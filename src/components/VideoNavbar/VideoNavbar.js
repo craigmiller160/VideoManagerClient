@@ -6,7 +6,8 @@ import {
     NavItem,
     NavbarToggler,
     Collapse,
-    NavLink
+    NavLink,
+    Container
 } from 'reactstrap';
 import * as classes from './VideoNavbar.scss';
 
@@ -29,15 +30,17 @@ class VideoNavbar extends Component {
 
         return (
             <Navbar className={classes.VideoNavbar} color="light" light expand="md">
-                <NavbarBrand href="/">Video Manager</NavbarBrand>
-                <NavbarToggler onClick={this.toggle} />
-                <Collapse isOpen={this.state.isOpen} navbar>
-                    <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <NavLink>Scan Directory</NavLink>
-                        </NavItem>
-                    </Nav>
-                </Collapse>
+                <Container>
+                    <NavbarBrand href="/">Video Manager</NavbarBrand>
+                    <NavbarToggler onClick={this.toggle} />
+                    <Collapse isOpen={this.state.isOpen} navbar>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <NavLink>Scan Directory</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
+                </Container>
             </Navbar>
         );
     }
