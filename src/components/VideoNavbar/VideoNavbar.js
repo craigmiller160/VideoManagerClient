@@ -8,6 +8,7 @@ import {
     Collapse,
     NavLink
 } from 'reactstrap';
+import * as classes from './VideoNavbar.scss';
 
 class VideoNavbar extends Component {
 
@@ -25,8 +26,9 @@ class VideoNavbar extends Component {
     };
 
     render() {
+
         return (
-            <Navbar color="light" light expand="md">
+            <Navbar className={classes.VideoNavbar} color="light" light expand="md">
                 <NavbarBrand href="/">Video Manager</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
