@@ -1,5 +1,5 @@
 import { configureStore } from 'redux-starter-kit';
-import videoListReducer from 'videoList/videoList.reducer';
+import videoListReducer from './videoList/videoList.reducer';
 
 const reducer = {
     videoList: videoListReducer
