@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import VideoNavbar from '../../components/VideoNavbar/VideoNavbar';
 import Layout from '../../components/Layout/Layout';
+import { connect } from 'react-redux';
 
 class AppContent extends Component {
     render() {
@@ -13,4 +14,16 @@ class AppContent extends Component {
     }
 }
 
-export default AppContent;
+const mapStateToProps = (state) => {
+    return {
+
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContent);
