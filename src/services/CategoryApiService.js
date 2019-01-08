@@ -1,24 +1,19 @@
-import axios from 'axios';
-import { apiRoot } from './serviceConstants';
-
-const api = axios.create({
-    baseURL: `${apiRoot}/categories`
-});
+import API from './API';
 
 const getAllCategories = () => {
-    return api.get('/');
+    return API.get('/categories');
 };
 
 const addCategory = (category) => {
-    return api.post('/', category);
+    return API.post('/categories', category);
 };
 
 const updateCategory = (categoryId, category) => {
-    return api.put(`/${categoryId}`, category);
+    return API.put(`/categories/${categoryId}`, category);
 };
 
 const deleteCategory = (categoryId) => {
-    return api.delete(`/${categoryId}`);
+    return API.delete(`/categories/${categoryId}`);
 };
 
 export default {

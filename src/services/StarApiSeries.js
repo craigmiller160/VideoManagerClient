@@ -1,24 +1,19 @@
-import axios from 'axios';
-import { apiRoot } from './serviceConstants';
-
-const api = axios.create({
-    baseURL: `${apiRoot}/series`
-});
+import API from './API';
 
 const getAllStars = () => {
-    return api.get('/');
+    return API.get('/stars');
 };
 
 const addStar = (star) => {
-    return api.post('/', star);
+    return API.post('/stars', star);
 };
 
 const updateStar = (starId, star) => {
-    return api.put(`/${starId}`, star);
+    return API.put(`/stars/${starId}`, star);
 };
 
 const deleteStar = (starId) => {
-    return api.delete(`/${starId}`);
+    return API.delete(`/stars/${starId}`);
 };
 
 export default {

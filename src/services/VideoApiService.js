@@ -1,32 +1,27 @@
-import axios from 'axios';
-import { apiRoot } from './serviceConstants';
-
-const api = axios.create({
-    baseURL: `${apiRoot}/video-files`
-});
+import API from './API';
 
 const addVideoFile = (videoFile) => {
-    return api.post('/', videoFile);
+    return API.post('/video-files', videoFile);
 };
 
 const updateVideoFile = (videoFileId, videoFile) => {
-    return api.put(`/${videoFileId}`, videoFile);
+    return API.put(`/video-files/${videoFileId}`, videoFile);
 };
 
 const startVideoScan = () => {
-    return api.post('/scanner');
+    return API.post('/video-files/scanner');
 };
 
 const isVideoScanRunning = () => {
-    return api.get('/scanner');
+    return API.get('/video-files/scanner');
 };
 
 const playVideo = (videoFile) => {
-    return api.post('/play', videoFile);
+    return API.post('/video-files/play', videoFile);
 };
 
 const searchForVideos = (search, page, sortDirection) => {
-    return api.post('/search', search, {
+    return API.post('/video-files/search', search, {
         params: {
             page,
             sortDirection
@@ -35,7 +30,6 @@ const searchForVideos = (search, page, sortDirection) => {
 };
 
 export default {
-    getVideoFile,
     addVideoFile,
     updateVideoFile,
     startVideoScan,

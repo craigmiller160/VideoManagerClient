@@ -122,5 +122,10 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.12",
+    "@types/node": "^10.12.18",
+    "axios-mock-adapter": "^1.16.0"
   }
 }

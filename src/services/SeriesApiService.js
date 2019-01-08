@@ -1,24 +1,19 @@
-import axios from 'axios';
-import { apiRoot } from './serviceConstants';
-
-const api = axios.create({
-    baseURL: `${apiRoot}/series`
-});
+import API from './API';
 
 const getAllSeries = () => {
-    return api.get('/');
+    return API.get('/series');
 };
 
 const addSeries = (series) => {
-    return api.post('/', series);
+    return API.post('/series', series);
 };
 
 const updateSeries = (seriesId, series) => {
-    return api.put(`/${seriesId}`, series);
+    return API.put(`/series/${seriesId}`, series);
 };
 
 const deleteSeries = (seriesId) => {
-    return api.delete(`/${seriesId}`);
+    return API.delete(`/series/${seriesId}`);
 };
 
 export default {
