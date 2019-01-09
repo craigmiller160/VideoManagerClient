@@ -20,7 +20,7 @@ const playVideo = (videoFile) => {
     return API.post('/video-files/play', videoFile);
 };
 
-const searchForVideos = (search, page, sortDirection) => {
+const searchForVideos = (search, page = 0, sortDirection = 'ASC') => {
     return API.post('/video-files/search', search, {
         params: {
             page,

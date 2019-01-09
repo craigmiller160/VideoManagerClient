@@ -12,6 +12,7 @@ const stars = [
 const newStar = { id: 3, starName: 'ThirdStar' };
 
 beforeEach(() => {
+    mock.reset();
     mock.onGet('/stars')
         .reply(200, stars);
     mock.onPost('/stars', newStar)

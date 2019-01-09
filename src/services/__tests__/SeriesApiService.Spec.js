@@ -12,6 +12,7 @@ const series = [
 const newSeries = { id: 3, seriesName: 'ThirdSeries' };
 
 beforeEach(() => {
+    mock.reset();
     mock.onGet('/series')
         .reply(200, series);
     mock.onPost('/series', newSeries)

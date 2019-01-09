@@ -12,6 +12,7 @@ const categories = [
 const newCategory = { id: 3, categoryName: 'ThirdCategory' };
 
 beforeEach(() => {
+    mock.reset();
     mock.onGet('/categories')
         .reply(200, categories);
     mock.onPost('/categories', newCategory)
