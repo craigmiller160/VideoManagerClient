@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
-const Layout = (props) => {
+const VideoListLayout = (props) => {
     return (
         <Container>
             <Row>
@@ -16,4 +16,4 @@ const Layout = (props) => {
     );
 };
 
-export default Layout;
+export default VideoListLayout;
