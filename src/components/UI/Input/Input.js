@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input as ReactInput, FormGroup, Label } from 'reactstrap';
 import newid from '../../../utils/newid';
+import classes from './Input.scss';
 
 const Input = (props) => {
     const {
@@ -14,7 +15,7 @@ const Input = (props) => {
 
     const id = newid();
     return (
-        <FormGroup>
+        <FormGroup className={classes.Input}>
             <Label
                 for={ id }
             >
