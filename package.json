@@ -126,6 +126,8 @@
   "devDependencies": {
     "@types/jest": "^23.3.12",
     "@types/node": "^10.12.18",
-    "axios-mock-adapter": "^1.16.0"
+    "axios-mock-adapter": "^1.16.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1"
   }
 }
