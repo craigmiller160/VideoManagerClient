@@ -1,11 +1,9 @@
 import React from 'react';
 import Input from '../Input';
-import { configure, mount } from 'enzyme';
+import { configure, mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
-
-// TODO look into mount vs shallow in more detail
 
 describe('Input', () => {
     const props = {
@@ -15,7 +13,7 @@ describe('Input', () => {
     };
 
     it('should render correctly', () => {
-        const component = mount(
+        const component = shallow(
             <Input { ...props } />
         );
         expect(component).toMatchSnapshot();
@@ -25,11 +23,12 @@ describe('Input', () => {
         let value = 'InitialValue';
         props.onChange = (newValue) => value = newValue.target.value;
 
-        const component = mount(
+        const component = shallow(
             <Input { ...props } />
         );
 
-        const result = component.find('input');
+        const result = component.find('Input');
+        expect(result.length).toEqual(1);
         result.simulate('change', {target: {value: 'My New Value'}});
         expect(value).toEqual('My New Value');
     });
