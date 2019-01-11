@@ -30,7 +30,7 @@ describe('Select', () => {
             <Select { ...props } />
         );
 
-        const result = component.find('Select');
+        const result = component.find('[name="MySelect"]');
         expect(result.length).toEqual(1);
 
         result.simulate('change', { label: 'Opt1', value: 'opt2' });
