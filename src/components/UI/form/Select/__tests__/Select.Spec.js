@@ -33,7 +33,7 @@ describe('Select', () => {
         const result = component.find('[name="MySelect"]');
         expect(result.length).toEqual(1);
 
-        result.simulate('change', { label: 'Opt1', value: 'opt2' });
-        expect(value).toEqual({ name: 'MySelect', value: 'opt2' });
+        result.simulate('change', { label: 'Opt2', value: 'opt2' });
+        expect(value).toEqual({ name: 'MySelect', label: 'Opt2', value: 'opt2' });
     });
 });

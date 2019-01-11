@@ -15,7 +15,7 @@ const Select = (props) => {
     } = props;
 
     const onChangeFn = onChange ? (value) => {
-        onChange({name, value: value.value});
+        onChange({name, label: value.label, value: value.value});
     } : null;
 
     const id = newid();
@@ -43,7 +43,7 @@ Select.propTypes = {
     options: PropTypes.array.isRequired,
     name: PropTypes.string,
     onChange: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.object
 };
 
 export default Select;
