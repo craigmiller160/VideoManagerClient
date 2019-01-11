@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Input as ReactInput, FormGroup, Label } from 'reactstrap';
-import newid from '../../../utils/newid';
-import classes from './Input.scss';
+import newid from '../../../../utils/newid';
+import formStyles from '../FormStyles.scss';
 
 const Input = (props) => {
     const {
@@ -13,9 +13,13 @@ const Input = (props) => {
         value
     } = props;
 
+    const onChangeFn = onChange ? (event) => {
+        onChange({name, value: event.target.value});
+    } : null;
+
     const id = newid();
     return (
-        <FormGroup className={classes.Input}>
+        <FormGroup className={ formStyles['input-label'] }>
             <Label
                 for={ id }
             >
@@ -25,7 +29,7 @@ const Input = (props) => {
                 id={ id }
                 type={ type }
                 name={ name }
-                onChange={ onChange }
+                onChange={ onChangeFn }
                 value={ value }
             />
         </FormGroup>

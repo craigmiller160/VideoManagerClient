@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from '../Input';
-import { configure, mount, shallow } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
@@ -21,7 +21,7 @@ describe('Input', () => {
 
     it('should handle onChange', () => {
         let value = 'InitialValue';
-        props.onChange = (newValue) => value = newValue.target.value;
+        props.onChange = (newValue) => value = newValue;
 
         const component = shallow(
             <Input { ...props } />
@@ -29,7 +29,8 @@ describe('Input', () => {
 
         const result = component.find('Input');
         expect(result.length).toEqual(1);
+
         result.simulate('change', {target: {value: 'My New Value'}});
-        expect(value).toEqual('My New Value');
+        expect(value).toEqual({name: 'MyInput', value: 'My New Value'});
     });
 });

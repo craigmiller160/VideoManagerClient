@@ -1,12 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Input should render correctly 1`] = `
+exports[`Select should render correctly 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Input
-    label="My Input"
-    name="MyInput"
-    type="text"
+  Symbol(enzyme.__unrendered__): <Select
+    label="My Select"
+    name="MySelect"
+    options={
+      Array [
+        Object {
+          "label": "Opt1",
+          "value": "opt1",
+        },
+        Object {
+          "label": "Opt2",
+          "value": "opt2",
+        },
+      ]
+    }
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -35,14 +46,31 @@ ShallowWrapper {
             ]
           }
         >
-          My Input
+          My Select
         </Label>,
-        <Input
+        <StateManager
+          defaultInputValue=""
+          defaultMenuIsOpen={false}
+          defaultValue={null}
           id="id_0"
-          name="MyInput"
-          type="text"
+          isSearchable={true}
+          name="MySelect"
+          onChange={null}
+          options={
+            Array [
+              Object {
+                "label": "Opt1",
+                "value": "opt1",
+              },
+              Object {
+                "label": "Opt2",
+                "value": "opt2",
+              },
+            ]
+          }
         />,
       ],
+      "className": undefined,
       "tag": "div",
     },
     "ref": null,
@@ -52,7 +80,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "children": "My Input",
+          "children": "My Select",
           "for": "id_0",
           "tag": "label",
           "widths": Array [
@@ -64,7 +92,7 @@ ShallowWrapper {
           ],
         },
         "ref": null,
-        "rendered": "My Input",
+        "rendered": "My Select",
         "type": [Function],
       },
       Object {
@@ -72,10 +100,23 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
+          "defaultInputValue": "",
+          "defaultMenuIsOpen": false,
+          "defaultValue": null,
           "id": "id_0",
-          "name": "MyInput",
-          "onChange": undefined,
-          "type": "text",
+          "isSearchable": true,
+          "name": "MySelect",
+          "onChange": null,
+          "options": Array [
+            Object {
+              "label": "Opt1",
+              "value": "opt1",
+            },
+            Object {
+              "label": "Opt2",
+              "value": "opt2",
+            },
+          ],
           "value": undefined,
         },
         "ref": null,
@@ -105,14 +146,31 @@ ShallowWrapper {
               ]
             }
           >
-            My Input
+            My Select
           </Label>,
-          <Input
+          <StateManager
+            defaultInputValue=""
+            defaultMenuIsOpen={false}
+            defaultValue={null}
             id="id_0"
-            name="MyInput"
-            type="text"
+            isSearchable={true}
+            name="MySelect"
+            onChange={null}
+            options={
+              Array [
+                Object {
+                  "label": "Opt1",
+                  "value": "opt1",
+                },
+                Object {
+                  "label": "Opt2",
+                  "value": "opt2",
+                },
+              ]
+            }
           />,
         ],
+        "className": undefined,
         "tag": "div",
       },
       "ref": null,
@@ -122,7 +180,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "children": "My Input",
+            "children": "My Select",
             "for": "id_0",
             "tag": "label",
             "widths": Array [
@@ -134,7 +192,7 @@ ShallowWrapper {
             ],
           },
           "ref": null,
-          "rendered": "My Input",
+          "rendered": "My Select",
           "type": [Function],
         },
         Object {
@@ -142,10 +200,23 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
+            "defaultInputValue": "",
+            "defaultMenuIsOpen": false,
+            "defaultValue": null,
             "id": "id_0",
-            "name": "MyInput",
-            "onChange": undefined,
-            "type": "text",
+            "isSearchable": true,
+            "name": "MySelect",
+            "onChange": null,
+            "options": Array [
+              Object {
+                "label": "Opt1",
+                "value": "opt1",
+              },
+              Object {
+                "label": "Opt2",
+                "value": "opt2",
+              },
+            ],
             "value": undefined,
           },
           "ref": null,

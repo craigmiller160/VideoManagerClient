@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
-import Input from '../../../UI/Input/Input';
+import Input from '../../../UI/form/Input/Input';
+import Select from '../../../UI/form/Select/Select';
 import classes from './VideoSearch.scss';
 
 const SEARCH_INPUT = 'searchInput';
 const CATEGORY_INPUT = 'categoryInput';
 const STATUS_INPUT = 'statusInput';
 const SERIES_INPUT = 'seriesInput';
+
+const tempCategories = [ // TODO replace with real categories
+    { label: 'Cat 1', value: 'cat1' },
+    { label: 'Cat 2', value: 'cat2' },
+    { label: 'Cat 3', value: 'cat3' }
+];
 
 class VideoSearch extends Component {
 
@@ -18,6 +25,7 @@ class VideoSearch extends Component {
     };
 
     onInputChange = (event) => {
+        console.log(event); // TODO delete this
         const { name, value } = event.target;
         this.setState((prevState) => ({
             ...prevState,
@@ -37,7 +45,13 @@ class VideoSearch extends Component {
                     />
                 </Col>
                 <Col sm="6" md="3">
-                    <p>Test</p>
+                    <Select
+                        label="Category"
+                        options={ tempCategories }
+                        onChange={ this.onInputChange }
+                        value={ this.state.category }
+                        name={ CATEGORY_INPUT }
+                    />
                 </Col>
                 <Col sm="6" md="3">
                     <p>Test</p>
