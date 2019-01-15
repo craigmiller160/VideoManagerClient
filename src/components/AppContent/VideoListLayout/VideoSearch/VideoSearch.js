@@ -3,6 +3,8 @@ import { Row, Col } from 'reactstrap';
 import Input from '../../../UI/form/Input/Input';
 import Select from '../../../UI/form/Select/Select';
 import classes from './VideoSearch.scss';
+import Form from "../../../UI/form/Form/Form";
+import { Field } from "redux-form";
 
 const SEARCH_INPUT = 'searchInput';
 const CATEGORY_INPUT = 'categoryInput';
@@ -31,9 +33,9 @@ class VideoSearch extends Component {
 
     state = { // TODO replace this with redux-form
         [SEARCH_INPUT]: '',
-        [CATEGORY_INPUT]: '',
-        [STARS_INPUT]: '',
-        [SERIES_INPUT]: ''
+        [CATEGORY_INPUT]: {},
+        [STARS_INPUT]: {},
+        [SERIES_INPUT]: {}
     };
 
     onInputChange = (payload) => {
@@ -49,43 +51,45 @@ class VideoSearch extends Component {
 
     render() {
         return (
-            <Row className={classes.VideoSearch}>
-                <Col sm="6" md="3">
-                    <Input
-                        label="Search"
-                        name={ SEARCH_INPUT }
-                        onChange={ this.onInputChange }
-                        value={ this.state[SEARCH_INPUT].value }
-                    />
-                </Col>
-                <Col sm="6" md="3">
-                    <Select
-                        label="Category"
-                        options={ tempCategories }
-                        onChange={ this.onInputChange }
-                        value={ this.state[CATEGORY_INPUT] }
-                        name={ CATEGORY_INPUT }
-                    />
-                </Col>
-                <Col sm="6" md="3">
-                    <Select
-                        label="Series"
-                        options={ tempSeries }
-                        onChange={ this.onInputChange }
-                        value={ this.state[SERIES_INPUT] }
-                        name={ SERIES_INPUT }
-                    />
-                </Col>
-                <Col sm="6" md="3">
-                    <Select
-                        label="Stars"
-                        options={ tempStars }
-                        onChange={ this.onInputChange }
-                        value={ this.state[STARS_INPUT] }
-                        name={ STARS_INPUT }
-                    />
-                </Col>
-            </Row>
+            <Form form="video-search">
+                <Row className={classes.VideoSearch}>
+                    <Col sm="6" md="3">
+                        <Input
+                            label="Search"
+                            name={ SEARCH_INPUT }
+                            onChange={ this.onInputChange }
+                            value={ this.state[SEARCH_INPUT].value }
+                        />
+                    </Col>
+                    <Col sm="6" md="3">
+                        <Select
+                            label="Category"
+                            options={ tempCategories }
+                            onChange={ this.onInputChange }
+                            value={ this.state[CATEGORY_INPUT] }
+                            name={ CATEGORY_INPUT }
+                        />
+                    </Col>
+                    <Col sm="6" md="3">
+                        <Select
+                            label="Series"
+                            options={ tempSeries }
+                            onChange={ this.onInputChange }
+                            value={ this.state[SERIES_INPUT] }
+                            name={ SERIES_INPUT }
+                        />
+                    </Col>
+                    <Col sm="6" md="3">
+                        <Select
+                            label="Stars"
+                            options={ tempStars }
+                            onChange={ this.onInputChange }
+                            value={ this.state[STARS_INPUT] }
+                            name={ STARS_INPUT }
+                        />
+                    </Col>
+                </Row>
+            </Form>
         );
     }
 }
