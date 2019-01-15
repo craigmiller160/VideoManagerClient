@@ -1,8 +1,10 @@
 import { configureStore } from 'redux-starter-kit';
 import videoListReducer from './videoList/videoList.reducer';
+import { reducer as formReducer } from 'redux-form';
 
 const reducer = {
-    videoList: videoListReducer
+    videoList: videoListReducer,
+    form: formReducer
 };
 
 export default configureStore({
