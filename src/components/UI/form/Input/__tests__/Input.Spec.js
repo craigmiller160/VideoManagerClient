@@ -27,10 +27,10 @@ describe('Input', () => {
             <Input { ...props } />
         );
 
-        const result = component.find('Input');
+        const result = component.find('[name="MyInput"]');
         expect(result.length).toEqual(1);
 
         result.simulate('change', {target: {value: 'My New Value'}});
-        expect(value).toEqual({name: 'MyInput', value: 'My New Value'});
+        expect(value).toEqual({target: {value: 'My New Value'}});
     });
 });

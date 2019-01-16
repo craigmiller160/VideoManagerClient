@@ -4,7 +4,6 @@ import ReactSelect from 'react-select';
 import { FormGroup, Label } from 'reactstrap';
 import newid from '../../../../utils/newid';
 import formStyles from '../FormStyles.scss';
-import { Field } from "redux-form";
 import createField from "../createField";
 
 const Select = (props) => {
@@ -12,8 +11,7 @@ const Select = (props) => {
         label,
         input,
         name,
-        options,
-        value
+        options
     } = props;
 
     const id = newid();
@@ -28,9 +26,9 @@ const Select = (props) => {
                 id={ id }
                 { ...input }
                 name={ name }
+                onBlur={ () => input.onBlur(input.value) }
                 options={ options }
                 isSearchable={ true }
-                value={ value }
             />
         </FormGroup>
     );
@@ -39,9 +37,7 @@ const Select = (props) => {
 Select.propTypes = {
     label: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
-    name: PropTypes.string,
-    onChange: PropTypes.func,
-    value: PropTypes.object
+    name: PropTypes.string
 };
 
 export default createField(Select);

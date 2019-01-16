@@ -32,9 +32,9 @@ class VideoSearch extends Component {
 
     state = { // TODO replace this with redux-form
         [SEARCH_INPUT]: '',
-        [CATEGORY_INPUT]: {},
-        [STARS_INPUT]: {},
-        [SERIES_INPUT]: {}
+        // [CATEGORY_INPUT]: {},
+        // [STARS_INPUT]: {},
+        // [SERIES_INPUT]: {}
     };
 
     onInputChange = (payload) => {
@@ -56,16 +56,12 @@ class VideoSearch extends Component {
                         <Input
                             label="Search"
                             name={ SEARCH_INPUT }
-                            onChange={ this.onInputChange }
-                            value={ this.state[SEARCH_INPUT].value }
                         />
                     </Col>
                     <Col sm="6" md="3">
                         <Select
                             label="Category"
                             options={ tempCategories }
-                            onChange={ this.onInputChange }
-                            value={ this.state[CATEGORY_INPUT] }
                             name={ CATEGORY_INPUT }
                         />
                     </Col>
@@ -73,8 +69,6 @@ class VideoSearch extends Component {
                         <Select
                             label="Series"
                             options={ tempSeries }
-                            onChange={ this.onInputChange }
-                            value={ this.state[SERIES_INPUT] }
                             name={ SERIES_INPUT }
                         />
                     </Col>
@@ -82,8 +76,6 @@ class VideoSearch extends Component {
                         <Select
                             label="Stars"
                             options={ tempStars }
-                            onChange={ this.onInputChange }
-                            value={ this.state[STARS_INPUT] }
                             name={ STARS_INPUT }
                         />
                     </Col>
