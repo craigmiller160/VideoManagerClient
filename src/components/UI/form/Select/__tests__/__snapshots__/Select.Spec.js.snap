@@ -3,7 +3,7 @@
 exports[`Select should render correctly 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Select
+  Symbol(enzyme.__unrendered__): <Unknown
     label="My Select"
     name="MySelect"
     options={
@@ -32,99 +32,27 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "children": Array [
-        <Label
-          for="id_0"
-          tag="label"
-          widths={
-            Array [
-              "xs",
-              "sm",
-              "md",
-              "lg",
-              "xl",
-            ]
-          }
-        >
-          My Select
-        </Label>,
-        <StateManager
-          defaultInputValue=""
-          defaultMenuIsOpen={false}
-          defaultValue={null}
-          id="id_0"
-          isSearchable={true}
-          name="MySelect"
-          onChange={null}
-          options={
-            Array [
-              Object {
-                "label": "Opt1",
-                "value": "opt1",
-              },
-              Object {
-                "label": "Opt2",
-                "value": "opt2",
-              },
-            ]
-          }
-        />,
+      "component": [Function],
+      "label": "My Select",
+      "name": "MySelect",
+      "options": Array [
+        Object {
+          "label": "Opt1",
+          "value": "opt1",
+        },
+        Object {
+          "label": "Opt2",
+          "value": "opt2",
+        },
       ],
-      "className": undefined,
-      "tag": "div",
     },
     "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "children": "My Select",
-          "for": "id_0",
-          "tag": "label",
-          "widths": Array [
-            "xs",
-            "sm",
-            "md",
-            "lg",
-            "xl",
-          ],
-        },
-        "ref": null,
-        "rendered": "My Select",
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "defaultInputValue": "",
-          "defaultMenuIsOpen": false,
-          "defaultValue": null,
-          "id": "id_0",
-          "isSearchable": true,
-          "name": "MySelect",
-          "onChange": null,
-          "options": Array [
-            Object {
-              "label": "Opt1",
-              "value": "opt1",
-            },
-            Object {
-              "label": "Opt2",
-              "value": "opt2",
-            },
-          ],
-          "value": undefined,
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-    ],
-    "type": [Function],
+    "rendered": null,
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "displayName": "Field",
+      "render": [Function],
+    },
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
@@ -132,99 +60,27 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "function",
       "props": Object {
-        "children": Array [
-          <Label
-            for="id_0"
-            tag="label"
-            widths={
-              Array [
-                "xs",
-                "sm",
-                "md",
-                "lg",
-                "xl",
-              ]
-            }
-          >
-            My Select
-          </Label>,
-          <StateManager
-            defaultInputValue=""
-            defaultMenuIsOpen={false}
-            defaultValue={null}
-            id="id_0"
-            isSearchable={true}
-            name="MySelect"
-            onChange={null}
-            options={
-              Array [
-                Object {
-                  "label": "Opt1",
-                  "value": "opt1",
-                },
-                Object {
-                  "label": "Opt2",
-                  "value": "opt2",
-                },
-              ]
-            }
-          />,
+        "component": [Function],
+        "label": "My Select",
+        "name": "MySelect",
+        "options": Array [
+          Object {
+            "label": "Opt1",
+            "value": "opt1",
+          },
+          Object {
+            "label": "Opt2",
+            "value": "opt2",
+          },
         ],
-        "className": undefined,
-        "tag": "div",
       },
       "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "children": "My Select",
-            "for": "id_0",
-            "tag": "label",
-            "widths": Array [
-              "xs",
-              "sm",
-              "md",
-              "lg",
-              "xl",
-            ],
-          },
-          "ref": null,
-          "rendered": "My Select",
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "defaultInputValue": "",
-            "defaultMenuIsOpen": false,
-            "defaultValue": null,
-            "id": "id_0",
-            "isSearchable": true,
-            "name": "MySelect",
-            "onChange": null,
-            "options": Array [
-              Object {
-                "label": "Opt1",
-                "value": "opt1",
-              },
-              Object {
-                "label": "Opt2",
-                "value": "opt2",
-              },
-            ],
-            "value": undefined,
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-      ],
-      "type": [Function],
+      "rendered": null,
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "displayName": "Field",
+        "render": [Function],
+      },
     },
   ],
   Symbol(enzyme.__options__): Object {

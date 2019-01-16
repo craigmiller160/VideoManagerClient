@@ -4,7 +4,6 @@ import Input from '../../../UI/form/Input/Input';
 import Select from '../../../UI/form/Select/Select';
 import classes from './VideoSearch.scss';
 import Form from "../../../UI/form/Form/Form";
-import { Field } from "redux-form";
 
 const SEARCH_INPUT = 'searchInput';
 const CATEGORY_INPUT = 'categoryInput';

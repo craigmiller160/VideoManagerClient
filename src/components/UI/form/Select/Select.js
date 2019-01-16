@@ -4,19 +4,17 @@ import ReactSelect from 'react-select';
 import { FormGroup, Label } from 'reactstrap';
 import newid from '../../../../utils/newid';
 import formStyles from '../FormStyles.scss';
+import { Field } from "redux-form";
+import createField from "../createField";
 
 const Select = (props) => {
     const {
         label,
+        input,
         name,
         options,
-        onChange,
         value
     } = props;
-
-    const onChangeFn = onChange ? (value) => {
-        onChange({name, label: value.label, value: value.value});
-    } : null;
 
     const id = newid();
     return (
@@ -28,9 +26,9 @@ const Select = (props) => {
             </Label>
             <ReactSelect
                 id={ id }
+                { ...input }
                 name={ name }
                 options={ options }
-                onChange={ onChangeFn }
                 isSearchable={ true }
                 value={ value }
             />
@@ -46,4 +44,4 @@ Select.propTypes = {
     value: PropTypes.object
 };
 
-export default Select;
+export default createField(Select);
