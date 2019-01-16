@@ -10,26 +10,20 @@ const initialState = {
     currentPage: 1
 };
 
-const handleSetVideoList = (state, action) => {
-    return {
-        ...state,
-        videoList: action.payload
-    }
-};
+const handleSetVideoList = (state, action) => ({
+    ...state,
+    videoList: action.payload
+});
 
-const handleSetPagination = (state, action) => {
-    return {
-        ...state,
-        pagination: action.payload
-    }
-};
+const handleSetPagination = (state, action) => ({
+    ...state,
+    pagination: action.payload
+});
 
-const handleSetCurrentPage = (state, action) => {
-    return {
-        ...state,
-        currentPage: action.payload
-    }
-};
+const handleSetCurrentPage = (state, action) => ({
+    ...state,
+    currentPage: action.payload
+});
 
 export default createReducer(initialState, {
     [setVideoList]: handleSetVideoList,

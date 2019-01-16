@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import Input from '../../../UI/form/Input/Input';
 import Select from '../../../UI/form/Select/Select';
 import classes from './VideoSearch.scss';
 import Form from "../../../UI/form/Form/Form";
+import { loadFilterOptions } from "../../../../store/videoSearch/videoSearch.actions";
 
 const SEARCH_INPUT = 'searchInput';
 const CATEGORY_INPUT = 'categoryInput';
@@ -30,23 +33,9 @@ const tempStars = [
 
 class VideoSearch extends Component {
 
-    state = { // TODO replace this with redux-form
-        [SEARCH_INPUT]: '',
-        // [CATEGORY_INPUT]: {},
-        // [STARS_INPUT]: {},
-        // [SERIES_INPUT]: {}
-    };
+    componentDidMount() {
 
-    onInputChange = (payload) => {
-        const { name, value, label } = payload;
-        this.setState((prevState) => ({
-            ...prevState,
-            [name]: {
-                value,
-                label
-            }
-        }));
-    };
+    }
 
     render() {
         return (
@@ -85,4 +74,12 @@ class VideoSearch extends Component {
     }
 }
 
-export default VideoSearch;
+const mapStateToProps = (state) => ({
+
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    loadFilterOptions
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(VideoSearch);
