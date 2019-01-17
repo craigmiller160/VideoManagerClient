@@ -1,13 +1,19 @@
 import { createAction } from 'redux-starter-kit';
 import CategoryApiService from '../../services/CategoryApiService';
 import SeriesApiService from '../../services/SeriesApiService';
-import StarsApiService from '../../services/StarsApiService';
+import StarApiService from '../../services/StarApiService';
 
 export const loadFilterOptions = () => async (dispatch) => {
     try {
-        const categories = await CategoryApiService.getAllCategories();
-        const series = await SeriesApiService.getAllSeries();
-        const stars = await StarsApiService.getAllStars();
+        let res = await CategoryApiService.getAllCategories();
+        const categories = (res.data || [])
+            .map(category => ({ value: category.categoryId, label: category.categoryName }));
+        res = await SeriesApiService.getAllSeries();
+        const series = (res.data || [])
+            .map(s => ({ value: s.seriesId, label: s.seriesName }));
+        res = await StarApiService.getAllStars();
+        const stars = (res.data || [])
+            .map(star => ({ value: star.starId, label: star.starName }));
 
         dispatch(setCategories(categories));
         dispatch(setSeries(series));

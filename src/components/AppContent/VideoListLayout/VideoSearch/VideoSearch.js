@@ -13,31 +13,19 @@ const CATEGORY_INPUT = 'categoryInput';
 const STARS_INPUT = 'starsInput';
 const SERIES_INPUT = 'seriesInput';
 
-const tempCategories = [ // TODO replace with real categories
-    { label: 'Cat 1', value: 'cat1' },
-    { label: 'Cat 2', value: 'cat2' },
-    { label: 'Cat 3', value: 'cat3' }
-];
-
-const tempSeries = [ // TODO replace with real data
-    { label: 'Series 1', value: 'series1' },
-    { label: 'Series 2', value: 'series2' },
-    { label: 'Series 3', value: 'series3' }
-];
-
-const tempStars = [
-    { label: 'Star 1', value: 'star1' },
-    { label: 'Star 2', value: 'star2' },
-    { label: 'Star 3', value: 'star3' }
-];
-
 class VideoSearch extends Component {
 
     componentDidMount() {
-
+        this.props.loadFilterOptions();
     }
 
     render() {
+        const {
+            categories,
+            series,
+            stars
+        } = this.props.filters;
+
         return (
             <Form form="video-search">
                 <Row className={classes.VideoSearch}>
@@ -50,21 +38,21 @@ class VideoSearch extends Component {
                     <Col sm="6" md="3">
                         <Select
                             label="Category"
-                            options={ tempCategories }
+                            options={ categories }
                             name={ CATEGORY_INPUT }
                         />
                     </Col>
                     <Col sm="6" md="3">
                         <Select
                             label="Series"
-                            options={ tempSeries }
+                            options={ series }
                             name={ SERIES_INPUT }
                         />
                     </Col>
                     <Col sm="6" md="3">
                         <Select
                             label="Stars"
-                            options={ tempStars }
+                            options={ stars }
                             name={ STARS_INPUT }
                         />
                     </Col>
@@ -75,7 +63,7 @@ class VideoSearch extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+    filters: state.videoSearch.filters
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
