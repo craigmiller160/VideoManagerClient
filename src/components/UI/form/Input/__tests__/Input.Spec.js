@@ -1,9 +1,6 @@
 import React from 'react';
 import Input from '../Input';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() });
+import { shallow } from 'enzyme';
 
 describe('Input', () => {
     const props = {
