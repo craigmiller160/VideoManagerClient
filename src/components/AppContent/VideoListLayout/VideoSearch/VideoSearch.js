@@ -8,11 +8,6 @@ import classes from './VideoSearch.scss';
 import Form from "../../../UI/form/Form/Form";
 import { loadFilterOptions } from "../../../../store/videoSearch/videoSearch.actions";
 
-const SEARCH_INPUT = 'searchInput';
-const CATEGORY_INPUT = 'categoryInput';
-const STARS_INPUT = 'starsInput';
-const SERIES_INPUT = 'seriesInput';
-
 class VideoSearch extends Component {
 
     componentDidMount() {
@@ -32,28 +27,28 @@ class VideoSearch extends Component {
                     <Col sm="6" md="3">
                         <Input
                             label="Search"
-                            name={ SEARCH_INPUT }
+                            name="search"
                         />
                     </Col>
                     <Col sm="6" md="3">
                         <Select
                             label="Category"
                             options={ categories }
-                            name={ CATEGORY_INPUT }
+                            name="category"
                         />
                     </Col>
                     <Col sm="6" md="3">
                         <Select
                             label="Series"
                             options={ series }
-                            name={ SERIES_INPUT }
+                            name="series"
                         />
                     </Col>
                     <Col sm="6" md="3">
                         <Select
                             label="Stars"
                             options={ stars }
-                            name={ STARS_INPUT }
+                            name="star"
                         />
                     </Col>
                 </Row>
