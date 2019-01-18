@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import VideoSearch from './VideoSearch/VideoSearch';
+import VideoList from './VideoList/VideoList';
 
 const VideoListLayout = () => {
     return (
@@ -10,7 +11,7 @@ const VideoListLayout = () => {
                     <VideoSearch />
                 </Col>
                 <Col xs="12">
-                    <h3>List</h3>
+                    <VideoList />
                 </Col>
             </Row>
         </Container>
