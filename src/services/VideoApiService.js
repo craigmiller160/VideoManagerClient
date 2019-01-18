@@ -20,8 +20,24 @@ const playVideo = (videoFile) => {
     return API.post('/video-files/play', videoFile);
 };
 
-const searchForVideos = (search, page = 0, sortDirection = 'ASC') => {
-    return API.post('/video-files/search', search, {
+const searchForVideos = (searchConfig) => {
+    const {
+        searchText,
+        categoryId,
+        starId,
+        seriesId,
+        page = 0,
+        sortDirection = 'ASC'
+    } = searchConfig;
+
+    const payload = {
+        searchText,
+        seriesId,
+        starId,
+        categoryId
+    };
+
+    return API.post('/video-files/search', payload, {
         params: {
             page,
             sortDirection

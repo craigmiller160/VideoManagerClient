@@ -46,7 +46,7 @@ describe('VideoApiService', () => {
 
     it('Search for Files', async () => {
         try {
-            const result = await VideoApiService.searchForVideos({}, 0, 'ASC');
+            const result = await VideoApiService.searchForVideos({ page: 0, sortDirection: 'ASC' });
             expect(result.status).toEqual(200);
             expect(result.data).toEqual(BASE_VIDE0_FILES);
         }
