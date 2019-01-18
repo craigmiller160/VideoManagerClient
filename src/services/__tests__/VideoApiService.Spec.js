@@ -1,44 +1,32 @@
 import VideoApiService from '../VideoApiService';
 import API from '../API';
 import MockAdapter from 'axios-mock-adapter';
+import { BASE_VIDE0_FILES, NEW_VIEW_FILE } from '../../mock/mockData/videoFileData';
+import {
+    mockAddNewVideoFile, mockIsVideoScanRunning, mockPlayVideo,
+    mockSearchForFiles,
+    mockStartVideoScan,
+    mockUpdateVideoFile
+} from '../../mock/mockApiConfig/videoFileApi';
 
-const mock = new MockAdapter(API);
-
-const files = [
-    { id: 1, fileName: 'FirstFile' },
-    { id: 2, fileName: 'SecondFile' }
-];
-
-const newFile = { id: 3, fileName: 'ThirdFile' };
+const mockApi = new MockAdapter(API);
 
 beforeEach(() => {
-    mock.reset();
-    mock.onPost('/video-files', newFile)
-        .reply(200, newFile);
-    mock.onPut('/video-files/1', newFile)
-        .reply(200, newFile);
-    mock.onPost('/video-files/search', {})
-        .reply(config => {
-            expect(config.params).toEqual({
-                page: 0,
-                sortDirection: 'ASC'
-            });
-            return [200, files];
-        });
-    mock.onPost('/video-files/scanner')
-        .reply(200);
-    mock.onGet('/video-files/scanner')
-        .reply(200);
-    mock.onPost('/video-files/play', newFile)
-        .reply(200);
+    mockApi.reset();
+    mockAddNewVideoFile(mockApi);
+    mockUpdateVideoFile(mockApi);
+    mockSearchForFiles(mockApi);
+    mockStartVideoScan(mockApi);
+    mockIsVideoScanRunning(mockApi);
+    mockPlayVideo(mockApi);
 });
 
 describe('VideoApiService', () => {
     it('Add File', async () => {
         try {
-            const result = await VideoApiService.addVideoFile(newFile);
+            const result = await VideoApiService.addVideoFile(NEW_VIEW_FILE);
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(newFile);
+            expect(result.data).toEqual(NEW_VIEW_FILE);
         }
         catch (ex) {
             throw ex;
@@ -47,9 +35,9 @@ describe('VideoApiService', () => {
 
     it('Update File', async () => {
         try {
-            const result = await VideoApiService.updateVideoFile(1, newFile);
+            const result = await VideoApiService.updateVideoFile(1, NEW_VIEW_FILE);
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(newFile);
+            expect(result.data).toEqual(NEW_VIEW_FILE);
         }
         catch (ex) {
             throw ex;
@@ -60,7 +48,7 @@ describe('VideoApiService', () => {
         try {
             const result = await VideoApiService.searchForVideos({}, 0, 'ASC');
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(files);
+            expect(result.data).toEqual(BASE_VIDE0_FILES);
         }
         catch (ex) {
             throw ex;

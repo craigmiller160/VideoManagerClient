@@ -1,26 +1,22 @@
 import CategoryApiService from '../CategoryApiService';
 import API from '../API';
 import MockAdapter from 'axios-mock-adapter';
+import { BASE_CATEGORIES, NEW_CATEGORY } from '../../mock/mockData/categoryData';
+import {
+    mockAddCategory,
+    mockDeleteCategory,
+    mockGetAllCategories,
+    mockUpdateCategory
+} from '../../mock/mockApiConfig/categoryApi';
 
-const mock = new MockAdapter(API);
-
-const categories = [
-    { id: 1, categoryName: 'FirstCategory' },
-    { id: 2, categoryName: 'SecondCategory' }
-];
-
-const newCategory = { id: 3, categoryName: 'ThirdCategory' };
+const mockApi = new MockAdapter(API);
 
 beforeEach(() => {
-    mock.reset();
-    mock.onGet('/categories')
-        .reply(200, categories);
-    mock.onPost('/categories', newCategory)
-        .reply(200, newCategory);
-    mock.onPut('/categories/1', newCategory)
-        .reply(200, newCategory);
-    mock.onDelete('/categories/1')
-        .reply(200, newCategory);
+    mockApi.reset();
+    mockGetAllCategories(mockApi);
+    mockAddCategory(mockApi);
+    mockUpdateCategory(mockApi);
+    mockDeleteCategory(mockApi);
 });
 
 describe('CategoryApiService', () => {
@@ -28,7 +24,7 @@ describe('CategoryApiService', () => {
         try {
             const result = await CategoryApiService.getAllCategories();
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(categories);
+            expect(result.data).toEqual(BASE_CATEGORIES);
         }
         catch (ex) {
             throw ex;
@@ -37,9 +33,9 @@ describe('CategoryApiService', () => {
 
     it('Add Category', async () => {
         try {
-            const result = await CategoryApiService.addCategory(newCategory);
+            const result = await CategoryApiService.addCategory(NEW_CATEGORY);
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(newCategory);
+            expect(result.data).toEqual(NEW_CATEGORY);
         }
         catch (ex) {
             throw ex;
@@ -48,9 +44,9 @@ describe('CategoryApiService', () => {
 
     it('Update Category', async () => {
         try {
-            const result = await CategoryApiService.updateCategory(1, newCategory);
+            const result = await CategoryApiService.updateCategory(1, NEW_CATEGORY);
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(newCategory);
+            expect(result.data).toEqual(NEW_CATEGORY);
         }
         catch (ex) {
             throw ex;
@@ -61,7 +57,7 @@ describe('CategoryApiService', () => {
         try {
             const result = await CategoryApiService.deleteCategory(1);
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(newCategory);
+            expect(result.data).toEqual(NEW_CATEGORY);
         }
         catch (ex) {
             throw ex;

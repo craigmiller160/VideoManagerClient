@@ -1,26 +1,22 @@
 import SeriesApiService from '../SeriesApiService';
 import API from '../API';
 import MockAdapter from 'axios-mock-adapter';
+import { BASE_SERIES, NEW_SERIES } from '../../mock/mockData/seriesData';
+import {
+    mockAddNewSeries,
+    mockDeleteSeries,
+    mockGetAllSeries,
+    mockUpdateSeries
+} from '../../mock/mockApiConfig/seriesApi';
 
-const mock = new MockAdapter(API);
-
-const series = [
-    { id: 1, seriesName: 'FirstSeries' },
-    { id: 2, seriesName: 'SecondSeries' }
-];
-
-const newSeries = { id: 3, seriesName: 'ThirdSeries' };
+const mockApi = new MockAdapter(API);
 
 beforeEach(() => {
-    mock.reset();
-    mock.onGet('/series')
-        .reply(200, series);
-    mock.onPost('/series', newSeries)
-        .reply(200, newSeries);
-    mock.onPut('/series/1', newSeries)
-        .reply(200, newSeries);
-    mock.onDelete('/series/1')
-        .reply(200, newSeries);
+    mockApi.reset();
+    mockGetAllSeries(mockApi);
+    mockAddNewSeries(mockApi);
+    mockUpdateSeries(mockApi);
+    mockDeleteSeries(mockApi);
 });
 
 describe('SeriesApiService', () => {
@@ -28,7 +24,7 @@ describe('SeriesApiService', () => {
         try {
             const result = await SeriesApiService.getAllSeries();
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(series);
+            expect(result.data).toEqual(BASE_SERIES);
         }
         catch (ex) {
             throw ex;
@@ -37,9 +33,9 @@ describe('SeriesApiService', () => {
 
     it('Add Series', async () => {
         try {
-            const result = await SeriesApiService.addSeries(newSeries);
+            const result = await SeriesApiService.addSeries(NEW_SERIES);
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(newSeries);
+            expect(result.data).toEqual(NEW_SERIES);
         }
         catch (ex) {
             throw ex;
@@ -48,9 +44,9 @@ describe('SeriesApiService', () => {
 
     it('Update Series', async () => {
         try {
-            const result = await SeriesApiService.updateSeries(1, newSeries);
+            const result = await SeriesApiService.updateSeries(1, NEW_SERIES);
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(newSeries);
+            expect(result.data).toEqual(NEW_SERIES);
         }
         catch (ex) {
             throw ex;
@@ -61,7 +57,7 @@ describe('SeriesApiService', () => {
         try {
             const result = await SeriesApiService.deleteSeries(1);
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(newSeries);
+            expect(result.data).toEqual(NEW_SERIES);
         }
         catch (ex) {
             throw ex;

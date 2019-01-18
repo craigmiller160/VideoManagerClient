@@ -1,26 +1,17 @@
 import StarApiService from '../StarApiService';
 import API from '../API';
 import MockAdapter from 'axios-mock-adapter';
+import { BASE_STARS, NEW_STAR } from '../../mock/mockData/starData';
+import { mockAddNewStar, mockDeleteStar, mockGetAllStars, mockUpdateStar } from '../../mock/mockApiConfig/starApi';
 
-const mock = new MockAdapter(API);
-
-const stars = [
-    { id: 1, starName: 'FirstStar' },
-    { id: 2, starName: 'SecondStar' }
-];
-
-const newStar = { id: 3, starName: 'ThirdStar' };
+const mockApi = new MockAdapter(API);
 
 beforeEach(() => {
-    mock.reset();
-    mock.onGet('/stars')
-        .reply(200, stars);
-    mock.onPost('/stars', newStar)
-        .reply(200, newStar);
-    mock.onPut('/stars/1', newStar)
-        .reply(200, newStar);
-    mock.onDelete('/stars/1')
-        .reply(200, newStar);
+    mockApi.reset();
+    mockGetAllStars(mockApi);
+    mockAddNewStar(mockApi);
+    mockUpdateStar(mockApi);
+    mockDeleteStar(mockApi);
 });
 
 describe('StarApiService', () => {
@@ -28,7 +19,7 @@ describe('StarApiService', () => {
         try {
             const result = await StarApiService.getAllStars();
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(stars);
+            expect(result.data).toEqual(BASE_STARS);
         }
         catch (ex) {
             throw ex;
@@ -37,9 +28,9 @@ describe('StarApiService', () => {
 
     it('Add Star', async () => {
         try {
-            const result = await StarApiService.addStar(newStar);
+            const result = await StarApiService.addStar(NEW_STAR);
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(newStar);
+            expect(result.data).toEqual(NEW_STAR);
         }
         catch (ex) {
             throw ex;
@@ -48,9 +39,9 @@ describe('StarApiService', () => {
 
     it('Update Star', async () => {
         try {
-            const result = await StarApiService.updateStar(1, newStar);
+            const result = await StarApiService.updateStar(1, NEW_STAR);
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(newStar);
+            expect(result.data).toEqual(NEW_STAR);
         }
         catch (ex) {
             throw ex;
@@ -61,7 +52,7 @@ describe('StarApiService', () => {
         try {
             const result = await StarApiService.deleteStar(1);
             expect(result.status).toEqual(200);
-            expect(result.data).toEqual(newStar);
+            expect(result.data).toEqual(NEW_STAR);
         }
         catch (ex) {
             throw ex;
