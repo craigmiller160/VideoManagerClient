@@ -1,6 +1,11 @@
 export const BASE_STARS = [
-    { id: 1, starName: 'FirstStar' },
-    { id: 2, starName: 'SecondStar' }
+    { starId: 1, starName: 'FirstStar' },
+    { starId: 2, starName: 'SecondStar' }
 ];
 
-export const NEW_STAR = { id: 3, starName: 'ThirdStar' };
+export const BASE_STAR_FILTERS = [
+    { value: 1, label: 'FirstStar' },
+    { value: 2, label: 'SecondStar' }
+];
+
+export const NEW_STAR = { starId: 3, starName: 'ThirdStar' };

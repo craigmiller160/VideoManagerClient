@@ -1,6 +1,11 @@
 export const BASE_CATEGORIES = [
-    { id: 1, categoryName: 'FirstCategory' },
-    { id: 2, categoryName: 'SecondCategory' }
+    { categoryId: 1, categoryName: 'FirstCategory' },
+    { categoryId: 2, categoryName: 'SecondCategory' }
 ];
 
-export const NEW_CATEGORY = { id: 3, categoryName: 'ThirdCategory' };
+export const BASE_CATEGORY_FILTERS = [
+    { value: 1, label: 'FirstCategory' },
+    { value: 2, label: 'SecondCategory' }
+];
+
+export const NEW_CATEGORY = { categoryId: 3, categoryName: 'ThirdCategory' };

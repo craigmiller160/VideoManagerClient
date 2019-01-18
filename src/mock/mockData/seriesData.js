@@ -1,6 +1,11 @@
 export const BASE_SERIES = [
-    { id: 1, seriesName: 'FirstSeries' },
-    { id: 2, seriesName: 'SecondSeries' }
+    { seriesId: 1, seriesName: 'FirstSeries' },
+    { seriesId: 2, seriesName: 'SecondSeries' }
 ];
 
-export const NEW_SERIES = { id: 3, seriesName: 'ThirdSeries' };
+export const BASE_SERIES_FILTERS = [
+    { value: 1, label: 'FirstSeries' },
+    { value: 2, label: 'SecondSeries' }
+];
+
+export const NEW_SERIES = { seriesId: 3, seriesName: 'ThirdSeries' };

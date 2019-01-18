@@ -1,7 +1,7 @@
 import { createReducer } from "redux-starter-kit";
 import { setCategories, setStars, setSeries } from "./videoSearch.actions";
 
-const initialState = {
+export const initialState = {
     filters: {
         categories: [],
         stars: [],
