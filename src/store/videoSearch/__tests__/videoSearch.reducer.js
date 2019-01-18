@@ -1,0 +1,39 @@
+import videoSearchReducer, { initialState as videoSearchInitState } from '../videoSearch.reducer';
+import { setCategories, setSeries, setStars } from '../videoSearch.actions';
+import { BASE_CATEGORIES } from '../../../mock/mockData/categoryData';
+import { BASE_SERIES } from '../../../mock/mockData/seriesData';
+import { BASE_STARS } from '../../../mock/mockData/starData';
+
+const cloneState = () => ({
+    ...videoSearchInitState,
+    filters: {
+        ...videoSearchInitState.filters
+    }
+});
+
+describe('videoSearch.reducer', () => {
+    it('should return initial state', () => {
+        expect(videoSearchReducer(undefined, {})).toEqual(videoSearchInitState);
+    });
+
+    it('should handle setCategories', () => {
+        const action = { type: setCategories.toString(), payload: BASE_CATEGORIES };
+        const expectedState = cloneState();
+        expectedState.filters.categories = BASE_CATEGORIES;
+        expect(videoSearchReducer(undefined, action)).toEqual(expectedState);
+    });
+
+    it('should handle setSeries', () => {
+        const action = { type: setSeries.toString(), payload: BASE_SERIES };
+        const expectedState = cloneState();
+        expectedState.filters.series = BASE_SERIES;
+        expect(videoSearchReducer(undefined, action)).toEqual(expectedState);
+    });
+
+    it('should handle setStars', () => {
+        const action = { type: setStars.toString(), payload: BASE_STARS };
+        const expectedState = cloneState();
+        expectedState.filters.stars = BASE_STARS;
+        expect(videoSearchReducer(undefined, action)).toEqual(expectedState);
+    });
+});
