@@ -1,13 +1,13 @@
-import { BASE_VIDE0_FILES, NEW_VIEW_FILE } from '../mockData/videoFileData';
+import { BASE_VIDE0_FILES, FILE_COUNT, NEW_VIDEO_FILE } from '../mockData/videoFileData';
 
 export const  mockAddNewVideoFile = (mockApi) => {
-    mockApi.onPost('/video-files', NEW_VIEW_FILE)
-        .reply(200, NEW_VIEW_FILE);
+    mockApi.onPost('/video-files', NEW_VIDEO_FILE)
+        .reply(200, NEW_VIDEO_FILE);
 };
 
 export const mockUpdateVideoFile = (mockApi) => {
-    mockApi.onPut('/video-files/1', NEW_VIEW_FILE)
-        .reply(200, NEW_VIEW_FILE);
+    mockApi.onPut('/video-files/1', NEW_VIDEO_FILE)
+        .reply(200, NEW_VIDEO_FILE);
 };
 
 export const mockSearchForFiles = (mockApi) => {
@@ -32,6 +32,11 @@ export const mockIsVideoScanRunning = (mockApi) => {
 };
 
 export const mockPlayVideo = (mockApi) => {
-    mockApi.onPost('/video-files/play', NEW_VIEW_FILE)
+    mockApi.onPost('/video-files/play', NEW_VIDEO_FILE)
         .reply(200);
+};
+
+export const mockGetVideoFileCount = (mockApi) => {
+    mockApi.onGet('/video-files/count')
+        .reply(200, FILE_COUNT);
 };

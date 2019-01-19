@@ -27,7 +27,8 @@ describe('SeriesApiService', () => {
             expect(result.data).toEqual(BASE_SERIES);
         }
         catch (ex) {
-            throw ex;
+            console.log(ex);
+            expect(ex).toBeUndefined();
         }
     });
 
@@ -38,7 +39,8 @@ describe('SeriesApiService', () => {
             expect(result.data).toEqual(NEW_SERIES);
         }
         catch (ex) {
-            throw ex;
+            console.log(ex);
+            expect(ex).toBeUndefined();
         }
     });
 
@@ -49,7 +51,8 @@ describe('SeriesApiService', () => {
             expect(result.data).toEqual(NEW_SERIES);
         }
         catch (ex) {
-            throw ex;
+            console.log(ex);
+            expect(ex).toBeUndefined();
         }
     });
 
@@ -60,7 +63,8 @@ describe('SeriesApiService', () => {
             expect(result.data).toEqual(NEW_SERIES);
         }
         catch (ex) {
-            throw ex;
+            console.log(ex);
+            expect(ex).toBeUndefined();
         }
     });
 });

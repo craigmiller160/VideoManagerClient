@@ -45,11 +45,16 @@ const searchForVideos = (searchConfig) => {
     });
 };
 
+const getVideoFileCount = () => {
+    return API.get('/video-files/count');
+};
+
 export default {
     addVideoFile,
     updateVideoFile,
     startVideoScan,
     isVideoScanRunning,
     searchForVideos,
-    playVideo
+    playVideo,
+    getVideoFileCount
 }

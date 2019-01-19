@@ -33,6 +33,16 @@ export const searchForVideos = () => async (dispatch, getState) => {
     }
 };
 
+export const getVideoFileCount = () => async (dispatch) => {
+    try {
+        // TODO finish this
+    }
+    catch (ex) {
+        // TODO need error handling in the UI
+        console.log('Error', ex);
+    }
+};
+
 export const setVideoList = createAction('setVideoList');
 export const setPagination = createAction('setPagination');
 export const setCurrentPage = createAction('setCurrentPage');
