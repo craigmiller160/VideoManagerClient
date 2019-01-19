@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-starter-kit';
-import { setVideoList, setPagination, setCurrentPage } from './videoList.actions';
+import { setVideoList, setPagination, setCurrentPage, expandVideoFile } from './videoList.actions';
 
 export const initialState = {
     videoList: [],
@@ -12,7 +12,10 @@ export const initialState = {
 
 const handleSetVideoList = (state, action) => ({
     ...state,
-    videoList: action.payload
+    videoList: action.payload.map((videoFile) => ({
+        ...videoFile,
+        expanded: false
+    }))
 });
 
 const handleSetPagination = (state, action) => ({
@@ -25,9 +28,26 @@ const handleSetCurrentPage = (state, action) => ({
     currentPage: action.payload
 });
 
+const handleExpandVideoFile = (state, action) => ({
+    ...state,
+    videoList: state.videoList.map((videoFile) => {
+        if (action.payload === videoFile.fileId) {
+            return {
+                ...videoFile,
+                expanded: true
+            }
+        }
+        return {
+            ...videoFile,
+            expanded: false
+        }
+    })
+});
+
 export default createReducer(initialState, {
     [setVideoList]: handleSetVideoList,
     [setPagination]: handleSetPagination,
-    [setCurrentPage]: handleSetCurrentPage
+    [setCurrentPage]: handleSetCurrentPage,
+    [expandVideoFile]: handleExpandVideoFile
 });
 

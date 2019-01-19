@@ -35,3 +35,4 @@ export const searchForVideos = () => async (dispatch, getState) => {
 export const setVideoList = createAction('setVideoList');
 export const setPagination = createAction('setPagination');
 export const setCurrentPage = createAction('setCurrentPage');
+export const expandVideoFile = createAction('expandVideoFile');

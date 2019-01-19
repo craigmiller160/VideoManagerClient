@@ -2,7 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import API from '../../../services/API';
-import { searchForVideos, setCurrentPage, setPagination, setVideoList } from '../videoList.actions';
+import { expandVideoFile, searchForVideos, setCurrentPage, setPagination, setVideoList } from '../videoList.actions';
 import { BASE_VIDE0_FILES, PAGINATION_COUNTS } from '../../../mock/mockData/videoFileData';
 import { mockGetVideoFileCount, mockSearchForFiles } from '../../../mock/mockApiConfig/videoFileApi';
 import { initialState as videoListInitState } from '../videoList.reducer';
@@ -37,6 +37,15 @@ describe('videoList.actions', () => {
             payload: 5
         };
         const action = setCurrentPage(5);
+        expect(action).toEqual(expectedAction);
+    });
+
+    describe('expandVideoFile action', () => {
+        const expectedAction = {
+            type: expandVideoFile.toString(),
+            payload: 1
+        };
+        const action = expandVideoFile(1);
         expect(action).toEqual(expectedAction);
     });
 

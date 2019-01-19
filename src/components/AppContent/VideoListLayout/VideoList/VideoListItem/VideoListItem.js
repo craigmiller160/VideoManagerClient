@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classes from './VideoListItem.scss';
 import {
@@ -65,17 +65,17 @@ const VideoListItem = (props) => {
                         </ListGroupItemText>
                     </Col>
                 </Row>
-                {/*<Row>*/}
-                    {/*<Col>*/}
-                        {/*<ListGroupItemText>*/}
-                            {/*{ fileName }*/}
-                        {/*</ListGroupItemText>*/}
-                    {/*</Col>*/}
-                    {/*<Col className="text-right">*/}
-                        {/*<Button color="info">Edit</Button>*/}
-                        {/*<Button color="primary">Play</Button>*/}
-                    {/*</Col>*/}
-                {/*</Row>*/}
+                <Row>
+                    <Col>
+                        <ListGroupItemText>
+                            { fileName }
+                        </ListGroupItemText>
+                    </Col>
+                    <Col className="text-right">
+                        <Button color="info">Edit</Button>
+                        <Button color="primary">Play</Button>
+                    </Col>
+                </Row>
             </ListGroupItem>
         </div>
     );
