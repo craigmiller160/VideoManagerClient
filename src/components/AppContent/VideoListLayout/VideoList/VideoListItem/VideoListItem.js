@@ -27,7 +27,6 @@ const VideoListItem = (props) => {
     } = props;
 
     const leftColSize = 6;
-    // const expandClasses = [ classes.expand, (expanded ? classes.active : '') ].join(' ');
     const rootClasses = [ classes.VideoListItem, (expanded ? classes.active : '') ].join(' ');
 
     return (
