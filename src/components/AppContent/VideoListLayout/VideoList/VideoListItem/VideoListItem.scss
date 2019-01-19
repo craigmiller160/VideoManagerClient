@@ -1,5 +1,8 @@
 
 .VideoListItem {
+  &.active, &.active li {
+    background-color: lightblue;
+  }
   .heading {
     font-weight: bold;
   }

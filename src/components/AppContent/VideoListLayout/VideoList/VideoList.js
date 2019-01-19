@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
-import { searchForVideos } from '../../../../store/videoList/videoList.actions';
+import { expandVideoFile, searchForVideos } from '../../../../store/videoList/videoList.actions';
 
 class VideoList extends Component {
 
@@ -21,6 +21,7 @@ class VideoList extends Component {
                         <VideoListItem
                             key={ videoFile.fileId }
                             videoFile={ videoFile }
+                            expandVideoFile={ this.props.expandVideoFile }
                         />
                     )) }
                 </ListGroup>
@@ -38,7 +39,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    searchForVideos
+    searchForVideos,
+    expandVideoFile
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoList);

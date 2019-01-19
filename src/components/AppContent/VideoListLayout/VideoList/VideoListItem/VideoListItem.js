@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './VideoListItem.scss';
 import {
@@ -7,23 +7,31 @@ import {
     ListGroupItemText,
     Col,
     Row,
-    Button
+    Button,
+    Collapse
 } from 'reactstrap';
 
 const VideoListItem = (props) => {
     const {
-        fileName,
-        displayName,
-        description,
-        categories,
-        series,
-        stars
-    } = props.videoFile;
+        videoFile: {
+            fileId,
+            fileName,
+            displayName,
+            description,
+            categories,
+            series,
+            stars,
+            expanded
+        },
+        expandVideoFile
+    } = props;
 
-    const leftColSize = 4;
+    const leftColSize = 6;
+    // const expandClasses = [ classes.expand, (expanded ? classes.active : '') ].join(' ');
+    const rootClasses = [ classes.VideoListItem, (expanded ? classes.active : '') ].join(' ');
 
     return (
-        <div className={ classes.VideoListItem }>
+        <div className={ rootClasses } onClick={ () => expandVideoFile(fileId) }>
             <ListGroupItem>
                 <Row>
                     <Col xs={ leftColSize }>
@@ -65,24 +73,28 @@ const VideoListItem = (props) => {
                         </ListGroupItemText>
                     </Col>
                 </Row>
-                <Row>
-                    <Col>
-                        <ListGroupItemText>
-                            { fileName }
-                        </ListGroupItemText>
-                    </Col>
-                    <Col className="text-right">
-                        <Button color="info">Edit</Button>
-                        <Button color="primary">Play</Button>
-                    </Col>
-                </Row>
+                <Collapse isOpen={ expanded }>
+                    <Row>
+                        <Col>
+                            <ListGroupItemText>
+                                <span className={ classes.heading }>File Name: </span>
+                                { fileName }
+                            </ListGroupItemText>
+                        </Col>
+                        <Col className="text-right">
+                            <Button color="info">Edit</Button>
+                            <Button color="primary">Play</Button>
+                        </Col>
+                    </Row>
+                </Collapse>
             </ListGroupItem>
         </div>
     );
 };
 
 VideoListItem.propTypes = {
-    videoFile: PropTypes.object.isRequired
+    videoFile: PropTypes.object.isRequired,
+    expandVideoFile: PropTypes.func.isRequired
 };
 
 export default VideoListItem;
