@@ -35,7 +35,11 @@ export const searchForVideos = () => async (dispatch, getState) => {
 
 export const getVideoFileCount = () => async (dispatch) => {
     try {
-        // TODO finish this
+        const result = await VideoApiService.getVideoFileCount();
+        dispatch(setPagination({
+            totalItems: result.data.totalFiles,
+            itemsPerPage: result.data.filesPerPage
+        }));
     }
     catch (ex) {
         // TODO need error handling in the UI

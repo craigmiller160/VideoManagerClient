@@ -1,7 +1,7 @@
 import { createReducer } from 'redux-starter-kit';
 import { setVideoList, setPagination, setCurrentPage } from './videoList.actions';
 
-const initialState = {
+export const initialState = {
     videoList: [],
     pagination: {
         totalItems: 0,
