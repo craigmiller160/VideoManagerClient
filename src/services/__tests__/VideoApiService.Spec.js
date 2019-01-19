@@ -51,26 +51,37 @@ describe('VideoApiService', () => {
     });
 
     it('Search for Files', async () => {
+        let result;
         try {
-            const result = await VideoApiService.searchForVideos({ page: 0, sortDirection: 'ASC' });
-            expect(result.status).toEqual(200);
-            expect(result.data).toEqual(BASE_VIDEO_SEARCH_RESULT);
+            result = await VideoApiService.searchForVideos({
+                page: 0,
+                sortDirection: 'ASC',
+                searchText: '',
+                categoryId: 0,
+                starId: 0,
+                seriesId: 0
+            });
         }
         catch (ex) {
             console.log(ex);
             expect(ex).toBeUndefined();
         }
+        expect(result).toBeTruthy();
+        expect(result.status).toEqual(200);
+        expect(result.data).toEqual(BASE_VIDEO_SEARCH_RESULT);
     });
 
     it('Start Video Scan', async () => {
+        let result;
         try {
-            const result = await VideoApiService.startVideoScan();
-            expect(result.status).toEqual(200);
+            result = await VideoApiService.startVideoScan();
         }
         catch (ex) {
             console.log(ex);
             expect(ex).toBeUndefined();
         }
+        expect(result).toBeTruthy();
+        expect(result.status).toEqual(200);
     });
 
     it('Is Video Scan Running', async () => {

@@ -2,9 +2,9 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import API from '../../../services/API';
-import { getVideoFileCount, setCurrentPage, setPagination, setVideoList } from '../videoList.actions';
+import { searchForVideos, setCurrentPage, setPagination, setVideoList } from '../videoList.actions';
 import { BASE_VIDE0_FILES, PAGINATION_COUNTS } from '../../../mock/mockData/videoFileData';
-import { mockGetVideoFileCount } from '../../../mock/mockApiConfig/videoFileApi';
+import { mockGetVideoFileCount, mockSearchForFiles } from '../../../mock/mockApiConfig/videoFileApi';
 import { initialState as videoListInitState } from '../videoList.reducer';
 
 const mockStore = configureMockStore([thunk]);
@@ -45,14 +45,36 @@ describe('videoList.actions', () => {
 
         beforeEach(() => {
             mockApi.reset();
-            mockGetVideoFileCount(mockApi);
+            mockSearchForFiles(mockApi);
 
-            store = mockStore(videoListInitState);
+            store = mockStore({
+                videoList: videoListInitState,
+                form: {
+                    videoSearch: {
+                        category: 0,
+                        series: 0,
+                        star: 0,
+                        search: ''
+                    }
+                }
+            });
         });
 
         describe('searchForVideos action', () => {
-            it('performs the search', () => {
-                throw new Error('Complete the function and then complete this test');
+            it('performs the search', async () => {
+                const expectedActions = [
+                    { type: setPagination.toString(), payload: PAGINATION_COUNTS },
+                    { type: setVideoList.toString(), payload: BASE_VIDE0_FILES }
+                ];
+
+                try {
+                    await store.dispatch(searchForVideos());
+                }
+                catch (ex) {
+                    console.log('Error', ex);
+                    expect(ex).toBeUndefined();
+                }
+                expect(store.getActions()).toEqual(expectedActions);
             });
         });
     });

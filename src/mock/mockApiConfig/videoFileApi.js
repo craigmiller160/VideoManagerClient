@@ -1,4 +1,4 @@
-import { BASE_VIDEO_SEARCH_RESULT, FILE_COUNT, NEW_VIDEO_FILE } from '../mockData/videoFileData';
+import { BASE_VIDEO_SEARCH_RESULT, EMPTY_SEARCH, FILE_COUNT, NEW_VIDEO_FILE } from '../mockData/videoFileData';
 
 export const  mockAddNewVideoFile = (mockApi) => {
     mockApi.onPost('/video-files', NEW_VIDEO_FILE)
@@ -11,7 +11,7 @@ export const mockUpdateVideoFile = (mockApi) => {
 };
 
 export const mockSearchForFiles = (mockApi) => {
-    mockApi.onPost('/video-files/search', {})
+    mockApi.onPost('/video-files/search', EMPTY_SEARCH)
         .reply(config => {
             expect(config.params).toEqual({
                 page: 0,

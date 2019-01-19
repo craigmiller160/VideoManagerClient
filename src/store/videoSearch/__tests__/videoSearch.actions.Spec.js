@@ -72,12 +72,12 @@ describe('videoSearch.actions', () => {
 
                 try {
                     await store.dispatch(loadFilterOptions());
-                    expect(store.getActions()).toEqual(expectedActions);
                 }
                 catch (ex) {
                     console.log('Error', ex);
                     expect(ex).toBeUndefined();
                 }
+                expect(store.getActions()).toEqual(expectedActions);
             });
         });
     });

@@ -7,7 +7,7 @@ export const initialState = {
         totalItems: 0,
         itemsPerPage: 0
     },
-    currentPage: 1
+    currentPage: 0
 };
 
 const handleSetVideoList = (state, action) => ({

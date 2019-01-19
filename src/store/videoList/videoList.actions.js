@@ -25,7 +25,12 @@ export const searchForVideos = () => async (dispatch, getState) => {
             searchText: search
         });
 
+        dispatch(setPagination({
+            itemsPerPage: result.data.filesPerPage,
+            totalItems: result.data.totalFiles
+        }));
 
+        dispatch(setVideoList(result.data.videoList));
     }
     catch (ex) {
         // TODO need error handling in the UI
