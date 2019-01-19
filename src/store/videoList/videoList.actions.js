@@ -4,26 +4,20 @@ import VideoApiService from '../../services/VideoApiService';
 export const searchForVideos = () => async (dispatch, getState) => {
     try {
         const {
-            videoList: {
-                currentPage
-            },
-            form: {
-                videoSearch: {
-                    category,
-                    series,
-                    star,
-                    search
-                }
-            }
+            videoList: { currentPage },
+            form
         } = getState();
 
-        const result = await VideoApiService.searchForVideos({
-            page: currentPage,
-            categoryId: category,
-            seriesId: series,
-            starId: star,
-            searchText: search
-        });
+        const searchConfig = { page: currentPage };
+        if (form && form.videoSearch) {
+            const { category, series, star, search } = form.videoSearch;
+            searchConfig.categoryId = category;
+            searchConfig.seriesId = series;
+            searchConfig.starId = star;
+            searchConfig.searchText = search;
+        }
+
+        const result = await VideoApiService.searchForVideos(searchConfig);
 
         dispatch(setPagination({
             itemsPerPage: result.data.filesPerPage,
