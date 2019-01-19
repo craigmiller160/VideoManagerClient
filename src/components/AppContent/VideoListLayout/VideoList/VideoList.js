@@ -13,9 +13,12 @@ class VideoList extends Component {
 
 }
 
-const mapStateToProps = (state) => {
-
-};
+const mapStateToProps = (state) => ({
+    totalItems: state.videoList.pagination.totalItems,
+    itemsPerPage: state.videoList.pagination.itemsPerPage,
+    currentPage: state.videoList.currentPage,
+    videoList: state.videoList.videoList
+});
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
 
