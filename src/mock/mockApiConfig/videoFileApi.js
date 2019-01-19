@@ -1,4 +1,4 @@
-import { BASE_VIDE0_FILES, FILE_COUNT, NEW_VIDEO_FILE } from '../mockData/videoFileData';
+import { BASE_VIDEO_SEARCH_RESULT, FILE_COUNT, NEW_VIDEO_FILE } from '../mockData/videoFileData';
 
 export const  mockAddNewVideoFile = (mockApi) => {
     mockApi.onPost('/video-files', NEW_VIDEO_FILE)
@@ -17,7 +17,7 @@ export const mockSearchForFiles = (mockApi) => {
                 page: 0,
                 sortDirection: 'ASC'
             });
-            return [200, BASE_VIDE0_FILES];
+            return [200, BASE_VIDEO_SEARCH_RESULT];
         });
 };
 

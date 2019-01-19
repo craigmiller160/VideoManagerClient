@@ -55,23 +55,6 @@ describe('videoList.actions', () => {
                 throw new Error('Complete the function and then complete this test');
             });
         });
-
-        describe('getVideoFileCount action', () => {
-            it('loads the data', async () => {
-                const expectedActions = [
-                    { type: setPagination.toString(), payload: PAGINATION_COUNTS }
-                ];
-
-                try {
-                    await store.dispatch(getVideoFileCount());
-                    expect(store.getActions()).toEqual(expectedActions);
-                }
-                catch (ex) {
-                    console.log('Error', ex);
-                    expect(ex).toBeNull();
-                }
-            });
-        });
     });
 
 

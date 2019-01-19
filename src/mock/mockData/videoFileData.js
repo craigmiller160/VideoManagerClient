@@ -3,6 +3,13 @@ export const BASE_VIDE0_FILES = [
     { fileId: 2, fileName: 'SecondFile' }
 ];
 
+export const BASE_VIDEO_SEARCH_RESULT = {
+    totalFiles: 100,
+    filesPerPage: 10,
+    currentPage: 0,
+    videoList: BASE_VIDE0_FILES
+};
+
 export const NEW_VIDEO_FILE = { fileId: 3, fileName: 'ThirdFile' };
 
 export const FILE_COUNT = { totalFiles: 100, filesPerPage: 10 };

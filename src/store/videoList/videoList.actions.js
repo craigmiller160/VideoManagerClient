@@ -25,21 +25,7 @@ export const searchForVideos = () => async (dispatch, getState) => {
             searchText: search
         });
 
-        // TODO need to store the result in redux
-    }
-    catch (ex) {
-        // TODO need error handling in the UI
-        console.log('Error', ex);
-    }
-};
 
-export const getVideoFileCount = () => async (dispatch) => {
-    try {
-        const result = await VideoApiService.getVideoFileCount();
-        dispatch(setPagination({
-            totalItems: result.data.totalFiles,
-            itemsPerPage: result.data.filesPerPage
-        }));
     }
     catch (ex) {
         // TODO need error handling in the UI
