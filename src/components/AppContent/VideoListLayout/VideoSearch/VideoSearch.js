@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap';
 import Input from '../../../UI/form/Input/Input';
 import Select from '../../../UI/form/Select/Select';
 import classes from './VideoSearch.scss';
 import Form from "../../../UI/form/Form/Form";
 import { loadFilterOptions } from "../../../../store/videoSearch/videoSearch.actions";
+import { searchForVideos } from '../../../../store/videoList/videoList.actions';
 
 class VideoSearch extends Component {
 
@@ -22,7 +23,10 @@ class VideoSearch extends Component {
         } = this.props.filters;
 
         return (
-            <Form form="video-search">
+            <Form
+                form="video-search"
+                handleSubmit={ this.props.searchForVideos }
+            >
                 <Row className={classes.VideoSearch}>
                     <Col sm="6" md="3">
                         <Input
@@ -52,6 +56,11 @@ class VideoSearch extends Component {
                         />
                     </Col>
                 </Row>
+                <Row>
+                    <Col className="text-center">
+                        <Button type="submit" color="primary">Search</Button>
+                    </Col>
+                </Row>
             </Form>
         );
     }
@@ -62,7 +71,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    loadFilterOptions
+    loadFilterOptions,
+    searchForVideos
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoSearch);

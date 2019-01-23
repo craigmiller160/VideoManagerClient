@@ -28,7 +28,8 @@ const Select = (props) => {
                 name={ name }
                 onBlur={ () => input.onBlur(input.value) }
                 options={ options }
-                isSearchable={ true }
+                isSearchable
+                isClearable
             />
         </FormGroup>
     );
