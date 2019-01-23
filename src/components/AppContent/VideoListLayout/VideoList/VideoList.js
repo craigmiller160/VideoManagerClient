@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
 import { expandVideoFile, searchForVideos } from '../../../../store/videoList/videoList.actions';
+import Spinner from '../../../UI/Spinner/Spinner';
 
 class VideoList extends Component {
 
@@ -16,15 +17,22 @@ class VideoList extends Component {
         return (
             <div className={ classes.VideoList }>
                 <h3>Available Videos</h3>
-                <ListGroup>
-                    { this.props.videoList.map((videoFile) => (
-                        <VideoListItem
-                            key={ videoFile.fileId }
-                            videoFile={ videoFile }
-                            expandVideoFile={ this.props.expandVideoFile }
-                        />
-                    )) }
-                </ListGroup>
+                {
+                    this.props.videoList.length === 0 &&
+                    <Spinner />
+                }
+                {
+                    this.props.videoList.length > 0 &&
+                    <ListGroup>
+                        { this.props.videoList.map((videoFile) => (
+                            <VideoListItem
+                                key={ videoFile.fileId }
+                                videoFile={ videoFile }
+                                expandVideoFile={ this.props.expandVideoFile }
+                            />
+                        )) }
+                    </ListGroup>
+                }
             </div>
         );
     }
