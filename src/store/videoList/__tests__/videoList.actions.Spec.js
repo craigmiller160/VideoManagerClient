@@ -4,7 +4,7 @@ import MockAdapter from 'axios-mock-adapter';
 import API from '../../../services/API';
 import { expandVideoFile, searchForVideos, setCurrentPage, setPagination, setVideoList } from '../videoList.actions';
 import { BASE_VIDE0_FILES, PAGINATION_COUNTS } from '../../../mock/mockData/videoFileData';
-import { mockGetVideoFileCount, mockSearchForFiles } from '../../../mock/mockApiConfig/videoFileApi';
+import { mockGetAllFiles, mockGetVideoFileCount, mockSearchForFiles } from '../../../mock/mockApiConfig/videoFileApi';
 import { initialState as videoListInitState } from '../videoList.reducer';
 
 const mockStore = configureMockStore([thunk]);
@@ -50,27 +50,58 @@ describe('videoList.actions', () => {
     });
 
     describe('asynchronous thunk actions', () => {
-        let store;
-
         beforeEach(() => {
             mockApi.reset();
+            mockGetAllFiles(mockApi);
             mockSearchForFiles(mockApi);
-
-            store = mockStore({
-                videoList: videoListInitState,
-                form: {
-                    videoSearch: {
-                        category: 0,
-                        series: 0,
-                        star: 0,
-                        search: ''
-                    }
-                }
-            });
         });
 
         describe('searchForVideos action', () => {
             it('performs the search', async () => {
+                const store = mockStore({
+                    videoList: videoListInitState,
+                    form: {
+                        'video-search': {
+                            values: {
+                                category: 0,
+                                series: 0,
+                                star: 0,
+                                search: ''
+                            }
+                        }
+                    }
+                });
+
+                const expectedActions = [
+                    { type: setPagination.toString(), payload: PAGINATION_COUNTS },
+                    { type: setVideoList.toString(), payload: BASE_VIDE0_FILES }
+                ];
+
+                try {
+                    await store.dispatch(searchForVideos());
+                }
+                catch (ex) {
+                    console.log('Error', ex);
+                    expect(ex).toBeUndefined();
+                }
+                expect(store.getActions()).toEqual(expectedActions);
+            });
+
+            it('searchForVideos with config', async () => {
+                const store = mockStore({
+                    videoList: videoListInitState,
+                    form: {
+                        'video-search': {
+                            values: {
+                                category: 1,
+                                series: 1,
+                                star: 1,
+                                search: 'Hello World'
+                            }
+                        }
+                    }
+                });
+
                 const expectedActions = [
                     { type: setPagination.toString(), payload: PAGINATION_COUNTS },
                     { type: setVideoList.toString(), payload: BASE_VIDE0_FILES }

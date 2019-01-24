@@ -9,11 +9,11 @@ export const searchForVideos = () => async (dispatch, getState) => {
         } = getState();
 
         const searchConfig = { page: currentPage };
-        if (form && form.videoSearch) {
-            const { category, series, star, search } = form.videoSearch;
-            searchConfig.categoryId = category;
-            searchConfig.seriesId = series;
-            searchConfig.starId = star;
+        if (form && form['video-search'] && form['video-search'].values) {
+            const { category, series, star, search } = form['video-search'].values;
+            searchConfig.categoryId = category ? category.value : 0;
+            searchConfig.seriesId = series ? series.value : 0;
+            searchConfig.starId = star ? star.value : 0;
             searchConfig.searchText = search;
         }
 
