@@ -2,6 +2,7 @@ import { createAction } from 'redux-starter-kit';
 import CategoryApiService from '../../services/CategoryApiService';
 import SeriesApiService from '../../services/SeriesApiService';
 import StarApiService from '../../services/StarApiService';
+import { showErrorAlert } from '../alert/alert.actions';
 
 export const loadFilterOptions = () => async (dispatch) => {
     try {
@@ -20,8 +21,7 @@ export const loadFilterOptions = () => async (dispatch) => {
         dispatch(setStars(stars));
     }
     catch (ex) {
-        // TODO need error handling in UI
-        console.log('Error!', ex);
+        dispatch(showErrorAlert(ex.message));
     }
 };
 

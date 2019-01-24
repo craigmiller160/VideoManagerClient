@@ -1,5 +1,6 @@
 import { createAction } from 'redux-starter-kit';
 import VideoApiService from '../../services/VideoApiService';
+import { showErrorAlert } from '../alert/alert.actions';
 
 export const searchForVideos = () => async (dispatch, getState) => {
     try {
@@ -27,8 +28,7 @@ export const searchForVideos = () => async (dispatch, getState) => {
         dispatch(setVideoList(result.data.videoList));
     }
     catch (ex) {
-        // TODO need error handling in the UI
-        console.log('Error', ex);
+        dispatch(showErrorAlert(ex.message));
     }
 };
 
