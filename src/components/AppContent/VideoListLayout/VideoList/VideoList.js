@@ -18,11 +18,11 @@ class VideoList extends Component {
             <div className={ classes.VideoList }>
                 <h3>Available Videos</h3>
                 {
-                    this.props.videoList.length === 0 &&
+                    this.props.searching &&
                     <Spinner />
                 }
                 {
-                    this.props.videoList.length > 0 &&
+                    !this.props.searching > 0 &&
                     <ListGroup>
                         { this.props.videoList.map((videoFile) => (
                             <VideoListItem
@@ -43,7 +43,8 @@ const mapStateToProps = (state) => ({
     totalItems: state.videoList.pagination.totalItems,
     itemsPerPage: state.videoList.pagination.itemsPerPage,
     currentPage: state.videoList.currentPage,
-    videoList: state.videoList.videoList
+    videoList: state.videoList.videoList,
+    searching: state.videoSearch.searching
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

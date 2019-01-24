@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { setCategories, setSeries, setStars, loadFilterOptions } from "../videoSearch.actions";
+import { setCategories, setSeries, setStars, loadFilterOptions, setSearching } from "../videoSearch.actions";
 import MockAdapter from 'axios-mock-adapter';
 import API from '../../../services/API';
 import { BASE_CATEGORIES, BASE_CATEGORY_FILTERS } from '../../../mock/mockData/categoryData';
@@ -46,6 +46,15 @@ describe('videoSearch.actions', () => {
             const action = setStars(BASE_STARS);
             expect(action).toEqual(expectedAction);
         });
+    });
+
+    describe('setSearching action', () => {
+        const expectedAction = {
+            type: setSearching.toString(),
+            payload: true
+        };
+        const action = setSearching(true);
+        expect(action).toEqual(expectedAction);
     });
 
     describe('asynchronous thunk actions', () => {

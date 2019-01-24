@@ -1,9 +1,11 @@
 import { createAction } from 'redux-starter-kit';
 import VideoApiService from '../../services/VideoApiService';
 import { showErrorAlert } from '../alert/alert.actions';
+import { setSearching } from '../videoSearch/videoSearch.actions';
 
 export const searchForVideos = () => async (dispatch, getState) => {
     try {
+        dispatch(setSearching(true));
         const {
             videoList: { currentPage },
             form
@@ -26,9 +28,15 @@ export const searchForVideos = () => async (dispatch, getState) => {
         }));
 
         dispatch(setVideoList(result.data.videoList));
+
+        // TODO need to refresh the filters too
     }
     catch (ex) {
+        console.log(ex);
         dispatch(showErrorAlert(ex.message));
+    }
+    finally {
+        dispatch(setSearching(false));
     }
 };
 

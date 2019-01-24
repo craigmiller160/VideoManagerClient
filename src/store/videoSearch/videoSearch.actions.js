@@ -21,6 +21,7 @@ export const loadFilterOptions = () => async (dispatch) => {
         dispatch(setStars(stars));
     }
     catch (ex) {
+        console.log(ex);
         dispatch(showErrorAlert(ex.message));
     }
 };
@@ -28,3 +29,4 @@ export const loadFilterOptions = () => async (dispatch) => {
 export const setCategories = createAction('setCategories');
 export const setSeries = createAction('setSeries');
 export const setStars = createAction('setStars');
+export const setSearching = createAction('setSearching');

@@ -1,5 +1,5 @@
 import videoSearchReducer, { initialState as videoSearchInitState } from '../videoSearch.reducer';
-import { setCategories, setSeries, setStars } from '../videoSearch.actions';
+import { setCategories, setSearching, setSeries, setStars } from '../videoSearch.actions';
 import { BASE_CATEGORIES } from '../../../mock/mockData/categoryData';
 import { BASE_SERIES } from '../../../mock/mockData/seriesData';
 import { BASE_STARS } from '../../../mock/mockData/starData';
@@ -34,6 +34,15 @@ describe('videoSearch.reducer', () => {
         const action = { type: setStars.toString(), payload: BASE_STARS };
         const expectedState = cloneState();
         expectedState.filters.stars = BASE_STARS;
+        expect(videoSearchReducer(undefined, action)).toEqual(expectedState);
+    });
+
+    it('should handle setSearching', () => {
+        const action = { type: setSearching.toString(), payload: true };
+        const expectedState = {
+            ...cloneState(),
+            searching: true
+        };
         expect(videoSearchReducer(undefined, action)).toEqual(expectedState);
     });
 });

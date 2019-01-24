@@ -1,12 +1,13 @@
 import { createReducer } from "redux-starter-kit";
-import { setCategories, setStars, setSeries } from "./videoSearch.actions";
+import { setCategories, setStars, setSeries, setSearching } from "./videoSearch.actions";
 
 export const initialState = {
     filters: {
         categories: [],
         stars: [],
         series: []
-    }
+    },
+    searching: false
 };
 
 const handleSetCategories = (state, action) => ({
@@ -33,8 +34,14 @@ const handleSetSeries = (state, action) => ({
     }
 });
 
+const handleSetSearching = (state, action) => ({
+    ...state,
+    searching: action.payload
+});
+
 export default createReducer(initialState, {
     [setCategories]: handleSetCategories,
     [setStars]: handleSetStars,
-    [setSeries]: handleSetSeries
+    [setSeries]: handleSetSeries,
+    [setSearching]: handleSetSearching
 });

@@ -12,10 +12,10 @@ export const initialState = {
 
 const handleSetVideoList = (state, action) => ({
     ...state,
-    videoList: action.payload.map((videoFile) => ({
+    videoList: action.payload ? action.payload.map((videoFile) => ({
         ...videoFile,
         expanded: false
-    }))
+    })) : []
 });
 
 const handleSetPagination = (state, action) => ({

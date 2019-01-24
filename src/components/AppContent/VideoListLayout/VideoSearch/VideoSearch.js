@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { reset } from 'redux-form';
 import { Row, Col, Button } from 'reactstrap';
 import Input from '../../../UI/form/Input/Input';
 import Select from '../../../UI/form/Select/Select';
@@ -9,11 +10,17 @@ import Form from "../../../UI/form/Form/Form";
 import { loadFilterOptions } from "../../../../store/videoSearch/videoSearch.actions";
 import { searchForVideos } from '../../../../store/videoList/videoList.actions';
 
+const FORM_NAME = 'video-search';
+
 class VideoSearch extends Component {
 
     componentDidMount() {
         this.props.loadFilterOptions();
     }
+
+    resetForm = () => {
+        reset(FORM_NAME); // TODO needs to be tested to make sure it works
+    };
 
     render() {
         const {
@@ -24,10 +31,11 @@ class VideoSearch extends Component {
 
         return (
             <Form
-                form="video-search"
+                form={ FORM_NAME }
                 handleSubmit={ this.props.searchForVideos }
+                className={ classes.VideoSearch }
             >
-                <Row className={classes.VideoSearch}>
+                <Row>
                     <Col sm="6" md="3">
                         <Input
                             label="Search"
@@ -58,7 +66,19 @@ class VideoSearch extends Component {
                 </Row>
                 <Row>
                     <Col className="text-center">
-                        <Button type="submit" color="primary">Search</Button>
+                        <Button
+                            type="submit"
+                            color="primary"
+                        >
+                            Search
+                        </Button>
+                        <Button
+                            type="button"
+                            color="info"
+                            onClick={ this.resetForm }
+                        >
+                            Reset
+                        </Button>
                     </Col>
                 </Row>
             </Form>

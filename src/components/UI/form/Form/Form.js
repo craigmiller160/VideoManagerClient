@@ -7,11 +7,13 @@ import { reduxForm } from 'redux-form';
 const Form = (props) => {
     const {
         children,
-        handleSubmit
+        handleSubmit,
+        className
     } = props;
 
     return (
         <ReactForm
+            className={ className }
             onSubmit={ (event) => {
                 event.preventDefault();
                 handleSubmit(event);
@@ -31,7 +33,8 @@ const Form = (props) => {
 const ReduxFormForm = reduxForm({})(Form);
 ReduxFormForm.propTypes = {
     form: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func
+    handleSubmit: PropTypes.func,
+    className: PropTypes.string
 };
 
 export default ReduxFormForm;
