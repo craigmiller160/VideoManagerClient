@@ -29,7 +29,7 @@ class VideoNavbar extends Component {
     render() {
 
         return (
-            <Navbar className={classes.VideoNavbar} color="light" light expand="md">
+            <Navbar className={classes.VideoNavbar} color="dark" dark expand="md">
                 <Container>
                     <NavbarBrand href="/">Video Manager</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
