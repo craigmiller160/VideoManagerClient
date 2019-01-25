@@ -6,6 +6,7 @@ import { expandVideoFile, searchForVideos, setCurrentPage, setPagination, setVid
 import { BASE_VIDE0_FILES, PAGINATION_COUNTS } from '../../../mock/mockData/videoFileData';
 import { mockGetAllFiles, mockGetVideoFileCount, mockSearchForFiles } from '../../../mock/mockApiConfig/videoFileApi';
 import { initialState as videoListInitState } from '../videoList.reducer';
+import { setSearching } from '../../videoSearch/videoSearch.actions';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -63,9 +64,9 @@ describe('videoList.actions', () => {
                     form: {
                         'video-search': {
                             values: {
-                                category: 0,
-                                series: 0,
-                                star: 0,
+                                category: { value: 0 },
+                                series: { value: 0 },
+                                star: { value: 0 },
                                 search: ''
                             }
                         }
@@ -73,8 +74,10 @@ describe('videoList.actions', () => {
                 });
 
                 const expectedActions = [
+                    { type: setSearching.toString(), payload: true },
                     { type: setPagination.toString(), payload: PAGINATION_COUNTS },
-                    { type: setVideoList.toString(), payload: BASE_VIDE0_FILES }
+                    { type: setVideoList.toString(), payload: BASE_VIDE0_FILES },
+                    { type: setSearching.toString(), payload: false }
                 ];
 
                 try {
@@ -93,9 +96,9 @@ describe('videoList.actions', () => {
                     form: {
                         'video-search': {
                             values: {
-                                category: 1,
-                                series: 1,
-                                star: 1,
+                                category: { value: 1 },
+                                series: { value: 1 },
+                                star: { value: 1 },
                                 search: 'Hello World'
                             }
                         }
@@ -103,8 +106,10 @@ describe('videoList.actions', () => {
                 });
 
                 const expectedActions = [
+                    { type: setSearching.toString(), payload: true },
                     { type: setPagination.toString(), payload: PAGINATION_COUNTS },
-                    { type: setVideoList.toString(), payload: BASE_VIDE0_FILES }
+                    { type: setVideoList.toString(), payload: BASE_VIDE0_FILES },
+                    { type: setSearching.toString(), payload: false }
                 ];
 
                 try {
