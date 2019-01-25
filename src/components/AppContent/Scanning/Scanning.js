@@ -3,7 +3,7 @@ import { Row, Col } from 'reactstrap';
 import Spinner from '../../UI/Spinner/Spinner';
 import classes from './Scanning.scss';
 
-const Scanning = () => (
+const Scanning = (props) => (
     <div className={ classes.Scanning }>
         <Row>
             <Col xs="12">

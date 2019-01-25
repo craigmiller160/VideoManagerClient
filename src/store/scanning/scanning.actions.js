@@ -25,3 +25,4 @@ export const startFileScan = () => async (dispatch) => {
 };
 
 export const setIsScanning = createAction('setIsScanning');
+export const setScanningError = createAction('setScanningError');

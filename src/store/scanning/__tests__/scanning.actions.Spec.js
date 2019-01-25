@@ -1,4 +1,4 @@
-import { checkIsScanning, setIsScanning, startFileScan } from '../scanning.actions';
+import { checkIsScanning, setIsScanning, setScanningError, startFileScan } from '../scanning.actions';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
@@ -17,6 +17,17 @@ describe('scanning.actions', () => {
                 payload: true
             };
             const action = setIsScanning(true);
+            expect(action).toEqual(expectedAction);
+        });
+    });
+
+    describe('setScanningError action', () => {
+        it('creates the action', () => {
+            const expectedAction = {
+                type: setScanningError.toString(),
+                payload: true
+            };
+            const action = setScanningError(true);
             expect(action).toEqual(expectedAction);
         });
     });

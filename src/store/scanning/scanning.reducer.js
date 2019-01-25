@@ -1,8 +1,9 @@
-import { setIsScanning } from './scanning.actions';
+import { setIsScanning, setScanningError } from './scanning.actions';
 import { createReducer } from 'redux-starter-kit';
 
 export const initialState = {
-    isScanning: false
+    isScanning: false,
+    scanningError: false
 };
 
 const handleSetIsScanning = (state, action) => ({
@@ -10,6 +11,12 @@ const handleSetIsScanning = (state, action) => ({
     isScanning: action.payload
 });
 
+const handleSetScanningError = (state, action) => ({
+    ...state,
+    scanningError: action.payload
+});
+
 export default createReducer(initialState, {
-    [setIsScanning]: handleSetIsScanning
+    [setIsScanning]: handleSetIsScanning,
+    [setScanningError]: handleSetScanningError
 });
