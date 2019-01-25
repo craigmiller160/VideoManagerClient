@@ -1,7 +1,7 @@
 import VideoApiService from '../VideoApiService';
 import API from '../API';
 import MockAdapter from 'axios-mock-adapter';
-import { BASE_VIDEO_SEARCH_RESULT, NEW_VIDEO_FILE } from '../../mock/mockData/videoFileData';
+import { BASE_VIDEO_SEARCH_RESULT, FILE_SCAN_STATUS, NEW_VIDEO_FILE } from '../../mock/mockData/videoFileData';
 import {
     mockAddNewVideoFile,
     mockGetAllFiles,
@@ -82,12 +82,14 @@ describe('VideoApiService', () => {
         }
         expect(result).toBeTruthy();
         expect(result.status).toEqual(200);
+        expect(result.data).toEqual(FILE_SCAN_STATUS);
     });
 
     it('Is Video Scan Running', async () => {
         try {
             const result = await VideoApiService.isVideoScanRunning();
             expect(result.status).toEqual(200);
+            expect(result.data).toEqual(FILE_SCAN_STATUS);
         }
         catch (ex) {
             console.log(ex);

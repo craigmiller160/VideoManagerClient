@@ -10,7 +10,7 @@ import Spinner from '../../../UI/Spinner/Spinner';
 class VideoList extends Component {
 
     componentDidMount() {
-        this.props.searchForVideos(); // TODO might want to relocate this eventually
+        this.props.searchForVideos();
     }
 
     render() {

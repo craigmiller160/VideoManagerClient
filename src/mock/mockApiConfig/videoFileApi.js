@@ -1,7 +1,7 @@
 import {
     BASE_VIDEO_SEARCH_RESULT,
     EMPTY_SEARCH,
-    FILE_COUNT,
+    FILE_COUNT, FILE_SCAN_STATUS,
     FULL_SEARCH,
     NEW_VIDEO_FILE
 } from '../mockData/videoFileData';
@@ -40,12 +40,12 @@ export const mockGetAllFiles = (mockApi) => {
 
 export const mockStartVideoScan = (mockApi) => {
     mockApi.onPost('/video-files/scanner')
-        .reply(200);
+        .reply(200, FILE_SCAN_STATUS);
 };
 
 export const mockIsVideoScanRunning = (mockApi) => {
     mockApi.onGet('/video-files/scanner')
-        .reply(200);
+        .reply(200, FILE_SCAN_STATUS);
 };
 
 export const mockPlayVideo = (mockApi) => {
