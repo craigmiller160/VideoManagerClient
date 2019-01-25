@@ -1,26 +1,23 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import VideoSearch from './VideoSearch/VideoSearch';
 import VideoList from './VideoList/VideoList';
-import Alert from '../../UI/Alert/Alert';
 
 const VideoListLayout = () => {
     return (
-        <Container>
-            <Row>
-                <Col xs={{ size: 8, offset: 2 }}>
-                    <Alert />
-                </Col>
-            </Row>
+        <>
             <Row>
                 <Col xs="12">
                     <VideoSearch />
                 </Col>
+            </Row>
+            <Row>
                 <Col xs="12">
                     <VideoList />
                 </Col>
             </Row>
-        </Container>
+        </>
+
     );
 };
 
