@@ -3,7 +3,7 @@ import { Col, Row } from 'reactstrap';
 import Spinner from '../../UI/Spinner/Spinner';
 import classes from './Scanning.scss';
 
-const Scanning = (props) => {
+const Scanning = () => {
     const colSize = {
         size: 8,
         offset: 2
