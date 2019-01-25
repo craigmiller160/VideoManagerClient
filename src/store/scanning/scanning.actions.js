@@ -7,6 +7,9 @@ export const checkIsScanning = () => async (dispatch) => {
         const result = await VideoApiService.isVideoScanRunning();
         dispatch(setIsScanning(result.data.inProgress));
         dispatch(setScanningError(result.data.scanError));
+        if (result.data.scanError) {
+            dispatch(showErrorAlert('Scanning failed with an error. Please check the server logs'));
+        }
     }
     catch (ex) {
         console.log(ex);
