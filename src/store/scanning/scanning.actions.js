@@ -15,7 +15,8 @@ export const checkIsScanning = () => async (dispatch) => {
 
 export const startFileScan = () => async (dispatch) => {
     try {
-
+        const result = await VideoApiService.startVideoScan();
+        dispatch(setIsScanning(result.data.inProgress));
     }
     catch (ex) {
         console.log(ex);

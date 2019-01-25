@@ -66,12 +66,10 @@ describe('videoSearch.actions', () => {
             mockGetAllSeries(mockApi);
             mockGetAllStars(mockApi);
 
-            store = mockStore(videoSearchInitState);
+            store = mockStore({ videoSearch: videoSearchInitState });
         });
 
         describe('loadFilterOptions action', () => {
-
-
             it('loads the data', async () => {
                 const expectedActions = [
                     { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS },
