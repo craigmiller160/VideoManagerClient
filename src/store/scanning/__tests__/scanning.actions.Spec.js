@@ -46,7 +46,8 @@ describe('scanning.actions', () => {
         describe('checkIsScanning action', () => {
             it('checks if the scan is running', async () => {
                 const expectedActions = [
-                    { type: setIsScanning.toString(), payload: true }
+                    { type: setIsScanning.toString(), payload: true },
+                    { type: setScanningError.toString(), payload: false }
                 ];
 
                 try {
@@ -63,7 +64,9 @@ describe('scanning.actions', () => {
         describe('startFileScan action', () => {
             it('starts the file scan', async () => {
                 const expectedActions = [
-                    { type: setIsScanning.toString(), payload: true }
+                    { type: setScanningError.toString(), payload: false },
+                    { type: setIsScanning.toString(), payload: true },
+                    { type: setScanningError.toString(), payload: false }
                 ];
 
                 try {

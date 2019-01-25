@@ -25,4 +25,4 @@ export const EMPTY_SEARCH = { searchText: '', seriesId: 0, starId: 0, categoryId
 
 export const FULL_SEARCH = { searchText: 'Hello World', seriesId: 1, starId: 1, categoryId: 1 };
 
-export const FILE_SCAN_STATUS = { inProgress: true };
+export const FILE_SCAN_STATUS = { inProgress: true, scanError: false };
