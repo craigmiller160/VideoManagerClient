@@ -2,8 +2,14 @@ import React from 'react';
 import { Row, Col } from 'reactstrap';
 import VideoSearch from './VideoSearch/VideoSearch';
 import VideoList from './VideoList/VideoList';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const VideoListLayout = () => {
+const VideoListLayout = (props) => {
+    if (props.isScanning) {
+        return <Redirect to="/scanning" />
+    }
+
     return (
         <>
             <Row>
@@ -21,4 +27,8 @@ const VideoListLayout = () => {
     );
 };
 
-export default VideoListLayout;
+const mapStateToProps = (state) => ({
+    isScanning: state.scanning.isScanning
+});
+
+export default connect(mapStateToProps, null)(VideoListLayout);
