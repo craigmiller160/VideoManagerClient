@@ -19,7 +19,8 @@ class VideoSearch extends Component {
     }
 
     resetForm = () => {
-        reset(FORM_NAME); // TODO needs to be tested to make sure it works
+        this.props.resetForm(FORM_NAME);
+        this.props.searchForVideos();
     };
 
     render() {
@@ -92,7 +93,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     loadFilterOptions,
-    searchForVideos
+    searchForVideos,
+    resetForm: reset
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoSearch);
