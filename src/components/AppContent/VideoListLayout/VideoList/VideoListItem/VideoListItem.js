@@ -28,6 +28,7 @@ const VideoListItem = (props) => {
 
     const leftColSize = 6;
     const rootClasses = [ classes.VideoListItem, (expanded ? classes.active : '') ].join(' ');
+    const actualDisplayName = displayName ? displayName : fileName;
 
     return (
         <div className={ rootClasses } onClick={ () => expandVideoFile(fileId) }>
@@ -37,7 +38,7 @@ const VideoListItem = (props) => {
                         <ListGroupItemHeading
                             className={ classes.heading }
                         >
-                            { displayName }
+                            { actualDisplayName }
                         </ListGroupItemHeading>
                     </Col>
                     <Col>
