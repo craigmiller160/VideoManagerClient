@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
 import VideoSearch from './VideoSearch/VideoSearch';
 import VideoList from './VideoList/VideoList';
 import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 const VideoListLayout = (props) => {
     if (props.isScanning) {
@@ -23,12 +23,11 @@ const VideoListLayout = (props) => {
                 </Col>
             </Row>
         </>
-
     );
 };
 
-const mapStateToProps = (state) => ({
-    isScanning: state.scanning.isScanning
-});
+VideoListLayout.propTypes = {
+    isScanning: PropTypes.bool.isRequired
+};
 
-export default connect(mapStateToProps, null)(VideoListLayout);
+export default VideoListLayout;

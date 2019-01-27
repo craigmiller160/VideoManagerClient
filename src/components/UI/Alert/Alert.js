@@ -12,7 +12,7 @@ const Alert = (props) => {
             className={ classes.Alert }
             color={ color }
             isOpen={ show }
-            toggle={ hideAlert }
+            toggle={ () => hideAlert() }
         >
             { message }
         </ReactAlert>
