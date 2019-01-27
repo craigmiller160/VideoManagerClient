@@ -5,11 +5,7 @@ import { showErrorAlert } from '../alert/alert.actions';
 export const checkIsScanning = () => async (dispatch) => {
     try {
         const result = await VideoApiService.isVideoScanRunning();
-        dispatch(setIsScanning(result.data.inProgress));
-        dispatch(setScanningError(result.data.scanError));
-        if (result.data.scanError) {
-            dispatch(showErrorAlert('Scanning failed with an error. Please check the server logs'));
-        }
+        handleScanStatus(result, dispatch);
     }
     catch (ex) {
         console.log(ex);
@@ -17,12 +13,19 @@ export const checkIsScanning = () => async (dispatch) => {
     }
 };
 
+const handleScanStatus = (result, dispatch) => {
+    dispatch(setIsScanning(result.data.inProgress));
+    dispatch(setScanningError(result.data.scanError));
+    if (result.data.scanError) {
+        dispatch(showErrorAlert('Last attempted file scanning failed with an error. Please check the server logs'));
+    }
+};
+
 export const startFileScan = () => async (dispatch) => {
     try {
         dispatch(setScanningError(false));
         const result = await VideoApiService.startVideoScan();
-        dispatch(setIsScanning(result.data.inProgress));
-        dispatch(setScanningError(result.data.scanError));
+        handleScanStatus(result, dispatch);
     }
     catch (ex) {
         console.log(ex);
