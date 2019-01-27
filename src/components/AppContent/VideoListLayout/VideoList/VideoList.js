@@ -6,6 +6,7 @@ import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
 import { expandVideoFile, searchForVideos } from '../../../../store/videoList/videoList.actions';
 import Spinner from '../../../UI/Spinner/Spinner';
+import Pagination from '../../../UI/Pagination/Pagination';
 
 class VideoList extends Component {
 
@@ -13,25 +14,47 @@ class VideoList extends Component {
         this.props.searchForVideos();
     }
 
+    getPagination() {
+        const { totalItems, itemsPerPage, currentPage } = this.props;
+        if (totalItems === 0) {
+            return <div />;
+        }
+
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        // totalPages += (totalItems % itemsPerPage > 0 ? 1 : 0);
+
+        return (
+            <Pagination
+                totalPages={ totalPages }
+                currentPage={ currentPage }
+            />
+       );
+    }
+
     render() {
+
+
         return (
             <div className={ classes.VideoList }>
                 <h3>Available Videos</h3>
                 {
                     this.props.searching &&
-                    <Spinner />
+                        <Spinner />
                 }
                 {
                     !this.props.searching > 0 &&
-                    <ListGroup>
-                        { this.props.videoList.map((videoFile) => (
-                            <VideoListItem
-                                key={ videoFile.fileId }
-                                videoFile={ videoFile }
-                                expandVideoFile={ this.props.expandVideoFile }
-                            />
-                        )) }
-                    </ListGroup>
+                        <>
+                            { this.getPagination() }
+                            <ListGroup>
+                                { this.props.videoList.map((videoFile) => (
+                                    <VideoListItem
+                                        key={ videoFile.fileId }
+                                        videoFile={ videoFile }
+                                        expandVideoFile={ this.props.expandVideoFile }
+                                    />
+                                )) }
+                            </ListGroup>
+                        </>
                 }
             </div>
         );
