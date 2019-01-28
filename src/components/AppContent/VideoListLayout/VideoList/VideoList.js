@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
-import { expandVideoFile, searchForVideos } from '../../../../store/videoList/videoList.actions';
+import { expandVideoFile, searchForVideos, setCurrentPage } from '../../../../store/videoList/videoList.actions';
 import Spinner from '../../../UI/Spinner/Spinner';
 import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
 
@@ -21,16 +21,34 @@ class VideoList extends Component {
         }
 
         const totalPages = Math.ceil(totalItems / itemsPerPage);
-        // totalPages += (totalItems % itemsPerPage > 0 ? 1 : 0);
 
         return (
             <Pagination
                 totalPages={ totalPages }
                 currentPage={ currentPage }
                 align={ RIGHT_ALIGN }
+                onClick={ this.paginationClick }
             />
        );
     }
+
+    paginationClick = (value) => {
+        let currentPage = this.props.currentPage;
+        if (currentPage != value) { // eslint-disable-line
+            if ('<' === value) {
+                currentPage--;
+            }
+            else if ('>' === value) {
+                currentPage++;
+            }
+            else {
+                currentPage = parseInt(value);
+            }
+
+            this.props.setCurrentPage(currentPage);
+            this.props.searchForVideos();
+        }
+    };
 
     render() {
         return (
@@ -72,6 +90,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     searchForVideos,
+    setCurrentPage,
     expandVideoFile
 }, dispatch);
 
