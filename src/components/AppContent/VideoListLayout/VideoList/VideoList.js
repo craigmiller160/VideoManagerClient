@@ -6,7 +6,7 @@ import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
 import { expandVideoFile, searchForVideos } from '../../../../store/videoList/videoList.actions';
 import Spinner from '../../../UI/Spinner/Spinner';
-import Pagination from '../../../UI/Pagination/Pagination';
+import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
 
 class VideoList extends Component {
 
@@ -27,13 +27,12 @@ class VideoList extends Component {
             <Pagination
                 totalPages={ totalPages }
                 currentPage={ currentPage }
+                align={ RIGHT_ALIGN }
             />
        );
     }
 
     render() {
-
-
         return (
             <div className={ classes.VideoList }>
                 <h3>Available Videos</h3>
@@ -54,6 +53,7 @@ class VideoList extends Component {
                                     />
                                 )) }
                             </ListGroup>
+                            { this.getPagination() }
                         </>
                 }
             </div>
