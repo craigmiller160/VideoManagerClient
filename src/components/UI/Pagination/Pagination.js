@@ -21,7 +21,7 @@ const getAlignClassName = (stringName) => {
 };
 
 const Pagination = (props) => {
-    const { currentPage, totalPages, align } = props;
+    const { currentPage, totalPages, align, onClick } = props;
     const showPrevious = currentPage > 0;
     const showNext = currentPage < totalPages - 1;
     const classNames = [ classes.Pagination, getAlignClassName(align) ].join(' ');
@@ -30,15 +30,16 @@ const Pagination = (props) => {
         <ReactPagination className={ classNames }>
             {
                 showPrevious &&
-                <PaginationItem>
-                    <PaginationLink previous />
-                </PaginationItem>
+                    <PaginationItem onClick={ () => onClick('<') }>
+                        <PaginationLink previous />
+                    </PaginationItem>
             }
             {
                 [...Array(totalPages).keys() ].map((index) => (
                     <PaginationItem
                         key={ index }
                         active={ index === currentPage }
+                        onClick={ () => onClick(`${index}`) }
                     >
                         <PaginationLink>
                             { index + 1 }
@@ -48,22 +49,24 @@ const Pagination = (props) => {
             }
             {
                 showNext &&
-                <PaginationItem>
-                    <PaginationLink next />
-                </PaginationItem>
+                    <PaginationItem onClick={ () => onClick('>') }>
+                        <PaginationLink next />
+                    </PaginationItem>
             }
         </ReactPagination>
     );
 };
 
 Pagination.defaultProps = {
-    align: LEFT_ALIGN
+    align: LEFT_ALIGN,
+    onClick: () => {}
 };
 
 Pagination.propTypes = {
     currentPage: PropTypes.number.isRequired,
     totalPages: PropTypes.number.isRequired,
-    align: PropTypes.oneOf([LEFT_ALIGN, CENTER_ALIGN, RIGHT_ALIGN])
+    align: PropTypes.oneOf([LEFT_ALIGN, CENTER_ALIGN, RIGHT_ALIGN]),
+    onClick: PropTypes.func
 };
 
 export default Pagination;

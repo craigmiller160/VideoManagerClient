@@ -10,8 +10,16 @@ const getProps = (currentPage) => ({
 
 describe('Pagination', () => {
     it('should render correctly', () => {
+        let clickedIndex = -1;
+        const clickHandler = (index) => {
+            clickedIndex = index;
+        };
+
         const component = mount(
-            <Pagination { ...getProps(1) } />
+            <Pagination
+                { ...getProps(1) }
+                onClick={ clickHandler }
+            />
         );
         expect(component).toMatchSnapshot();
 
@@ -25,6 +33,13 @@ describe('Pagination', () => {
         expect(paginationItems.at(0).find('PaginationLink').props().previous).toEqual(true);
         expect(paginationItems.at(6).find('PaginationLink').props().next).toEqual(true);
         expect(paginationItems.at(2).props().active).toEqual(true);
+
+        paginationItems.at(3).simulate('click', {});
+        expect(clickedIndex).toEqual('2');
+        paginationItems.at(0).simulate('click', {});
+        expect(clickedIndex).toEqual('<');
+        paginationItems.at(6).simulate('click', {});
+        expect(clickedIndex).toEqual('>');
     });
 
     it('should only render with next button', () => {

@@ -5,6 +5,7 @@ ReactWrapper {
   Symbol(enzyme.__unrendered__): <Pagination
     align="right"
     currentPage={0}
+    onClick={[Function]}
     totalPages={5}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -23,6 +24,7 @@ ReactWrapper {
     "props": Object {
       "align": "right",
       "currentPage": 0,
+      "onClick": [Function],
       "totalPages": 5,
     },
     "ref": null,
@@ -37,6 +39,7 @@ ReactWrapper {
           Array [
             <PaginationItem
               active={true}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -47,6 +50,7 @@ ReactWrapper {
             </PaginationItem>,
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -57,6 +61,7 @@ ReactWrapper {
             </PaginationItem>,
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -67,6 +72,7 @@ ReactWrapper {
             </PaginationItem>,
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -77,6 +83,7 @@ ReactWrapper {
             </PaginationItem>,
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -87,6 +94,7 @@ ReactWrapper {
             </PaginationItem>,
           ],
           <PaginationItem
+            onClick={[Function]}
             tag="li"
           >
             <PaginationLink
@@ -183,6 +191,7 @@ ReactWrapper {
           >
             <PaginationItem
               active={true}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -193,6 +202,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -203,6 +213,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -213,6 +224,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -223,6 +235,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -232,6 +245,7 @@ ReactWrapper {
               </PaginationLink>
             </PaginationItem>
             <PaginationItem
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -321,6 +335,7 @@ ReactWrapper {
                 Array [
                   <PaginationItem
                     active={true}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -331,6 +346,7 @@ ReactWrapper {
                   </PaginationItem>,
                   <PaginationItem
                     active={false}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -341,6 +357,7 @@ ReactWrapper {
                   </PaginationItem>,
                   <PaginationItem
                     active={false}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -351,6 +368,7 @@ ReactWrapper {
                   </PaginationItem>,
                   <PaginationItem
                     active={false}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -361,6 +379,7 @@ ReactWrapper {
                   </PaginationItem>,
                   <PaginationItem
                     active={false}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -371,6 +390,7 @@ ReactWrapper {
                   </PaginationItem>,
                 ],
                 <PaginationItem
+                  onClick={[Function]}
                   tag="li"
                 >
                   <PaginationLink
@@ -394,6 +414,7 @@ ReactWrapper {
                   >
                     1
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -416,6 +437,7 @@ ReactWrapper {
                       1
                     </PaginationLink>,
                     "className": "page-item active",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -465,6 +487,7 @@ ReactWrapper {
                   >
                     2
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -487,6 +510,7 @@ ReactWrapper {
                       2
                     </PaginationLink>,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -536,6 +560,7 @@ ReactWrapper {
                   >
                     3
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -558,6 +583,7 @@ ReactWrapper {
                       3
                     </PaginationLink>,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -607,6 +633,7 @@ ReactWrapper {
                   >
                     4
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -629,6 +656,7 @@ ReactWrapper {
                       4
                     </PaginationLink>,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -678,6 +706,7 @@ ReactWrapper {
                   >
                     5
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -700,6 +729,7 @@ ReactWrapper {
                       5
                     </PaginationLink>,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -747,6 +777,7 @@ ReactWrapper {
                     next={true}
                     tag="a"
                   />,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -778,6 +809,7 @@ ReactWrapper {
                       tag="a"
                     />,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -890,6 +922,7 @@ ReactWrapper {
       "props": Object {
         "align": "right",
         "currentPage": 0,
+        "onClick": [Function],
         "totalPages": 5,
       },
       "ref": null,
@@ -904,6 +937,7 @@ ReactWrapper {
             Array [
               <PaginationItem
                 active={true}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -914,6 +948,7 @@ ReactWrapper {
               </PaginationItem>,
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -924,6 +959,7 @@ ReactWrapper {
               </PaginationItem>,
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -934,6 +970,7 @@ ReactWrapper {
               </PaginationItem>,
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -944,6 +981,7 @@ ReactWrapper {
               </PaginationItem>,
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -954,6 +992,7 @@ ReactWrapper {
               </PaginationItem>,
             ],
             <PaginationItem
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -1050,6 +1089,7 @@ ReactWrapper {
             >
               <PaginationItem
                 active={true}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -1060,6 +1100,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -1070,6 +1111,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -1080,6 +1122,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -1090,6 +1133,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -1099,6 +1143,7 @@ ReactWrapper {
                 </PaginationLink>
               </PaginationItem>
               <PaginationItem
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -1188,6 +1233,7 @@ ReactWrapper {
                   Array [
                     <PaginationItem
                       active={true}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -1198,6 +1244,7 @@ ReactWrapper {
                     </PaginationItem>,
                     <PaginationItem
                       active={false}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -1208,6 +1255,7 @@ ReactWrapper {
                     </PaginationItem>,
                     <PaginationItem
                       active={false}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -1218,6 +1266,7 @@ ReactWrapper {
                     </PaginationItem>,
                     <PaginationItem
                       active={false}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -1228,6 +1277,7 @@ ReactWrapper {
                     </PaginationItem>,
                     <PaginationItem
                       active={false}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -1238,6 +1288,7 @@ ReactWrapper {
                     </PaginationItem>,
                   ],
                   <PaginationItem
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -1261,6 +1312,7 @@ ReactWrapper {
                     >
                       1
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -1283,6 +1335,7 @@ ReactWrapper {
                         1
                       </PaginationLink>,
                       "className": "page-item active",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -1332,6 +1385,7 @@ ReactWrapper {
                     >
                       2
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -1354,6 +1408,7 @@ ReactWrapper {
                         2
                       </PaginationLink>,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -1403,6 +1458,7 @@ ReactWrapper {
                     >
                       3
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -1425,6 +1481,7 @@ ReactWrapper {
                         3
                       </PaginationLink>,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -1474,6 +1531,7 @@ ReactWrapper {
                     >
                       4
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -1496,6 +1554,7 @@ ReactWrapper {
                         4
                       </PaginationLink>,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -1545,6 +1604,7 @@ ReactWrapper {
                     >
                       5
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -1567,6 +1627,7 @@ ReactWrapper {
                         5
                       </PaginationLink>,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -1614,6 +1675,7 @@ ReactWrapper {
                       next={true}
                       tag="a"
                     />,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -1645,6 +1707,7 @@ ReactWrapper {
                         tag="a"
                       />,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -1775,6 +1838,7 @@ ReactWrapper {
   Symbol(enzyme.__unrendered__): <Pagination
     align="right"
     currentPage={4}
+    onClick={[Function]}
     totalPages={5}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -1793,6 +1857,7 @@ ReactWrapper {
     "props": Object {
       "align": "right",
       "currentPage": 4,
+      "onClick": [Function],
       "totalPages": 5,
     },
     "ref": null,
@@ -1804,6 +1869,7 @@ ReactWrapper {
         "aria-label": "pagination",
         "children": Array [
           <PaginationItem
+            onClick={[Function]}
             tag="li"
           >
             <PaginationLink
@@ -1814,6 +1880,7 @@ ReactWrapper {
           Array [
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -1824,6 +1891,7 @@ ReactWrapper {
             </PaginationItem>,
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -1834,6 +1902,7 @@ ReactWrapper {
             </PaginationItem>,
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -1844,6 +1913,7 @@ ReactWrapper {
             </PaginationItem>,
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -1854,6 +1924,7 @@ ReactWrapper {
             </PaginationItem>,
             <PaginationItem
               active={true}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -1952,6 +2023,7 @@ ReactWrapper {
             className="pagination"
           >
             <PaginationItem
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -1961,6 +2033,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -1971,6 +2044,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -1981,6 +2055,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -1991,6 +2066,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -2001,6 +2077,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={true}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -2088,6 +2165,7 @@ ReactWrapper {
             "props": Object {
               "children": Array [
                 <PaginationItem
+                  onClick={[Function]}
                   tag="li"
                 >
                   <PaginationLink
@@ -2098,6 +2176,7 @@ ReactWrapper {
                 Array [
                   <PaginationItem
                     active={false}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -2108,6 +2187,7 @@ ReactWrapper {
                   </PaginationItem>,
                   <PaginationItem
                     active={false}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -2118,6 +2198,7 @@ ReactWrapper {
                   </PaginationItem>,
                   <PaginationItem
                     active={false}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -2128,6 +2209,7 @@ ReactWrapper {
                   </PaginationItem>,
                   <PaginationItem
                     active={false}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -2138,6 +2220,7 @@ ReactWrapper {
                   </PaginationItem>,
                   <PaginationItem
                     active={true}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -2162,6 +2245,7 @@ ReactWrapper {
                     previous={true}
                     tag="a"
                   />,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -2193,6 +2277,7 @@ ReactWrapper {
                       tag="a"
                     />,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -2298,6 +2383,7 @@ ReactWrapper {
                   >
                     1
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -2320,6 +2406,7 @@ ReactWrapper {
                       1
                     </PaginationLink>,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -2369,6 +2456,7 @@ ReactWrapper {
                   >
                     2
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -2391,6 +2479,7 @@ ReactWrapper {
                       2
                     </PaginationLink>,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -2440,6 +2529,7 @@ ReactWrapper {
                   >
                     3
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -2462,6 +2552,7 @@ ReactWrapper {
                       3
                     </PaginationLink>,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -2511,6 +2602,7 @@ ReactWrapper {
                   >
                     4
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -2533,6 +2625,7 @@ ReactWrapper {
                       4
                     </PaginationLink>,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -2582,6 +2675,7 @@ ReactWrapper {
                   >
                     5
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -2604,6 +2698,7 @@ ReactWrapper {
                       5
                     </PaginationLink>,
                     "className": "page-item active",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -2660,6 +2755,7 @@ ReactWrapper {
       "props": Object {
         "align": "right",
         "currentPage": 4,
+        "onClick": [Function],
         "totalPages": 5,
       },
       "ref": null,
@@ -2671,6 +2767,7 @@ ReactWrapper {
           "aria-label": "pagination",
           "children": Array [
             <PaginationItem
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -2681,6 +2778,7 @@ ReactWrapper {
             Array [
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -2691,6 +2789,7 @@ ReactWrapper {
               </PaginationItem>,
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -2701,6 +2800,7 @@ ReactWrapper {
               </PaginationItem>,
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -2711,6 +2811,7 @@ ReactWrapper {
               </PaginationItem>,
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -2721,6 +2822,7 @@ ReactWrapper {
               </PaginationItem>,
               <PaginationItem
                 active={true}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -2819,6 +2921,7 @@ ReactWrapper {
               className="pagination"
             >
               <PaginationItem
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -2828,6 +2931,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -2838,6 +2942,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -2848,6 +2953,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -2858,6 +2964,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -2868,6 +2975,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={true}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -2955,6 +3063,7 @@ ReactWrapper {
               "props": Object {
                 "children": Array [
                   <PaginationItem
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -2965,6 +3074,7 @@ ReactWrapper {
                   Array [
                     <PaginationItem
                       active={false}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -2975,6 +3085,7 @@ ReactWrapper {
                     </PaginationItem>,
                     <PaginationItem
                       active={false}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -2985,6 +3096,7 @@ ReactWrapper {
                     </PaginationItem>,
                     <PaginationItem
                       active={false}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -2995,6 +3107,7 @@ ReactWrapper {
                     </PaginationItem>,
                     <PaginationItem
                       active={false}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -3005,6 +3118,7 @@ ReactWrapper {
                     </PaginationItem>,
                     <PaginationItem
                       active={true}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -3029,6 +3143,7 @@ ReactWrapper {
                       previous={true}
                       tag="a"
                     />,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -3060,6 +3175,7 @@ ReactWrapper {
                         tag="a"
                       />,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -3165,6 +3281,7 @@ ReactWrapper {
                     >
                       1
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -3187,6 +3304,7 @@ ReactWrapper {
                         1
                       </PaginationLink>,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -3236,6 +3354,7 @@ ReactWrapper {
                     >
                       2
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -3258,6 +3377,7 @@ ReactWrapper {
                         2
                       </PaginationLink>,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -3307,6 +3427,7 @@ ReactWrapper {
                     >
                       3
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -3329,6 +3450,7 @@ ReactWrapper {
                         3
                       </PaginationLink>,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -3378,6 +3500,7 @@ ReactWrapper {
                     >
                       4
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -3400,6 +3523,7 @@ ReactWrapper {
                         4
                       </PaginationLink>,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -3449,6 +3573,7 @@ ReactWrapper {
                     >
                       5
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -3471,6 +3596,7 @@ ReactWrapper {
                         5
                       </PaginationLink>,
                       "className": "page-item active",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -3545,6 +3671,7 @@ ReactWrapper {
   Symbol(enzyme.__unrendered__): <Pagination
     align="right"
     currentPage={1}
+    onClick={[Function]}
     totalPages={5}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -3563,6 +3690,7 @@ ReactWrapper {
     "props": Object {
       "align": "right",
       "currentPage": 1,
+      "onClick": [Function],
       "totalPages": 5,
     },
     "ref": null,
@@ -3574,6 +3702,7 @@ ReactWrapper {
         "aria-label": "pagination",
         "children": Array [
           <PaginationItem
+            onClick={[Function]}
             tag="li"
           >
             <PaginationLink
@@ -3584,6 +3713,7 @@ ReactWrapper {
           Array [
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -3594,6 +3724,7 @@ ReactWrapper {
             </PaginationItem>,
             <PaginationItem
               active={true}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -3604,6 +3735,7 @@ ReactWrapper {
             </PaginationItem>,
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -3614,6 +3746,7 @@ ReactWrapper {
             </PaginationItem>,
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -3624,6 +3757,7 @@ ReactWrapper {
             </PaginationItem>,
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -3634,6 +3768,7 @@ ReactWrapper {
             </PaginationItem>,
           ],
           <PaginationItem
+            onClick={[Function]}
             tag="li"
           >
             <PaginationLink
@@ -3748,6 +3883,7 @@ ReactWrapper {
             className="pagination"
           >
             <PaginationItem
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -3757,6 +3893,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -3767,6 +3904,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={true}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -3777,6 +3915,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -3787,6 +3926,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -3797,6 +3937,7 @@ ReactWrapper {
             </PaginationItem>
             <PaginationItem
               active={false}
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -3806,6 +3947,7 @@ ReactWrapper {
               </PaginationLink>
             </PaginationItem>
             <PaginationItem
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -3911,6 +4053,7 @@ ReactWrapper {
             "props": Object {
               "children": Array [
                 <PaginationItem
+                  onClick={[Function]}
                   tag="li"
                 >
                   <PaginationLink
@@ -3921,6 +4064,7 @@ ReactWrapper {
                 Array [
                   <PaginationItem
                     active={false}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -3931,6 +4075,7 @@ ReactWrapper {
                   </PaginationItem>,
                   <PaginationItem
                     active={true}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -3941,6 +4086,7 @@ ReactWrapper {
                   </PaginationItem>,
                   <PaginationItem
                     active={false}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -3951,6 +4097,7 @@ ReactWrapper {
                   </PaginationItem>,
                   <PaginationItem
                     active={false}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -3961,6 +4108,7 @@ ReactWrapper {
                   </PaginationItem>,
                   <PaginationItem
                     active={false}
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -3971,6 +4119,7 @@ ReactWrapper {
                   </PaginationItem>,
                 ],
                 <PaginationItem
+                  onClick={[Function]}
                   tag="li"
                 >
                   <PaginationLink
@@ -3992,6 +4141,7 @@ ReactWrapper {
                     previous={true}
                     tag="a"
                   />,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -4023,6 +4173,7 @@ ReactWrapper {
                       tag="a"
                     />,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -4128,6 +4279,7 @@ ReactWrapper {
                   >
                     1
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -4150,6 +4302,7 @@ ReactWrapper {
                       1
                     </PaginationLink>,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -4199,6 +4352,7 @@ ReactWrapper {
                   >
                     2
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -4221,6 +4375,7 @@ ReactWrapper {
                       2
                     </PaginationLink>,
                     "className": "page-item active",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -4270,6 +4425,7 @@ ReactWrapper {
                   >
                     3
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -4292,6 +4448,7 @@ ReactWrapper {
                       3
                     </PaginationLink>,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -4341,6 +4498,7 @@ ReactWrapper {
                   >
                     4
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -4363,6 +4521,7 @@ ReactWrapper {
                       4
                     </PaginationLink>,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -4412,6 +4571,7 @@ ReactWrapper {
                   >
                     5
                   </PaginationLink>,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -4434,6 +4594,7 @@ ReactWrapper {
                       5
                     </PaginationLink>,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -4481,6 +4642,7 @@ ReactWrapper {
                     next={true}
                     tag="a"
                   />,
+                  "onClick": [Function],
                   "tag": "li",
                 },
                 "ref": null,
@@ -4512,6 +4674,7 @@ ReactWrapper {
                       tag="a"
                     />,
                     "className": "page-item",
+                    "onClick": [Function],
                   },
                   "ref": null,
                   "rendered": Array [
@@ -4624,6 +4787,7 @@ ReactWrapper {
       "props": Object {
         "align": "right",
         "currentPage": 1,
+        "onClick": [Function],
         "totalPages": 5,
       },
       "ref": null,
@@ -4635,6 +4799,7 @@ ReactWrapper {
           "aria-label": "pagination",
           "children": Array [
             <PaginationItem
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -4645,6 +4810,7 @@ ReactWrapper {
             Array [
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -4655,6 +4821,7 @@ ReactWrapper {
               </PaginationItem>,
               <PaginationItem
                 active={true}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -4665,6 +4832,7 @@ ReactWrapper {
               </PaginationItem>,
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -4675,6 +4843,7 @@ ReactWrapper {
               </PaginationItem>,
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -4685,6 +4854,7 @@ ReactWrapper {
               </PaginationItem>,
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -4695,6 +4865,7 @@ ReactWrapper {
               </PaginationItem>,
             ],
             <PaginationItem
+              onClick={[Function]}
               tag="li"
             >
               <PaginationLink
@@ -4809,6 +4980,7 @@ ReactWrapper {
               className="pagination"
             >
               <PaginationItem
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -4818,6 +4990,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -4828,6 +5001,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={true}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -4838,6 +5012,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -4848,6 +5023,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -4858,6 +5034,7 @@ ReactWrapper {
               </PaginationItem>
               <PaginationItem
                 active={false}
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -4867,6 +5044,7 @@ ReactWrapper {
                 </PaginationLink>
               </PaginationItem>
               <PaginationItem
+                onClick={[Function]}
                 tag="li"
               >
                 <PaginationLink
@@ -4972,6 +5150,7 @@ ReactWrapper {
               "props": Object {
                 "children": Array [
                   <PaginationItem
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -4982,6 +5161,7 @@ ReactWrapper {
                   Array [
                     <PaginationItem
                       active={false}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -4992,6 +5172,7 @@ ReactWrapper {
                     </PaginationItem>,
                     <PaginationItem
                       active={true}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -5002,6 +5183,7 @@ ReactWrapper {
                     </PaginationItem>,
                     <PaginationItem
                       active={false}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -5012,6 +5194,7 @@ ReactWrapper {
                     </PaginationItem>,
                     <PaginationItem
                       active={false}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -5022,6 +5205,7 @@ ReactWrapper {
                     </PaginationItem>,
                     <PaginationItem
                       active={false}
+                      onClick={[Function]}
                       tag="li"
                     >
                       <PaginationLink
@@ -5032,6 +5216,7 @@ ReactWrapper {
                     </PaginationItem>,
                   ],
                   <PaginationItem
+                    onClick={[Function]}
                     tag="li"
                   >
                     <PaginationLink
@@ -5053,6 +5238,7 @@ ReactWrapper {
                       previous={true}
                       tag="a"
                     />,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -5084,6 +5270,7 @@ ReactWrapper {
                         tag="a"
                       />,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -5189,6 +5376,7 @@ ReactWrapper {
                     >
                       1
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -5211,6 +5399,7 @@ ReactWrapper {
                         1
                       </PaginationLink>,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -5260,6 +5449,7 @@ ReactWrapper {
                     >
                       2
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -5282,6 +5472,7 @@ ReactWrapper {
                         2
                       </PaginationLink>,
                       "className": "page-item active",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -5331,6 +5522,7 @@ ReactWrapper {
                     >
                       3
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -5353,6 +5545,7 @@ ReactWrapper {
                         3
                       </PaginationLink>,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -5402,6 +5595,7 @@ ReactWrapper {
                     >
                       4
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -5424,6 +5618,7 @@ ReactWrapper {
                         4
                       </PaginationLink>,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -5473,6 +5668,7 @@ ReactWrapper {
                     >
                       5
                     </PaginationLink>,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -5495,6 +5691,7 @@ ReactWrapper {
                         5
                       </PaginationLink>,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
@@ -5542,6 +5739,7 @@ ReactWrapper {
                       next={true}
                       tag="a"
                     />,
+                    "onClick": [Function],
                     "tag": "li",
                   },
                   "ref": null,
@@ -5573,6 +5771,7 @@ ReactWrapper {
                         tag="a"
                       />,
                       "className": "page-item",
+                      "onClick": [Function],
                     },
                     "ref": null,
                     "rendered": Array [
