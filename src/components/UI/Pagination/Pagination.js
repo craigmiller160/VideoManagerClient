@@ -24,7 +24,7 @@ const Pagination = (props) => {
     const { currentPage, totalPages, align } = props;
     const showPrevious = currentPage > 0;
     const showNext = currentPage < totalPages - 1;
-    const classNames = [classes.Pagination, getAlignClassName(align) ].join(' ');
+    const classNames = [ classes.Pagination, getAlignClassName(align) ].join(' ');
 
     return (
         <ReactPagination className={ classNames }>
