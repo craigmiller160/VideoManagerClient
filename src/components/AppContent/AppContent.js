@@ -5,12 +5,12 @@ import { Container, Row, Col } from 'reactstrap';
 import Alert from '../UI/Alert/Alert';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Scanning from './Scanning/Scanning';
-import { checkIsScanning } from '../../store/scanning/scanning.actions';
+import { checkIsScanning, startFileScan } from '../../store/scanning/scanning.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { showErrorAlert } from '../../store/alert/alert.actions';
 
-class AppContent extends Component {
+export class AppContent extends Component {
 
     state = {
         isStarted: false
@@ -33,11 +33,16 @@ class AppContent extends Component {
     }
 
     render() {
+        const { startFileScan, isScanning, checkIsScanning } = this.props;
+        const { isStarted } = this.state;
+
         return (
             <div>
-                <VideoNavbar />
+                <VideoNavbar
+                    startFileScan={ startFileScan }
+                />
                 {
-                    this.state.isStarted &&
+                    isStarted &&
                     <Container>
                         <Row>
                             <Col xs={{ size: 8, offset: 2 }}>
@@ -47,12 +52,11 @@ class AppContent extends Component {
                         <Switch>
                             <Route
                                 path="/scanning"
-                                exact
                                 render={ (props) => (
                                     <Scanning
                                         { ...props }
-                                        isScanning={ this.props.isScanning }
-                                        checkIsScanning={ this.props.checkIsScanning }
+                                        isScanning={ isScanning }
+                                        checkIsScanning={ checkIsScanning }
                                     />
                                 ) }
                             />
@@ -61,7 +65,7 @@ class AppContent extends Component {
                                    render={ (props) => (
                                        <VideoListLayout
                                            { ...props }
-                                           isScanning={ this.props.isScanning }
+                                           isScanning={ isScanning }
                                        />
                                    ) }
                             />
@@ -79,6 +83,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     checkIsScanning,
+    startFileScan,
     showErrorAlert
 }, dispatch);
 

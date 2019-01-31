@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoNavbar renders successfully 1`] = `
+<VideoNavbar>
+  <Navbar
+    color="dark"
+    dark={true}
+    expand="md"
+    tag="nav"
+  >
+    <nav
+      className="navbar navbar-expand-md navbar-dark bg-dark"
+    >
+      <Container
+        tag="div"
+      >
+        <div
+          className="container"
+        >
+          <NavbarBrand
+            tag={[Function]}
+            to="/"
+          >
+            <Link
+              className="navbar-brand"
+              replace={false}
+              to="/"
+            >
+              <a
+                className="navbar-brand"
+                href="/"
+                onClick={[Function]}
+              >
+                Video Manager
+              </a>
+            </Link>
+          </NavbarBrand>
+          <NavbarToggler
+            onClick={[Function]}
+            tag="button"
+            type="button"
+          >
+            <button
+              className="navbar-toggler"
+              onClick={[Function]}
+              type="button"
+            >
+              <span
+                className="navbar-toggler-icon"
+              />
+            </button>
+          </NavbarToggler>
+          <Collapse
+            appear={false}
+            enter={true}
+            exit={true}
+            in={false}
+            isOpen={false}
+            mountOnEnter={false}
+            navbar={true}
+            onEnter={[Function]}
+            onEntered={[Function]}
+            onEntering={[Function]}
+            onExit={[Function]}
+            onExited={[Function]}
+            onExiting={[Function]}
+            tag="div"
+            timeout={350}
+            unmountOnExit={false}
+          >
+            <Transition
+              appear={false}
+              enter={true}
+              exit={true}
+              in={false}
+              mountOnEnter={false}
+              onEnter={[Function]}
+              onEntered={[Function]}
+              onEntering={[Function]}
+              onExit={[Function]}
+              onExited={[Function]}
+              onExiting={[Function]}
+              timeout={350}
+              unmountOnExit={false}
+            >
+              <div
+                className="collapse navbar-collapse"
+                style={Object {}}
+              >
+                <Nav
+                  className="ml-auto"
+                  navbar={true}
+                  tag="ul"
+                  vertical={false}
+                >
+                  <ul
+                    className="ml-auto navbar-nav"
+                  >
+                    <NavItem
+                      tag="li"
+                    >
+                      <li
+                        className="nav-item"
+                      >
+                        <NavLink
+                          onClick={[Function]}
+                          tag="a"
+                        >
+                          <a
+                            className="nav-link"
+                            onClick={[Function]}
+                          >
+                            Scan Directory
+                          </a>
+                        </NavLink>
+                      </li>
+                    </NavItem>
+                  </ul>
+                </Nav>
+              </div>
+            </Transition>
+          </Collapse>
+        </div>
+      </Container>
+    </nav>
+  </Navbar>
+</VideoNavbar>
+`;
