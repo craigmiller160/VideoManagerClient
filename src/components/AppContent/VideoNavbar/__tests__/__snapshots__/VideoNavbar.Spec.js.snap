@@ -23,16 +23,9 @@ exports[`VideoNavbar renders successfully 1`] = `
           >
             <Link
               className="navbar-brand"
-              replace={false}
               to="/"
             >
-              <a
-                className="navbar-brand"
-                href="/"
-                onClick={[Function]}
-              >
-                Video Manager
-              </a>
+              Link
             </Link>
           </NavbarBrand>
           <NavbarToggler
@@ -103,11 +96,13 @@ exports[`VideoNavbar renders successfully 1`] = `
                         className="nav-item"
                       >
                         <NavLink
+                          id="scanDirectory"
                           onClick={[Function]}
                           tag="a"
                         >
                           <a
                             className="nav-link"
+                            id="scanDirectory"
                             onClick={[Function]}
                           >
                             Scan Directory

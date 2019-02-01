@@ -8,7 +8,7 @@ import Scanning from './Scanning/Scanning';
 import { checkIsScanning, startFileScan } from '../../store/scanning/scanning.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { showErrorAlert } from '../../store/alert/alert.actions';
+import { showErrorAlert, hideAlert } from '../../store/alert/alert.actions';
 
 export class AppContent extends Component {
 
@@ -33,7 +33,13 @@ export class AppContent extends Component {
     }
 
     render() {
-        const { startFileScan, isScanning, checkIsScanning } = this.props;
+        const {
+            startFileScan,
+            isScanning,
+            checkIsScanning,
+            alert,
+            hideAlert
+        } = this.props;
         const { isStarted } = this.state;
 
         return (
@@ -46,7 +52,10 @@ export class AppContent extends Component {
                     <Container>
                         <Row>
                             <Col xs={{ size: 8, offset: 2 }}>
-                                <Alert />
+                                <Alert
+                                    alert={ alert }
+                                    hideAlert={ hideAlert }
+                                />
                             </Col>
                         </Row>
                         <Switch>
@@ -78,13 +87,15 @@ export class AppContent extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    isScanning: state.scanning.isScanning
+    isScanning: state.scanning.isScanning,
+    alert: state.alert
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     checkIsScanning,
     startFileScan,
-    showErrorAlert
+    showErrorAlert,
+    hideAlert
 }, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppContent));
