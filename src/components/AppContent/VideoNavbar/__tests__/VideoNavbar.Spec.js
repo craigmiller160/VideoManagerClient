@@ -1,17 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import VideoNavbar from '../VideoNavbar';
-import { MemoryRouter } from 'react-router-dom';
 import toJson from 'enzyme-to-json';
 
-const mountComponent = (props) => {
-    props = props || {};
-    return mount(
-        <MemoryRouter initialEntries={ ['/'] }>
-            <VideoNavbar { ...props } />
-        </MemoryRouter>
-    );
-};
+jest.mock('react-router-dom', () => ({ Link: () => 'Link' }));
+
+const mountComponent = (props = {}) => mount(
+    <VideoNavbar { ...props } />
+);
 
 describe('VideoNavbar', () => {
     it('renders successfully', () => {
@@ -20,9 +16,8 @@ describe('VideoNavbar', () => {
     });
 
     it('toggles the collapse open and closed', () => {
-        const component = mountComponent();
-        const navbar = component.find('VideoNavbar');
-        const toggle = component.find('VideoNavbar NavbarToggler');
+        const navbar = mountComponent();
+        const toggle = navbar.find('VideoNavbar NavbarToggler');
 
         expect(navbar.state()).toEqual(expect.objectContaining({
             isOpen: false
