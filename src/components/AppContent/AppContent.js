@@ -12,9 +12,6 @@ import { showErrorAlert, hideAlert } from '../../store/alert/alert.actions';
 
 export class AppContent extends Component {
 
-    // This is just here to hold the promise for testing
-    busy;
-
     state = {
         isStarted: false
     };
