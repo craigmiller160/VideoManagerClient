@@ -49,37 +49,37 @@ export class AppContent extends Component {
                 />
                 {
                     isStarted &&
-                    <Container>
-                        <Row>
-                            <Col xs={{ size: 8, offset: 2 }}>
-                                <Alert
-                                    alert={ alert }
-                                    hideAlert={ hideAlert }
-                                />
-                            </Col>
-                        </Row>
-                        <Switch>
-                            <Route
-                                path="/scanning"
-                                render={ (props) => (
-                                    <Scanning
-                                        { ...props }
-                                        isScanning={ isScanning }
-                                        checkIsScanning={ checkIsScanning }
+                        <Container>
+                            <Row>
+                                <Col xs={{ size: 8, offset: 2 }}>
+                                    <Alert
+                                        alert={ alert }
+                                        hideAlert={ hideAlert }
                                     />
-                                ) }
-                            />
-                            <Route path="/"
-                                   exact
-                                   render={ (props) => (
-                                       <VideoListLayout
-                                           { ...props }
-                                           isScanning={ isScanning }
-                                       />
-                                   ) }
-                            />
-                        </Switch>
-                    </Container>
+                                </Col>
+                            </Row>
+                            <Switch>
+                                <Route
+                                    path="/scanning"
+                                    render={ (props) => (
+                                        <Scanning
+                                            { ...props }
+                                            isScanning={ isScanning }
+                                            checkIsScanning={ checkIsScanning }
+                                        />
+                                    ) }
+                                />
+                                <Route path="/"
+                                       exact
+                                       render={ (props) => (
+                                           <VideoListLayout
+                                               { ...props }
+                                               isScanning={ isScanning }
+                                           />
+                                       ) }
+                                />
+                            </Switch>
+                        </Container>
                 }
             </div>
         );

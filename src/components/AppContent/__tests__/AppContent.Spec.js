@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppContent } from '../AppContent';
-import { MemoryRouter, withRouter } from 'react-router-dom';
+import { MemoryRouter, Route, Switch, withRouter } from 'react-router-dom';
 import { mount } from 'enzyme';
 
 jest.mock('../../UI/Alert/Alert', () => () => 'Alert');
@@ -22,7 +22,13 @@ const showErrorAlert = jest.fn(ex => console.log(ex));
 const props = {
     checkIsScanning,
     showErrorAlert,
-    isScanning: false
+    isScanning: false,
+    // history: {
+    //     location: {
+    //         pathname: '/scanning'
+    //     },
+    //     push: jest.fn()
+    // }
 };
 
 describe('AppContent', () => {
@@ -64,5 +70,18 @@ describe('AppContent', () => {
 
     it('reverts back to root component on scanning completion', () => {
         throw new Error('Finish this');
+    });
+
+    it('testing', () => {
+        const component = mount(
+            <MemoryRouter initalEntries={ [ '/next' ] }>
+                <Switch>
+                    <Route path="/next" render={ () => <p>Next</p> } />
+                    <Route path="/" exact render={ () => <p>Root</p> } />
+                </Switch>
+            </MemoryRouter>
+        );
+
+        console.log(component.debug());
     });
 });
