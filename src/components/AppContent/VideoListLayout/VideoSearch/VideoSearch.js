@@ -10,9 +10,9 @@ import Form from "../../../UI/form/Form/Form";
 import { loadFilterOptions } from "../../../../store/videoSearch/videoSearch.actions";
 import { searchForVideos } from '../../../../store/videoList/videoList.actions';
 
-const FORM_NAME = 'video-search';
+export const FORM_NAME = 'video-search';
 
-class VideoSearch extends Component {
+export class VideoSearch extends Component {
 
     componentDidMount() {
         this.props.loadFilterOptions();
@@ -68,12 +68,14 @@ class VideoSearch extends Component {
                 <Row>
                     <Col className="text-center">
                         <Button
+                            id="do-video-search-btn"
                             type="submit"
                             color="primary"
                         >
                             Search
                         </Button>
                         <Button
+                            id="reset-video-search-btn"
                             type="button"
                             color="info"
                             onClick={ this.resetForm }
