@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { FORM_NAME, VideoSearch } from 'components/AppContent/VideoListLayout/VideoSearch/VideoSearch';
-import mockComponent from '../../../../testUtil/mockComponent';
+import mockComponent from '../../../../exclude/testUtil/mockComponent';
 
 jest.mock('redux-form', () => ({
     reduxForm: () => (Comp) => Comp

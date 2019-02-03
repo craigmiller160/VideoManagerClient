@@ -98,7 +98,7 @@
     "testPathIgnorePatterns": [
       "<rootDir>/test/setupTests.js",
       "<rootDir>/test/mock/.*",
-      "<rootDir>/test/testUtil/.*"
+      "<rootDir>/test/exclude/.*"
     ],
     "testEnvironment": "jsdom",
     "testURL": "http://localhost",

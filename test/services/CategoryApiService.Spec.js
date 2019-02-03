@@ -1,13 +1,13 @@
 import CategoryApiService from '../../src/services/CategoryApiService';
 import API from '../../src/services/API';
 import MockAdapter from 'axios-mock-adapter';
-import { BASE_CATEGORIES, NEW_CATEGORY } from '../mock/mockData/categoryData';
+import { BASE_CATEGORIES, NEW_CATEGORY } from '../exclude/mock/mockData/categoryData';
 import {
     mockAddCategory,
     mockDeleteCategory,
     mockGetAllCategories,
     mockUpdateCategory
-} from '../mock/mockApiConfig/categoryApi';
+} from '../exclude/mock/mockApiConfig/categoryApi';
 
 const mockApi = new MockAdapter(API);
 

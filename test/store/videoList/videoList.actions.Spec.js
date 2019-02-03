@@ -3,8 +3,8 @@ import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import API from '../../../src/services/API';
 import { expandVideoFile, searchForVideos, setCurrentPage, setPagination, setVideoList } from '../../../src/store/videoList/videoList.actions';
-import { BASE_VIDE0_FILES, PAGINATION_COUNTS } from '../../mock/mockData/videoFileData';
-import { mockGetAllFiles, mockGetVideoFileCount, mockSearchForFiles } from '../../mock/mockApiConfig/videoFileApi';
+import { BASE_VIDE0_FILES, PAGINATION_COUNTS } from '../../exclude/mock/mockData/videoFileData';
+import { mockGetAllFiles, mockGetVideoFileCount, mockSearchForFiles } from '../../exclude/mock/mockApiConfig/videoFileApi';
 import { initialState as videoListInitState } from '../../../src/store/videoList/videoList.reducer';
 import { setSearching } from '../../../src/store/videoSearch/videoSearch.actions';
 
