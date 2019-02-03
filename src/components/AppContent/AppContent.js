@@ -9,6 +9,7 @@ import { checkIsScanning, startFileScan } from 'store/scanning/scanning.actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { showErrorAlert, hideAlert } from 'store/alert/alert.actions';
+import { VideoFileEdit } from './VideoFileEdit/VideoFileEdit';
 
 export class AppContent extends Component {
 
@@ -27,7 +28,7 @@ export class AppContent extends Component {
     };
 
     componentWillUpdate(nextProps) {
-        if (nextProps.history.location.pathname !== '/' && !nextProps.isScanning) {
+        if (nextProps.history.location.pathname === '/scanning' && !nextProps.isScanning) {
             this.props.history.push('/');
         }
     }
@@ -66,6 +67,14 @@ export class AppContent extends Component {
                                             { ...props }
                                             isScanning={ isScanning }
                                             checkIsScanning={ checkIsScanning }
+                                        />
+                                    ) }
+                                />
+                                <Route
+                                    path="/edit"
+                                    render={ (props) => (
+                                        <VideoFileEdit
+                                            { ...props }
                                         />
                                     ) }
                                 />

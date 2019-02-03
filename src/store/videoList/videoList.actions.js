@@ -28,8 +28,6 @@ export const searchForVideos = () => async (dispatch, getState) => {
         }));
 
         dispatch(setVideoList(result.data.videoList));
-
-        // TODO need to refresh the filters too
     }
     catch (ex) {
         console.log(ex);
