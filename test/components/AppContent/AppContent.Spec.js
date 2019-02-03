@@ -1,11 +1,11 @@
 import React from 'react';
-import { AppContent } from '../AppContent';
+import { AppContent } from 'components/AppContent/AppContent';
 import { MemoryRouter, Route, Switch, withRouter } from 'react-router-dom';
 import { mount } from 'enzyme';
 
-jest.mock('../../UI/Alert/Alert', () => () => 'Alert');
-jest.mock('../VideoListLayout/VideoListLayout', () => () => 'VideoListLayout');
-jest.mock('../Scanning/Scanning', () => () => 'Scanning');
+jest.mock('components/UI/Alert/Alert', () => () => 'Alert');
+jest.mock('components/AppContent/VideoListLayout/VideoListLayout', () => () => 'VideoListLayout');
+jest.mock('components/AppContent/Scanning/Scanning', () => () => 'Scanning');
 
 const createComponent = (props = {}, route = '/') => {
     const AppContentRouter = withRouter(AppContent);
@@ -22,16 +22,15 @@ const showErrorAlert = jest.fn(ex => console.log(ex));
 const props = {
     checkIsScanning,
     showErrorAlert,
-    isScanning: false,
-    // history: {
-    //     location: {
-    //         pathname: '/scanning'
-    //     },
-    //     push: jest.fn()
-    // }
+    isScanning: false
 };
 
 describe('AppContent', () => {
+    beforeEach(() => {
+        checkIsScanning.mockReset();
+        showErrorAlert.mockReset();
+    });
+
     it('renders successfully with VideoListComponent for root route', (done) => {
         const component = createComponent(props);
 

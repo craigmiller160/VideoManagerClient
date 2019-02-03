@@ -1,8 +1,8 @@
-import StarApiService from '../StarApiService';
-import API from '../API';
+import StarApiService from '../../src/services/StarApiService';
+import API from '../../src/services/API';
 import MockAdapter from 'axios-mock-adapter';
-import { BASE_STARS, NEW_STAR } from '../../mock/mockData/starData';
-import { mockAddNewStar, mockDeleteStar, mockGetAllStars, mockUpdateStar } from '../../mock/mockApiConfig/starApi';
+import { BASE_STARS, NEW_STAR } from '../../src/mock/mockData/starData';
+import { mockAddNewStar, mockDeleteStar, mockGetAllStars, mockUpdateStar } from '../../src/mock/mockApiConfig/starApi';
 
 const mockApi = new MockAdapter(API);
 

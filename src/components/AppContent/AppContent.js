@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import VideoNavbar from './VideoNavbar/VideoNavbar';
+import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
 import VideoListLayout from './VideoListLayout/VideoListLayout';
 import { Container, Row, Col } from 'reactstrap';
 import Alert from '../UI/Alert/Alert';

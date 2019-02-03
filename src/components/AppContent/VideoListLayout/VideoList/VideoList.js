@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
 import { expandVideoFile, searchForVideos, setCurrentPage } from '../../../../store/videoList/videoList.actions';
-import Spinner from '../../../UI/Spinner/Spinner';
+import Spinner from 'components/UI/Spinner/Spinner';
 import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
 
 export class VideoList extends Component {

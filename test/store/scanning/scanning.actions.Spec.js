@@ -1,10 +1,10 @@
-import { checkIsScanning, setIsScanning, setScanningError, startFileScan } from '../scanning.actions';
+import { checkIsScanning, setIsScanning, setScanningError, startFileScan } from '../../../src/store/scanning/scanning.actions';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
-import API from '../../../services/API';
-import { mockIsVideoScanRunning, mockStartVideoScan } from '../../../mock/mockApiConfig/videoFileApi';
-import { initialState as scanningInitialState } from '../scanning.reducer';
+import API from '../../../src/services/API';
+import { mockIsVideoScanRunning, mockStartVideoScan } from '../../../src/mock/mockApiConfig/videoFileApi';
+import { initialState as scanningInitialState } from '../../../src/store/scanning/scanning.reducer';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);

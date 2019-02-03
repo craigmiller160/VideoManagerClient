@@ -1,5 +1,5 @@
-import scanningReducer, { initialState as scanningInitialState } from '../scanning.reducer';
-import { setIsScanning, setScanningError } from '../scanning.actions';
+import scanningReducer, { initialState as scanningInitialState } from '../../../src/store/scanning/scanning.reducer';
+import { setIsScanning, setScanningError } from '../../../src/store/scanning/scanning.actions';
 
 describe('scanning.reducer', () => {
     it('should return initial state', () => {

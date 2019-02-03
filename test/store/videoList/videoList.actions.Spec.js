@@ -1,12 +1,12 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
-import API from '../../../services/API';
-import { expandVideoFile, searchForVideos, setCurrentPage, setPagination, setVideoList } from '../videoList.actions';
-import { BASE_VIDE0_FILES, PAGINATION_COUNTS } from '../../../mock/mockData/videoFileData';
-import { mockGetAllFiles, mockGetVideoFileCount, mockSearchForFiles } from '../../../mock/mockApiConfig/videoFileApi';
-import { initialState as videoListInitState } from '../videoList.reducer';
-import { setSearching } from '../../videoSearch/videoSearch.actions';
+import API from '../../../src/services/API';
+import { expandVideoFile, searchForVideos, setCurrentPage, setPagination, setVideoList } from '../../../src/store/videoList/videoList.actions';
+import { BASE_VIDE0_FILES, PAGINATION_COUNTS } from '../../../src/mock/mockData/videoFileData';
+import { mockGetAllFiles, mockGetVideoFileCount, mockSearchForFiles } from '../../../src/mock/mockApiConfig/videoFileApi';
+import { initialState as videoListInitState } from '../../../src/store/videoList/videoList.reducer';
+import { setSearching } from '../../../src/store/videoSearch/videoSearch.actions';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);

@@ -1,4 +1,4 @@
-import { hideAlert, showErrorAlert, showSuccessAlert } from '../alert.actions';
+import { hideAlert, showErrorAlert, showSuccessAlert } from '../../../src/store/alert/alert.actions';
 
 describe('alert.actions', () => {
     const MESSAGE = 'Hello World';
