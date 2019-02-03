@@ -68,7 +68,7 @@ export class VideoList extends Component {
                 }
                 {
                     !searching && videoList.length > 0 &&
-                        <>
+                        <div className={ classes['list-contents'] }>
                             { this.getPagination() }
                             <ListGroup>
                                 { videoList.map((videoFile) => (
@@ -80,7 +80,7 @@ export class VideoList extends Component {
                                 )) }
                             </ListGroup>
                             { this.getPagination() }
-                        </>
+                        </div>
                 }
                 {
                     !searching && videoList.length === 0 &&
