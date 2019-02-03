@@ -1,25 +1,51 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Form from 'components/UI/form/Form/Form';
 import classes from './VideoFileEdit.scss';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Row, Col } from 'reactstrap';
-import { getSelectedVideo } from '../../../store/videoList/videoList.selectors';
+import { Col, Row } from 'reactstrap';
+import Input from 'components/UI/form/Input/Input';
 
 export const FORM_NAME = 'video-file-edit';
 
+// TODO need some way to warn that unsaved changes will be lost when leaving this component
+
 export class VideoFileEdit extends Component {
 
+    handleSubmit = () => {
+        console.log('Submitting'); // TODO delete this
+    };
+
     render() {
+        if (!this.props.selectedVideo) {
+            return <div />;
+        }
+
+        const {
+            selectedVideo,
+            selectedVideo: { fileName },
+            filters: { categories, stars, series }
+        } = this.props;
 
         return (
             <Form
                 form={ FORM_NAME }
-                handleSubmit={ () => null } // TODO finish this
+                handleSubmit={ this.handleSubmit }
                 className={ classes.VideoFileEdit }
+                initialValues={ selectedVideo }
             >
                 <Row>
-                    <Col>
+                    <Col className="text-center" md={ { size: 8, offset: 2 } }>
+                        <h3>{ fileName }</h3>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={ { size: 4, offset: 2 } }>
+                        <Input
+                            label="Display Name"
+                            name="displayName"
+                        />
+                    </Col>
+                    <Col md={ { size: 4 } }>
 
                     </Col>
                 </Row>
@@ -28,12 +54,9 @@ export class VideoFileEdit extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    selectedVideo: getSelectedVideo(state)
-});
+VideoFileEdit.propTypes = {
+    selectedVideo: PropTypes.object.isRequired,
+    filters: PropTypes.object.isRequired
+};
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(VideoFileEdit);
+export default VideoFileEdit;

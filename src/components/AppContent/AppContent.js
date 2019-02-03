@@ -10,6 +10,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { showErrorAlert, hideAlert } from 'store/alert/alert.actions';
 import { VideoFileEdit } from './VideoFileEdit/VideoFileEdit';
+import { getSelectedVideo } from '../../store/videoList/videoList.selectors';
 
 export class AppContent extends Component {
 
@@ -27,8 +28,20 @@ export class AppContent extends Component {
         }
     };
 
-    componentWillUpdate(nextProps) {
+    static resetToRootComponent(nextProps) {
         if (nextProps.history.location.pathname === '/scanning' && !nextProps.isScanning) {
+            return true;
+        }
+
+        if (nextProps.history.location.pathname === '/edit' && (!nextProps.selectedVideo || Object.entries(nextProps.selectedVideo).length === 0)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    componentWillUpdate(nextProps) {
+        if (AppContent.resetToRootComponent(nextProps)) {
             this.props.history.push('/');
         }
     }
@@ -39,7 +52,9 @@ export class AppContent extends Component {
             isScanning,
             checkIsScanning,
             alert,
-            hideAlert
+            hideAlert,
+            selectedVideo,
+            filters
         } = this.props;
         const { isStarted } = this.state;
 
@@ -75,6 +90,8 @@ export class AppContent extends Component {
                                     render={ (props) => (
                                         <VideoFileEdit
                                             { ...props }
+                                            selectedVideo={ selectedVideo }
+                                            filters={ filters }
                                         />
                                     ) }
                                 />
@@ -97,7 +114,9 @@ export class AppContent extends Component {
 
 const mapStateToProps = (state) => ({
     isScanning: state.scanning.isScanning,
-    alert: state.alert
+    alert: state.alert,
+    selectedVideo: getSelectedVideo(state),
+    filters: state.videoSearch.filters
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

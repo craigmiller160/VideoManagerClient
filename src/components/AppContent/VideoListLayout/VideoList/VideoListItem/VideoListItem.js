@@ -10,6 +10,7 @@ import {
     Button,
     Collapse
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const VideoListItem = (props) => {
     const {
@@ -82,7 +83,10 @@ const VideoListItem = (props) => {
                             </ListGroupItemText>
                         </Col>
                         <Col className="text-right">
-                            <Button color="info">Edit</Button>
+                            <Link to="/edit">
+                                <Button color="info">Edit</Button>
+                            </Link>
+
                             <Button color="primary">Play</Button>
                         </Col>
                     </Row>
