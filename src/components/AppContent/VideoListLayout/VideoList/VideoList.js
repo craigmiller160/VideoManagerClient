@@ -8,7 +8,7 @@ import { expandVideoFile, searchForVideos, setCurrentPage } from '../../../../st
 import Spinner from '../../../UI/Spinner/Spinner';
 import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
 
-class VideoList extends Component {
+export class VideoList extends Component {
 
     componentDidMount() {
         this.props.searchForVideos();
@@ -51,28 +51,42 @@ class VideoList extends Component {
     };
 
     render() {
+        const {
+            searching,
+            videoList,
+            expandVideoFile
+        } = this.props;
+
         return (
             <div className={ classes.VideoList }>
-                <h3>Available Videos</h3>
+                <div className={ classes['list-title'] }>
+                    <h3>Available Videos</h3>
+                </div>
                 {
-                    this.props.searching &&
+                    searching &&
                         <Spinner />
                 }
                 {
-                    !this.props.searching > 0 &&
+                    !searching && videoList.length > 0 &&
                         <>
                             { this.getPagination() }
                             <ListGroup>
-                                { this.props.videoList.map((videoFile) => (
+                                { videoList.map((videoFile) => (
                                     <VideoListItem
                                         key={ videoFile.fileId }
                                         videoFile={ videoFile }
-                                        expandVideoFile={ this.props.expandVideoFile }
+                                        expandVideoFile={ expandVideoFile }
                                     />
                                 )) }
                             </ListGroup>
                             { this.getPagination() }
                         </>
+                }
+                {
+                    !searching && videoList.length === 0 &&
+                        <div className={ classes['none-available'] }>
+                            <h3>No Videos Available</h3>
+                        </div>
                 }
             </div>
         );

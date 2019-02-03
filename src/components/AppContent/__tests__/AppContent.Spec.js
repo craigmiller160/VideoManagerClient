@@ -76,8 +76,21 @@ describe('AppContent', () => {
         const component = mount(
             <MemoryRouter initalEntries={ [ '/next' ] }>
                 <Switch>
-                    <Route path="/next" render={ () => <p>Next</p> } />
                     <Route path="/" exact render={ () => <p>Root</p> } />
+                    <Route path="/next" render={ () => <p>Next</p> } />
+                </Switch>
+            </MemoryRouter>
+        );
+
+        console.log(component.debug());
+    });
+
+    it('testing2', () => {
+        const component = mount(
+            <MemoryRouter initalEntries={ [ '/next' ] }>
+                <Switch>
+                    <Route path="/" exact render={ () => <p>Root</p> } />
+                    <Route path="/next" render={ () => <p>Next</p> } />
                 </Switch>
             </MemoryRouter>
         );

@@ -1,7 +1,10 @@
 
 .VideoList {
-  h3 {
+  .list-title {
     margin-top: 20px;
     border-bottom: 1px solid lightgray;
+  }
+  .none-available {
+    text-align: center;
   }
 }

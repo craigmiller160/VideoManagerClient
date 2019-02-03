@@ -5,7 +5,6 @@ import { Alert as ReactAlert } from 'reactstrap';
 import classes from './Alert.scss';
 
 const Alert = (props) => {
-    console.log('Alert is starting'); // TODO delete this
     const { alert: { color, message, show }, hideAlert } = props;
     return (
         <ReactAlert
