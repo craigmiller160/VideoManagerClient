@@ -5,10 +5,10 @@ import { Container, Row, Col } from 'reactstrap';
 import Alert from '../UI/Alert/Alert';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Scanning from './Scanning/Scanning';
-import { checkIsScanning, startFileScan } from '../../store/scanning/scanning.actions';
+import { checkIsScanning, startFileScan } from 'store/scanning/scanning.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { showErrorAlert, hideAlert } from '../../store/alert/alert.actions';
+import { showErrorAlert, hideAlert } from 'store/alert/alert.actions';
 
 export class AppContent extends Component {
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppContent } from 'components/AppContent/AppContent';
-import { MemoryRouter, Route, Switch, withRouter } from 'react-router-dom';
+import { MemoryRouter, withRouter } from 'react-router-dom';
 import { mount } from 'enzyme';
 
 jest.mock('components/UI/Alert/Alert', () => () => 'Alert');
@@ -11,7 +11,7 @@ const createComponent = (props = {}, route = '/') => {
     const AppContentRouter = withRouter(AppContent);
 
     return mount(
-        <MemoryRouter initalEntries={ [ route ] }>
+        <MemoryRouter initialEntries={ [ route ] }>
             <AppContentRouter { ...props } />
         </MemoryRouter>
     );
@@ -65,35 +65,5 @@ describe('AppContent', () => {
             expect(component.find('AppContent Route').text().trim()).toEqual('VideoListLayout');
             done();
         });
-    });
-
-    it('reverts back to root component on scanning completion', () => {
-        throw new Error('Finish this');
-    });
-
-    it('testing', () => {
-        const component = mount(
-            <MemoryRouter initalEntries={ [ '/next' ] }>
-                <Switch>
-                    <Route path="/" exact render={ () => <p>Root</p> } />
-                    <Route path="/next" render={ () => <p>Next</p> } />
-                </Switch>
-            </MemoryRouter>
-        );
-
-        console.log(component.debug());
-    });
-
-    it('testing2', () => {
-        const component = mount(
-            <MemoryRouter initalEntries={ [ '/next' ] }>
-                <Switch>
-                    <Route path="/" exact render={ () => <p>Root</p> } />
-                    <Route path="/next" render={ () => <p>Next</p> } />
-                </Switch>
-            </MemoryRouter>
-        );
-
-        console.log(component.debug());
     });
 });
