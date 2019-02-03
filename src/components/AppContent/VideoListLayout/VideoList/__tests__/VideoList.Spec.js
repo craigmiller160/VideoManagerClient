@@ -75,14 +75,11 @@ describe('VideoList', () => {
 
         component.instance().paginationClick('<');
         expect(setCurrentPage).toHaveBeenLastCalledWith(-1);
-        expect(searchForVideos).toHaveBeenCalledTimes(2);
 
         component.instance().paginationClick('1');
         expect(setCurrentPage).toHaveBeenLastCalledWith(1);
-        expect(searchForVideos).toHaveBeenCalledTimes(3);
 
         component.instance().paginationClick('>');
         expect(setCurrentPage).toHaveBeenLastCalledWith(1);
-        expect(searchForVideos).toHaveBeenCalledTimes(4);
     });
 });
