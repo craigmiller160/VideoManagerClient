@@ -35,6 +35,12 @@ const createComponent = (props = {}) => mount(
 );
 
 describe('VideoList', () => {
+    beforeEach(() => {
+        searchForVideos.mockReset();
+        setCurrentPage.mockReset();
+        expandVideoFile.mockReset();
+    });
+
     it('shows spinner while searching', () => {
         const component = createComponent({ ...props, searching: true });
         expect(searchForVideos).toHaveBeenCalled();
@@ -75,11 +81,14 @@ describe('VideoList', () => {
 
         component.instance().paginationClick('<');
         expect(setCurrentPage).toHaveBeenLastCalledWith(-1);
+        expect(searchForVideos).toHaveBeenCalledTimes(2);
 
         component.instance().paginationClick('1');
         expect(setCurrentPage).toHaveBeenLastCalledWith(1);
+        expect(searchForVideos).toHaveBeenCalledTimes(3);
 
         component.instance().paginationClick('>');
         expect(setCurrentPage).toHaveBeenLastCalledWith(1);
+        expect(searchForVideos).toHaveBeenCalledTimes(4);
     });
 });
