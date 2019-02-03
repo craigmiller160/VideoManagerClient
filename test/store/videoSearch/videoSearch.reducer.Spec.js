@@ -1,8 +1,8 @@
 import videoSearchReducer, { initialState as videoSearchInitState } from '../../../src/store/videoSearch/videoSearch.reducer';
 import { setCategories, setSearching, setSeries, setStars } from '../../../src/store/videoSearch/videoSearch.actions';
-import { BASE_CATEGORIES } from '../../../src/mock/mockData/categoryData';
-import { BASE_SERIES } from '../../../src/mock/mockData/seriesData';
-import { BASE_STARS } from '../../../src/mock/mockData/starData';
+import { BASE_CATEGORIES } from '../../mock/mockData/categoryData';
+import { BASE_SERIES } from '../../mock/mockData/seriesData';
+import { BASE_STARS } from '../../mock/mockData/starData';
 
 const cloneState = () => ({
     ...videoSearchInitState,

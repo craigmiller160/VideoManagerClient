@@ -1,7 +1,7 @@
 import VideoApiService from '../../src/services/VideoApiService';
 import API from '../../src/services/API';
 import MockAdapter from 'axios-mock-adapter';
-import { BASE_VIDEO_SEARCH_RESULT, FILE_SCAN_STATUS, NEW_VIDEO_FILE } from '../../src/mock/mockData/videoFileData';
+import { BASE_VIDEO_SEARCH_RESULT, FILE_SCAN_STATUS, NEW_VIDEO_FILE } from '../mock/mockData/videoFileData';
 import {
     mockAddNewVideoFile,
     mockGetAllFiles,
@@ -10,7 +10,7 @@ import {
     mockPlayVideo,
     mockStartVideoScan,
     mockUpdateVideoFile
-} from '../../src/mock/mockApiConfig/videoFileApi';
+} from '../mock/mockApiConfig/videoFileApi';
 
 const mockApi = new MockAdapter(API);
 

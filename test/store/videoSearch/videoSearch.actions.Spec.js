@@ -3,12 +3,12 @@ import thunk from 'redux-thunk';
 import { setCategories, setSeries, setStars, loadFilterOptions, setSearching } from "../../../src/store/videoSearch/videoSearch.actions";
 import MockAdapter from 'axios-mock-adapter';
 import API from '../../../src/services/API';
-import { BASE_CATEGORIES, BASE_CATEGORY_FILTERS } from '../../../src/mock/mockData/categoryData';
-import { BASE_SERIES, BASE_SERIES_FILTERS } from '../../../src/mock/mockData/seriesData';
-import { BASE_STAR_FILTERS, BASE_STARS } from '../../../src/mock/mockData/starData';
-import { mockGetAllCategories } from '../../../src/mock/mockApiConfig/categoryApi';
-import { mockGetAllSeries } from '../../../src/mock/mockApiConfig/seriesApi';
-import { mockGetAllStars } from '../../../src/mock/mockApiConfig/starApi';
+import { BASE_CATEGORIES, BASE_CATEGORY_FILTERS } from '../../mock/mockData/categoryData';
+import { BASE_SERIES, BASE_SERIES_FILTERS } from '../../mock/mockData/seriesData';
+import { BASE_STAR_FILTERS, BASE_STARS } from '../../mock/mockData/starData';
+import { mockGetAllCategories } from '../../mock/mockApiConfig/categoryApi';
+import { mockGetAllSeries } from '../../mock/mockApiConfig/seriesApi';
+import { mockGetAllStars } from '../../mock/mockApiConfig/starApi';
 import { initialState as videoSearchInitState } from '../../../src/store/videoSearch/videoSearch.reducer';
 
 const mockStore = configureMockStore([thunk]);

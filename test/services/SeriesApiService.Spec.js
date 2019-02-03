@@ -1,13 +1,13 @@
 import SeriesApiService from '../../src/services/SeriesApiService';
 import API from '../../src/services/API';
 import MockAdapter from 'axios-mock-adapter';
-import { BASE_SERIES, NEW_SERIES } from '../../src/mock/mockData/seriesData';
+import { BASE_SERIES, NEW_SERIES } from '../mock/mockData/seriesData';
 import {
     mockAddNewSeries,
     mockDeleteSeries,
     mockGetAllSeries,
     mockUpdateSeries
-} from '../../src/mock/mockApiConfig/seriesApi';
+} from '../mock/mockApiConfig/seriesApi';
 
 const mockApi = new MockAdapter(API);
 

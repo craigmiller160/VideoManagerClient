@@ -1,6 +1,6 @@
 import videoListReducer, { initialState as videoListInitState } from '../../../src/store/videoList/videoList.reducer';
 import { expandVideoFile, setCurrentPage, setPagination, setVideoList } from '../../../src/store/videoList/videoList.actions';
-import { BASE_VIDE0_FILES, BASE_VIDEO_FILES_STATE, PAGINATION_COUNTS } from '../../../src/mock/mockData/videoFileData';
+import { BASE_VIDE0_FILES, BASE_VIDEO_FILES_STATE, PAGINATION_COUNTS } from '../../mock/mockData/videoFileData';
 
 const cloneState = () => ({
     ...videoListInitState,
