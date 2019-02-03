@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from '../Input';
+import Input from '../../../../../src/components/UI/form/Input/Input';
 import { shallow } from 'enzyme';
 
 describe('Input', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import VideoListItem from '../VideoListItem';
+import VideoListItem from '../../../../../../src/components/AppContent/VideoListLayout/VideoList/VideoListItem/VideoListItem';
 
 const expandVideoFile = jest.fn();
 const props = {

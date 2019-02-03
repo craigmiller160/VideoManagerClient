@@ -1,5 +1,5 @@
 import React from 'react';
-import Pagination, { RIGHT_ALIGN } from '../Pagination';
+import Pagination, { RIGHT_ALIGN } from '../../../../src/components/UI/Pagination/Pagination';
 import { mount } from 'enzyme';
 
 const getProps = (currentPage) => ({

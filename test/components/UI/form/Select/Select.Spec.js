@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from '../Select';
+import Select from '../../../../../src/components/UI/form/Select/Select';
 import { shallow } from 'enzyme';
 
 describe('Select', () => {
