@@ -1,6 +1,6 @@
 import { createAction } from 'redux-starter-kit';
 import VideoApiService from '../../services/VideoApiService';
-import { showErrorAlert } from '../alert/alert.actions';
+import { showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
 import { setSearching } from '../videoSearch/videoSearch.actions';
 
 export const searchForVideos = () => async (dispatch, getState) => {
@@ -35,6 +35,18 @@ export const searchForVideos = () => async (dispatch, getState) => {
     }
     finally {
         dispatch(setSearching(false));
+    }
+};
+
+export const saveVideoFile = (videoFile) => async (dispatch) => {
+    try {
+        await VideoApiService.updateVideoFile(videoFile.fileId, videoFile);
+        dispatch(showSuccessAlert('Successfully saved video file'));
+        await dispatch(searchForVideos());
+    }
+    catch (ex) {
+        console.log(ex);
+        dispatch(showErrorAlert(ex.message));
     }
 };
 

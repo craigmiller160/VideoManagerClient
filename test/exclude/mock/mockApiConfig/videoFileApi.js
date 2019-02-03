@@ -12,7 +12,7 @@ export const  mockAddNewVideoFile = (mockApi) => {
 };
 
 export const mockUpdateVideoFile = (mockApi) => {
-    mockApi.onPut('/video-files/1', NEW_VIDEO_FILE)
+    mockApi.onPut('/video-files/3', NEW_VIDEO_FILE)
         .reply(200, NEW_VIDEO_FILE);
 };
 
