@@ -31,6 +31,10 @@ const Input = (props) => {
     );
 };
 
+Input.defaultProps = {
+    type: 'text'
+};
+
 Input.propTypes = {
     type: PropTypes.string,
     label: PropTypes.string.isRequired,
