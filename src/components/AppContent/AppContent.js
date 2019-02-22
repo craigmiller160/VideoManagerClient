@@ -10,7 +10,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { showErrorAlert, hideAlert } from 'store/alert/alert.actions';
 import { VideoFileEdit } from './VideoFileEdit/VideoFileEdit';
-import { getSelectedVideo } from '../../store/videoList/videoList.selectors';
+import { getSelectedVideo } from 'store/videoList/videoList.selectors';
+import { ManageVideoFilters } from './ManageVideoFilters/ManageVideoFilters';
+import classes from './AppContent.scss';
+import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
 
 export class AppContent extends Component {
 
@@ -20,6 +23,7 @@ export class AppContent extends Component {
 
     componentDidMount = async () => {
         try {
+            this.props.loadFilterOptions();
             await this.props.checkIsScanning();
             this.setState({ isStarted: true });
         }
@@ -59,7 +63,7 @@ export class AppContent extends Component {
         const { isStarted } = this.state;
 
         return (
-            <div>
+            <div className={ classes.AppContent }>
                 <VideoNavbar
                     startFileScan={ startFileScan }
                     manageFilters={ this.handleManageFilters }
@@ -67,7 +71,7 @@ export class AppContent extends Component {
                 />
                 {
                     isStarted &&
-                        <Container>
+                        <Container className={ classes.container }>
                             <Row>
                                 <Col xs={{ size: 8, offset: 2 }}>
                                     <Alert
@@ -93,6 +97,15 @@ export class AppContent extends Component {
                                         <VideoFileEdit
                                             { ...props }
                                             selectedVideo={ selectedVideo }
+                                            filters={ filters }
+                                        />
+                                    ) }
+                                />
+                                <Route
+                                    path="/filters"
+                                    render={ (props) => (
+                                        <ManageVideoFilters
+                                            { ...props }
                                             filters={ filters }
                                         />
                                     ) }
@@ -125,6 +138,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     checkIsScanning,
     startFileScan,
     showErrorAlert,
+    loadFilterOptions,
     hideAlert
 }, dispatch);
 

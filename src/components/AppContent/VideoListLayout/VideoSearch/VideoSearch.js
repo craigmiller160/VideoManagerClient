@@ -14,10 +14,6 @@ export const FORM_NAME = 'video-search';
 
 export class VideoSearch extends Component {
 
-    componentDidMount() {
-        this.props.loadFilterOptions();
-    }
-
     resetForm = () => {
         this.props.resetForm(FORM_NAME);
         this.props.searchForVideos();
@@ -94,7 +90,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    loadFilterOptions,
     searchForVideos,
     resetForm: reset
 }, dispatch);
