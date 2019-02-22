@@ -28,16 +28,16 @@ export class AppContent extends Component {
         }
     };
 
+    handleManageFilters = () => {
+        this.props.history.push('/filters');
+    };
+
     static resetToRootComponent(nextProps) {
         if (nextProps.history.location.pathname === '/scanning' && !nextProps.isScanning) {
             return true;
         }
 
-        if (nextProps.history.location.pathname === '/edit' && (!nextProps.selectedVideo || Object.entries(nextProps.selectedVideo).length === 0)) {
-            return true;
-        }
-
-        return false;
+        return nextProps.history.location.pathname === '/edit' && (!nextProps.selectedVideo || Object.entries(nextProps.selectedVideo).length === 0);
     }
 
     componentWillUpdate(nextProps) {
@@ -62,6 +62,8 @@ export class AppContent extends Component {
             <div>
                 <VideoNavbar
                     startFileScan={ startFileScan }
+                    manageFilters={ this.handleManageFilters }
+                    isScanning={ isScanning }
                 />
                 {
                     isStarted &&
