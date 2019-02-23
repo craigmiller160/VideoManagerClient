@@ -4,7 +4,7 @@ import { Button, Col, Row } from 'reactstrap';
 import classes from './ManageVideoFilters.scss';
 
 const ListElement = ({ value, label }) => (
-    <p key={ value } >{ label }</p>
+    <p key={ value } className={ classes['list-item'] } >{ label }</p>
 );
 
 export const ManageVideoFilters = (props) => {

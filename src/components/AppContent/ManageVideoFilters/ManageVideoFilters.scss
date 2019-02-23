@@ -10,5 +10,12 @@
     height: 60%;
     padding: 0;
     margin: 0;
+    border: 1px solid lightgray;
+  }
+  .list-item {
+    margin-left: 5px;
+  }
+  .list-item:hover {
+    background-color: aqua;
   }
 }
