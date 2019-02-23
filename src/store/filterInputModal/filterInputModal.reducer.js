@@ -10,9 +10,9 @@ export const initialState = {
     type: ''
 };
 
-const handleToggleModal = (state, { payload: { open, type = '' } }) => ({
-    open,
-    type
+const handleToggleModal = (state, { payload }) => ({
+    open: !state.open,
+    type: state.open ? '' : payload // If the state is already open, then we're closing the modal now
 });
 
 export default createReducer(initialState, {

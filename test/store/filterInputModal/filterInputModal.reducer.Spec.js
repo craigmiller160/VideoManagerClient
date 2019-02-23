@@ -11,49 +11,37 @@ describe('filterInputModal.reducer', () => {
     });
 
     it('should handle toggleModal open with category type', () => {
-        const payload = {
+        const expectedState = {
+            ...filterInputInitState,
             open: true,
             type: CATEGORY_TYPE
         };
-        const expectedState = {
-            ...filterInputInitState,
-            ...payload
-        };
-        const action = { type: toggleModal.toString(), payload };
+        const action = { type: toggleModal.toString(), payload: CATEGORY_TYPE };
         expect(filterInputReducer(filterInputInitState, action)).toEqual(expectedState);
     });
 
     it('should handle toggleModal open with series type', () => {
-        const payload = {
+        const expectedState = {
+            ...filterInputInitState,
             open: true,
             type: SERIES_TYPE
         };
-        const expectedState = {
-            ...filterInputInitState,
-            ...payload
-        };
-        const action = { type: toggleModal.toString(), payload };
+        const action = { type: toggleModal.toString(), payload: SERIES_TYPE };
         expect(filterInputReducer(filterInputInitState, action)).toEqual(expectedState);
     });
 
     it('should handle toggleModal open with star type', () => {
-        const payload = {
+        const expectedState = {
+            ...filterInputInitState,
             open: true,
             type: STAR_TYPE
         };
-        const expectedState = {
-            ...filterInputInitState,
-            ...payload
-        };
-        const action = { type: toggleModal.toString(), payload };
+        const action = { type: toggleModal.toString(), payload: STAR_TYPE };
         expect(filterInputReducer(filterInputInitState, action)).toEqual(expectedState);
     });
 
     it('should handle toggleModal close', () => {
-        const payload = {
-            open: false
-        };
-        const action = { type: toggleModal.toString(), payload };
+        const action = { type: toggleModal.toString(), payload: CATEGORY_TYPE };
         const newInitState = {
             ...filterInputInitState,
             open: true,
