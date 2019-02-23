@@ -130,14 +130,15 @@ const mapStateToProps = (state) => ({
     filters: state.videoSearch.filters
 });
 
+// Actions are mapped this way because SyntheticEvents were being passed into them which caused console errors
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    showAddCategoryModal,
-    showAddSeriesModal,
-    showAddStarModal,
-    showEditCategoryModal,
-    showEditSeriesModal,
-    showEditStarModal,
-    hideFilterModal
+    showAddCategoryModal: () => showAddCategoryModal(),
+    showAddSeriesModal: () => showAddSeriesModal(),
+    showAddStarModal: () => showAddStarModal(),
+    showEditCategoryModal: () => showEditCategoryModal(),
+    showEditSeriesModal: () => showEditSeriesModal(),
+    showEditStarModal: () => showEditStarModal(),
+    hideFilterModal: () => hideFilterModal()
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageVideoFilters);
