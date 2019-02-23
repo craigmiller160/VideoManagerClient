@@ -11,9 +11,10 @@ import { connect } from 'react-redux';
 import { showErrorAlert, hideAlert } from 'store/alert/alert.actions';
 import { VideoFileEdit } from './VideoFileEdit/VideoFileEdit';
 import { getSelectedVideo } from 'store/videoList/videoList.selectors';
-import { ManageVideoFilters } from './ManageVideoFilters/ManageVideoFilters';
+import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
 import classes from './AppContent.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
+import { toggleFilterInputModal } from 'store/filterInputModal/filterInputModal.actions';
 
 export class AppContent extends Component {
 
@@ -58,7 +59,9 @@ export class AppContent extends Component {
             alert,
             hideAlert,
             selectedVideo,
-            filters
+            filters,
+            filterInputModalOpen,
+            toggleFilterInputModal
         } = this.props;
         const { isStarted } = this.state;
 
@@ -107,6 +110,8 @@ export class AppContent extends Component {
                                         <ManageVideoFilters
                                             { ...props }
                                             filters={ filters }
+                                            modalOpen={ filterInputModalOpen }
+                                            toggleModal={ toggleFilterInputModal }
                                         />
                                     ) }
                                 />
@@ -131,7 +136,8 @@ const mapStateToProps = (state) => ({
     isScanning: state.scanning.isScanning,
     alert: state.alert,
     selectedVideo: getSelectedVideo(state),
-    filters: state.videoSearch.filters
+    filters: state.videoSearch.filters,
+    filterInputModalOpen: state.filterInputModal.open
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -139,6 +145,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     startFileScan,
     showErrorAlert,
     loadFilterOptions,
+    toggleFilterInputModal,
     hideAlert
 }, dispatch);
 
