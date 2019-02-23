@@ -1,5 +1,5 @@
-import alertReducer, { initialState as alertInitialState } from '../../../src/store/alert/alert.reducer';
-import { hideAlert, showErrorAlert, showSuccessAlert } from '../../../src/store/alert/alert.actions';
+import alertReducer, { initialState as alertInitialState } from 'store/alert/alert.reducer';
+import { hideAlert, showErrorAlert, showSuccessAlert } from 'store/alert/alert.actions';
 
 describe('alert.reducer', () => {
     const MESSAGE = 'Hello World';

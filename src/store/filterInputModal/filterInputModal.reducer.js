@@ -10,7 +10,7 @@ export const initialState = {
     type: ''
 };
 
-const handleToggleModal = (state, { payload: { open, type } }) => ({
+const handleToggleModal = (state, { payload: { open, type = '' } }) => ({
     open,
     type
 });
