@@ -18,20 +18,11 @@ const FilterInputModal = (props) => {
         action
     } = props;
 
-    const title = (() => {
-        switch (type) {
-            case CATEGORY_TYPE: return 'Category';
-            case SERIES_TYPE: return 'Series';
-            case STAR_TYPE: return 'Star';
-            default: return '';
-        }
-    })();
-
     return (
         <Modal
             open={ open }
             close={ close }
-            title={ title }
+            title={ `${action} ${type}` }
         >
             <Form
                 form={ FORM_NAME }

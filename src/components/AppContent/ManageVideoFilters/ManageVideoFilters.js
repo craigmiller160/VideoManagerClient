@@ -1,14 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Button, Col, Row } from 'reactstrap';
 import classes from './ManageVideoFilters.scss';
-import FilterInputModal from '../../Modals/FilterInputModal/FilterInputModal';
+import FilterInputModal from 'components/Modals/FilterInputModal/FilterInputModal';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
-    CATEGORY_TYPE,
-    initialState as filterInputModalInitState,
-    SERIES_TYPE,
-    STAR_TYPE
-} from 'store/filterInputModal/filterInputModal.reducer';
+    hideFilterModal,
+    showAddCategoryModal,
+    showAddSeriesModal,
+    showAddStarModal, showEditCategoryModal, showEditSeriesModal, showEditStarModal
+} from 'store/filterInputModal/filterInputModal.actions';
 
 const ListElement = ({ value, label }) => (
     <p key={ value } className={ classes['list-item'] } >{ label }</p>
@@ -17,8 +18,14 @@ const ListElement = ({ value, label }) => (
 const ManageVideoFilters = (props) => {
     const {
         filters: { categories, stars, series },
-        modal,
-        toggleModal
+        open, type, action,
+        showAddCategoryModal,
+        showAddSeriesModal,
+        showAddStarModal,
+        showEditCategoryModal,
+        showEditSeriesModal,
+        showEditStarModal,
+        hideFilterModal
     } = props;
 
     return (
@@ -48,7 +55,7 @@ const ManageVideoFilters = (props) => {
                                 <Col className="text-center">
                                     <Button
                                         color="info"
-                                        onClick={ () => toggleModal(CATEGORY_TYPE) }
+                                        onClick={ showAddCategoryModal }
                                     >
                                         +
                                     </Button>
@@ -72,7 +79,7 @@ const ManageVideoFilters = (props) => {
                                 <Col className="text-center">
                                     <Button
                                         color="info"
-                                        onClick={ () => toggleModal(SERIES_TYPE) }
+                                        onClick={ showAddSeriesModal }
                                     >
                                         +
                                     </Button>
@@ -96,7 +103,7 @@ const ManageVideoFilters = (props) => {
                                 <Col className="text-center">
                                     <Button
                                         color="info"
-                                        onClick={ () => toggleModal(STAR_TYPE) }
+                                        onClick={ showAddStarModal }
                                     >
                                         +
                                     </Button>
@@ -107,26 +114,30 @@ const ManageVideoFilters = (props) => {
                 </Col>
             </Row>
             <FilterInputModal
-                open={ modal.open }
-                close={ () => toggleModal('') }
-                type={ modal.type }
+                open={ open }
+                close={ hideFilterModal }
+                type={ type }
+                action={ action }
             />
         </>
     );
 };
 
-ManageVideoFilters.defaultProps = {
-    modalOpen: false
-};
+const mapStateToProps = (state) => ({
+    open: state.filterInputModal.open,
+    type: state.filterInputModal.type,
+    action: state.filterInputModal.action,
+    filters: state.videoSearch.filters
+});
 
-ManageVideoFilters.propTypes = {
-    filters: PropTypes.shape({
-        categories: PropTypes.array,
-        stars: PropTypes.array,
-        series: PropTypes.array
-    }).isRequired,
-    modal: PropTypes.shape(filterInputModalInitState),
-    toggleModal: PropTypes.func.isRequired
-};
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    showAddCategoryModal,
+    showAddSeriesModal,
+    showAddStarModal,
+    showEditCategoryModal,
+    showEditSeriesModal,
+    showEditStarModal,
+    hideFilterModal
+}, dispatch);
 
-export default ManageVideoFilters;
+export default connect(mapStateToProps, mapDispatchToProps)(ManageVideoFilters);

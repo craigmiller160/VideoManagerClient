@@ -14,7 +14,6 @@ import { getSelectedVideo } from 'store/videoList/videoList.selectors';
 import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
 import classes from './AppContent.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
-import { toggleFilterInputModal } from 'store/filterInputModal/filterInputModal.actions';
 
 export class AppContent extends Component {
 
@@ -109,9 +108,6 @@ export class AppContent extends Component {
                                     render={ (props) => (
                                         <ManageVideoFilters
                                             { ...props }
-                                            filters={ filters }
-                                            modal={ filterInputModal }
-                                            toggleModal={ toggleFilterInputModal }
                                         />
                                     ) }
                                 />
@@ -136,8 +132,7 @@ const mapStateToProps = (state) => ({
     isScanning: state.scanning.isScanning,
     alert: state.alert,
     selectedVideo: getSelectedVideo(state),
-    filters: state.videoSearch.filters,
-    filterInputModal: state.filterInputModal
+    filters: state.videoSearch.filters
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -145,7 +140,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     startFileScan,
     showErrorAlert,
     loadFilterOptions,
-    toggleFilterInputModal,
     hideAlert
 }, dispatch);
 
