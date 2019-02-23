@@ -60,7 +60,7 @@ export class AppContent extends Component {
             hideAlert,
             selectedVideo,
             filters,
-            filterInputModalOpen,
+            filterInputModal,
             toggleFilterInputModal
         } = this.props;
         const { isStarted } = this.state;
@@ -110,7 +110,7 @@ export class AppContent extends Component {
                                         <ManageVideoFilters
                                             { ...props }
                                             filters={ filters }
-                                            modalOpen={ filterInputModalOpen }
+                                            modal={ filterInputModal }
                                             toggleModal={ toggleFilterInputModal }
                                         />
                                     ) }
@@ -137,7 +137,7 @@ const mapStateToProps = (state) => ({
     alert: state.alert,
     selectedVideo: getSelectedVideo(state),
     filters: state.videoSearch.filters,
-    filterInputModalOpen: state.filterInputModal.open
+    filterInputModal: state.filterInputModal
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

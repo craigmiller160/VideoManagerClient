@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { Button, Col, Row } from 'reactstrap';
 import classes from './ManageVideoFilters.scss';
 import FilterInputModal from '../../Modals/FilterInputModal/FilterInputModal';
-import { CATEGORY_TYPE, SERIES_TYPE, STAR_TYPE } from '../../../store/filterInputModal/filterInputModal.reducer';
+import {
+    CATEGORY_TYPE,
+    initialState as filterInputModalInitState,
+    SERIES_TYPE,
+    STAR_TYPE
+} from 'store/filterInputModal/filterInputModal.reducer';
 
 const ListElement = ({ value, label }) => (
     <p key={ value } className={ classes['list-item'] } >{ label }</p>
@@ -12,7 +17,7 @@ const ListElement = ({ value, label }) => (
 const ManageVideoFilters = (props) => {
     const {
         filters: { categories, stars, series },
-        modalOpen,
+        modal,
         toggleModal
     } = props;
 
@@ -102,8 +107,9 @@ const ManageVideoFilters = (props) => {
                 </Col>
             </Row>
             <FilterInputModal
-                open={ modalOpen }
+                open={ modal.open }
                 close={ () => toggleModal('') }
+                type={ modal.type }
             />
         </>
     );
@@ -119,7 +125,7 @@ ManageVideoFilters.propTypes = {
         stars: PropTypes.array,
         series: PropTypes.array
     }).isRequired,
-    modalOpen: PropTypes.bool,
+    modal: PropTypes.shape(filterInputModalInitState),
     toggleModal: PropTypes.func.isRequired
 };
 
