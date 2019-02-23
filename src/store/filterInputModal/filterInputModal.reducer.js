@@ -1,20 +1,79 @@
 import { createReducer } from 'redux-starter-kit';
-import { toggleFilterInputModal } from './filterInputModal.actions';
+import {
+    hideFilterModal,
+    showAddCategoryModal,
+    showAddSeriesModal,
+    showAddStarModal,
+    showEditCategoryModal, showEditSeriesModal, showEditStarModal
+} from './filterInputModal.actions';
 
-export const CATEGORY_TYPE = 'CATEGORY_TYPE';
-export const STAR_TYPE = 'STAR_TYPE';
-export const SERIES_TYPE = 'SERIES_TYPE';
+export const CATEGORY_TYPE = 'Category';
+export const STAR_TYPE = 'Star';
+export const SERIES_TYPE = 'Series';
+export const ADD_ACTION = 'Add';
+export const EDIT_ACTION = 'Edit';
 
 export const initialState = {
     open: false,
-    type: ''
+    type: '',
+    action: ''
 };
 
-const handleToggleFilterInputModal = (state, { payload }) => ({
-    open: !state.open,
-    type: state.open ? '' : payload // If the state is already open, then we're closing the modal now
+const handleShowAddCategoryModal = (state) => ({
+    ...state,
+    open: true,
+    type: CATEGORY_TYPE,
+    action: ADD_ACTION
+});
+
+const handleShowAddSeriesModal = (state) => ({
+    ...state,
+    open: true,
+    type: SERIES_TYPE,
+    action: ADD_ACTION
+});
+
+const handleShowAddStarModal = (state) => ({
+    ...state,
+    open: true,
+    type: STAR_TYPE,
+    action: ADD_ACTION
+});
+
+const handleShowEditCategoryModal = (state) => ({
+    ...state,
+    open: true,
+    type: CATEGORY_TYPE,
+    action: EDIT_ACTION
+});
+
+const handleShowEditSeriesModal = (state) => ({
+    ...state,
+    open: true,
+    type: SERIES_TYPE,
+    action: EDIT_ACTION
+});
+
+const handleShowEditStarModal = (state) => ({
+    ...state,
+    open: true,
+    type: STAR_TYPE,
+    action: EDIT_ACTION
+});
+
+const handleHideFilterModal = (state) => ({
+    ...state,
+    open: false,
+    type: '',
+    action: ''
 });
 
 export default createReducer(initialState, {
-    [toggleFilterInputModal]: handleToggleFilterInputModal
+    [showAddCategoryModal]: handleShowAddCategoryModal,
+    [showAddSeriesModal]: handleShowAddSeriesModal,
+    [showAddStarModal]: handleShowAddStarModal,
+    [showEditCategoryModal]: handleShowEditCategoryModal,
+    [showEditSeriesModal]: handleShowEditSeriesModal,
+    [showEditStarModal]: handleShowEditStarModal,
+    [hideFilterModal]: handleHideFilterModal
 });
