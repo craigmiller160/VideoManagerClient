@@ -4,4 +4,4 @@ export const saveFilterChanges = (filter) => (dispatch, getState) => {
     // TODO finish this
 };
 
-export const toggleModal = createAction('toggleFilterInputModal');
+export const toggleFilterInputModal = createAction('toggleFilterInputModal');
