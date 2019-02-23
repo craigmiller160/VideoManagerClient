@@ -7,8 +7,7 @@ import Input from '../../../UI/form/Input/Input';
 import Select from '../../../UI/form/Select/Select';
 import classes from './VideoSearch.scss';
 import Form from "../../../UI/form/Form/Form";
-import { loadFilterOptions } from "../../../../store/videoSearch/videoSearch.actions";
-import { searchForVideos } from '../../../../store/videoList/videoList.actions';
+import { searchForVideos } from 'store/videoList/videoList.actions';
 
 export const FORM_NAME = 'video-search';
 
