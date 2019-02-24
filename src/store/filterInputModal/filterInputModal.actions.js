@@ -51,31 +51,29 @@ const saveCategoryChanges = async (filter, action, dispatch) => {
 };
 
 const saveSeriesChanges = async (filter, action, dispatch) => {
+    const series = {
+        seriesId: filter.value,
+        seriesName: filter.label
+    };
     if (ADD_ACTION === action) {
-        await SeriesApiService.addSeries({
-            seriesName: filter.label
-        });
+        await SeriesApiService.addSeries(series);
     }
     else {
-        await SeriesApiService.updateSeries(filter.value, {
-            seriesId: filter.value,
-            seriesName: filter.label
-        });
+        await SeriesApiService.updateSeries(filter.value, series);
     }
     await dispatch(loadSeriesOptions());
 };
 
 const saveStarChanges = async (filter, action, dispatch) => {
+    const star = {
+        starId: filter.value,
+        starName: filter.label
+    };
     if (ADD_ACTION === action) {
-        await StarApiService.addStar({
-            starName: filter.label
-        });
+        await StarApiService.addStar(star);
     }
     else {
-        await StarApiService.updateStar(filter.value, {
-            starId: filter.value,
-            starName: filter.label
-        });
+        await StarApiService.updateStar(filter.value, star);
     }
     await dispatch(loadStarOptions());
 };

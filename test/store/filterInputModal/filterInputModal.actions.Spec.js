@@ -18,10 +18,12 @@ import { mockAddNewStar, mockGetAllStars, mockUpdateStar } from '../../exclude/m
 import {
     ADD_ACTION,
     CATEGORY_TYPE, EDIT_ACTION,
-    initialState as filterInputInitState
+    initialState as filterInputInitState, SERIES_TYPE, STAR_TYPE
 } from 'store/filterInputModal/filterInputModal.reducer';
-import { setCategories } from '../../../src/store/videoSearch/videoSearch.actions';
+import { setCategories, setSeries, setStars } from '../../../src/store/videoSearch/videoSearch.actions';
 import { BASE_CATEGORY_FILTERS, NEW_CATEGORY_FILTER } from '../../exclude/mock/mockData/categoryData';
+import { BASE_SERIES_FILTERS, NEW_SERIES_FILTER } from '../../exclude/mock/mockData/seriesData';
+import { BASE_STAR_FILTERS, NEW_STAR_FILTER } from '../../exclude/mock/mockData/starData';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -117,7 +119,7 @@ describe('filterInputModal.actions', () => {
                         url: expect.stringMatching(/\/categories$/)
                     })
                 ]
-            }))
+            }));
         });
 
         it('edit category', async () => {
@@ -148,23 +150,131 @@ describe('filterInputModal.actions', () => {
                         url: expect.stringMatching(/\/categories\/3$/)
                     })
                 ]
-            }))
+            }));
         });
 
-        it('add new series', () => {
-            throw new Error('Finish this');
+        it('add new series', async () => {
+            const initState = {
+                ...filterInputInitState,
+                type: SERIES_TYPE,
+                action: ADD_ACTION
+            };
+            store = mockStore({ filterInputModal: initState });
+            const expectedActions = [
+                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS }
+            ];
+            try {
+                await store.dispatch(saveFilterChanges(NEW_SERIES_FILTER));
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+            expect(mockApi.history).toEqual(expect.objectContaining({
+                get: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/series$/)
+                    })
+                ],
+                post: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/series$/)
+                    })
+                ]
+            }));
         });
 
-        it('edit series', () => {
-            throw new Error('Finish this');
+        it('edit series', async () => {
+            const initState = {
+                ...filterInputInitState,
+                type: SERIES_TYPE,
+                action: EDIT_ACTION
+            };
+            store = mockStore({ filterInputModal: initState });
+            const expectedActions = [
+                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS }
+            ];
+            try {
+                await store.dispatch(saveFilterChanges(NEW_SERIES_FILTER));
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+            expect(mockApi.history).toEqual(expect.objectContaining({
+                get: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/series$/)
+                    })
+                ],
+                put: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/series\/3$/)
+                    })
+                ]
+            }));
         });
 
-        it('add new star', () => {
-            throw new Error('Finish this');
+        it('add new star', async () => {
+            const initState = {
+                ...filterInputInitState,
+                type: STAR_TYPE,
+                action: ADD_ACTION
+            };
+            store = mockStore({ filterInputModal: initState });
+            const expectedActions = [
+                { type: setStars.toString(), payload: BASE_STAR_FILTERS }
+            ];
+            try {
+                await store.dispatch(saveFilterChanges(NEW_STAR_FILTER));
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+            expect(mockApi.history).toEqual(expect.objectContaining({
+                get: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/stars$/)
+                    })
+                ],
+                post: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/stars$/)
+                    })
+                ]
+            }));
         });
 
-        it('edit star', () => {
-            throw new Error('Finish this');
+        it('edit star', async () => {
+            const initState = {
+                ...filterInputInitState,
+                type: STAR_TYPE,
+                action: EDIT_ACTION
+            };
+            store = mockStore({ filterInputModal: initState });
+            const expectedActions = [
+                { type: setStars.toString(), payload: BASE_STAR_FILTERS }
+            ];
+            try {
+                await store.dispatch(saveFilterChanges(NEW_STAR_FILTER));
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+            expect(mockApi.history).toEqual(expect.objectContaining({
+                get: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/stars$/)
+                    })
+                ],
+                put: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/stars\/3$/)
+                    })
+                ]
+            }));
         });
     });
 });

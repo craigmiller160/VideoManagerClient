@@ -9,3 +9,4 @@ export const BASE_STAR_FILTERS = [
 ];
 
 export const NEW_STAR = { starId: 3, starName: 'ThirdStar' };
+export const NEW_STAR_FILTER = { value: NEW_STAR.starId, label: NEW_STAR.starName };

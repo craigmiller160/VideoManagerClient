@@ -9,3 +9,4 @@ export const BASE_SERIES_FILTERS = [
 ];
 
 export const NEW_SERIES = { seriesId: 3, seriesName: 'ThirdSeries' };
+export const NEW_SERIES_FILTER = { value: NEW_SERIES.seriesId, label: NEW_SERIES.seriesName };

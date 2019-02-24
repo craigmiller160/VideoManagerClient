@@ -11,7 +11,7 @@ export const mockAddNewStar = (mockApi) => {
 };
 
 export const mockUpdateStar = (mockApi) => {
-    mockApi.onPut('/stars/1', NEW_STAR)
+    mockApi.onPut('/stars/3', NEW_STAR)
         .reply(200, NEW_STAR);
 };
 

@@ -11,7 +11,7 @@ export const mockAddNewSeries = (mockApi) => {
 };
 
 export const mockUpdateSeries = (mockApi) => {
-    mockApi.onPut('/series/1', NEW_SERIES)
+    mockApi.onPut('/series/3', NEW_SERIES)
         .reply(200, NEW_SERIES);
 };
 
