@@ -17,9 +17,11 @@ const createComponent = (props = {}, route = '/') => {
     );
 };
 
+const loadFilterOptions = jest.fn();
 const checkIsScanning = jest.fn();
 const showErrorAlert = jest.fn(ex => console.log(ex));
 const props = {
+    loadFilterOptions,
     checkIsScanning,
     showErrorAlert,
     isScanning: false
@@ -35,6 +37,7 @@ describe('AppContent', () => {
         const component = createComponent(props);
 
         setImmediate(() => {
+            expect(loadFilterOptions).toHaveBeenCalled();
             expect(checkIsScanning).toHaveBeenCalled();
             expect(showErrorAlert).not.toHaveBeenCalled();
             expect(component.find('AppContent').state()).toEqual(expect.objectContaining({

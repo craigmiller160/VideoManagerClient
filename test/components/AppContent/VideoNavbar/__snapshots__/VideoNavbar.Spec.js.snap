@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`VideoNavbar renders successfully 1`] = `
-<VideoNavbar>
+<VideoNavbar
+  isScanning={false}
+>
   <Navbar
     color="dark"
     dark={true}
@@ -18,11 +20,13 @@ exports[`VideoNavbar renders successfully 1`] = `
           className="container"
         >
           <NavbarBrand
+            disabled={false}
             tag={[Function]}
             to="/"
           >
             <Link
               className="navbar-brand"
+              disabled={false}
               to="/"
             >
               Link
@@ -89,6 +93,27 @@ exports[`VideoNavbar renders successfully 1`] = `
                   <ul
                     className="ml-auto navbar-nav"
                   >
+                    <NavItem
+                      tag="li"
+                    >
+                      <li
+                        className="nav-item"
+                      >
+                        <NavLink
+                          id="manageFilters"
+                          onClick={[Function]}
+                          tag="a"
+                        >
+                          <a
+                            className="nav-link"
+                            id="manageFilters"
+                            onClick={[Function]}
+                          >
+                            Manage Filters
+                          </a>
+                        </NavLink>
+                      </li>
+                    </NavItem>
                     <NavItem
                       tag="li"
                     >

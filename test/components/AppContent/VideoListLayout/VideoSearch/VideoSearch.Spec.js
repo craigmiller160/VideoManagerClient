@@ -42,7 +42,6 @@ describe('VideoSearch', () => {
 
     it('renders properly', () => {
         const component = createComponent(props);
-        expect(loadFilterOptions).toHaveBeenCalled();
         expect(component.find('mock-comp[name="category"]').props()).toEqual(expect.objectContaining({
             options: props.filters.categories
         }));

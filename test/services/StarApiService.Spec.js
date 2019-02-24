@@ -41,7 +41,7 @@ describe('StarApiService', () => {
 
     it('Update Star', async () => {
         try {
-            const result = await StarApiService.updateStar(1, NEW_STAR);
+            const result = await StarApiService.updateStar(3, NEW_STAR);
             expect(result.status).toEqual(200);
             expect(result.data).toEqual(NEW_STAR);
         }

@@ -46,7 +46,7 @@ describe('SeriesApiService', () => {
 
     it('Update Series', async () => {
         try {
-            const result = await SeriesApiService.updateSeries(1, NEW_SERIES);
+            const result = await SeriesApiService.updateSeries(3, NEW_SERIES);
             expect(result.status).toEqual(200);
             expect(result.data).toEqual(NEW_SERIES);
         }

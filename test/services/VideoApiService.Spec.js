@@ -40,7 +40,7 @@ describe('VideoApiService', () => {
 
     it('Update File', async () => {
         try {
-            const result = await VideoApiService.updateVideoFile(1, NEW_VIDEO_FILE);
+            const result = await VideoApiService.updateVideoFile(3, NEW_VIDEO_FILE);
             expect(result.status).toEqual(200);
             expect(result.data).toEqual(NEW_VIDEO_FILE);
         }
