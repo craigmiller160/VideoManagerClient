@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import VideoListItem from '../../../../../../src/components/AppContent/VideoListLayout/VideoList/VideoListItem/VideoListItem';
+import VideoListItem from 'components/AppContent/VideoListLayout/VideoList/VideoListItem/VideoListItem';
+import { MemoryRouter } from 'react-router-dom';
 
 const expandVideoFile = jest.fn();
 const props = {
@@ -15,7 +16,9 @@ const props = {
 };
 
 const createComponent = (props = {}) => mount(
-    <VideoListItem { ...props } />
+    <MemoryRouter initialEntries={ [ '/' ] }>
+        <VideoListItem { ...props } />
+    </MemoryRouter>
 );
 
 describe('VideoListItem', () => {

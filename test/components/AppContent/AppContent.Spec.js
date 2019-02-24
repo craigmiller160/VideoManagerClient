@@ -17,10 +17,12 @@ const createComponent = (props = {}, route = '/') => {
     );
 };
 
+const startFileScan = jest.fn();
 const loadFilterOptions = jest.fn();
 const checkIsScanning = jest.fn();
 const showErrorAlert = jest.fn(ex => console.log(ex));
 const props = {
+    startFileScan,
     loadFilterOptions,
     checkIsScanning,
     showErrorAlert,

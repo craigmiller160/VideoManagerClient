@@ -9,14 +9,21 @@ const mountComponent = (props = {}) => mount(
     <VideoNavbar { ...props } />
 );
 
+const startFileScan = jest.fn();
+const manageFilters = jest.fn();
+const props = {
+    startFileScan,
+    manageFilters
+};
+
 describe('VideoNavbar', () => {
     it('renders successfully', () => {
-        const component = mountComponent();
+        const component = mountComponent(props);
         expect(toJson(component.find('VideoNavbar'))).toMatchSnapshot();
     });
 
     it('toggles the collapse open and closed', () => {
-        const navbar = mountComponent();
+        const navbar = mountComponent(props);
         const toggle = navbar.find('VideoNavbar NavbarToggler');
 
         expect(navbar.state()).toEqual(expect.objectContaining({
@@ -29,10 +36,16 @@ describe('VideoNavbar', () => {
     });
 
     it('Starts file scan', () => {
-        const startFileScan = jest.fn();
-        const component = mountComponent({ startFileScan });
+        const component = mountComponent(props);
         const scanDirectoryBtn = component.find('NavLink#scanDirectory');
         scanDirectoryBtn.simulate('click');
-        expect(startFileScan).toHaveBeenCalledTimes(1);
+        expect(startFileScan).toHaveBeenCalled();
+    });
+
+    it('Manages filters', () => {
+        const component = mountComponent(props);
+        const manageFiltersBtn = component.find('NavLink#manageFilters');
+        manageFiltersBtn.simulate('click');
+        expect(manageFilters).toHaveBeenCalled()
     });
 });

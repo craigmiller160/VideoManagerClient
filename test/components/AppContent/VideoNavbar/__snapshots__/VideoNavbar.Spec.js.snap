@@ -3,6 +3,8 @@
 exports[`VideoNavbar renders successfully 1`] = `
 <VideoNavbar
   isScanning={false}
+  manageFilters={[MockFunction]}
+  startFileScan={[MockFunction]}
 >
   <Navbar
     color="dark"
