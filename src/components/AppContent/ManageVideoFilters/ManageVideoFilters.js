@@ -10,6 +10,7 @@ import {
     showAddSeriesModal,
     showAddStarModal, showEditCategoryModal, showEditSeriesModal, showEditStarModal
 } from 'store/filterInputModal/filterInputModal.actions';
+import { saveFilterChanges } from 'store/filterInputModal/filterInputModal.actions';
 
 const ListElement = ({ value, label }) => (
     <p key={ value } className={ classes['list-item'] } >{ label }</p>
@@ -118,6 +119,7 @@ const ManageVideoFilters = (props) => {
                 close={ hideFilterModal }
                 type={ type }
                 action={ action }
+                submit={ saveFilterChanges }
             />
         </>
     );
@@ -135,10 +137,11 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     showAddCategoryModal: () => showAddCategoryModal(),
     showAddSeriesModal: () => showAddSeriesModal(),
     showAddStarModal: () => showAddStarModal(),
-    showEditCategoryModal: () => showEditCategoryModal(),
-    showEditSeriesModal: () => showEditSeriesModal(),
-    showEditStarModal: () => showEditStarModal(),
-    hideFilterModal: () => hideFilterModal()
+    showEditCategoryModal,
+    showEditSeriesModal,
+    showEditStarModal,
+    hideFilterModal: () => hideFilterModal(),
+    saveFilterChanges
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageVideoFilters);

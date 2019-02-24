@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal as ReactModal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import Form from 'components/UI/form/Form/Form';
 
 const Modal = (props) => {
     const {
@@ -9,14 +10,13 @@ const Modal = (props) => {
         children,
         modalProps,
         modalBtns,
-        close
+        close,
+        form
     } = props;
 
-    return (
-        <ReactModal
-            isOpen={ open }
-            { ...modalProps }
-        >
+    const hasForm = form && form.name;
+    const modalContent = (
+        <>
             <ModalHeader
                 toggle={ close }
             >
@@ -30,6 +30,7 @@ const Modal = (props) => {
                     <Button
                         key={ index }
                         color={ btn.color }
+                        type={ btn.type }
                         onClick={ (event) => {
                             if (btn.closeModal) {
                                 close();
@@ -44,6 +45,27 @@ const Modal = (props) => {
                     </Button>
                 )) }
             </ModalFooter>
+        </>
+    );
+
+    return (
+        <ReactModal
+            isOpen={ open }
+            { ...modalProps }
+        >
+            {
+                hasForm &&
+                    <Form
+                        form={ form.name }
+                        handleSubmit={ form.handleSubmit }
+                    >
+                        { modalContent }
+                    </Form>
+            }
+            {
+                !hasForm &&
+                    modalContent
+            }
         </ReactModal>
     );
 };
@@ -59,9 +81,14 @@ Modal.propTypes = {
     close: PropTypes.func.isRequired,
     title: PropTypes.string,
     modalProps: PropTypes.shape(ReactModal.propTypes),
+    form: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        handleSubmit: PropTypes.func
+    }),
     modalBtns: PropTypes.arrayOf(PropTypes.shape({
         color: PropTypes.string,
         text: PropTypes.string,
+        type: PropTypes.string,
         onClick: PropTypes.func,
         closeModal: PropTypes.bool
     }))

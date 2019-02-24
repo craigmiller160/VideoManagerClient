@@ -1,13 +1,9 @@
 import React from 'react';
 import Modal from 'components/UI/Modal/Modal';
-import Form from 'components/UI/form/Form/Form';
 import PropTypes from 'prop-types';
 import Input from 'components/UI/form/Input/Input';
-import { CATEGORY_TYPE, SERIES_TYPE, STAR_TYPE } from '../../../store/filterInputModal/filterInputModal.reducer';
 
 const FORM_NAME = 'filterInputForm';
-export const ACTION_ADD = 'Add';
-export const ACTION_EDIT = 'Edit';
 
 const FilterInputModal = (props) => {
     const {
@@ -18,24 +14,34 @@ const FilterInputModal = (props) => {
         action
     } = props;
 
+    const modalBtns = [
+        {
+            color: 'success',
+            text: 'Save',
+            type: 'submit',
+            closeModal: true
+        },
+        {
+            color: 'info',
+            text: 'Cancel',
+            closeModal: true
+        }
+    ];
+
     return (
         <Modal
             open={ open }
             close={ close }
             title={ `${action} ${type}` }
+            modalBtns={ modalBtns }
+            form={ {
+                name: FORM_NAME,
+                handleSubmit: submit
+            } }
         >
-            <Form
-                form={ FORM_NAME }
-                handleSubmit={ submit }
-            >
-                <Input label="Input" name="input" />
-            </Form>
+            <Input label={ `${type} Name` } name="name" />
         </Modal>
     );
-};
-
-FilterInputModal.defaultProps = {
-    action: ACTION_ADD
 };
 
 FilterInputModal.propTypes = {
