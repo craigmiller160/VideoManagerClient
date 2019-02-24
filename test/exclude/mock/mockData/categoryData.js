@@ -9,3 +9,4 @@ export const BASE_CATEGORY_FILTERS = [
 ];
 
 export const NEW_CATEGORY = { categoryId: 3, categoryName: 'ThirdCategory' };
+export const NEW_CATEGORY_FILTER = { value: NEW_CATEGORY.categoryId, label: NEW_CATEGORY.categoryName };

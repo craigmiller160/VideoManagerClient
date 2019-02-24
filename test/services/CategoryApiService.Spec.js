@@ -3,7 +3,7 @@ import API from '../../src/services/API';
 import MockAdapter from 'axios-mock-adapter';
 import { BASE_CATEGORIES, NEW_CATEGORY } from '../exclude/mock/mockData/categoryData';
 import {
-    mockAddCategory,
+    mockAddNewCategory,
     mockDeleteCategory,
     mockGetAllCategories,
     mockUpdateCategory
@@ -14,7 +14,7 @@ const mockApi = new MockAdapter(API);
 beforeEach(() => {
     mockApi.reset();
     mockGetAllCategories(mockApi);
-    mockAddCategory(mockApi);
+    mockAddNewCategory(mockApi);
     mockUpdateCategory(mockApi);
     mockDeleteCategory(mockApi);
 });
@@ -46,7 +46,7 @@ describe('CategoryApiService', () => {
 
     it('Update Category', async () => {
         try {
-            const result = await CategoryApiService.updateCategory(1, NEW_CATEGORY);
+            const result = await CategoryApiService.updateCategory(3, NEW_CATEGORY);
             expect(result.status).toEqual(200);
             expect(result.data).toEqual(NEW_CATEGORY);
         }

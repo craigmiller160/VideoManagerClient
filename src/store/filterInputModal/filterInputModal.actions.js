@@ -37,16 +37,15 @@ export const saveFilterChanges = (filter) => async (dispatch, getState) => {
 };
 
 const saveCategoryChanges = async (filter, action, dispatch) => {
+    const category = {
+        categoryId: filter.value,
+        categoryName: filter.label
+    };
     if (ADD_ACTION === action) {
-        await CategoryApiService.addCategory({
-            categoryName: filter.label
-        });
+        await CategoryApiService.addCategory(category);
     }
     else {
-        await CategoryApiService.updateCategory(filter.value, {
-            categoryId: filter.value,
-            categoryName: filter.label
-        });
+        await CategoryApiService.updateCategory(category.categoryId, category);
     }
     await dispatch(loadCategoryOptions());
 };

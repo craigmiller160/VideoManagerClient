@@ -5,13 +5,13 @@ export const mockGetAllCategories = (mockApi) => {
         .reply(200, BASE_CATEGORIES);
 };
 
-export const mockAddCategory = (mockApi) => {
+export const mockAddNewCategory = (mockApi) => {
     mockApi.onPost('/categories', NEW_CATEGORY)
         .reply(200, NEW_CATEGORY);
 };
 
 export const mockUpdateCategory = (mockApi) => {
-    mockApi.onPut('/categories/1', NEW_CATEGORY)
+    mockApi.onPut('/categories/3', NEW_CATEGORY)
         .reply(200, NEW_CATEGORY);
 };
 
