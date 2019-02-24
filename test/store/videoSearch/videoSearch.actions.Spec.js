@@ -1,6 +1,13 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { setCategories, setSeries, setStars, loadFilterOptions, setSearching } from "../../../src/store/videoSearch/videoSearch.actions";
+import {
+    setCategories,
+    setSeries,
+    setStars,
+    loadFilterOptions,
+    setSearching,
+    loadCategoryOptions, loadSeriesOptions, loadStarOptions
+} from "../../../src/store/videoSearch/videoSearch.actions";
 import MockAdapter from 'axios-mock-adapter';
 import API from '../../../src/services/API';
 import { BASE_CATEGORIES, BASE_CATEGORY_FILTERS } from '../../exclude/mock/mockData/categoryData';
@@ -69,23 +76,60 @@ describe('videoSearch.actions', () => {
             store = mockStore({ videoSearch: videoSearchInitState });
         });
 
-        describe('loadFilterOptions action', () => {
-            it('loads the data', async () => {
-                const expectedActions = [
-                    { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS },
-                    { type: setSeries.toString(), payload: BASE_SERIES_FILTERS },
-                    { type: setStars.toString(), payload: BASE_STAR_FILTERS }
-                ];
+        it('loadFilterOptions', async () => {
+            const expectedActions = [
+                { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS },
+                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS },
+                { type: setStars.toString(), payload: BASE_STAR_FILTERS }
+            ];
 
-                try {
-                    await store.dispatch(loadFilterOptions());
-                }
-                catch (ex) {
-                    console.log('Error', ex);
-                    expect(ex).toBeUndefined();
-                }
-                expect(store.getActions()).toEqual(expectedActions);
-            });
+            try {
+                await store.dispatch(loadFilterOptions());
+            }
+            catch (ex) {
+                console.log('Error', ex);
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+
+        it('loadCategoryOptions', async () => {
+            const expectedActions = [
+                { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS }
+            ];
+            try {
+                await store.dispatch(loadCategoryOptions());
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+
+        it('loadSeriesOptions', async () => {
+            const expectedActions = [
+                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS }
+            ];
+            try {
+                await store.dispatch(loadSeriesOptions());
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+
+        it('loadStarOptions', async () => {
+            const expectedActions = [
+                { type: setStars.toString(), payload: BASE_STAR_FILTERS }
+            ];
+            try {
+                await store.dispatch(loadStarOptions());
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
         });
     });
 });

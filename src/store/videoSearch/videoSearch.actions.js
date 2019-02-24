@@ -6,24 +6,35 @@ import { showErrorAlert } from '../alert/alert.actions';
 
 export const loadFilterOptions = () => async (dispatch) => {
     try {
-        let res = await CategoryApiService.getAllCategories();
-        const categories = (res.data || [])
-            .map(category => ({ value: category.categoryId, label: category.categoryName }));
-        res = await SeriesApiService.getAllSeries();
-        const series = (res.data || [])
-            .map(s => ({ value: s.seriesId, label: s.seriesName }));
-        res = await StarApiService.getAllStars();
-        const stars = (res.data || [])
-            .map(star => ({ value: star.starId, label: star.starName }));
-
-        dispatch(setCategories(categories));
-        dispatch(setSeries(series));
-        dispatch(setStars(stars));
+        await dispatch(loadCategoryOptions());
+        await dispatch(loadSeriesOptions());
+        await dispatch(loadStarOptions());
     }
     catch (ex) {
         console.log(ex);
         dispatch(showErrorAlert(ex.message));
     }
+};
+
+export const loadCategoryOptions = () => async (dispatch) => {
+    const res = await CategoryApiService.getAllCategories();
+    const categories = (res.data || [])
+        .map(category => ({ value: category.categoryId, label: category.categoryName }));
+    dispatch(setCategories(categories));
+};
+
+export const loadSeriesOptions = () => async (dispatch) => {
+    const res = await SeriesApiService.getAllSeries();
+    const series = (res.data || [])
+        .map(s => ({ value: s.seriesId, label: s.seriesName }));
+    dispatch(setSeries(series));
+};
+
+export const loadStarOptions = () => async (dispatch) => {
+    const res = await StarApiService.getAllStars();
+    const stars = (res.data || [])
+        .map(star => ({ value: star.starId, label: star.starName }));
+    dispatch(setStars(stars));
 };
 
 export const setCategories = createAction('setCategories');
