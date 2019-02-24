@@ -47,4 +47,8 @@ describe('filterInputModal.actions', () => {
         const action = hideFilterModal();
         expect(action).toEqual(expectedAction);
     });
+
+    describe('saveFilterChanges action', () => {
+        // TODO finish this
+    });
 });
