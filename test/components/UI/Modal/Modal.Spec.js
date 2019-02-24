@@ -1,12 +1,16 @@
 import React from 'react';
 import Modal from 'components/UI/Modal/Modal';
 import { mount } from 'enzyme';
+import createMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
+
+const closeFn = jest.fn();
+const store = createMockStore()({});
 
 describe('Modal component', () => {
     it('renders correctly', () => {
         const title = 'Test Modal';
         const bodyText = 'Hello World';
-        const closeFn = jest.fn();
         const modalBtns = [
             {
                 color: 'primary',
@@ -40,5 +44,24 @@ describe('Modal component', () => {
         button.simulate('click');
         expect(modalBtns[0].onClick).toHaveBeenCalledTimes(1);
         expect(closeFn).toHaveBeenCalledTimes(2);
+
+        expect(component.find('form')).toHaveLength(0);
+    });
+
+    it('renders with form', () => {
+        const component = mount(
+            <Provider store={ store }>
+                <Modal
+                    open
+                    close={ closeFn }
+                    form={ {
+                        name: 'TestForm'
+                    } }
+                >
+                    <p>Hello World</p>
+                </Modal>
+            </Provider>
+        );
+        expect(component.find('form')).toHaveLength(1);
     });
 });
