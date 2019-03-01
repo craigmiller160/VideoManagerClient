@@ -42,8 +42,8 @@ Input.defaultProps = {
 
 Input.propTypes = {
     type: PropTypes.string,
-    label: PropTypes.string.isRequired,
-    name: PropTypes.string
+    label: PropTypes.string,
+    name: PropTypes.string.isRequired
 };
 
 export default createField(Input);
