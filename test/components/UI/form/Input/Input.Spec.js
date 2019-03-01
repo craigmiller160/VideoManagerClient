@@ -30,4 +30,8 @@ describe('Input', () => {
         result.simulate('change', {target: {value: 'My New Value'}});
         expect(value).toEqual({target: {value: 'My New Value'}});
     });
+
+    it('is invisible if type is hidden', () => {
+        throw new Error('Finish this test');
+    });
 });

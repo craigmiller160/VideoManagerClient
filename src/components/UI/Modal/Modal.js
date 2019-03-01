@@ -58,6 +58,7 @@ const Modal = (props) => {
                     <Form
                         form={ form.name }
                         handleSubmit={ form.handleSubmit }
+                        initialValues={ form.initialValues }
                     >
                         { modalContent }
                     </Form>
@@ -73,7 +74,10 @@ const Modal = (props) => {
 Modal.defaultProps = {
     title: 'Modal',
     modalProps: {},
-    modalBtns: []
+    modalBtns: [],
+    form: {
+        initialValues: {}
+    }
 };
 
 Modal.propTypes = {
@@ -83,7 +87,8 @@ Modal.propTypes = {
     modalProps: PropTypes.shape(ReactModal.propTypes),
     form: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        handleSubmit: PropTypes.func
+        handleSubmit: PropTypes.func,
+        initialValues: PropTypes.object
     }),
     modalBtns: PropTypes.arrayOf(PropTypes.shape({
         color: PropTypes.string,

@@ -14,8 +14,13 @@ const Input = (props) => {
     } = props;
 
     const id = newid();
+    const classes = [formStyles['input-label']];
+    if ('hidden' === type.toLowerCase()) {
+        classes.push(formStyles.hidden);
+    }
+
     return (
-        <FormGroup className={ formStyles['input-label'] }>
+        <FormGroup className={ classes.join(' ') }>
             <Label
                 for={ id }
             >

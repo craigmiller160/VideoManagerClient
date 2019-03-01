@@ -63,5 +63,8 @@ describe('Modal component', () => {
             </Provider>
         );
         expect(component.find('form')).toHaveLength(1);
+
+        throw new Error('Finish this test');
+        // TODO include submit action to test that behavior
     });
 });
