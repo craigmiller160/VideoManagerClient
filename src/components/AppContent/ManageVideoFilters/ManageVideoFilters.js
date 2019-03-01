@@ -26,7 +26,8 @@ const ManageVideoFilters = (props) => {
         showEditCategoryModal,
         showEditSeriesModal,
         showEditStarModal,
-        hideFilterModal
+        hideFilterModal,
+        saveFilterChanges
     } = props;
 
     return (
@@ -119,7 +120,9 @@ const ManageVideoFilters = (props) => {
                 close={ hideFilterModal }
                 type={ type }
                 action={ action }
-                submit={ saveFilterChanges }
+                submit={ (value) => {
+                    console.log('Form', value); // TODO delete this
+                } }
             />
         </>
     );

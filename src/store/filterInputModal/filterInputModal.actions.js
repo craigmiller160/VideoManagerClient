@@ -11,10 +11,10 @@ import SeriesApiService from '../../services/SeriesApiService';
 import StarApiService from '../../services/StarApiService';
 
 export const saveFilterChanges = (filter) => async (dispatch, getState) => {
-    console.log(filter); // TODO delete this
     const state = getState();
     const type = state.filterInputModal.type;
     const action = state.filterInputModal.action;
+    console.log(filter, type, action); // TODO delete this
     try {
         switch (type) {
             case CATEGORY_TYPE:
