@@ -10,11 +10,20 @@ import {
 import SeriesApiService from '../../services/SeriesApiService';
 import StarApiService from '../../services/StarApiService';
 
-export const saveFilterChanges = (filter) => async (dispatch, getState) => {
+export const saveFilterChanges = () => async (dispatch, getState) => {
     const state = getState();
     const type = state.filterInputModal.type;
     const action = state.filterInputModal.action;
-    console.log(filter, type, action); // TODO delete this
+    if (!state.form['filterInputForm']) {
+        throw new Error('Cannot find filterInputForm in Redux store');
+    }
+
+    const form = state.form['filterInputForm'];
+    const filter = {
+        value: form.values['id'],
+        label: form.values['name']
+    };
+
     try {
         switch (type) {
             case CATEGORY_TYPE:

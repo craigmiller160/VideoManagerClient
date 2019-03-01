@@ -63,9 +63,7 @@ const handleShowEditStarModal = (state) => ({
 
 const handleHideFilterModal = (state) => ({
     ...state,
-    open: false,
-    type: '',
-    action: ''
+    open: false
 });
 
 export default createReducer(initialState, {

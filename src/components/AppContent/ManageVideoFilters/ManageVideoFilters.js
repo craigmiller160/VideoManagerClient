@@ -120,9 +120,7 @@ const ManageVideoFilters = (props) => {
                 close={ hideFilterModal }
                 type={ type }
                 action={ action }
-                submit={ (value) => {
-                    console.log('Form', value); // TODO delete this
-                } }
+                submit={ saveFilterChanges }
             />
         </>
     );

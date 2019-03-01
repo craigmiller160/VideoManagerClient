@@ -28,6 +28,9 @@ const FilterInputModal = (props) => {
         }
     ];
 
+    // TODO in the long run, this is how we pass in the ID for editing existing entries
+    const initialValues = {};
+
     return (
         <Modal
             open={ open }
@@ -36,10 +39,18 @@ const FilterInputModal = (props) => {
             modalBtns={ modalBtns }
             form={ {
                 name: FORM_NAME,
-                handleSubmit: submit
+                handleSubmit: submit,
+                initialValues
             } }
         >
-            <Input label={ `${type} Name` } name="name" />
+            <Input
+                label={ `${type} Name` }
+                name="name"
+            />
+            <Input
+                type="hidden"
+                name="id"
+            />
         </Modal>
     );
 };
