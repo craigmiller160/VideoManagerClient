@@ -34,7 +34,8 @@ const ReduxFormForm = reduxForm({})(Form);
 ReduxFormForm.propTypes = {
     form: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func,
-    className: PropTypes.string
+    className: PropTypes.string,
+    initialValues: PropTypes.object
 };
 
 export default ReduxFormForm;
