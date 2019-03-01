@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from './store/store';
 import AppContent from './components/AppContent/AppContent';
+import './App.scss';
 
 class App extends Component {
 
