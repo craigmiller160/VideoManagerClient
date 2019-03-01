@@ -9,7 +9,6 @@ const Input = (props) => {
     const {
         label,
         type,
-        name,
         input,
     } = props;
 
@@ -30,7 +29,7 @@ const Input = (props) => {
                 id={ id }
                 { ...input }
                 type={ type }
-                name={ name }
+                name={ input.name }
             />
         </FormGroup>
     );
@@ -43,7 +42,16 @@ Input.defaultProps = {
 Input.propTypes = {
     type: PropTypes.string,
     label: PropTypes.string,
+    input: PropTypes.shape({
+        name: PropTypes.string.isRequired
+    })
+};
+
+const Field = createField(Input);
+Field.propTypes = {
+    type: PropTypes.string,
+    label: PropTypes.string,
     name: PropTypes.string.isRequired
 };
 
-export default createField(Input);
+export default Field;
