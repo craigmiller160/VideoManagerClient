@@ -12,6 +12,7 @@ import {
 } from 'store/filterInputModal/filterInputModal.actions';
 import { saveFilterChanges } from 'store/filterInputModal/filterInputModal.actions';
 import FilterListItem from './FilterListItem/FilterListItem';
+import { getSelectedFilter } from 'store/filterInputModal/filterInputModal.selectors';
 
 const ManageVideoFilters = (props) => {
     const {
@@ -24,7 +25,8 @@ const ManageVideoFilters = (props) => {
         showEditSeriesModal,
         showEditStarModal,
         hideFilterModal,
-        saveFilterChanges
+        saveFilterChanges,
+        selectedFilter
     } = props;
 
     return (
@@ -46,12 +48,12 @@ const ManageVideoFilters = (props) => {
                             <Row>
                                 <Col className={ classes.scroll }>
                                     {
-                                        categories.map(({ value, label }) => (
+                                        categories.map(({ value, label }, index) => (
                                             <FilterListItem
                                                 key={ value }
                                                 label={ label }
                                                 value={ value }
-                                                click={ showEditCategoryModal }
+                                                click={ () => showEditCategoryModal(index) }
                                             />
                                         ))
                                     }
@@ -77,12 +79,11 @@ const ManageVideoFilters = (props) => {
                             <Row>
                                 <Col className={ classes.scroll }>
                                     {
-                                        series.map(({ value, label }) => (
+                                        series.map(({ value, label }, index) => (
                                             <FilterListItem
                                                 key={ value }
                                                 label={ label }
-                                                value={ value }
-                                                click={ showEditSeriesModal }
+                                                click={ () => showEditSeriesModal(index) }
                                             />
                                         ))
                                     }
@@ -108,12 +109,11 @@ const ManageVideoFilters = (props) => {
                             <Row>
                                 <Col className={ classes.scroll }>
                                     {
-                                        stars.map(({ value, label }) => (
+                                        stars.map(({ value, label }, index) => (
                                             <FilterListItem
                                                 key={ value }
                                                 label={ label }
-                                                value={ value }
-                                                click={ showEditStarModal }
+                                                click={ () => showEditStarModal(index) }
                                             />
                                         ))
                                     }
@@ -139,6 +139,7 @@ const ManageVideoFilters = (props) => {
                 type={ type }
                 action={ action }
                 submit={ saveFilterChanges }
+                value={ selectedFilter }
             />
         </>
     );
@@ -148,7 +149,8 @@ const mapStateToProps = (state) => ({
     open: state.filterInputModal.open,
     type: state.filterInputModal.type,
     action: state.filterInputModal.action,
-    filters: state.videoSearch.filters
+    filters: state.videoSearch.filters,
+    selectedFilter: getSelectedFilter(state)
 });
 
 // Actions are mapped this way because SyntheticEvents were being passed into them which caused console errors

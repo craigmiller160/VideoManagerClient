@@ -11,7 +11,8 @@ const FilterInputModal = (props) => {
         close,
         submit,
         type,
-        action
+        action,
+        value
     } = props;
 
     const modalBtns = [
@@ -28,9 +29,6 @@ const FilterInputModal = (props) => {
         }
     ];
 
-    // TODO in the long run, this is how we pass in the ID for editing existing entries
-    const initialValues = {};
-
     return (
         <Modal
             open={ open }
@@ -40,7 +38,10 @@ const FilterInputModal = (props) => {
             form={ {
                 name: FORM_NAME,
                 handleSubmit: submit,
-                initialValues
+                initialValues: {
+                    name: value.label,
+                    id: value.value
+                }
             } }
         >
             <Input
@@ -55,13 +56,20 @@ const FilterInputModal = (props) => {
     );
 };
 
+FilterInputModal.defaultProps = {
+    value: {}
+};
+
 FilterInputModal.propTypes = {
     open: PropTypes.bool,
     close: PropTypes.func,
     submit: PropTypes.func,
     type: PropTypes.string,
     action: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.shape({
+        value: PropTypes.number,
+        label: PropTypes.string
+    })
 };
 
 export default FilterInputModal;

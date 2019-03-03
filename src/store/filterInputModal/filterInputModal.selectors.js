@@ -8,6 +8,10 @@ export const getSelectedFilter = createSelector(
         'filterInputModal.index'
     ],
     (filters, type, index) => {
+        if (!type) {
+            return {};
+        }
+
         switch (type) {
             case CATEGORY_TYPE: return filters.categories[index];
             case SERIES_TYPE: return filters.series[index];

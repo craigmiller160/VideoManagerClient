@@ -5,12 +5,11 @@ import classes from './FilterListItem.scss';
 const FilterListItem = (props) => {
     const {
         label,
-        value,
         click
     } = props;
     return (
         <p
-            onClick={ () => click(value) }
+            onClick={ click }
             className={ classes.FilterListItem }
         >
             { label }
@@ -19,8 +18,7 @@ const FilterListItem = (props) => {
 };
 FilterListItem.propTypes = {
     label: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired,
-    click: PropTypes.func.isRequired
+    click: PropTypes.func
 };
 
 export default FilterListItem;
