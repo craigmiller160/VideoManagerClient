@@ -11,9 +11,10 @@ import {
     showAddStarModal, showEditCategoryModal, showEditSeriesModal, showEditStarModal
 } from 'store/filterInputModal/filterInputModal.actions';
 import { saveFilterChanges } from 'store/filterInputModal/filterInputModal.actions';
+import FilterListItem from './FilterListItem/FilterListItem';
 
-const ListElement = ({ value, label }) => (
-    <p key={ value } className={ classes['list-item'] } >{ label }</p>
+const createListItem = ({ value, label }) => (
+    <FilterListItem key={ value } label={ label } />
 );
 
 const ManageVideoFilters = (props) => {
@@ -49,7 +50,7 @@ const ManageVideoFilters = (props) => {
                             <Row>
                                 <Col className={ classes.scroll }>
                                     {
-                                        categories.map(ListElement)
+                                        categories.map(createListItem)
                                     }
                                 </Col>
                             </Row>
@@ -73,7 +74,7 @@ const ManageVideoFilters = (props) => {
                             <Row>
                                 <Col className={ classes.scroll }>
                                     {
-                                        series.map(ListElement)
+                                        series.map(createListItem)
                                     }
                                 </Col>
                             </Row>
@@ -97,7 +98,7 @@ const ManageVideoFilters = (props) => {
                             <Row>
                                 <Col className={ classes.scroll }>
                                     {
-                                        stars.map(ListElement)
+                                        stars.map(createListItem)
                                     }
                                 </Col>
                             </Row>
