@@ -60,7 +60,8 @@ FilterInputModal.propTypes = {
     close: PropTypes.func,
     submit: PropTypes.func,
     type: PropTypes.string,
-    action: PropTypes.string
+    action: PropTypes.string,
+    value: PropTypes.string
 };
 
 export default FilterInputModal;
