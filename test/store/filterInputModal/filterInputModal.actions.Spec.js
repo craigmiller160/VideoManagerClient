@@ -48,20 +48,20 @@ describe('filterInputModal.actions', () => {
     });
 
     it('showEditCategoryModal action', () => {
-        const expectedAction = { type: showEditCategoryModal.toString() };
-        const action = showEditCategoryModal();
+        const expectedAction = { type: showEditCategoryModal.toString(), payload: 1 };
+        const action = showEditCategoryModal(1);
         expect(action).toEqual(expectedAction);
     });
 
     it('showEditSeriesModal action', () => {
-        const expectedAction = { type: showEditSeriesModal.toString() };
-        const action = showEditSeriesModal();
+        const expectedAction = { type: showEditSeriesModal.toString(), payload: 1 };
+        const action = showEditSeriesModal(1);
         expect(action).toEqual(expectedAction);
     });
 
     it('showEditStarModal action', () => {
-        const expectedAction = { type: showEditStarModal.toString() };
-        const action = showEditStarModal();
+        const expectedAction = { type: showEditStarModal.toString(), payload: 1 };
+        const action = showEditStarModal(1);
         expect(action).toEqual(expectedAction);
     });
 

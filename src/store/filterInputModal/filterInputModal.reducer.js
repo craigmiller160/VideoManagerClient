@@ -16,7 +16,8 @@ export const EDIT_ACTION = 'Edit';
 export const initialState = {
     open: false,
     type: '',
-    action: ''
+    action: '',
+    index: -1
 };
 
 const handleShowAddCategoryModal = (state) => ({
@@ -40,25 +41,28 @@ const handleShowAddStarModal = (state) => ({
     action: ADD_ACTION
 });
 
-const handleShowEditCategoryModal = (state) => ({
+const handleShowEditCategoryModal = (state, { payload }) => ({
     ...state,
     open: true,
     type: CATEGORY_TYPE,
-    action: EDIT_ACTION
+    action: EDIT_ACTION,
+    index: payload
 });
 
-const handleShowEditSeriesModal = (state) => ({
+const handleShowEditSeriesModal = (state, { payload }) => ({
     ...state,
     open: true,
     type: SERIES_TYPE,
-    action: EDIT_ACTION
+    action: EDIT_ACTION,
+    index: payload
 });
 
-const handleShowEditStarModal = (state) => ({
+const handleShowEditStarModal = (state, { payload }) => ({
     ...state,
     open: true,
     type: STAR_TYPE,
-    action: EDIT_ACTION
+    action: EDIT_ACTION,
+    index: payload
 });
 
 const handleHideFilterModal = (state) => ({

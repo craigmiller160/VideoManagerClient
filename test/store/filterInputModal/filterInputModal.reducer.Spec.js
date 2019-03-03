@@ -54,9 +54,10 @@ describe('filterInputModal.reducer', () => {
             ...filterInputInitState,
             open: true,
             type: CATEGORY_TYPE,
-            action: EDIT_ACTION
+            action: EDIT_ACTION,
+            index: 1
         };
-        const action = { type: showEditCategoryModal.toString() };
+        const action = { type: showEditCategoryModal.toString(), payload: 1 };
         expect(filterInputReducer(filterInputInitState, action)).toEqual(expectedState);
     });
 
@@ -65,9 +66,10 @@ describe('filterInputModal.reducer', () => {
             ...filterInputInitState,
             open: true,
             type: SERIES_TYPE,
-            action: EDIT_ACTION
+            action: EDIT_ACTION,
+            index: 1
         };
-        const action = { type: showEditSeriesModal.toString() };
+        const action = { type: showEditSeriesModal.toString(), payload: 1 };
         expect(filterInputReducer(filterInputInitState, action)).toEqual(expectedState);
     });
 
@@ -76,20 +78,25 @@ describe('filterInputModal.reducer', () => {
             ...filterInputInitState,
             open: true,
             type: STAR_TYPE,
-            action: EDIT_ACTION
+            action: EDIT_ACTION,
+            index: 1
         };
-        const action = { type: showEditStarModal.toString() };
+        const action = { type: showEditStarModal.toString(), payload: 1 };
         expect(filterInputReducer(filterInputInitState, action)).toEqual(expectedState);
     });
 
     it('hideFilterModal action', () => {
+        const initState = {
+            open: true,
+            type: 'foo',
+            action: 'bar',
+            index: 1
+        };
         const expectedState = {
-            ...filterInputInitState,
-            open: false,
-            type: '',
-            action: ''
+            ...initState,
+            open: false
         };
         const action = { type: hideFilterModal.toString() };
-        expect(filterInputReducer(filterInputInitState, action)).toEqual(expectedState);
+        expect(filterInputReducer(initState, action)).toEqual(expectedState);
     });
 });
