@@ -1,6 +1,14 @@
 import { initialState as videoSearchInitState } from 'store/videoSearch/videoSearch.reducer';
-import { CATEGORY_TYPE, initialState as filterInputInitState } from 'store/filterInputModal/filterInputModal.reducer';
+import {
+    CATEGORY_TYPE,
+    initialState as filterInputInitState,
+    SERIES_TYPE, STAR_TYPE
+} from 'store/filterInputModal/filterInputModal.reducer';
 import { getSelectedFilter } from 'store/filterInputModal/filterInputModal.selectors';
+
+const category = { value: 1, label: 'Cat1' };
+const series = { value: 1, label: 'Series1' };
+const star = { value: 1, label: 'Star1' };
 
 describe('filterInputModal.selectors', () => {
     let state;
@@ -9,28 +17,35 @@ describe('filterInputModal.selectors', () => {
         state = {
             videoSearch: {
                 ...videoSearchInitState,
-                categories: videoSearchInitState.filters.categories.push({ value: 1, label: 'Cat1' })
+                filters: {
+                    ...videoSearchInitState.filters,
+                    categories: videoSearchInitState.filters.categories.concat(category),
+                    series: videoSearchInitState.filters.series.concat(series),
+                    stars: videoSearchInitState.filters.stars.concat(star)
+                }
             },
             filterInputModal: filterInputInitState
         };
-        // state.videoSearch.filters.categories.push({ value: 1, label: 'Cat1' });
-        state.videoSearch.filters.series.push({ value: 1, label: 'Series1' });
-        state.videoSearch.filters.stars.push({ value: 1, label: 'Star1' });
         state.filterInputModal.index = 0;
     });
 
     describe('getSelectedFilter', () => {
         it('gets selected category', () => {
             state.filterInputModal.type = CATEGORY_TYPE;
-            getSelectedFilter(state);
+            const result = getSelectedFilter(state);
+            expect(result).toEqual(category);
         });
 
         it('gets selected series', () => {
-            throw new Error('Finish this');
+            state.filterInputModal.type = SERIES_TYPE;
+            const result = getSelectedFilter(state);
+            expect(result).toEqual(series);
         });
 
         it('gets selected star', () => {
-            throw new Error('Finish this');
+            state.filterInputModal.type = STAR_TYPE;
+            const result = getSelectedFilter(state);
+            expect(result).toEqual(star);
         });
     });
 });
