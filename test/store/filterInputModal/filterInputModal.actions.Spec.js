@@ -279,6 +279,10 @@ describe('filterInputModal.actions', () => {
     });
 
     describe('deleteFilter action', () => {
+        it('fails without type and selected filter', () => {
+            throw new Error('Finish this');
+        });
+
         it('deletes category', () => {
             throw new Error('Finish this');
         });

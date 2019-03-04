@@ -9,10 +9,40 @@ import {
 } from '../videoSearch/videoSearch.actions';
 import SeriesApiService from '../../services/SeriesApiService';
 import StarApiService from '../../services/StarApiService';
+import { getSelectedFilter } from './filterInputModal.selectors';
 
 export const deleteFilter = () => async (dispatch, getState) => {
-    // TODO finish this
-    console.log('Deleting'); // TODO delete this
+    const state = getState();
+    const type = state.filterInputModal.type;
+    const selectedFilter = getSelectedFilter(state);
+
+    if (!type || !selectedFilter) {
+        dispatch(showErrorAlert('Invalid state for deleting a filter'));
+        return;
+    }
+
+    try {
+        switch (type) {
+            case CATEGORY_TYPE:
+                await CategoryApiService.deleteCategory(selectedFilter.value);
+                await dispatch(loadCategoryOptions());
+                break;
+            case SERIES_TYPE:
+                await SeriesApiService.deleteSeries(selectedFilter.value);
+                await dispatch(loadSeriesOptions());
+                break;
+            case STAR_TYPE:
+                await StarApiService.deleteStar(selectedFilter.value);
+                await dispatch(loadStarOptions());
+                break;
+            default:
+                dispatch(showErrorAlert(`Invalid filter type ${type}`));
+        }
+    }
+    catch (ex) {
+        console.log(ex);
+        dispatch(showErrorAlert(ex.message));
+    }
 };
 
 export const saveFilterChanges = () => async (dispatch, getState) => {
