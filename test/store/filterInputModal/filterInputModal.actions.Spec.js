@@ -74,6 +74,32 @@ describe('filterInputModal.actions', () => {
     describe('saveFilterChanges action', () => {
         let store;
 
+        const getStateFormValues = (type) => {
+            switch (type) {
+                case CATEGORY_TYPE: return NEW_CATEGORY_FILTER;
+                case SERIES_TYPE: return NEW_SERIES_FILTER;
+                case STAR_TYPE: return NEW_STAR_FILTER;
+                default:
+                    throw new Error(`Invalid type: ${type}`);
+            }
+        };
+
+        const createState = (action, type) => ({
+            filterInputModal: {
+                ...filterInputInitState,
+                type,
+                action
+            },
+            form: {
+                filterInputForm: {
+                    values: {
+                        id: getStateFormValues(type).value,
+                        name: getStateFormValues(type).label
+                    }
+                }
+            }
+        });
+
         beforeEach(() => {
             mockApi.reset();
 
@@ -91,12 +117,7 @@ describe('filterInputModal.actions', () => {
         });
 
         it('add new category', async () => {
-            const initState = {
-                ...filterInputInitState,
-                type: CATEGORY_TYPE,
-                action: ADD_ACTION
-            };
-            store = mockStore({ filterInputModal: initState });
+            store = mockStore(createState(ADD_ACTION, CATEGORY_TYPE));
             const expectedActions = [
                 { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS }
             ];
@@ -123,12 +144,7 @@ describe('filterInputModal.actions', () => {
         });
 
         it('edit category', async () => {
-            const initState = {
-                ...filterInputInitState,
-                type: CATEGORY_TYPE,
-                action: EDIT_ACTION
-            };
-            store = mockStore({ filterInputModal: initState });
+            store = mockStore(createState(EDIT_ACTION, CATEGORY_TYPE));
             const expectedActions = [
                 { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS }
             ];
@@ -154,12 +170,7 @@ describe('filterInputModal.actions', () => {
         });
 
         it('add new series', async () => {
-            const initState = {
-                ...filterInputInitState,
-                type: SERIES_TYPE,
-                action: ADD_ACTION
-            };
-            store = mockStore({ filterInputModal: initState });
+            store = mockStore(createState(ADD_ACTION, SERIES_TYPE));
             const expectedActions = [
                 { type: setSeries.toString(), payload: BASE_SERIES_FILTERS }
             ];
@@ -185,12 +196,7 @@ describe('filterInputModal.actions', () => {
         });
 
         it('edit series', async () => {
-            const initState = {
-                ...filterInputInitState,
-                type: SERIES_TYPE,
-                action: EDIT_ACTION
-            };
-            store = mockStore({ filterInputModal: initState });
+            store = mockStore(createState(EDIT_ACTION, SERIES_TYPE));
             const expectedActions = [
                 { type: setSeries.toString(), payload: BASE_SERIES_FILTERS }
             ];
@@ -216,12 +222,7 @@ describe('filterInputModal.actions', () => {
         });
 
         it('add new star', async () => {
-            const initState = {
-                ...filterInputInitState,
-                type: STAR_TYPE,
-                action: ADD_ACTION
-            };
-            store = mockStore({ filterInputModal: initState });
+            store = mockStore(createState(ADD_ACTION, STAR_TYPE));
             const expectedActions = [
                 { type: setStars.toString(), payload: BASE_STAR_FILTERS }
             ];
@@ -247,12 +248,7 @@ describe('filterInputModal.actions', () => {
         });
 
         it('edit star', async () => {
-            const initState = {
-                ...filterInputInitState,
-                type: STAR_TYPE,
-                action: EDIT_ACTION
-            };
-            store = mockStore({ filterInputModal: initState });
+            store = mockStore(createState(EDIT_ACTION, STAR_TYPE));
             const expectedActions = [
                 { type: setStars.toString(), payload: BASE_STAR_FILTERS }
             ];
