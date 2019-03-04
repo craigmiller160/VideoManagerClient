@@ -10,6 +10,11 @@ import {
 import SeriesApiService from '../../services/SeriesApiService';
 import StarApiService from '../../services/StarApiService';
 
+export const deleteFilter = () => async (dispatch, getState) => {
+    // TODO finish this
+    console.log('Deleting'); // TODO delete this
+};
+
 export const saveFilterChanges = () => async (dispatch, getState) => {
     const state = getState();
     const type = state.filterInputModal.type;

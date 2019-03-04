@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'components/UI/Modal/Modal';
 import PropTypes from 'prop-types';
 import Input from 'components/UI/form/Input/Input';
+import { EDIT_ACTION } from '../../../store/filterInputModal/filterInputModal.reducer';
 
 const FORM_NAME = 'filterInputForm';
 
@@ -12,7 +13,8 @@ const FilterInputModal = (props) => {
         submit,
         type,
         action,
-        value
+        value,
+        deleteFilter
     } = props;
 
     const modalBtns = [
@@ -29,6 +31,22 @@ const FilterInputModal = (props) => {
         }
     ];
 
+    if (EDIT_ACTION === action) {
+        modalBtns.unshift({
+            color: 'danger',
+            text: 'Delete',
+            closeModal: true,
+            onClick: deleteFilter
+        });
+    }
+
+    const initialValues = EDIT_ACTION === action ? {
+        name: value.label,
+        id: value.value
+    } : {};
+
+    // TODO make sure edit and delete changes can save
+
     return (
         <Modal
             open={ open }
@@ -38,10 +56,7 @@ const FilterInputModal = (props) => {
             form={ {
                 name: FORM_NAME,
                 handleSubmit: submit,
-                initialValues: {
-                    name: value.label,
-                    id: value.value
-                }
+                initialValues
             } }
         >
             <Input
@@ -64,6 +79,7 @@ FilterInputModal.propTypes = {
     open: PropTypes.bool,
     close: PropTypes.func,
     submit: PropTypes.func,
+    deleteFilter: PropTypes.func,
     type: PropTypes.string,
     action: PropTypes.string,
     value: PropTypes.shape({

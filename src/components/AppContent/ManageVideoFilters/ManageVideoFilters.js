@@ -8,9 +8,9 @@ import {
     hideFilterModal,
     showAddCategoryModal,
     showAddSeriesModal,
-    showAddStarModal, showEditCategoryModal, showEditSeriesModal, showEditStarModal
+    showAddStarModal, showEditCategoryModal, showEditSeriesModal, showEditStarModal,
+    deleteFilter, saveFilterChanges
 } from 'store/filterInputModal/filterInputModal.actions';
-import { saveFilterChanges } from 'store/filterInputModal/filterInputModal.actions';
 import FilterListItem from './FilterListItem/FilterListItem';
 import { getSelectedFilter } from 'store/filterInputModal/filterInputModal.selectors';
 
@@ -26,7 +26,8 @@ const ManageVideoFilters = (props) => {
         showEditStarModal,
         hideFilterModal,
         saveFilterChanges,
-        selectedFilter
+        selectedFilter,
+        deleteFilter
     } = props;
 
     return (
@@ -140,6 +141,7 @@ const ManageVideoFilters = (props) => {
                 action={ action }
                 submit={ saveFilterChanges }
                 value={ selectedFilter }
+                deleteFilter={ deleteFilter }
             />
         </>
     );
@@ -162,7 +164,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     showEditSeriesModal,
     showEditStarModal,
     hideFilterModal: () => hideFilterModal(),
-    saveFilterChanges
+    saveFilterChanges,
+    deleteFilter
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageVideoFilters);

@@ -277,4 +277,18 @@ describe('filterInputModal.actions', () => {
             }));
         });
     });
+
+    describe('deleteFilter action', () => {
+        it('deletes category', () => {
+            throw new Error('Finish this');
+        });
+
+        it('deletes series', () => {
+            throw new Error('Finish this');
+        });
+
+        it('deletes star', () => {
+            throw new Error('Finish this');
+        });
+    });
 });
