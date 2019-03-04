@@ -16,7 +16,7 @@ export const deleteFilter = () => async (dispatch, getState) => {
     const type = state.filterInputModal.type;
     const selectedFilter = getSelectedFilter(state);
 
-    if (!type || !selectedFilter) {
+    if (!type || (!selectedFilter || selectedFilter === {})) {
         dispatch(showErrorAlert('Invalid state for deleting a filter'));
         return;
     }

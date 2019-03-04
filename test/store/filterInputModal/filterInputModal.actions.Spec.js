@@ -1,5 +1,5 @@
 import {
-    hideFilterModal, saveFilterChanges,
+    hideFilterModal, saveFilterChanges, deleteFilter,
     showAddCategoryModal,
     showAddSeriesModal,
     showAddStarModal, showEditCategoryModal, showEditSeriesModal, showEditStarModal
@@ -20,10 +20,11 @@ import {
     CATEGORY_TYPE, EDIT_ACTION,
     initialState as filterInputInitState, SERIES_TYPE, STAR_TYPE
 } from 'store/filterInputModal/filterInputModal.reducer';
-import { setCategories, setSeries, setStars } from '../../../src/store/videoSearch/videoSearch.actions';
+import { setCategories, setSeries, setStars } from 'store/videoSearch/videoSearch.actions';
 import { BASE_CATEGORY_FILTERS, NEW_CATEGORY_FILTER } from '../../exclude/mock/mockData/categoryData';
 import { BASE_SERIES_FILTERS, NEW_SERIES_FILTER } from '../../exclude/mock/mockData/seriesData';
 import { BASE_STAR_FILTERS, NEW_STAR_FILTER } from '../../exclude/mock/mockData/starData';
+import { showErrorAlert } from 'store/alert/alert.actions';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -288,8 +289,33 @@ describe('filterInputModal.actions', () => {
     });
 
     describe('deleteFilter action', () => {
-        it('fails without type and selected filter', () => {
-            throw new Error('Finish this');
+        const createState = (type) => ({
+            filterInputModal: {
+                ...filterInputInitState,
+                type,
+                index: 0
+            },
+            videoSearch: {
+                filters: {
+                    categories: BASE_CATEGORY_FILTERS,
+                    series: BASE_SERIES_FILTERS,
+                    stars: BASE_STAR_FILTERS
+                }
+            }
+        });
+
+        it('fails without type', async () => {
+            const store = mockStore(createState(null));
+            const expectedActions = [
+                { type: showErrorAlert.toString(), payload: 'Invalid state for deleting a filter' }
+            ];
+            try {
+                await store.dispatch(deleteFilter());
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
         });
 
         it('deletes category', () => {
