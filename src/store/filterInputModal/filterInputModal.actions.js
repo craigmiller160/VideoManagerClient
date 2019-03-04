@@ -47,11 +47,12 @@ export const deleteFilter = () => async (dispatch, getState) => {
 
 export const saveFilterChanges = () => async (dispatch, getState) => {
     const state = getState();
-    const type = state.filterInputModal.type;
-    const action = state.filterInputModal.action;
     if (!state.form['filterInputForm']) {
         throw new Error('Cannot find filterInputForm in Redux store');
     }
+
+    const type = state.filterInputModal.type;
+    const action = state.filterInputModal.action;
 
     const form = state.form['filterInputForm'];
     const filter = {

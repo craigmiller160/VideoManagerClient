@@ -116,6 +116,19 @@ describe('filterInputModal.actions', () => {
             mockGetAllStars(mockApi);
         });
 
+        it('fails if cannot find form', async () => {
+            store = mockStore({ form: {} });
+            try {
+                await store.dispatch(saveFilterChanges(NEW_CATEGORY_FILTER));
+            }
+            catch (ex) {
+                expect(ex.message).toContain('Cannot find filterInputForm in Redux store');
+                return;
+            }
+            // eslint-disable-next-line no-undef
+            fail('Operation should have thrown an exception');
+        });
+
         it('add new category', async () => {
             store = mockStore(createState(ADD_ACTION, CATEGORY_TYPE));
             const expectedActions = [
