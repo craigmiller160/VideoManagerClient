@@ -30,6 +30,25 @@ describe('filterInputModal.selectors', () => {
     });
 
     describe('getSelectedFilter', () => {
+        it('returns default if no type', () => {
+            state.filterInputModal.type = null;
+            const result = getSelectedFilter(state);
+            expect(result).toEqual({});
+        });
+
+        it('throws exception if invalid type', () => {
+            state.filterInputModal.type = 'abc';
+            try {
+                getSelectedFilter(state);
+            }
+            catch (ex) {
+                expect(ex.message).toContain('Invalid filter type');
+                return;
+            }
+            // eslint-disable-next-line no-undef
+            fail('Should have thrown exception');
+        });
+
         it('gets selected category', () => {
             state.filterInputModal.type = CATEGORY_TYPE;
             const result = getSelectedFilter(state);
