@@ -16,6 +16,6 @@ export const mockUpdateCategory = (mockApi) => {
 };
 
 export const mockDeleteCategory = (mockApi) => {
-    mockApi.onDelete('/categories/1')
+    mockApi.onDelete('/categories/3')
         .reply(200, NEW_CATEGORY);
 };

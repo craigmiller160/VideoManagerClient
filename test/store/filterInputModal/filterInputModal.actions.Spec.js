@@ -9,18 +9,34 @@ import configureMockStore from 'redux-mock-store';
 import API from 'services/API';
 import MockAdapter from 'axios-mock-adapter';
 import {
-    mockAddNewCategory,
+    mockAddNewCategory, mockDeleteCategory,
     mockGetAllCategories,
     mockUpdateCategory
 } from '../../exclude/mock/mockApiConfig/categoryApi';
-import { mockAddNewSeries, mockGetAllSeries, mockUpdateSeries } from '../../exclude/mock/mockApiConfig/seriesApi';
-import { mockAddNewStar, mockGetAllStars, mockUpdateStar } from '../../exclude/mock/mockApiConfig/starApi';
+import {
+    mockAddNewSeries,
+    mockDeleteSeries,
+    mockGetAllSeries,
+    mockUpdateSeries
+} from '../../exclude/mock/mockApiConfig/seriesApi';
+import {
+    mockAddNewStar,
+    mockDeleteStar,
+    mockGetAllStars,
+    mockUpdateStar
+} from '../../exclude/mock/mockApiConfig/starApi';
 import {
     ADD_ACTION,
     CATEGORY_TYPE, EDIT_ACTION,
     initialState as filterInputInitState, SERIES_TYPE, STAR_TYPE
 } from 'store/filterInputModal/filterInputModal.reducer';
-import { setCategories, setSeries, setStars } from 'store/videoSearch/videoSearch.actions';
+import {
+    loadCategoryOptions,
+    loadSeriesOptions, loadStarOptions,
+    setCategories,
+    setSeries,
+    setStars
+} from 'store/videoSearch/videoSearch.actions';
 import { BASE_CATEGORY_FILTERS, NEW_CATEGORY_FILTER } from '../../exclude/mock/mockData/categoryData';
 import { BASE_SERIES_FILTERS, NEW_SERIES_FILTER } from '../../exclude/mock/mockData/seriesData';
 import { BASE_STAR_FILTERS, NEW_STAR_FILTER } from '../../exclude/mock/mockData/starData';
@@ -293,15 +309,23 @@ describe('filterInputModal.actions', () => {
             filterInputModal: {
                 ...filterInputInitState,
                 type,
-                index: 0
+                index: 2
             },
             videoSearch: {
                 filters: {
-                    categories: BASE_CATEGORY_FILTERS,
-                    series: BASE_SERIES_FILTERS,
-                    stars: BASE_STAR_FILTERS
+                    categories: BASE_CATEGORY_FILTERS.concat(NEW_CATEGORY_FILTER),
+                    series: BASE_SERIES_FILTERS.concat(NEW_SERIES_FILTER),
+                    stars: BASE_STAR_FILTERS.concat(NEW_STAR_FILTER)
                 }
             }
+        });
+
+        beforeEach(() => {
+            mockApi.reset();
+
+            mockDeleteCategory(mockApi);
+            mockDeleteSeries(mockApi);
+            mockDeleteStar(mockApi);
         });
 
         it('fails without type', async () => {
@@ -318,16 +342,46 @@ describe('filterInputModal.actions', () => {
             expect(store.getActions()).toEqual(expectedActions);
         });
 
-        it('deletes category', () => {
-            throw new Error('Finish this');
+        it('deletes category', async () => {
+            const store = mockStore(createState(CATEGORY_TYPE));
+            const expectedActions = [
+                { type: loadCategoryOptions.toString() }
+            ];
+            try {
+                await store.dispatch(deleteFilter());
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
         });
 
-        it('deletes series', () => {
-            throw new Error('Finish this');
+        it('deletes series', async () => {
+            const store = mockStore(createState(SERIES_TYPE));
+            const expectedActions = [
+                { type: loadSeriesOptions.toString() }
+            ];
+            try {
+                await store.dispatch(deleteFilter());
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
         });
 
-        it('deletes star', () => {
-            throw new Error('Finish this');
+        it('deletes star', async () => {
+            const store = mockStore(createState(STAR_TYPE));
+            const expectedActions = [
+                { type: loadStarOptions.toString() }
+            ];
+            try {
+                await store.dispatch(deleteFilter());
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
         });
     });
 });
