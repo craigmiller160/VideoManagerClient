@@ -58,7 +58,7 @@ describe('CategoryApiService', () => {
 
     it('Delete Category', async () => {
         try {
-            const result = await CategoryApiService.deleteCategory(1);
+            const result = await CategoryApiService.deleteCategory(3);
             expect(result.status).toEqual(200);
             expect(result.data).toEqual(NEW_CATEGORY);
         }

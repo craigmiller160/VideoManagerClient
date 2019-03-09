@@ -5,7 +5,7 @@ import newid from '../../../../utils/newid';
 import formStyles from '../FormStyles.scss';
 import createField from "../createField";
 
-const Input = (props) => {
+export const InputComponent = (props) => {
     const {
         label,
         type,
@@ -29,17 +29,17 @@ const Input = (props) => {
                 id={ id }
                 { ...input }
                 type={ type }
-                name={ input.name }
+                name={ input ? input.name : '' }
             />
         </FormGroup>
     );
 };
 
-Input.defaultProps = {
+InputComponent.defaultProps = {
     type: 'text'
 };
 
-Input.propTypes = {
+InputComponent.propTypes = {
     type: PropTypes.string,
     label: PropTypes.string,
     input: PropTypes.shape({
@@ -47,7 +47,7 @@ Input.propTypes = {
     })
 };
 
-const Field = createField(Input);
+const Field = createField(InputComponent);
 Field.propTypes = {
     type: PropTypes.string,
     label: PropTypes.string,

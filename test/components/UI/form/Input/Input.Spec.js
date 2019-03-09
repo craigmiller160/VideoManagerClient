@@ -1,37 +1,35 @@
 import React from 'react';
-import Input from '../../../../../src/components/UI/form/Input/Input';
-import { shallow } from 'enzyme';
+import { InputComponent } from 'components/UI/form/Input/Input';
+import { mount } from 'enzyme';
 
 describe('Input', () => {
     const props = {
         label: 'My Input',
         type: 'text',
-        name: 'MyInput'
+        input: {
+            name: 'MyInput'
+        }
     };
 
     it('should render correctly', () => {
-        const component = shallow(
-            <Input { ...props } />
+        const component = mount(
+            <InputComponent { ...props } />
         );
-        expect(component).toMatchSnapshot();
-    });
-
-    it('should handle onChange', () => {
-        let value = 'InitialValue';
-        props.onChange = (newValue) => value = newValue;
-
-        const component = shallow(
-            <Input { ...props } />
-        );
-
-        const result = component.find('[name="MyInput"]');
-        expect(result.length).toEqual(1);
-
-        result.simulate('change', {target: {value: 'My New Value'}});
-        expect(value).toEqual({target: {value: 'My New Value'}});
+        expect(component.find('FormGroup')).toHaveLength(1);
+        expect(component.find('FormGroup').hasClass('hidden')).toEqual(false);
+        expect(component.find('label')).toHaveLength(1);
+        expect(component.find('label').text()).toEqual('My Input');
+        expect(component.find('input')).toHaveLength(1);
+        expect(component.find('input').props()).toEqual(expect.objectContaining({
+            type: 'text',
+            name: 'MyInput'
+        }));
     });
 
     it('is invisible if type is hidden', () => {
-        throw new Error('Finish this test');
+        const component = mount(
+            <InputComponent { ...props } type="hidden" />
+        );
+        expect(component.find('FormGroup').hasClass('hidden')).toEqual(true);
     });
 });
