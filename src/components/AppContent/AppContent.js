@@ -9,7 +9,7 @@ import { checkIsScanning, startFileScan } from 'store/scanning/scanning.actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { showErrorAlert, hideAlert } from 'store/alert/alert.actions';
-import { VideoFileEdit } from './VideoFileEdit/VideoFileEdit';
+import VideoFileEdit from './VideoFileEdit/VideoFileEdit';
 import { getSelectedVideo } from 'store/videoList/videoList.selectors';
 import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
 import classes from './AppContent.scss';
