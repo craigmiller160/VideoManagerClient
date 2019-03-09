@@ -4,7 +4,7 @@ import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, 
 import * as classes from './VideoNavbar.scss'
 import { Link, withRouter } from 'react-router-dom';
 
-const VideoNavbar = (props) => {
+export const VideoNavbar = (props) => {
     const [ isOpen, setOpen ] = useState(false);
     const { isScanning, history, startFileScan } = props;
     const pathname = history.location.pathname;

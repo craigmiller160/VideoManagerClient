@@ -60,7 +60,7 @@ const startupCheck = async (props, setStarted) => {
     }
 };
 
-const AppContent = (props) => {
+export const AppContent = (props) => {
     const [ isStarted, setStarted ] = useState(false);
     const {
         checkIsScanning,
