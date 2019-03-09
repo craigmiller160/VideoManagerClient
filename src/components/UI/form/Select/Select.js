@@ -15,6 +15,8 @@ export const SelectComponent = (props) => {
         multi
     } = props;
 
+    console.log('Multi', multi); // TODO delete this
+
     const id = newid();
     return (
         <FormGroup className={ formStyles['input-label'] }>
@@ -31,7 +33,7 @@ export const SelectComponent = (props) => {
                 options={ options }
                 isSearchable
                 isClearable
-                multi={ multi }
+                isMulti={ multi }
             />
         </FormGroup>
     );

@@ -4,6 +4,7 @@ import Form from 'components/UI/form/Form/Form';
 import classes from './VideoFileEdit.scss';
 import { Col, Row } from 'reactstrap';
 import Input from 'components/UI/form/Input/Input';
+import Select from 'components/UI/form/Select/Select';
 
 export const FORM_NAME = 'video-file-edit';
 
@@ -33,7 +34,7 @@ const VideoFileEdit = (props) => {
             initialValues={ selectedVideo }
         >
             <Row>
-                <Col className="text-center" md={ { size: 8, offset: 2 } }>
+                <Col className="text-center">
                     <h3 className={ classes.title }>{ fileName }</h3>
                 </Col>
             </Row>
@@ -46,10 +47,33 @@ const VideoFileEdit = (props) => {
                 </Col>
             </Row>
             <Row>
-
+                <Col md="4">
+                    <Select
+                        label="Categories"
+                        options={ categories }
+                        name="categories"
+                        multi
+                    />
+                </Col>
+                <Col md="4">
+                    <Select
+                        label="Series"
+                        options={ series }
+                        name="series"
+                        multi
+                    />
+                </Col>
+                <Col md="4">
+                    <Select
+                        label="Stars"
+                        options={ stars }
+                        name="stars"
+                        multi
+                    />
+                </Col>
             </Row>
             <Row>
-                <Col md={ { size: 4 } }>
+                <Col md={ { size: 6, offset: 3 } }>
                     <Input
                         type="textarea"
                         name="description"

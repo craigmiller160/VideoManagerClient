@@ -17,7 +17,6 @@ describe('Select', () => {
         const component = mount(
             <SelectComponent { ...props } />
         );
-        console.log(component.debug()); // TODO delete this
         expect(component.find('FormGroup')).toHaveLength(1);
         expect(component.find('SelectComponent')).toHaveLength(1);
         expect(component.find('SelectComponent').props()).toEqual(expect.objectContaining({
