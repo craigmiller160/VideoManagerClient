@@ -1,6 +1,6 @@
 import React from 'react';
-import Select from '../../../../../src/components/UI/form/Select/Select';
-import { shallow } from 'enzyme';
+import { SelectComponent } from 'components/UI/form/Select/Select';
+import { mount } from 'enzyme';
 
 describe('Select', () => {
     const props = {
@@ -13,24 +13,17 @@ describe('Select', () => {
     };
 
     it('should render correctly', () => {
-        const component = shallow(
-            <Select { ...props } />
+        const component = mount(
+            <SelectComponent { ...props } />
         );
-        expect(component).toMatchSnapshot();
-    });
+        console.log(component.debug()); // TODO delete this
+        expect(component.find('FormGroup')).toHaveLength(1);
+        expect(component.find('SelectComponent')).toHaveLength(1);
+        expect(component.find('SelectComponent').props()).toEqual(expect.objectContaining({
+            ...props
+        }));
+        expect(component.find('label')).toHaveLength(1);
+        expect(component.find('label').text()).toEqual('My Select');
 
-    it('should handle onChange', () => {
-        let value = 'InitialValue';
-        props.onChange = (newValue) => value = newValue;
-
-        const component = shallow(
-            <Select { ...props } />
-        );
-
-        const result = component.find('[name="MySelect"]');
-        expect(result.length).toEqual(1);
-
-        result.simulate('change', { label: 'Opt2', value: 'opt2' });
-        expect(value).toEqual({ label: 'Opt2', value: 'opt2' });
     });
 });

@@ -6,7 +6,7 @@ import newid from '../../../../utils/newid';
 import formStyles from '../FormStyles.scss';
 import createField from "../createField";
 
-const Select = (props) => {
+export const SelectComponent = (props) => {
     const {
         label,
         input,
@@ -35,10 +35,24 @@ const Select = (props) => {
     );
 };
 
-Select.propTypes = {
+SelectComponent.propTypes = {
     label: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
-    name: PropTypes.string
+    input: PropTypes.shape({
+        name: PropTypes.string
+    }),
+    multi: PropTypes.bool
 };
 
-export default createField(Select);
+SelectComponent.defaultProps = {
+    options: [],
+    multi: false
+};
+
+const Field = createField(SelectComponent);
+Field.propTypes = {
+    label: PropTypes.string,
+    name: PropTypes.string,
+    multi: PropTypes.bool
+};
+export default Field;
