@@ -46,7 +46,14 @@ export class VideoFileEdit extends Component {
                         />
                     </Col>
                     <Col md={ { size: 4 } }>
-
+                        <Input
+                            type="textarea"
+                            name="description"
+                            label="Description"
+                            textarea={ {
+                                rows: 5
+                            } }
+                        />
                     </Col>
                 </Row>
             </Form>

@@ -10,16 +10,22 @@ export const InputComponent = (props) => {
         label,
         type,
         input,
+        textarea
     } = props;
 
     const id = newid();
-    const classes = [formStyles['input-label']];
+    const groupClasses = [formStyles['input-label']];
     if ('hidden' === type.toLowerCase()) {
-        classes.push(formStyles.hidden);
+        groupClasses.push(formStyles.hidden);
+    }
+
+    const inputClasses = [];
+    if (!textarea || !textarea.resize) {
+        inputClasses.push(formStyles['no-resize']);
     }
 
     return (
-        <FormGroup className={ classes.join(' ') }>
+        <FormGroup className={ groupClasses.join(' ') }>
             <Label
                 for={ id }
             >
@@ -27,16 +33,22 @@ export const InputComponent = (props) => {
             </Label>
             <ReactInput
                 id={ id }
+                className={ inputClasses.join(' ') }
                 { ...input }
                 type={ type }
                 name={ input ? input.name : '' }
+                rows={ textarea ? textarea.rows : null }
+                cols={ textarea ? textarea.cols : null }
             />
         </FormGroup>
     );
 };
 
 InputComponent.defaultProps = {
-    type: 'text'
+    type: 'text',
+    textarea: {
+        resize: false
+    }
 };
 
 InputComponent.propTypes = {
@@ -44,6 +56,11 @@ InputComponent.propTypes = {
     label: PropTypes.string,
     input: PropTypes.shape({
         name: PropTypes.string.isRequired
+    }),
+    textarea: PropTypes.shape({
+        rows: PropTypes.number,
+        cols: PropTypes.number,
+        resize: PropTypes.bool
     })
 };
 
