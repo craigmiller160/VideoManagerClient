@@ -3,6 +3,7 @@ import CategoryApiService from '../../services/CategoryApiService';
 import SeriesApiService from '../../services/SeriesApiService';
 import StarApiService from '../../services/StarApiService';
 import { showErrorAlert } from '../alert/alert.actions';
+import { convertCategoryToFilter, convertSeriesToFilter, convertStarToFilter } from '../../utils/videoFileConverter';
 
 export const loadFilterOptions = () => async (dispatch) => {
     try {
@@ -19,21 +20,21 @@ export const loadFilterOptions = () => async (dispatch) => {
 export const loadCategoryOptions = () => async (dispatch) => {
     const res = await CategoryApiService.getAllCategories();
     const categories = (res.data || [])
-        .map(category => ({ value: category.categoryId, label: category.categoryName }));
+        .map(convertCategoryToFilter);
     dispatch(setCategories(categories));
 };
 
 export const loadSeriesOptions = () => async (dispatch) => {
     const res = await SeriesApiService.getAllSeries();
     const series = (res.data || [])
-        .map(s => ({ value: s.seriesId, label: s.seriesName }));
+        .map(convertSeriesToFilter);
     dispatch(setSeries(series));
 };
 
 export const loadStarOptions = () => async (dispatch) => {
     const res = await StarApiService.getAllStars();
     const stars = (res.data || [])
-        .map(star => ({ value: star.starId, label: star.starName }));
+        .map(convertStarToFilter);
     dispatch(setStars(stars));
 };
 

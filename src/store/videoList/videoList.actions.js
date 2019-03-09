@@ -3,6 +3,7 @@ import VideoApiService from '../../services/VideoApiService';
 import { showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
 import { setSearching } from '../videoSearch/videoSearch.actions';
 import { FORM_NAME } from 'components/AppContent/VideoFileEdit/VideoFileEdit';
+import { convertFiltersToFile } from '../../utils/videoFileConverter';
 
 export const searchForVideos = () => async (dispatch, getState) => {
     try {
@@ -44,23 +45,10 @@ export const saveVideoFileEdits = () => async (dispatch, getState) => {
     if (!state.form || !state.form[FORM_NAME]) {
         throw new Error('Video edit form is not available');
     }
-
-    const videoFile = {
+    const videoFile = convertFiltersToFile({
         ...state.form[FORM_NAME].values,
         expanded: undefined
-    };
-    videoFile.categories = videoFile.categories.map((category) => ({
-        categoryId: category.value,
-        categoryName: category.label
-    }));
-    videoFile.series = videoFile.series.map((series) => ({
-        seriesId: series.value,
-        seriesName: series.label
-    }));
-    videoFile.stars = videoFile.stars.map((star) => ({
-        starId: star.value,
-        starName: star.label
-    }));
+    });
 
     await dispatch(saveVideoFile(videoFile));
 };
