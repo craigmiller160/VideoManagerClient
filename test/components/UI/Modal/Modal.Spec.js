@@ -49,22 +49,26 @@ describe('Modal component', () => {
     });
 
     it('renders with form', () => {
+        const handleSubmit = jest.fn();
         const component = mount(
             <Provider store={ store }>
                 <Modal
                     open
                     close={ closeFn }
                     form={ {
-                        name: 'TestForm'
+                        name: 'TestForm',
+                        handleSubmit
                     } }
                 >
                     <p>Hello World</p>
                 </Modal>
             </Provider>
         );
-        expect(component.find('form')).toHaveLength(1);
 
-        throw new Error('Finish this test');
-        // TODO include submit action to test that behavior
+        const form = component.find('form');
+
+        expect(form).toHaveLength(1);
+        form.simulate('submit');
+        expect(handleSubmit).toHaveBeenCalled();
     });
 });
