@@ -53,7 +53,7 @@ describe('StarApiService', () => {
 
     it('Delete Star', async () => {
         try {
-            const result = await StarApiService.deleteStar(1);
+            const result = await StarApiService.deleteStar(3);
             expect(result.status).toEqual(200);
             expect(result.data).toEqual(NEW_STAR);
         }

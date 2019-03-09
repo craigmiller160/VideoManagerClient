@@ -58,7 +58,7 @@ describe('SeriesApiService', () => {
 
     it('Delete Series', async () => {
         try {
-            const result = await SeriesApiService.deleteSeries(1);
+            const result = await SeriesApiService.deleteSeries(3);
             expect(result.status).toEqual(200);
             expect(result.data).toEqual(NEW_SERIES);
         }
