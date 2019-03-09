@@ -11,7 +11,8 @@ export const SelectComponent = (props) => {
         label,
         input,
         name,
-        options
+        options,
+        multi
     } = props;
 
     const id = newid();
@@ -30,6 +31,7 @@ export const SelectComponent = (props) => {
                 options={ options }
                 isSearchable
                 isClearable
+                multi={ multi }
             />
         </FormGroup>
     );

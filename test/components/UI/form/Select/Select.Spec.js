@@ -9,7 +9,8 @@ describe('Select', () => {
         options: [
             { label: 'Opt1', value: 'opt1' },
             { label: 'Opt2', value: 'opt2' }
-        ]
+        ],
+        multi: false
     };
 
     it('should render correctly', () => {
