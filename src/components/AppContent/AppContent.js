@@ -33,14 +33,6 @@ export class AppContent extends Component {
         }
     };
 
-    handleManageFilters = () => {
-        this.props.history.push('/filters');
-    };
-
-    handleVideoList = () => {
-        this.props.history.push('/');
-    };
-
     saveFileChanges = async () => {
         await this.props.saveVideoFileEdits();
         this.props.history.push('/');
@@ -55,8 +47,12 @@ export class AppContent extends Component {
     }
 
     componentWillUpdate(nextProps) {
+        console.log('Update', nextProps); // TODO delete this
         if (AppContent.resetToRootComponent(nextProps)) {
             this.props.history.push('/');
+        }
+        else if (nextProps.isScanning && nextProps.history.location.pathname !== '/scanning') {
+            nextProps.history.push('/scanning');
         }
     }
 
@@ -76,8 +72,6 @@ export class AppContent extends Component {
             <div className={ classes.AppContent }>
                 <VideoNavbar
                     startFileScan={ startFileScan }
-                    manageFilters={ this.handleManageFilters }
-                    videoList={ this.handleVideoList }
                     isScanning={ isScanning }
                 />
                 {

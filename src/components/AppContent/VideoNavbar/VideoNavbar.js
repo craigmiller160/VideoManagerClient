@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import * as classes from './VideoNavbar.scss'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class VideoNavbar extends Component {
 
@@ -19,21 +19,18 @@ class VideoNavbar extends Component {
         });
     };
 
-    handleScanDirectory = () => {
-        this.props.startFileScan();
-    };
-
     handleManageFilters = () => {
-        this.props.manageFilters();
+        this.props.history.push('/filters')
     };
 
     handleVideoList = () => {
-        this.props.videoList();
+        this.props.history.push('/');
     };
 
     render() {
         const { isOpen } = this.state;
-        const { isScanning } = this.props;
+        const { isScanning, history, startFileScan } = this.props;
+        const pathname = history.location.pathname;
 
         return (
             <Navbar className={ classes.VideoNavbar } color="dark" dark expand="md">
@@ -51,20 +48,21 @@ class VideoNavbar extends Component {
                             <NavbarToggler onClick={ this.toggle } />
                             <Collapse isOpen={ isOpen } navbar>
                                 <Nav navbar>
-                                    <NavItem>
+                                    <NavItem active={ pathname === '/' }>
                                         <NavLink
                                             id="videoList"
                                             className={ classes['use-pointer'] }
-                                            onClick={ this.handleVideoList }
+                                            onClick={ () => history.push('/') }
                                         >
                                             Video List
                                         </NavLink>
                                     </NavItem>
-                                    <NavItem>
+                                    <NavItem active={ pathname === '/filters' }>
                                         <NavLink
                                             id="manageFilters"
                                             className={ classes['use-pointer'] }
-                                            onClick={ this.handleManageFilters }>
+                                            onClick={ () => history.push('/filters') }
+                                        >
                                             Manage Filters
                                         </NavLink>
                                     </NavItem>
@@ -74,7 +72,8 @@ class VideoNavbar extends Component {
                                         <NavLink
                                             id="scanDirectory"
                                             className={ classes['use-pointer'] }
-                                            onClick={ this.handleScanDirectory }>
+                                            onClick={ startFileScan }
+                                        >
                                             Scan Directory
                                         </NavLink>
                                     </NavItem>
@@ -95,9 +94,7 @@ VideoNavbar.defaultProps = {
 
 VideoNavbar.propTypes = {
     startFileScan: PropTypes.func.isRequired,
-    manageFilters: PropTypes.func.isRequired,
-    videoList: PropTypes.func.isRequired,
     isScanning: PropTypes.bool
 };
 
-export default VideoNavbar;
+export default withRouter(VideoNavbar);
