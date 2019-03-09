@@ -16,6 +16,6 @@ export const mockUpdateSeries = (mockApi) => {
 };
 
 export const mockDeleteSeries = (mockApi) => {
-    mockApi.onDelete('/series/1')
+    mockApi.onDelete('/series/3')
         .reply(200, NEW_SERIES);
 };

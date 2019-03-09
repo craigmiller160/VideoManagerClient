@@ -31,8 +31,6 @@ import {
     initialState as filterInputInitState, SERIES_TYPE, STAR_TYPE
 } from 'store/filterInputModal/filterInputModal.reducer';
 import {
-    loadCategoryOptions,
-    loadSeriesOptions, loadStarOptions,
     setCategories,
     setSeries,
     setStars
@@ -326,6 +324,10 @@ describe('filterInputModal.actions', () => {
             mockDeleteCategory(mockApi);
             mockDeleteSeries(mockApi);
             mockDeleteStar(mockApi);
+
+            mockGetAllCategories(mockApi);
+            mockGetAllSeries(mockApi);
+            mockGetAllStars(mockApi);
         });
 
         it('fails without type', async () => {
@@ -345,7 +347,7 @@ describe('filterInputModal.actions', () => {
         it('deletes category', async () => {
             const store = mockStore(createState(CATEGORY_TYPE));
             const expectedActions = [
-                { type: loadCategoryOptions.toString() }
+                { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS }
             ];
             try {
                 await store.dispatch(deleteFilter());
@@ -359,7 +361,7 @@ describe('filterInputModal.actions', () => {
         it('deletes series', async () => {
             const store = mockStore(createState(SERIES_TYPE));
             const expectedActions = [
-                { type: loadSeriesOptions.toString() }
+                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS }
             ];
             try {
                 await store.dispatch(deleteFilter());
@@ -373,7 +375,7 @@ describe('filterInputModal.actions', () => {
         it('deletes star', async () => {
             const store = mockStore(createState(STAR_TYPE));
             const expectedActions = [
-                { type: loadStarOptions.toString() }
+                { type: setStars.toString(), payload: BASE_STAR_FILTERS }
             ];
             try {
                 await store.dispatch(deleteFilter());

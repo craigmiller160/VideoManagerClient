@@ -16,6 +16,6 @@ export const mockUpdateStar = (mockApi) => {
 };
 
 export const mockDeleteStar = (mockApi) => {
-    mockApi.onDelete('/stars/1')
+    mockApi.onDelete('/stars/3')
         .reply(200, NEW_STAR);
 };
