@@ -34,16 +34,21 @@ const VideoFileEdit = (props) => {
         >
             <Row>
                 <Col className="text-center" md={ { size: 8, offset: 2 } }>
-                    <h3>{ fileName }</h3>
+                    <h3 className={ classes.title }>{ fileName }</h3>
                 </Col>
             </Row>
             <Row>
-                <Col md={ { size: 4, offset: 2 } }>
+                <Col md={ { size: 4, offset: 4 } }>
                     <Input
                         label="Display Name"
                         name="displayName"
                     />
                 </Col>
+            </Row>
+            <Row>
+
+            </Row>
+            <Row>
                 <Col md={ { size: 4 } }>
                     <Input
                         type="textarea"
