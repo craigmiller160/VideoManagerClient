@@ -3,7 +3,7 @@ import {
     EMPTY_SEARCH,
     FILE_COUNT, FILE_SCAN_STATUS,
     FULL_SEARCH,
-    NEW_VIDEO_FILE
+    NEW_VIDEO_FILE, NEW_VIDEO_FILE_FULL
 } from '../mockData/videoFileData';
 
 export const  mockAddNewVideoFile = (mockApi) => {
@@ -14,6 +14,11 @@ export const  mockAddNewVideoFile = (mockApi) => {
 export const mockUpdateVideoFile = (mockApi) => {
     mockApi.onPut('/video-files/3', NEW_VIDEO_FILE)
         .reply(200, NEW_VIDEO_FILE);
+};
+
+export const mockUpdateFullVideoFile = (mockApi) => {
+    mockApi.onPut('/video-files/3', NEW_VIDEO_FILE_FULL)
+        .reply(200, NEW_VIDEO_FILE_FULL);
 };
 
 export const mockSearchForFiles = (mockApi) => {

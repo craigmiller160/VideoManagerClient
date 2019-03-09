@@ -1,3 +1,7 @@
+import { NEW_CATEGORY, NEW_CATEGORY_FILTER } from './categoryData';
+import { NEW_SERIES, NEW_SERIES_FILTER } from './seriesData';
+import { NEW_STAR, NEW_STAR_FILTER } from './starData';
+
 export const BASE_VIDE0_FILES = [
     { fileId: 1, fileName: 'FirstFile' },
     { fileId: 2, fileName: 'SecondFile' }
@@ -16,6 +20,20 @@ export const BASE_VIDEO_SEARCH_RESULT = {
 };
 
 export const NEW_VIDEO_FILE = { fileId: 3, fileName: 'ThirdFile' };
+
+export const NEW_VIDEO_FILE_FULL = {
+    ...NEW_VIDEO_FILE,
+    categories: [ NEW_CATEGORY ],
+    series: [ NEW_SERIES ],
+    stars: [ NEW_STAR ]
+};
+
+export const NEW_VIDEO_FILE_FULL_FILTERS = {
+    ...NEW_VIDEO_FILE,
+    categories: [ NEW_CATEGORY_FILTER ],
+    series: [ NEW_SERIES_FILTER ],
+    stars: [ NEW_STAR_FILTER ]
+};
 
 export const FILE_COUNT = { totalFiles: 100, filesPerPage: 10 };
 

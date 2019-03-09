@@ -2,6 +2,7 @@ import { createAction } from 'redux-starter-kit';
 import VideoApiService from '../../services/VideoApiService';
 import { showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
 import { setSearching } from '../videoSearch/videoSearch.actions';
+import { FORM_NAME } from 'components/AppContent/VideoFileEdit/VideoFileEdit';
 
 export const searchForVideos = () => async (dispatch, getState) => {
     try {
@@ -36,6 +37,32 @@ export const searchForVideos = () => async (dispatch, getState) => {
     finally {
         dispatch(setSearching(false));
     }
+};
+
+export const saveVideoFileEdits = () => async (dispatch, getState) => {
+    const state = getState();
+    if (!state.form || !state.form[FORM_NAME]) {
+        throw new Error('Video edit form is not available');
+    }
+
+    const videoFile = {
+        ...state.form[FORM_NAME].values,
+        expanded: undefined
+    };
+    videoFile.categories = videoFile.categories.map((category) => ({
+        categoryId: category.value,
+        categoryName: category.label
+    }));
+    videoFile.series = videoFile.series.map((series) => ({
+        seriesId: series.value,
+        seriesName: series.label
+    }));
+    videoFile.stars = videoFile.stars.map((star) => ({
+        starId: star.value,
+        starName: star.label
+    }));
+
+    await dispatch(saveVideoFile(videoFile));
 };
 
 export const saveVideoFile = (videoFile) => async (dispatch) => {

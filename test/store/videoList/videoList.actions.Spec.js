@@ -1,24 +1,31 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
-import API from '../../../src/services/API';
+import API from 'services/API';
 import {
     expandVideoFile,
-    saveVideoFile,
+    saveVideoFile, saveVideoFileEdits,
     searchForVideos,
     setCurrentPage,
     setPagination,
     setVideoList
-} from '../../../src/store/videoList/videoList.actions';
-import { BASE_VIDE0_FILES, NEW_VIDEO_FILE, PAGINATION_COUNTS } from '../../exclude/mock/mockData/videoFileData';
+} from 'store/videoList/videoList.actions';
+import {
+    BASE_VIDE0_FILES,
+    NEW_VIDEO_FILE,
+    NEW_VIDEO_FILE_FULL_FILTERS,
+    PAGINATION_COUNTS
+} from '../../exclude/mock/mockData/videoFileData';
 import {
     mockGetAllFiles,
-    mockSearchForFiles,
+    mockSearchForFiles, mockUpdateFullVideoFile,
     mockUpdateVideoFile
 } from '../../exclude/mock/mockApiConfig/videoFileApi';
-import { initialState as videoListInitState } from '../../../src/store/videoList/videoList.reducer';
-import { setSearching } from '../../../src/store/videoSearch/videoSearch.actions';
-import { showSuccessAlert } from '../../../src/store/alert/alert.actions';
+import { initialState as videoListInitState } from 'store/videoList/videoList.reducer';
+import { setSearching } from 'store/videoSearch/videoSearch.actions';
+import { showSuccessAlert } from 'store/alert/alert.actions';
+import { FORM_NAME as VideoSearchFormName } from 'components/AppContent/VideoListLayout/VideoSearch/VideoSearch';
+import { FORM_NAME as VideoEditFormName } from 'components/AppContent/VideoFileEdit/VideoFileEdit';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -66,7 +73,7 @@ describe('videoList.actions', () => {
         const noConfigState = {
             videoList: videoListInitState,
             form: {
-                'video-search': {
+                [VideoSearchFormName]: {
                     values: {
                         category: { value: 0 },
                         series: { value: 0 },
@@ -79,7 +86,7 @@ describe('videoList.actions', () => {
         const configState = {
             videoList: videoListInitState,
             form: {
-                'video-search': {
+                [VideoSearchFormName]: {
                     values: {
                         category: { value: 1 },
                         series: { value: 1 },
@@ -95,6 +102,7 @@ describe('videoList.actions', () => {
             mockGetAllFiles(mockApi);
             mockSearchForFiles(mockApi);
             mockUpdateVideoFile(mockApi);
+            mockUpdateFullVideoFile(mockApi);
         });
 
         describe('searchForVideos action', () => {
@@ -155,6 +163,55 @@ describe('videoList.actions', () => {
                 catch (ex) {
                     expect(ex).toBeUndefined();
                 }
+                expect(store.getActions()).toEqual(expectedActions);
+            });
+        });
+
+        describe('saveVideoFileEdits action', () => {
+            const videoEditForm = {
+                values: {
+                    ...NEW_VIDEO_FILE_FULL_FILTERS
+                }
+            };
+
+            it('throws an error if form not available', async () => {
+                const store = mockStore(noConfigState);
+
+                try {
+                    await store.dispatch(saveVideoFileEdits());
+                }
+                catch (ex) {
+                    expect(ex).not.toBeUndefined();
+                    return;
+                }
+                // eslint-disable-next-line no-undef
+                fail('Should have thrown exception');
+            });
+
+            it('saves the video file edits', async () => {
+                const store = mockStore({
+                    ...noConfigState,
+                    form: {
+                        ...noConfigState.form,
+                        [VideoEditFormName]: videoEditForm
+                    }
+                });
+
+                const expectedActions = [
+                    { type: showSuccessAlert.toString(), payload: 'Successfully saved video file' },
+                    { type: setSearching.toString(), payload: true },
+                    { type: setPagination.toString(), payload: PAGINATION_COUNTS },
+                    { type: setVideoList.toString(), payload: BASE_VIDE0_FILES },
+                    { type: setSearching.toString(), payload: false }
+                ];
+
+                try {
+                    await store.dispatch(saveVideoFileEdits());
+                }
+                catch (ex) {
+                    expect(ex).toBeUndefined();
+                }
+
                 expect(store.getActions()).toEqual(expectedActions);
             });
         });
