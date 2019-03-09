@@ -27,6 +27,10 @@ class VideoNavbar extends Component {
         this.props.manageFilters();
     };
 
+    handleVideoList = () => {
+        this.props.videoList();
+    };
+
     render() {
         const { isOpen } = this.state;
         const { isScanning } = this.props;
@@ -46,7 +50,16 @@ class VideoNavbar extends Component {
                         <>
                             <NavbarToggler onClick={ this.toggle } />
                             <Collapse isOpen={ isOpen } navbar>
-                                <Nav className="ml-auto" navbar>
+                                <Nav navbar>
+                                    <NavItem>
+                                        <NavLink
+                                            id="videoList"
+                                            className={ classes['use-pointer'] }
+                                            onClick={ this.handleVideoList }
+                                        >
+                                            Video List
+                                        </NavLink>
+                                    </NavItem>
                                     <NavItem>
                                         <NavLink
                                             id="manageFilters"
@@ -55,6 +68,8 @@ class VideoNavbar extends Component {
                                             Manage Filters
                                         </NavLink>
                                     </NavItem>
+                                </Nav>
+                                <Nav className="ml-auto" navbar>
                                     <NavItem>
                                         <NavLink
                                             id="scanDirectory"
@@ -81,6 +96,7 @@ VideoNavbar.defaultProps = {
 VideoNavbar.propTypes = {
     startFileScan: PropTypes.func.isRequired,
     manageFilters: PropTypes.func.isRequired,
+    videoList: PropTypes.func.isRequired,
     isScanning: PropTypes.bool
 };
 
