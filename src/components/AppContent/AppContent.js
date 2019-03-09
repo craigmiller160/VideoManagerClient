@@ -14,6 +14,7 @@ import { getSelectedVideo } from 'store/videoList/videoList.selectors';
 import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
 import classes from './AppContent.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
+import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 
 export class AppContent extends Component {
 
@@ -58,7 +59,8 @@ export class AppContent extends Component {
             alert,
             hideAlert,
             selectedVideo,
-            filters
+            filters,
+            saveVideoFileEdits
         } = this.props;
         const { isStarted } = this.state;
 
@@ -97,6 +99,7 @@ export class AppContent extends Component {
                                         <VideoFileEdit
                                             { ...props }
                                             selectedVideo={ selectedVideo }
+                                            saveFileChanges={ saveVideoFileEdits }
                                             filters={ filters }
                                         />
                                     ) }
@@ -138,7 +141,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     startFileScan,
     showErrorAlert,
     loadFilterOptions,
-    hideAlert
+    hideAlert,
+    saveVideoFileEdits
 }, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppContent));

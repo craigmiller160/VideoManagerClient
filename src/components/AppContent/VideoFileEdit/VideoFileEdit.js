@@ -11,11 +11,6 @@ export const FORM_NAME = 'video-file-edit';
 // TODO need some way to warn that unsaved changes will be lost when leaving this component
 
 const VideoFileEdit = (props) => {
-    const handleSubmit = () => {
-        // TODO this should call a redux action
-        console.log('Submitting'); // TODO delete this
-    };
-
     if (!props.selectedVideo) {
         return <div />;
     }
@@ -23,13 +18,14 @@ const VideoFileEdit = (props) => {
     const {
         selectedVideo,
         selectedVideo: { fileName },
-        filters: { categories, stars, series }
+        filters: { categories, stars, series },
+        saveFileChanges
     } = props;
 
     return (
         <Form
             form={ FORM_NAME }
-            handleSubmit={ handleSubmit }
+            handleSubmit={ saveFileChanges }
             className={ classes.VideoFileEdit }
             initialValues={ selectedVideo }
         >
@@ -100,7 +96,8 @@ const VideoFileEdit = (props) => {
 
 VideoFileEdit.propTypes = {
     selectedVideo: PropTypes.object.isRequired,
-    filters: PropTypes.object.isRequired
+    filters: PropTypes.object.isRequired,
+    saveFileChanges: PropTypes.func.isRequired
 };
 
 export default VideoFileEdit;
