@@ -37,6 +37,11 @@ export class AppContent extends Component {
         this.props.history.push('/filters');
     };
 
+    saveFileChanges = async () => {
+        await this.props.saveVideoFileEdits();
+        this.props.history.push('/');
+    };
+
     static resetToRootComponent(nextProps) {
         if (nextProps.history.location.pathname === '/scanning' && !nextProps.isScanning) {
             return true;
@@ -99,7 +104,7 @@ export class AppContent extends Component {
                                         <VideoFileEdit
                                             { ...props }
                                             selectedVideo={ selectedVideo }
-                                            saveFileChanges={ saveVideoFileEdits }
+                                            saveFileChanges={ this.saveFileChanges }
                                             filters={ filters }
                                         />
                                     ) }
