@@ -2,11 +2,14 @@ import React from 'react';
 import { mount } from 'enzyme';
 import VideoNavbar from '../../../../src/components/AppContent/VideoNavbar/VideoNavbar';
 import toJson from 'enzyme-to-json';
+import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('react-router-dom', () => ({ Link: () => 'Link' }));
 
 const mountComponent = (props = {}) => mount(
-    <VideoNavbar { ...props } />
+    <MemoryRouter initialEntries={ ['/'] }>
+        <VideoNavbar { ...props } />
+    </MemoryRouter>
 );
 
 const startFileScan = jest.fn();
