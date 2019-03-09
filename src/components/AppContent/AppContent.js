@@ -47,7 +47,6 @@ export class AppContent extends Component {
     }
 
     componentWillUpdate(nextProps) {
-        console.log('Update', nextProps); // TODO delete this
         if (AppContent.resetToRootComponent(nextProps)) {
             this.props.history.push('/');
         }
