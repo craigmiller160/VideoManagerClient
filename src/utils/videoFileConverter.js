@@ -1,16 +1,16 @@
 
 export const convertFileToFilters = (videoFile) => ({
     ...videoFile,
-    categories: videoFile.categories.map(convertCategoryToFilter),
-    series: videoFile.series.map(convertSeriesToFilter),
-    stars: videoFile.stars.map(convertStarToFilter)
+    categories: videoFile && videoFile.categories ? videoFile.categories.map(convertCategoryToFilter) : [],
+    series: videoFile && videoFile.series ? videoFile.series.map(convertSeriesToFilter) : [],
+    stars: videoFile && videoFile.stars ? videoFile.stars.map(convertStarToFilter) : []
 });
 
 export const convertFiltersToFile = (videoFile) => ({
     ...videoFile,
-    categories: videoFile.categories.map(convertFilterToCategory),
-    series: videoFile.series.map(convertFilterToSeries),
-    stars: videoFile.stars.map(convertFilterToStar)
+    categories: videoFile && videoFile.categories ? videoFile.categories.map(convertFilterToCategory) : [],
+    series: videoFile && videoFile.series ? videoFile.series.map(convertFilterToSeries) : [],
+    stars: videoFile && videoFile.stars ? videoFile.stars.map(convertFilterToStar) : []
 });
 
 export const convertCategoryToFilter = (category) => ({

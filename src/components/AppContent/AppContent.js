@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { showErrorAlert, hideAlert } from 'store/alert/alert.actions';
 import VideoFileEdit from './VideoFileEdit/VideoFileEdit';
-import { getSelectedVideo } from 'store/videoList/videoList.selectors';
+import { getSelectedVideo, getSelectedVideoWithFilters } from 'store/videoList/videoList.selectors';
 import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
 import classes from './AppContent.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
@@ -132,7 +132,7 @@ export class AppContent extends Component {
 const mapStateToProps = (state) => ({
     isScanning: state.scanning.isScanning,
     alert: state.alert,
-    selectedVideo: getSelectedVideo(state),
+    selectedVideo: getSelectedVideoWithFilters(state),
     filters: state.videoSearch.filters
 });
 
