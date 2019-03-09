@@ -38,7 +38,7 @@ import {
 import { BASE_CATEGORY_FILTERS, NEW_CATEGORY_FILTER } from '../../exclude/mock/mockData/categoryData';
 import { BASE_SERIES_FILTERS, NEW_SERIES_FILTER } from '../../exclude/mock/mockData/seriesData';
 import { BASE_STAR_FILTERS, NEW_STAR_FILTER } from '../../exclude/mock/mockData/starData';
-import { showErrorAlert } from 'store/alert/alert.actions';
+import { showErrorAlert, showSuccessAlert } from 'store/alert/alert.actions';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -147,7 +147,8 @@ describe('filterInputModal.actions', () => {
         it('add new category', async () => {
             store = mockStore(createState(ADD_ACTION, CATEGORY_TYPE));
             const expectedActions = [
-                { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS }
+                { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully saved Category filter' }
             ];
 
             try {
@@ -174,7 +175,8 @@ describe('filterInputModal.actions', () => {
         it('edit category', async () => {
             store = mockStore(createState(EDIT_ACTION, CATEGORY_TYPE));
             const expectedActions = [
-                { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS }
+                { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully saved Category filter' }
             ];
             try {
                 await store.dispatch(saveFilterChanges(NEW_CATEGORY_FILTER));
@@ -200,7 +202,8 @@ describe('filterInputModal.actions', () => {
         it('add new series', async () => {
             store = mockStore(createState(ADD_ACTION, SERIES_TYPE));
             const expectedActions = [
-                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS }
+                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully saved Series filter' }
             ];
             try {
                 await store.dispatch(saveFilterChanges(NEW_SERIES_FILTER));
@@ -226,7 +229,8 @@ describe('filterInputModal.actions', () => {
         it('edit series', async () => {
             store = mockStore(createState(EDIT_ACTION, SERIES_TYPE));
             const expectedActions = [
-                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS }
+                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully saved Series filter' }
             ];
             try {
                 await store.dispatch(saveFilterChanges(NEW_SERIES_FILTER));
@@ -252,7 +256,9 @@ describe('filterInputModal.actions', () => {
         it('add new star', async () => {
             store = mockStore(createState(ADD_ACTION, STAR_TYPE));
             const expectedActions = [
-                { type: setStars.toString(), payload: BASE_STAR_FILTERS }
+                { type: setStars.toString(), payload: BASE_STAR_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully saved Star filter' }
+
             ];
             try {
                 await store.dispatch(saveFilterChanges(NEW_STAR_FILTER));
@@ -278,7 +284,9 @@ describe('filterInputModal.actions', () => {
         it('edit star', async () => {
             store = mockStore(createState(EDIT_ACTION, STAR_TYPE));
             const expectedActions = [
-                { type: setStars.toString(), payload: BASE_STAR_FILTERS }
+                { type: setStars.toString(), payload: BASE_STAR_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully saved Star filter' }
+
             ];
             try {
                 await store.dispatch(saveFilterChanges(NEW_STAR_FILTER));
@@ -347,7 +355,8 @@ describe('filterInputModal.actions', () => {
         it('deletes category', async () => {
             const store = mockStore(createState(CATEGORY_TYPE));
             const expectedActions = [
-                { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS }
+                { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully deleted Category filter' }
             ];
             try {
                 await store.dispatch(deleteFilter());
@@ -361,7 +370,8 @@ describe('filterInputModal.actions', () => {
         it('deletes series', async () => {
             const store = mockStore(createState(SERIES_TYPE));
             const expectedActions = [
-                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS }
+                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully deleted Series filter' }
             ];
             try {
                 await store.dispatch(deleteFilter());
@@ -375,7 +385,8 @@ describe('filterInputModal.actions', () => {
         it('deletes star', async () => {
             const store = mockStore(createState(STAR_TYPE));
             const expectedActions = [
-                { type: setStars.toString(), payload: BASE_STAR_FILTERS }
+                { type: setStars.toString(), payload: BASE_STAR_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully deleted Star filter' }
             ];
             try {
                 await store.dispatch(deleteFilter());
