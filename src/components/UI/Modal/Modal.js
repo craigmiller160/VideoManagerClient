@@ -30,7 +30,7 @@ const Modal = (props) => {
                     <Button
                         key={ index }
                         color={ btn.color }
-                        type={ btn.type }
+                        type={ btn.type ? btn.type : 'button' }
                         onClick={ (event) => {
                             if (btn.closeModal) {
                                 close();

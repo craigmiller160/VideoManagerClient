@@ -1,7 +1,7 @@
 import { createAction } from 'redux-starter-kit';
 import { ADD_ACTION, CATEGORY_TYPE, SERIES_TYPE, STAR_TYPE } from './filterInputModal.reducer';
 import CategoryApiService from '../../services/CategoryApiService';
-import { showErrorAlert } from '../alert/alert.actions';
+import { showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
 import {
     loadCategoryOptions,
     loadSeriesOptions,
@@ -38,6 +38,8 @@ export const deleteFilter = () => async (dispatch, getState) => {
             default:
                 dispatch(showErrorAlert(`Invalid filter type ${type}`));
         }
+
+        dispatch(showSuccessAlert(`Successfully deleted ${type} filter`));
     }
     catch (ex) {
         console.log(ex);
@@ -75,6 +77,7 @@ export const saveFilterChanges = () => async (dispatch, getState) => {
                 dispatch(showErrorAlert(`Invalid type: ${type}`));
                 break;
         }
+        dispatch(showSuccessAlert(`Successfully saved ${type} filter`));
     }
     catch (ex) {
         console.log(ex);

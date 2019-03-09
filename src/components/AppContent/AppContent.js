@@ -58,9 +58,7 @@ export class AppContent extends Component {
             alert,
             hideAlert,
             selectedVideo,
-            filters,
-            filterInputModal,
-            toggleFilterInputModal
+            filters
         } = this.props;
         const { isStarted } = this.state;
 

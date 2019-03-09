@@ -45,8 +45,6 @@ const FilterInputModal = (props) => {
         id: value.value
     } : {};
 
-    // TODO make sure edit and delete changes can save
-
     return (
         <Modal
             open={ open }
