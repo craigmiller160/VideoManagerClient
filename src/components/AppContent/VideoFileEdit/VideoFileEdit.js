@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Form from 'components/UI/form/Form/Form';
 import classes from './VideoFileEdit.scss';
-import { Col, Row } from 'reactstrap';
+import { Col, Row, Button } from 'reactstrap';
 import Input from 'components/UI/form/Input/Input';
 import Select from 'components/UI/form/Select/Select';
 
@@ -82,6 +82,16 @@ const VideoFileEdit = (props) => {
                             rows: 5
                         } }
                     />
+                </Col>
+            </Row>
+            <Row>
+                <Col className="text-center">
+                    <Button
+                        color="success"
+                        type="submit"
+                    >
+                        Save
+                    </Button>
                 </Col>
             </Row>
         </Form>

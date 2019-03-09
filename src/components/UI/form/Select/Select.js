@@ -15,8 +15,6 @@ export const SelectComponent = (props) => {
         multi
     } = props;
 
-    console.log('Multi', multi); // TODO delete this
-
     const id = newid();
     return (
         <FormGroup className={ formStyles['input-label'] }>
