@@ -1,42 +1,57 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { VideoNavbar } from 'components/AppContent/VideoNavbar/VideoNavbar';
+import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
 import toJson from 'enzyme-to-json';
-import { MemoryRouter, withRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 
 jest.mock('react-router-dom', () => ({ Link: () => 'Link' }));
 
 const mountComponent = (props = {}) => {
-    const VideoNavbarRouter = withRouter(VideoNavbar);
     return mount(
         <MemoryRouter initialEntries={ ['/'] }>
-            <VideoNavbarRouter { ...props } />
+            <VideoNavbar { ...props } />
         </MemoryRouter>
     );
 };
 
 const startFileScan = jest.fn();
-const manageFilters = jest.fn();
 const props = {
     startFileScan,
-    manageFilters
+    isScanning: false
 };
 
 describe('VideoNavbar', () => {
     it('renders successfully', () => {
         const component = mountComponent(props);
-        expect(toJson(component.find('VideoNavbar'))).toMatchSnapshot();
+        expect(component.find('VideoNavbar')).toHaveLength(1);
+        expect(component.find('NavbarBrand')).toHaveLength(1);
+        expect(component.find('NavItem')).toHaveLength(3);
+        expect(component.find('NavbarToggler')).toHaveLength(1);
+    });
+
+    it('hides/disables items if scanning', () => {
+        const component = mountComponent({
+            ...props,
+            isScanning: true
+        });
+        expect(component.find('VideoNavbar')).toHaveLength(1);
+        expect(component.find('NavItem')).toHaveLength(0);
+        expect(component.find('NavbarToggler')).toHaveLength(0);
+        expect(component.find('NavbarBrand')).toHaveLength(1);
+        expect(component.find('NavbarBrand').props()).toEqual(expect.objectContaining({
+            disabled: true
+        }));
     });
 
     it('toggles the collapse open and closed', () => {
-        const navbar = mountComponent(props);
-        const toggle = navbar.find('VideoNavbar NavbarToggler');
+        const component = mountComponent(props);
+        const toggle = component.find('VideoNavbar NavbarToggler');
 
-        expect(navbar.state()).toEqual(expect.objectContaining({
+        expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
             isOpen: false
         }));
         toggle.simulate('click');
-        expect(navbar.state()).toEqual(expect.objectContaining({
+        expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
             isOpen: true
         }));
     });
@@ -46,12 +61,5 @@ describe('VideoNavbar', () => {
         const scanDirectoryBtn = component.find('NavLink#scanDirectory');
         scanDirectoryBtn.simulate('click');
         expect(startFileScan).toHaveBeenCalled();
-    });
-
-    it('Manages filters', () => {
-        const component = mountComponent(props);
-        const manageFiltersBtn = component.find('NavLink#manageFilters');
-        manageFiltersBtn.simulate('click');
-        expect(manageFilters).toHaveBeenCalled()
     });
 });

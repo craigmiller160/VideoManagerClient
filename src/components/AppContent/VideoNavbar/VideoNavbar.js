@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import * as classes from './VideoNavbar.scss'
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
-export const VideoNavbar = (props) => {
+const VideoNavbar = (props) => {
     const [ isOpen, setOpen ] = useState(false);
     const { isScanning, history, startFileScan } = props;
     const pathname = history.location.pathname;
