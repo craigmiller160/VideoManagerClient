@@ -21,12 +21,17 @@ const getPagination = (props) => {
             totalPages={ totalPages }
             currentPage={ currentPage }
             align={ RIGHT_ALIGN }
-            onClick={ (value) => paginationClick(value, currentPage, setCurrentPage) }
+            onClick={ (value) => paginationClick(value, props) }
         />
     );
 };
 
-const paginationClick = (value, currentPage, setCurrentPage) => {
+export const paginationClick = (value, props) => {
+    const {
+        currentPage,
+        setCurrentPage,
+        searchForVideos
+    } = props;
     let newPage = currentPage;
     if (newPage != value) { // eslint-disable-line
         if ('<' === value) {
@@ -44,7 +49,7 @@ const paginationClick = (value, currentPage, setCurrentPage) => {
     }
 };
 
-const VideoList = (props) => {
+export const VideoList = (props) => {
     const {
         searching,
         videoList,
@@ -53,9 +58,15 @@ const VideoList = (props) => {
         currentPage
     } = props;
 
+    console.log(searchForVideos); // TODO delete this
+
     useEffect(() => {
+        console.log('Effect running', searchForVideos); // TODO delete this
         searchForVideos();
+        console.log('Done the search'); // TODO delete this
     }, [currentPage]);
+
+    console.log('Rendering'); // TODO delete this
 
     return (
         <div className={ classes.VideoList }>
