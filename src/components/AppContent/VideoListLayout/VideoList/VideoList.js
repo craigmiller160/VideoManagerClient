@@ -58,12 +58,8 @@ export const VideoList = (props) => {
         currentPage
     } = props;
 
-    console.log(searchForVideos); // TODO delete this
-
     useEffect(() => {
-        console.log('Effect running', searchForVideos); // TODO delete this
         searchForVideos();
-        console.log('Done the search'); // TODO delete this
     }, [currentPage]);
 
     console.log('Rendering'); // TODO delete this
