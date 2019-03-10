@@ -28,7 +28,7 @@ const resetToRootComponent = (props) => {
         return true;
     }
 
-    return location.pathname === '/edit' && (!selectedVideo || Object.entries(selectedVideo).length === 0);
+    return location.pathname === '/edit' && (!selectedVideo || !selectedVideo.fileName);
 };
 
 const handleRouting = (props) => {
