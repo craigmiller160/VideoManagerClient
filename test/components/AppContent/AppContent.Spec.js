@@ -37,17 +37,14 @@ describe('AppContent', () => {
 
     it('renders successfully with VideoListComponent for root route', (done) => {
         const component = createComponent(props);
-
-        setImmediate(() => {
+        requestAnimationFrame(() => {
             expect(loadFilterOptions).toHaveBeenCalled();
             expect(checkIsScanning).toHaveBeenCalled();
+            expect(component.find('AppContent Container')).toHaveLength(1);
             expect(showErrorAlert).not.toHaveBeenCalled();
-            expect(component.find('AppContent').state()).toEqual(expect.objectContaining({
-                isStarted: true
-            }));
-            component.update();
+            component.update(); // This is when isStarted is set to true
             expect(component.find('AppContent Container')).toHaveLength(2);
-            expect(component.find('AppContent Route').text().trim()).toEqual('VideoListLayout');
+            expect(component.find('AppContent Route').at(1).text().trim()).toEqual('VideoListLayout');
             done();
         });
     });
@@ -55,9 +52,9 @@ describe('AppContent', () => {
     it('renders Scanning component for /scanning route', (done) => {
         const component = createComponent({ ...props, isScanning: true }, '/scanning');
 
-        setImmediate(() => {
+        requestAnimationFrame(() => {
             component.update();
-            expect(component.find('AppContent Route').text().trim()).toEqual('Scanning');
+            expect(component.find('AppContent Route').at(1).text().trim()).toEqual('Scanning');
             done();
         });
     });
@@ -65,9 +62,9 @@ describe('AppContent', () => {
     it('won\'t render Scanning component if isScanning is false', (done) => {
         const component = createComponent(props, '/scanning');
 
-        setImmediate(() => {
+        requestAnimationFrame(() => {
             component.update();
-            expect(component.find('AppContent Route').text().trim()).toEqual('VideoListLayout');
+            expect(component.find('AppContent Route').at(1).text().trim()).toEqual('VideoListLayout');
             done();
         });
     });
