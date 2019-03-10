@@ -59,7 +59,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "gulp build",
     "test": "gulp test",
     "eslint": "gulp eslint",
     "validate": "gulp validate"
@@ -181,6 +181,7 @@
     "gulp": "^4.0.0",
     "gulp-eslint": "^5.0.0",
     "gulp-jest": "^4.0.2",
+    "gulp-run": "^1.7.1",
     "jest": "23.6.0",
     "jest-cli": "^24.3.1",
     "jest-pnp-resolver": "1.0.1",

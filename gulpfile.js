@@ -1,7 +1,8 @@
 /* eslint-disable */
-const { src, task, series } = require('gulp');
+const { src, task, series, dest } = require('gulp');
 const eslint = require('gulp-eslint');
 const jest = require('jest-cli');
+const run = require('gulp-run');
 
 task('eslint', () => {
     return src(['./src/**/*.js'])
@@ -23,5 +24,9 @@ task('test', () => {
 
 task('validate', series('eslint', 'test', (done) => {
     done();
+}));
+
+task('build', series('validate', () => {
+    return run('node scripts/build.js', {}).exec();
 }));
 
