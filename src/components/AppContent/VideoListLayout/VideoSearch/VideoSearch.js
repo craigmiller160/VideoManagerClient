@@ -11,7 +11,7 @@ import { searchForVideos } from 'store/videoList/videoList.actions';
 
 export const FORM_NAME = 'video-search';
 
-const VideoSearch = (props) => {
+export const VideoSearch = (props) => {
     const {
         filters: { categories, series, stars },
         searchForVideos,
