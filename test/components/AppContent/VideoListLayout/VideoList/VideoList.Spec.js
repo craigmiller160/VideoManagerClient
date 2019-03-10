@@ -16,7 +16,7 @@ const pagination = {
     itemsPerPage: 10
 };
 
-const searchForVideos = jest.fn(() => console.log('Searching...')); // TODO remove console log
+const searchForVideos = jest.fn();
 const setCurrentPage = jest.fn();
 const expandVideoFile = jest.fn();
 const props = {
@@ -43,7 +43,7 @@ describe('VideoList', () => {
 
     it('shows spinner while searching', (done) => {
         const component = createComponent({ ...props, searching: true });
-        setImmediate(() => {
+        requestAnimationFrame(() => {
             expect(searchForVideos).toHaveBeenCalled();
             expect(component.find('mock-spinner')).toHaveLength(1);
             expect(component.find('mock-video-list-item')).toHaveLength(0);
@@ -55,23 +55,27 @@ describe('VideoList', () => {
 
     it('shows no videos if list length is 0', () => {
         const component = createComponent(props);
-        expect(searchForVideos).toHaveBeenCalled();
-        expect(component.find('mock-spinner')).toHaveLength(0);
-        expect(component.find('mock-video-list-item')).toHaveLength(0);
-        expect(component.find('mock-pagination')).toHaveLength(0);
-        expect(component.find('h3')).toHaveLength(2);
-        expect(component.find('h3').at(1).text()).toEqual('No Videos Available');
+        requestAnimationFrame(() => {
+            expect(searchForVideos).toHaveBeenCalled();
+            expect(component.find('mock-spinner')).toHaveLength(0);
+            expect(component.find('mock-video-list-item')).toHaveLength(0);
+            expect(component.find('mock-pagination')).toHaveLength(0);
+            expect(component.find('h3')).toHaveLength(2);
+            expect(component.find('h3').at(1).text()).toEqual('No Videos Available');
+        });
     });
 
     it('shows videos and pagination', () => {
         const component = createComponent({ ...props, videoList, ...pagination });
-        expect(searchForVideos).toHaveBeenCalled();
-        expect(component.find('mock-spinner')).toHaveLength(0);
-        expect(component.find('mock-video-list-item')).toHaveLength(2);
-        expect(component.find('mock-pagination')).toHaveLength(2);
-        expect(component.find('h3')).toHaveLength(1);
+        requestAnimationFrame(() => {
+            expect(searchForVideos).toHaveBeenCalled();
+            expect(component.find('mock-spinner')).toHaveLength(0);
+            expect(component.find('mock-video-list-item')).toHaveLength(2);
+            expect(component.find('mock-pagination')).toHaveLength(2);
+            expect(component.find('h3')).toHaveLength(1);
 
-        expect(component.find('mock-pagination').at(0).props().totalPages).toEqual(4);
+            expect(component.find('mock-pagination').at(0).props().totalPages).toEqual(4);
+        });
     });
 
     it('handles onClick from Pagination', () => {
