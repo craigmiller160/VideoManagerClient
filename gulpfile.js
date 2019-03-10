@@ -1,5 +1,6 @@
 const { src, task, series } = require('gulp');
 const eslint = require('gulp-eslint');
+const jest = require('jest-cli');
 
 task('eslint', () => {
     return src(['./src/**/*.js'])
@@ -8,10 +9,12 @@ task('eslint', () => {
         .pipe(eslint.failAfterError());
 });
 
-// task('test', () => {
-//
-// });
+task('test', () => {
+    process.env.NODE_ENV = 'test';
 
-task('validate', series('eslint', (done) => {
+    return jest.runCLI({}, ['./test']);
+});
+
+task('validate', series('eslint', 'test', (done) => {
     done();
 }));
