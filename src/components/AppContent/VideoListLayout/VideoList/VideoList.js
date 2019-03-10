@@ -9,7 +9,7 @@ import Spinner from 'components/UI/Spinner/Spinner';
 import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
 
 const getPagination = (props) => {
-    const { totalItems, itemsPerPage, currentPage, setCurrentPage } = props;
+    const { totalItems, itemsPerPage, currentPage } = props;
     if (totalItems === 0) {
         return <div />;
     }
