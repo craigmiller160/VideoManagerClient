@@ -62,8 +62,6 @@ export const VideoList = (props) => {
         searchForVideos();
     }, [currentPage]);
 
-    console.log('Rendering'); // TODO delete this
-
     return (
         <div className={ classes.VideoList }>
             <div className={ classes['list-title'] }>
