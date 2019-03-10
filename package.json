@@ -60,14 +60,24 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "CI=true node scripts/test.js"
+    "test": "gulp test",
+    "eslint": "gulp eslint",
+    "validate": "gulp validate"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "eslint:recommended",
       "plugin:react/recommended"
-    ]
+    ],
+    "rules": {
+      "react/prop-types": [
+        1,
+        {
+          "ignore": "children"
+        }
+      ]
+    }
   },
   "browserslist": [
     ">0.2%",

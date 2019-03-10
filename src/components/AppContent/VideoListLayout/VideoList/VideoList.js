@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import classes from './VideoList.scss';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -9,7 +10,7 @@ import Spinner from 'components/UI/Spinner/Spinner';
 import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
 
 const getPagination = (props) => {
-    const { totalItems, itemsPerPage, currentPage } = props;
+    const { totalItems, itemsPerPage, currentPage } = props; //eslint-disable-line react/prop-types
     if (totalItems === 0) {
         return <div />;
     }
@@ -97,6 +98,16 @@ export const VideoList = (props) => {
     );
 };
 
+VideoList.propTypes = {
+    totalItems: PropTypes.number,
+    itemsPerPage: PropTypes.number,
+    searching: PropTypes.bool,
+    videoList: PropTypes.array,
+    expandVideoFile: PropTypes.func,
+    searchForVideos: PropTypes.func,
+    currentPage: PropTypes.number
+};
+
 const mapStateToProps = (state) => ({
     totalItems: state.videoList.pagination.totalItems,
     itemsPerPage: state.videoList.pagination.itemsPerPage,
@@ -111,4 +122,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     expandVideoFile
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(VideoList);
+const VideoListConnected = connect(mapStateToProps, mapDispatchToProps)(VideoList);
+VideoListConnected.propTypes = {};
+export default VideoListConnected;

@@ -12,7 +12,6 @@ export const loadFilterOptions = () => async (dispatch) => {
         await dispatch(loadStarOptions());
     }
     catch (ex) {
-        console.log(ex);
         dispatch(showErrorAlert(ex.message));
     }
 };

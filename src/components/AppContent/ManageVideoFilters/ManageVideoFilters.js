@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Col, Row } from 'reactstrap';
 import classes from './ManageVideoFilters.scss';
 import FilterInputModal from 'components/Modals/FilterInputModal/FilterInputModal';
@@ -147,6 +148,27 @@ const ManageVideoFilters = (props) => {
     );
 };
 
+ManageVideoFilters.propTypes = {
+    open: PropTypes.bool,
+    type: PropTypes.string,
+    action: PropTypes.string,
+    filters: PropTypes.shape({
+        categories: PropTypes.array,
+        series: PropTypes.array,
+        stars: PropTypes.array
+    }),
+    selectedFilter: PropTypes.object,
+    showAddCategoryModal: PropTypes.func,
+    showAddSeriesModal: PropTypes.func,
+    showAddStarModal: PropTypes.func,
+    showEditCategoryModal: PropTypes.func,
+    showEditSeriesModal: PropTypes.func,
+    showEditStarModal: PropTypes.func,
+    hideFilterModal: PropTypes.func,
+    saveFilterChanges: PropTypes.func,
+    deleteFilter: PropTypes.func
+};
+
 const mapStateToProps = (state) => ({
     open: state.filterInputModal.open,
     type: state.filterInputModal.type,
@@ -168,4 +190,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     deleteFilter
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageVideoFilters);
+const ManageVideoFiltersConnected = connect(mapStateToProps, mapDispatchToProps)(ManageVideoFilters);
+ManageVideoFiltersConnected.propTypes = {};
+export default ManageVideoFiltersConnected;

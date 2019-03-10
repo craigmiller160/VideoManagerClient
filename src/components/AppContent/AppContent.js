@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
 import VideoListLayout from './VideoListLayout/VideoListLayout';
 import { Container, Row, Col } from 'reactstrap';
@@ -152,6 +153,24 @@ export const AppContent = (props) => {
     );
 };
 
+AppContent.propTypes = {
+    isScanning: PropTypes.bool,
+    alert: PropTypes.object,
+    selectedVideo: PropTypes.object,
+    filters: PropTypes.shape({
+        categories: PropTypes.array,
+        series: PropTypes.array,
+        stars: PropTypes.array
+    }),
+    checkIsScanning: PropTypes.func,
+    startFileScan: PropTypes.func,
+    showErrorAlert: PropTypes.func,
+    loadFilterOptions: PropTypes.func,
+    hideAlert: PropTypes.func,
+    saveVideoFileEdits: PropTypes.func,
+    history: PropTypes.object
+};
+
 const mapStateToProps = (state) => ({
     isScanning: state.scanning.isScanning,
     alert: state.alert,
@@ -168,4 +187,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     saveVideoFileEdits
 }, dispatch);
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppContent));
+const AppContentWrapped = withRouter(connect(mapStateToProps, mapDispatchToProps)(AppContent));
+AppContentWrapped.propTypes = {};
+export default AppContentWrapped;

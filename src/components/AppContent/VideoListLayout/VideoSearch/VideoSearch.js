@@ -1,4 +1,5 @@
 import React  from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
@@ -81,6 +82,16 @@ export const VideoSearch = (props) => {
     );
 };
 
+VideoSearch.propTypes = {
+    filters: PropTypes.shape({
+        categories: PropTypes.array,
+        series: PropTypes.array,
+        stars: PropTypes.array
+    }),
+    searchForVideos: PropTypes.func,
+    resetForm: PropTypes.func
+};
+
 const mapStateToProps = (state) => ({
     filters: state.videoSearch.filters
 });
@@ -90,4 +101,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     resetForm: reset
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(VideoSearch);
+const VideoSearchConnected = connect(mapStateToProps, mapDispatchToProps)(VideoSearch);
+VideoSearchConnected.propTypes = {};
+export default VideoSearchConnected;

@@ -68,9 +68,19 @@ VideoNavbar.defaultProps = {
     isScanning: false
 };
 
-VideoNavbar.propTypes = {
+const propTypes = {
     startFileScan: PropTypes.func.isRequired,
-    isScanning: PropTypes.bool
+    isScanning: PropTypes.bool,
+    history: PropTypes.object
 };
 
-export default withRouter(VideoNavbar);
+VideoNavbar.propTypes = {
+    ...propTypes
+};
+
+const VideoNavbarRouter = withRouter(VideoNavbar);
+VideoNavbarRouter.propTypes = {
+    ...propTypes,
+    history: undefined
+};
+export default VideoNavbarRouter;

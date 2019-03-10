@@ -30,12 +30,18 @@ const Form = (props) => {
     );
 };
 
+Form.propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+    className: PropTypes.string
+};
+
 const ReduxFormForm = reduxForm({})(Form);
 ReduxFormForm.propTypes = {
     form: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func,
+    handleSubmit: PropTypes.func.isRequired,
     className: PropTypes.string,
-    initialValues: PropTypes.object
+    initialValues: PropTypes.object,
+    children: PropTypes.element
 };
 
 export default ReduxFormForm;

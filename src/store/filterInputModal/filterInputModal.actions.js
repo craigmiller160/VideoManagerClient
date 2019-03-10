@@ -42,7 +42,6 @@ export const deleteFilter = () => async (dispatch, getState) => {
         dispatch(showSuccessAlert(`Successfully deleted ${type} filter`));
     }
     catch (ex) {
-        console.log(ex);
         dispatch(showErrorAlert(ex.message));
     }
 };
@@ -80,7 +79,6 @@ export const saveFilterChanges = () => async (dispatch, getState) => {
         dispatch(showSuccessAlert(`Successfully saved ${type} filter`));
     }
     catch (ex) {
-        console.log(ex);
         dispatch(showErrorAlert(ex.message));
     }
 };

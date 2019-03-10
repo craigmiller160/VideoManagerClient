@@ -32,7 +32,6 @@ export const searchForVideos = () => async (dispatch, getState) => {
         dispatch(setVideoList(result.data.videoList));
     }
     catch (ex) {
-        console.log(ex);
         dispatch(showErrorAlert(ex.message));
     }
     finally {
@@ -60,7 +59,6 @@ export const saveVideoFile = (videoFile) => async (dispatch) => {
         await dispatch(searchForVideos());
     }
     catch (ex) {
-        console.log(ex);
         dispatch(showErrorAlert(ex.message));
     }
 };

@@ -8,7 +8,6 @@ export const checkIsScanning = () => async (dispatch) => {
         handleScanStatus(result, dispatch);
     }
     catch (ex) {
-        console.log(ex);
         dispatch(showErrorAlert(ex.message));
     }
 };
@@ -28,7 +27,6 @@ export const startFileScan = () => async (dispatch) => {
         handleScanStatus(result, dispatch);
     }
     catch (ex) {
-        console.log(ex);
         dispatch(showErrorAlert(ex.message));
     }
 };

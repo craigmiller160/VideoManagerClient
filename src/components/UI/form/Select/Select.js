@@ -10,7 +10,6 @@ export const SelectComponent = (props) => {
     const {
         label,
         input,
-        name,
         options,
         multi
     } = props;
@@ -26,7 +25,7 @@ export const SelectComponent = (props) => {
             <ReactSelect
                 id={ id }
                 { ...input }
-                name={ name }
+                name={ input && input.name }
                 onBlur={ () => input.onBlur(input.value) }
                 options={ options }
                 isSearchable
