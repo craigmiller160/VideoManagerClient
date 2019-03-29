@@ -3,6 +3,10 @@ const { src, task, series, dest } = require('gulp');
 const eslint = require('gulp-eslint');
 const jest = require('jest-cli');
 const run = require('gulp-run');
+const zip = require('gulp-zip');
+const clean = require('gulp-clean');
+
+const packageJson = require('./package.json');
 
 task('eslint', () => {
     return src(['./src/**/*.js'])
@@ -22,11 +26,25 @@ task('test', () => {
         });
 });
 
+task('clean', () => {
+    return src(['./build', './dist'], { allowEmpty: true })
+        .pipe(clean({ force: true }));
+});
+
 task('validate', series('eslint', 'test', (done) => {
     done();
 }));
 
-task('build', series('validate', () => {
+task('build', series('clean', 'validate', () => {
     return run('node scripts/build.js', {}).exec();
 }));
 
+task('zip', () => {
+    return src('./build/**/**')
+        .pipe(zip(`${packageJson.name}_${packageJson.version}.zip`))
+        .pipe(dest('./dist'));
+});
+
+task('dist', series('build', 'zip', (done) => {
+    done();
+}));
