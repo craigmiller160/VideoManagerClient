@@ -31,9 +31,7 @@ task('clean', () => {
         .pipe(clean({ force: true }));
 });
 
-task('validate', series('eslint', 'test', (done) => {
-    done();
-}));
+task('validate', series('eslint', 'test'));
 
 task('build', series('clean', 'validate', () => {
     return run('node scripts/build.js', {}).exec();
@@ -45,6 +43,4 @@ task('zip', () => {
         .pipe(dest('./dist'));
 });
 
-task('dist', series('build', 'zip', (done) => {
-    done();
-}));
+task('dist', series('build', 'zip'));
