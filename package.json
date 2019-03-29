@@ -28,9 +28,6 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "gulp build",
-    "test": "gulp test",
-    "eslint": "gulp eslint",
     "validate": "gulp validate",
     "dist": "gulp dist"
   },
