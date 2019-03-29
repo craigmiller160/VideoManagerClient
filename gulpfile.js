@@ -41,7 +41,7 @@ task('build', series('clean', 'validate', () => {
 
 task('zip', () => {
     return src('./build/**/**')
-        .pipe(zip(`${packageJson.name}_${packageJson.version}.zip`))
+        .pipe(zip(`${packageJson.name}-${packageJson.version}.zip`))
         .pipe(dest('./dist'));
 });
 
