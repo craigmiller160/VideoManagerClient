@@ -6,6 +6,7 @@ import { Col, Row, Button } from 'reactstrap';
 import Input from 'components/UI/form/Input/Input';
 import Select from 'components/UI/form/Select/Select';
 import { Prompt } from 'react-router';
+import AddButton from '../../UI/AddButton/AddButton';
 
 export const FORM_NAME = 'video-file-edit';
 
@@ -82,25 +83,13 @@ const VideoFileEdit = (props) => {
                     </Row>
                     <Row className="justify-content-center" >
                         <Col md="4" className={ classes['add-filter-wrapper'] }>
-                            <Button
-                                color="info"
-                            >
-                                +
-                            </Button>
+                            <AddButton />
                         </Col>
                         <Col md="4" className={ classes['add-filter-wrapper'] }>
-                            <Button
-                                color="info"
-                            >
-                                +
-                            </Button>
+                            <AddButton />
                         </Col>
                         <Col md="4" className={ classes['add-filter-wrapper'] }>
-                            <Button
-                                color="info"
-                            >
-                                +
-                            </Button>
+                            <AddButton />
                         </Col>
                     </Row>
                     <Row>
