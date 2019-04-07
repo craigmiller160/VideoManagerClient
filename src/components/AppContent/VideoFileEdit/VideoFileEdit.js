@@ -47,7 +47,7 @@ const VideoFileEdit = (props) => {
                             <h3 className={ classes.title }>{ fileName }</h3>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className="mt-3 mb-3">
                         <Col md={ { size: 4, offset: 4 } }>
                             <Input
                                 label="Display Name"
@@ -81,7 +81,7 @@ const VideoFileEdit = (props) => {
                             />
                         </Col>
                     </Row>
-                    <Row className="justify-content-center" >
+                    <Row className="justify-content-center mb-3" >
                         <Col md="4" className={ classes['add-filter-wrapper'] }>
                             <AddButton />
                         </Col>
