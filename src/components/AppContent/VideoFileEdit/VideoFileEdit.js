@@ -10,6 +10,7 @@ import { Prompt } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AddButton from '../../UI/AddButton/AddButton';
+// import { showAddCategoryModal } from 'store/filterInputModal/filterInputModal.actions';
 
 export const FORM_NAME = 'video-file-edit';
 
@@ -137,7 +138,11 @@ const mapStateToProps = (state) =>  ({
     filters: state.videoSearch.filters
 });
 
-const VideoFileEditConnected = connect(mapStateToProps)(VideoFileEdit);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    // showAddCategoryModal
+}, dispatch);
+
+const VideoFileEditConnected = connect(mapStateToProps, mapDispatchToProps)(VideoFileEdit);
 VideoFileEditConnected.propTypes = {
     selectedVideo: PropTypes.object.isRequired,
     saveFileChanges: PropTypes.func.isRequired
