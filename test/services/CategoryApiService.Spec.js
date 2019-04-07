@@ -27,7 +27,6 @@ describe('CategoryApiService', () => {
             expect(result.data).toEqual(BASE_CATEGORIES);
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
     });
@@ -39,7 +38,6 @@ describe('CategoryApiService', () => {
             expect(result.data).toEqual(NEW_CATEGORY);
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
     });
@@ -51,7 +49,6 @@ describe('CategoryApiService', () => {
             expect(result.data).toEqual(NEW_CATEGORY);
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
     });
@@ -63,7 +60,6 @@ describe('CategoryApiService', () => {
             expect(result.data).toEqual(NEW_CATEGORY);
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
     });

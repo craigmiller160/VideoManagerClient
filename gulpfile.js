@@ -9,7 +9,7 @@ const clean = require('gulp-clean');
 const packageJson = require('./package.json');
 
 task('eslint', () => {
-    return src(['./src/**/*.js'])
+    return src(['./src/**/*.js', './test/**/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());

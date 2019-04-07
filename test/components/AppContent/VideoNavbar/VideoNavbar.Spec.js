@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
-import toJson from 'enzyme-to-json';
 import { MemoryRouter } from 'react-router';
 
 jest.mock('react-router-dom', () => ({ Link: () => 'Link' }));

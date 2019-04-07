@@ -2,9 +2,12 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { VideoList, paginationClick } from 'components/AppContent/VideoListLayout/VideoList/VideoList';
 
-jest.mock('components/AppContent/VideoListLayout/VideoList/VideoListItem/VideoListItem', () => (props) => <mock-video-list-item { ...props } />);
-jest.mock('components/UI/Spinner/Spinner', () => (props) => <mock-spinner { ...props } />);
-jest.mock('components/UI/Pagination/Pagination', () => (props) => <mock-pagination { ...props } />);
+jest.mock('components/AppContent/VideoListLayout/VideoList/VideoListItem/VideoListItem',
+    () => (props) => <mock-video-list-item { ...props } />); // eslint-disable-line react/display-name
+jest.mock('components/UI/Spinner/Spinner',
+    () => (props) => <mock-spinner { ...props } />); // eslint-disable-line react/display-name
+jest.mock('components/UI/Pagination/Pagination',
+    () => (props) => <mock-pagination { ...props } />); // eslint-disable-line react/display-name
 
 const videoList = [
     { fileId: 1 },

@@ -87,7 +87,6 @@ describe('videoSearch.actions', () => {
                 await store.dispatch(loadFilterOptions());
             }
             catch (ex) {
-                console.log('Error', ex);
                 expect(ex).toBeUndefined();
             }
             expect(store.getActions()).toEqual(expectedActions);

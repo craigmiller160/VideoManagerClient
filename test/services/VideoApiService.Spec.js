@@ -33,7 +33,6 @@ describe('VideoApiService', () => {
             expect(result.data).toEqual(NEW_VIDEO_FILE);
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
     });
@@ -45,7 +44,6 @@ describe('VideoApiService', () => {
             expect(result.data).toEqual(NEW_VIDEO_FILE);
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
     });
@@ -63,7 +61,6 @@ describe('VideoApiService', () => {
             });
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
         expect(result).toBeTruthy();
@@ -77,7 +74,6 @@ describe('VideoApiService', () => {
             result = await VideoApiService.startVideoScan();
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
         expect(result).toBeTruthy();
@@ -92,7 +88,6 @@ describe('VideoApiService', () => {
             expect(result.data).toEqual(FILE_SCAN_STATUS);
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
     });
@@ -103,7 +98,6 @@ describe('VideoApiService', () => {
             expect(result.status).toEqual(200);
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
     });

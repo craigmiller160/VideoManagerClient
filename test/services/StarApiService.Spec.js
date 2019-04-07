@@ -22,7 +22,6 @@ describe('StarApiService', () => {
             expect(result.data).toEqual(BASE_STARS);
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
     });
@@ -34,7 +33,6 @@ describe('StarApiService', () => {
             expect(result.data).toEqual(NEW_STAR);
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
     });
@@ -46,7 +44,6 @@ describe('StarApiService', () => {
             expect(result.data).toEqual(NEW_STAR);
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
     });
@@ -58,7 +55,6 @@ describe('StarApiService', () => {
             expect(result.data).toEqual(NEW_STAR);
         }
         catch (ex) {
-            console.log(ex);
             expect(ex).toBeUndefined();
         }
     });
