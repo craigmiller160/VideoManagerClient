@@ -1,3 +1,4 @@
+/* eslint-disable */ // TODO delete this
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
@@ -72,8 +73,7 @@ export const AppContent = (props) => {
         selectedVideo,
         startFileScan,
         alert,
-        hideAlert,
-        filters
+        hideAlert
     } = props;
 
     useEffect(() => {
@@ -125,7 +125,6 @@ export const AppContent = (props) => {
                                     { ...props }
                                     selectedVideo={ selectedVideo }
                                     saveFileChanges={ saveFileChanges }
-                                    filters={ filters }
                                 />
                             ) }
                         />
@@ -157,11 +156,6 @@ AppContent.propTypes = {
     isScanning: PropTypes.bool,
     alert: PropTypes.object,
     selectedVideo: PropTypes.object,
-    filters: PropTypes.shape({
-        categories: PropTypes.array,
-        series: PropTypes.array,
-        stars: PropTypes.array
-    }),
     checkIsScanning: PropTypes.func,
     startFileScan: PropTypes.func,
     showErrorAlert: PropTypes.func,
@@ -174,8 +168,7 @@ AppContent.propTypes = {
 const mapStateToProps = (state) => ({
     isScanning: state.scanning.isScanning,
     alert: state.alert,
-    selectedVideo: getSelectedVideoWithFilters(state),
-    filters: state.videoSearch.filters
+    selectedVideo: getSelectedVideoWithFilters(state)
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

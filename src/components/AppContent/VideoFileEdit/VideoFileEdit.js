@@ -1,3 +1,4 @@
+/* eslint-disable */ // TODO delete this
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'components/UI/form/Form/Form';
@@ -6,6 +7,8 @@ import { Col, Row, Button } from 'reactstrap';
 import Input from 'components/UI/form/Input/Input';
 import Select from 'components/UI/form/Select/Select';
 import { Prompt } from 'react-router';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import AddButton from '../../UI/AddButton/AddButton';
 
 export const FORM_NAME = 'video-file-edit';
@@ -122,8 +125,22 @@ const VideoFileEdit = (props) => {
 
 VideoFileEdit.propTypes = {
     selectedVideo: PropTypes.object.isRequired,
-    filters: PropTypes.object.isRequired,
+    filters: PropTypes.shape({
+        categories: PropTypes.array,
+        series: PropTypes.array,
+        stars: PropTypes.array
+    }).isRequired,
     saveFileChanges: PropTypes.func.isRequired
 };
 
-export default VideoFileEdit;
+const mapStateToProps = (state) =>  ({
+    filters: state.videoSearch.filters
+});
+
+const VideoFileEditConnected = connect(mapStateToProps)(VideoFileEdit);
+VideoFileEditConnected.propTypes = {
+    selectedVideo: PropTypes.object.isRequired,
+    saveFileChanges: PropTypes.func.isRequired
+};
+
+export default VideoFileEditConnected;
