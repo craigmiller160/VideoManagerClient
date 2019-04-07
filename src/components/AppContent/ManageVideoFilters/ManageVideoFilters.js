@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Row } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import classes from './ManageVideoFilters.scss';
 import FilterInputModal from 'components/Modals/FilterInputModal/FilterInputModal';
 import { connect } from 'react-redux';
@@ -18,6 +18,7 @@ import {
 } from 'store/filterInputModal/filterInputModal.actions';
 import { getSelectedFilter } from 'store/filterInputModal/filterInputModal.selectors';
 import FilterListItems from './FilterListItems/FilterListItems';
+import AddButton from '../../UI/AddButton/AddButton';
 
 const ManageVideoFilters = (props) => {
     const {
@@ -61,12 +62,7 @@ const ManageVideoFilters = (props) => {
                             </Row>
                             <Row>
                                 <Col className="text-center">
-                                    <Button
-                                        color="info"
-                                        onClick={ showAddCategoryModal }
-                                    >
-                                        +
-                                    </Button>
+                                    <AddButton addItem={ showAddCategoryModal } />
                                 </Col>
                             </Row>
                         </Col>
@@ -86,12 +82,7 @@ const ManageVideoFilters = (props) => {
                             </Row>
                             <Row>
                                 <Col className="text-center">
-                                    <Button
-                                        color="info"
-                                        onClick={ showAddSeriesModal }
-                                    >
-                                        +
-                                    </Button>
+                                    <AddButton addItem={ showAddSeriesModal } />
                                 </Col>
                             </Row>
                         </Col>
@@ -111,12 +102,7 @@ const ManageVideoFilters = (props) => {
                             </Row>
                             <Row>
                                 <Col className="text-center">
-                                    <Button
-                                        color="info"
-                                        onClick={ showAddStarModal }
-                                    >
-                                        +
-                                    </Button>
+                                    <AddButton addItem={ showAddStarModal } />
                                 </Col>
                             </Row>
                         </Col>
