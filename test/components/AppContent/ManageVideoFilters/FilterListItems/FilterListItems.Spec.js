@@ -3,8 +3,8 @@ import { mount } from 'enzyme';
 import FilterListItems from 'components/AppContent/ManageVideoFilters/FilterListItems/FilterListItems';
 
 const items = [
-    { value: 'val1', label: 'label1' },
-    { value: 'val2', label: 'label2' }
+    { value: 1, label: 'label1' },
+    { value: 2, label: 'label2' }
 ];
 const showEditModal = jest.fn();
 

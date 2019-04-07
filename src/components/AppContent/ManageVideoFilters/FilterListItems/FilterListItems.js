@@ -19,7 +19,7 @@ const FilterListItems = (props) => (
 
 FilterListItems.propTypes = {
     items: PropTypes.arrayOf(PropTypes.shape({
-        value: PropTypes.string,
+        value: PropTypes.number,
         label: PropTypes.string
     })),
     showEditModal: PropTypes.func

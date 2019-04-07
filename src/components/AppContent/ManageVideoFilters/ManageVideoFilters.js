@@ -16,8 +16,8 @@ import {
     showEditSeriesModal,
     showEditStarModal
 } from 'store/filterInputModal/filterInputModal.actions';
-import FilterListItem from './FilterListItems/FilterListItem/FilterListItem';
 import { getSelectedFilter } from 'store/filterInputModal/filterInputModal.selectors';
+import FilterListItems from './FilterListItems/FilterListItems';
 
 const ManageVideoFilters = (props) => {
     const {
@@ -53,16 +53,10 @@ const ManageVideoFilters = (props) => {
                             </Row>
                             <Row>
                                 <Col className={ classes.scroll }>
-                                    {
-                                        categories.map(({ value, label }, index) => (
-                                            <FilterListItem
-                                                key={ value }
-                                                label={ label }
-                                                value={ value }
-                                                click={ () => showEditCategoryModal(index) }
-                                            />
-                                        ))
-                                    }
+                                    <FilterListItems
+                                        items={ categories }
+                                        showEditModal={ showEditCategoryModal }
+                                    />
                                 </Col>
                             </Row>
                             <Row>
@@ -84,15 +78,10 @@ const ManageVideoFilters = (props) => {
                             </Row>
                             <Row>
                                 <Col className={ classes.scroll }>
-                                    {
-                                        series.map(({ value, label }, index) => (
-                                            <FilterListItem
-                                                key={ value }
-                                                label={ label }
-                                                click={ () => showEditSeriesModal(index) }
-                                            />
-                                        ))
-                                    }
+                                    <FilterListItems
+                                        items={ series }
+                                        showEditModal={ showEditSeriesModal }
+                                    />
                                 </Col>
                             </Row>
                             <Row>
@@ -114,15 +103,10 @@ const ManageVideoFilters = (props) => {
                             </Row>
                             <Row>
                                 <Col className={ classes.scroll }>
-                                    {
-                                        stars.map(({ value, label }, index) => (
-                                            <FilterListItem
-                                                key={ value }
-                                                label={ label }
-                                                click={ () => showEditStarModal(index) }
-                                            />
-                                        ))
-                                    }
+                                    <FilterListItems
+                                        items={ stars }
+                                        showEditModal={ showEditStarModal }
+                                    />
                                 </Col>
                             </Row>
                             <Row>
