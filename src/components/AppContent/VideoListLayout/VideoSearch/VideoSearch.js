@@ -30,54 +30,56 @@ export const VideoSearch = (props) => {
             handleSubmit={ searchForVideos }
             className={ classes.VideoSearch }
         >
-            <Row>
-                <Col sm="6" md="3">
-                    <Input
-                        label="Search"
-                        name="search"
-                    />
-                </Col>
-                <Col sm="6" md="3">
-                    <Select
-                        label="Category"
-                        options={ categories }
-                        name="category"
-                    />
-                </Col>
-                <Col sm="6" md="3">
-                    <Select
-                        label="Series"
-                        options={ series }
-                        name="series"
-                    />
-                </Col>
-                <Col sm="6" md="3">
-                    <Select
-                        label="Stars"
-                        options={ stars }
-                        name="star"
-                    />
-                </Col>
-            </Row>
-            <Row>
-                <Col className="text-center">
-                    <Button
-                        id="do-video-search-btn"
-                        type="submit"
-                        color="primary"
-                    >
-                        Search
-                    </Button>
-                    <Button
-                        id="reset-video-search-btn"
-                        type="button"
-                        color="info"
-                        onClick={ doResetForm }
-                    >
-                        Reset
-                    </Button>
-                </Col>
-            </Row>
+            <>
+                <Row>
+                    <Col sm="6" md="3">
+                        <Input
+                            label="Search"
+                            name="search"
+                        />
+                    </Col>
+                    <Col sm="6" md="3">
+                        <Select
+                            label="Category"
+                            options={ categories }
+                            name="category"
+                        />
+                    </Col>
+                    <Col sm="6" md="3">
+                        <Select
+                            label="Series"
+                            options={ series }
+                            name="series"
+                        />
+                    </Col>
+                    <Col sm="6" md="3">
+                        <Select
+                            label="Stars"
+                            options={ stars }
+                            name="star"
+                        />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className="text-center">
+                        <Button
+                            id="do-video-search-btn"
+                            type="submit"
+                            color="primary"
+                        >
+                            Search
+                        </Button>
+                        <Button
+                            id="reset-video-search-btn"
+                            type="button"
+                            color="info"
+                            onClick={ doResetForm }
+                        >
+                            Reset
+                        </Button>
+                    </Col>
+                </Row>
+            </>
         </Form>
     );
 };

@@ -81,6 +81,6 @@ VideoNavbar.propTypes = {
 const VideoNavbarRouter = withRouter(VideoNavbar);
 VideoNavbarRouter.propTypes = {
     ...propTypes,
-    history: undefined
+    history: PropTypes.object
 };
 export default VideoNavbarRouter;
