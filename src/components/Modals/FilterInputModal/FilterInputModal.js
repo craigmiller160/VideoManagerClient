@@ -9,7 +9,7 @@ import { deleteFilter, hideFilterModal, saveFilterChanges } from 'store/filterIn
 
 const FORM_NAME = 'filterInputForm';
 
-const FilterInputModal = (props) => {
+export const FilterInputModal = (props) => {
     const {
         open,
         close,
