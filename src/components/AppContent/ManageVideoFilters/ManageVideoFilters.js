@@ -6,13 +6,17 @@ import FilterInputModal from 'components/Modals/FilterInputModal/FilterInputModa
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
+    deleteFilter,
     hideFilterModal,
+    saveFilterChanges,
     showAddCategoryModal,
     showAddSeriesModal,
-    showAddStarModal, showEditCategoryModal, showEditSeriesModal, showEditStarModal,
-    deleteFilter, saveFilterChanges
+    showAddStarModal,
+    showEditCategoryModal,
+    showEditSeriesModal,
+    showEditStarModal
 } from 'store/filterInputModal/filterInputModal.actions';
-import FilterListItem from './FilterListItem/FilterListItem';
+import FilterListItem from './FilterListItems/FilterListItem/FilterListItem';
 import { getSelectedFilter } from 'store/filterInputModal/filterInputModal.selectors';
 
 const ManageVideoFilters = (props) => {
