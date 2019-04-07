@@ -6,9 +6,6 @@ import FilterInputModal from 'components/Modals/FilterInputModal/FilterInputModa
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-    deleteFilter,
-    hideFilterModal,
-    saveFilterChanges,
     showAddCategoryModal,
     showAddSeriesModal,
     showAddStarModal,
@@ -23,17 +20,13 @@ import AddButton from '../../UI/AddButton/AddButton';
 const ManageVideoFilters = (props) => {
     const {
         filters: { categories, stars, series },
-        open, type, action,
         showAddCategoryModal,
         showAddSeriesModal,
         showAddStarModal,
         showEditCategoryModal,
         showEditSeriesModal,
         showEditStarModal,
-        hideFilterModal,
-        saveFilterChanges,
-        selectedFilter,
-        deleteFilter
+        selectedFilter
     } = props;
 
     return (
@@ -110,22 +103,13 @@ const ManageVideoFilters = (props) => {
                 </Col>
             </Row>
             <FilterInputModal
-                open={ open }
-                close={ hideFilterModal }
-                type={ type }
-                action={ action }
-                submit={ saveFilterChanges }
                 value={ selectedFilter }
-                deleteFilter={ deleteFilter }
             />
         </>
     );
 };
 
 ManageVideoFilters.propTypes = {
-    open: PropTypes.bool,
-    type: PropTypes.string,
-    action: PropTypes.string,
     filters: PropTypes.shape({
         categories: PropTypes.array,
         series: PropTypes.array,
@@ -137,16 +121,10 @@ ManageVideoFilters.propTypes = {
     showAddStarModal: PropTypes.func,
     showEditCategoryModal: PropTypes.func,
     showEditSeriesModal: PropTypes.func,
-    showEditStarModal: PropTypes.func,
-    hideFilterModal: PropTypes.func,
-    saveFilterChanges: PropTypes.func,
-    deleteFilter: PropTypes.func
+    showEditStarModal: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
-    open: state.filterInputModal.open,
-    type: state.filterInputModal.type,
-    action: state.filterInputModal.action,
     filters: state.videoSearch.filters,
     selectedFilter: getSelectedFilter(state)
 });
@@ -158,10 +136,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     showAddStarModal: () => showAddStarModal(),
     showEditCategoryModal,
     showEditSeriesModal,
-    showEditStarModal,
-    hideFilterModal: () => hideFilterModal(),
-    saveFilterChanges,
-    deleteFilter
+    showEditStarModal
 }, dispatch);
 
 const ManageVideoFiltersConnected = connect(mapStateToProps, mapDispatchToProps)(ManageVideoFilters);

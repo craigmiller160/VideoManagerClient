@@ -1,8 +1,11 @@
 import React from 'react';
-import Modal from 'components/UI/Modal/Modal';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Modal from 'components/UI/Modal/Modal';
 import Input from 'components/UI/form/Input/Input';
-import { EDIT_ACTION } from '../../../store/filterInputModal/filterInputModal.reducer';
+import { EDIT_ACTION } from 'store/filterInputModal/filterInputModal.reducer';
+import { deleteFilter, hideFilterModal, saveFilterChanges } from 'store/filterInputModal/filterInputModal.actions';
 
 const FORM_NAME = 'filterInputForm';
 
@@ -86,4 +89,19 @@ FilterInputModal.propTypes = {
     })
 };
 
-export default FilterInputModal;
+const mapStateToProps = (state) => ({
+    open: state.filterInputModal.open,
+    type: state.filterInputModal.type,
+    action: state.filterInputModal.action
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    close: () => hideFilterModal(),
+    submit: saveFilterChanges,
+    deleteFilter
+}, dispatch);
+
+const FilterInputModalConnected = connect(mapStateToProps, mapDispatchToProps)(FilterInputModal);
+FilterInputModalConnected.propTypes = {};
+
+export default FilterInputModalConnected;
