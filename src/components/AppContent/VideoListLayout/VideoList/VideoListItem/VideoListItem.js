@@ -24,7 +24,9 @@ const VideoListItem = (props) => {
             stars,
             expanded
         },
-        expandVideoFile
+        videoFile,
+        expandVideoFile,
+        playVideoFile
     } = props;
 
     const leftColSize = 6;
@@ -87,7 +89,11 @@ const VideoListItem = (props) => {
                                 <Button color="info">Edit</Button>
                             </Link>
 
-                            <Button color="primary">Play</Button>
+                            <Button
+                                color="primary"
+                                onClick={ () => playVideoFile(videoFile) }>
+                                Play
+                            </Button>
                         </Col>
                     </Row>
                 </Collapse>
@@ -98,7 +104,8 @@ const VideoListItem = (props) => {
 
 VideoListItem.propTypes = {
     videoFile: PropTypes.object.isRequired,
-    expandVideoFile: PropTypes.func.isRequired
+    expandVideoFile: PropTypes.func.isRequired,
+    playVideoFile: PropTypes.func.isRequired
 };
 
 export default VideoListItem;
