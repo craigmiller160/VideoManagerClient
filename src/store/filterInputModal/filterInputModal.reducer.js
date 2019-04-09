@@ -4,14 +4,11 @@ import {
     showAddCategoryModal,
     showAddSeriesModal,
     showAddStarModal,
-    showEditCategoryModal, showEditSeriesModal, showEditStarModal
+    showEditCategoryModal,
+    showEditSeriesModal,
+    showEditStarModal
 } from './filterInputModal.actions';
-
-export const CATEGORY_TYPE = 'Category';
-export const STAR_TYPE = 'Star';
-export const SERIES_TYPE = 'Series';
-export const ADD_ACTION = 'Add';
-export const EDIT_ACTION = 'Edit';
+import { ADD_ACTION, CATEGORY_TYPE, EDIT_ACTION, SERIES_TYPE, STAR_TYPE } from './filterInputModal.constants';
 
 export const initialState = {
     open: false,

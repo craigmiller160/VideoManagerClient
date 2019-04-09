@@ -1,5 +1,5 @@
 import { createSelector } from 'redux-starter-kit';
-import { CATEGORY_TYPE, SERIES_TYPE, STAR_TYPE } from './filterInputModal.reducer';
+import { CATEGORY_TYPE, SERIES_TYPE, STAR_TYPE } from './filterInputModal.constants';
 
 export const getSelectedFilter = createSelector(
     [

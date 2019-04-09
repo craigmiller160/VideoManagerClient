@@ -1,12 +1,8 @@
 import { createAction } from 'redux-starter-kit';
-import { ADD_ACTION, CATEGORY_TYPE, SERIES_TYPE, STAR_TYPE } from './filterInputModal.reducer';
+import { ADD_ACTION, CATEGORY_TYPE, SERIES_TYPE, STAR_TYPE } from './filterInputModal.constants';
 import CategoryApiService from '../../services/CategoryApiService';
 import { showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
-import {
-    loadCategoryOptions,
-    loadSeriesOptions,
-    loadStarOptions
-} from '../videoSearch/videoSearch.actions';
+import { loadCategoryOptions, loadSeriesOptions, loadStarOptions } from '../videoSearch/videoSearch.actions';
 import SeriesApiService from '../../services/SeriesApiService';
 import StarApiService from '../../services/StarApiService';
 import { getSelectedFilter } from './filterInputModal.selectors';

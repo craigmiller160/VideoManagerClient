@@ -1,16 +1,14 @@
-/* eslint-disable */ // TODO delete this
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'components/UI/form/Form/Form';
 import classes from './VideoFileEdit.scss';
-import { Col, Row, Button } from 'reactstrap';
+import { Button, Col, Row } from 'reactstrap';
 import Input from 'components/UI/form/Input/Input';
 import Select from 'components/UI/form/Select/Select';
 import { Prompt } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AddButton from '../../UI/AddButton/AddButton';
-// import { showAddCategoryModal } from 'store/filterInputModal/filterInputModal.actions';
 
 export const FORM_NAME = 'video-file-edit';
 

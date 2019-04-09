@@ -1,9 +1,8 @@
-/* eslint-disable */ // TODO delete this
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
 import VideoListLayout from './VideoListLayout/VideoListLayout';
-import { Container, Row, Col } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import Alert from '../UI/Alert/Alert';
 import { Route, Switch } from 'react-router-dom';
 import { withRouter } from 'react-router';
@@ -11,7 +10,7 @@ import Scanning from './Scanning/Scanning';
 import { checkIsScanning, startFileScan } from 'store/scanning/scanning.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { showErrorAlert, hideAlert } from 'store/alert/alert.actions';
+import { hideAlert, showErrorAlert } from 'store/alert/alert.actions';
 import VideoFileEdit from './VideoFileEdit/VideoFileEdit';
 import { getSelectedVideoWithFilters } from 'store/videoList/videoList.selectors';
 import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
