@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { FilterInputModal } from 'components/Modals/FilterInputModal/FilterInputModal';
-import { ADD_ACTION, EDIT_ACTION } from 'store/filterInputModal/filterInputModal.reducer';
+import { ADD_ACTION, EDIT_ACTION } from 'store/filterInputModal/filterInputModal.constants';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';

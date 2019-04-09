@@ -1,8 +1,9 @@
-import filterInputReducer, {
+import {
     ADD_ACTION,
     CATEGORY_TYPE, EDIT_ACTION,
-    initialState as filterInputInitState, SERIES_TYPE, STAR_TYPE
-} from 'store/filterInputModal/filterInputModal.reducer';
+    SERIES_TYPE, STAR_TYPE
+} from 'store/filterInputModal/filterInputModal.constants';
+import filterInputReducer, { initialState as filterInputInitState } from 'store/filterInputModal/filterInputModal.reducer';
 import {
     hideFilterModal,
     showAddCategoryModal,
