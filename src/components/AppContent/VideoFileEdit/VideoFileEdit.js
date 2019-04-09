@@ -9,6 +9,12 @@ import { Prompt } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AddButton from '../../UI/AddButton/AddButton';
+import {
+    showAddCategoryModal,
+    showAddSeriesModal,
+    showAddStarModal,
+} from 'store/filterInputModal/filterInputModal.actions';
+import FilterInputModal from '../../Modals/FilterInputModal/FilterInputModal';
 
 export const FORM_NAME = 'video-file-edit';
 
@@ -23,7 +29,10 @@ const VideoFileEdit = (props) => {
         selectedVideo,
         selectedVideo: { fileName },
         filters: { categories, stars, series },
-        saveFileChanges
+        saveFileChanges,
+        showAddCategoryModal,
+        showAddSeriesModal,
+        showAddStarModal
     } = props;
 
     const submit = () => {
@@ -85,13 +94,13 @@ const VideoFileEdit = (props) => {
                     </Row>
                     <Row className="justify-content-center mb-3" >
                         <Col md="4" className={ classes['add-filter-wrapper'] }>
-                            <AddButton />
+                            <AddButton addItem={ showAddCategoryModal } />
                         </Col>
                         <Col md="4" className={ classes['add-filter-wrapper'] }>
-                            <AddButton />
+                            <AddButton addItem={ showAddSeriesModal } />
                         </Col>
                         <Col md="4" className={ classes['add-filter-wrapper'] }>
-                            <AddButton />
+                            <AddButton addItem={ showAddStarModal } />
                         </Col>
                     </Row>
                     <Row>
@@ -118,6 +127,7 @@ const VideoFileEdit = (props) => {
                     </Row>
                 </>
             </Form>
+            <FilterInputModal />
         </>
     );
 };
@@ -129,7 +139,10 @@ VideoFileEdit.propTypes = {
         series: PropTypes.array,
         stars: PropTypes.array
     }).isRequired,
-    saveFileChanges: PropTypes.func.isRequired
+    saveFileChanges: PropTypes.func.isRequired,
+    showAddCategoryModal: PropTypes.func,
+    showAddSeriesModal: PropTypes.func,
+    showAddStarModal: PropTypes.func
 };
 
 const mapStateToProps = (state) =>  ({
@@ -137,7 +150,9 @@ const mapStateToProps = (state) =>  ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    // showAddCategoryModal
+    showAddCategoryModal: () => showAddCategoryModal(),
+    showAddSeriesModal: () => showAddSeriesModal(),
+    showAddStarModal: () => showAddStarModal()
 }, dispatch);
 
 const VideoFileEditConnected = connect(mapStateToProps, mapDispatchToProps)(VideoFileEdit);
