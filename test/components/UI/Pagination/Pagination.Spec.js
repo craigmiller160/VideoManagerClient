@@ -1,10 +1,16 @@
 import React from 'react';
-import Pagination, { RIGHT_ALIGN } from '../../../../src/components/UI/Pagination/Pagination';
+import Pagination, {
+    RIGHT_ALIGN,
+    LEFT_ALIGN,
+    CENTER_ALIGN,
+    getAlignClassName
+} from 'components/UI/Pagination/Pagination';
+import PaginationClasses from 'components/UI/Pagination/Pagination.scss';
 import { mount } from 'enzyme';
 
-const getProps = (currentPage) => ({
+const getProps = (currentPage, totalPages = 5) => ({
     currentPage,
-    totalPages: 5,
+    totalPages,
     align: RIGHT_ALIGN
 });
 
@@ -21,38 +27,44 @@ describe('Pagination', () => {
                 onClick={ clickHandler }
             />
         );
-        expect(component).toMatchSnapshot();
 
         const paginationRoot = component.find('Pagination[tag="nav"]');
         expect(paginationRoot.hasClass('Pagination')).toEqual(true);
         expect(paginationRoot.hasClass('right')).toEqual(true);
 
         const paginationItems = component.find('PaginationItem');
-        expect(paginationItems.length).toEqual(7);
+        expect(paginationItems.length).toEqual(9);
 
-        expect(paginationItems.at(0).find('PaginationLink').props().previous).toEqual(true);
-        expect(paginationItems.at(6).find('PaginationLink').props().next).toEqual(true);
-        expect(paginationItems.at(2).props().active).toEqual(true);
+        expect(paginationItems.at(0).find('PaginationLink').props().first).toEqual(true);
+        expect(paginationItems.at(1).find('PaginationLink').props().previous).toEqual(true);
+        expect(paginationItems.at(7).find('PaginationLink').props().next).toEqual(true);
+        expect(paginationItems.at(8).find('PaginationLink').props().last).toEqual(true);
+        expect(paginationItems.at(3).props().active).toEqual(true);
 
-        paginationItems.at(3).simulate('click', {});
+        paginationItems.at(4).simulate('click');
         expect(clickedIndex).toEqual('2');
-        paginationItems.at(0).simulate('click', {});
+        paginationItems.at(1).simulate('click');
         expect(clickedIndex).toEqual('<');
-        paginationItems.at(6).simulate('click', {});
+        paginationItems.at(7).simulate('click');
         expect(clickedIndex).toEqual('>');
+        paginationItems.at(0).simulate('click');
+        expect(clickedIndex).toEqual('<<');
+        paginationItems.at(8).simulate('click');
+        expect(clickedIndex).toEqual('>>');
     });
 
     it('should only render with next button', () => {
         const component = mount(
             <Pagination { ...getProps(0) } />
         );
-        expect(component).toMatchSnapshot();
 
         const paginationItems = component.find('PaginationItem');
-        expect(paginationItems.length).toEqual(6);
+        expect(paginationItems.length).toEqual(7);
 
-        expect(paginationItems.at(0).find('PaginationLink').props().previous).toBeUndefined();
+        expect(paginationItems.at(0).find('PaginationLink').props().first).toBeUndefined();
+        expect(paginationItems.at(1).find('PaginationLink').props().previous).toBeUndefined();
         expect(paginationItems.at(5).find('PaginationLink').props().next).toEqual(true);
+        expect(paginationItems.at(6).find('PaginationLink').props().last).toEqual(true);
         expect(paginationItems.at(0).props().active).toEqual(true);
     });
 
@@ -60,13 +72,62 @@ describe('Pagination', () => {
         const component = mount(
             <Pagination { ...getProps(4) } />
         );
-        expect(component).toMatchSnapshot();
 
         const paginationItems = component.find('PaginationItem');
-        expect(paginationItems.length).toEqual(6);
+        expect(paginationItems.length).toEqual(7);
 
-        expect(paginationItems.at(0).find('PaginationLink').props().previous).toEqual(true);
+        expect(paginationItems.at(0).find('PaginationLink').props().first).toEqual(true);
+        expect(paginationItems.at(1).find('PaginationLink').props().previous).toEqual(true);
         expect(paginationItems.at(5).find('PaginationLink').props().next).toBeUndefined();
-        expect(paginationItems.at(5).props().active).toEqual(true);
+        expect(paginationItems.at(6).find('PaginationLink').props().last).toBeUndefined();
+        expect(paginationItems.at(6).props().active).toEqual(true);
+    });
+
+    describe('the max number of buttons limit', () => {
+        it('is limited when the currentPage is in the middle', () => {
+            const component = mount(
+                <Pagination { ...getProps(10, 22) } />
+            );
+
+            const paginationItems = component.find('PaginationItem');
+            expect(paginationItems.length).toEqual(13);
+        });
+
+        it('is limited when the currentPage is at the beginning', () => {
+            const component = mount(
+                <Pagination { ...getProps(0, 22) } />
+            );
+
+            const paginationItems = component.find('PaginationItem');
+            expect(paginationItems.length).toEqual(7);
+        });
+
+        it('is limited when the currentPage is at the end', () => {
+            const component = mount(
+                <Pagination { ...getProps(21, 22) } />
+            );
+
+            const paginationItems = component.find('PaginationItem');
+            expect(paginationItems.length).toEqual(7);
+        });
+    });
+
+    it('getAlignClassName returns the correct class name', () => {
+        let className = getAlignClassName(LEFT_ALIGN);
+        expect(className).toEqual(PaginationClasses.left);
+
+        className = getAlignClassName(CENTER_ALIGN);
+        expect(className).toEqual(PaginationClasses.center);
+
+        className = getAlignClassName(RIGHT_ALIGN);
+        expect(className).toEqual(PaginationClasses.right);
+
+        try {
+            getAlignClassName('foobar');
+        }
+        catch (ex) {
+            return;
+        }
+        throw new Error('Should have thrown exception');
     });
 });

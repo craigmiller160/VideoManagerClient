@@ -10,4 +10,7 @@
   &.right {
     justify-content: flex-end;
   }
+  button.page-link {
+    cursor: pointer;
+  }
 }

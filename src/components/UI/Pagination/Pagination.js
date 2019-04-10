@@ -6,8 +6,9 @@ import { Pagination as ReactPagination, PaginationItem, PaginationLink } from 'r
 export const LEFT_ALIGN = 'left';
 export const CENTER_ALIGN = 'center';
 export const RIGHT_ALIGN = 'right';
+const NUM_BUTTONS = 5;
 
-const getAlignClassName = (stringName) => {
+export const getAlignClassName = (stringName) => {
     switch(stringName) {
         case LEFT_ALIGN:
             return classes.left;
@@ -20,6 +21,22 @@ const getAlignClassName = (stringName) => {
     }
 };
 
+const createPageButtons = (currentPage, totalPages, onClick) =>
+    [...Array(totalPages).keys()]
+        .filter((index) => index > currentPage - NUM_BUTTONS &&
+            index < currentPage + NUM_BUTTONS)
+        .map((index) => (
+            <PaginationItem
+                key={ index }
+                active={ index === currentPage }
+                onClick={ () => onClick(`${index}`) }
+            >
+                <PaginationLink>
+                    { index + 1 }
+                </PaginationLink>
+            </PaginationItem>
+        ));
+
 const Pagination = (props) => {
     const { currentPage, totalPages, align, onClick } = props;
     const showPrevious = currentPage > 0;
@@ -30,28 +47,28 @@ const Pagination = (props) => {
         <ReactPagination className={ classNames }>
             {
                 showPrevious &&
-                    <PaginationItem onClick={ () => onClick('<') }>
-                        <PaginationLink previous />
-                    </PaginationItem>
+                    <>
+                        <PaginationItem onClick={ () => onClick('<<') }>
+                            <PaginationLink first />
+                        </PaginationItem>
+                        <PaginationItem onClick={ () => onClick('<') }>
+                            <PaginationLink previous />
+                        </PaginationItem>
+                    </>
             }
             {
-                [...Array(totalPages).keys() ].map((index) => (
-                    <PaginationItem
-                        key={ index }
-                        active={ index === currentPage }
-                        onClick={ () => onClick(`${index}`) }
-                    >
-                        <PaginationLink>
-                            { index + 1 }
-                        </PaginationLink>
-                    </PaginationItem>
-                ))
+                createPageButtons(currentPage, totalPages, onClick)
             }
             {
                 showNext &&
-                    <PaginationItem onClick={ () => onClick('>') }>
-                        <PaginationLink next />
-                    </PaginationItem>
+                    <>
+                        <PaginationItem onClick={ () => onClick('>') }>
+                            <PaginationLink next />
+                        </PaginationItem>
+                        <PaginationItem onClick={ () => onClick('>>') }>
+                            <PaginationLink last />
+                        </PaginationItem>
+                    </>
             }
         </ReactPagination>
     );
