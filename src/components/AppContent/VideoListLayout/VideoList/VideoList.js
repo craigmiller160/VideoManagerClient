@@ -22,7 +22,7 @@ const getPagination = (props) => {
             totalPages={ totalPages }
             currentPage={ currentPage }
             align={ RIGHT_ALIGN }
-            onClick={ (value) => paginationClick(value, props) }
+            onClick={ (value) => paginationClick(value, { ...props, totalPages }) }
         />
     );
 };
@@ -31,7 +31,8 @@ export const paginationClick = (value, props) => {
     const {
         currentPage,
         setCurrentPage,
-        searchForVideos
+        searchForVideos,
+        totalPages
     } = props;
     let newPage = currentPage;
     if (newPage != value) { // eslint-disable-line
@@ -40,6 +41,12 @@ export const paginationClick = (value, props) => {
         }
         else if ('>' === value) {
             newPage++;
+        }
+        else if ('>>' === value) {
+            newPage = totalPages - 1;
+        }
+        else if ('<<' === value) {
+            newPage = 0;
         }
         else {
             newPage = parseInt(value);

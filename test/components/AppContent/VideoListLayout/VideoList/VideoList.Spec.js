@@ -85,7 +85,8 @@ describe('VideoList', () => {
         const props = {
             setCurrentPage,
             currentPage: 0,
-            searchForVideos
+            searchForVideos,
+            totalPages: 22
         };
 
         paginationClick('<', props);
@@ -99,5 +100,12 @@ describe('VideoList', () => {
         paginationClick('>', props);
         expect(setCurrentPage).toHaveBeenLastCalledWith(1);
         expect(searchForVideos).toHaveBeenCalledTimes(3);
+
+        paginationClick('<<', props);
+        expect(setCurrentPage).toHaveBeenCalledWith(0);
+        expect(searchForVideos).toHaveBeenCalledTimes(4);
+        paginationClick('>>', props);
+        expect(setCurrentPage).toHaveBeenCalledWith(21);
+        expect(searchForVideos).toHaveBeenCalledTimes(5);
     });
 });
