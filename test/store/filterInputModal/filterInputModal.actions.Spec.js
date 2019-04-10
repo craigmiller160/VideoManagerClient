@@ -25,11 +25,11 @@ import {
     mockGetAllStars,
     mockUpdateStar
 } from '../../exclude/mock/mockApiConfig/starApi';
-import {
-    ADD_ACTION,
+import { ADD_ACTION,
     CATEGORY_TYPE, EDIT_ACTION,
-    initialState as filterInputInitState, SERIES_TYPE, STAR_TYPE
-} from 'store/filterInputModal/filterInputModal.reducer';
+    SERIES_TYPE, STAR_TYPE
+} from 'store/filterInputModal/filterInputModal.constants';
+import { initialState as filterInputInitState } from 'store/filterInputModal/filterInputModal.reducer';
 import {
     setCategories,
     setSeries,

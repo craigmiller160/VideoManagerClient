@@ -1,8 +1,10 @@
 import { initialState as videoSearchInitState } from 'store/videoSearch/videoSearch.reducer';
 import {
     CATEGORY_TYPE,
-    initialState as filterInputInitState,
     SERIES_TYPE, STAR_TYPE
+} from 'store/filterInputModal/filterInputModal.constants';
+import {
+    initialState as filterInputInitState
 } from 'store/filterInputModal/filterInputModal.reducer';
 import { getSelectedFilter } from 'store/filterInputModal/filterInputModal.selectors';
 
