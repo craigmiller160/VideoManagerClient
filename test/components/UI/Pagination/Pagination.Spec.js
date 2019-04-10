@@ -1,5 +1,11 @@
 import React from 'react';
-import Pagination, { RIGHT_ALIGN } from '../../../../src/components/UI/Pagination/Pagination';
+import Pagination, {
+    RIGHT_ALIGN,
+    LEFT_ALIGN,
+    CENTER_ALIGN,
+    getAlignClassName
+} from 'components/UI/Pagination/Pagination';
+import PaginationClasses from 'components/UI/Pagination/Pagination.scss';
 import { mount } from 'enzyme';
 
 const getProps = (currentPage) => ({
@@ -21,7 +27,6 @@ describe('Pagination', () => {
                 onClick={ clickHandler }
             />
         );
-        expect(component).toMatchSnapshot();
 
         const paginationRoot = component.find('Pagination[tag="nav"]');
         expect(paginationRoot.hasClass('Pagination')).toEqual(true);
@@ -46,7 +51,6 @@ describe('Pagination', () => {
         const component = mount(
             <Pagination { ...getProps(0) } />
         );
-        expect(component).toMatchSnapshot();
 
         const paginationItems = component.find('PaginationItem');
         expect(paginationItems.length).toEqual(6);
@@ -60,7 +64,6 @@ describe('Pagination', () => {
         const component = mount(
             <Pagination { ...getProps(4) } />
         );
-        expect(component).toMatchSnapshot();
 
         const paginationItems = component.find('PaginationItem');
         expect(paginationItems.length).toEqual(6);
@@ -68,5 +71,24 @@ describe('Pagination', () => {
         expect(paginationItems.at(0).find('PaginationLink').props().previous).toEqual(true);
         expect(paginationItems.at(5).find('PaginationLink').props().next).toBeUndefined();
         expect(paginationItems.at(5).props().active).toEqual(true);
+    });
+
+    it('getAlignClassName returns the correct class name', () => {
+        let className = getAlignClassName(LEFT_ALIGN);
+        expect(className).toEqual(PaginationClasses.left);
+
+        className = getAlignClassName(CENTER_ALIGN);
+        expect(className).toEqual(PaginationClasses.center);
+
+        className = getAlignClassName(RIGHT_ALIGN);
+        expect(className).toEqual(PaginationClasses.right);
+
+        try {
+            getAlignClassName('foobar');
+        }
+        catch (ex) {
+            return;
+        }
+        throw new Error('Should have thrown exception');
     });
 });

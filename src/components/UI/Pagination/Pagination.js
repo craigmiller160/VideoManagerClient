@@ -7,7 +7,7 @@ export const LEFT_ALIGN = 'left';
 export const CENTER_ALIGN = 'center';
 export const RIGHT_ALIGN = 'right';
 
-const getAlignClassName = (stringName) => {
+export const getAlignClassName = (stringName) => {
     switch(stringName) {
         case LEFT_ALIGN:
             return classes.left;
