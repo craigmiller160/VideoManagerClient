@@ -17,6 +17,7 @@ import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
 import classes from './AppContent.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
 import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
+import VideoPlayer from './VideoPlayer/VideoPlayer';
 
 const resetToRootComponent = (props) => {
     const {
@@ -133,6 +134,12 @@ export const AppContent = (props) => {
                                 <ManageVideoFilters
                                     { ...props }
                                 />
+                            ) }
+                        />
+                        <Route
+                            path="/play/:fileId"
+                            render={ (props) => (
+                                <VideoPlayer { ...props } />
                             ) }
                         />
                         <Route path="/"

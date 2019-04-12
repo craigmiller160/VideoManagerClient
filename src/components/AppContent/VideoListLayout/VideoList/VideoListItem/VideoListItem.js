@@ -24,8 +24,6 @@ const VideoListItem = (props) => {
             stars,
             expanded
         },
-        // TODO remove this eslint-disable
-        videoFile, // eslint-disable-line no-unused-vars
         expandVideoFile
     } = props;
 
@@ -88,10 +86,9 @@ const VideoListItem = (props) => {
                             <Link to="/edit">
                                 <Button color="info">Edit</Button>
                             </Link>
-                            <Button
-                                color="primary">
-                                Play
-                            </Button>
+                            <Link to={ `/play/${fileId}` }>
+                                <Button color="primary">Play</Button>
+                            </Link>
                         </Col>
                     </Row>
                 </Collapse>
