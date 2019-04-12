@@ -63,7 +63,7 @@ export const saveVideoFile = (videoFile) => async (dispatch) => {
     }
 };
 
-export const setVideoList = createAction('setVideoList');
-export const setPagination = createAction('setPagination');
-export const setCurrentPage = createAction('setCurrentPage');
-export const expandVideoFile = createAction('expandVideoFile');
+export const setVideoList = createAction('videoList/setVideoList');
+export const setPagination = createAction('videoList/setPagination');
+export const setCurrentPage = createAction('videoList/setCurrentPage');
+export const expandVideoFile = createAction('videoList/expandVideoFile');

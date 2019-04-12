@@ -121,10 +121,10 @@ const saveStarChanges = async (filter, action, dispatch) => {
     await dispatch(loadStarOptions());
 };
 
-export const showAddCategoryModal = createAction('showAddCategoryModal');
-export const showAddSeriesModal = createAction('showAddSeriesModal');
-export const showAddStarModal = createAction('showAddStarModal');
-export const showEditCategoryModal = createAction('showEditCategoryModal');
-export const showEditSeriesModal = createAction('showEditSeriesModal');
-export const showEditStarModal = createAction('showEditStarModal');
-export const hideFilterModal = createAction('hideFilterModal');
+export const showAddCategoryModal = createAction('filterInputModal/showAddCategoryModal');
+export const showAddSeriesModal = createAction('filterInputModal/showAddSeriesModal');
+export const showAddStarModal = createAction('filterInputModal/showAddStarModal');
+export const showEditCategoryModal = createAction('filterInputModal/showEditCategoryModal');
+export const showEditSeriesModal = createAction('filterInputModal/showEditSeriesModal');
+export const showEditStarModal = createAction('filterInputModal/showEditStarModal');
+export const hideFilterModal = createAction('filterInputModal/hideFilterModal');

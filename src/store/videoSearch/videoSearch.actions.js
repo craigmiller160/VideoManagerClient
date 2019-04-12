@@ -37,7 +37,7 @@ export const loadStarOptions = () => async (dispatch) => {
     dispatch(setStars(stars));
 };
 
-export const setCategories = createAction('setCategories');
-export const setSeries = createAction('setSeries');
-export const setStars = createAction('setStars');
-export const setSearching = createAction('setSearching');
+export const setCategories = createAction('videoSearch/setCategories');
+export const setSeries = createAction('videoSearch/setSeries');
+export const setStars = createAction('videoSearch/setStars');
+export const setSearching = createAction('videoSearch/setSearching');
