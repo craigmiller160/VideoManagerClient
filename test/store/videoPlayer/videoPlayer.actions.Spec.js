@@ -1,4 +1,4 @@
-import { loadDataForPlayback, setLoading, setVideoFile } from 'store/videoPlayer/videoPlayer.actions';
+import { loadDataForPlayback, setLoading, setVideoFile, reset } from 'store/videoPlayer/videoPlayer.actions';
 import { NEW_VIDEO_FILE_FULL } from '../../exclude/mock/mockData/videoFileData';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -25,6 +25,14 @@ describe('videoPlayer.actions', () => {
             payload: NEW_VIDEO_FILE_FULL
         };
         const action = setVideoFile(NEW_VIDEO_FILE_FULL);
+        expect(action).toEqual(expectedAction);
+    });
+
+    it('creates reset action', () => {
+        const expectedAction = {
+            type: reset.toString()
+        };
+        const action = reset();
         expect(action).toEqual(expectedAction);
     });
 

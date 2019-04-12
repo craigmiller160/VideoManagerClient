@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-starter-kit';
-import { setLoading, setVideoFile } from './videoPlayer.actions';
+import { setLoading, setVideoFile, reset } from './videoPlayer.actions';
 
 export const initialState = {
     loading: true,
@@ -16,7 +16,12 @@ const handleSetVideoFile = (state, action) => ({
     videoFile: action.payload
 });
 
+const handleReset = (state, action) => ({
+    ...initialState
+});
+
 export default createReducer(initialState, {
     [setLoading]: handleSetLoading,
-    [setVideoFile]: handleSetVideoFile
+    [setVideoFile]: handleSetVideoFile,
+    [reset]: handleReset
 });

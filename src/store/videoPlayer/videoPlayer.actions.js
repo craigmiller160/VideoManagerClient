@@ -18,3 +18,4 @@ export const loadDataForPlayback = (fileId) => async (dispatch) => {
 
 export const setLoading = createAction('videoPlayer/setLoading');
 export const setVideoFile = createAction('videoPlayer/setVideoFile');
+export const reset = createAction('videoPlayer/reset');

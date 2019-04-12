@@ -1,5 +1,5 @@
 import videoPlayerReducer, { initialState as videoPlayerInitState } from 'store/videoPlayer/videoPlayer.reducer';
-import { setLoading, setVideoFile } from 'store/videoPlayer/videoPlayer.actions';
+import { setLoading, setVideoFile, reset } from 'store/videoPlayer/videoPlayer.actions';
 import { NEW_VIDEO_FILE_FULL } from '../../exclude/mock/mockData/videoFileData';
 
 describe('videoPlayer.reducer', () => {
@@ -23,5 +23,14 @@ describe('videoPlayer.reducer', () => {
             videoFile: NEW_VIDEO_FILE_FULL
         };
         expect(videoPlayerReducer(videoPlayerInitState, action)).toEqual(expectedState);
+    });
+
+    it('should handle reset', () => {
+        const action = { type: reset.toString() };
+        const state = {
+            loading: false,
+            videoFile: NEW_VIDEO_FILE_FULL
+        };
+        expect(videoPlayerReducer(state, action)).toEqual(videoPlayerInitState);
     });
 });
