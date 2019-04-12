@@ -3,7 +3,7 @@ import { setLoading, setVideoFile, reset } from './videoPlayer.actions';
 
 export const initialState = {
     loading: true,
-    videoFile: null
+    videoFile: {}
 };
 
 const handleSetLoading = (state, action) => ({
@@ -16,7 +16,7 @@ const handleSetVideoFile = (state, action) => ({
     videoFile: action.payload
 });
 
-const handleReset = (state, action) => ({
+const handleReset = () => ({
     ...initialState
 });
 

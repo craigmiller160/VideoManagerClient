@@ -2,16 +2,27 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import classes from './VideoPlayer.scss';
 import Spinner from '../../UI/Spinner/Spinner';
-import VideoApiService from 'services/VideoApiService';
+import { loadDataForPlayback } from 'store/videoPlayer/videoPlayer.actions';
 
 const getFileName = (videoFile) => {
     return videoFile.displayName || videoFile.fileName;
 };
 
 const VideoPlayer = (props) => {
-    const [ loading, setLoading ] = useState(true);
+    const {
+        loading,
+        videoFile,
+        loadDataForPlayback,
+        match: { params }
+    } = props;
+
+    useEffect(() => {
+        loadDataForPlayback(params.fileId)
+    }, []);
 
     return (
         <div className={ classes.VideoPlayer }>
@@ -34,5 +45,21 @@ const VideoPlayer = (props) => {
         </div>
     );
 };
+VideoPlayer.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    videoFile: PropTypes.object.isRequired,
+    loadDataForPlayback: PropTypes.func.isRequired
+};
 
-export default VideoPlayer;
+const mapStateToProps = (state) => ({
+    loading: state.videoPlayer.loading,
+    videoFile: state.videoPlayer.videoFile
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    loadDataForPlayback
+}, dispatch);
+
+const VideoPlayerConnected = connect(mapStateToProps, mapDispatchToProps)(VideoPlayer);
+VideoPlayerConnected.propTypes = {};
+export default VideoPlayerConnected;

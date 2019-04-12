@@ -37,7 +37,6 @@ const VideoListItem = (props) => {
     const playVideoClick = async () => {
         try {
             await videoPlayerReset();
-            console.log('Clicked'); // eslint-disable-line no-console
             history.push(`/play/${fileId}`);
         }
         catch (ex) { // eslint-disable-line no-empty
