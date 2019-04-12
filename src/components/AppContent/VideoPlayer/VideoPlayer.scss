@@ -1,7 +1,11 @@
 
 .VideoPlayer {
+  margin-top: 20px;
   .title {
     border-bottom: 1px solid lightgray;
     margin-bottom: 10px;
+  }
+  video {
+    width: 100%;
   }
 }

@@ -35,11 +35,20 @@ const VideoPlayer = (props) => {
             }
             {
                 !loading &&
-                <Row>
-                    <Col className="text-center">
-                        <h3 className={ classes.title }>{ getFileName(videoFile) }</h3>
-                    </Col>
-                </Row>
+                <>
+                    <Row>
+                        <Col className="text-center">
+                            <h3 className={ classes.title }>{ getFileName(videoFile) }</h3>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className="text-center">
+                            <video controls autoPlay="autoPlay">
+                                <source src={ `/api/video-files/play/${params.fileId}` } />
+                            </video>
+                        </Col>
+                    </Row>
+                </>
             }
         </div>
     );
@@ -47,7 +56,10 @@ const VideoPlayer = (props) => {
 VideoPlayer.propTypes = {
     loading: PropTypes.bool.isRequired,
     videoFile: PropTypes.object.isRequired,
-    loadDataForPlayback: PropTypes.func.isRequired
+    loadDataForPlayback: PropTypes.func.isRequired,
+    match: PropTypes.shape({
+        params: PropTypes.object
+    })
 };
 
 const mapStateToProps = (state) => ({
