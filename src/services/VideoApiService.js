@@ -16,6 +16,10 @@ const isVideoScanRunning = () => {
     return API.get('/video-files/scanner');
 };
 
+const getVideoFile = (fileId) => {
+    return API.get(`/video-files/${fileId}`);
+};
+
 const searchForVideos = (searchConfig) => {
     const {
         searchText,
@@ -46,5 +50,6 @@ export default {
     updateVideoFile,
     startVideoScan,
     isVideoScanRunning,
-    searchForVideos
+    searchForVideos,
+    getVideoFile
 }
