@@ -7,7 +7,6 @@ import {
     mockGetAllFiles,
     mockGetVideoFileCount,
     mockIsVideoScanRunning,
-    mockPlayVideo,
     mockStartVideoScan,
     mockUpdateVideoFile
 } from '../exclude/mock/mockApiConfig/videoFileApi';
@@ -21,7 +20,6 @@ beforeEach(() => {
     mockGetAllFiles(mockApi);
     mockStartVideoScan(mockApi);
     mockIsVideoScanRunning(mockApi);
-    mockPlayVideo(mockApi);
     mockGetVideoFileCount(mockApi);
 });
 
@@ -86,16 +84,6 @@ describe('VideoApiService', () => {
             const result = await VideoApiService.isVideoScanRunning();
             expect(result.status).toEqual(200);
             expect(result.data).toEqual(FILE_SCAN_STATUS);
-        }
-        catch (ex) {
-            expect(ex).toBeUndefined();
-        }
-    });
-
-    it('Play Video', async () => {
-        try {
-            const result = await VideoApiService.playVideo(NEW_VIDEO_FILE);
-            expect(result.status).toEqual(200);
         }
         catch (ex) {
             expect(ex).toBeUndefined();

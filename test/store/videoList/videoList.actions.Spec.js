@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
 import {
-    expandVideoFile, playVideoFile,
+    expandVideoFile,
     saveVideoFile, saveVideoFileEdits,
     searchForVideos,
     setCurrentPage,
@@ -17,7 +17,7 @@ import {
     PAGINATION_COUNTS
 } from '../../exclude/mock/mockData/videoFileData';
 import {
-    mockGetAllFiles, mockPlayVideo,
+    mockGetAllFiles,
     mockSearchForFiles, mockUpdateFullVideoFile,
     mockUpdateVideoFile
 } from '../../exclude/mock/mockApiConfig/videoFileApi';
@@ -103,7 +103,6 @@ describe('videoList.actions', () => {
             mockSearchForFiles(mockApi);
             mockUpdateVideoFile(mockApi);
             mockUpdateFullVideoFile(mockApi);
-            mockPlayVideo(mockApi);
         });
 
         describe('searchForVideos action', () => {
@@ -213,24 +212,6 @@ describe('videoList.actions', () => {
                     expect(ex).toBeUndefined();
                 }
 
-                expect(store.getActions()).toEqual(expectedActions);
-            });
-        });
-
-        describe('playVideoFile action', () => {
-            it('plays the video file', async () => {
-                const store = mockStore(noConfigState);
-
-                const expectedActions = [
-                    { type: showSuccessAlert.toString(), payload: 'Successfully played video file' }
-                ];
-
-                try {
-                    await store.dispatch(playVideoFile(NEW_VIDEO_FILE));
-                }
-                catch (ex) {
-                    expect(ex).toBeUndefined();
-                }
                 expect(store.getActions()).toEqual(expectedActions);
             });
         });

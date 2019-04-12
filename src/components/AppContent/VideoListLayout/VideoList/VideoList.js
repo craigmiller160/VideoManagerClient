@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
-import { expandVideoFile, searchForVideos, setCurrentPage, playVideoFile } from 'store/videoList/videoList.actions';
+import { expandVideoFile, searchForVideos, setCurrentPage } from 'store/videoList/videoList.actions';
 import Spinner from 'components/UI/Spinner/Spinner';
 import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
 
@@ -63,7 +63,6 @@ export const VideoList = (props) => {
         videoList,
         expandVideoFile,
         searchForVideos,
-        playVideoFile,
         currentPage
     } = props;
 
@@ -90,7 +89,6 @@ export const VideoList = (props) => {
                                 key={ videoFile.fileId }
                                 videoFile={ videoFile }
                                 expandVideoFile={ expandVideoFile }
-                                playVideoFile={ playVideoFile }
                             />
                         )) }
                     </ListGroup>
@@ -129,8 +127,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     searchForVideos,
     setCurrentPage,
-    expandVideoFile,
-    playVideoFile
+    expandVideoFile
 }, dispatch);
 
 const VideoListConnected = connect(mapStateToProps, mapDispatchToProps)(VideoList);

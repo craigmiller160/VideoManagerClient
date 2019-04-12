@@ -24,9 +24,9 @@ const VideoListItem = (props) => {
             stars,
             expanded
         },
-        videoFile,
-        expandVideoFile,
-        playVideoFile
+        // TODO remove this eslint-disable
+        videoFile, // eslint-disable-line no-unused-vars
+        expandVideoFile
     } = props;
 
     const leftColSize = 6;
@@ -88,10 +88,8 @@ const VideoListItem = (props) => {
                             <Link to="/edit">
                                 <Button color="info">Edit</Button>
                             </Link>
-
                             <Button
-                                color="primary"
-                                onClick={ () => playVideoFile(videoFile) }>
+                                color="primary">
                                 Play
                             </Button>
                         </Col>
@@ -104,8 +102,7 @@ const VideoListItem = (props) => {
 
 VideoListItem.propTypes = {
     videoFile: PropTypes.object.isRequired,
-    expandVideoFile: PropTypes.func.isRequired,
-    playVideoFile: PropTypes.func.isRequired
+    expandVideoFile: PropTypes.func.isRequired
 };
 
 export default VideoListItem;

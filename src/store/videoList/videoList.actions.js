@@ -63,16 +63,6 @@ export const saveVideoFile = (videoFile) => async (dispatch) => {
     }
 };
 
-export const playVideoFile = (videoFile) => async (dispatch) => {
-    try {
-        await VideoApiService.playVideo(videoFile);
-        dispatch(showSuccessAlert('Successfully played video file'));
-    }
-    catch (ex) {
-        dispatch(showErrorAlert(ex.message));
-    }
-};
-
 export const setVideoList = createAction('setVideoList');
 export const setPagination = createAction('setPagination');
 export const setCurrentPage = createAction('setCurrentPage');

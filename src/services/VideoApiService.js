@@ -16,10 +16,6 @@ const isVideoScanRunning = () => {
     return API.get('/video-files/scanner');
 };
 
-const playVideo = (videoFile) => {
-    return API.post('/video-files/play', videoFile);
-};
-
 const searchForVideos = (searchConfig) => {
     const {
         searchText,
@@ -50,6 +46,5 @@ export default {
     updateVideoFile,
     startVideoScan,
     isVideoScanRunning,
-    searchForVideos,
-    playVideo
+    searchForVideos
 }
