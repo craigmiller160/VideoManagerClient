@@ -1,5 +1,4 @@
-/* eslint-disable */ // TODO delete this
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
