@@ -11,6 +11,7 @@ import {
     Collapse
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 const VideoListItem = (props) => {
     const {
@@ -24,12 +25,24 @@ const VideoListItem = (props) => {
             stars,
             expanded
         },
-        expandVideoFile
+        expandVideoFile,
+        videoPlayerReset,
+        history
     } = props;
 
     const leftColSize = 6;
     const rootClasses = [ classes.VideoListItem, (expanded ? classes.active : '') ].join(' ');
     const actualDisplayName = displayName ? displayName : fileName;
+
+    const playVideoClick = async () => {
+        try {
+            await videoPlayerReset();
+            console.log('Clicked'); // eslint-disable-line no-console
+            history.push(`/play/${fileId}`);
+        }
+        catch (ex) { // eslint-disable-line no-empty
+        }
+    };
 
     return (
         <div className={ rootClasses } onClick={ () => expandVideoFile(fileId) }>
@@ -86,9 +99,7 @@ const VideoListItem = (props) => {
                             <Link to="/edit">
                                 <Button color="info">Edit</Button>
                             </Link>
-                            <Link to={ `/play/${fileId}` }>
-                                <Button color="primary">Play</Button>
-                            </Link>
+                            <Button color="primary" onClick={ playVideoClick }>Play</Button>
                         </Col>
                     </Row>
                 </Collapse>
@@ -99,7 +110,9 @@ const VideoListItem = (props) => {
 
 VideoListItem.propTypes = {
     videoFile: PropTypes.object.isRequired,
-    expandVideoFile: PropTypes.func.isRequired
+    expandVideoFile: PropTypes.func.isRequired,
+    videoPlayerReset: PropTypes.func.isRequired,
+    history: PropTypes.object
 };
 
-export default VideoListItem;
+export default withRouter(VideoListItem);
