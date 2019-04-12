@@ -11,12 +11,12 @@ const handleSetLoading = (state, action) => ({
     loading: action.payload
 });
 
-const handleSetVideFile = (state, action) => ({
+const handleSetVideoFile = (state, action) => ({
     ...state,
     videoFile: action.payload
 });
 
 export default createReducer(initialState, {
     [setLoading]: handleSetLoading,
-    [setVideoFile]: handleSetVideFile()
+    [setVideoFile]: handleSetVideoFile
 });
