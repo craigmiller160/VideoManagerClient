@@ -1,3 +1,4 @@
+/* eslint-disable */ // TODO delete this
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Input as ReactInput, FormGroup, Label } from 'reactstrap';
@@ -10,8 +11,11 @@ export const InputComponent = (props) => {
         label,
         type,
         input,
-        textarea
+        textarea,
+        inputProps
     } = props;
+
+    console.log('Props', props); // TODO delete this
 
     const id = newid();
     const groupClasses = [formStyles['input-label']];
@@ -35,6 +39,7 @@ export const InputComponent = (props) => {
                 id={ id }
                 className={ inputClasses.join(' ') }
                 { ...input }
+                { ...inputProps }
                 type={ type }
                 name={ input ? input.name : '' }
                 rows={ textarea ? textarea.rows : null }
@@ -48,7 +53,8 @@ InputComponent.defaultProps = {
     type: 'text',
     textarea: {
         resize: false
-    }
+    },
+    inputProps: {}
 };
 
 InputComponent.propTypes = {
@@ -57,6 +63,7 @@ InputComponent.propTypes = {
     input: PropTypes.shape({
         name: PropTypes.string.isRequired
     }),
+    inputProps: PropTypes.object,
     textarea: PropTypes.shape({
         rows: PropTypes.number,
         cols: PropTypes.number,
