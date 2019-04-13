@@ -18,6 +18,14 @@ import FilterInputModal from '../../Modals/FilterInputModal/FilterInputModal';
 
 export const FORM_NAME = 'video-file-edit';
 
+/* eslint-disable */ // TODO delete this
+const blockEnterSubmit = (event) => {
+    console.log('EnterSubmit', event.key); // TODO delete this
+    if (event.key === 'Enter') {
+        event.preventDefault();
+    }
+};
+
 const VideoFileEdit = (props) => {
     const [ isSubmitted, setSubmitted ] = useState(false);
 
@@ -48,7 +56,7 @@ const VideoFileEdit = (props) => {
             />
             <Form
                 form={ FORM_NAME }
-                handleSubmit={ submit }
+                handleSubmit={ (event) => event.preventDefault() }
                 className={ classes.VideoFileEdit }
                 initialValues={ selectedVideo }
             >
@@ -63,6 +71,9 @@ const VideoFileEdit = (props) => {
                             <Input
                                 label="Display Name"
                                 name="displayName"
+                                inputProps={ {
+                                    onKeyPress: blockEnterSubmit
+                                } }
                             />
                         </Col>
                     </Row>
@@ -73,6 +84,9 @@ const VideoFileEdit = (props) => {
                                 options={ categories }
                                 name="categories"
                                 multi
+                                inputProps={ {
+                                    onKeyPress: blockEnterSubmit
+                                } }
                             />
                         </Col>
                         <Col md="4">
@@ -81,6 +95,9 @@ const VideoFileEdit = (props) => {
                                 options={ series }
                                 name="series"
                                 multi
+                                inputProps={ {
+                                    onKeyPress: blockEnterSubmit
+                                } }
                             />
                         </Col>
                         <Col md="4">
@@ -89,6 +106,9 @@ const VideoFileEdit = (props) => {
                                 options={ stars }
                                 name="stars"
                                 multi
+                                inputProps={ {
+                                    onKeyPress: blockEnterSubmit
+                                } }
                             />
                         </Col>
                     </Row>
@@ -112,6 +132,9 @@ const VideoFileEdit = (props) => {
                                 textarea={ {
                                     rows: 5
                                 } }
+                                inputProps={ {
+                                    onKeyPress: blockEnterSubmit
+                                } }
                             />
                         </Col>
                     </Row>
@@ -119,7 +142,8 @@ const VideoFileEdit = (props) => {
                         <Col className="text-center">
                             <Button
                                 color="success"
-                                type="submit"
+                                type="button"
+                                onClick={ submit }
                             >
                                 Save
                             </Button>
