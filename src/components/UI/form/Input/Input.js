@@ -1,7 +1,6 @@
-/* eslint-disable */ // TODO delete this
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input as ReactInput, FormGroup, Label } from 'reactstrap';
+import { FormGroup, Input as ReactInput, Label } from 'reactstrap';
 import newid from '../../../../utils/newid';
 import formStyles from '../FormStyles.scss';
 import createField from "../createField";
@@ -14,8 +13,6 @@ export const InputComponent = (props) => {
         textarea,
         inputProps
     } = props;
-
-    console.log('Props', props); // TODO delete this
 
     const id = newid();
     const groupClasses = [formStyles['input-label']];
