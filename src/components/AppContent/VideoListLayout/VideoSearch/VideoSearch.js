@@ -8,7 +8,7 @@ import Input from '../../../UI/form/Input/Input';
 import Select from '../../../UI/form/Select/Select';
 import classes from './VideoSearch.scss';
 import Form from "../../../UI/form/Form/Form";
-import { searchForVideos } from 'store/videoList/videoList.actions';
+import { searchForVideos, setCurrentPage } from 'store/videoList/videoList.actions';
 
 export const FORM_NAME = 'video-search';
 
@@ -16,7 +16,8 @@ export const VideoSearch = (props) => {
     const {
         filters: { categories, series, stars },
         searchForVideos,
-        resetForm
+        resetForm,
+        setCurrentPage
     } = props;
 
     const doResetForm = () => {
@@ -24,10 +25,15 @@ export const VideoSearch = (props) => {
         searchForVideos();
     };
 
+    const doSearch = () => {
+        setCurrentPage(0);
+        searchForVideos();
+    };
+
     return (
         <Form
             form={ FORM_NAME }
-            handleSubmit={ searchForVideos }
+            handleSubmit={ doSearch }
             className={ classes.VideoSearch }
         >
             <>
@@ -91,7 +97,8 @@ VideoSearch.propTypes = {
         stars: PropTypes.array
     }),
     searchForVideos: PropTypes.func,
-    resetForm: PropTypes.func
+    resetForm: PropTypes.func,
+    setCurrentPage: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -100,6 +107,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     searchForVideos,
+    setCurrentPage,
     resetForm: reset
 }, dispatch);
 
