@@ -53,9 +53,9 @@ export const mockIsVideoScanRunning = (mockApi) => {
         .reply(200, FILE_SCAN_STATUS);
 };
 
-export const mockPlayVideo = (mockApi) => {
-    mockApi.onPost('/video-files/play', NEW_VIDEO_FILE)
-        .reply(200);
+export const mockGetVideoFile = (mockApi) => {
+    mockApi.onGet('/video-files/3')
+        .reply(200, NEW_VIDEO_FILE_FULL)
 };
 
 export const mockGetVideoFileCount = (mockApi) => {

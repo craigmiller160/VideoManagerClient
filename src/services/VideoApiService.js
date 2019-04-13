@@ -16,8 +16,8 @@ const isVideoScanRunning = () => {
     return API.get('/video-files/scanner');
 };
 
-const playVideo = (videoFile) => {
-    return API.post('/video-files/play', videoFile);
+const getVideoFile = (fileId) => {
+    return API.get(`/video-files/${fileId}`);
 };
 
 const searchForVideos = (searchConfig) => {
@@ -51,5 +51,5 @@ export default {
     startVideoScan,
     isVideoScanRunning,
     searchForVideos,
-    playVideo
+    getVideoFile
 }

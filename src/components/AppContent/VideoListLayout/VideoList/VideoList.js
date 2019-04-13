@@ -5,9 +5,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
-import { expandVideoFile, searchForVideos, setCurrentPage, playVideoFile } from 'store/videoList/videoList.actions';
+import { expandVideoFile, searchForVideos, setCurrentPage } from 'store/videoList/videoList.actions';
 import Spinner from 'components/UI/Spinner/Spinner';
 import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
+import { reset } from 'store/videoPlayer/videoPlayer.actions';
 
 const getPagination = (props) => {
     const { totalItems, itemsPerPage, currentPage } = props; //eslint-disable-line react/prop-types
@@ -63,8 +64,8 @@ export const VideoList = (props) => {
         videoList,
         expandVideoFile,
         searchForVideos,
-        playVideoFile,
-        currentPage
+        currentPage,
+        videoPlayerReset
     } = props;
 
     useEffect(() => {
@@ -90,7 +91,7 @@ export const VideoList = (props) => {
                                 key={ videoFile.fileId }
                                 videoFile={ videoFile }
                                 expandVideoFile={ expandVideoFile }
-                                playVideoFile={ playVideoFile }
+                                videoPlayerReset={ videoPlayerReset }
                             />
                         )) }
                     </ListGroup>
@@ -115,7 +116,8 @@ VideoList.propTypes = {
     expandVideoFile: PropTypes.func,
     searchForVideos: PropTypes.func,
     currentPage: PropTypes.number,
-    playVideoFile: PropTypes.func
+    playVideoFile: PropTypes.func,
+    videoPlayerReset: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -130,7 +132,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     searchForVideos,
     setCurrentPage,
     expandVideoFile,
-    playVideoFile
+    videoPlayerReset: reset
 }, dispatch);
 
 const VideoListConnected = connect(mapStateToProps, mapDispatchToProps)(VideoList);

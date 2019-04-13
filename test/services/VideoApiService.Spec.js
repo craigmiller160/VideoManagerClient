@@ -1,13 +1,17 @@
 import VideoApiService from '../../src/services/VideoApiService';
 import API from '../../src/services/API';
 import MockAdapter from 'axios-mock-adapter';
-import { BASE_VIDEO_SEARCH_RESULT, FILE_SCAN_STATUS, NEW_VIDEO_FILE } from '../exclude/mock/mockData/videoFileData';
+import {
+    BASE_VIDEO_SEARCH_RESULT,
+    FILE_SCAN_STATUS,
+    NEW_VIDEO_FILE,
+    NEW_VIDEO_FILE_FULL
+} from '../exclude/mock/mockData/videoFileData';
 import {
     mockAddNewVideoFile,
-    mockGetAllFiles,
+    mockGetAllFiles, mockGetVideoFile,
     mockGetVideoFileCount,
     mockIsVideoScanRunning,
-    mockPlayVideo,
     mockStartVideoScan,
     mockUpdateVideoFile
 } from '../exclude/mock/mockApiConfig/videoFileApi';
@@ -21,8 +25,8 @@ beforeEach(() => {
     mockGetAllFiles(mockApi);
     mockStartVideoScan(mockApi);
     mockIsVideoScanRunning(mockApi);
-    mockPlayVideo(mockApi);
     mockGetVideoFileCount(mockApi);
+    mockGetVideoFile(mockApi);
 });
 
 describe('VideoApiService', () => {
@@ -92,10 +96,11 @@ describe('VideoApiService', () => {
         }
     });
 
-    it('Play Video', async () => {
+    it('Get Video File', async () => {
         try {
-            const result = await VideoApiService.playVideo(NEW_VIDEO_FILE);
+            const result = await VideoApiService.getVideoFile(3);
             expect(result.status).toEqual(200);
+            expect(result.data).toEqual(NEW_VIDEO_FILE_FULL);
         }
         catch (ex) {
             expect(ex).toBeUndefined();
