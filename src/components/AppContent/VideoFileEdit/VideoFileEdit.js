@@ -66,7 +66,7 @@ const VideoFileEdit = (props) => {
                             />
                         </Col>
                     </Row>
-                    <Row className="align-items-center">
+                    <Row className="align-items-center justify-content-center text-center mb-3">
                         <Col md="4">
                             <Select
                                 label="Categories"
@@ -74,6 +74,7 @@ const VideoFileEdit = (props) => {
                                 name="categories"
                                 multi
                             />
+                            <AddButton addItem={ showAddCategoryModal } />
                         </Col>
                         <Col md="4">
                             <Select
@@ -82,6 +83,7 @@ const VideoFileEdit = (props) => {
                                 name="series"
                                 multi
                             />
+                            <AddButton addItem={ showAddSeriesModal } />
                         </Col>
                         <Col md="4">
                             <Select
@@ -90,16 +92,6 @@ const VideoFileEdit = (props) => {
                                 name="stars"
                                 multi
                             />
-                        </Col>
-                    </Row>
-                    <Row className="justify-content-center mb-3" >
-                        <Col md="4" className={ classes['add-filter-wrapper'] }>
-                            <AddButton addItem={ showAddCategoryModal } />
-                        </Col>
-                        <Col md="4" className={ classes['add-filter-wrapper'] }>
-                            <AddButton addItem={ showAddSeriesModal } />
-                        </Col>
-                        <Col md="4" className={ classes['add-filter-wrapper'] }>
                             <AddButton addItem={ showAddStarModal } />
                         </Col>
                     </Row>

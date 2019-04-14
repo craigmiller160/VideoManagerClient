@@ -11,7 +11,6 @@ import {
     Collapse
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
 
 const VideoListItem = (props) => {
     const {
@@ -26,8 +25,7 @@ const VideoListItem = (props) => {
             expanded
         },
         expandVideoFile,
-        videoPlayerReset,
-        history
+        videoPlayerReset
     } = props;
 
     const leftColSize = 6;
@@ -37,7 +35,7 @@ const VideoListItem = (props) => {
     const playVideoClick = async () => {
         try {
             await videoPlayerReset();
-            history.push(`/play/${fileId}`);
+            window.open(`/play/${fileId}`, '_blank');
         }
         catch (ex) { // eslint-disable-line no-empty
         }
@@ -110,8 +108,7 @@ const VideoListItem = (props) => {
 VideoListItem.propTypes = {
     videoFile: PropTypes.object.isRequired,
     expandVideoFile: PropTypes.func.isRequired,
-    videoPlayerReset: PropTypes.func.isRequired,
-    history: PropTypes.object
+    videoPlayerReset: PropTypes.func.isRequired
 };
 
-export default withRouter(VideoListItem);
+export default VideoListItem;
