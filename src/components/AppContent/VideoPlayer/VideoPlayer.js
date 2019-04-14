@@ -48,6 +48,37 @@ const VideoPlayer = (props) => {
                             </video>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col className="mt-2 text-center">
+                            <p className={ classes.bold }>{ videoFile.fileName }</p>
+                        </Col>
+                    </Row>
+                    <Row className="text-center">
+                        <Col md="6">
+                            <p className={ classes.bold }>Description</p>
+                            <p>{ videoFile.description }</p>
+                        </Col>
+                        <Col md="6">
+                            <p className={ classes.bold }>Categories</p>
+                            <p>{
+                                videoFile.categories
+                                    .map((cat) => cat.categoryName)
+                                    .join(', ')
+                            }</p>
+                            <p className={ classes.bold }>Series</p>
+                            <p>{
+                                videoFile.series
+                                    .map((series) => series.seriesName)
+                                    .join(', ')
+                            }</p>
+                            <p className={ classes.bold }>Stars</p>
+                            <p>{
+                                videoFile.stars
+                                    .map((star) => star.starName)
+                                    .join(', ')
+                            }</p>
+                        </Col>
+                    </Row>
                 </>
             }
         </div>
