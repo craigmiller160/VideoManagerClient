@@ -48,7 +48,7 @@ const VideoFileEdit = (props) => {
             />
             <Form
                 form={ FORM_NAME }
-                handleSubmit={ submit }
+                handleSubmit={ (event) => event.preventDefault() }
                 className={ classes.VideoFileEdit }
                 initialValues={ selectedVideo }
             >
@@ -119,7 +119,8 @@ const VideoFileEdit = (props) => {
                         <Col className="text-center">
                             <Button
                                 color="success"
-                                type="submit"
+                                type="button"
+                                onClick={ submit }
                             >
                                 Save
                             </Button>

@@ -31,7 +31,7 @@ const createPageButtons = (currentPage, totalPages, onClick) =>
                 active={ index === currentPage }
                 onClick={ () => onClick(`${index}`) }
             >
-                <PaginationLink style={ { 'z-index': 0 } }>
+                <PaginationLink style={ { zIndex: 0 } }>
                     { index + 1 }
                 </PaginationLink>
             </PaginationItem>

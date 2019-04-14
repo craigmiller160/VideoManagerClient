@@ -32,7 +32,7 @@ const Form = (props) => {
 
 Form.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
-    className: PropTypes.string
+    className: PropTypes.string,
 };
 
 const ReduxFormForm = reduxForm({})(Form);
@@ -41,7 +41,8 @@ ReduxFormForm.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     className: PropTypes.string,
     initialValues: PropTypes.object,
-    children: PropTypes.element
+    children: PropTypes.element,
+    destroyOnUnmount: PropTypes.bool
 };
 
 export default ReduxFormForm;

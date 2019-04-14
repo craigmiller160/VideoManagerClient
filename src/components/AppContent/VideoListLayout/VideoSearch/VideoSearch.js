@@ -35,6 +35,7 @@ export const VideoSearch = (props) => {
             form={ FORM_NAME }
             handleSubmit={ doSearch }
             className={ classes.VideoSearch }
+            destroyOnUnmount={ false }
         >
             <>
                 <Row>

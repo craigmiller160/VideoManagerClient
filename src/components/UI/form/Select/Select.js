@@ -11,7 +11,8 @@ export const SelectComponent = (props) => {
         label,
         input,
         options,
-        multi
+        multi,
+        inputProps
     } = props;
 
     const id = newid();
@@ -25,6 +26,7 @@ export const SelectComponent = (props) => {
             <ReactSelect
                 id={ id }
                 { ...input }
+                { ...inputProps }
                 name={ input && input.name }
                 onBlur={ () => input.onBlur(input.value) }
                 options={ options }
@@ -42,12 +44,14 @@ SelectComponent.propTypes = {
     input: PropTypes.shape({
         name: PropTypes.string
     }),
-    multi: PropTypes.bool
+    multi: PropTypes.bool,
+    inputProps: PropTypes.object
 };
 
 SelectComponent.defaultProps = {
     options: [],
-    multi: false
+    multi: false,
+    inputProps: {}
 };
 
 const Field = createField(SelectComponent);

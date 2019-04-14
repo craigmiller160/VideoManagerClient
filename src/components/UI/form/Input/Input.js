@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input as ReactInput, FormGroup, Label } from 'reactstrap';
+import { FormGroup, Input as ReactInput, Label } from 'reactstrap';
 import newid from '../../../../utils/newid';
 import formStyles from '../FormStyles.scss';
 import createField from "../createField";
@@ -10,7 +10,8 @@ export const InputComponent = (props) => {
         label,
         type,
         input,
-        textarea
+        textarea,
+        inputProps
     } = props;
 
     const id = newid();
@@ -35,6 +36,7 @@ export const InputComponent = (props) => {
                 id={ id }
                 className={ inputClasses.join(' ') }
                 { ...input }
+                { ...inputProps }
                 type={ type }
                 name={ input ? input.name : '' }
                 rows={ textarea ? textarea.rows : null }
@@ -48,7 +50,8 @@ InputComponent.defaultProps = {
     type: 'text',
     textarea: {
         resize: false
-    }
+    },
+    inputProps: {}
 };
 
 InputComponent.propTypes = {
@@ -57,6 +60,7 @@ InputComponent.propTypes = {
     input: PropTypes.shape({
         name: PropTypes.string.isRequired
     }),
+    inputProps: PropTypes.object,
     textarea: PropTypes.shape({
         rows: PropTypes.number,
         cols: PropTypes.number,
