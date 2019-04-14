@@ -13,6 +13,7 @@ import {
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
+/* eslint-disable */ // TODO delete this
 const VideoListItem = (props) => {
     const {
         videoFile: {
@@ -37,7 +38,7 @@ const VideoListItem = (props) => {
     const playVideoClick = async () => {
         try {
             await videoPlayerReset();
-            history.push(`/play/${fileId}`);
+            window.open(`/play/${fileId}`, '_blank');
         }
         catch (ex) { // eslint-disable-line no-empty
         }
