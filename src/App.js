@@ -9,7 +9,7 @@ import './App.scss';
 const App = () => (
     <>
         <Helmet>
-            <title>My Title</title>
+            <title>Video Manager</title>
         </Helmet>
         <Provider store={ store }>
             <BrowserRouter>
