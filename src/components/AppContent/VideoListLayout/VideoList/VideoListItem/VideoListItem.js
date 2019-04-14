@@ -11,9 +11,7 @@ import {
     Collapse
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
 
-/* eslint-disable */ // TODO delete this
 const VideoListItem = (props) => {
     const {
         videoFile: {
@@ -27,8 +25,7 @@ const VideoListItem = (props) => {
             expanded
         },
         expandVideoFile,
-        videoPlayerReset,
-        history
+        videoPlayerReset
     } = props;
 
     const leftColSize = 6;
@@ -111,8 +108,7 @@ const VideoListItem = (props) => {
 VideoListItem.propTypes = {
     videoFile: PropTypes.object.isRequired,
     expandVideoFile: PropTypes.func.isRequired,
-    videoPlayerReset: PropTypes.func.isRequired,
-    history: PropTypes.object
+    videoPlayerReset: PropTypes.func.isRequired
 };
 
-export default withRouter(VideoListItem);
+export default VideoListItem;
