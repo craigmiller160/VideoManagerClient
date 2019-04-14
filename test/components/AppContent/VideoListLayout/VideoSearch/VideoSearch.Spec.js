@@ -12,10 +12,12 @@ jest.mock('components/UI/form/Select/Select', () => (props) => mockComponent('Se
 const loadFilterOptions = jest.fn();
 const searchForVideos = jest.fn();
 const resetForm = jest.fn();
+const setCurrentPage = jest.fn();
 const props = {
     loadFilterOptions,
     searchForVideos,
     resetForm,
+    setCurrentPage,
     filters: {
         categories: [
             { value: 1, label: 'Cat 1' }
@@ -38,6 +40,7 @@ describe('VideoSearch', () => {
         loadFilterOptions.mockReset();
         searchForVideos.mockReset();
         resetForm.mockReset();
+        setCurrentPage.mockReset();
     });
 
     it('renders properly', () => {
@@ -56,6 +59,7 @@ describe('VideoSearch', () => {
     it('calls actions on click', () => {
         const component = createComponent(props);
         component.find(`Form[form="${FORM_NAME}"]`).simulate('submit');
+        expect(setCurrentPage).toHaveBeenCalledWith(0);
         expect(searchForVideos).toHaveBeenCalled();
         component.find('button#reset-video-search-btn').simulate('click');
         expect(resetForm).toHaveBeenLastCalledWith(FORM_NAME);
