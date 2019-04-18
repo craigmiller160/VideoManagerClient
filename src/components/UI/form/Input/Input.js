@@ -18,6 +18,9 @@ const Component = (props) => {
         <StyledInput { ...props } />
     );
 };
+Component.propTypes = {
+    type: PropTypes.string
+};
 
 export const InputComponent = (props) => {
     const {
