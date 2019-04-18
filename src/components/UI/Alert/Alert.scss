@@ -1,3 +1,4 @@
+@import '../../../_variables.scss';
 
 .Alert {
   text-align: center;
@@ -13,13 +14,13 @@
   }
 
   &.success {
-    background-color: lightgreen;
-    color: green;
+    background-color: $success;
+    color: $success-dark;
   }
 
   &.danger {
-    background-color: coral;
-    color: red;
+    background-color: $danger;
+    color: $danger-dark;
   }
 
   button {
