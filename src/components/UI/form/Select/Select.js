@@ -4,6 +4,7 @@ import ReactSelect from 'react-select';
 import newid from '../../../../utils/newid';
 import createField from "../createField";
 import StyledLabel from '../../Styled/StyledLabel';
+import StyledFormGroupDiv from '../../Styled/StyledFormGroupDiv';
 
 export const SelectComponent = (props) => {
     const {
@@ -16,7 +17,7 @@ export const SelectComponent = (props) => {
 
     const id = newid();
     return (
-        <div>
+        <StyledFormGroupDiv>
             <StyledLabel
                 htmlFor={ id }
             >
@@ -33,7 +34,7 @@ export const SelectComponent = (props) => {
                 isClearable
                 isMulti={ multi }
             />
-        </div>
+        </StyledFormGroupDiv>
     );
 };
 

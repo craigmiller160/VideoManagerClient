@@ -5,6 +5,7 @@ import StyledLabel from '../../Styled/StyledLabel';
 import newid from '../../../../utils/newid';
 import formStyles from '../FormStyles.scss';
 import createField from "../createField";
+import StyledFormGroupDiv from '../../Styled/StyledFormGroupDiv';
 
 export const InputComponent = (props) => {
     const {
@@ -27,7 +28,7 @@ export const InputComponent = (props) => {
     }
 
     return (
-        <div className={ groupClasses.join(' ') }>
+        <StyledFormGroupDiv className={ groupClasses.join(' ') }>
             <StyledLabel
                 htmlForm={ id }
             >
@@ -43,7 +44,7 @@ export const InputComponent = (props) => {
                 rows={ textarea ? textarea.rows : null }
                 cols={ textarea ? textarea.cols : null }
             />
-        </div>
+        </StyledFormGroupDiv>
     );
 };
 
