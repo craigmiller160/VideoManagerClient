@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
-import { Form as ReactForm } from 'reactstrap';
 import { reduxForm } from 'redux-form';
 
 const Form = (props) => {
@@ -12,7 +11,7 @@ const Form = (props) => {
     } = props;
 
     return (
-        <ReactForm
+        <form
             className={ className }
             onSubmit={ (event) => {
                 event.preventDefault();
@@ -26,7 +25,7 @@ const Form = (props) => {
             } }
         >
             { children }
-        </ReactForm>
+        </form>
     );
 };
 
