@@ -2,4 +2,34 @@
 .Alert {
   text-align: center;
   margin: 10px;
+  width: calc(100% - 20px);
+  display: none;
+  padding: 10px 0;
+  border-radius: 3px;
+  position: relative;
+
+  &.show {
+    display: block;
+  }
+
+  &.success {
+    background-color: lightgreen;
+    color: green;
+  }
+
+  &.danger {
+    background-color: coral;
+    color: red;
+  }
+
+  button {
+    border: none;
+    color: inherit;
+    background-color: inherit;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    margin: 0;
+    cursor: pointer;
+  }
 }
