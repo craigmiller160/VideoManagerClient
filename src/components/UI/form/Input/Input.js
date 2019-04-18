@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, Input as ReactInput, Label } from 'reactstrap';
+import { FormGroup, Label } from 'reactstrap';
+import StyledInput from './StyledInput';
 import newid from '../../../../utils/newid';
 import formStyles from '../FormStyles.scss';
 import createField from "../createField";
@@ -32,7 +33,7 @@ export const InputComponent = (props) => {
             >
                 { label }
             </Label>
-            <ReactInput
+            <StyledInput
                 id={ id }
                 className={ inputClasses.join(' ') }
                 { ...input }
