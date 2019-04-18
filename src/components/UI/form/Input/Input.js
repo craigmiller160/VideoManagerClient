@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, Label } from 'reactstrap';
-import StyledInput from './StyledInput';
+import StyledInput from '../../Styled/StyledInput';
+import StyledLabel from '../../Styled/StyledLabel';
 import newid from '../../../../utils/newid';
 import formStyles from '../FormStyles.scss';
 import createField from "../createField";
@@ -16,7 +16,7 @@ export const InputComponent = (props) => {
     } = props;
 
     const id = newid();
-    const groupClasses = [formStyles['input-label']];
+    const groupClasses = [];
     if ('hidden' === type.toLowerCase()) {
         groupClasses.push(formStyles.hidden);
     }
@@ -27,12 +27,12 @@ export const InputComponent = (props) => {
     }
 
     return (
-        <FormGroup className={ groupClasses.join(' ') }>
-            <Label
-                for={ id }
+        <div className={ groupClasses.join(' ') }>
+            <StyledLabel
+                htmlForm={ id }
             >
                 { label }
-            </Label>
+            </StyledLabel>
             <StyledInput
                 id={ id }
                 className={ inputClasses.join(' ') }
@@ -43,7 +43,7 @@ export const InputComponent = (props) => {
                 rows={ textarea ? textarea.rows : null }
                 cols={ textarea ? textarea.cols : null }
             />
-        </FormGroup>
+        </div>
     );
 };
 
