@@ -21,7 +21,7 @@ export const getAlignClassName = (stringName) => {
     }
 };
 
-const createPageButtons = (currentPage, totalPages, onClick) =>
+export const createPageButtons = ({ currentPage, totalPages, onClick }) =>
     [...Array(totalPages).keys()]
         .filter((index) => index > currentPage - NUM_BUTTONS &&
             index < currentPage + NUM_BUTTONS)
@@ -57,7 +57,7 @@ const Pagination = (props) => {
                     </>
             }
             {
-                createPageButtons(currentPage, totalPages, onClick)
+                createPageButtons({ currentPage, totalPages, onClick })
             }
             {
                 showNext &&

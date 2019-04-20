@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Pagination, {
     RIGHT_ALIGN,
     LEFT_ALIGN,
     CENTER_ALIGN,
-    getAlignClassName
+    getAlignClassName,
+    createPageButtons
 } from 'components/UI/Pagination/Pagination';
 import PaginationClasses from 'components/UI/Pagination/Pagination.scss';
 import { mount } from 'enzyme';
@@ -129,5 +130,41 @@ describe('Pagination', () => {
             return;
         }
         throw new Error('Should have thrown exception');
+    });
+
+    describe('creates the correct number of page buttons', () => {
+        const onClick = jest.fn();
+        const totalPages = 22;
+
+        const mountPageBtns = (currentPage) => mount(
+            <Fragment>
+                { createPageButtons({ currentPage, totalPages, onClick }) }
+            </Fragment>
+        );
+
+        beforeEach(() => {
+            onClick.mockReset();
+        });
+
+        it('current page is first page', () => {
+            const pageButtons = mountPageBtns(0);
+            expect(pageButtons).toHaveLength(5);
+            pageButtons.find('PaginationItem').at(0).simulate('click');
+            expect(onClick).toHaveBeenCalledWith('0');
+        });
+
+        it('current page is middle page', () => {
+            const pageButtons = mountPageBtns(10);
+            expect(pageButtons).toHaveLength(9);
+            pageButtons.find('PaginationItem').at(0).simulate('click');
+            expect(onClick).toHaveBeenCalledWith('6');
+        });
+
+        it('current page is last page', () => {
+            const pageButtons = mountPageBtns(21);
+            expect(pageButtons).toHaveLength(5);
+            pageButtons.find('PaginationItem').at(0).simulate('click');
+            expect(onClick).toHaveBeenCalledWith('17');
+        });
     });
 });
