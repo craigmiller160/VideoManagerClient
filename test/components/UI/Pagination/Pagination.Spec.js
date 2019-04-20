@@ -43,15 +43,15 @@ describe('Pagination', () => {
         expect(paginationItems.at(3).props().active).toEqual(true);
 
         paginationItems.at(4).simulate('click');
-        expect(clickedIndex).toEqual('2');
+        expect(clickedIndex).toEqual(2);
         paginationItems.at(1).simulate('click');
-        expect(clickedIndex).toEqual('<');
+        expect(clickedIndex).toEqual(0);
         paginationItems.at(7).simulate('click');
-        expect(clickedIndex).toEqual('>');
+        expect(clickedIndex).toEqual(2);
         paginationItems.at(0).simulate('click');
-        expect(clickedIndex).toEqual('<<');
+        expect(clickedIndex).toEqual(0);
         paginationItems.at(8).simulate('click');
-        expect(clickedIndex).toEqual('>>');
+        expect(clickedIndex).toEqual(4);
     });
 
     it('should only render with next button', () => {
@@ -150,21 +150,21 @@ describe('Pagination', () => {
             const pageButtons = mountPageBtns(0);
             expect(pageButtons).toHaveLength(5);
             pageButtons.find('PaginationItem').at(0).simulate('click');
-            expect(onClick).toHaveBeenCalledWith('0');
+            expect(onClick).toHaveBeenCalledWith(0);
         });
 
         it('current page is middle page', () => {
             const pageButtons = mountPageBtns(10);
             expect(pageButtons).toHaveLength(9);
             pageButtons.find('PaginationItem').at(0).simulate('click');
-            expect(onClick).toHaveBeenCalledWith('6');
+            expect(onClick).toHaveBeenCalledWith(6);
         });
 
         it('current page is last page', () => {
             const pageButtons = mountPageBtns(21);
             expect(pageButtons).toHaveLength(5);
             pageButtons.find('PaginationItem').at(0).simulate('click');
-            expect(onClick).toHaveBeenCalledWith('17');
+            expect(onClick).toHaveBeenCalledWith(17);
         });
     });
 });

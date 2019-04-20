@@ -28,6 +28,7 @@ const getPagination = (props) => {
     );
 };
 
+// TODO need to refactor this and the tests for it
 export const paginationClick = (value, props) => {
     const {
         currentPage,
