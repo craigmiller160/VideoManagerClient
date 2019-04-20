@@ -48,6 +48,7 @@ export const InputComponent = (props) => {
                 name={ input ? input.name : '' }
                 rows={ textarea ? textarea.rows : null }
                 cols={ textarea ? textarea.cols : null }
+                resize={ textarea ? textarea.resize : false }
             />
         </StyledFormGroupDiv>
     );

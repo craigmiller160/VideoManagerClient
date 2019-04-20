@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputComponent } from 'components/UI/form/Input/Input';
+import { InputComponent, InnerComponent } from 'components/UI/form/Input/Input';
 import { mount } from 'enzyme';
 import 'jest-styled-components'
 
@@ -13,11 +13,19 @@ describe('Input', () => {
     };
 
     it('should render InnerComponent as input', () => {
-        throw new Error('Finish this');
+        const component = mount(
+            <InnerComponent type="text" />
+        );
+        expect(component.find('StyledInput')).toHaveLength(1);
+        expect(component.find('StyledTextArea')).toHaveLength(0);
     });
 
     it('should render InnerComponent as textarea', () => {
-        throw new Error('Finish this');
+        const component = mount(
+            <InnerComponent type="textarea" />
+        );
+        expect(component.find('StyledInput')).toHaveLength(0);
+        expect(component.find('StyledTextArea')).toHaveLength(1);
     });
 
     it('should render correctly', () => {
