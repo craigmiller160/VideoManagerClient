@@ -1,7 +1,6 @@
 import React from 'react';
 import { InputComponent, InnerComponent } from 'components/UI/form/Input/Input';
 import { mount } from 'enzyme';
-import 'jest-styled-components'
 
 describe('Input', () => {
     const props = {

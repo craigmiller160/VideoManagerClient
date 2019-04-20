@@ -15,7 +15,7 @@ const Alert = (props) => {
             <button aria-label="close" onClick={ () => hideAlert() }>
                 <span aria-hidden="true">X</span>
             </button>
-            { message }
+            <span>{ message }</span>
         </div>
     );
 };
