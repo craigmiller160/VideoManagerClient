@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StyledTextArea renders correctly 1`] = `
+.c0 {
+  font-weight: bold;
+  margin: 0;
+}
+
+<StyledLabel>
+  <label
+    className="c0"
+  />
+</StyledLabel>
+`;
