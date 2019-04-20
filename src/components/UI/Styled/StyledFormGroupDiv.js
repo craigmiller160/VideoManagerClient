@@ -10,5 +10,8 @@ StyledFormGroupDiv.displayName = 'StyledFormGroupDiv';
 StyledFormGroupDiv.propTypes = {
     hidden: PropTypes.bool
 };
+StyledFormGroupDiv.defaultProps = {
+    hidden: false
+};
 
 export default StyledFormGroupDiv;
