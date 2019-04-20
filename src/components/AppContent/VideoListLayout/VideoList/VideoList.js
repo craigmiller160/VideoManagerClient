@@ -11,7 +11,7 @@ import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
 import { reset } from 'store/videoPlayer/videoPlayer.actions';
 
 const getPagination = (props) => {
-    const { totalItems, itemsPerPage, currentPage } = props; //eslint-disable-line react/prop-types
+    const { totalItems, itemsPerPage, currentPage, setCurrentPage, searchForVideos } = props; //eslint-disable-line react/prop-types
     if (totalItems === 0) {
         return <div />;
     }
