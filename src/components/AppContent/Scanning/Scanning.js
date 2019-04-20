@@ -36,7 +36,7 @@ const Scanning = (props) => {
             </Row>
             <Row>
                 <Col xs="12">
-                    <Spinner />
+                    <Spinner id="scanning-spinner" />
                 </Col>
             </Row>
         </div>

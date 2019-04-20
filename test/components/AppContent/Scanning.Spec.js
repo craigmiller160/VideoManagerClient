@@ -2,24 +2,35 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Scanning from 'components/AppContent/Scanning/Scanning';
 
+const checkIsScanning = jest.fn();
 const defaultProps = {
-
+    checkIsScanning
 };
 
-const doMount = (props) => mount(
+const doMount = (props = defaultProps) => mount(
     <Scanning { ...props } />
 );
 
 describe('Scanning', () => {
+    beforeEach(() => {
+        checkIsScanning.mockReset();
+    });
+
     it('renders component', () => {
-        throw new Error('Finish this');
+        const component = doMount();
+        expect(component.find('Spinner#scanning-spinner')).toHaveLength(1);
     });
 
-    it('checks is scanning on interval', () => {
-        throw new Error('Finish this');
-    });
-
-    it('stops checking is scanning when unmounted', () => {
-        throw new Error('Finish this');
+    it('starts and stops calling the checkIsScanning function', (done) => {
+        const component = doMount();
+        setTimeout(() => {
+            component.unmount();
+            const calledTimes = checkIsScanning.mock.results.length;
+            expect(checkIsScanning).toHaveBeenCalledTimes(calledTimes);
+            setTimeout(() => {
+                expect(checkIsScanning).toHaveBeenCalledTimes(calledTimes);
+                done();
+            }, 1200);
+        }, 1200);
     });
 });
