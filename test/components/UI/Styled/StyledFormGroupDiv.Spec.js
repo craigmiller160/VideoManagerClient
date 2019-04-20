@@ -1,6 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import 'jest-styled-components'
 import StyledFormGroupDiv from 'components/UI/Styled/StyledFormGroupDiv';
 
 const doMount = (props = {}) => mount(

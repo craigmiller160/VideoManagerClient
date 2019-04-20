@@ -1,6 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import 'jest-styled-components';
 import StyledTextArea from 'components/UI/Styled/StyledTextArea';
 
 describe('StyledTextArea', () => {
