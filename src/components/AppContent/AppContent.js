@@ -147,7 +147,6 @@ export const AppContent = (props) => {
                                render={ (props) => (
                                    <VideoListLayout
                                        { ...props }
-                                       isScanning={ isScanning }
                                    />
                                ) }
                         />
