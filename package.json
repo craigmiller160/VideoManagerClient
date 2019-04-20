@@ -45,7 +45,8 @@
         {
           "ignore": "children"
         }
-      ]
+      ],
+      "react/no-unused-prop-types": 2
     }
   },
   "browserslist": [
