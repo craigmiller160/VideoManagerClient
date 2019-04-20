@@ -1,6 +1,9 @@
 import React from 'react';
 import { InputComponent } from 'components/UI/form/Input/Input';
 import { mount } from 'enzyme';
+import { matchers } from 'jest-emotion';
+
+expect.extend(matchers);
 
 describe('Input', () => {
     const props = {
@@ -11,12 +14,24 @@ describe('Input', () => {
         }
     };
 
+    it('should render InnerComponent as input', () => {
+        throw new Error('Finish this');
+    });
+
+    it('should render InnerComponent as textarea', () => {
+        throw new Error('Finish this');
+    });
+
     it('should render correctly', () => {
         const component = mount(
             <InputComponent { ...props } />
         );
-        expect(component.find('FormGroup')).toHaveLength(1);
-        expect(component.find('FormGroup').hasClass('hidden')).toEqual(false);
+
+        expect(component.find('StyledFormGroupDiv')).toHaveLength(1);
+        expect(component.find('StyledFormGroupDiv')).toHaveStyleRule('display', 'block');
+        // console.log(component.find('StyledFormGroupDiv').get(0).props().style); // TODO delete this
+        // expect(component.find('StyledFormGroupDiv').get(0).style).toHaveProperty('display', 'block');
+        // expect(component.find('FormGroup').hasClass('hidden')).toEqual(false);
         expect(component.find('label')).toHaveLength(1);
         expect(component.find('label').text()).toEqual('My Input');
         expect(component.find('input')).toHaveLength(1);

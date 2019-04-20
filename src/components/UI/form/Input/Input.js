@@ -7,7 +7,7 @@ import createField from "../createField";
 import StyledFormGroupDiv from '../../Styled/StyledFormGroupDiv';
 import StyledTextArea from '../../Styled/StyledTextArea';
 
-const Component = (props) => {
+export const InnerComponent = (props) => {
     if (props.type === 'textarea') {
         return (
             <StyledTextArea { ...props } />
@@ -18,7 +18,7 @@ const Component = (props) => {
         <StyledInput { ...props } />
     );
 };
-Component.propTypes = {
+InnerComponent.propTypes = {
     type: PropTypes.string
 };
 
@@ -33,8 +33,6 @@ export const InputComponent = (props) => {
 
     const id = newid();
 
-    // const component = 'textarea' === type ? StyledTextArea : StyledInput;
-
     return (
         <StyledFormGroupDiv hidden={ 'hidden' === type.toLowerCase() }>
             <StyledLabel
@@ -42,7 +40,7 @@ export const InputComponent = (props) => {
             >
                 { label }
             </StyledLabel>
-            <Component
+            <InnerComponent
                 id={ id }
                 { ...input }
                 { ...inputProps }
