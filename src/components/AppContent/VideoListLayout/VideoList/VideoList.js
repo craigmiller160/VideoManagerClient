@@ -10,8 +10,15 @@ import Spinner from 'components/UI/Spinner/Spinner';
 import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
 import { reset } from 'store/videoPlayer/videoPlayer.actions';
 
-const getPagination = (props) => {
-    const { totalItems, itemsPerPage, currentPage, setCurrentPage, searchForVideos } = props; //eslint-disable-line react/prop-types
+const VideoListPagination = (props) => {
+    const {
+        totalItems,
+        itemsPerPage,
+        currentPage,
+        setCurrentPage,
+        searchForVideos
+    } = props;
+
     if (totalItems === 0) {
         return <div />;
     }
@@ -30,6 +37,13 @@ const getPagination = (props) => {
         />
     );
 };
+VideoListPagination.propTypes = {
+    totalItems: PropTypes.number,
+    itemsPerPage: PropTypes.number,
+    currentPage: PropTypes.number,
+    setCurrentPage: PropTypes.func,
+    searchForVideos: PropTypes.func
+};
 
 export const VideoList = (props) => {
     const {
@@ -38,12 +52,26 @@ export const VideoList = (props) => {
         expandVideoFile,
         searchForVideos,
         currentPage,
-        videoPlayerReset
+        videoPlayerReset,
+        itemsPerPage,
+        totalItems,
+        setCurrentPage
     } = props;
 
     useEffect(() => {
         searchForVideos();
     }, [currentPage]);
+
+    const [ pager1, pager2 ] = [...Array(2).keys()].map((index) => (
+        <VideoListPagination
+            key={ index }
+            currentPage={ currentPage }
+            itemsPerPage={ itemsPerPage }
+            setCurrentPage={ setCurrentPage }
+            searchForVideos={ searchForVideos }
+            totalItems={ totalItems }
+        />
+    ));
 
     return (
         <div className={ classes.VideoList }>
@@ -57,7 +85,7 @@ export const VideoList = (props) => {
             {
                 !searching && videoList.length > 0 &&
                 <div>
-                    { getPagination(props) }
+                    { pager1 }
                     <ListGroup>
                         { videoList.map((videoFile) => (
                             <VideoListItem
@@ -68,7 +96,7 @@ export const VideoList = (props) => {
                             />
                         )) }
                     </ListGroup>
-                    { getPagination(props) }
+                    { pager2 }
                 </div>
             }
             {
@@ -89,8 +117,8 @@ VideoList.propTypes = {
     expandVideoFile: PropTypes.func,
     searchForVideos: PropTypes.func,
     currentPage: PropTypes.number,
-    playVideoFile: PropTypes.func,
-    videoPlayerReset: PropTypes.func
+    videoPlayerReset: PropTypes.func,
+    setCurrentPage: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
