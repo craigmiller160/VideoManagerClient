@@ -23,40 +23,12 @@ const getPagination = (props) => {
             totalPages={ totalPages }
             currentPage={ currentPage }
             align={ RIGHT_ALIGN }
-            onClick={ (value) => paginationClick(value, { ...props, totalPages }) }
+            onClick={ (value) => {
+                setCurrentPage(value);
+                searchForVideos();
+            } }
         />
     );
-};
-
-// TODO need to refactor this and the tests for it
-export const paginationClick = (value, props) => {
-    const {
-        currentPage,
-        setCurrentPage,
-        searchForVideos,
-        totalPages
-    } = props;
-    let newPage = currentPage;
-    if (newPage != value) { // eslint-disable-line
-        if ('<' === value) {
-            newPage--;
-        }
-        else if ('>' === value) {
-            newPage++;
-        }
-        else if ('>>' === value) {
-            newPage = totalPages - 1;
-        }
-        else if ('<<' === value) {
-            newPage = 0;
-        }
-        else {
-            newPage = parseInt(value);
-        }
-
-        setCurrentPage(newPage);
-        searchForVideos();
-    }
 };
 
 export const VideoList = (props) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { VideoList, paginationClick } from 'components/AppContent/VideoListLayout/VideoList/VideoList';
+import { VideoList } from 'components/AppContent/VideoListLayout/VideoList/VideoList';
 
 jest.mock('components/AppContent/VideoListLayout/VideoList/VideoListItem/VideoListItem',
     () => (props) => <mock-video-list-item { ...props } />); // eslint-disable-line react/display-name
@@ -79,33 +79,5 @@ describe('VideoList', () => {
 
             expect(component.find('mock-pagination').at(0).props().totalPages).toEqual(4);
         });
-    });
-
-    it('handles onClick from Pagination', () => {
-        const props = {
-            setCurrentPage,
-            currentPage: 0,
-            searchForVideos,
-            totalPages: 22
-        };
-
-        paginationClick('<', props);
-        expect(setCurrentPage).toHaveBeenLastCalledWith(-1);
-        expect(searchForVideos).toHaveBeenCalledTimes(1);
-
-        paginationClick('1', props);
-        expect(setCurrentPage).toHaveBeenLastCalledWith(1);
-        expect(searchForVideos).toHaveBeenCalledTimes(2);
-
-        paginationClick('>', props);
-        expect(setCurrentPage).toHaveBeenLastCalledWith(1);
-        expect(searchForVideos).toHaveBeenCalledTimes(3);
-
-        paginationClick('<<', props);
-        expect(setCurrentPage).toHaveBeenCalledWith(0);
-        expect(searchForVideos).toHaveBeenCalledTimes(4);
-        paginationClick('>>', props);
-        expect(setCurrentPage).toHaveBeenCalledWith(21);
-        expect(searchForVideos).toHaveBeenCalledTimes(5);
     });
 });
