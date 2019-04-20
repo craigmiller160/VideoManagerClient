@@ -12,13 +12,13 @@ import AddButton from '../../UI/AddButton/AddButton';
 import {
     showAddCategoryModal,
     showAddSeriesModal,
-    showAddStarModal,
+    showAddStarModal
 } from 'store/filterInputModal/filterInputModal.actions';
 import FilterInputModal from '../../Modals/FilterInputModal/FilterInputModal';
 
 export const FORM_NAME = 'video-file-edit';
 
-const VideoFileEdit = (props) => {
+export const VideoFileEdit = (props) => {
     const [ isSubmitted, setSubmitted ] = useState(false);
 
     if (!props.selectedVideo) {
