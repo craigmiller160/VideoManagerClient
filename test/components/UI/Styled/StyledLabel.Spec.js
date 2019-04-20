@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import 'jest-styled-components'
+import 'jest-styled-components';
 import StyledLabel from 'components/UI/Styled/StyledLabel';
 
 describe('StyledLabel', () => {

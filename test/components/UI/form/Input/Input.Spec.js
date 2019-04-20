@@ -1,9 +1,7 @@
 import React from 'react';
 import { InputComponent } from 'components/UI/form/Input/Input';
 import { mount } from 'enzyme';
-import { matchers } from 'jest-emotion';
-
-expect.extend(matchers);
+import 'jest-styled-components'
 
 describe('Input', () => {
     const props = {
@@ -29,9 +27,6 @@ describe('Input', () => {
 
         expect(component.find('StyledFormGroupDiv')).toHaveLength(1);
         expect(component.find('StyledFormGroupDiv')).toHaveStyleRule('display', 'block');
-        // console.log(component.find('StyledFormGroupDiv').get(0).props().style); // TODO delete this
-        // expect(component.find('StyledFormGroupDiv').get(0).style).toHaveProperty('display', 'block');
-        // expect(component.find('FormGroup').hasClass('hidden')).toEqual(false);
         expect(component.find('label')).toHaveLength(1);
         expect(component.find('label').text()).toEqual('My Input');
         expect(component.find('input')).toHaveLength(1);
@@ -46,7 +41,7 @@ describe('Input', () => {
         const component = mount(
             <InputComponent { ...props } type="hidden" />
         );
-        expect(component.find('FormGroup').hasClass('hidden')).toEqual(true);
+        expect(component.find('StyledFormGroupDiv')).toHaveStyleRule('display', 'none');
     });
 
     it('renders textarea', () => {
@@ -68,7 +63,7 @@ describe('Input', () => {
             rows: 10,
             cols: 10
         }));
-        expect(textarea.hasClass('no-resize')).toEqual(true);
+        expect(component.find('StyledTextArea')).toHaveStyleRule('resize', 'none');
     });
 
     it('renders textarea with resizing', () => {
@@ -84,6 +79,6 @@ describe('Input', () => {
         );
         const textarea = component.find('textarea');
         expect(textarea).toHaveLength(1);
-        expect(textarea.hasClass('no-resize')).toEqual(false);
+        expect(component.find('StyledTextArea')).toHaveStyleRule('resize', 'both');
     });
 });
