@@ -44,7 +44,6 @@ const Scanning = (props) => {
 };
 
 Scanning.propTypes = {
-    isScanning: PropTypes.bool.isRequired,
     checkIsScanning: PropTypes.func.isRequired
 };
 

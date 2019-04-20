@@ -113,7 +113,6 @@ export const AppContent = (props) => {
                             render={ (props) => (
                                 <Scanning
                                     { ...props }
-                                    isScanning={ isScanning }
                                     checkIsScanning={ checkIsScanning }
                                 />
                             ) }
