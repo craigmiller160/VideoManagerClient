@@ -7,14 +7,10 @@ import classes from './VideoPlayer.scss';
 import Spinner from '../../UI/Spinner/Spinner';
 import { loadDataForPlayback } from 'store/videoPlayer/videoPlayer.actions';
 import { Helmet } from 'react-helmet';
-import moment from 'moment';
+import VideoDate from '../../../model/VideoDate';
 
 const getFileName = (videoFile) => {
     return videoFile.displayName || videoFile.fileName;
-};
-
-const formatDate = (date) => {
-    return moment(date, 'YYYY-MM-DDTHH:mm:ss').format('YYYY-MM-DD hh:mm a');
 };
 
 const VideoPlayer = (props) => {
@@ -28,6 +24,8 @@ const VideoPlayer = (props) => {
     useEffect(() => {
         loadDataForPlayback(params.fileId)
     }, []);
+
+    const formattedLastViewed = new VideoDate(videoFile.lastViewed).formatDateTime();
 
     return (
         <>
@@ -79,7 +77,7 @@ const VideoPlayer = (props) => {
                                     </Col>
                                     <Col>
                                         <p>
-                                            <span className={ classes.bold }>Last Viewed: </span>{ formatDate(videoFile.lastViewed) }
+                                            <span className={ classes.bold }>Last Viewed: </span>{ formattedLastViewed }
                                         </p>
                                     </Col>
                                 </Row>
