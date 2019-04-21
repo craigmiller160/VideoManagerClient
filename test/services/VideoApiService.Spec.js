@@ -18,19 +18,20 @@ import {
 
 const mockApi = new MockAdapter(API);
 
-beforeEach(() => {
-    mockApi.reset();
-    mockAddNewVideoFile(mockApi);
-    mockUpdateVideoFile(mockApi);
-    mockGetAllFiles(mockApi);
-    mockStartVideoScan(mockApi);
-    mockIsVideoScanRunning(mockApi);
-    mockGetVideoFileCount(mockApi);
-    mockGetVideoFile(mockApi);
-    mockRecordNewVideoPlay(mockApi);
-});
-
 describe('VideoApiService', () => {
+    beforeEach(() => {
+        mockApi.reset();
+        mockAddNewVideoFile(mockApi);
+        mockUpdateVideoFile(mockApi);
+        mockGetAllFiles(mockApi);
+        mockStartVideoScan(mockApi);
+        mockIsVideoScanRunning(mockApi);
+        mockGetVideoFileCount(mockApi);
+        mockGetVideoFile(mockApi);
+        mockRecordNewVideoPlay(mockApi);
+        // mockSearchForFiles(mockApi);
+    });
+
     it('Add File', async () => {
         try {
             const result = await VideoApiService.addVideoFile(NEW_VIDEO_FILE);
@@ -58,11 +59,12 @@ describe('VideoApiService', () => {
         try {
             result = await VideoApiService.searchForVideos({
                 page: 0,
-                sortDirection: 'ASC',
                 searchText: '',
                 categoryId: 0,
                 starId: 0,
-                seriesId: 0
+                seriesId: 0,
+                sortBy: 'NAME',
+                sortDir: 'ASC'
             });
         }
         catch (ex) {

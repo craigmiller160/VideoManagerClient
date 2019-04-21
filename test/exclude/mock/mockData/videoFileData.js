@@ -39,8 +39,8 @@ export const FILE_COUNT = { totalFiles: 100, filesPerPage: 10 };
 
 export const PAGINATION_COUNTS = { totalItems: 100, itemsPerPage: 10 };
 
-export const EMPTY_SEARCH = { searchText: '', seriesId: 0, starId: 0, categoryId: 0 };
+export const EMPTY_SEARCH = { searchText: '', seriesId: 0, starId: 0, categoryId: 0, sortBy: 'NAME', sortDir: 'ASC', page: 0 };
 
-export const FULL_SEARCH = { searchText: 'Hello World', seriesId: 1, starId: 1, categoryId: 1 };
+export const FULL_SEARCH = { searchText: 'Hello World', seriesId: 1, starId: 1, categoryId: 1, page: 0, sortBy: 'NAME', sortDir: 'ASC' };
 
 export const FILE_SCAN_STATUS = { inProgress: true, scanError: false };
