@@ -60,8 +60,24 @@ const VideoPlayer = (props) => {
                         </Row>
                         <Row className="text-center">
                             <Col md="6">
-                                <p className={ classes.bold }>Description</p>
-                                <p>{ videoFile.description }</p>
+                                <Row>
+                                    <Col>
+                                        <p className={ classes.bold }>Description</p>
+                                        <p>{ videoFile.description }</p>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <p>
+                                            <span className={ classes.bold }>Views: </span>{ videoFile.viewCount }
+                                        </p>
+                                    </Col>
+                                    <Col>
+                                        <p>
+                                            <span className={ classes.bold }>Last Viewed: </span>{ videoFile.lastViewed }
+                                        </p>
+                                    </Col>
+                                </Row>
                             </Col>
                             <Col md="6">
                                 <p className={ classes.bold }>Categories</p>
