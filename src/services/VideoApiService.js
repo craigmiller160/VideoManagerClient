@@ -20,6 +20,10 @@ const getVideoFile = (fileId) => {
     return API.get(`/video-files/${fileId}`);
 };
 
+const recordNewVideoPlay = (fileId) => {
+    return API.get(`/video-files/record-play/${fileId}`);
+};
+
 const searchForVideos = (searchConfig) => {
     const {
         searchText,
@@ -51,5 +55,6 @@ export default {
     startVideoScan,
     isVideoScanRunning,
     searchForVideos,
-    getVideoFile
+    getVideoFile,
+    recordNewVideoPlay
 }
