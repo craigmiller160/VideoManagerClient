@@ -91,14 +91,12 @@ const VideoListItem = (props) => {
                 <Collapse isOpen={ expanded }>
                     <Row>
                         <Col xs={ leftColSize }>
-                            <ListGroupItemText>
-                                <span className={ classes.heading }>File Name: </span>
-                                { fileName }
-                            </ListGroupItemText>
+                            <p className={ classes.heading }>File Name:</p>
+                            <p>{ fileName }</p>
                         </Col>
                         <Col>
                             <p className={ classes.label }>Views:</p>
-                            <p>{ viewCount }</p>
+                            <p className={ classes['push-text'] }>{ viewCount }</p>
                         </Col>
                         <Col className="text-center">
                             <p className={ classes.label }>Last Viewed:</p>
