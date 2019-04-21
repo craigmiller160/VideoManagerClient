@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
 import {
-    expandVideoFile,
+    expandVideoFile, parseSortBy, parseSortDir,
     saveVideoFile, saveVideoFileEdits,
     searchForVideos,
     setCurrentPage,
@@ -26,6 +26,13 @@ import { setSearching } from 'store/videoSearch/videoSearch.actions';
 import { showSuccessAlert } from 'store/alert/alert.actions';
 import { FORM_NAME as VideoSearchFormName } from 'components/AppContent/VideoListLayout/VideoSearch/VideoSearch';
 import { FORM_NAME as VideoEditFormName } from 'components/AppContent/VideoFileEdit/VideoFileEdit';
+import {
+    SORT_ASC,
+    SORT_BY_LAST_MOD,
+    SORT_BY_LAST_VIEWED,
+    SORT_BY_NAME,
+    SORT_BY_VIEWS, SORT_DESC
+} from '../../../src/components/AppContent/VideoListLayout/VideoSearch/VideoSearch.options';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -217,5 +224,57 @@ describe('videoList.actions', () => {
         });
     });
 
+    describe('parseSortBy', () => {
+        it('is sorting by name', () => {
+            const result = parseSortBy(SORT_BY_NAME);
+            expect(result).toEqual('NAME');
+        });
 
+        it('is sorting by views', () => {
+            const result = parseSortBy(SORT_BY_VIEWS);
+            expect(result).toEqual('VIEW_COUNT');
+        });
+
+        it('is sorting by last viewed', () => {
+            const result = parseSortBy(SORT_BY_LAST_VIEWED);
+            expect(result).toEqual('LAST_VIEWED');
+        });
+
+        it('is sorting by last modified', () => {
+            const result = parseSortBy(SORT_BY_LAST_MOD);
+            expect(result).toEqual('LAST_MODIFIED');
+        });
+
+        it('invalid sort by', () => {
+            try {
+                parseSortBy('abc');
+            }
+            catch (ex) {
+                return;
+            }
+            throw new Error('Should have thrown exception');
+        });
+    });
+
+    describe('parseSortDir', () => {
+        it('sorts ascending', () => {
+            const result = parseSortDir(SORT_ASC);
+            expect(result).toEqual('ASC');
+        });
+
+        it('sorts descending', () => {
+            const result = parseSortDir(SORT_DESC);
+            expect(result).toEqual('DESC');
+        });
+
+        it('invalid sort direction', () => {
+            try {
+                parseSortDir('abc');
+            }
+            catch (ex) {
+                return;
+            }
+            throw new Error('Should have thrown exception');
+        });
+    });
 });
