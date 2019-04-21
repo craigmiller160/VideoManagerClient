@@ -11,6 +11,7 @@ import {
     Collapse
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import VideoDate from 'model/VideoDate';
 
 const VideoListItem = (props) => {
     const {
@@ -22,7 +23,9 @@ const VideoListItem = (props) => {
             categories,
             series,
             stars,
-            expanded
+            expanded,
+            viewCount,
+            lastViewed
         },
         expandVideoFile,
         videoPlayerReset
@@ -31,6 +34,7 @@ const VideoListItem = (props) => {
     const leftColSize = 6;
     const rootClasses = [ classes.VideoListItem, (expanded ? classes.active : '') ].join(' ');
     const actualDisplayName = displayName ? displayName : fileName;
+    const formattedLastViewed = new VideoDate(lastViewed).formatDateTime();
 
     const playVideoClick = async () => {
         try {
@@ -86,11 +90,19 @@ const VideoListItem = (props) => {
                 </Row>
                 <Collapse isOpen={ expanded }>
                     <Row>
-                        <Col>
+                        <Col xs={ leftColSize }>
                             <ListGroupItemText>
                                 <span className={ classes.heading }>File Name: </span>
                                 { fileName }
                             </ListGroupItemText>
+                        </Col>
+                        <Col>
+                            <p className={ classes.label }>Views:</p>
+                            <p>{ viewCount }</p>
+                        </Col>
+                        <Col className="text-center">
+                            <p className={ classes.label }>Last Viewed:</p>
+                            <p>{ formattedLastViewed }</p>
                         </Col>
                         <Col className="text-right">
                             <Link to="/edit">
