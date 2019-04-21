@@ -110,7 +110,7 @@ describe('VideoApiService', () => {
 
     it('Record New Video Play', async () => {
         try {
-            await VideoApiService.recordNewVideoPlay(1);
+            await VideoApiService.recordNewVideoPlay(3);
         }
         catch (ex) {
             expect(ex).toBeUndefined();

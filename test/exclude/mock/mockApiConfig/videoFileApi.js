@@ -64,6 +64,6 @@ export const mockGetVideoFileCount = (mockApi) => {
 };
 
 export const mockRecordNewVideoPlay = (mockApi) => {
-    mockApi.onGet('/video-files/record-play/1')
+    mockApi.onGet('/video-files/record-play/3')
         .reply(200);
 };
