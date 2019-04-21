@@ -40,7 +40,12 @@ export const SelectComponent = (props) => {
 
 SelectComponent.propTypes = {
     label: PropTypes.string.isRequired,
-    options: PropTypes.array.isRequired,
+    options: PropTypes.arrayOf([
+        PropTypes.shape({
+            label: PropTypes.string,
+            value: PropTypes.any
+        })
+    ]),
     input: PropTypes.shape({
         name: PropTypes.string
     }),
