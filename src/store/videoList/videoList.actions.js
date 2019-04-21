@@ -27,8 +27,8 @@ export const searchForVideos = () => async (dispatch, getState) => {
             searchConfig.seriesId = series ? series.value : 0;
             searchConfig.starId = star ? star.value : 0;
             searchConfig.searchText = search;
-            searchConfig.sortBy = parseSortBy(sortBy);
-            searchConfig.sortDir = parseSortDir(sortDir);
+            searchConfig.sortBy = parseSortBy(sortBy.value);
+            searchConfig.sortDir = parseSortDir(sortDir.value);
         }
 
         const result = await VideoApiService.searchForVideos(searchConfig);
