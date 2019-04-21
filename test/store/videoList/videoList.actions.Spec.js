@@ -85,7 +85,9 @@ describe('videoList.actions', () => {
                         category: { value: 0 },
                         series: { value: 0 },
                         star: { value: 0 },
-                        search: ''
+                        search: '',
+                        sortBy: SORT_BY_NAME,
+                        sortDir: SORT_ASC
                     }
                 }
             }
@@ -98,7 +100,9 @@ describe('videoList.actions', () => {
                         category: { value: 1 },
                         series: { value: 1 },
                         star: { value: 1 },
-                        search: 'Hello World'
+                        search: 'Hello World',
+                        sortBy: SORT_BY_NAME,
+                        sortDir: SORT_ASC
                     }
                 }
             }
