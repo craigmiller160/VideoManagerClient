@@ -1,4 +1,3 @@
-/* eslint-disable */ // TODO delete this
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
