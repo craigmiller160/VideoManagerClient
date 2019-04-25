@@ -25,7 +25,8 @@ const VideoPlayer = (props) => {
         loadDataForPlayback(params.fileId)
     }, []);
 
-    const formattedLastViewed = new VideoDate(videoFile.lastViewed).formatDateTime();
+    const formattedLastViewed = videoFile.lastViewed ? new VideoDate(videoFile.lastViewed).formatDateTime() : '';
+    const formattedLastModified = videoFile.lastModified ? new VideoDate(videoFile.lastModified).formatDateTime() : '';
 
     return (
         <>
@@ -71,14 +72,16 @@ const VideoPlayer = (props) => {
                                 </Row>
                                 <Row>
                                     <Col>
-                                        <p>
-                                            <span className={ classes.bold }>Views: </span>{ videoFile.viewCount }
-                                        </p>
+                                        <p className={ classes.bold }>Views:</p>
+                                        <p>{ videoFile.viewCount }</p>
                                     </Col>
                                     <Col>
-                                        <p>
-                                            <span className={ classes.bold }>Last Viewed: </span>{ formattedLastViewed }
-                                        </p>
+                                        <p className={ classes.bold }>Last Viewed:</p>
+                                        <p>{ formattedLastViewed }</p>
+                                    </Col>
+                                    <Col>
+                                        <p className={ classes.bold }>Last Modified:</p>
+                                        <p>{ formattedLastModified }</p>
                                     </Col>
                                 </Row>
                             </Col>
