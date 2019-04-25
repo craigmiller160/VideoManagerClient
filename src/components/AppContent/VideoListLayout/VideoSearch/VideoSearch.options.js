@@ -16,6 +16,6 @@ export const SORT_BY_OPTIONS = convertToOptions([
 export const SORT_ASC = 'Ascending';
 export const SORT_DESC = 'Descending';
 export const SORT_DIR_OPTIONS = convertToOptions([
-    SORT_ASC,
-    SORT_DESC
+    SORT_DESC,
+    SORT_ASC
 ]);
