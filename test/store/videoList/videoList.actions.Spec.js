@@ -31,7 +31,7 @@ import {
     SORT_BY_LAST_VIEWED,
     SORT_BY_NAME,
     SORT_BY_VIEWS, SORT_DESC
-} from '../../../src/components/AppContent/VideoListLayout/VideoSearch/VideoSearch.options';
+} from 'components/AppContent/VideoListLayout/VideoSearch/VideoSearch.options';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
