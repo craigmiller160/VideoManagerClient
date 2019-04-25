@@ -27,8 +27,7 @@ import { showSuccessAlert } from 'store/alert/alert.actions';
 import { FORM_NAME as VideoSearchFormName } from 'components/AppContent/VideoListLayout/VideoSearch/VideoSearch';
 import { FORM_NAME as VideoEditFormName } from 'components/AppContent/VideoFileEdit/VideoFileEdit';
 import {
-    SORT_ASC,
-    SORT_BY_LAST_MOD,
+    SORT_ASC, SORT_BY_FILE_ADDED,
     SORT_BY_LAST_VIEWED,
     SORT_BY_NAME,
     SORT_BY_VIEWS, SORT_DESC
@@ -244,9 +243,9 @@ describe('videoList.actions', () => {
             expect(result).toEqual('LAST_VIEWED');
         });
 
-        it('is sorting by last modified', () => {
-            const result = parseSortBy(SORT_BY_LAST_MOD);
-            expect(result).toEqual('LAST_MODIFIED');
+        it('is sorting by file added', () => {
+            const result = parseSortBy(SORT_BY_FILE_ADDED);
+            expect(result).toEqual('FILE_ADDED');
         });
 
         it('invalid sort by', () => {

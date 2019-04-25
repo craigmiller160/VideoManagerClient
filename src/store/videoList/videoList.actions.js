@@ -5,8 +5,7 @@ import { setSearching } from '../videoSearch/videoSearch.actions';
 import { FORM_NAME } from 'components/AppContent/VideoFileEdit/VideoFileEdit';
 import { convertFiltersToFile } from '../../utils/videoFileConverter';
 import {
-    SORT_ASC,
-    SORT_BY_LAST_MOD,
+    SORT_ASC, SORT_BY_FILE_ADDED,
     SORT_BY_LAST_VIEWED,
     SORT_BY_NAME,
     SORT_BY_VIEWS, SORT_DESC
@@ -53,7 +52,7 @@ export const parseSortBy = (sortBy) => {
         case SORT_BY_NAME: return 'NAME';
         case SORT_BY_VIEWS: return 'VIEW_COUNT';
         case SORT_BY_LAST_VIEWED: return 'LAST_VIEWED';
-        case SORT_BY_LAST_MOD: return 'LAST_MODIFIED';
+        case SORT_BY_FILE_ADDED: return 'FILE_ADDED';
         default:
             throw new Error(`Invalid sort by value: ${sortBy}`);
     }

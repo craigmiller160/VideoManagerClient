@@ -5,12 +5,12 @@ const convertToOptions = (array) =>
 export const SORT_BY_NAME = 'Name';
 export const SORT_BY_VIEWS = 'Views';
 export const SORT_BY_LAST_VIEWED = 'Last Viewed';
-export const SORT_BY_LAST_MOD = 'Last Modified';
+export const SORT_BY_FILE_ADDED = 'File Added';
 export const SORT_BY_OPTIONS = convertToOptions([
-    SORT_BY_NAME,
-    SORT_BY_VIEWS,
+    SORT_BY_FILE_ADDED,
     SORT_BY_LAST_VIEWED,
-    SORT_BY_LAST_MOD
+    SORT_BY_NAME,
+    SORT_BY_VIEWS
 ]);
 
 export const SORT_ASC = 'Ascending';
