@@ -26,7 +26,7 @@ const VideoListItem = (props) => {
             expanded,
             viewCount,
             lastViewed,
-            lastModified
+            fileAdded
         },
         expandVideoFile,
         videoPlayerReset
@@ -36,7 +36,7 @@ const VideoListItem = (props) => {
     const rootClasses = [ classes.VideoListItem, (expanded ? classes.active : '') ].join(' ');
     const actualDisplayName = displayName ? displayName : fileName;
     const formattedLastViewed = lastViewed ? new VideoDate(lastViewed).formatDateTime() : '';
-    const formattedLastModified = lastModified ? new VideoDate(lastModified).formatDateTime() : '';
+    const formattedFileAdded = fileAdded ? new VideoDate(fileAdded).formatDateTime() : '';
 
     const playVideoClick = async () => {
         try {
@@ -105,8 +105,8 @@ const VideoListItem = (props) => {
                             <p>{ formattedLastViewed }</p>
                         </Col>
                         <Col className="text-right">
-                            <p className={ classes.label }>Last Modified:</p>
-                            <p>{ formattedLastModified }</p>
+                            <p className={ classes.label }>File Added:</p>
+                            <p>{ formattedFileAdded }</p>
                         </Col>
                     </Row>
                     <Row>

@@ -26,7 +26,7 @@ const VideoPlayer = (props) => {
     }, []);
 
     const formattedLastViewed = videoFile.lastViewed ? new VideoDate(videoFile.lastViewed).formatDateTime() : '';
-    const formattedLastModified = videoFile.lastModified ? new VideoDate(videoFile.lastModified).formatDateTime() : '';
+    const formattedFileAdded = videoFile.fileAdded ? new VideoDate(videoFile.fileAdded).formatDateTime() : '';
 
     return (
         <>
@@ -80,8 +80,8 @@ const VideoPlayer = (props) => {
                                         <p>{ formattedLastViewed }</p>
                                     </Col>
                                     <Col>
-                                        <p className={ classes.bold }>Last Modified:</p>
-                                        <p>{ formattedLastModified }</p>
+                                        <p className={ classes.bold }>File Added:</p>
+                                        <p>{ formattedFileAdded }</p>
                                     </Col>
                                 </Row>
                             </Col>
