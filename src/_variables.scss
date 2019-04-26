@@ -1,0 +1,19 @@
+$success: lightgreen;
+$success-dark: green;
+$danger: coral;
+$danger-dark: red;
+$info: lightblue;
+$info-dark: blue;
+$warning: goldenrod;
+$warning-dark: orange;
+
+:export {
+  success: $success;
+  successDark: $success-dark;
+  danger: $danger;
+  dangerDark: $danger-dark;
+  info: $info;
+  info-dark: $info-dark;
+  warning: $warning;
+  warning-dark: $warning-dark;
+}

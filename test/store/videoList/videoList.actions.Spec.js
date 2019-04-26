@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
 import {
-    expandVideoFile,
+    expandVideoFile, parseSortBy, parseSortDir,
     saveVideoFile, saveVideoFileEdits,
     searchForVideos,
     setCurrentPage,
@@ -26,6 +26,12 @@ import { setSearching } from 'store/videoSearch/videoSearch.actions';
 import { showSuccessAlert } from 'store/alert/alert.actions';
 import { FORM_NAME as VideoSearchFormName } from 'components/AppContent/VideoListLayout/VideoSearch/VideoSearch';
 import { FORM_NAME as VideoEditFormName } from 'components/AppContent/VideoFileEdit/VideoFileEdit';
+import {
+    SORT_ASC, SORT_BY_FILE_ADDED,
+    SORT_BY_LAST_VIEWED,
+    SORT_BY_NAME,
+    SORT_BY_VIEWS, SORT_DESC
+} from 'components/AppContent/VideoListLayout/VideoSearch/VideoSearch.options';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -78,7 +84,9 @@ describe('videoList.actions', () => {
                         category: { value: 0 },
                         series: { value: 0 },
                         star: { value: 0 },
-                        search: ''
+                        search: '',
+                        sortBy: { value: SORT_BY_NAME },
+                        sortDir: { value: SORT_ASC }
                     }
                 }
             }
@@ -91,7 +99,9 @@ describe('videoList.actions', () => {
                         category: { value: 1 },
                         series: { value: 1 },
                         star: { value: 1 },
-                        search: 'Hello World'
+                        search: 'Hello World',
+                        sortBy: { value: SORT_BY_NAME },
+                        sortDir: { value: SORT_ASC }
                     }
                 }
             }
@@ -217,5 +227,57 @@ describe('videoList.actions', () => {
         });
     });
 
+    describe('parseSortBy', () => {
+        it('is sorting by name', () => {
+            const result = parseSortBy(SORT_BY_NAME);
+            expect(result).toEqual('NAME');
+        });
 
+        it('is sorting by views', () => {
+            const result = parseSortBy(SORT_BY_VIEWS);
+            expect(result).toEqual('VIEW_COUNT');
+        });
+
+        it('is sorting by last viewed', () => {
+            const result = parseSortBy(SORT_BY_LAST_VIEWED);
+            expect(result).toEqual('LAST_VIEWED');
+        });
+
+        it('is sorting by file added', () => {
+            const result = parseSortBy(SORT_BY_FILE_ADDED);
+            expect(result).toEqual('FILE_ADDED');
+        });
+
+        it('invalid sort by', () => {
+            try {
+                parseSortBy('abc');
+            }
+            catch (ex) {
+                return;
+            }
+            throw new Error('Should have thrown exception');
+        });
+    });
+
+    describe('parseSortDir', () => {
+        it('sorts ascending', () => {
+            const result = parseSortDir(SORT_ASC);
+            expect(result).toEqual('ASC');
+        });
+
+        it('sorts descending', () => {
+            const result = parseSortDir(SORT_DESC);
+            expect(result).toEqual('DESC');
+        });
+
+        it('invalid sort direction', () => {
+            try {
+                parseSortDir('abc');
+            }
+            catch (ex) {
+                return;
+            }
+            throw new Error('Should have thrown exception');
+        });
+    });
 });

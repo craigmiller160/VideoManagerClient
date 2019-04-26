@@ -20,29 +20,12 @@ const getVideoFile = (fileId) => {
     return API.get(`/video-files/${fileId}`);
 };
 
+const recordNewVideoPlay = (fileId) => {
+    return API.get(`/video-files/record-play/${fileId}`);
+};
+
 const searchForVideos = (searchConfig) => {
-    const {
-        searchText,
-        categoryId,
-        starId,
-        seriesId,
-        page = 0,
-        sortDirection = 'ASC'
-    } = searchConfig;
-
-    const payload = {
-        searchText,
-        seriesId,
-        starId,
-        categoryId
-    };
-
-    return API.post('/video-files/search', payload, {
-        params: {
-            page,
-            sortDirection
-        }
-    });
+    return API.post('/video-files/search', searchConfig);
 };
 
 export default {
@@ -51,5 +34,6 @@ export default {
     startVideoScan,
     isVideoScanRunning,
     searchForVideos,
-    getVideoFile
+    getVideoFile,
+    recordNewVideoPlay
 }

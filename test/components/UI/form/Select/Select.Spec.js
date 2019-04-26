@@ -17,7 +17,7 @@ describe('Select', () => {
         const component = mount(
             <SelectComponent { ...props } />
         );
-        expect(component.find('FormGroup')).toHaveLength(1);
+        expect(component.find('StyledFormGroupDiv')).toHaveLength(1);
         expect(component.find('SelectComponent')).toHaveLength(1);
         expect(component.find('SelectComponent').props()).toEqual(expect.objectContaining({
             ...props

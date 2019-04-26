@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputComponent } from 'components/UI/form/Input/Input';
+import { InputComponent, InnerComponent } from 'components/UI/form/Input/Input';
 import { mount } from 'enzyme';
 
 describe('Input', () => {
@@ -11,12 +11,29 @@ describe('Input', () => {
         }
     };
 
+    it('should render InnerComponent as input', () => {
+        const component = mount(
+            <InnerComponent type="text" />
+        );
+        expect(component.find('StyledInput')).toHaveLength(1);
+        expect(component.find('StyledTextArea')).toHaveLength(0);
+    });
+
+    it('should render InnerComponent as textarea', () => {
+        const component = mount(
+            <InnerComponent type="textarea" />
+        );
+        expect(component.find('StyledInput')).toHaveLength(0);
+        expect(component.find('StyledTextArea')).toHaveLength(1);
+    });
+
     it('should render correctly', () => {
         const component = mount(
             <InputComponent { ...props } />
         );
-        expect(component.find('FormGroup')).toHaveLength(1);
-        expect(component.find('FormGroup').hasClass('hidden')).toEqual(false);
+
+        expect(component.find('StyledFormGroupDiv')).toHaveLength(1);
+        expect(component.find('StyledFormGroupDiv')).toHaveStyleRule('display', 'block');
         expect(component.find('label')).toHaveLength(1);
         expect(component.find('label').text()).toEqual('My Input');
         expect(component.find('input')).toHaveLength(1);
@@ -31,7 +48,7 @@ describe('Input', () => {
         const component = mount(
             <InputComponent { ...props } type="hidden" />
         );
-        expect(component.find('FormGroup').hasClass('hidden')).toEqual(true);
+        expect(component.find('StyledFormGroupDiv')).toHaveStyleRule('display', 'none');
     });
 
     it('renders textarea', () => {
@@ -53,7 +70,7 @@ describe('Input', () => {
             rows: 10,
             cols: 10
         }));
-        expect(textarea.hasClass('no-resize')).toEqual(true);
+        expect(component.find('StyledTextArea')).toHaveStyleRule('resize', 'none');
     });
 
     it('renders textarea with resizing', () => {
@@ -69,6 +86,6 @@ describe('Input', () => {
         );
         const textarea = component.find('textarea');
         expect(textarea).toHaveLength(1);
-        expect(textarea.hasClass('no-resize')).toEqual(false);
+        expect(component.find('StyledTextArea')).toHaveStyleRule('resize', 'both');
     });
 });

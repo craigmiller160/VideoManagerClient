@@ -9,6 +9,7 @@
     "identity-obj-proxy": "3.0.0",
     "keycode": "^2.2.0",
     "mini-css-extract-plugin": "0.4.3",
+    "moment": "^2.24.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "react": "16.8.3",
@@ -25,7 +26,8 @@
     "redux-form": "^8.1.0",
     "redux-starter-kit": "^0.4.3",
     "redux-thunk": "^2.3.0",
-    "resolve": "1.8.1"
+    "resolve": "1.8.1",
+    "styled-components": "^4.2.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -44,7 +46,8 @@
         {
           "ignore": "children"
         }
-      ]
+      ],
+      "react/no-unused-prop-types": 2
     }
   },
   "browserslist": [
@@ -58,19 +61,29 @@
     "coverageReporters": [
       "html"
     ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    },
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
+      "!src/**/*.d.ts",
+      "!src/serviceWorker.js",
+      "!src/index.js"
     ],
     "resolver": "jest-pnp-resolver",
     "setupFiles": [
       "react-app-polyfill/jsdom"
     ],
-    "setupTestFrameworkScriptFile": "<rootDir>/test/setupTests.js",
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setupTests.js"
+    ],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx}",
-      "<rootDir>/test/**/*.{js,jsx,ts,tsx}"
+      "<rootDir>/test/**/*.Spec.{js,jsx,ts,tsx}"
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/test/setupTests.js",
@@ -123,7 +136,8 @@
             "test": "./test",
             "services": "./src/services",
             "store": "./src/store",
-            "utils": "./src/utils"
+            "utils": "./src/utils",
+            "model": "./src/model"
           }
         }
       ]
@@ -173,6 +187,7 @@
     "jest-cli": "^24.3.1",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
+    "jest-styled-components": "^6.3.1",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.1.0",
     "postcss-flexbugs-fixes": "4.1.0",

@@ -3,8 +3,8 @@ import { NEW_VIDEO_FILE_FULL } from '../../exclude/mock/mockData/videoFileData';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
-import API from '../../../src/services/API';
-import { mockGetVideoFile } from '../../exclude/mock/mockApiConfig/videoFileApi';
+import API from 'services/API';
+import { mockGetVideoFile, mockRecordNewVideoPlay } from '../../exclude/mock/mockApiConfig/videoFileApi';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -38,7 +38,9 @@ describe('videoPlayer.actions', () => {
 
     describe('thunk actions', () => {
         beforeEach(() => {
+            mockApi.reset();
             mockGetVideoFile(mockApi);
+            mockRecordNewVideoPlay(mockApi);
         });
 
         it('loads data for playback', async () => {

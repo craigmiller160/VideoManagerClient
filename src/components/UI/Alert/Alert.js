@@ -1,20 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert as ReactAlert } from 'reactstrap';
 
 import classes from './Alert.scss';
 
 const Alert = (props) => {
     const { alert: { color, message, show }, hideAlert } = props;
+    const rootClasses = [classes.Alert, classes[color]];
+    if (show) {
+        rootClasses.push(classes.show);
+    }
+
     return (
-        <ReactAlert
-            className={ classes.Alert }
-            color={ color }
-            isOpen={ show }
-            toggle={ () => hideAlert() }
-        >
-            { message }
-        </ReactAlert>
+        <div className={ rootClasses.join(' ') }>
+            <button aria-label="close" onClick={ () => hideAlert() }>
+                <span aria-hidden="true">X</span>
+            </button>
+            <span>{ message }</span>
+        </div>
     );
 };
 

@@ -1,4 +1,3 @@
-/* eslint-disable */ // TODO delete this
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
@@ -8,6 +7,7 @@ import classes from './VideoPlayer.scss';
 import Spinner from '../../UI/Spinner/Spinner';
 import { loadDataForPlayback } from 'store/videoPlayer/videoPlayer.actions';
 import { Helmet } from 'react-helmet';
+import VideoDate from '../../../model/VideoDate';
 
 const getFileName = (videoFile) => {
     return videoFile.displayName || videoFile.fileName;
@@ -24,6 +24,9 @@ const VideoPlayer = (props) => {
     useEffect(() => {
         loadDataForPlayback(params.fileId)
     }, []);
+
+    const formattedLastViewed = videoFile.lastViewed ? new VideoDate(videoFile.lastViewed).formatDateTime() : '';
+    const formattedFileAdded = videoFile.fileAdded ? new VideoDate(videoFile.fileAdded).formatDateTime() : '';
 
     return (
         <>
@@ -61,8 +64,26 @@ const VideoPlayer = (props) => {
                         </Row>
                         <Row className="text-center">
                             <Col md="6">
-                                <p className={ classes.bold }>Description</p>
-                                <p>{ videoFile.description }</p>
+                                <Row>
+                                    <Col>
+                                        <p className={ classes.bold }>Description</p>
+                                        <p>{ videoFile.description }</p>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <p className={ classes.bold }>Views:</p>
+                                        <p>{ videoFile.viewCount }</p>
+                                    </Col>
+                                    <Col>
+                                        <p className={ classes.bold }>Last Viewed:</p>
+                                        <p>{ formattedLastViewed }</p>
+                                    </Col>
+                                    <Col>
+                                        <p className={ classes.bold }>File Added:</p>
+                                        <p>{ formattedFileAdded }</p>
+                                    </Col>
+                                </Row>
                             </Col>
                             <Col md="6">
                                 <p className={ classes.bold }>Categories</p>

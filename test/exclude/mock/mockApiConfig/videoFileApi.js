@@ -23,24 +23,12 @@ export const mockUpdateFullVideoFile = (mockApi) => {
 
 export const mockSearchForFiles = (mockApi) => {
     mockApi.onPost('/video-files/search', FULL_SEARCH)
-        .reply(config => {
-            expect(config.params).toEqual({
-                page: 0,
-                sortDirection: 'ASC'
-            });
-            return [200, BASE_VIDEO_SEARCH_RESULT];
-        });
+        .reply(200, BASE_VIDEO_SEARCH_RESULT);
 };
 
 export const mockGetAllFiles = (mockApi) => {
     mockApi.onPost('/video-files/search', EMPTY_SEARCH)
-        .reply(config => {
-            expect(config.params).toEqual({
-                page: 0,
-                sortDirection: 'ASC'
-            });
-            return [200, BASE_VIDEO_SEARCH_RESULT];
-        });
+        .reply(200, BASE_VIDEO_SEARCH_RESULT);
 };
 
 export const mockStartVideoScan = (mockApi) => {
@@ -61,4 +49,9 @@ export const mockGetVideoFile = (mockApi) => {
 export const mockGetVideoFileCount = (mockApi) => {
     mockApi.onGet('/video-files/count')
         .reply(200, FILE_COUNT);
+};
+
+export const mockRecordNewVideoPlay = (mockApi) => {
+    mockApi.onGet('/video-files/record-play/3')
+        .reply(200);
 };

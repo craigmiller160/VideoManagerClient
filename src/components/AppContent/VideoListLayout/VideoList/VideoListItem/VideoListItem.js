@@ -11,6 +11,7 @@ import {
     Collapse
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import VideoDate from 'model/VideoDate';
 
 const VideoListItem = (props) => {
     const {
@@ -22,7 +23,10 @@ const VideoListItem = (props) => {
             categories,
             series,
             stars,
-            expanded
+            expanded,
+            viewCount,
+            lastViewed,
+            fileAdded
         },
         expandVideoFile,
         videoPlayerReset
@@ -31,6 +35,8 @@ const VideoListItem = (props) => {
     const leftColSize = 6;
     const rootClasses = [ classes.VideoListItem, (expanded ? classes.active : '') ].join(' ');
     const actualDisplayName = displayName ? displayName : fileName;
+    const formattedLastViewed = lastViewed ? new VideoDate(lastViewed).formatDateTime() : '';
+    const formattedFileAdded = fileAdded ? new VideoDate(fileAdded).formatDateTime() : '';
 
     const playVideoClick = async () => {
         try {
@@ -86,12 +92,24 @@ const VideoListItem = (props) => {
                 </Row>
                 <Collapse isOpen={ expanded }>
                     <Row>
-                        <Col>
-                            <ListGroupItemText>
-                                <span className={ classes.heading }>File Name: </span>
-                                { fileName }
-                            </ListGroupItemText>
+                        <Col xs={ leftColSize }>
+                            <p className={ classes.heading }>File Name:</p>
+                            <p>{ fileName }</p>
                         </Col>
+                        <Col>
+                            <p className={ classes.label }>Views:</p>
+                            <p className={ classes['push-text'] }>{ viewCount }</p>
+                        </Col>
+                        <Col className="text-center">
+                            <p className={ classes.label }>Last Viewed:</p>
+                            <p>{ formattedLastViewed }</p>
+                        </Col>
+                        <Col className="text-right">
+                            <p className={ classes.label }>File Added:</p>
+                            <p>{ formattedFileAdded }</p>
+                        </Col>
+                    </Row>
+                    <Row>
                         <Col className="text-right">
                             <Link to="/edit">
                                 <Button color="info">Edit</Button>

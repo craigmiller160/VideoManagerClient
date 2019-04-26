@@ -1,9 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup, Input as ReactInput, Label } from 'reactstrap';
+import StyledInput from '../../Styled/StyledInput';
+import StyledLabel from '../../Styled/StyledLabel';
 import newid from '../../../../utils/newid';
-import formStyles from '../FormStyles.scss';
 import createField from "../createField";
+import StyledFormGroupDiv from '../../Styled/StyledFormGroupDiv';
+import StyledTextArea from '../../Styled/StyledTextArea';
+
+export const InnerComponent = (props) => {
+    if (props.type === 'textarea') {
+        return (
+            <StyledTextArea { ...props } />
+        );
+    }
+
+    return (
+        <StyledInput { ...props } />
+    );
+};
+InnerComponent.propTypes = {
+    type: PropTypes.string
+};
 
 export const InputComponent = (props) => {
     const {
@@ -15,34 +32,25 @@ export const InputComponent = (props) => {
     } = props;
 
     const id = newid();
-    const groupClasses = [formStyles['input-label']];
-    if ('hidden' === type.toLowerCase()) {
-        groupClasses.push(formStyles.hidden);
-    }
-
-    const inputClasses = [];
-    if (!textarea || !textarea.resize) {
-        inputClasses.push(formStyles['no-resize']);
-    }
 
     return (
-        <FormGroup className={ groupClasses.join(' ') }>
-            <Label
-                for={ id }
+        <StyledFormGroupDiv hidden={ 'hidden' === type.toLowerCase() }>
+            <StyledLabel
+                htmlForm={ id }
             >
                 { label }
-            </Label>
-            <ReactInput
+            </StyledLabel>
+            <InnerComponent
                 id={ id }
-                className={ inputClasses.join(' ') }
                 { ...input }
                 { ...inputProps }
                 type={ type }
                 name={ input ? input.name : '' }
                 rows={ textarea ? textarea.rows : null }
                 cols={ textarea ? textarea.cols : null }
+                resize={ textarea ? textarea.resize : false }
             />
-        </FormGroup>
+        </StyledFormGroupDiv>
     );
 };
 

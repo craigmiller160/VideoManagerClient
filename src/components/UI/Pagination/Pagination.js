@@ -21,7 +21,30 @@ export const getAlignClassName = (stringName) => {
     }
 };
 
-const createPageButtons = (currentPage, totalPages, onClick) =>
+export const getClickValue = (value, currentPage, totalPages) => {
+    let newPage = currentPage;
+    if (newPage !== value) {
+        if ('<' === value) {
+            newPage--;
+        }
+        else if ('>' === value) {
+            newPage++;
+        }
+        else if ('>>' === value) {
+            newPage = totalPages - 1;
+        }
+        else if ('<<' === value) {
+            newPage = 0;
+        }
+        else {
+            newPage = value;
+        }
+    }
+
+    return newPage;
+};
+
+export const createPageButtons = ({ currentPage, totalPages, onClick }) =>
     [...Array(totalPages).keys()]
         .filter((index) => index > currentPage - NUM_BUTTONS &&
             index < currentPage + NUM_BUTTONS)
@@ -29,7 +52,7 @@ const createPageButtons = (currentPage, totalPages, onClick) =>
             <PaginationItem
                 key={ index }
                 active={ index === currentPage }
-                onClick={ () => onClick(`${index}`) }
+                onClick={ () => onClick(getClickValue(index, currentPage, totalPages)) }
             >
                 <PaginationLink style={ { zIndex: 0 } }>
                     { index + 1 }
@@ -48,24 +71,24 @@ const Pagination = (props) => {
             {
                 showPrevious &&
                     <>
-                        <PaginationItem onClick={ () => onClick('<<') }>
+                        <PaginationItem onClick={ () => onClick(getClickValue('<<', currentPage, totalPages)) }>
                             <PaginationLink first />
                         </PaginationItem>
-                        <PaginationItem onClick={ () => onClick('<') }>
+                        <PaginationItem onClick={ () => onClick(getClickValue('<', currentPage, totalPages)) }>
                             <PaginationLink previous />
                         </PaginationItem>
                     </>
             }
             {
-                createPageButtons(currentPage, totalPages, onClick)
+                createPageButtons({ currentPage, totalPages, onClick })
             }
             {
                 showNext &&
                     <>
-                        <PaginationItem onClick={ () => onClick('>') }>
+                        <PaginationItem onClick={ () => onClick(getClickValue('>', currentPage, totalPages)) }>
                             <PaginationLink next />
                         </PaginationItem>
-                        <PaginationItem onClick={ () => onClick('>>') }>
+                        <PaginationItem onClick={ () => onClick(getClickValue('>>', currentPage, totalPages)) }>
                             <PaginationLink last />
                         </PaginationItem>
                     </>

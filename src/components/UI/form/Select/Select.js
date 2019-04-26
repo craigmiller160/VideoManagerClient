@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect from 'react-select';
-import { FormGroup, Label } from 'reactstrap';
 import newid from '../../../../utils/newid';
-import formStyles from '../FormStyles.scss';
 import createField from "../createField";
+import StyledLabel from '../../Styled/StyledLabel';
+import StyledFormGroupDiv from '../../Styled/StyledFormGroupDiv';
 
 export const SelectComponent = (props) => {
     const {
@@ -17,12 +17,12 @@ export const SelectComponent = (props) => {
 
     const id = newid();
     return (
-        <FormGroup className={ formStyles['input-label'] }>
-            <Label
-                for={ id }
+        <StyledFormGroupDiv>
+            <StyledLabel
+                htmlFor={ id }
             >
                 { label }
-            </Label>
+            </StyledLabel>
             <ReactSelect
                 id={ id }
                 { ...input }
@@ -34,13 +34,18 @@ export const SelectComponent = (props) => {
                 isClearable
                 isMulti={ multi }
             />
-        </FormGroup>
+        </StyledFormGroupDiv>
     );
 };
 
 SelectComponent.propTypes = {
     label: PropTypes.string.isRequired,
-    options: PropTypes.array.isRequired,
+    options: PropTypes.arrayOf([
+        PropTypes.shape({
+            label: PropTypes.string,
+            value: PropTypes.any
+        })
+    ]),
     input: PropTypes.shape({
         name: PropTypes.string
     }),

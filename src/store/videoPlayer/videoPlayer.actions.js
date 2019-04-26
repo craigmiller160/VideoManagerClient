@@ -5,6 +5,7 @@ import VideoApiService from '../../services/VideoApiService';
 export const loadDataForPlayback = (fileId) => async (dispatch) => {
     try {
         dispatch(setLoading(true));
+        await VideoApiService.recordNewVideoPlay(fileId);
         const response = await VideoApiService.getVideoFile(fileId);
         dispatch(setVideoFile(response.data));
     }
