@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-/* eslint-disable */
-import '!style-loader!css-loader!bootstrap/dist/css/bootstrap.min.css';
+import '!style-loader!css-loader!bootstrap/dist/css/bootstrap.min.css'; // eslint-disable-line import/no-webpack-loader-syntax
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
