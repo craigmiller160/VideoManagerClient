@@ -47,8 +47,7 @@ describe('filterInputModal.selectors', () => {
                 expect(ex.message).toContain('Invalid filter type');
                 return;
             }
-            // eslint-disable-next-line no-undef
-            fail('Should have thrown exception');
+            throw new Error('Should have thrown exception');
         });
 
         it('gets selected category', () => {
