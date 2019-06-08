@@ -1,0 +1,35 @@
+version: '3.5'
+
+services:
+  video-server:
+    build:
+      context: .
+      dockerfile: video-server_Dockerfile
+    container_name: video-server
+    networks:
+      - videoManagerNetwork
+      - pgNetwork
+    environment:
+      - VIDEO_MANAGER_DIR=/opt/videos
+    volumes:
+      - ${VIDEO_MANAGER_DIR_PROD}:/opt/videos
+      - ~/video-manager/server-logs:/opt/video-manager/server-logs
+      -
+  video-client:
+    build:
+      context: .
+      dockerfile: video-client_Dockerfile
+    container_name: video-client
+    networks:
+      - videoManagerNetwork
+    ports:
+      - 9000:80
+    volumes:
+      - ~/video-manager/client-logs:/var/log/nginx
+
+networks:
+  pgNetwork:
+    external:
+      name: pg_network
+  videoManagerNetwork:
+    name: videoManagerNetwork
