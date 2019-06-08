@@ -140,8 +140,7 @@ describe('filterInputModal.actions', () => {
                 expect(ex.message).toContain('Cannot find filterInputForm in Redux store');
                 return;
             }
-            // eslint-disable-next-line no-undef
-            fail('Operation should have thrown an exception');
+            throw new Error('Operation should have thrown an exception');
         });
 
         it('add new category', async () => {
