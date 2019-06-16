@@ -194,8 +194,7 @@ describe('videoList.actions', () => {
                     expect(ex).not.toBeUndefined();
                     return;
                 }
-                // eslint-disable-next-line no-undef
-                fail('Should have thrown exception');
+                throw new Error('Should have thrown exception');
             });
 
             it('saves the video file edits', async () => {
