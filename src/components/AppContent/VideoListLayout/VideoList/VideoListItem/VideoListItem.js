@@ -39,12 +39,8 @@ const VideoListItem = (props) => {
     const formattedFileAdded = fileAdded ? new VideoDate(fileAdded).formatDateTime() : '';
 
     const playVideoClick = async () => {
-        try {
-            await videoPlayerReset();
-            window.open(`/play/${fileId}`, '_blank');
-        }
-        catch (ex) { // eslint-disable-line no-empty
-        }
+        await videoPlayerReset();
+        window.open(`/play/${fileId}`, '_blank');
     };
 
     return (

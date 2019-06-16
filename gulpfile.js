@@ -1,4 +1,3 @@
-/* eslint-disable */
 const { src, task, series, dest } = require('gulp');
 const eslint = require('gulp-eslint');
 const jest = require('jest-cli');

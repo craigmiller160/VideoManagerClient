@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  video-client:
+    build:
+      context: .
+      dockerfile: video-client_Dockerfile
+    container_name: video-client
+    networks:
+      - videoManagerNetwork
+    ports:
+      - 9000:80
+    volumes:
+      - ~/video-manager/client-logs:/var/log/nginx
+
+networks:
+  videoManagerNetwork:
+    external:
+      name: videoManagerNetwork
