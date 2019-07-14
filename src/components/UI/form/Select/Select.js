@@ -28,7 +28,8 @@ export const SelectComponent = (props) => {
                 { ...input }
                 { ...inputProps }
                 name={ input && input.name }
-                onBlur={ () => input.onBlur(input.value) }
+                onBlur={ (event) => event.preventDefault() }
+                onChange={ input.onChange }
                 options={ options }
                 isSearchable
                 isClearable
@@ -40,14 +41,13 @@ export const SelectComponent = (props) => {
 
 SelectComponent.propTypes = {
     label: PropTypes.string.isRequired,
-    options: PropTypes.arrayOf([
-        PropTypes.shape({
-            label: PropTypes.string,
-            value: PropTypes.any
-        })
-    ]),
+    options: PropTypes.arrayOf(PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.any
+    })),
     input: PropTypes.shape({
-        name: PropTypes.string
+        name: PropTypes.string,
+        onChange: PropTypes.func
     }),
     multi: PropTypes.bool,
     inputProps: PropTypes.object
