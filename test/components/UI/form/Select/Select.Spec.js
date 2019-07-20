@@ -10,7 +10,10 @@ describe('Select', () => {
             { label: 'Opt1', value: 'opt1' },
             { label: 'Opt2', value: 'opt2' }
         ],
-        multi: false
+        multi: false,
+        input: {
+            onChange: jest.fn()
+        }
     };
 
     it('should render correctly', () => {
