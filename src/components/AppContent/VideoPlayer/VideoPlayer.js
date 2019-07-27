@@ -8,6 +8,7 @@ import Spinner from '../../UI/Spinner/Spinner';
 import { loadDataForPlayback } from 'store/videoPlayer/videoPlayer.actions';
 import { Helmet } from 'react-helmet';
 import VideoDate from '../../../model/VideoDate';
+import WordWrapCol from '../../UI/WordWrapCol/WordWrapCol';
 
 const getFileName = (videoFile) => {
     return videoFile.displayName || videoFile.fileName;
@@ -46,46 +47,46 @@ const VideoPlayer = (props) => {
                     !loading &&
                     <>
                         <Row>
-                            <Col className="text-center">
+                            <WordWrapCol className="text-center">
                                 <h3 className={ classes.title }>{ getFileName(videoFile) }</h3>
-                            </Col>
+                            </WordWrapCol>
                         </Row>
                         <Row>
-                            <Col className="text-center">
+                            <WordWrapCol className="text-center">
                                 <video controls autoPlay="autoPlay">
                                     <source src={ `/api/video-files/play/${params.fileId}` } />
                                 </video>
-                            </Col>
+                            </WordWrapCol>
                         </Row>
                         <Row>
-                            <Col className="mt-2 text-center">
+                            <WordWrapCol className="mt-2 text-center">
                                 <p className={ classes.bold }>{ videoFile.fileName }</p>
-                            </Col>
+                            </WordWrapCol>
                         </Row>
                         <Row className="text-center">
                             <Col md="6">
                                 <Row>
-                                    <Col>
+                                    <WordWrapCol>
                                         <p className={ classes.bold }>Description</p>
                                         <p>{ videoFile.description }</p>
-                                    </Col>
+                                    </WordWrapCol>
                                 </Row>
                                 <Row>
-                                    <Col>
+                                    <WordWrapCol>
                                         <p className={ classes.bold }>Views:</p>
                                         <p>{ videoFile.viewCount }</p>
-                                    </Col>
-                                    <Col>
+                                    </WordWrapCol>
+                                    <WordWrapCol>
                                         <p className={ classes.bold }>Last Viewed:</p>
                                         <p>{ formattedLastViewed }</p>
-                                    </Col>
-                                    <Col>
+                                    </WordWrapCol>
+                                    <WordWrapCol>
                                         <p className={ classes.bold }>File Added:</p>
                                         <p>{ formattedFileAdded }</p>
-                                    </Col>
+                                    </WordWrapCol>
                                 </Row>
                             </Col>
-                            <Col md="6">
+                            <WordWrapCol md="6">
                                 <p className={ classes.bold }>Categories</p>
                                 <p>{
                                     videoFile.categories
@@ -104,7 +105,7 @@ const VideoPlayer = (props) => {
                                         .map((star) => star.starName)
                                         .join(', ')
                                 }</p>
-                            </Col>
+                            </WordWrapCol>
                         </Row>
                     </>
                 }
