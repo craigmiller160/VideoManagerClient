@@ -5,13 +5,13 @@ import {
     ListGroupItem,
     ListGroupItemHeading,
     ListGroupItemText,
-    Col,
     Row,
     Button,
     Collapse
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import VideoDate from 'model/VideoDate';
+import WordWrapCol from 'components/UI/WordWrapCol/WordWrapCol';
 
 const VideoListItem = (props) => {
     const {
@@ -47,71 +47,71 @@ const VideoListItem = (props) => {
         <div className={ rootClasses } onClick={ () => expandVideoFile(fileId) }>
             <ListGroupItem>
                 <Row>
-                    <Col xs={ leftColSize }>
+                    <WordWrapCol xs={ leftColSize }>
                         <ListGroupItemHeading
                             className={ classes.heading }
                         >
                             { actualDisplayName }
                         </ListGroupItemHeading>
-                    </Col>
-                    <Col>
+                    </WordWrapCol>
+                    <WordWrapCol>
                         <span className={ classes.label }>Series:</span>
-                    </Col>
-                    <Col className="text-center">
+                    </WordWrapCol>
+                    <WordWrapCol className="text-center">
                         <span className={ classes.label }>Categories:</span>
-                    </Col>
-                    <Col className="text-right">
+                    </WordWrapCol>
+                    <WordWrapCol className="text-right">
                         <span className={ classes.label }>Stars:</span>
-                    </Col>
+                    </WordWrapCol>
                 </Row>
                 <Row>
-                    <Col xs={ leftColSize }>
+                    <WordWrapCol xs={ leftColSize }>
                         <ListGroupItemText>
                             { description }
                         </ListGroupItemText>
-                    </Col>
-                    <Col>
+                    </WordWrapCol>
+                    <WordWrapCol>
                         <ListGroupItemText>
                             { series.map(s => s.seriesName ).join(', ') }
                         </ListGroupItemText>
-                    </Col>
-                    <Col className="text-center">
+                    </WordWrapCol>
+                    <WordWrapCol className="text-center">
                         <ListGroupItemText>
                             { categories.map(cat => cat.categoryName).join(', ') }
                         </ListGroupItemText>
-                    </Col>
-                    <Col className="text-right">
+                    </WordWrapCol>
+                    <WordWrapCol className="text-right">
                         <ListGroupItemText>
                             { stars.map(star => star.starName).join(', ') }
                         </ListGroupItemText>
-                    </Col>
+                    </WordWrapCol>
                 </Row>
                 <Collapse isOpen={ expanded }>
                     <Row>
-                        <Col xs={ leftColSize }>
+                        <WordWrapCol xs={ leftColSize }>
                             <p className={ classes.heading }>File Name:</p>
                             <p>{ fileName }</p>
-                        </Col>
-                        <Col>
+                        </WordWrapCol>
+                        <WordWrapCol>
                             <p className={ classes.label }>Views:</p>
                             <p className={ classes['push-text'] }>{ viewCount }</p>
-                        </Col>
-                        <Col className="text-center">
+                        </WordWrapCol>
+                        <WordWrapCol className="text-center">
                             <p className={ classes.label }>Last Viewed:</p>
                             <p>{ formattedLastViewed }</p>
-                        </Col>
-                        <Col className="text-right">
+                        </WordWrapCol>
+                        <WordWrapCol className="text-right">
                             <p className={ classes.label }>File Added:</p>
                             <p>{ formattedFileAdded }</p>
-                        </Col>
+                        </WordWrapCol>
                     </Row>
                     <Row>
-                        <Col className="text-right">
+                        <WordWrapCol className="text-right">
                             <Link to="/edit">
                                 <Button color="info">Edit</Button>
                             </Link>
                             <Button color="primary" onClick={ playVideoClick }>Play</Button>
-                        </Col>
+                        </WordWrapCol>
                     </Row>
                 </Collapse>
             </ListGroupItem>
