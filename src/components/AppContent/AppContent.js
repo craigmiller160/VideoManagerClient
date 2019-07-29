@@ -95,7 +95,7 @@ export const AppContent = (props) => {
         <div className={ classes.AppContent }>
             <VideoNavbar
                 startFileScan={ startFileScan }
-                isScanning={ isScanning }
+                disabled={ isScanning }
             />
             {
                 isStarted &&

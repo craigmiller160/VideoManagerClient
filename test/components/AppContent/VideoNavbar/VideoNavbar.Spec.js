@@ -28,7 +28,7 @@ describe('VideoNavbar', () => {
         expect(component.find('NavbarToggler')).toHaveLength(1);
     });
 
-    it('hides/disables items if scanning', () => {
+    it('hides/disables items if scanning', () => { // TODO refactor this test
         const component = mountComponent({
             ...props,
             isScanning: true

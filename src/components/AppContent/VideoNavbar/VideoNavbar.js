@@ -7,7 +7,7 @@ import { withRouter } from 'react-router';
 
 const VideoNavbar = (props) => {
     const [ isOpen, setOpen ] = useState(false);
-    const { isScanning, history, startFileScan } = props;
+    const { disabled, history, startFileScan } = props;
     const pathname = history.location.pathname;
 
     return (
@@ -16,12 +16,12 @@ const VideoNavbar = (props) => {
                 <NavbarBrand
                     tag={ Link }
                     to="/"
-                    disabled={ isScanning }
+                    disabled={ disabled }
                 >
                     Video Manager
                 </NavbarBrand>
                 {
-                    !isScanning &&
+                    !disabled &&
                     <>
                         <NavbarToggler onClick={ () => setOpen(!isOpen) } />
                         <Collapse isOpen={ isOpen } navbar>
@@ -65,12 +65,12 @@ const VideoNavbar = (props) => {
 };
 
 VideoNavbar.defaultProps = {
-    isScanning: false
+    disabled: false
 };
 
 const propTypes = {
     startFileScan: PropTypes.func.isRequired,
-    isScanning: PropTypes.bool,
+    disabled: PropTypes.bool,
     history: PropTypes.object
 };
 
