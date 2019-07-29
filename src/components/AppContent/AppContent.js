@@ -18,6 +18,7 @@ import classes from './AppContent.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
 import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 import VideoPlayer from './VideoPlayer/VideoPlayer';
+import Login from './Login/Login';
 
 const resetToRootComponent = (props) => {
     const {
@@ -141,13 +142,21 @@ export const AppContent = (props) => {
                                 <VideoPlayer { ...props } />
                             ) }
                         />
-                        <Route path="/"
-                               exact
-                               render={ (props) => (
-                                   <VideoListLayout
-                                       { ...props }
-                                   />
-                               ) }
+                        <Route
+                            path="/"
+                            exact
+                            render={ (props) => (
+                                <VideoListLayout
+                                    { ...props }
+                                />
+                            ) }
+                        />
+                        <Route
+                            path="/login"
+                            exact
+                            render={ (props) => (
+                                <Login { ...props } />
+                            ) }
                         />
                     </Switch>
                 </Container>
