@@ -16,7 +16,7 @@ const mountComponent = (props = {}) => {
 const startFileScan = jest.fn();
 const props = {
     startFileScan,
-    isScanning: false
+    disabled: false
 };
 
 describe('VideoNavbar', () => {
@@ -28,10 +28,10 @@ describe('VideoNavbar', () => {
         expect(component.find('NavbarToggler')).toHaveLength(1);
     });
 
-    it('hides/disables items if scanning', () => { // TODO refactor this test
+    it('hides/disables items if scanning', () => {
         const component = mountComponent({
             ...props,
-            isScanning: true
+            disabled: true
         });
         expect(component.find('VideoNavbar')).toHaveLength(1);
         expect(component.find('NavItem')).toHaveLength(0);
