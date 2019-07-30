@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink as BootLink } from 'reactstrap';
 import * as classes from './VideoNavbar.scss'
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
 const VideoNavbar = (props) => {
@@ -14,11 +14,15 @@ const VideoNavbar = (props) => {
         <Navbar className={ classes.VideoNavbar } color="dark" dark expand="md">
             <Container>
                 <NavbarBrand
-                    tag={ Link }
-                    to="/"
                     disabled={ disabled }
                 >
-                    Video Manager
+                    <NavLink
+                        to="/"
+                        activeClassName={ classes.active }
+                        className={ classes.link }
+                    >
+                        Video Manager
+                    </NavLink>
                 </NavbarBrand>
                 {
                     !disabled &&
@@ -27,33 +31,42 @@ const VideoNavbar = (props) => {
                         <Collapse isOpen={ isOpen } navbar>
                             <Nav navbar>
                                 <NavItem active={ pathname === '/' }>
-                                    <NavLink
+                                    <BootLink
                                         id="videoList"
-                                        className={ classes['use-pointer'] }
-                                        onClick={ () => history.push('/') }
                                     >
-                                        Video List
-                                    </NavLink>
+                                        <NavLink
+                                            to="/"
+                                            activeClassName={ classes.active }
+                                            className={ classes.link }
+                                            exact
+                                        >
+                                            Video List
+                                        </NavLink>
+                                    </BootLink>
                                 </NavItem>
                                 <NavItem active={ pathname === '/filters' }>
-                                    <NavLink
+                                    <BootLink
                                         id="manageFilters"
-                                        className={ classes['use-pointer'] }
-                                        onClick={ () => history.push('/filters') }
                                     >
-                                        Manage Filters
-                                    </NavLink>
+                                        <NavLink
+                                            to="/filters"
+                                            activeClassName={ classes.active }
+                                            className={ classes.link }
+                                        >
+                                            Manage Filters
+                                        </NavLink>
+                                    </BootLink>
                                 </NavItem>
                             </Nav>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink
+                                    <BootLink
                                         id="scanDirectory"
                                         className={ classes['use-pointer'] }
                                         onClick={ startFileScan }
                                     >
                                         Scan Directory
-                                    </NavLink>
+                                    </BootLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>
