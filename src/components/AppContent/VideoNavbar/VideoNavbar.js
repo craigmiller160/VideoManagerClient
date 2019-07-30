@@ -14,6 +14,7 @@ const VideoNavbar = (props) => {
         <Navbar className={ classes.VideoNavbar } color="dark" dark expand="md">
             <Container>
                 <NavbarBrand
+                    tag="div"
                     disabled={ disabled }
                 >
                     <NavLink
@@ -32,6 +33,7 @@ const VideoNavbar = (props) => {
                             <Nav navbar>
                                 <NavItem active={ pathname === '/' }>
                                     <BootLink
+                                        tag="div"
                                         id="videoList"
                                     >
                                         <NavLink
@@ -46,6 +48,7 @@ const VideoNavbar = (props) => {
                                 </NavItem>
                                 <NavItem active={ pathname === '/filters' }>
                                     <BootLink
+                                        tag="div"
                                         id="manageFilters"
                                     >
                                         <NavLink
