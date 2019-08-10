@@ -8,7 +8,7 @@ const instance = axios.create({
     }
 });
 
-instance.interceptors.request.use((config) => {
+export const addTokenInterceptor = (config) => {
     const token = localStorage.getItem(TOKEN_KEY);
     if (token) {
         config.headers = {
@@ -17,6 +17,8 @@ instance.interceptors.request.use((config) => {
         };
     }
     return config;
-});
+};
+
+instance.interceptors.request.use(addTokenInterceptor);
 
 export default instance;
