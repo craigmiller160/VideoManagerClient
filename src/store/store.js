@@ -6,6 +6,7 @@ import filterInputModalReducer from './filterInputModal/filterInputModal.reducer
 import videoPlayerReducer from './videoPlayer/videoPlayer.reducer';
 import { reducer as formReducer } from 'redux-form';
 import alertReducer from './alert/alert.reducer';
+import authReducer from './auth/auth.reducer';
 
 const reducer = {
     videoList: videoListReducer,
@@ -14,7 +15,8 @@ const reducer = {
     alert: alertReducer,
     scanning: scanningReducer,
     filterInputModal: filterInputModalReducer,
-    videoPlayer: videoPlayerReducer
+    videoPlayer: videoPlayerReducer,
+    auth: authReducer
 };
 
 export default configureStore({
