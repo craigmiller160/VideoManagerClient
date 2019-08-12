@@ -1,10 +1,17 @@
+import authReducer, { initialState as authInitState } from 'store/auth/auth.reducer';
+import { setIsAuth } from '../../../src/store/auth/auth.actions';
 
 describe('auth.reducer', () => {
     it('returns initial state', () => {
-        throw new Error('Finish this');
+        expect(authReducer(undefined, {})).toEqual(authInitState);
     });
 
     it('handleSetIsAuth', () => {
-        throw new Error('Finish this');
+        const action = { type: setIsAuth.toString(), payload: true };
+        const expectedState = {
+            ...authInitState,
+            isAuth: true
+        };
+        expect(authReducer(authInitState, action)).toEqual(expectedState);
     });
 });

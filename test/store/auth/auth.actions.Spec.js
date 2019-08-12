@@ -1,6 +1,12 @@
+import { setIsAuth } from 'store/auth/auth.actions';
 
 describe('auth.actions', () => {
     it('setIsAuth', () => {
-        throw new Error('Finish this');
+        const expectedAction = {
+            type: setIsAuth.toString(),
+            payload: true
+        };
+        const action = setIsAuth(true);
+        expect(action).toEqual(expectedAction);
     });
 });
