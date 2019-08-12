@@ -31,13 +31,13 @@ const VideoNavbar = (props) => {
                         <NavbarToggler onClick={ () => setOpen(!isOpen) } />
                         <Collapse isOpen={ isOpen } navbar>
                             <Nav navbar>
-                                <NavItem active={ pathname === '/' }>
+                                <NavItem active={ pathname === '/list' }>
                                     <BootLink
                                         tag="div"
                                         id="videoList"
                                     >
                                         <NavLink
-                                            to="/"
+                                            to="/list"
                                             activeClassName={ classes.active }
                                             className={ classes.link }
                                             exact

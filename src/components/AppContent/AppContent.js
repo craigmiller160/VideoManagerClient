@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
-import VideoListLayout from './VideoListLayout/VideoListLayout';
 import { Col, Container, Row } from 'reactstrap';
 import Alert from '../UI/Alert/Alert';
-import { Route, Switch } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import Scanning from './Scanning/Scanning';
 import { checkIsScanning, startFileScan } from 'store/scanning/scanning.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { hideAlert, showErrorAlert } from 'store/alert/alert.actions';
-import VideoFileEdit from './VideoFileEdit/VideoFileEdit';
 import { getSelectedVideoWithFilters } from 'store/videoList/videoList.selectors';
-import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
 import classes from './AppContent.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
 import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
-import VideoPlayer from './VideoPlayer/VideoPlayer';
-import Login from './Login/Login';
+import AppRoutes from './AppRoutes';
 
 const resetToRootComponent = (props) => {
     const {
@@ -108,57 +102,11 @@ export const AppContent = (props) => {
                             />
                         </Col>
                     </Row>
-                    <Switch>
-                        <Route
-                            path="/scanning"
-                            render={ (props) => (
-                                <Scanning
-                                    { ...props }
-                                    checkIsScanning={ checkIsScanning }
-                                />
-                            ) }
-                        />
-                        <Route
-                            path="/edit"
-                            render={ (props) => (
-                                <VideoFileEdit
-                                    { ...props }
-                                    selectedVideo={ selectedVideo }
-                                    saveFileChanges={ saveFileChanges }
-                                />
-                            ) }
-                        />
-                        <Route
-                            path="/filters"
-                            render={ (props) => (
-                                <ManageVideoFilters
-                                    { ...props }
-                                />
-                            ) }
-                        />
-                        <Route
-                            path="/play/:fileId"
-                            render={ (props) => (
-                                <VideoPlayer { ...props } />
-                            ) }
-                        />
-                        <Route
-                            path="/"
-                            exact
-                            render={ (props) => (
-                                <VideoListLayout
-                                    { ...props }
-                                />
-                            ) }
-                        />
-                        <Route
-                            path="/login"
-                            exact
-                            render={ (props) => (
-                                <Login { ...props } />
-                            ) }
-                        />
-                    </Switch>
+                    <AppRoutes
+                        saveFileChanges={ saveFileChanges }
+                        checkIsScanning={ checkIsScanning }
+                        selectedVideo={ selectedVideo }
+                    />
                 </Container>
             }
         </div>
@@ -171,8 +119,8 @@ AppContent.propTypes = {
     selectedVideo: PropTypes.object,
     checkIsScanning: PropTypes.func,
     startFileScan: PropTypes.func,
-    showErrorAlert: PropTypes.func,
-    loadFilterOptions: PropTypes.func,
+    showErrorAlert: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
+    loadFilterOptions: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
     hideAlert: PropTypes.func,
     saveVideoFileEdits: PropTypes.func,
     history: PropTypes.object
