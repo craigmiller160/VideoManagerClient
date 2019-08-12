@@ -14,7 +14,7 @@ import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
 import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
 
-const resetToRootComponent = (props) => {
+const resetToListComponent = (props) => {
     const {
         history: { location },
         isScanning,
@@ -31,10 +31,14 @@ const resetToRootComponent = (props) => {
 const handleRouting = (props) => {
     const {
         history,
-        isScanning
+        isScanning,
+        isAuth
     } = props;
 
-    if (resetToRootComponent(props)) {
+    if (!isAuth) {
+        history.push('/login');
+    }
+    else if (resetToListComponent(props)) {
         history.push('/');
     }
     else if (isScanning && history.location.pathname !== '/scanning') {
@@ -129,7 +133,8 @@ AppContent.propTypes = {
 const mapStateToProps = (state) => ({
     isScanning: state.scanning.isScanning,
     alert: state.alert,
-    selectedVideo: getSelectedVideoWithFilters(state)
+    selectedVideo: getSelectedVideoWithFilters(state),
+    isAuth: state.auth.isAuth
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
