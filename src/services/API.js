@@ -19,6 +19,10 @@ export const addTokenInterceptor = (config) => {
     return config;
 };
 
+export const handle401Interceptor = (config) => {
+    // TODO finish this
+};
+
 instance.interceptors.request.use(addTokenInterceptor);
 
 export default instance;
