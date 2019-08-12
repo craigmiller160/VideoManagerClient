@@ -2,7 +2,7 @@ import React from 'react';
 import { Col } from 'reactstrap';
 
 const style = {
-    'word-wrap': 'break-word'
+    wordWrap: 'break-word'
 };
 
 const WordWrapCol = (props) => (
