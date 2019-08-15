@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col, Button } from 'reactstrap';
 import Form from 'components/UI/form/Form/Form';
 import Input from 'components/UI/form/Input/Input';
+import classes from './Login.scss';
 
 const FORM_NAME = 'LoginForm';
 
@@ -10,6 +11,7 @@ const Login = () => {
         <Form
             form={ FORM_NAME }
             handleSubmit={ () => {} }
+            className={ classes.Login }
         >
             <>
                 <Row>
