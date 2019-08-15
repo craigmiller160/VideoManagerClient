@@ -1,6 +1,18 @@
-import { setIsAuth } from 'store/auth/auth.actions';
+import { checkAuth, setIsAuth } from 'store/auth/auth.actions';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import MockAdapter from 'axios-mock-adapter';
+import API from 'services/API';
+import { mockCheckAuthFail, mockCheckAuthSuccess } from '../../exclude/mock/mockApiConfig/authApi';
+
+const mockStore = configureMockStore([thunk]);
+const mockApi = new MockAdapter(API);
 
 describe('auth.actions', () => {
+    beforeEach(() => {
+        mockApi.reset();
+    });
+
     it('setIsAuth', () => {
         const expectedAction = {
             type: setIsAuth.toString(),
@@ -8,5 +20,32 @@ describe('auth.actions', () => {
         };
         const action = setIsAuth(true);
         expect(action).toEqual(expectedAction);
+    });
+
+    describe('thunk actions', () => {
+        let store;
+        beforeEach(() => {
+            store = mockStore({});
+        });
+
+        describe('checkAuth', () => {
+            it('checkAuth is authenticated', async () => {
+                mockCheckAuthSuccess(mockApi);
+                const expectedActions = [
+                    { type: setIsAuth.toString(), payload: true }
+                ];
+                await store.dispatch(checkAuth());
+                expect(store.getActions()).toEqual(expectedActions);
+            });
+
+            it('checkAuth is not authenticated', async () => {
+                mockCheckAuthFail(mockApi);
+                const expectedActions = [
+                    { type: setIsAuth.toString(), payload: false }
+                ];
+                await store.dispatch(checkAuth());
+                expect(store.getActions()).toEqual(expectedActions);
+            });
+        });
     });
 });
