@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
@@ -13,6 +14,7 @@ import classes from './AppContent.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
 import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
+import { checkAuth } from '../../store/auth/auth.actions';
 
 const resetToListComponent = (props) => {
     const {
@@ -50,12 +52,16 @@ const startupCheck = async (props, setStarted) => {
     const {
         loadFilterOptions,
         checkIsScanning,
-        showErrorAlert
+        showErrorAlert,
+        checkAuth
     } = props;
     try {
-        loadFilterOptions();
-        await checkIsScanning();
-        setStarted(true);
+        const isAuth = await checkAuth();
+        if (isAuth) {
+            loadFilterOptions();
+            await checkIsScanning(); // TODO need to still do this check after login
+            setStarted(true);
+        }
     }
     catch (ex) {
         showErrorAlert(ex.message);
@@ -63,6 +69,7 @@ const startupCheck = async (props, setStarted) => {
 };
 
 export const AppContent = (props) => {
+    console.log(props); // TODO delete this
     const [ isStarted, setStarted ] = useState(false);
     const {
         checkIsScanning,
@@ -127,7 +134,8 @@ AppContent.propTypes = {
     loadFilterOptions: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
     hideAlert: PropTypes.func,
     saveVideoFileEdits: PropTypes.func,
-    history: PropTypes.object
+    history: PropTypes.object,
+    checkAuth: PropTypes.func // eslint-disable-line react/no-unused-prop-types
 };
 
 const mapStateToProps = (state) => ({
@@ -143,7 +151,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     showErrorAlert,
     loadFilterOptions,
     hideAlert,
-    saveVideoFileEdits
+    saveVideoFileEdits,
+    checkAuth
 }, dispatch);
 
 const AppContentWrapped = withRouter(connect(mapStateToProps, mapDispatchToProps)(AppContent));

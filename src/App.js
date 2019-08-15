@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 import store from './store/store';
 import './App.scss';
 import variables from './_variables.scss';
-import DoAuthAppContent from './components/AppContent/DoAuthAppContent';
+import { AppContent } from './components/AppContent/AppContent';
 
 const theme = {
     colors: {
@@ -22,7 +22,7 @@ const App = () => (
         <Provider store={ store }>
             <BrowserRouter>
                 <ThemeProvider theme={ theme }>
-                    <DoAuthAppContent />
+                    <AppContent />
                 </ThemeProvider>
             </BrowserRouter>
         </Provider>
