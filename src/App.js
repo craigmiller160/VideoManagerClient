@@ -4,9 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Helmet } from 'react-helmet';
 import store from './store/store';
-import AppContent from './components/AppContent/AppContent';
 import './App.scss';
 import variables from './_variables.scss';
+import DoAuthAppContent from './components/AppContent/DoAuthAppContent';
 
 const theme = {
     colors: {
@@ -22,7 +22,7 @@ const App = () => (
         <Provider store={ store }>
             <BrowserRouter>
                 <ThemeProvider theme={ theme }>
-                    <AppContent />
+                    <DoAuthAppContent />
                 </ThemeProvider>
             </BrowserRouter>
         </Provider>
