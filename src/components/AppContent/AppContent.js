@@ -77,7 +77,8 @@ export const AppContent = (props) => {
         selectedVideo,
         startFileScan,
         alert,
-        hideAlert
+        hideAlert,
+        isAuth
     } = props;
 
     useEffect(() => {
@@ -98,7 +99,7 @@ export const AppContent = (props) => {
         <div className={ classes.AppContent }>
             <VideoNavbar
                 startFileScan={ startFileScan }
-                disabled={ isScanning }
+                disabled={ isScanning || !isAuth }
             />
             {
                 isStarted &&
