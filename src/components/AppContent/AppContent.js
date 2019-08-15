@@ -134,7 +134,8 @@ AppContent.propTypes = {
     hideAlert: PropTypes.func,
     saveVideoFileEdits: PropTypes.func,
     history: PropTypes.object,
-    checkAuth: PropTypes.func // eslint-disable-line react/no-unused-prop-types
+    checkAuth: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
+    isAuth: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
