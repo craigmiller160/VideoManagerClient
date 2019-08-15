@@ -60,8 +60,8 @@ const startupCheck = async (props, setStarted) => {
         if (isAuth) {
             loadFilterOptions();
             await checkIsScanning(); // TODO need to still do this check after login
-            setStarted(true);
         }
+        setStarted(true);
     }
     catch (ex) {
         showErrorAlert(ex.message);

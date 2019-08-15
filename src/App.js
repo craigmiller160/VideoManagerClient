@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 import store from './store/store';
 import './App.scss';
 import variables from './_variables.scss';
-import { AppContent } from './components/AppContent/AppContent';
+import AppContent from './components/AppContent/AppContent';
 
 const theme = {
     colors: {
