@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
@@ -69,7 +68,6 @@ const startupCheck = async (props, setStarted) => {
 };
 
 export const AppContent = (props) => {
-    console.log(props); // TODO delete this
     const [ isStarted, setStarted ] = useState(false);
     const {
         checkIsScanning,
