@@ -34,7 +34,8 @@ describe('auth.actions', () => {
                 const expectedActions = [
                     { type: setIsAuth.toString(), payload: true }
                 ];
-                await store.dispatch(checkAuth());
+                const result = await store.dispatch(checkAuth());
+                expect(result).toEqual(true);
                 expect(store.getActions()).toEqual(expectedActions);
             });
 
@@ -43,7 +44,8 @@ describe('auth.actions', () => {
                 const expectedActions = [
                     { type: setIsAuth.toString(), payload: false }
                 ];
-                await store.dispatch(checkAuth());
+                const result = await store.dispatch(checkAuth());
+                expect(result).toEqual(false);
                 expect(store.getActions()).toEqual(expectedActions);
             });
         });

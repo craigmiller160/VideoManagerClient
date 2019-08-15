@@ -7,8 +7,10 @@ export const checkAuth = () => async (dispatch) => {
     try {
         await AuthService.checkAuth();
         dispatch(setIsAuth(true));
+        return true;
     }
     catch (ex) {
         dispatch(setIsAuth(false));
+        return false;
     }
 };
