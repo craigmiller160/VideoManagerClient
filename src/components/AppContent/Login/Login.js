@@ -17,7 +17,7 @@ const Login = () => {
     return (
         <Form
             form={ LOGIN_FORM_NAME }
-            handleSubmit={ () => dispatch(login()) }
+            onSubmit={ (values) => dispatch(login(values)) }
             className={ classes.Login }
         >
             <>
@@ -30,7 +30,7 @@ const Login = () => {
                     <Col md={ { size: 4, offset: 4 } }>
                         <Input
                             label="Username"
-                            name="username"
+                            name="userName"
                             type="email"
                             validate={ [
                                 isRequired,

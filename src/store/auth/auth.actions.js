@@ -1,6 +1,7 @@
 import { createAction } from 'redux-starter-kit';
 import * as AuthService from 'services/AuthApiService';
 import { TOKEN_KEY } from '../../utils/securityConstants';
+import { showErrorAlert } from '../alert/alert.actions';
 
 export const setIsAuth = createAction('auth/setIsAuth');
 
@@ -16,20 +17,14 @@ export const checkAuth = () => async (dispatch) => {
     }
 };
 
-/* eslint-disable */
-export const login = () => async (dispatch, getState) => {
+export const login = ({ userName, password }) => async (dispatch) => {
     try {
-        const state = getState();
-        const { username, password } = state?.form?.LoginForm?.values ?? {};
-        if (!username || !password) {
-            return;
-        }
-
-        const result = await AuthService.login();
+        const result = await AuthService.login(userName, password);
         localStorage.setItem(TOKEN_KEY, result.data.token);
         dispatch(setIsAuth(true));
     }
     catch (ex) {
         dispatch(setIsAuth(false));
+        dispatch(showErrorAlert('Invalid login'));
     }
 };

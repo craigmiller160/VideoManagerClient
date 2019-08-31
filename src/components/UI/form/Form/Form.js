@@ -14,6 +14,7 @@ const Form = (props) => {
         <form
             className={ className }
             onSubmit={ (event) => {
+                console.log('OnSubmit', event); // eslint-disable-line no-console
                 event.preventDefault();
                 handleSubmit(event);
             } }
@@ -37,7 +38,8 @@ Form.propTypes = {
 const ReduxFormForm = reduxForm({})(Form);
 ReduxFormForm.propTypes = {
     form: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func, // DEPRECATED
+    onSubmit: PropTypes.func.isRequired,
     className: PropTypes.string,
     initialValues: PropTypes.object,
     children: PropTypes.element,
