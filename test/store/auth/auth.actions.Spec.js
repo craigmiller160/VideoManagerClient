@@ -49,5 +49,11 @@ describe('auth.actions', () => {
                 expect(store.getActions()).toEqual(expectedActions);
             });
         });
+
+        describe('login', () => {
+            it('logs the user in', () => {
+                throw new Error('Finish this');
+            });
+        });
     });
 });
