@@ -5,6 +5,8 @@ import { showErrorAlert } from '../alert/alert.actions';
 
 export const setIsAuth = createAction('auth/setIsAuth');
 
+export const setLoginLoading = createAction('auth/setLoginLoading');
+
 export const checkAuth = () => async (dispatch) => {
     try {
         await AuthService.checkAuth();
@@ -18,6 +20,7 @@ export const checkAuth = () => async (dispatch) => {
 };
 
 export const login = ({ userName, password }) => async (dispatch) => {
+    dispatch(setLoginLoading(true));
     try {
         const result = await AuthService.login(userName, password);
         localStorage.setItem(TOKEN_KEY, result.data.token);
@@ -31,5 +34,8 @@ export const login = ({ userName, password }) => async (dispatch) => {
         else {
             dispatch(showErrorAlert(ex.message));
         }
+    }
+    finally {
+        dispatch(setLoginLoading(false));
     }
 };

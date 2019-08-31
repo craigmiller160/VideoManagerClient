@@ -1,4 +1,4 @@
-import { checkAuth, login, setIsAuth } from 'store/auth/auth.actions';
+import { checkAuth, login, setIsAuth, setLoginLoading } from 'store/auth/auth.actions';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
@@ -25,6 +25,15 @@ describe('auth.actions', () => {
             payload: true
         };
         const action = setIsAuth(true);
+        expect(action).toEqual(expectedAction);
+    });
+
+    it('setLoginLoading', () => {
+        const expectedAction = {
+            type: setLoginLoading.toString(),
+            payload: true
+        };
+        const action = setLoginLoading(true);
         expect(action).toEqual(expectedAction);
     });
 
@@ -60,7 +69,9 @@ describe('auth.actions', () => {
             it('logs the user in', async () => {
                 mockLoginSuccess(mockApi);
                 const expectedActions = [
-                    { type: setIsAuth.toString(), payload: true }
+                    { type: setLoginLoading.toString(), payload: true },
+                    { type: setIsAuth.toString(), payload: true },
+                    { type: setLoginLoading.toString(), payload: false }
                 ];
                 await store.dispatch(login({ userName: mockUserName, password: mockPassword }));
                 expect(store.getActions()).toEqual(expectedActions);
@@ -69,8 +80,10 @@ describe('auth.actions', () => {
             it('handles invalid login', async () => {
                 mockLoginFail(mockApi);
                 const expectedActions = [
+                    { type: setLoginLoading.toString(), payload: true },
                     { type: setIsAuth.toString(), payload: false },
-                    { type: showErrorAlert.toString(), payload: 'Invalid login' }
+                    { type: showErrorAlert.toString(), payload: 'Invalid login' },
+                    { type: setLoginLoading.toString(), payload: false }
                 ];
                 await store.dispatch(login({ userName: mockUserName, password: mockPassword }));
                 expect(store.getActions()).toEqual(expectedActions);

@@ -1,5 +1,5 @@
 import authReducer, { initialState as authInitState } from 'store/auth/auth.reducer';
-import { setIsAuth } from '../../../src/store/auth/auth.actions';
+import { setIsAuth, setLoginLoading } from '../../../src/store/auth/auth.actions';
 
 describe('auth.reducer', () => {
     it('returns initial state', () => {
@@ -11,6 +11,15 @@ describe('auth.reducer', () => {
         const expectedState = {
             ...authInitState,
             isAuth: true
+        };
+        expect(authReducer(authInitState, action)).toEqual(expectedState);
+    });
+
+    it('handleSetLoginLoading', () => {
+        const action = { type: setLoginLoading.toString(), payload: true };
+        const expectedState = {
+            ...authInitState,
+            loginLoading: true
         };
         expect(authReducer(authInitState, action)).toEqual(expectedState);
     });

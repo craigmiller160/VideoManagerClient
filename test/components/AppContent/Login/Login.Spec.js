@@ -11,4 +11,8 @@ describe('Login', () => {
     it('submits form', () => {
         throw new Error('Finish this');
     });
+
+    it('renders loading for when logging in', () => {
+        throw new Error('Finish this');
+    });
 });

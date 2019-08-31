@@ -1,8 +1,9 @@
 import { createReducer } from 'redux-starter-kit';
-import { setIsAuth } from './auth.actions';
+import { setIsAuth, setLoginLoading } from './auth.actions';
 
 export const initialState = {
-    isAuth: false
+    isAuth: false,
+    loginLoading: false
 };
 
 const handleSetIsAuth = (state, action) => ({
@@ -10,6 +11,12 @@ const handleSetIsAuth = (state, action) => ({
     isAuth: action.payload
 });
 
+const handleSetLoginLoading = (state, action) => ({
+    ...state,
+    loginLoading: action.payload
+});
+
 export default createReducer(initialState, {
-    [setIsAuth]: handleSetIsAuth
+    [setIsAuth]: handleSetIsAuth,
+    [setLoginLoading]: handleSetLoginLoading
 });
