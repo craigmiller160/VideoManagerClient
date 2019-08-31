@@ -1,17 +1,23 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button, Col, Row } from 'reactstrap';
 import Form from 'components/UI/form/Form/Form';
 import Input from 'components/UI/form/Input/Input';
 import classes from './Login.scss';
 import { isRequired } from '../../../utils/validations';
+import { login } from '../../../store/auth/auth.actions';
+import { loginFormHasErrors } from '../../../store/auth/auth.selectors';
 
-const FORM_NAME = 'LoginForm';
+export const LOGIN_FORM_NAME = 'LoginForm';
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const loginFormErrors = useSelector(loginFormHasErrors);
+
     return (
         <Form
-            form={ FORM_NAME }
-            handleSubmit={ () => {} }
+            form={ LOGIN_FORM_NAME }
+            handleSubmit={ () => dispatch(login()) }
             className={ classes.Login }
         >
             <>
@@ -45,6 +51,7 @@ const Login = () => {
                         <Button
                             type="submit"
                             color="primary"
+                            disabled={ loginFormErrors }
                         >
                             Login
                         </Button>

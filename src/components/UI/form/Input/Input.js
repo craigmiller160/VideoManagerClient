@@ -33,7 +33,7 @@ export const InputComponent = (props) => {
     } = props;
 
     const id = newid();
-    const hasError = touched && error;
+    const hasError = touched && !!error;
 
     return (
         <StyledFormGroupDiv hidden={ 'hidden' === type.toLowerCase() }>
