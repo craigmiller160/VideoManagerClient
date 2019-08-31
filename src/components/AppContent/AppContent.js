@@ -15,6 +15,7 @@ import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
 import { checkAuth } from '../../store/auth/auth.actions';
 
+/* eslint-disable */ // TODO delete this
 const resetToListComponent = (props) => {
     const {
         history: { location },
@@ -23,9 +24,9 @@ const resetToListComponent = (props) => {
         isAuth
     } = props;
 
-    if (location.pathname === '/scanning' && !isScanning) {
-        return true;
-    }
+    // if (location.pathname === '/scanning' && !isScanning) {
+    //     return true;
+    // }
 
     if (location.pathname === '/login' && isAuth) {
         return true;
@@ -47,9 +48,9 @@ const handleRouting = (props) => {
     else if (resetToListComponent(props)) {
         history.push('/list');
     }
-    else if (isScanning && history.location.pathname !== '/scanning') {
-        history.push('/scanning');
-    }
+    // else if (isScanning && history.location.pathname !== '/scanning') {
+    //     history.push('/scanning');
+    // }
 };
 
 const startupCheck = async (props, setStarted) => {
@@ -121,6 +122,8 @@ export const AppContent = (props) => {
                         saveFileChanges={ saveFileChanges }
                         checkIsScanning={ checkIsScanning }
                         selectedVideo={ selectedVideo }
+                        isScanning={ isScanning }
+                        isAuth={ isAuth }
                     />
                 </Container>
             }

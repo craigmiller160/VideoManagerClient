@@ -7,23 +7,29 @@ import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
 import VideoPlayer from './VideoPlayer/VideoPlayer';
 import VideoListLayout from './VideoListLayout/VideoListLayout';
 import Login from './Login/Login';
+import ProtectedRoute from '../Routing/ProtectedRoute';
 
 const AppRoutes = (props) => {
     const {
         checkIsScanning,
         selectedVideo,
-        saveFileChanges
+        saveFileChanges,
+        isScanning,
+        isAuth
     } = props;
+
     return (
         <Switch>
-            <Route
+            <ProtectedRoute
                 path="/scanning"
-                render={ (routeProps) => (
-                    <Scanning
-                        { ...routeProps }
-                        checkIsScanning={ checkIsScanning }
-                    />
-                ) }
+                component={ Scanning }
+                componentProps={ {
+                    checkIsScanning
+                } }
+                rules={ [
+                    { allow: () => isAuth, redirect: '/login' },
+                    { allow: () => isScanning, redirect: '/' }
+                ] }
             />
             <Route
                 path="/edit"
@@ -70,7 +76,9 @@ const AppRoutes = (props) => {
 AppRoutes.propTypes = {
     checkIsScanning: PropTypes.func,
     selectedVideo: PropTypes.object,
-    saveFileChanges: PropTypes.func
+    saveFileChanges: PropTypes.func,
+    isScanning: PropTypes.bool,
+    isAuth: PropTypes.bool
 };
 
 export default AppRoutes;
