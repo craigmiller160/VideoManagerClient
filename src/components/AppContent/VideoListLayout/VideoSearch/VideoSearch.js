@@ -41,7 +41,7 @@ export const VideoSearch = (props) => {
     return (
         <Form
             form={ FORM_NAME }
-            handleSubmit={ doSearch }
+            onSubmit={ doSearch }
             className={ classes.VideoSearch }
             destroyOnUnmount={ false }
             initialValues={ initialValues }
