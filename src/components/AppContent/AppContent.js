@@ -19,10 +19,15 @@ const resetToListComponent = (props) => {
     const {
         history: { location },
         isScanning,
-        selectedVideo
+        selectedVideo,
+        isAuth
     } = props;
 
     if (location.pathname === '/scanning' && !isScanning) {
+        return true;
+    }
+
+    if (location.pathname === '/login' && isAuth) {
         return true;
     }
 
@@ -40,7 +45,7 @@ const handleRouting = (props) => {
         history.push('/login');
     }
     else if (resetToListComponent(props)) {
-        history.push('/');
+        history.push('/list');
     }
     else if (isScanning && history.location.pathname !== '/scanning') {
         history.push('/scanning');
@@ -88,7 +93,7 @@ export const AppContent = (props) => {
     useEffect(() => {
         handleRouting(props);
         return () => handleRouting(props);
-    }, [history, isScanning, selectedVideo]);
+    }, [history, isScanning, selectedVideo, isAuth]);
 
     const saveFileChanges = async () => {
         await saveVideoFileEdits();
