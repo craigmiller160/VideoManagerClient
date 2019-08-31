@@ -13,7 +13,7 @@ import classes from './AppContent.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
 import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
-import { checkAuth } from '../../store/auth/auth.actions';
+import { checkAuth, logout } from '../../store/auth/auth.actions';
 
 const startupCheck = async (props, setStarted) => {
     const {
@@ -46,7 +46,8 @@ export const AppContent = (props) => {
         startFileScan,
         alert,
         hideAlert,
-        isAuth
+        isAuth,
+        logout
     } = props;
 
     useEffect(() => {
@@ -63,6 +64,7 @@ export const AppContent = (props) => {
             <VideoNavbar
                 startFileScan={ startFileScan }
                 disabled={ isScanning || !isAuth }
+                logout={ logout }
             />
             {
                 isStarted &&
@@ -100,7 +102,8 @@ AppContent.propTypes = {
     saveVideoFileEdits: PropTypes.func,
     history: PropTypes.object,
     checkAuth: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
-    isAuth: PropTypes.bool
+    isAuth: PropTypes.bool,
+    logout: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -117,7 +120,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     loadFilterOptions,
     hideAlert,
     saveVideoFileEdits,
-    checkAuth
+    checkAuth,
+    logout
 }, dispatch);
 
 const AppContentWrapped = withRouter(connect(mapStateToProps, mapDispatchToProps)(AppContent));

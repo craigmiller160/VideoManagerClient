@@ -7,7 +7,7 @@ import { withRouter } from 'react-router';
 
 const VideoNavbar = (props) => {
     const [ isOpen, setOpen ] = useState(false);
-    const { disabled, history, startFileScan } = props;
+    const { disabled, history, startFileScan, logout } = props;
     const pathname = history.location.pathname;
 
     return (
@@ -71,6 +71,15 @@ const VideoNavbar = (props) => {
                                         Scan Directory
                                     </BootLink>
                                 </NavItem>
+                                <NavItem>
+                                    <BootLink
+                                        id="logout"
+                                        className={ classes['use-pointer'] }
+                                        onClick={ logout }
+                                    >
+                                        Logout
+                                    </BootLink>
+                                </NavItem>
                             </Nav>
                         </Collapse>
                     </>
@@ -87,7 +96,8 @@ VideoNavbar.defaultProps = {
 const propTypes = {
     startFileScan: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
-    history: PropTypes.object
+    history: PropTypes.object,
+    logout: PropTypes.func
 };
 
 VideoNavbar.propTypes = {

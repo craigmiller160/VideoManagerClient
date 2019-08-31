@@ -39,3 +39,7 @@ export const login = ({ userName, password }) => async (dispatch) => {
         dispatch(setLoginLoading(false));
     }
 };
+
+export const logout = () => async (dispatch) => {
+    // TODO finish this
+};
