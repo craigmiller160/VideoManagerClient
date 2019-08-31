@@ -15,44 +15,6 @@ import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
 import { checkAuth } from '../../store/auth/auth.actions';
 
-/* eslint-disable */ // TODO delete this
-const resetToListComponent = (props) => {
-    const {
-        history: { location },
-        isScanning,
-        selectedVideo,
-        isAuth
-    } = props;
-
-    // if (location.pathname === '/scanning' && !isScanning) {
-    //     return true;
-    // }
-
-    if (location.pathname === '/login' && isAuth) {
-        return true;
-    }
-
-    return location.pathname === '/edit' && (!selectedVideo || !selectedVideo.fileName);
-};
-
-const handleRouting = (props) => {
-    const {
-        history,
-        isScanning,
-        isAuth
-    } = props;
-
-    if (!isAuth) {
-        history.push('/login');
-    }
-    else if (resetToListComponent(props)) {
-        history.push('/list');
-    }
-    // else if (isScanning && history.location.pathname !== '/scanning') {
-    //     history.push('/scanning');
-    // }
-};
-
 const startupCheck = async (props, setStarted) => {
     const {
         loadFilterOptions,
@@ -90,11 +52,6 @@ export const AppContent = (props) => {
     useEffect(() => {
         startupCheck(props, setStarted);
     }, []);
-
-    // useEffect(() => {
-    //     handleRouting(props);
-    //     return () => handleRouting(props);
-    // }, [history, isScanning, selectedVideo, isAuth]);
 
     const saveFileChanges = async () => {
         await saveVideoFileEdits();
