@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import Scanning from './Scanning/Scanning';
 import VideoFileEdit from './VideoFileEdit/VideoFileEdit';
 import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
@@ -31,44 +31,50 @@ const AppRoutes = (props) => {
                     { allow: () => isScanning, redirect: '/' }
                 ] }
             />
-            <Route
+            <ProtectedRoute
                 path="/edit"
-                render={ (routeProps) => (
-                    <VideoFileEdit
-                        { ...routeProps }
-                        selectedVideo={ selectedVideo }
-                        saveFileChanges={ saveFileChanges }
-                    />
-                ) }
+                component={ VideoFileEdit }
+                componentProps={ {
+                    selectedVideo,
+                    saveFileChanges
+                } }
+                rules={ [
+                    { allow: () => isAuth, redirect: '/login' },
+                    { allow: () => !isScanning, redirect: '/scanning' },
+                    { allow: () => !!selectedVideo?.fileName, redirect: '/' }
+                ] }
             />
-            <Route
+            <ProtectedRoute
                 path="/filters"
-                render={ (routeProps) => (
-                    <ManageVideoFilters
-                        { ...routeProps }
-                    />
-                ) }
+                component={ ManageVideoFilters }
+                rules={ [
+                    { allow: () => isAuth, redirect: '/login' },
+                    { allow: () => !isScanning, redirect: '/scanning' }
+                ] }
             />
-            <Route
+            <ProtectedRoute
                 path="/play/:fileId"
-                render={ (routeProps) => (
-                    <VideoPlayer { ...routeProps } />
-                ) }
+                component={ VideoPlayer }
+                rules={ [
+                    { allow: () => isAuth, redirect: '/login' },
+                    { allow: () => !isScanning, redirect: '/scanning' }
+                ] }
             />
-            <Route
+            <ProtectedRoute
                 path="/list"
-                render={ (routeProps) => (
-                    <VideoListLayout
-                        { ...routeProps }
-                    />
-                ) }
+                component={ VideoListLayout }
+                rules={ [
+                    { allow: () => isAuth, redirect: '/login' },
+                    { allow: () => !isScanning, redirect: '/scanning' }
+                ] }
             />
-            <Route
+            <ProtectedRoute
                 path="/login"
                 exact
-                render={ (routeProps) => (
-                    <Login { ...routeProps } />
-                ) }
+                component={ Login }
+                rules={ [
+                    { allow: () => !isAuth, redirect: '/' }
+                ] }
             />
         </Switch>
     );

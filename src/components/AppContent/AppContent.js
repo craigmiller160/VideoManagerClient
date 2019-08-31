@@ -91,10 +91,10 @@ export const AppContent = (props) => {
         startupCheck(props, setStarted);
     }, []);
 
-    useEffect(() => {
-        handleRouting(props);
-        return () => handleRouting(props);
-    }, [history, isScanning, selectedVideo, isAuth]);
+    // useEffect(() => {
+    //     handleRouting(props);
+    //     return () => handleRouting(props);
+    // }, [history, isScanning, selectedVideo, isAuth]);
 
     const saveFileChanges = async () => {
         await saveVideoFileEdits();
