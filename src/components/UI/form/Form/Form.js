@@ -14,7 +14,6 @@ const Form = (props) => {
         <form
             className={ className }
             onSubmit={ (event) => {
-                console.log('OnSubmit', event); // eslint-disable-line no-console
                 event.preventDefault();
                 handleSubmit(event);
             } }
