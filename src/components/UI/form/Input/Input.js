@@ -28,10 +28,12 @@ export const InputComponent = (props) => {
         type,
         input,
         textarea,
-        inputProps
+        inputProps,
+        meta: { touched, error }
     } = props;
 
     const id = newid();
+    const hasError = touched && error;
 
     return (
         <StyledFormGroupDiv hidden={ 'hidden' === type.toLowerCase() }>
@@ -49,7 +51,12 @@ export const InputComponent = (props) => {
                 rows={ textarea ? textarea.rows : null }
                 cols={ textarea ? textarea.cols : null }
                 resize={ textarea ? textarea.resize : false }
+                hasError={ hasError }
             />
+            {
+                hasError &&
+                    <span className="text-danger">{ error }</span>
+            }
         </StyledFormGroupDiv>
     );
 };
@@ -73,6 +80,10 @@ InputComponent.propTypes = {
         rows: PropTypes.number,
         cols: PropTypes.number,
         resize: PropTypes.bool
+    }),
+    meta: PropTypes.shape({
+        touched: PropTypes.bool,
+        error: PropTypes.string
     })
 };
 
