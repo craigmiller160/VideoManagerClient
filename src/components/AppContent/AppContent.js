@@ -15,26 +15,6 @@ import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
 import { checkAuth, logout } from '../../store/auth/auth.actions';
 
-const startupCheck = async (props, setStarted) => {
-    const {
-        loadFilterOptions,
-        checkIsScanning,
-        showErrorAlert,
-        checkAuth
-    } = props;
-    try {
-        const isAuth = await checkAuth();
-        if (isAuth) {
-            loadFilterOptions();
-            await checkIsScanning(); // TODO need to still do this check after login
-        }
-        setStarted(true);
-    }
-    catch (ex) {
-        showErrorAlert(ex.message);
-    }
-};
-
 export const AppContent = (props) => {
     const [ isStarted, setStarted ] = useState(false);
     const {
@@ -47,12 +27,28 @@ export const AppContent = (props) => {
         alert,
         hideAlert,
         isAuth,
-        logout
+        logout,
+        checkAuth,
+        loadFilterOptions
     } = props;
 
     useEffect(() => {
-        startupCheck(props, setStarted);
+        const doCheckAuth = async () => {
+            await checkAuth();
+            setStarted(true);
+        };
+        doCheckAuth();
     }, []);
+
+    useEffect(() => {
+        const startup = async () => {
+            if (isAuth) {
+                loadFilterOptions();
+                await checkIsScanning();
+            }
+        };
+        startup();
+    }, [isAuth]);
 
     const saveFileChanges = async () => {
         await saveVideoFileEdits();

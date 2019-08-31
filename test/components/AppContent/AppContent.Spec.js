@@ -29,6 +29,8 @@ const props = {
     isScanning: false
 };
 
+// TODO completely redo these tests
+
 describe('AppContent', () => {
     beforeEach(() => {
         checkIsScanning.mockReset();
