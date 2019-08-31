@@ -41,7 +41,7 @@ ReduxFormForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     className: PropTypes.string,
     initialValues: PropTypes.object,
-    children: PropTypes.element,
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
     destroyOnUnmount: PropTypes.bool
 };
 
