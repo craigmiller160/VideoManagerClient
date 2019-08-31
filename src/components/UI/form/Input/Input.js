@@ -80,7 +80,8 @@ const Field = createField(InputComponent);
 Field.propTypes = {
     type: PropTypes.string,
     label: PropTypes.string,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    validate: PropTypes.arrayOf(PropTypes.func)
 };
 
 export default Field;
