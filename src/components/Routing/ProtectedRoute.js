@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 import { Route } from 'react-router-dom';
 
-// TODO need unit tests for this
-
 const ProtectedRoute = (props) => {
     const {
         rules,
