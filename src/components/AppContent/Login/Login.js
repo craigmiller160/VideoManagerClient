@@ -4,7 +4,7 @@ import { Button, Col, Row } from 'reactstrap';
 import Form from 'components/UI/form/Form/Form';
 import Input from 'components/UI/form/Input/Input';
 import classes from './Login.scss';
-import { isRequired } from '../../../utils/validations';
+import { isRequired, isValidEmail } from '../../../utils/validations';
 import { login } from '../../../store/auth/auth.actions';
 import { loginFormHasErrors } from '../../../store/auth/auth.selectors';
 
@@ -33,7 +33,8 @@ const Login = () => {
                             name="username"
                             type="email"
                             validate={ [
-                                isRequired
+                                isRequired,
+                                isValidEmail
                             ] }
                         />
                         <Input
