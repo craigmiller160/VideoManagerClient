@@ -41,5 +41,6 @@ export const login = ({ userName, password }) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-    // TODO finish this
+    localStorage.removeItem(TOKEN_KEY);
+    dispatch(setIsAuth(false));
 };

@@ -1,4 +1,4 @@
-import { checkAuth, login, setIsAuth, setLoginLoading } from 'store/auth/auth.actions';
+import { checkAuth, login, setIsAuth, setLoginLoading, logout } from 'store/auth/auth.actions';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
@@ -86,6 +86,16 @@ describe('auth.actions', () => {
                     { type: setLoginLoading.toString(), payload: false }
                 ];
                 await store.dispatch(login({ userName: mockUserName, password: mockPassword }));
+                expect(store.getActions()).toEqual(expectedActions);
+            });
+        });
+
+        describe('logout', () => {
+            it('logs out', async () => {
+                const expectedActions = [
+                    { type: setIsAuth.toString(), payload: false }
+                ];
+                await store.dispatch(logout());
                 expect(store.getActions()).toEqual(expectedActions);
             });
         });
