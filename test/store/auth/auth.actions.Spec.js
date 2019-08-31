@@ -1,9 +1,15 @@
-import { checkAuth, setIsAuth } from 'store/auth/auth.actions';
+import { checkAuth, login, setIsAuth } from 'store/auth/auth.actions';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
-import { mockCheckAuthFail, mockCheckAuthSuccess } from '../../exclude/mock/mockApiConfig/authApi';
+import {
+    mockCheckAuthFail,
+    mockCheckAuthSuccess, mockLoginFail,
+    mockLoginSuccess, mockPassword,
+    mockUserName
+} from '../../exclude/mock/mockApiConfig/authApi';
+import { showErrorAlert } from 'store/alert/alert.actions';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -51,8 +57,23 @@ describe('auth.actions', () => {
         });
 
         describe('login', () => {
-            it('logs the user in', () => {
-                throw new Error('Finish this');
+            it('logs the user in', async () => {
+                mockLoginSuccess(mockApi);
+                const expectedActions = [
+                    { type: setIsAuth.toString(), payload: true }
+                ];
+                await store.dispatch(login({ userName: mockUserName, password: mockPassword }));
+                expect(store.getActions()).toEqual(expectedActions);
+            });
+
+            it('handles invalid login', async () => {
+                mockLoginFail(mockApi);
+                const expectedActions = [
+                    { type: setIsAuth.toString(), payload: false },
+                    { type: showErrorAlert.toString(), payload: 'Invalid login' }
+                ];
+                await store.dispatch(login({ userName: mockUserName, password: mockPassword }));
+                expect(store.getActions()).toEqual(expectedActions);
             });
         });
     });

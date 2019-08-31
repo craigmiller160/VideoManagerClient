@@ -25,6 +25,11 @@ export const login = ({ userName, password }) => async (dispatch) => {
     }
     catch (ex) {
         dispatch(setIsAuth(false));
-        dispatch(showErrorAlert('Invalid login'));
+        if (ex?.response?.status === 401) {
+            dispatch(showErrorAlert('Invalid login'));
+        }
+        else {
+            dispatch(showErrorAlert(ex.message));
+        }
     }
 };
