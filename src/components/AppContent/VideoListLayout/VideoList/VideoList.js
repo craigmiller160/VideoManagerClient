@@ -7,43 +7,8 @@ import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
 import { expandVideoFile, searchForVideos, setCurrentPage } from 'store/videoList/videoList.actions';
 import Spinner from 'components/UI/Spinner/Spinner';
-import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
 import { reset } from 'store/videoPlayer/videoPlayer.actions';
-
-const VideoListPagination = (props) => {
-    const {
-        totalItems,
-        itemsPerPage,
-        currentPage,
-        setCurrentPage,
-        searchForVideos
-    } = props;
-
-    if (totalItems === 0) {
-        return <div />;
-    }
-
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-    return (
-        <Pagination
-            totalPages={ totalPages }
-            currentPage={ currentPage }
-            align={ RIGHT_ALIGN }
-            onClick={ (value) => {
-                setCurrentPage(value);
-                searchForVideos();
-            } }
-        />
-    );
-};
-VideoListPagination.propTypes = {
-    totalItems: PropTypes.number,
-    itemsPerPage: PropTypes.number,
-    currentPage: PropTypes.number,
-    setCurrentPage: PropTypes.func,
-    searchForVideos: PropTypes.func
-};
+import VideoListPagination from './VideoListPagination';
 
 export const VideoList = (props) => {
     const {
