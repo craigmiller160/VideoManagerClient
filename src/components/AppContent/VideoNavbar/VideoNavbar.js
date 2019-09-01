@@ -6,12 +6,13 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useReactRouter from 'use-react-router';
 import { startFileScan } from '../../../store/scanning/scanning.actions';
+import { logout } from '../../../store/auth/auth.actions';
 
 const VideoNavbar = (props) => {
     const dispatch = useDispatch();
     const { history } = useReactRouter();
     const [ isOpen, setOpen ] = useState(false);
-    const { disabled, logout } = props;
+    const { disabled } = props;
     const pathname = history.location.pathname;
 
     return (
@@ -79,7 +80,7 @@ const VideoNavbar = (props) => {
                                     <BootLink
                                         id="logout"
                                         className={ classes['use-pointer'] }
-                                        onClick={ logout }
+                                        onClick={ () => dispatch(logout()) }
                                     >
                                         Logout
                                     </BootLink>
@@ -97,8 +98,7 @@ VideoNavbar.defaultProps = {
     disabled: false
 };
 VideoNavbar.propTypes = {
-    disabled: PropTypes.bool,
-    logout: PropTypes.func
+    disabled: PropTypes.bool
 };
 
 export default VideoNavbar;
