@@ -27,7 +27,8 @@
     "redux-starter-kit": "^0.4.3",
     "redux-thunk": "^2.3.0",
     "resolve": "1.8.1",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "use-react-router": "^1.0.7"
   },
   "scripts": {
     "start": "node scripts/start.js",
