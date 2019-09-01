@@ -3,9 +3,14 @@ import { AppContent } from 'components/AppContent/AppContent';
 import { MemoryRouter, withRouter } from 'react-router-dom';
 import { mount } from 'enzyme';
 
-jest.mock('components/UI/Alert/Alert', () => () => 'Alert');
-jest.mock('components/AppContent/VideoListLayout/VideoListLayout', () => () => 'VideoListLayout');
-jest.mock('components/AppContent/Scanning/Scanning', () => () => 'Scanning');
+jest.mock('components/UI/Alert/Alert', () => {
+    const Alert = () => <div />;
+    return Alert;
+});
+jest.mock('components/AppContent/AppRoutes', () => {
+    const AppRoutes = () => <div />;
+    return AppRoutes;
+});
 
 const createComponent = (props = {}, route = '/') => {
     const AppContentRouter = withRouter(AppContent);
@@ -36,6 +41,16 @@ describe('AppContent', () => {
         checkIsScanning.mockReset();
         showErrorAlert.mockReset();
     });
+
+    it('renders the initial component pre-effects', () => {
+        throw new Error('Finish this');
+    });
+
+    it('renders component after running effects', () => {
+        throw new Error('Finish this');
+    });
+
+    // TODO everything below here should be deleted
 
     it('renders successfully with VideoListComponent for root route', (done) => {
         const component = createComponent(props);
