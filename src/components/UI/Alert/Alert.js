@@ -12,8 +12,11 @@ const Alert = (props) => {
         rootClasses.push(classes.show);
     }
 
+    // This is here to override the behavior in AppContent to close the alert on click
+    const click = (event) => event.stopPropagation();
+
     return (
-        <div className={ rootClasses.join(' ') }>
+        <div className={ rootClasses.join(' ') } onClick={ click }>
             <button aria-label="close" onClick={ () => dispatch(hideAlert()) }>
                 <span aria-hidden="true">X</span>
             </button>

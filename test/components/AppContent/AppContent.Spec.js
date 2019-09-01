@@ -50,6 +50,10 @@ describe('AppContent', () => {
         throw new Error('Finish this');
     });
 
+    it('hides alert on click', () => {
+        throw new Error('Finish this');
+    });
+
     // TODO everything below here should be deleted
 
     it('renders successfully with VideoListComponent for root route', (done) => {

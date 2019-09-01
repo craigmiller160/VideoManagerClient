@@ -11,6 +11,7 @@ import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
 import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
 import { checkAuth, logout } from '../../store/auth/auth.actions';
+import { hideAlert } from '../../store/alert/alert.actions';
 
 export const AppContent = () => {
     const [ isStarted, setStarted ] = useState(false);
@@ -44,8 +45,10 @@ export const AppContent = () => {
         history.push('/');
     };
 
+    const hideAlertOnClick = () => dispatch(hideAlert());
+
     return (
-        <div className={ classes.AppContent }>
+        <div className={ classes.AppContent } onClick={ hideAlertOnClick }>
             <VideoNavbar
                 disabled={ isScanning || !isAuth }
                 logout={ logout }
