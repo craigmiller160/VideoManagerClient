@@ -21,7 +21,6 @@ export const AppContent = () => {
     const selectedVideo = useSelector(getSelectedVideoWithFilters, shallowEqual);
     const isAuth = useSelector((state) => state.auth.isAuth, shallowEqual);
 
-
     useEffect(() => {
         const doCheckAuth = async () => {
             await dispatch(checkAuth());
