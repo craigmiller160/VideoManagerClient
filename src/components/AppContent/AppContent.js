@@ -7,7 +7,6 @@ import { checkIsScanning } from 'store/scanning/scanning.actions';
 import { bindActionCreators } from 'redux';
 import { connect, useDispatch } from 'react-redux';
 import useReactRouter from 'use-react-router';
-import { hideAlert, showErrorAlert } from 'store/alert/alert.actions';
 import { getSelectedVideoWithFilters } from 'store/videoList/videoList.selectors';
 import classes from './AppContent.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
@@ -16,10 +15,6 @@ import AppRoutes from './AppRoutes';
 import { checkAuth, logout } from '../../store/auth/auth.actions';
 
 // const mapDispatchToProps = (dispatch) => bindActionCreators({
-//     showErrorAlert,
-//     loadFilterOptions,
-//     hideAlert,
-//     saveVideoFileEdits,
 //     checkAuth,
 //     logout
 // }, dispatch);
@@ -29,15 +24,12 @@ export const AppContent = (props) => {
     const { history } = useReactRouter();
     const dispatch = useDispatch();
     const {
-        saveVideoFileEdits,
         isScanning,
         selectedVideo,
         alert,
-        hideAlert,
         isAuth,
         logout,
-        checkAuth,
-        loadFilterOptions
+        checkAuth
     } = props;
 
     useEffect(() => {
@@ -51,7 +43,7 @@ export const AppContent = (props) => {
     useEffect(() => {
         const startup = async () => {
             if (isAuth) {
-                loadFilterOptions();
+                dispatch(loadFilterOptions());
                 await dispatch(checkIsScanning());
             }
         };
@@ -59,7 +51,7 @@ export const AppContent = (props) => {
     }, [isAuth]);
 
     const saveFileChanges = async () => {
-        await saveVideoFileEdits();
+        await dispatch(saveVideoFileEdits());
         history.push('/');
     };
 
@@ -76,7 +68,6 @@ export const AppContent = (props) => {
                         <Col xs={{ size: 8, offset: 2 }}>
                             <Alert
                                 alert={ alert }
-                                hideAlert={ hideAlert }
                             />
                         </Col>
                     </Row>
@@ -96,10 +87,6 @@ AppContent.propTypes = {
     isScanning: PropTypes.bool,
     alert: PropTypes.object,
     selectedVideo: PropTypes.object,
-    showErrorAlert: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
-    loadFilterOptions: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
-    hideAlert: PropTypes.func,
-    saveVideoFileEdits: PropTypes.func,
     checkAuth: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
     isAuth: PropTypes.bool,
     logout: PropTypes.func
@@ -113,10 +100,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    showErrorAlert,
-    loadFilterOptions,
-    hideAlert,
-    saveVideoFileEdits,
     checkAuth,
     logout
 }, dispatch);
