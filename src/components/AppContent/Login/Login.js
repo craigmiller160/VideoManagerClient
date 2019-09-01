@@ -13,7 +13,7 @@ export const LOGIN_FORM_NAME = 'LoginForm';
 
 const Login = () => {
     const dispatch = useDispatch();
-    const loginFormErrors = useSelector(loginFormHasErrors);
+    const loginFormErrors = useSelector(loginFormHasErrors, shallowEqual);
     const loginLoading = useSelector((state) => state.auth.loginLoading, shallowEqual);
 
     return (
