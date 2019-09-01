@@ -11,7 +11,6 @@ import ProtectedRoute from '../Routing/ProtectedRoute';
 
 const AppRoutes = (props) => {
     const {
-        checkIsScanning,
         selectedVideo,
         saveFileChanges,
         isScanning,
@@ -23,9 +22,6 @@ const AppRoutes = (props) => {
             <ProtectedRoute
                 path="/scanning"
                 component={ Scanning }
-                componentProps={ {
-                    checkIsScanning
-                } }
                 rules={ [
                     { allow: () => isAuth, redirect: '/login' },
                     { allow: () => isScanning, redirect: '/' }
@@ -85,7 +81,6 @@ const AppRoutes = (props) => {
     );
 };
 AppRoutes.propTypes = {
-    checkIsScanning: PropTypes.func,
     selectedVideo: PropTypes.object,
     saveFileChanges: PropTypes.func,
     isScanning: PropTypes.bool,

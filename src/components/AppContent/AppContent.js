@@ -5,7 +5,7 @@ import { Col, Container, Row } from 'reactstrap';
 import Alert from '../UI/Alert/Alert';
 import { checkIsScanning, startFileScan } from 'store/scanning/scanning.actions';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import useReactRouter from 'use-react-router';
 import { hideAlert, showErrorAlert } from 'store/alert/alert.actions';
 import { getSelectedVideoWithFilters } from 'store/videoList/videoList.selectors';
@@ -18,8 +18,8 @@ import { checkAuth, logout } from '../../store/auth/auth.actions';
 export const AppContent = (props) => {
     const [ isStarted, setStarted ] = useState(false);
     const { history } = useReactRouter();
+    const dispatch = useDispatch();
     const {
-        checkIsScanning,
         saveVideoFileEdits,
         isScanning,
         selectedVideo,
@@ -44,7 +44,7 @@ export const AppContent = (props) => {
         const startup = async () => {
             if (isAuth) {
                 loadFilterOptions();
-                await checkIsScanning();
+                await dispatch(checkIsScanning());
             }
         };
         startup();
@@ -75,7 +75,6 @@ export const AppContent = (props) => {
                     </Row>
                     <AppRoutes
                         saveFileChanges={ saveFileChanges }
-                        checkIsScanning={ checkIsScanning }
                         selectedVideo={ selectedVideo }
                         isScanning={ isScanning }
                         isAuth={ isAuth }
@@ -90,7 +89,6 @@ AppContent.propTypes = {
     isScanning: PropTypes.bool,
     alert: PropTypes.object,
     selectedVideo: PropTypes.object,
-    checkIsScanning: PropTypes.func,
     startFileScan: PropTypes.func,
     showErrorAlert: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
     loadFilterOptions: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
@@ -109,7 +107,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    checkIsScanning,
     startFileScan,
     showErrorAlert,
     loadFilterOptions,
