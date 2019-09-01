@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
 import { Col, Container, Row } from 'reactstrap';
 import Alert from '../UI/Alert/Alert';
 import { checkIsScanning } from 'store/scanning/scanning.actions';
-import { connect, useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useReactRouter from 'use-react-router';
 import { getSelectedVideoWithFilters } from 'store/videoList/videoList.selectors';
 import classes from './AppContent.scss';
@@ -13,16 +12,15 @@ import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
 import { checkAuth, logout } from '../../store/auth/auth.actions';
 
-export const AppContent = (props) => {
+export const AppContent = () => {
     const [ isStarted, setStarted ] = useState(false);
     const { history } = useReactRouter();
     const dispatch = useDispatch();
-    const {
-        isScanning,
-        selectedVideo,
-        alert,
-        isAuth
-    } = props;
+    const isScanning = useSelector((state) => state.scanning.isScanning, shallowEqual);
+    const alert = useSelector((state) => state.alert, shallowEqual);
+    const selectedVideo = useSelector(getSelectedVideoWithFilters, shallowEqual);
+    const isAuth = useSelector((state) => state.auth.isAuth, shallowEqual);
+
 
     useEffect(() => {
         const doCheckAuth = async () => {
@@ -75,20 +73,4 @@ export const AppContent = (props) => {
     );
 };
 
-AppContent.propTypes = {
-    isScanning: PropTypes.bool,
-    alert: PropTypes.object,
-    selectedVideo: PropTypes.object,
-    isAuth: PropTypes.bool
-};
-
-const mapStateToProps = (state) => ({
-    isScanning: state.scanning.isScanning,
-    alert: state.alert,
-    selectedVideo: getSelectedVideoWithFilters(state),
-    isAuth: state.auth.isAuth
-});
-
-const AppContentWrapped = connect(mapStateToProps, null)(AppContent);
-AppContentWrapped.propTypes = {};
-export default AppContentWrapped;
+export default AppContent;
