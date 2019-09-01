@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink as BootLink } from 'reactstrap';
 import * as classes from './VideoNavbar.scss'
 import { NavLink } from 'react-router-dom';
-import { withRouter } from 'react-router';
+import { useDispatch } from 'react-redux';
+import useReactRouter from 'use-react-router';
+import { startFileScan } from '../../../store/scanning/scanning.actions';
 
 const VideoNavbar = (props) => {
+    const dispatch = useDispatch();
+    const { history } = useReactRouter();
     const [ isOpen, setOpen ] = useState(false);
-    const { disabled, history, startFileScan, logout } = props;
+    const { disabled, logout } = props;
     const pathname = history.location.pathname;
 
     return (
@@ -66,7 +70,7 @@ const VideoNavbar = (props) => {
                                     <BootLink
                                         id="scanDirectory"
                                         className={ classes['use-pointer'] }
-                                        onClick={ startFileScan }
+                                        onClick={ () => dispatch(startFileScan()) }
                                     >
                                         Scan Directory
                                     </BootLink>
@@ -92,21 +96,9 @@ const VideoNavbar = (props) => {
 VideoNavbar.defaultProps = {
     disabled: false
 };
-
-const propTypes = {
-    startFileScan: PropTypes.func.isRequired,
+VideoNavbar.propTypes = {
     disabled: PropTypes.bool,
-    history: PropTypes.object,
     logout: PropTypes.func
 };
 
-VideoNavbar.propTypes = {
-    ...propTypes
-};
-
-const VideoNavbarRouter = withRouter(VideoNavbar);
-VideoNavbarRouter.propTypes = {
-    ...propTypes,
-    history: PropTypes.object
-};
-export default VideoNavbarRouter;
+export default VideoNavbar;

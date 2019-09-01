@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
 import { Col, Container, Row } from 'reactstrap';
 import Alert from '../UI/Alert/Alert';
-import { checkIsScanning, startFileScan } from 'store/scanning/scanning.actions';
+import { checkIsScanning } from 'store/scanning/scanning.actions';
 import { bindActionCreators } from 'redux';
 import { connect, useDispatch } from 'react-redux';
 import useReactRouter from 'use-react-router';
@@ -15,6 +15,15 @@ import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
 import { checkAuth, logout } from '../../store/auth/auth.actions';
 
+// const mapDispatchToProps = (dispatch) => bindActionCreators({
+//     showErrorAlert,
+//     loadFilterOptions,
+//     hideAlert,
+//     saveVideoFileEdits,
+//     checkAuth,
+//     logout
+// }, dispatch);
+
 export const AppContent = (props) => {
     const [ isStarted, setStarted ] = useState(false);
     const { history } = useReactRouter();
@@ -23,7 +32,6 @@ export const AppContent = (props) => {
         saveVideoFileEdits,
         isScanning,
         selectedVideo,
-        startFileScan,
         alert,
         hideAlert,
         isAuth,
@@ -58,7 +66,6 @@ export const AppContent = (props) => {
     return (
         <div className={ classes.AppContent }>
             <VideoNavbar
-                startFileScan={ startFileScan }
                 disabled={ isScanning || !isAuth }
                 logout={ logout }
             />
@@ -89,7 +96,6 @@ AppContent.propTypes = {
     isScanning: PropTypes.bool,
     alert: PropTypes.object,
     selectedVideo: PropTypes.object,
-    startFileScan: PropTypes.func,
     showErrorAlert: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
     loadFilterOptions: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
     hideAlert: PropTypes.func,
@@ -107,7 +113,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    startFileScan,
     showErrorAlert,
     loadFilterOptions,
     hideAlert,
