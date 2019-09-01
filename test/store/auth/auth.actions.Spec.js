@@ -1,15 +1,24 @@
-import { checkAuth, login, setIsAuth, setLoginLoading, logout } from 'store/auth/auth.actions';
+import {
+    checkAuth,
+    login,
+    setIsAuth,
+    setLoginLoading,
+    logout,
+    setCsrfToken,
+    handleCsrfToken
+} from 'store/auth/auth.actions';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
 import {
     mockCheckAuthFail,
-    mockCheckAuthSuccess, mockLoginFail,
+    mockCheckAuthSuccess, mockCsrfToken, mockLoginFail,
     mockLoginSuccess, mockPassword,
     mockUserName
 } from '../../exclude/mock/mockApiConfig/authApi';
 import { showErrorAlert } from 'store/alert/alert.actions';
+import { CSRF_TOKEN_KEY } from '../../../src/utils/securityConstants';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -43,24 +52,39 @@ describe('auth.actions', () => {
             store = mockStore({});
         });
 
+        describe('handleCsrfToken', () => {
+            it('sets token', () => {
+                const expectedActions = [
+                    { type: setCsrfToken.toString(), payload: mockCsrfToken }
+                ];
+                const response = {
+                    headers: {
+                        [CSRF_TOKEN_KEY]: mockCsrfToken
+                    }
+                };
+                store.dispatch(handleCsrfToken(response));
+                expect(store.getActions()).toEqual(expectedActions);
+            });
+        });
+
         describe('checkAuth', () => {
             it('checkAuth is authenticated', async () => {
                 mockCheckAuthSuccess(mockApi);
                 const expectedActions = [
+                    { type: setCsrfToken.toString(), payload: mockCsrfToken },
                     { type: setIsAuth.toString(), payload: true }
                 ];
-                const result = await store.dispatch(checkAuth());
-                expect(result).toEqual(true);
+                await store.dispatch(checkAuth());
                 expect(store.getActions()).toEqual(expectedActions);
             });
 
             it('checkAuth is not authenticated', async () => {
                 mockCheckAuthFail(mockApi);
                 const expectedActions = [
+                    { type: setCsrfToken.toString(), payload: mockCsrfToken },
                     { type: setIsAuth.toString(), payload: false }
                 ];
-                const result = await store.dispatch(checkAuth());
-                expect(result).toEqual(false);
+                await store.dispatch(checkAuth());
                 expect(store.getActions()).toEqual(expectedActions);
             });
         });

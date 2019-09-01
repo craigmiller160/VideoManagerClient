@@ -1,15 +1,21 @@
+import { CSRF_TOKEN_KEY } from '../../../../src/utils/securityConstants';
 
 export const mockTokenResponse = { token: 'ABCDEFG' };
 export const mockUserName = 'userName';
 export const mockPassword = 'password';
+export const mockCsrfToken = 'HIJKLMONP';
 
 export const mockCheckAuthSuccess = (mockApi) =>
     mockApi.onGet('/auth/check')
-        .reply(204);
+        .reply(204, null, {
+            [CSRF_TOKEN_KEY]: mockCsrfToken
+        });
 
 export const mockCheckAuthFail = (mockApi) =>
     mockApi.onGet('/auth/check')
-        .reply(401);
+        .reply(401, null, {
+            [CSRF_TOKEN_KEY]: mockCsrfToken
+        });
 
 export const mockLoginSuccess = (mockApi) =>
     mockApi.onPost('/auth/login', { userName: mockUserName, password: mockPassword })
