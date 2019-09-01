@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
 import { Col, Container, Row } from 'reactstrap';
 import Alert from '../UI/Alert/Alert';
-import { withRouter } from 'react-router';
 import { checkIsScanning, startFileScan } from 'store/scanning/scanning.actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import useReactRouter from 'use-react-router';
 import { hideAlert, showErrorAlert } from 'store/alert/alert.actions';
 import { getSelectedVideoWithFilters } from 'store/videoList/videoList.selectors';
 import classes from './AppContent.scss';
@@ -17,10 +17,10 @@ import { checkAuth, logout } from '../../store/auth/auth.actions';
 
 export const AppContent = (props) => {
     const [ isStarted, setStarted ] = useState(false);
+    const { history } = useReactRouter();
     const {
         checkIsScanning,
         saveVideoFileEdits,
-        history,
         isScanning,
         selectedVideo,
         startFileScan,
@@ -96,7 +96,6 @@ AppContent.propTypes = {
     loadFilterOptions: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
     hideAlert: PropTypes.func,
     saveVideoFileEdits: PropTypes.func,
-    history: PropTypes.object,
     checkAuth: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
     isAuth: PropTypes.bool,
     logout: PropTypes.func
@@ -120,6 +119,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     logout
 }, dispatch);
 
-const AppContentWrapped = withRouter(connect(mapStateToProps, mapDispatchToProps)(AppContent));
+const AppContentWrapped = connect(mapStateToProps, mapDispatchToProps)(AppContent);
 AppContentWrapped.propTypes = {};
 export default AppContentWrapped;
