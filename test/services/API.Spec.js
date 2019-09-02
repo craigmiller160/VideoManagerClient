@@ -1,6 +1,7 @@
 import { addTokenInterceptor } from '../../src/services/API';
 import { CSRF_TOKEN_KEY } from 'utils/securityConstants';
 import { mockCsrfToken } from '../exclude/mock/mockApiConfig/authApi';
+import store from 'store/store'; // eslint-disable-line import/first
 
 jest.mock('store/store', () => {
     let csrfToken = '';
@@ -22,13 +23,11 @@ jest.mock('store/store', () => {
     }
 });
 
-import store from 'store/store'; // eslint-disable-line import/first
-
 const contentType = 'Content-Type';
 const applicationJson = 'application/json';
 
 describe('API', () => {
-    describe('addTokenInterceptor', () => {
+    describe('addCsrfTokenInterceptor', () => {
         const config = {
             method: 'post',
             headers: {
@@ -67,6 +66,20 @@ describe('API', () => {
                     ...config.headers
                 }
             });
+        });
+    });
+
+    describe('handle401Interceptor', () => {
+        it('does refresh for 401', () => {
+            throw new Error('Finish this');
+        });
+
+        it('skips refresh on 401 from refresh uri', () => {
+            throw new Error('Finish this');
+        });
+
+        it('has error during refresh', () => {
+            throw new Error('Finish this');
         });
     });
 });
