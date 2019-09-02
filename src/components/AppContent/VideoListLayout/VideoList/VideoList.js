@@ -33,7 +33,6 @@ export const VideoList = (props) => {
             currentPage={ currentPage }
             itemsPerPage={ itemsPerPage }
             setCurrentPage={ setCurrentPage }
-            searchForVideos={ searchForVideos }
             totalItems={ totalItems }
         />
     ));

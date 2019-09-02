@@ -2,14 +2,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
 
-
 const VideoListPagination = (props) => {
     const {
         totalItems,
         itemsPerPage,
         currentPage,
-        setCurrentPage,
-        searchForVideos
+        setCurrentPage
     } = props;
 
     if (totalItems === 0) {
@@ -25,7 +23,6 @@ const VideoListPagination = (props) => {
             align={ RIGHT_ALIGN }
             onClick={ (value) => {
                 setCurrentPage(value);
-                searchForVideos();
             } }
         />
     );
@@ -34,8 +31,7 @@ VideoListPagination.propTypes = {
     totalItems: PropTypes.number,
     itemsPerPage: PropTypes.number,
     currentPage: PropTypes.number,
-    setCurrentPage: PropTypes.func,
-    searchForVideos: PropTypes.func
+    setCurrentPage: PropTypes.func
 };
 
 export default VideoListPagination;
