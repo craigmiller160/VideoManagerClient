@@ -1,11 +1,11 @@
 import {
     checkAuth,
+    handleCsrfToken,
     login,
-    setIsAuth,
-    setLoginLoading,
     logout,
     setCsrfToken,
-    handleCsrfToken
+    setIsAuth,
+    setLoginLoading
 } from 'store/auth/auth.actions';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -13,8 +13,12 @@ import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
 import {
     mockCheckAuthFail,
-    mockCheckAuthSuccess, mockCsrfToken, mockLoginFail,
-    mockLoginSuccess, mockPassword,
+    mockCheckAuthSuccess,
+    mockCsrfToken,
+    mockLoginFail,
+    mockLoginSuccess,
+    mockLogout,
+    mockPassword,
     mockUserName
 } from '../../exclude/mock/mockApiConfig/authApi';
 import { showErrorAlert } from 'store/alert/alert.actions';
@@ -116,6 +120,7 @@ describe('auth.actions', () => {
 
         describe('logout', () => {
             it('logs out', async () => {
+                mockLogout(mockApi);
                 const expectedActions = [
                     { type: setIsAuth.toString(), payload: false }
                 ];

@@ -1,7 +1,8 @@
 import { createAction } from 'redux-starter-kit';
 import * as AuthService from 'services/AuthApiService';
-import { CSRF_TOKEN_KEY, TOKEN_KEY } from '../../utils/securityConstants';
+import { CSRF_TOKEN_KEY } from '../../utils/securityConstants';
 import { showErrorAlert } from '../alert/alert.actions';
+import CategoryApiService from '../../services/CategoryApiService';
 
 export const setIsAuth = createAction('auth/setIsAuth');
 export const setLoginLoading = createAction('auth/setLoginLoading');
@@ -27,9 +28,9 @@ export const checkAuth = () => async (dispatch) => {
 export const login = ({ userName, password }) => async (dispatch) => {
     dispatch(setLoginLoading(true));
     try {
-        const result = await AuthService.login(userName, password);
-        localStorage.setItem(TOKEN_KEY, result.data.token);
-        dispatch(setIsAuth(true));
+        await AuthService.login(userName, password);
+        await CategoryApiService.getAllCategories(); // This is only here because of the weird CSRF token changing behavior of Spring
+        await dispatch(checkAuth());
     }
     catch (ex) {
         dispatch(setIsAuth(false));
@@ -46,6 +47,6 @@ export const login = ({ userName, password }) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-    localStorage.removeItem(TOKEN_KEY);
+    await AuthService.logout();
     dispatch(setIsAuth(false));
 };
