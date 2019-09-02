@@ -1,14 +1,13 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentPage } from '../../../../store/videoList/videoList.actions';
+import shallowEqual from 'react-redux/es/utils/shallowEqual';
 
-const VideoListPagination = (props) => {
-    const {
-        totalItems,
-        itemsPerPage,
-        currentPage,
-        setCurrentPage
-    } = props;
+const VideoListPagination = () => {
+    const dispatch = useDispatch();
+    const { totalItems, itemsPerPage } = useSelector((state) => state.videoList.pagination, shallowEqual);
+    const currentPage = useSelector((state) => state.videoList.currentPage, shallowEqual);
 
     if (totalItems === 0) {
         return <div />;
@@ -21,17 +20,9 @@ const VideoListPagination = (props) => {
             totalPages={ totalPages }
             currentPage={ currentPage }
             align={ RIGHT_ALIGN }
-            onClick={ (value) => {
-                setCurrentPage(value);
-            } }
+            onClick={ (value) => dispatch(setCurrentPage(value)) }
         />
     );
-};
-VideoListPagination.propTypes = {
-    totalItems: PropTypes.number,
-    itemsPerPage: PropTypes.number,
-    currentPage: PropTypes.number,
-    setCurrentPage: PropTypes.func
 };
 
 export default VideoListPagination;

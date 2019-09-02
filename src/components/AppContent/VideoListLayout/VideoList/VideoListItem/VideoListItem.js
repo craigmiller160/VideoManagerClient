@@ -12,8 +12,12 @@ import {
 import { Link } from 'react-router-dom';
 import VideoDate from 'model/VideoDate';
 import WordWrapCol from 'components/UI/WordWrapCol/WordWrapCol';
+import { useDispatch } from 'react-redux';
+import { reset as videoPlayerReset } from 'store/videoPlayer/videoPlayer.actions';
+import { expandVideoFile } from '../../../../../store/videoList/videoList.actions';
 
 const VideoListItem = (props) => {
+    const dispatch = useDispatch();
     const {
         videoFile: {
             fileId,
@@ -27,9 +31,7 @@ const VideoListItem = (props) => {
             viewCount,
             lastViewed,
             fileAdded
-        },
-        expandVideoFile,
-        videoPlayerReset
+        }
     } = props;
 
     const leftColSize = 6;
@@ -39,12 +41,12 @@ const VideoListItem = (props) => {
     const formattedFileAdded = fileAdded ? new VideoDate(fileAdded).formatDateTime() : '';
 
     const playVideoClick = async () => {
-        await videoPlayerReset();
+        await dispatch(videoPlayerReset());
         window.open(`/play/${fileId}`, '_blank');
     };
 
     return (
-        <div className={ rootClasses } onClick={ () => expandVideoFile(fileId) }>
+        <div className={ rootClasses } onClick={ () => dispatch(expandVideoFile(fileId)) }>
             <ListGroupItem>
                 <Row>
                     <WordWrapCol xs={ leftColSize }>
@@ -120,9 +122,7 @@ const VideoListItem = (props) => {
 };
 
 VideoListItem.propTypes = {
-    videoFile: PropTypes.object.isRequired,
-    expandVideoFile: PropTypes.func.isRequired,
-    videoPlayerReset: PropTypes.func.isRequired
+    videoFile: PropTypes.object.isRequired
 };
 
 export default VideoListItem;
