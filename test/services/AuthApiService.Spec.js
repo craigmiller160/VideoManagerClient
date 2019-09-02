@@ -1,9 +1,10 @@
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
-import { checkAuth, login } from 'services/AuthApiService';
+import { checkAuth, login, logout } from 'services/AuthApiService';
 import {
     mockCheckAuthSuccess,
     mockLoginSuccess,
+    mockLogout,
     mockPassword,
     mockTokenResponse,
     mockUserName
@@ -16,6 +17,7 @@ describe('AuthApiService', () => {
         mockApi.reset();
         mockCheckAuthSuccess(mockApi);
         mockLoginSuccess(mockApi);
+        mockLogout(mockApi);
     });
 
     it('login', async () => {
@@ -28,6 +30,11 @@ describe('AuthApiService', () => {
 
     it('checkAuth', async () => {
         const res = await checkAuth();
+        expect(res.status).toEqual(204);
+    });
+
+    it('logout', async () => {
+        const res = await logout();
         expect(res.status).toEqual(204);
     });
 });

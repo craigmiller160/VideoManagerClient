@@ -24,3 +24,7 @@ export const mockLoginSuccess = (mockApi) =>
 export const mockLoginFail = (mockApi) =>
     mockApi.onPost('/auth/login', { userName: mockUserName, password: mockPassword })
         .reply(401);
+
+export const mockLogout = (mockApi) =>
+    mockApi.onGet('/auth/logout')
+        .reply(204);
