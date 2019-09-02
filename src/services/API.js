@@ -28,7 +28,10 @@ export const handle401Interceptor = async (error) => { // TODO create unit tests
         console.log('Doing refresh'); // TODO delete this
         await instance.get('/auth/refresh');
         console.log('Refresh successful'); // TODO delete this
-        return instance.request(error.config);
+        return instance.request({
+            ...error.config,
+            url: error.config.url.replace('/api', '')
+        });
     }
     // TODO probably need to dispatch redux action if 401 error to bump back to login page
     throw error;
