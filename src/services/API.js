@@ -1,19 +1,21 @@
 import axios from 'axios';
-import { TOKEN_KEY } from '../utils/securityConstants';
+import store from '../store/store';
+import { CSRF_TOKEN_KEY } from '../utils/securityConstants';
 
 const instance = axios.create({
     baseURL: '/api',
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    withCredentials: true
 });
 
 export const addTokenInterceptor = (config) => {
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (token) {
+    const { csrfToken } = store.getState().auth;
+    if (csrfToken && config.method !== 'get') {
         config.headers = {
             ...config.headers,
-            Authorization: `Bearer ${token}`
+            [CSRF_TOKEN_KEY]: csrfToken
         };
     }
     return config;
