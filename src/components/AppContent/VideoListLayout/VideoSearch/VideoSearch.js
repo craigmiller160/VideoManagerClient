@@ -1,8 +1,6 @@
 import React  from 'react';
-import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { reset } from 'redux-form';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { reset as resetForm } from 'redux-form';
 import { Row, Col, Button } from 'reactstrap';
 import Input from '../../../UI/form/Input/Input';
 import Select from '../../../UI/form/Select/Select';
@@ -13,22 +11,18 @@ import { SORT_BY_OPTIONS, SORT_DIR_OPTIONS } from './VideoSearch.options';
 
 export const FORM_NAME = 'video-search';
 
-export const VideoSearch = (props) => {
-    const {
-        filters: { categories, series, stars },
-        searchForVideos,
-        resetForm,
-        setCurrentPage
-    } = props;
+const VideoSearch = () => {
+    const dispatch = useDispatch();
+    const { categories, series, stars } = useSelector((state) => state.videoSearch.filters, shallowEqual);
 
     const doResetForm = () => {
-        resetForm(FORM_NAME);
-        searchForVideos();
+        dispatch(resetForm(FORM_NAME));
+        dispatch(searchForVideos());
     };
 
     const doSearch = () => {
-        setCurrentPage(0);
-        searchForVideos();
+        dispatch(setCurrentPage(0));
+        dispatch(searchForVideos());
     };
 
     const initialValues = {
@@ -116,27 +110,4 @@ export const VideoSearch = (props) => {
     );
 };
 
-VideoSearch.propTypes = {
-    filters: PropTypes.shape({
-        categories: PropTypes.array,
-        series: PropTypes.array,
-        stars: PropTypes.array
-    }),
-    searchForVideos: PropTypes.func,
-    resetForm: PropTypes.func,
-    setCurrentPage: PropTypes.func
-};
-
-const mapStateToProps = (state) => ({
-    filters: state.videoSearch.filters
-});
-
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-    searchForVideos,
-    setCurrentPage,
-    resetForm: reset
-}, dispatch);
-
-const VideoSearchConnected = connect(mapStateToProps, mapDispatchToProps)(VideoSearch);
-VideoSearchConnected.propTypes = {};
-export default VideoSearchConnected;
+export default VideoSearch;
