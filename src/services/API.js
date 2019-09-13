@@ -22,22 +22,21 @@ export const addCsrfTokenInterceptor = (config) => {
     return config;
 };
 
-/* eslint-disable */ // TODO delete this
 export const handle401Interceptor = async (error) => { // TODO create unit tests
     if (error.response.status === 401 && error.config.url !== '/api/auth/refresh') {
-        console.log('Doing refresh'); // TODO delete this
-        await instance.get('/auth/refresh');
-        console.log('Refresh successful'); // TODO delete this
-        return instance.request({
-            ...error.config,
-            url: error.config.url.replace('/api', '')
-        });
+        try {
+            await instance.get('/auth/refresh');
+            return instance.request({
+                ...error.config,
+                url: error.config.url.replace('/api', '')
+            });
+        } catch { } // eslint-disable-line no-empty
     }
     // TODO probably need to dispatch redux action if 401 error to bump back to login page
     throw error;
 };
 
 instance.interceptors.request.use(addCsrfTokenInterceptor);
-// instance.interceptors.response.use((response) => response, handle401Interceptor);
+instance.interceptors.response.use((response) => response, handle401Interceptor);
 
 export default instance;
