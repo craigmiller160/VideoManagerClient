@@ -38,6 +38,6 @@ export const handle401Interceptor = async (error) => { // TODO create unit tests
 };
 
 instance.interceptors.request.use(addCsrfTokenInterceptor);
-instance.interceptors.response.use((response) => response, handle401Interceptor);
+// instance.interceptors.response.use((response) => response, handle401Interceptor);
 
 export default instance;
