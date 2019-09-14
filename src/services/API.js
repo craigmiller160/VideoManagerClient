@@ -12,6 +12,9 @@ const instance = axios.create({
     withCredentials: true
 });
 
+const noAuthStatuses = [401, 403];
+const refreshUri = '/api/auth/refresh';
+
 // TODO make sure unit tests are up to date
 export const addCsrfTokenInterceptor = (config) => {
     const { csrfToken } = store.getState().auth;
@@ -25,7 +28,7 @@ export const addCsrfTokenInterceptor = (config) => {
 };
 
 export const handle401Interceptor = async (error) => { // TODO create unit tests
-    if (error.response.status === 401 && error.config.url !== '/api/auth/refresh') {
+    if (noAuthStatuses.includes(error.response.status) && error.config.url !== refreshUri) {
         try {
             await instance.get('/auth/refresh');
             return instance.request({
@@ -35,8 +38,8 @@ export const handle401Interceptor = async (error) => { // TODO create unit tests
         } catch (ex) {
             error.suppresed = ex;
         }
+        store.dispatch(setIsAuth(false));
     }
-    store.dispatch(setIsAuth(false));
     throw error;
 };
 
