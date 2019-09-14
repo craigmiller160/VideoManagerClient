@@ -15,7 +15,6 @@ const instance = axios.create({
 const noAuthStatuses = [401, 403];
 const refreshUri = '/api/auth/refresh';
 
-// TODO make sure unit tests are up to date
 export const addCsrfTokenInterceptor = (config) => {
     const { csrfToken } = store.getState().auth;
     if (csrfToken && config.method !== 'get') {

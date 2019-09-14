@@ -1,4 +1,4 @@
-import { addTokenInterceptor } from '../../src/services/API';
+import { addCsrfTokenInterceptor } from '../../src/services/API';
 import { CSRF_TOKEN_KEY } from 'utils/securityConstants';
 import { mockCsrfToken } from '../exclude/mock/mockApiConfig/authApi';
 import store from 'store/store'; // eslint-disable-line import/first
@@ -41,7 +41,7 @@ describe('API', () => {
 
         it('adds token if exists', () => {
             store.setCsrfToken(mockCsrfToken);
-            const result = addTokenInterceptor(config);
+            const result = addCsrfTokenInterceptor(config);
             expect(result).toEqual({
                 ...config,
                 headers: {
@@ -52,13 +52,13 @@ describe('API', () => {
         });
 
         it('does not add token if not exists', () => {
-            const result = addTokenInterceptor(config);
+            const result = addCsrfTokenInterceptor(config);
             expect(result).toEqual(config);
         });
 
         it('does not add token if method is get', () => {
             store.setCsrfToken(mockCsrfToken);
-            const result = addTokenInterceptor({ ...config, method: 'get' });
+            const result = addCsrfTokenInterceptor({ ...config, method: 'get' });
             expect(result).toEqual({
                 ...config,
                 method: 'get',
