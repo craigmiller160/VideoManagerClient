@@ -126,6 +126,12 @@ describe('VideoList', () => {
             expect(component.find('ListGroup')).toHaveLength(1);
             expect(component.find('Spinner')).toHaveLength(0);
             expect(component.find('VideoListItem')).toHaveLength(2);
+            expect(component.find('VideoListItem').at(0).props()).toEqual(expect.objectContaining({
+                videoFile: videoList[0]
+            }));
+            expect(component.find('VideoListItem').at(1).props()).toEqual(expect.objectContaining({
+                videoFile: videoList[1]
+            }));
         });
     });
 });
