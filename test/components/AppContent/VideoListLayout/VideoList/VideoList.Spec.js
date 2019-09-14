@@ -86,8 +86,6 @@ describe('VideoList', () => {
         });
 
         it('runs on current page change', () => {
-            const [,store] = doMount();
-            console.log(store); // TODO delete this
             throw new Error('Finish this');
         });
     });
