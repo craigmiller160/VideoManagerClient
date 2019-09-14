@@ -14,9 +14,9 @@ jest.mock('components/UI/Spinner/Spinner', () => {
     const Spinner = () => <div />;
     return Spinner;
 });
-jest.mock('', () => {
-    const Pagination = () => <div />;
-    return Pagination;
+jest.mock('components/AppContent/VideoListLayout/VideoList/VideoListPagination', () => {
+    const VideoListPagination = () => <div />;
+    return VideoListPagination;
 });
 
 jest.mock('store/videoList/videoList.actions', () => ({
@@ -51,7 +51,9 @@ const mockStore = configureMockStore([thunk]);
 const defaultState = {
     videoList: {
         currentPage: 0,
-        videoList: []
+        videoList: [],
+        totalItems: 36,
+        itemsPerPage: 10
     },
     videoSearch: {
         searching: false
@@ -84,6 +86,8 @@ describe('VideoList', () => {
         });
 
         it('runs on current page change', () => {
+            const [,store] = doMount();
+            console.log(store); // TODO delete this
             throw new Error('Finish this');
         });
     });
@@ -101,6 +105,7 @@ describe('VideoList', () => {
             const [component] = doMount({
                 ...defaultState,
                 videoSearch: {
+                    ...defaultState.videoSearch,
                     searching: true
                 }
             });
@@ -111,7 +116,18 @@ describe('VideoList', () => {
         });
 
         it('renders with videos', () => {
-            throw new Error('Finish this');
+            const [component] = doMount({
+                ...defaultState,
+                videoList: {
+                    ...defaultState.videoList,
+                    videoList
+                }
+            });
+            expect(component.find('h3#video-list-title').text()).toEqual('Available Videos');
+            expect(component.find('h3#no-videos-available')).toHaveLength(0);
+            expect(component.find('ListGroup')).toHaveLength(1);
+            expect(component.find('Spinner')).toHaveLength(0);
+            expect(component.find('VideoListItem')).toHaveLength(2);
         });
     });
 });
