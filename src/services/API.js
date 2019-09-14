@@ -1,6 +1,7 @@
 import axios from 'axios';
 import store from '../store/store';
 import { CSRF_TOKEN_KEY } from '../utils/securityConstants';
+import { setIsAuth } from '../store/auth/auth.actions';
 
 const instance = axios.create({
     baseURL: '/api',
@@ -11,6 +12,7 @@ const instance = axios.create({
     withCredentials: true
 });
 
+// TODO make sure unit tests are up to date
 export const addCsrfTokenInterceptor = (config) => {
     const { csrfToken } = store.getState().auth;
     if (csrfToken && config.method !== 'get') {
@@ -34,7 +36,7 @@ export const handle401Interceptor = async (error) => { // TODO create unit tests
             error.suppresed = ex;
         }
     }
-    // TODO probably need to dispatch redux action if 401 error to bump back to login page
+    store.dispatch(setIsAuth(false));
     throw error;
 };
 
