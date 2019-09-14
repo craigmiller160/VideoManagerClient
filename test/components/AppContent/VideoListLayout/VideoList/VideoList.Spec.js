@@ -114,42 +114,4 @@ describe('VideoList', () => {
             throw new Error('Finish this');
         });
     });
-
-    it('shows spinner while searching', () => {
-
-        // const component = createComponent({ ...props, searching: true });
-        // requestAnimationFrame(() => {
-        //     expect(searchForVideos).toHaveBeenCalled();
-        //     expect(component.find('Spinner')).toHaveLength(1);
-        //     expect(component.find('VideoListItem')).toHaveLength(0);
-        //     expect(component.find('Pagination')).toHaveLength(0);
-        //     expect(component.find('h3')).toHaveLength(1);
-        //     done();
-        // });
-    });
-
-    it('shows no videos if list length is 0', () => {
-        // const component = createComponent(props);
-        // requestAnimationFrame(() => {
-        //     expect(searchForVideos).toHaveBeenCalled();
-        //     expect(component.find('Spinner')).toHaveLength(0);
-        //     expect(component.find('VideoListItem')).toHaveLength(0);
-        //     expect(component.find('Pagination')).toHaveLength(0);
-        //     expect(component.find('h3')).toHaveLength(2);
-        //     expect(component.find('h3').at(1).text()).toEqual('No Videos Available');
-        // });
-    });
-
-    it('shows videos and pagination', () => {
-        // const component = createComponent({ ...props, videoList, ...pagination });
-        // requestAnimationFrame(() => {
-        //     expect(searchForVideos).toHaveBeenCalled();
-        //     expect(component.find('Spinner')).toHaveLength(0);
-        //     expect(component.find('VideoListItem')).toHaveLength(2);
-        //     expect(component.find('Pagination')).toHaveLength(2);
-        //     expect(component.find('h3')).toHaveLength(1);
-        //
-        //     expect(component.find('Pagination').at(0).props().totalPages).toEqual(4);
-        // });
-    });
 });
