@@ -1,8 +1,7 @@
 import React from 'react';
 import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { setCurrentPage } from '../../../../store/videoList/videoList.actions';
-import shallowEqual from 'react-redux/es/utils/shallowEqual';
 
 const VideoListPagination = () => {
     const dispatch = useDispatch();

@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import classes from './VideoList.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
 import { searchForVideos } from 'store/videoList/videoList.actions';
 import Spinner from 'components/UI/Spinner/Spinner';
 import VideoListPagination from './VideoListPagination';
-import shallowEqual from 'react-redux/es/utils/shallowEqual';
 
 const VideoList = () => {
     const dispatch = useDispatch();
