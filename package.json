@@ -33,7 +33,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "validate": "gulp validate",
-    "dist": "gulp dist"
+    "dist": "gulp dist",
+    "test": "gulp test"
   },
   "eslintConfig": {
     "extends": [
