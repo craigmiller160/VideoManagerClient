@@ -6,8 +6,6 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { act } from 'react-dom/test-utils';
 
-jest.useFakeTimers();
-
 jest.mock('components/AppContent/VideoListLayout/VideoList/VideoListItem/VideoListItem', () => {
     const VideoListItem = () => <div />;
     return VideoListItem;
