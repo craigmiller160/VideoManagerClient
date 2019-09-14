@@ -14,7 +14,7 @@ export const LOGIN_FORM_NAME = 'LoginForm';
 const Login = () => {
     const dispatch = useDispatch();
     const loginFormErrors = useSelector(loginFormHasErrors, shallowEqual);
-    const loginLoading = useSelector((state) => state.auth.loginLoading, shallowEqual);
+    const loginLoading = useSelector((state) => state.auth?.loginLoading, shallowEqual);
 
     return (
         <Form
@@ -24,14 +24,14 @@ const Login = () => {
         >
             {
                 loginLoading &&
-                    <Spinner />
+                    <Spinner id="login-spinner" />
             }
             {
                 !loginLoading &&
                 <>
                     <Row>
                         <Col className="text-center" md={ { size: 4, offset: 4 } }>
-                            <h3>Login</h3>
+                            <h3 id="login-title">Login</h3>
                         </Col>
                     </Row>
                     <Row>

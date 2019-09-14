@@ -1,6 +1,7 @@
 import { createSelector } from 'redux-starter-kit';
 import { LOGIN_FORM_NAME } from '../../components/AppContent/Login/Login';
 
+// TODO this should have unit tests
 export const loginFormHasErrors = createSelector(
     [
         'form'
