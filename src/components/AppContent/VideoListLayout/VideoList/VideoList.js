@@ -26,7 +26,7 @@ const VideoList = () => {
     return (
         <div className={ classes.VideoList }>
             <div className={ classes['list-title'] }>
-                <h3>Available Videos</h3>
+                <h3 id="video-list-title">Available Videos</h3>
             </div>
             {
                 searching &&
@@ -50,7 +50,7 @@ const VideoList = () => {
             {
                 !searching && videoList.length === 0 &&
                 <div className={ classes['none-available'] }>
-                    <h3>No Videos Available</h3>
+                    <h3 id="no-videos-available">No Videos Available</h3>
                 </div>
             }
         </div>
