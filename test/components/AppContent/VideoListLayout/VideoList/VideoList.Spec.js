@@ -4,6 +4,9 @@ import VideoList from 'components/AppContent/VideoListLayout/VideoList/VideoList
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { act } from 'react-dom/test-utils';
+
+jest.useFakeTimers();
 
 jest.mock('components/AppContent/VideoListLayout/VideoList/VideoListItem/VideoListItem', () => {
     const VideoListItem = () => <div />;
@@ -17,6 +20,10 @@ jest.mock('', () => {
     const Pagination = () => <div />;
     return Pagination;
 });
+
+jest.mock('store/videoList/videoList.actions', () => ({
+    searchForVideos: () => (dispatch) => dispatch({ type: 'SearchForVideos' })
+}));
 
 const videoList = [
     { fileId: 1 },
@@ -72,10 +79,13 @@ describe('VideoList', () => {
 
     describe('dispatches searchForVideos', () => {
         it('runs on mount', () => {
-            throw new Error('Finish this');
+            const [, store] = doMount();
+            expect(store.getActions()).toEqual(expect.arrayContaining([
+                { type: 'SearchForVideos' }
+            ]));
         });
 
-        it('runs on page change', () => {
+        it('runs on current page change', () => {
             throw new Error('Finish this');
         });
     });
