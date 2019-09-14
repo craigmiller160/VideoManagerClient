@@ -4,7 +4,6 @@ import VideoList from 'components/AppContent/VideoListLayout/VideoList/VideoList
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { act } from 'react-dom/test-utils';
 
 jest.mock('components/AppContent/VideoListLayout/VideoList/VideoListItem/VideoListItem', () => {
     const VideoListItem = () => <div />;
@@ -27,25 +26,6 @@ const videoList = [
     { fileId: 1 },
     { fileId: 2 }
 ];
-
-const pagination = {
-    totalItems: 36,
-    itemsPerPage: 10
-};
-
-const searchForVideos = jest.fn();
-const setCurrentPage = jest.fn();
-const expandVideoFile = jest.fn();
-const defaultProps = {
-    totalItems: 0,
-    itemsPerPage: 0,
-    currentPage: 0,
-    videoList: [],
-    searching: false,
-    searchForVideos,
-    setCurrentPage,
-    expandVideoFile
-};
 
 const mockStore = configureMockStore([thunk]);
 const defaultState = {
