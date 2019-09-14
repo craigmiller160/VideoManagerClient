@@ -30,7 +30,9 @@ export const handle401Interceptor = async (error) => { // TODO create unit tests
                 ...error.config,
                 url: error.config.url.replace('/api', '')
             });
-        } catch { } // eslint-disable-line no-empty
+        } catch (ex) {
+            error.suppresed = ex;
+        }
     }
     // TODO probably need to dispatch redux action if 401 error to bump back to login page
     throw error;
