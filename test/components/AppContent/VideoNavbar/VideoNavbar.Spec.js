@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
-import { MemoryRouter } from 'react-router';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { Switch, Route, MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
 
 jest.mock('store/scanning/scanning.actions', () => ({
@@ -25,6 +25,12 @@ const doMount = (props = defaultProps) => {
         <Provider store={ store }>
             <MemoryRouter initialEntries={ ['/'] }>
                 <VideoNavbar { ...props } />
+                <Switch>
+                    <Route
+                        path="/list"
+                        render={ () => <p id="list">List</p> }
+                    />
+                </Switch>
             </MemoryRouter>
         </Provider>
     );
@@ -70,17 +76,6 @@ describe('VideoNavbar', () => {
     });
 
     describe('click actions', () => {
-        it('clicks on navbar brand', () => {
-            throw new Error('Finish this');
-        });
-
-        it('clicks on video list link', () => {
-            throw new Error('Finish this');
-        });
-
-        it('clicks on filters link', () => {
-            throw new Error('Finish this');
-        });
 
         it('clicks on scan directory link', () => {
             const [component, store] = doMount();
@@ -98,28 +93,4 @@ describe('VideoNavbar', () => {
             ]);
         });
     });
-
-
-
-
-    // it('hides/disables items if scanning', () => {
-    //     const component = mountComponent({
-    //         ...props,
-    //         disabled: true
-    //     });
-    //     expect(component.find('VideoNavbar')).toHaveLength(1);
-    //     expect(component.find('NavItem')).toHaveLength(0);
-    //     expect(component.find('NavbarToggler')).toHaveLength(0);
-    //     expect(component.find('NavbarBrand')).toHaveLength(1);
-    //     expect(component.find('NavbarBrand').props()).toEqual(expect.objectContaining({
-    //         disabled: true
-    //     }));
-    // });
-    //
-    // it('Starts file scan', () => {
-    //     const component = mountComponent(props);
-    //     const scanDirectoryBtn = component.find('NavLink#scanDirectory');
-    //     scanDirectoryBtn.simulate('click');
-    //     expect(startFileScan).toHaveBeenCalled();
-    // });
 });
