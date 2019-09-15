@@ -96,8 +96,10 @@ describe('auth.actions', () => {
         describe('login', () => {
             it('logs the user in', async () => {
                 mockLoginSuccess(mockApi);
+                mockCheckAuthSuccess(mockApi);
                 const expectedActions = [
                     { type: setLoginLoading.toString(), payload: true },
+                    { type: setCsrfToken.toString(), payload: mockCsrfToken },
                     { type: setIsAuth.toString(), payload: true },
                     { type: setLoginLoading.toString(), payload: false }
                 ];
