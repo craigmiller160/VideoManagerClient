@@ -1,5 +1,6 @@
 import API, { addCsrfTokenInterceptor, handle401Interceptor } from '../../src/services/API';
 import { CSRF_TOKEN_KEY } from 'utils/securityConstants';
+import MockAdapter from 'axios-mock-adapter';
 import { mockCsrfToken } from '../exclude/mock/mockApiConfig/authApi';
 
 jest.mock('store/store', () => {
@@ -32,8 +33,10 @@ jest.mock('store/store', () => {
     }
 });
 
-import store from 'store/store';
-import MockAdapter from 'axios-mock-adapter'; // eslint-disable-line import/first
+import store from 'store/store'; // eslint-disable-line import/first
+
+const apiGetSpy = jest.spyOn(API, 'get');
+const apiRequestSpy = jest.spyOn(API, 'request');
 
 const contentType = 'Content-Type';
 const applicationJson = 'application/json';
@@ -45,6 +48,8 @@ describe('API', () => {
         store.clearCsrfToken();
         store.clearActions();
         mockApi.reset();
+        apiRequestSpy.mockClear();
+        apiGetSpy.mockClear();
     });
 
     describe('addCsrfTokenInterceptor', () => {
@@ -92,10 +97,8 @@ describe('API', () => {
             mockApi.onGet('/video-files')
                 .reply(200, 'Success');
 
-            const apiGetSpy = jest.spyOn(API, 'get');
-            const apiRequestSpy = jest.spyOn(API, 'request');
-
             const error = {
+                message: '401 Error',
                 response: {
                     status: 401
                 },
@@ -110,18 +113,96 @@ describe('API', () => {
                 ...error.config,
                 url: '/video-files'
             });
+            expect(store.getActions()).toEqual([]);
         });
 
-        it('skips refresh on 401 from refresh uri', () => {
+        it('skips refresh on 401 from refresh uri', async () => {
+            const error = {
+                message: '401 Error',
+                response: {
+                    status: 401
+                },
+                config: {
+                    url: '/api/auth/refresh'
+                }
+            };
+
+            try {
+                await handle401Interceptor(error);
+            } catch (ex) {
+                expect(ex).toEqual(error);
+            }
+
+            expect(apiGetSpy).not.toHaveBeenCalled();
+            expect(apiRequestSpy).not.toHaveBeenCalled();
+            expect(store.getActions()).toEqual([]);
+        });
+
+        it('has an error during refresh', async () => {
             throw new Error('Finish this');
         });
 
-        it('has error during refresh', () => {
-            throw new Error('Finish this');
+        it('has error after refresh', async () => {
+            mockApi.onGet('/auth/refresh')
+                .reply(204);
+            mockApi.onGet('/video-files')
+                .reply(500, 'Error');
+
+            const error = {
+                message: '401 Error',
+                response: {
+                    status: 401
+                },
+                config: {
+                    url: '/api/video-files'
+                }
+            };
+
+            const expectedError = expect.objectContaining({
+                config: expect.objectContaining({
+                    url: '/api/video-files'
+                }),
+                response: expect.objectContaining({
+                    data: 'Error',
+                    status: 500
+                }),
+                suppressed: error
+            });
+
+            try {
+                await handle401Interceptor(error);
+            } catch (ex) {
+                expect(ex).toEqual(expectedError);
+            }
+
+            expect(apiGetSpy).toHaveBeenCalledWith('/auth/refresh');
+            expect(apiRequestSpy).toHaveBeenCalledWith({
+                ...error.config,
+                url: '/video-files'
+            });
+            expect(store.getActions()).toEqual([]);
         });
 
-        it('has error that is not noAuth', () => {
-            throw new Error('Finish this');
+        it('has error that is not noAuth', async () => {
+            const error = {
+                message: '500 Error',
+                response: {
+                    status: 500
+                },
+                config: {
+                    url: '/video-files'
+                }
+            };
+
+            try {
+                await handle401Interceptor(error);
+            } catch (ex) {
+                expect(ex).toEqual(error);
+            }
+
+            expect(apiGetSpy).not.toHaveBeenCalled();
+            expect(apiRequestSpy).not.toHaveBeenCalled();
+            expect(store.getActions()).toEqual([]);
         });
     });
 });

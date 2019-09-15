@@ -9,7 +9,8 @@ const instance = axios.create({
         'Content-Type': 'application/json',
         Accept: 'application/json'
     },
-    withCredentials: true
+    withCredentials: true,
+    xsrfHeaderName: 'X-CSRF-TOKEN'
 });
 
 const noAuthStatuses = [401, 403];
@@ -27,17 +28,25 @@ export const addCsrfTokenInterceptor = (config) => {
 };
 
 export const handle401Interceptor = async (error) => {
-    if (noAuthStatuses.includes(error.response.status) && error.config.url !== refreshUri) {
+    if (noAuthStatuses.includes(error?.response?.status) && error?.config?.url !== refreshUri) {
         try {
             await instance.get('/auth/refresh');
-            return instance.request({
+        } catch (ex) {
+            error.suppresed = ex;
+            store.dispatch(setIsAuth(false));
+            throw error;
+        }
+
+        try {
+            return await instance.request({
                 ...error.config,
                 url: error.config.url.replace('/api', '')
             });
-        } catch (ex) {
-            error.suppresed = ex;
+        } catch (ex2) {
+            // TODO need to avoid infinite loop here... probably should have a prop on config
+            ex2.suppressed = error;
+            throw ex2;
         }
-        store.dispatch(setIsAuth(false));
     }
     throw error;
 };
