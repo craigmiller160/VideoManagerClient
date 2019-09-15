@@ -111,7 +111,8 @@ describe('API', () => {
             expect(apiGetSpy).toHaveBeenCalledWith('/auth/refresh');
             expect(apiRequestSpy).toHaveBeenCalledWith({
                 ...error.config,
-                url: '/video-files'
+                url: '/video-files',
+                rerun: true
             });
             expect(store.getActions()).toEqual([]);
         });
@@ -178,7 +179,8 @@ describe('API', () => {
             expect(apiGetSpy).toHaveBeenCalledWith('/auth/refresh');
             expect(apiRequestSpy).toHaveBeenCalledWith({
                 ...error.config,
-                url: '/video-files'
+                url: '/video-files',
+                rerun: true
             });
             expect(store.getActions()).toEqual([]);
         });
