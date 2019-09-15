@@ -6,7 +6,12 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
-// jest.mock('react-router-dom', () => ({ Link: () => 'Link' }));
+jest.mock('store/scanning/scanning.actions', () => ({
+    startFileScan: () => ({ type: 'startFileScan' })
+}));
+jest.mock('store/auth/auth.actions', () => ({
+    logout: () => ({ type: 'logout' })
+}));
 
 const mockStore = configureMockStore([thunk]);
 
@@ -30,17 +35,38 @@ describe('VideoNavbar', () => {
     it('renders successfully', () => {
         const [component] = doMount();
         expect(component.find('VideoNavbar')).toHaveLength(1);
+        expect(component.find('VideoNavbar').props()).toEqual(expect.objectContaining({
+            disabled: false
+        }));
         expect(component.find('NavbarBrand')).toHaveLength(1);
         expect(component.find('NavItem')).toHaveLength(4);
         expect(component.find('NavbarToggler')).toHaveLength(1);
     });
 
     it('hides/disables items', () => {
-        throw new Error('Finish this');
+        const [component] = doMount({
+            ...defaultProps,
+            disabled: true
+        });
+        expect(component.find('VideoNavbar')).toHaveLength(1);
+        expect(component.find('VideoNavbar').props()).toEqual(expect.objectContaining({
+            disabled: true
+        }));
+        expect(component.find('NavbarBrand')).toHaveLength(1);
+        expect(component.find('NavItem')).toHaveLength(0);
+        expect(component.find('NavbarToggler')).toHaveLength(0);
     });
 
     it('toggles the collapse open and closed', () => {
-        throw new Error('Finish this');
+        const [component] = doMount();
+        const toggle = component.find('VideoNavbar NavbarToggler');
+        expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
+            isOpen: false
+        }));
+        toggle.simulate('click');
+        expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
+            isOpen: true
+        }));
     });
 
     describe('click actions', () => {
@@ -57,11 +83,19 @@ describe('VideoNavbar', () => {
         });
 
         it('clicks on scan directory link', () => {
-            throw new Error('Finish this');
+            const [component, store] = doMount();
+            component.find('a#scanDirectory').simulate('click');
+            expect(store.getActions()).toEqual([
+                { type: 'startFileScan' }
+            ]);
         });
 
         it('clicks on logout link', () => {
-            throw new Error('Finish this');
+            const [component, store] = doMount();
+            component.find('a#logout').simulate('click');
+            expect(store.getActions()).toEqual([
+                { type: 'logout' }
+            ]);
         });
     });
 
@@ -79,19 +113,6 @@ describe('VideoNavbar', () => {
     //     expect(component.find('NavbarBrand')).toHaveLength(1);
     //     expect(component.find('NavbarBrand').props()).toEqual(expect.objectContaining({
     //         disabled: true
-    //     }));
-    // });
-    //
-    // it('toggles the collapse open and closed', () => {
-    //     const component = mountComponent(props);
-    //     const toggle = component.find('VideoNavbar NavbarToggler');
-    //
-    //     expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
-    //         isOpen: false
-    //     }));
-    //     toggle.simulate('click');
-    //     expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
-    //         isOpen: true
     //     }));
     // });
     //
