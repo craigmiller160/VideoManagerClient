@@ -8,8 +8,6 @@ import useReactRouter from 'use-react-router';
 import { startFileScan } from '../../../store/scanning/scanning.actions';
 import { logout } from '../../../store/auth/auth.actions';
 
-// TODO add unit tests for all the click actions
-
 const VideoNavbar = (props) => {
     const dispatch = useDispatch();
     const { history } = useReactRouter();
