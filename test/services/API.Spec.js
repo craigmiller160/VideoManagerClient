@@ -140,7 +140,42 @@ describe('API', () => {
         });
 
         it('has an error during refresh', async () => {
-            throw new Error('Finish this');
+            mockApi.onGet('/auth/refresh')
+                .reply(401);
+
+            const error = {
+                message: '401 Error',
+                response: {
+                    status: 401
+                },
+                config: {
+                    url: '/api/video-files'
+                }
+            };
+
+            const expectedError = {
+                ...error,
+                suppressed: expect.objectContaining({
+                    config: expect.objectContaining({
+                        url: '/api/auth/refresh'
+                    }),
+                    response: expect.objectContaining({
+                        status: 401
+                    })
+                })
+            };
+
+            try {
+                await handle401Interceptor(error);
+            } catch (ex) {
+                expect(ex).toEqual(expectedError);
+            }
+
+            expect(apiGetSpy).toHaveBeenCalledWith('/auth/refresh');
+            expect(apiRequestSpy).not.toHaveBeenCalled();
+            expect(store.getActions()).toEqual([
+                { type: 'auth/setIsAuth', payload: false }
+            ]);
         });
 
         it('has error after refresh', async () => {

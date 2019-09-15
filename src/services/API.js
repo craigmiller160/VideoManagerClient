@@ -34,7 +34,7 @@ export const handle401Interceptor = async (error) => {
         try {
             await instance.get('/auth/refresh');
         } catch (ex) {
-            error.suppresed = ex;
+            error.suppressed = ex;
             store.dispatch(setIsAuth(false));
             throw error;
         }
