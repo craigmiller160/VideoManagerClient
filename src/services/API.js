@@ -28,7 +28,9 @@ export const addCsrfTokenInterceptor = (config) => {
 };
 
 export const handle401Interceptor = async (error) => {
-    if (noAuthStatuses.includes(error?.response?.status) && error?.config?.url !== refreshUri) {
+    if (noAuthStatuses.includes(error?.response?.status) &&
+        error?.config?.url !== refreshUri &&
+        !error?.config?.rerun) {
         try {
             await instance.get('/auth/refresh');
         } catch (ex) {
@@ -40,10 +42,10 @@ export const handle401Interceptor = async (error) => {
         try {
             return await instance.request({
                 ...error.config,
-                url: error.config.url.replace('/api', '')
+                url: error.config.url.replace('/api', ''),
+                rerun: true
             });
         } catch (ex2) {
-            // TODO need to avoid infinite loop here... probably should have a prop on config
             ex2.suppressed = error;
             throw ex2;
         }

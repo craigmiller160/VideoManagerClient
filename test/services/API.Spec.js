@@ -204,5 +204,28 @@ describe('API', () => {
             expect(apiRequestSpy).not.toHaveBeenCalled();
             expect(store.getActions()).toEqual([]);
         });
+
+        it('does not attempt refresh for rerun', async () => {
+            const error = {
+                message: '401 Error',
+                config: {
+                    url: '/api/video-files',
+                    rerun: true
+                },
+                response: {
+                    status: 401
+                }
+            };
+
+            try {
+                await handle401Interceptor(error);
+            } catch (ex) {
+                expect(ex).toEqual(error);
+            }
+
+            expect(apiGetSpy).not.toHaveBeenCalled();
+            expect(apiRequestSpy).not.toHaveBeenCalled();
+            expect(store.getActions()).toEqual([]);
+        });
     });
 });
