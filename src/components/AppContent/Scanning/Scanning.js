@@ -5,23 +5,15 @@ import { checkIsScanning } from 'store/scanning/scanning.actions';
 import Spinner from '../../UI/Spinner/Spinner';
 import classes from './Scanning.scss';
 
-let intervalId;
-
-const Scanning = (props) => {
+const Scanning = () => {
     const dispatch = useDispatch();
+
     useEffect(() => {
-        if (intervalId) {
-            clearInterval(intervalId);
-        }
-        intervalId = setInterval(() => {
+        const intervalId = setInterval(() => {
             dispatch(checkIsScanning());
         }, 1000);
 
-        return () => {
-            if (intervalId) {
-                clearInterval(intervalId);
-            }
-        };
+        return () => clearInterval(intervalId);
     }, []);
 
     const colSize = {
