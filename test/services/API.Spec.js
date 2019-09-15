@@ -92,6 +92,9 @@ describe('API', () => {
             mockApi.onGet('/video-files')
                 .reply(200, 'Success');
 
+            const apiGetSpy = jest.spyOn(API, 'get');
+            const apiRequestSpy = jest.spyOn(API, 'request');
+
             const error = {
                 response: {
                     status: 401
@@ -102,7 +105,11 @@ describe('API', () => {
             };
             const res = await handle401Interceptor(error);
             expect(res.data).toEqual('Success');
-            // TODO might want to do more tests for what happened along the way
+            expect(apiGetSpy).toHaveBeenCalledWith('/auth/refresh');
+            expect(apiRequestSpy).toHaveBeenCalledWith({
+                ...error.config,
+                url: '/video-files'
+            });
         });
 
         it('skips refresh on 401 from refresh uri', () => {

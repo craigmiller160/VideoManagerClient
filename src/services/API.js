@@ -26,7 +26,7 @@ export const addCsrfTokenInterceptor = (config) => {
     return config;
 };
 
-export const handle401Interceptor = async (error) => { // TODO create unit tests
+export const handle401Interceptor = async (error) => {
     if (noAuthStatuses.includes(error.response.status) && error.config.url !== refreshUri) {
         try {
             await instance.get('/auth/refresh');
