@@ -13,7 +13,7 @@ import AppRoutes from './AppRoutes';
 import { checkAuth, logout } from '../../store/auth/auth.actions';
 import { hideAlert } from '../../store/alert/alert.actions';
 
-export const AppContent = () => {
+const AppContent = () => {
     const [ isStarted, setStarted ] = useState(false);
     const { history } = useReactRouter();
     const dispatch = useDispatch();
