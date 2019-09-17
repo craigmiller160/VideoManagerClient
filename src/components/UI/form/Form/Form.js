@@ -37,10 +37,11 @@ Form.propTypes = {
 const ReduxFormForm = reduxForm({})(Form);
 ReduxFormForm.propTypes = {
     form: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func, // DEPRECATED
+    onSubmit: PropTypes.func.isRequired,
     className: PropTypes.string,
     initialValues: PropTypes.object,
-    children: PropTypes.element,
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
     destroyOnUnmount: PropTypes.bool
 };
 

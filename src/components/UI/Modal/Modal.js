@@ -57,9 +57,9 @@ const Modal = (props) => {
                 hasForm &&
                     <Form
                         form={ form.name }
-                        handleSubmit={ () => {
+                        onSubmit={ (values) => {
                             close();
-                            form.handleSubmit();
+                            form.handleSubmit(values);
                         } }
                         initialValues={ form.initialValues }
                     >

@@ -3,4 +3,15 @@
     .use-pointer {
         cursor: pointer;
     }
+
+    .link {
+        color: rgba(255,255,255,.5);
+        &:hover {
+            color: white;
+            text-decoration: none;
+        }
+        &.active {
+            color: white;
+        }
+    }
 }

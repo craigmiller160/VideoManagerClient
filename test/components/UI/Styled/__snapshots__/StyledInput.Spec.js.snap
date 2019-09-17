@@ -13,7 +13,9 @@ exports[`StyledInput renders correctly 1`] = `
   height: calc(2.25rem + 2px);
 }
 
-<StyledInput>
+<StyledInput
+  hasError={false}
+>
   <input
     className="c0"
   />

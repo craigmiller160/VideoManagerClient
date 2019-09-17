@@ -5,3 +5,5 @@ import 'jest-styled-components';
 
 configure({ adapter: new Adapter() });
 expect.addSnapshotSerializer(createSerializer({ mode: 'deep' }));
+
+jest.useFakeTimers();

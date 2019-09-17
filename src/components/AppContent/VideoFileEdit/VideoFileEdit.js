@@ -48,7 +48,7 @@ export const VideoFileEdit = (props) => {
             />
             <Form
                 form={ FORM_NAME }
-                handleSubmit={ (event) => event.preventDefault() }
+                onSubmit={ (event) => event.preventDefault() }
                 className={ classes.VideoFileEdit }
                 initialValues={ selectedVideo }
             >

@@ -1,30 +1,38 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Alert from 'components/UI/Alert/Alert';
+import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 
-const hideAlert = jest.fn();
+jest.mock('store/alert/alert.actions', () => ({
+    hideAlert: () => (dispatch) => dispatch({ type: 'HideAlert' })
+}));
 
 const defaultProps = {
     alert: {
         color: 'success',
         message: 'My Message',
         show: false
-    },
-    hideAlert
+    }
 };
 
-const doMount = (props = defaultProps) => mount(
-    <Alert { ...props } />
-);
+const defaultState = {};
+const mockStore = configureMockStore([thunk]);
 
+const doMount = (state = defaultState, props = defaultProps) => {
+    const store = mockStore(state);
+    const component = mount(
+        <Provider store={ store }>
+            <Alert { ...props } />
+        </Provider>
+    );
+    return [component, store];
+};
 
 describe('Alert', () => {
-    beforeEach(() => {
-        hideAlert.mockReset();
-    });
-
     it('renders correctly', () => {
-        const component = doMount();
+        const [component] = doMount();
         expect(component.find('div.Alert').props()).toEqual(expect.objectContaining({
             className: expect.stringContaining('success')
         }));
@@ -32,7 +40,7 @@ describe('Alert', () => {
     });
 
     it('renders and shows', () => {
-        const component = doMount({
+        const [component] = doMount(defaultState, {
             ...defaultProps,
             alert: {
                 ...defaultProps.alert,
@@ -45,8 +53,10 @@ describe('Alert', () => {
     });
 
     it('calls hideAlert', () => {
-        const component = doMount();
+        const [component, store] = doMount();
         component.find('button').simulate('click');
-        expect(hideAlert).toHaveBeenCalled();
+        expect(store.getActions()).toEqual([
+            { type: 'HideAlert' }
+        ]);
     });
 });

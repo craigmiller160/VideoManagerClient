@@ -8,6 +8,10 @@ describe('Input', () => {
         type: 'text',
         input: {
             name: 'MyInput'
+        },
+        meta: {
+            touched: false,
+            error: null
         }
     };
 
@@ -42,6 +46,7 @@ describe('Input', () => {
             type: 'text',
             name: 'MyInput'
         }));
+        expect(component.find('span.text-danger')).toHaveLength(0);
     });
 
     it('is invisible if type is hidden', () => {
@@ -87,5 +92,30 @@ describe('Input', () => {
         const textarea = component.find('textarea');
         expect(textarea).toHaveLength(1);
         expect(component.find('StyledTextArea')).toHaveStyleRule('resize', 'both');
+    });
+
+    it('renders with error text', () => {
+        const newProps = {
+            ...props,
+            meta: {
+                touched: true,
+                error: 'My Error'
+            }
+        };
+        const component = mount(
+            <InputComponent { ...newProps } />
+        );
+
+        expect(component.find('StyledFormGroupDiv')).toHaveLength(1);
+        expect(component.find('StyledFormGroupDiv')).toHaveStyleRule('display', 'block');
+        expect(component.find('label')).toHaveLength(1);
+        expect(component.find('label').text()).toEqual('My Input');
+        expect(component.find('input')).toHaveLength(1);
+        expect(component.find('textarea')).toHaveLength(0);
+        expect(component.find('input').props()).toEqual(expect.objectContaining({
+            type: 'text',
+            name: 'MyInput'
+        }));
+        expect(component.find('span.text-danger')).toHaveLength(1);
     });
 });

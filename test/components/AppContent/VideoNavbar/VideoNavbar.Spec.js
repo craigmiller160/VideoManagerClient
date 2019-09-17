@@ -1,51 +1,71 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
-import { MemoryRouter } from 'react-router';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import { Switch, Route, MemoryRouter } from 'react-router';
+import { Provider } from 'react-redux';
 
-jest.mock('react-router-dom', () => ({ Link: () => 'Link' }));
+jest.mock('store/scanning/scanning.actions', () => ({
+    startFileScan: () => ({ type: 'startFileScan' })
+}));
+jest.mock('store/auth/auth.actions', () => ({
+    logout: () => ({ type: 'logout' })
+}));
 
-const mountComponent = (props = {}) => {
-    return mount(
-        <MemoryRouter initialEntries={ ['/'] }>
-            <VideoNavbar { ...props } />
-        </MemoryRouter>
-    );
+const mockStore = configureMockStore([thunk]);
+
+const defaultProps = {
+    disabled: false
 };
 
-const startFileScan = jest.fn();
-const props = {
-    startFileScan,
-    isScanning: false
+const doMount = (props = defaultProps) => {
+    const store = mockStore({});
+    const component = mount(
+        <Provider store={ store }>
+            <MemoryRouter initialEntries={ ['/'] }>
+                <VideoNavbar { ...props } />
+                <Switch>
+                    <Route
+                        path="/list"
+                        render={ () => <p id="list">List</p> }
+                    />
+                </Switch>
+            </MemoryRouter>
+        </Provider>
+    );
+    return [component, store];
 };
 
 describe('VideoNavbar', () => {
     it('renders successfully', () => {
-        const component = mountComponent(props);
+        const [component] = doMount();
         expect(component.find('VideoNavbar')).toHaveLength(1);
+        expect(component.find('VideoNavbar').props()).toEqual(expect.objectContaining({
+            disabled: false
+        }));
         expect(component.find('NavbarBrand')).toHaveLength(1);
-        expect(component.find('NavItem')).toHaveLength(3);
+        expect(component.find('NavItem')).toHaveLength(4);
         expect(component.find('NavbarToggler')).toHaveLength(1);
     });
 
-    it('hides/disables items if scanning', () => {
-        const component = mountComponent({
-            ...props,
-            isScanning: true
+    it('hides/disables items', () => {
+        const [component] = doMount({
+            ...defaultProps,
+            disabled: true
         });
         expect(component.find('VideoNavbar')).toHaveLength(1);
-        expect(component.find('NavItem')).toHaveLength(0);
-        expect(component.find('NavbarToggler')).toHaveLength(0);
-        expect(component.find('NavbarBrand')).toHaveLength(1);
-        expect(component.find('NavbarBrand').props()).toEqual(expect.objectContaining({
+        expect(component.find('VideoNavbar').props()).toEqual(expect.objectContaining({
             disabled: true
         }));
+        expect(component.find('NavbarBrand')).toHaveLength(1);
+        expect(component.find('NavItem')).toHaveLength(0);
+        expect(component.find('NavbarToggler')).toHaveLength(0);
     });
 
     it('toggles the collapse open and closed', () => {
-        const component = mountComponent(props);
+        const [component] = doMount();
         const toggle = component.find('VideoNavbar NavbarToggler');
-
         expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
             isOpen: false
         }));
@@ -55,10 +75,22 @@ describe('VideoNavbar', () => {
         }));
     });
 
-    it('Starts file scan', () => {
-        const component = mountComponent(props);
-        const scanDirectoryBtn = component.find('NavLink#scanDirectory');
-        scanDirectoryBtn.simulate('click');
-        expect(startFileScan).toHaveBeenCalled();
+    describe('click actions', () => {
+
+        it('clicks on scan directory link', () => {
+            const [component, store] = doMount();
+            component.find('a#scanDirectory').simulate('click');
+            expect(store.getActions()).toEqual([
+                { type: 'startFileScan' }
+            ]);
+        });
+
+        it('clicks on logout link', () => {
+            const [component, store] = doMount();
+            component.find('a#logout').simulate('click');
+            expect(store.getActions()).toEqual([
+                { type: 'logout' }
+            ]);
+        });
     });
 });

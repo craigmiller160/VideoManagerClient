@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledInput = styled.input`
-    border: 1px solid lightgray;
+    border: 1px solid ${(props) => props.hasError ? '#dc3545' : 'lightgray'};
     border-radius: 3px;
     display: block;
     width: 100%;
@@ -12,5 +13,11 @@ const StyledInput = styled.input`
     height: calc(2.25rem + 2px);
 `;
 StyledInput.displayName = 'StyledInput';
+StyledInput.propTypes = {
+    hasError: PropTypes.bool
+};
+StyledInput.defaultProps = {
+    hasError: false
+};
 
 export default StyledInput;

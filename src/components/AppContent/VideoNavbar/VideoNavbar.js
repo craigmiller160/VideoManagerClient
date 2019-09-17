@@ -1,59 +1,89 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink as BootLink } from 'reactstrap';
 import * as classes from './VideoNavbar.scss'
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
+import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import useReactRouter from 'use-react-router';
+import { startFileScan } from '../../../store/scanning/scanning.actions';
+import { logout } from '../../../store/auth/auth.actions';
 
 const VideoNavbar = (props) => {
+    const dispatch = useDispatch();
+    const { history } = useReactRouter();
     const [ isOpen, setOpen ] = useState(false);
-    const { isScanning, history, startFileScan } = props;
+    const { disabled } = props;
     const pathname = history.location.pathname;
 
     return (
         <Navbar className={ classes.VideoNavbar } color="dark" dark expand="md">
             <Container>
                 <NavbarBrand
-                    tag={ Link }
-                    to="/"
-                    disabled={ isScanning }
+                    tag="div"
+                    disabled={ disabled }
                 >
-                    Video Manager
+                    <NavLink
+                        to="/"
+                        activeClassName={ classes.active }
+                        className={ classes.link }
+                    >
+                        Video Manager
+                    </NavLink>
                 </NavbarBrand>
                 {
-                    !isScanning &&
+                    !disabled &&
                     <>
                         <NavbarToggler onClick={ () => setOpen(!isOpen) } />
                         <Collapse isOpen={ isOpen } navbar>
                             <Nav navbar>
-                                <NavItem active={ pathname === '/' }>
-                                    <NavLink
+                                <NavItem active={ pathname === '/list' }>
+                                    <BootLink
+                                        tag="div"
                                         id="videoList"
-                                        className={ classes['use-pointer'] }
-                                        onClick={ () => history.push('/') }
                                     >
-                                        Video List
-                                    </NavLink>
+                                        <NavLink
+                                            to="/list"
+                                            activeClassName={ classes.active }
+                                            className={ classes.link }
+                                            exact
+                                        >
+                                            Video List
+                                        </NavLink>
+                                    </BootLink>
                                 </NavItem>
                                 <NavItem active={ pathname === '/filters' }>
-                                    <NavLink
+                                    <BootLink
+                                        tag="div"
                                         id="manageFilters"
-                                        className={ classes['use-pointer'] }
-                                        onClick={ () => history.push('/filters') }
                                     >
-                                        Manage Filters
-                                    </NavLink>
+                                        <NavLink
+                                            to="/filters"
+                                            activeClassName={ classes.active }
+                                            className={ classes.link }
+                                        >
+                                            Manage Filters
+                                        </NavLink>
+                                    </BootLink>
                                 </NavItem>
                             </Nav>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink
+                                    <BootLink
                                         id="scanDirectory"
                                         className={ classes['use-pointer'] }
-                                        onClick={ startFileScan }
+                                        onClick={ () => dispatch(startFileScan()) }
                                     >
                                         Scan Directory
-                                    </NavLink>
+                                    </BootLink>
+                                </NavItem>
+                                <NavItem>
+                                    <BootLink
+                                        id="logout"
+                                        className={ classes['use-pointer'] }
+                                        onClick={ () => dispatch(logout()) }
+                                    >
+                                        Logout
+                                    </BootLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>
@@ -65,22 +95,10 @@ const VideoNavbar = (props) => {
 };
 
 VideoNavbar.defaultProps = {
-    isScanning: false
+    disabled: false
 };
-
-const propTypes = {
-    startFileScan: PropTypes.func.isRequired,
-    isScanning: PropTypes.bool,
-    history: PropTypes.object
-};
-
 VideoNavbar.propTypes = {
-    ...propTypes
+    disabled: PropTypes.bool
 };
 
-const VideoNavbarRouter = withRouter(VideoNavbar);
-VideoNavbarRouter.propTypes = {
-    ...propTypes,
-    history: PropTypes.object
-};
-export default VideoNavbarRouter;
+export default VideoNavbar;

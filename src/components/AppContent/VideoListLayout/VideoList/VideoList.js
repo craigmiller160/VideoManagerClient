@@ -1,82 +1,32 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import classes from './VideoList.scss';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
-import { expandVideoFile, searchForVideos, setCurrentPage } from 'store/videoList/videoList.actions';
+import { searchForVideos } from 'store/videoList/videoList.actions';
 import Spinner from 'components/UI/Spinner/Spinner';
-import Pagination, { RIGHT_ALIGN } from '../../../UI/Pagination/Pagination';
-import { reset } from 'store/videoPlayer/videoPlayer.actions';
+import VideoListPagination from './VideoListPagination';
 
-const VideoListPagination = (props) => {
-    const {
-        totalItems,
-        itemsPerPage,
-        currentPage,
-        setCurrentPage,
-        searchForVideos
-    } = props;
-
-    if (totalItems === 0) {
-        return <div />;
-    }
-
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-    return (
-        <Pagination
-            totalPages={ totalPages }
-            currentPage={ currentPage }
-            align={ RIGHT_ALIGN }
-            onClick={ (value) => {
-                setCurrentPage(value);
-                searchForVideos();
-            } }
-        />
-    );
-};
-VideoListPagination.propTypes = {
-    totalItems: PropTypes.number,
-    itemsPerPage: PropTypes.number,
-    currentPage: PropTypes.number,
-    setCurrentPage: PropTypes.func,
-    searchForVideos: PropTypes.func
-};
-
-export const VideoList = (props) => {
-    const {
-        searching,
-        videoList,
-        expandVideoFile,
-        searchForVideos,
-        currentPage,
-        videoPlayerReset,
-        itemsPerPage,
-        totalItems,
-        setCurrentPage
-    } = props;
+const VideoList = () => {
+    const dispatch = useDispatch();
+    const currentPage = useSelector((state) => state.videoList.currentPage, shallowEqual);
+    const videoList = useSelector((state) => state.videoList.videoList, shallowEqual);
+    const searching = useSelector((state) => state.videoSearch.searching, shallowEqual);
 
     useEffect(() => {
-        searchForVideos();
+        dispatch(searchForVideos());
     }, [currentPage]);
 
     const [ pager1, pager2 ] = [...Array(2).keys()].map((index) => (
         <VideoListPagination
             key={ index }
-            currentPage={ currentPage }
-            itemsPerPage={ itemsPerPage }
-            setCurrentPage={ setCurrentPage }
-            searchForVideos={ searchForVideos }
-            totalItems={ totalItems }
         />
     ));
 
     return (
         <div className={ classes.VideoList }>
             <div className={ classes['list-title'] }>
-                <h3>Available Videos</h3>
+                <h3 id="video-list-title">Available Videos</h3>
             </div>
             {
                 searching &&
@@ -91,8 +41,6 @@ export const VideoList = (props) => {
                             <VideoListItem
                                 key={ videoFile.fileId }
                                 videoFile={ videoFile }
-                                expandVideoFile={ expandVideoFile }
-                                videoPlayerReset={ videoPlayerReset }
                             />
                         )) }
                     </ListGroup>
@@ -102,40 +50,11 @@ export const VideoList = (props) => {
             {
                 !searching && videoList.length === 0 &&
                 <div className={ classes['none-available'] }>
-                    <h3>No Videos Available</h3>
+                    <h3 id="no-videos-available">No Videos Available</h3>
                 </div>
             }
         </div>
     );
 };
 
-VideoList.propTypes = {
-    totalItems: PropTypes.number,
-    itemsPerPage: PropTypes.number,
-    searching: PropTypes.bool,
-    videoList: PropTypes.array,
-    expandVideoFile: PropTypes.func,
-    searchForVideos: PropTypes.func,
-    currentPage: PropTypes.number,
-    videoPlayerReset: PropTypes.func,
-    setCurrentPage: PropTypes.func
-};
-
-const mapStateToProps = (state) => ({
-    totalItems: state.videoList.pagination.totalItems,
-    itemsPerPage: state.videoList.pagination.itemsPerPage,
-    currentPage: state.videoList.currentPage,
-    videoList: state.videoList.videoList,
-    searching: state.videoSearch.searching
-});
-
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-    searchForVideos,
-    setCurrentPage,
-    expandVideoFile,
-    videoPlayerReset: reset
-}, dispatch);
-
-const VideoListConnected = connect(mapStateToProps, mapDispatchToProps)(VideoList);
-VideoListConnected.propTypes = {};
-export default VideoListConnected;
+export default VideoList;

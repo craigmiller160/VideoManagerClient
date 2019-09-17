@@ -1,25 +1,19 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Col, Row } from 'reactstrap';
+import { useDispatch } from 'react-redux';
+import { checkIsScanning } from 'store/scanning/scanning.actions';
 import Spinner from '../../UI/Spinner/Spinner';
 import classes from './Scanning.scss';
 
-let intervalId;
+const Scanning = () => {
+    const dispatch = useDispatch();
 
-const Scanning = (props) => {
     useEffect(() => {
-        if (intervalId) {
-            clearInterval(intervalId);
-        }
-        intervalId = setInterval(() => {
-            props.checkIsScanning();
+        const intervalId = setInterval(() => {
+            dispatch(checkIsScanning());
         }, 1000);
 
-        return () => {
-            if (intervalId) {
-                clearInterval(intervalId);
-            }
-        };
+        return () => clearInterval(intervalId);
     }, []);
 
     const colSize = {
@@ -41,10 +35,6 @@ const Scanning = (props) => {
             </Row>
         </div>
     );
-};
-
-Scanning.propTypes = {
-    checkIsScanning: PropTypes.func.isRequired
 };
 
 export default Scanning;
