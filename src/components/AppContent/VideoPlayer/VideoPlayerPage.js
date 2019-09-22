@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import classes from './VideoPlayerPage.scss';
 import Spinner from '../../UI/Spinner/Spinner';
 import { loadDataForPlayback } from 'store/videoPlayer/videoPlayer.actions';
@@ -16,15 +15,14 @@ const getFileName = (videoFile) => {
 };
 
 const VideoPlayerPage = (props) => {
+    const dispatch = useDispatch();
+    const { loading, videoFile } = useSelector((state) => state.videoPlayer, shallowEqual);
     const {
-        loading,
-        videoFile,
-        loadDataForPlayback,
         match: { params }
     } = props;
 
     useEffect(() => {
-        loadDataForPlayback(params.fileId)
+        dispatch(loadDataForPlayback(params.fileId));
     }, []);
 
     const formattedLastViewed = videoFile.lastViewed ? new VideoDate(videoFile.lastViewed).formatDateTime() : '';
@@ -113,23 +111,9 @@ const VideoPlayerPage = (props) => {
     );
 };
 VideoPlayerPage.propTypes = {
-    loading: PropTypes.bool.isRequired,
-    videoFile: PropTypes.object.isRequired,
-    loadDataForPlayback: PropTypes.func.isRequired,
     match: PropTypes.shape({
         params: PropTypes.object
     })
 };
 
-const mapStateToProps = (state) => ({
-    loading: state.videoPlayer.loading,
-    videoFile: state.videoPlayer.videoFile
-});
-
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-    loadDataForPlayback
-}, dispatch);
-
-const VideoPlayerConnected = connect(mapStateToProps, mapDispatchToProps)(VideoPlayerPage);
-VideoPlayerConnected.propTypes = {};
-export default VideoPlayerConnected;
+export default VideoPlayerPage;
