@@ -14,7 +14,7 @@ const getFileName = (videoFile) => {
     return videoFile.displayName || videoFile.fileName;
 };
 
-const VideoPlayer = (props) => {
+const VideoPlayerPage = (props) => {
     const {
         loading,
         videoFile,
@@ -113,7 +113,7 @@ const VideoPlayer = (props) => {
         </>
     );
 };
-VideoPlayer.propTypes = {
+VideoPlayerPage.propTypes = {
     loading: PropTypes.bool.isRequired,
     videoFile: PropTypes.object.isRequired,
     loadDataForPlayback: PropTypes.func.isRequired,
@@ -131,6 +131,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     loadDataForPlayback
 }, dispatch);
 
-const VideoPlayerConnected = connect(mapStateToProps, mapDispatchToProps)(VideoPlayer);
+const VideoPlayerConnected = connect(mapStateToProps, mapDispatchToProps)(VideoPlayerPage);
 VideoPlayerConnected.propTypes = {};
 export default VideoPlayerConnected;

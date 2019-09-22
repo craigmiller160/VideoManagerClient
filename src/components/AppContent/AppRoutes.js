@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Scanning from './Scanning/Scanning';
 import VideoFileEdit from './VideoFileEdit/VideoFileEdit';
 import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
-import VideoPlayer from './VideoPlayer/VideoPlayer';
+import VideoPlayerPage from './VideoPlayer/VideoPlayerPage';
 import VideoListLayout from './VideoListLayout/VideoListLayout';
 import Login from './Login/Login';
 import ProtectedRoute from '../Routing/ProtectedRoute';
@@ -50,7 +50,7 @@ const AppRoutes = (props) => {
             />
             <ProtectedRoute
                 path="/play/:fileId"
-                component={ VideoPlayer }
+                component={ VideoPlayerPage }
                 rules={ [
                     { allow: () => isAuth, redirect: '/login' },
                     { allow: () => !isScanning, redirect: '/scanning' }
