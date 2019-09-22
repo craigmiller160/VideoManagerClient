@@ -9,6 +9,7 @@ import { loadDataForPlayback } from 'store/videoPlayer/videoPlayer.actions';
 import { Helmet } from 'react-helmet';
 import VideoDate from '../../../model/VideoDate';
 import WordWrapCol from '../../UI/WordWrapCol/WordWrapCol';
+import VideoPlayer from './VideoPlayer';
 
 const getFileName = (videoFile) => {
     return videoFile.displayName || videoFile.fileName;
@@ -53,9 +54,7 @@ const VideoPlayerPage = (props) => {
                         </Row>
                         <Row>
                             <WordWrapCol className="text-center">
-                                <video controls autoPlay="autoPlay">
-                                    <source src={ `/api/video-files/play/${params.fileId}` } />
-                                </video>
+                                <VideoPlayer fileId={ params.fileId } />
                             </WordWrapCol>
                         </Row>
                         <Row>
