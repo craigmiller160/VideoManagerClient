@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import classes from './VideoPlayer.scss';
+import classes from './VideoPlayerPage.scss';
 import Spinner from '../../UI/Spinner/Spinner';
 import { loadDataForPlayback } from 'store/videoPlayer/videoPlayer.actions';
 import { Helmet } from 'react-helmet';
@@ -34,7 +34,7 @@ const VideoPlayerPage = (props) => {
             <Helmet
                 title={ getFileName(videoFile) }
             />
-            <div className={ classes.VideoPlayer }>
+            <div className={ classes.VideoPlayerPage }>
                 {
                     loading &&
                     <Row>
