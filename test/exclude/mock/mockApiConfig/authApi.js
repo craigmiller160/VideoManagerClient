@@ -30,7 +30,7 @@ export const mockCheckAuthFail = (mockApi) =>
 
 export const mockLoginSuccess = (mockApi) =>
     mockApi.onPost('/auth/login', { userName: mockUserName, password: mockPassword })
-        .reply(200, mockTokenResponse);
+        .reply(204);
 
 export const mockLoginFail = (mockApi) =>
     mockApi.onPost('/auth/login', { userName: mockUserName, password: mockPassword })
@@ -39,3 +39,7 @@ export const mockLoginFail = (mockApi) =>
 export const mockLogout = (mockApi) =>
     mockApi.onGet('/auth/logout')
         .reply(204);
+
+export const mockGetVideoToken = (mockApi) =>
+    mockApi.onGet('/auth/videotoken/10')
+        .reply(200, mockTokenResponse);

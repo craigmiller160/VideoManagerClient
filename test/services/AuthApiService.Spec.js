@@ -1,9 +1,9 @@
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
-import { checkAuth, login, logout } from 'services/AuthApiService';
+import { checkAuth, getVideoToken, login, logout } from 'services/AuthApiService';
 import {
     CSRF_TOKEN_TEST,
-    mockCheckAuthSuccess, mockCsrfToken,
+    mockCheckAuthSuccess, mockCsrfToken, mockGetVideoToken,
     mockLoginSuccess,
     mockLogout,
     mockPassword,
@@ -20,13 +20,13 @@ describe('AuthApiService', () => {
         mockCheckAuthSuccess(mockApi);
         mockLoginSuccess(mockApi);
         mockLogout(mockApi);
+        mockGetVideoToken(mockApi);
     });
 
     it('login', async () => {
         const res = await login(mockUserName, mockPassword);
         expect(res).toEqual(expect.objectContaining({
-            status: 200,
-            data: mockTokenResponse
+            status: 204
         }));
     });
 
@@ -44,5 +44,13 @@ describe('AuthApiService', () => {
     it('logout', async () => {
         const res = await logout();
         expect(res.status).toEqual(204);
+    });
+
+    it('getVideoToken', async () => {
+        const res = await getVideoToken(10);
+        expect(res).toEqual(expect.objectContaining({
+            status: 200,
+            data: mockTokenResponse
+        }));
     });
 });

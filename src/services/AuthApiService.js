@@ -13,3 +13,6 @@ export const checkAuth = () =>
 
 export const logout = () =>
     API.get('/auth/logout');
+
+export const getVideoToken = (videoId) =>
+    API.get(`/auth/videotoken/${videoId}`);
