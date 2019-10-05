@@ -33,4 +33,8 @@ describe('videoPlayer.reducer', () => {
         };
         expect(videoPlayerReducer(state, action)).toEqual(videoPlayerInitState);
     });
+
+    it('should handle set video token', () => {
+        throw new Error('Finish this');
+    });
 });

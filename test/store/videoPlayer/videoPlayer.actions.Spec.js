@@ -36,6 +36,10 @@ describe('videoPlayer.actions', () => {
         expect(action).toEqual(expectedAction);
     });
 
+    it('creates setVideoToken action', () => {
+        throw new Error('Finish this');
+    });
+
     describe('thunk actions', () => {
         beforeEach(() => {
             mockApi.reset();

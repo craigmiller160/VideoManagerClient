@@ -1,13 +1,18 @@
 import { createAction } from 'redux-starter-kit';
 import { showErrorAlert } from '../alert/alert.actions';
 import VideoApiService from '../../services/VideoApiService';
+import * as AuthApiService from '../../services/AuthApiService';
 
 export const loadDataForPlayback = (fileId) => async (dispatch) => {
     try {
         dispatch(setLoading(true));
+
+        const videoFileResponse = await VideoApiService.getVideoFile(fileId);
+        const videoTokenResponse = await AuthApiService.getVideoToken(fileId);
+        dispatch(setVideoFile(videoFileResponse.data));
+        dispatch(setVideoToken(videoTokenResponse.data.token));
+
         await VideoApiService.recordNewVideoPlay(fileId);
-        const response = await VideoApiService.getVideoFile(fileId);
-        dispatch(setVideoFile(response.data));
     }
     catch (ex) {
         dispatch(showErrorAlert(ex.message));
@@ -20,3 +25,4 @@ export const loadDataForPlayback = (fileId) => async (dispatch) => {
 export const setLoading = createAction('videoPlayer/setLoading');
 export const setVideoFile = createAction('videoPlayer/setVideoFile');
 export const reset = createAction('videoPlayer/reset');
+export const setVideoToken = createAction('videoPlayer/setVideoToken');
