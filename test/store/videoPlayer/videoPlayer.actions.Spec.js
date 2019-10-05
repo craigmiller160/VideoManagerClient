@@ -1,10 +1,17 @@
-import { loadDataForPlayback, setLoading, setVideoFile, reset } from 'store/videoPlayer/videoPlayer.actions';
+import {
+    loadDataForPlayback,
+    setLoading,
+    setVideoFile,
+    reset,
+    setVideoToken
+} from 'store/videoPlayer/videoPlayer.actions';
 import { NEW_VIDEO_FILE_FULL } from '../../exclude/mock/mockData/videoFileData';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
 import { mockGetVideoFile, mockRecordNewVideoPlay } from '../../exclude/mock/mockApiConfig/videoFileApi';
+import { mockGetVideoToken, mockTokenResponse } from '../../exclude/mock/mockApiConfig/authApi';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -37,7 +44,13 @@ describe('videoPlayer.actions', () => {
     });
 
     it('creates setVideoToken action', () => {
-        throw new Error('Finish this');
+        const videoId = 10;
+        const expectedAction = {
+            type: setVideoFile.toString(),
+            payload: videoId
+        };
+        const action = setVideoFile(videoId);
+        expect(action).toEqual(expectedAction);
     });
 
     describe('thunk actions', () => {
@@ -45,6 +58,7 @@ describe('videoPlayer.actions', () => {
             mockApi.reset();
             mockGetVideoFile(mockApi);
             mockRecordNewVideoPlay(mockApi);
+            mockGetVideoToken(mockApi);
         });
 
         it('loads data for playback', async () => {
@@ -53,6 +67,7 @@ describe('videoPlayer.actions', () => {
             const expectedActions = [
                 { type: setLoading.toString(), payload: true },
                 { type: setVideoFile.toString(), payload: NEW_VIDEO_FILE_FULL },
+                { type: setVideoToken.toString(), payload: mockTokenResponse.token },
                 { type: setLoading.toString(), payload: false }
             ];
 

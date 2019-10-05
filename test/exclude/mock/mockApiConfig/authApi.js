@@ -41,5 +41,5 @@ export const mockLogout = (mockApi) =>
         .reply(204);
 
 export const mockGetVideoToken = (mockApi) =>
-    mockApi.onGet('/auth/videotoken/10')
+    mockApi.onGet('/auth/videotoken/3')
         .reply(200, mockTokenResponse);

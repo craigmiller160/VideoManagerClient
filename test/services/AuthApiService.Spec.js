@@ -47,7 +47,7 @@ describe('AuthApiService', () => {
     });
 
     it('getVideoToken', async () => {
-        const res = await getVideoToken(10);
+        const res = await getVideoToken(3);
         expect(res).toEqual(expect.objectContaining({
             status: 200,
             data: mockTokenResponse

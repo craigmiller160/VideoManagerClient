@@ -1,5 +1,5 @@
 import videoPlayerReducer, { initialState as videoPlayerInitState } from 'store/videoPlayer/videoPlayer.reducer';
-import { setLoading, setVideoFile, reset } from 'store/videoPlayer/videoPlayer.actions';
+import { setLoading, setVideoFile, reset, setVideoToken } from 'store/videoPlayer/videoPlayer.actions';
 import { NEW_VIDEO_FILE_FULL } from '../../exclude/mock/mockData/videoFileData';
 
 describe('videoPlayer.reducer', () => {
@@ -35,6 +35,12 @@ describe('videoPlayer.reducer', () => {
     });
 
     it('should handle set video token', () => {
-        throw new Error('Finish this');
+        const token = 'ABCDEFG';
+        const action = { type: setVideoToken.toString(), payload: token };
+        const expectedState = {
+            ...videoPlayerInitState,
+            videoToken: token
+        };
+        expect(videoPlayerReducer(videoPlayerInitState, action)).toEqual(expectedState);
     });
 });
