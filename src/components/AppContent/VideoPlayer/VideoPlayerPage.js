@@ -16,7 +16,7 @@ const getFileName = (videoFile) => {
 
 const VideoPlayerPage = (props) => {
     const dispatch = useDispatch();
-    const { loading, videoFile } = useSelector((state) => state.videoPlayer, shallowEqual);
+    const { loading, videoFile, videoToken } = useSelector((state) => state.videoPlayer, shallowEqual);
     const {
         match: { params }
     } = props;
@@ -52,7 +52,10 @@ const VideoPlayerPage = (props) => {
                         </Row>
                         <Row>
                             <WordWrapCol className="text-center">
-                                <VideoPlayer fileId={ params.fileId } />
+                                <VideoPlayer
+                                    fileId={ params.fileId }
+                                    videoToken={ videoToken }
+                                />
                             </WordWrapCol>
                         </Row>
                         <Row>

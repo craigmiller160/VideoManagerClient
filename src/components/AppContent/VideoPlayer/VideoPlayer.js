@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 const VideoPlayer = (props) => {
     const {
-        fileId
+        fileId,
+        videoToken
     } = props;
-    const videoUri = `/api/video-files/play/${fileId}`;
+    const videoUri = `/api/video-files/play/${fileId}?videoToken=${videoToken}`;
     return (
         <video controls autoPlay="autoPlay">
             <source src={ videoUri } />
@@ -13,7 +14,8 @@ const VideoPlayer = (props) => {
     );
 };
 VideoPlayer.propTypes = {
-    fileId: PropTypes.number
+    fileId: PropTypes.number.isRequired,
+    videoToken: PropTypes.string.isRequired
 };
 
 export default VideoPlayer;
