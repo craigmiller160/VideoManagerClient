@@ -14,7 +14,7 @@ const VideoPlayer = (props) => {
     );
 };
 VideoPlayer.propTypes = {
-    fileId: PropTypes.number.isRequired,
+    fileId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     videoToken: PropTypes.string.isRequired
 };
 
