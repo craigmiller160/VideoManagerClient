@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders correctly 1`] = `
+<div
+  className="Home"
+>
+  <div
+    className="title"
+  >
+    <h3>
+      Welcome to VideoManager
+    </h3>
+  </div>
+</div>
+`;
