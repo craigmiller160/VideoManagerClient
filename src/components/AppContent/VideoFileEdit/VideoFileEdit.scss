@@ -1,9 +1,8 @@
+@import '../../../assets/styles/pages';
 
 .VideoFileEdit {
-  margin-top: 20px;
   .title {
-    border-bottom: 1px solid lightgray;
-    margin-bottom: 10px;
+    @include page-title;
   }
   .add-filter-wrapper {
     text-align: center;

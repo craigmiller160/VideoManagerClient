@@ -1,9 +1,9 @@
+@import '../../../assets/styles/pages';
 
 .ManageVideoFilters {
-  margin-top: 20px;
   height: 70%;
   .title {
-    border-bottom: 1px solid lightgray;
+    @include page-title;
   }
   .scroll {
     overflow: scroll;
