@@ -2,9 +2,6 @@
 
 .VideoNavbar {
     border-bottom: 1px solid lightgray;
-    .use-pointer {
-        cursor: pointer;
-    }
     .link {
         @include link;
     }

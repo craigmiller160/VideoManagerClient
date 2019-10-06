@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink as BootLink } from 'reactstrap';
-import * as classes from './VideoNavbar.scss'
+import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler } from 'reactstrap';
+import * as classes from './VideoNavbar.scss';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { startFileScan } from '../../../store/scanning/scanning.actions';
@@ -39,33 +39,27 @@ const VideoNavbar = (props) => {
                                     to="/list"
                                     exact
                                     text="Video List"
+                                    isLink
                                 />
                                 <NavbarItem
                                     id="manageFiltersLink"
                                     to="/filters"
                                     exact
                                     text="Manage Filters"
+                                    isLink
                                 />
                             </Nav>
                             <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    <BootLink
-                                        id="scanDirectory"
-                                        className={ classes['use-pointer'] }
-                                        onClick={ () => dispatch(startFileScan()) }
-                                    >
-                                        Scan Directory
-                                    </BootLink>
-                                </NavItem>
-                                <NavItem>
-                                    <BootLink
-                                        id="logout"
-                                        className={ classes['use-pointer'] }
-                                        onClick={ () => dispatch(logout()) }
-                                    >
-                                        Logout
-                                    </BootLink>
-                                </NavItem>
+                                <NavbarItem
+                                    id="scanDirectoryLink"
+                                    onClick={ () => dispatch(startFileScan()) }
+                                    text="Scan Directory"
+                                />
+                                <NavbarItem
+                                    id="logoutLink"
+                                    onClick={ () => dispatch(logout()) }
+                                    text="Logout"
+                                />
                             </Nav>
                         </Collapse>
                     </>

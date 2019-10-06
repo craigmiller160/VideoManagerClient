@@ -5,29 +5,40 @@ import { NavLink } from 'react-router-dom';
 import classes from './NavbarItem.scss';
 import useReactRouter from 'use-react-router';
 
+/* eslint-disable */ // TODO delete this
 const NavbarItem = (props) => {
     const { history: { pathname } } = useReactRouter();
     const {
         id,
         to,
         text,
-        exact
+        exact,
+        isLink,
+        onClick
     } = props;
 
     return (
-        <NavItem className={ classes.NavbarItem } active={ pathname === to }>
+        <NavItem className={ classes.NavbarItem } active={ to && pathname === to }>
             <BootLink
                 tag="div"
                 id={ id }
+                className={ classes['use-pointer'] }
+                onClick={ onClick }
             >
-                <NavLink
-                    to={ to }
-                    activeClassName={ classes.active }
-                    className={ classes.link }
-                    exact={ exact }
-                >
-                    { text }
-                </NavLink>
+                {
+                    isLink &&
+                    <NavLink
+                        to={ to }
+                        activeClassName={ classes.active }
+                        className={ classes.link }
+                        exact={ exact }
+                    >
+                        { text }
+                    </NavLink>
+                }
+                {
+                    !isLink && text
+                }
             </BootLink>
         </NavItem>
     );
@@ -36,10 +47,13 @@ NavbarItem.propTypes = {
     id: PropTypes.string,
     to: PropTypes.string,
     text: PropTypes.string,
-    exact: PropTypes.bool
+    exact: PropTypes.bool,
+    isLink: PropTypes.bool,
+    onClick: PropTypes.func
 };
 NavbarItem.defaultProps = {
-    exact: false
+    exact: false,
+    isLink: false
 };
 
 export default NavbarItem;
