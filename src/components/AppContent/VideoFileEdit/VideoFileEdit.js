@@ -55,7 +55,9 @@ export const VideoFileEdit = (props) => {
                 <>
                     <Row>
                         <Col className="text-center">
-                            <h3 className={ classes.title }>{ fileName }</h3>
+                            <div className={ classes.title }>
+                                <h3>{ fileName }</h3>
+                            </div>
                         </Col>
                     </Row>
                     <Row className="mt-3 mb-3">

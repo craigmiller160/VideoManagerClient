@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import Scanning from './Scanning/Scanning';
 import VideoFileEdit from './VideoFileEdit/VideoFileEdit';
 import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
@@ -8,6 +8,7 @@ import VideoPlayerPage from './VideoPlayer/VideoPlayerPage';
 import VideoListLayout from './VideoListLayout/VideoListLayout';
 import Login from './Login/Login';
 import ProtectedRoute from '../Routing/ProtectedRoute';
+import Home from './Home/Home';
 
 const AppRoutes = (props) => {
     const {
@@ -72,10 +73,13 @@ const AppRoutes = (props) => {
                     { allow: () => !isAuth, redirect: '/' }
                 ] }
             />
-            <Route
+            <ProtectedRoute
                 path="/"
                 exact
-                render={ () => <Redirect to="/list" /> }
+                component={ Home }
+                rules={ [
+                    { allow: () => isAuth, redirect: '/login' }
+                ] }
             />
         </Switch>
     );

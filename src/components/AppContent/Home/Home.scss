@@ -1,10 +1,7 @@
 @import '../../../assets/styles/pages';
 
-.VideoFileEdit {
+.Home {
   .title {
     @include page-title;
-  }
-  .add-filter-wrapper {
-    text-align: center;
   }
 }

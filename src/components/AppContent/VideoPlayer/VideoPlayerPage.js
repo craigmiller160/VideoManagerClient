@@ -47,7 +47,9 @@ const VideoPlayerPage = (props) => {
                     <>
                         <Row>
                             <WordWrapCol className="text-center">
-                                <h3 className={ classes.title }>{ getFileName(videoFile) }</h3>
+                                <div className={ classes.title }>
+                                    <h3>{ getFileName(videoFile) }</h3>
+                                </div>
                             </WordWrapCol>
                         </Row>
                         <Row>
