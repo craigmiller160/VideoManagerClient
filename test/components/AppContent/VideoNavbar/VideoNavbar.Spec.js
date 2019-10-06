@@ -47,6 +47,11 @@ describe('VideoNavbar', () => {
         expect(component.find('NavbarBrand')).toHaveLength(1);
         expect(component.find('NavItem')).toHaveLength(4);
         expect(component.find('NavbarToggler')).toHaveLength(1);
+
+        expect(component.find('NavItem').at(0).text()).toEqual('Video List');
+        expect(component.find('NavItem').at(1).text()).toEqual('Manage Filters');
+        expect(component.find('NavItem').at(2).text()).toEqual('Scan Directory');
+        expect(component.find('NavItem').at(3).text()).toEqual('Logout');
     });
 
     it('hides/disables items', () => {
