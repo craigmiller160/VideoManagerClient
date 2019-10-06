@@ -1,8 +1,11 @@
 import React from 'react';
+import classes from './Home.scss';
 
 const Home = () => (
-    <div>
-        <h1>Welcome to VideoManager</h1>
+    <div className={ classes.Home }>
+        <div className={ classes.title }>
+            <h3>Welcome to VideoManager</h3>
+        </div>
     </div>
 );
 
