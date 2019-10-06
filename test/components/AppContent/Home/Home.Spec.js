@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Home from '../../../../src/components/AppContent/Home/Home';
+import Home from 'components/AppContent/Home/Home';
 
 describe('Home', () => {
     it('renders correctly', () => {
