@@ -4,14 +4,21 @@ import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler } from 're
 import * as classes from './VideoNavbar.scss';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import useReactRouter from 'use-react-router';
 import { startFileScan } from '../../../store/scanning/scanning.actions';
 import { logout } from '../../../store/auth/auth.actions';
 import NavbarItem from './NavbarItem';
 
 const VideoNavbar = (props) => {
     const dispatch = useDispatch();
+    const { history } = useReactRouter();
     const [ isOpen, setOpen ] = useState(false);
     const { disabled } = props;
+
+    const onScanDirClick = async () => {
+        await dispatch(startFileScan());
+        history.push('/scanning');
+    };
 
     return (
         <Navbar className={ classes.VideoNavbar } color="dark" dark expand="md">
@@ -52,7 +59,7 @@ const VideoNavbar = (props) => {
                             <Nav className="ml-auto" navbar>
                                 <NavbarItem
                                     id="scanDirectoryLink"
-                                    onClick={ () => dispatch(startFileScan()) }
+                                    onClick={ onScanDirClick }
                                     text="Scan Directory"
                                 />
                                 <NavbarItem

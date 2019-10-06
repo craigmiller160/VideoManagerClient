@@ -88,6 +88,7 @@ describe('VideoNavbar', () => {
             expect(store.getActions()).toEqual([
                 { type: 'startFileScan' }
             ]);
+            throw new Error('Add check for history'); // TODO delete this
         });
 
         it('clicks on logout link', () => {

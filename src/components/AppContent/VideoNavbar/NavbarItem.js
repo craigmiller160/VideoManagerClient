@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 import classes from './NavbarItem.scss';
 import useReactRouter from 'use-react-router';
 
-/* eslint-disable */ // TODO delete this
 const NavbarItem = (props) => {
     const { history: { pathname } } = useReactRouter();
     const {
