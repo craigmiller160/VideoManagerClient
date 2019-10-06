@@ -5,12 +5,22 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Switch, Route, MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
+import useReactRouter from 'use-react-router';
 
 jest.mock('store/scanning/scanning.actions', () => ({
     startFileScan: () => ({ type: 'startFileScan' })
 }));
 jest.mock('store/auth/auth.actions', () => ({
     logout: () => ({ type: 'logout' })
+}));
+jest.mock('components/AppContent/VideoNavbar/NavbarItem', () => {
+    const NavbarItem = () => <div />;
+    return NavbarItem;
+});
+jest.mock('use-react-router', () => () => ({
+    history: {
+        push: jest.fn()
+    }
 }));
 
 const mockStore = configureMockStore([thunk]);
@@ -81,14 +91,17 @@ describe('VideoNavbar', () => {
     });
 
     describe('click actions', () => {
+        beforeEach(() => {
+            useReactRouter().history.push.mockClear();
+        });
 
         it('clicks on scan directory link', () => {
             const [component, store] = doMount();
-            component.find('a#scanDirectory').simulate('click');
+            component.find('NavbarItem#scanDirectoryLink').props().onClick();
             expect(store.getActions()).toEqual([
                 { type: 'startFileScan' }
             ]);
-            throw new Error('Add check for history'); // TODO delete this
+            expect(useReactRouter().history.push).toHaveBeenCalledWith('/scanning');
         });
 
         it('clicks on logout link', () => {
