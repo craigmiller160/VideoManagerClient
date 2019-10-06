@@ -10,7 +10,8 @@ const NavbarItem = (props) => {
     const {
         id,
         to,
-        text
+        text,
+        exact
     } = props;
 
     return (
@@ -23,7 +24,7 @@ const NavbarItem = (props) => {
                     to={ to }
                     activeClassName={ classes.active }
                     className={ classes.link }
-                    exact
+                    exact={ exact }
                 >
                     { text }
                 </NavLink>
@@ -34,7 +35,11 @@ const NavbarItem = (props) => {
 NavbarItem.propTypes = {
     id: PropTypes.string,
     to: PropTypes.string,
-    text: PropTypes.string
+    text: PropTypes.string,
+    exact: PropTypes.bool
+};
+NavbarItem.defaultProps = {
+    exact: false
 };
 
 export default NavbarItem;

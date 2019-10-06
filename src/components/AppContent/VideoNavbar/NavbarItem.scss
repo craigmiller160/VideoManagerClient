@@ -1,4 +1,7 @@
+@import './navbar';
 
 .NavbarItem {
-
+  .link {
+    @include link;
+  }
 }
