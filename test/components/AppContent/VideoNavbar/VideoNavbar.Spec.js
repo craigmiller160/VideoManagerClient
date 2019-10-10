@@ -105,7 +105,6 @@ describe('VideoNavbar', () => {
             expect(store.getActions()).toEqual([
                 { type: 'startFileScan' }
             ]);
-            jest.advanceTimersByTime(10000);
             expect(push).toHaveBeenCalledWith('/scanning');
         });
 
