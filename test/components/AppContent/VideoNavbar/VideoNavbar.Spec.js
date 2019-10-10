@@ -39,12 +39,6 @@ const doMount = (props = defaultProps) => {
         <Provider store={ store }>
             <MemoryRouter initialEntries={ ['/'] }>
                 <VideoNavbar { ...props } />
-                <Switch>
-                    <Route
-                        path="/list"
-                        render={ () => <p id="list">List</p> }
-                    />
-                </Switch>
             </MemoryRouter>
         </Provider>
     );
@@ -54,18 +48,43 @@ const doMount = (props = defaultProps) => {
 describe('VideoNavbar', () => {
     it('renders successfully', () => {
         const [component] = doMount();
+        console.log(component.debug()); // TODO delete this
         expect(component.find('VideoNavbar')).toHaveLength(1);
         expect(component.find('VideoNavbar').props()).toEqual(expect.objectContaining({
             disabled: false
         }));
         expect(component.find('NavbarBrand')).toHaveLength(1);
-        expect(component.find('NavItem')).toHaveLength(4);
+        expect(component.find('NavbarItem')).toHaveLength(4);
         expect(component.find('NavbarToggler')).toHaveLength(1);
 
-        expect(component.find('NavItem').at(0).text()).toEqual('Video List');
-        expect(component.find('NavItem').at(1).text()).toEqual('Manage Filters');
-        expect(component.find('NavItem').at(2).text()).toEqual('Scan Directory');
-        expect(component.find('NavItem').at(3).text()).toEqual('Logout');
+        const testNavbarItem = (index, props) => {
+            expect(component.find('NavbarItem').at(index).props()).toEqual(props);
+        };
+
+        testNavbarItem(0, {
+            id: 'videoListLink',
+            to: '/list',
+            exact: true,
+            isLink: true,
+            text: 'Video List'
+        });
+        testNavbarItem(1, {
+            id: 'manageFiltersLink',
+            to: '/filters',
+            exact: true,
+            isLink: true,
+            text: 'Manage Filters'
+        });
+        testNavbarItem(2, {
+            id: 'scanDirectoryLink',
+            onClick: expect.any(Function),
+            text: 'Scan Directory'
+        });
+        testNavbarItem(3, {
+            id: 'logoutLink',
+            onClick: expect.any(Function),
+            text: 'Logout'
+        });
     });
 
     it('hides/disables items', () => {
@@ -78,7 +97,7 @@ describe('VideoNavbar', () => {
             disabled: true
         }));
         expect(component.find('NavbarBrand')).toHaveLength(1);
-        expect(component.find('NavItem')).toHaveLength(0);
+        expect(component.find('NavbarItem')).toHaveLength(0);
         expect(component.find('NavbarToggler')).toHaveLength(0);
     });
 
@@ -110,7 +129,7 @@ describe('VideoNavbar', () => {
 
         it('clicks on logout link', () => {
             const [component, store] = doMount();
-            component.find('a#logout').simulate('click');
+            component.find('NavbarItem#logoutLink').props().onClick();
             expect(store.getActions()).toEqual([
                 { type: 'logout' }
             ]);
