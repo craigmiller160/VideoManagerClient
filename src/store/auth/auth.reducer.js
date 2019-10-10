@@ -1,10 +1,11 @@
 import { createReducer } from 'redux-starter-kit';
-import { setCsrfToken, setIsAuth, setLoginLoading } from './auth.actions';
+import { setCsrfToken, setIsAuth, setLoginLoading, setUserDetails } from './auth.actions';
 
 export const initialState = {
     isAuth: false,
     loginLoading: false,
-    csrfToken: null
+    csrfToken: null,
+    userDetails: null
 };
 
 const handleSetIsAuth = (state, action) => ({
@@ -22,8 +23,14 @@ const handleSetCsrfToken = (state, action) => ({
     csrfToken: action.payload
 });
 
+const handleSetUserDetails = (state, action) => ({
+    ...state,
+    userDetails: action.payload
+});
+
 export default createReducer(initialState, {
     [setIsAuth]: handleSetIsAuth,
     [setLoginLoading]: handleSetLoginLoading,
-    [setCsrfToken]: handleSetCsrfToken
+    [setCsrfToken]: handleSetCsrfToken,
+    [setUserDetails]: handleSetUserDetails
 });

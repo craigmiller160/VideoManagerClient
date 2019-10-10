@@ -6,6 +6,7 @@ import { showErrorAlert } from '../alert/alert.actions';
 export const setIsAuth = createAction('auth/setIsAuth');
 export const setLoginLoading = createAction('auth/setLoginLoading');
 export const setCsrfToken = createAction('auth/setCsrfToken');
+export const setUserDetails = createAction('auth/setUserDetails');
 
 export const handleCsrfToken = (response) => (dispatch) => {
     const csrfToken = response?.headers?.[CSRF_TOKEN_KEY];
@@ -17,10 +18,12 @@ export const checkAuth = () => async (dispatch) => {
         const response = await AuthService.checkAuth();
         dispatch(handleCsrfToken(response));
         dispatch(setIsAuth(true));
+        dispatch(setUserDetails(response.data));
     }
     catch (ex) {
         dispatch(handleCsrfToken(ex.response));
         dispatch(setIsAuth(false));
+        dispatch(setUserDetails(null));
     }
 };
 
@@ -47,4 +50,5 @@ export const login = ({ userName, password }) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
     await AuthService.logout();
     dispatch(setIsAuth(false));
+    dispatch(setUserDetails(null));
 };

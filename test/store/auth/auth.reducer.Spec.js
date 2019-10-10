@@ -1,6 +1,6 @@
 import authReducer, { initialState as authInitState } from 'store/auth/auth.reducer';
-import { setCsrfToken, setIsAuth, setLoginLoading } from '../../../src/store/auth/auth.actions';
-import { mockCsrfToken } from '../../exclude/mock/mockApiConfig/authApi';
+import { setCsrfToken, setIsAuth, setLoginLoading, setUserDetails } from '../../../src/store/auth/auth.actions';
+import { mockCsrfToken, mockUserDetails } from '../../exclude/mock/mockApiConfig/authApi';
 
 describe('auth.reducer', () => {
     it('returns initial state', () => {
@@ -30,6 +30,15 @@ describe('auth.reducer', () => {
         const expectedState = {
             ...authInitState,
             csrfToken: mockCsrfToken
+        };
+        expect(authReducer(authInitState, action)).toEqual(expectedState);
+    });
+
+    it('handleSetUserDetails', () => {
+        const action = { type: setUserDetails.toString(), payload: mockUserDetails };
+        const expectedState = {
+            ...authInitState,
+            userDetails: mockUserDetails
         };
         expect(authReducer(authInitState, action)).toEqual(expectedState);
     });

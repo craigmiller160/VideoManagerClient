@@ -5,7 +5,7 @@ import {
     logout,
     setCsrfToken,
     setIsAuth,
-    setLoginLoading
+    setLoginLoading, setUserDetails
 } from 'store/auth/auth.actions';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -18,7 +18,7 @@ import {
     mockLoginFail,
     mockLoginSuccess,
     mockLogout,
-    mockPassword,
+    mockPassword, mockUserDetails,
     mockUserName
 } from '../../exclude/mock/mockApiConfig/authApi';
 import { showErrorAlert } from 'store/alert/alert.actions';
@@ -50,6 +50,25 @@ describe('auth.actions', () => {
         expect(action).toEqual(expectedAction);
     });
 
+    it('setCsrfToken', () => {
+        const csrfToken = 'csrfToken';
+        const expectedAction = {
+            type: setCsrfToken.toString(),
+            payload: csrfToken
+        };
+        const action = setCsrfToken(csrfToken);
+        expect(action).toEqual(expectedAction);
+    });
+
+    it('setUserDetails', () => {
+        const expectedAction = {
+            type: setUserDetails.toString(),
+            payload: mockUserDetails
+        };
+        const action = setUserDetails(mockUserDetails);
+        expect(action).toEqual(expectedAction);
+    });
+
     describe('thunk actions', () => {
         let store;
         beforeEach(() => {
@@ -76,7 +95,8 @@ describe('auth.actions', () => {
                 mockCheckAuthSuccess(mockApi);
                 const expectedActions = [
                     { type: setCsrfToken.toString(), payload: mockCsrfToken },
-                    { type: setIsAuth.toString(), payload: true }
+                    { type: setIsAuth.toString(), payload: true },
+                    { type: setUserDetails.toString(), payload: mockUserDetails }
                 ];
                 await store.dispatch(checkAuth());
                 expect(store.getActions()).toEqual(expectedActions);
@@ -86,7 +106,8 @@ describe('auth.actions', () => {
                 mockCheckAuthFail(mockApi);
                 const expectedActions = [
                     { type: setCsrfToken.toString(), payload: mockCsrfToken },
-                    { type: setIsAuth.toString(), payload: false }
+                    { type: setIsAuth.toString(), payload: false },
+                    { type: setUserDetails.toString(), payload: null }
                 ];
                 await store.dispatch(checkAuth());
                 expect(store.getActions()).toEqual(expectedActions);
@@ -101,6 +122,7 @@ describe('auth.actions', () => {
                     { type: setLoginLoading.toString(), payload: true },
                     { type: setCsrfToken.toString(), payload: mockCsrfToken },
                     { type: setIsAuth.toString(), payload: true },
+                    { type: setUserDetails.toString(), payload: mockUserDetails },
                     { type: setLoginLoading.toString(), payload: false }
                 ];
                 await store.dispatch(login({ userName: mockUserName, password: mockPassword }));
@@ -124,7 +146,8 @@ describe('auth.actions', () => {
             it('logs out', async () => {
                 mockLogout(mockApi);
                 const expectedActions = [
-                    { type: setIsAuth.toString(), payload: false }
+                    { type: setIsAuth.toString(), payload: false },
+                    { type: setUserDetails.toString(), payload: null }
                 ];
                 await store.dispatch(logout());
                 expect(store.getActions()).toEqual(expectedActions);

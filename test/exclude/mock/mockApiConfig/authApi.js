@@ -5,12 +5,18 @@ export const mockUserName = 'userName';
 export const mockPassword = 'password';
 export const mockCsrfToken = 'HIJKLMONP';
 export const CSRF_TOKEN_TEST = 'csrf-token-test';
+export const mockUserDetails = {
+    userName: mockUserName,
+    firstName: 'firstName',
+    lastName: 'lastName',
+    roles: []
+};
 
 export const mockCheckAuthSuccess = (mockApi) =>
     mockApi.onGet('/auth/check')
         .reply((config) =>  [
             204,
-            null,
+            mockUserDetails,
             {
                 [CSRF_TOKEN_KEY]: mockCsrfToken,
                 [CSRF_TOKEN_TEST]: config.headers[CSRF_TOKEN_KEY] === 'fetch'
