@@ -3,8 +3,9 @@ import { mount } from 'enzyme';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { Switch, Route, MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
+import useReactRouter from 'use-react-router'; // eslint-disable-line import/first
 
 jest.mock('store/scanning/scanning.actions', () => ({
     startFileScan: () => ({ type: 'startFileScan' })
@@ -17,8 +18,6 @@ jest.mock('components/AppContent/VideoNavbar/NavbarItem', () => {
     return NavbarItem;
 });
 jest.mock('use-react-router', () => jest.fn());
-
-import useReactRouter from 'use-react-router'; // eslint-disable-line import/first
 
 const push = jest.fn();
 useReactRouter.mockImplementation(() => ({
@@ -48,7 +47,6 @@ const doMount = (props = defaultProps) => {
 describe('VideoNavbar', () => {
     it('renders successfully', () => {
         const [component] = doMount();
-        console.log(component.debug()); // TODO delete this
         expect(component.find('VideoNavbar')).toHaveLength(1);
         expect(component.find('VideoNavbar').props()).toEqual(expect.objectContaining({
             disabled: false
