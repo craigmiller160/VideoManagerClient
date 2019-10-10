@@ -16,12 +16,6 @@ jest.mock('components/AppContent/VideoNavbar/NavbarItem', () => {
     const NavbarItem = () => <div />;
     return NavbarItem;
 });
-// jest.mock('use-react-router', () => {
-//     console.log('Mocking'); // TODO delete this
-//     const router = require('./useReactRouterMock');
-//     console.log(router); // TODO delete this
-//     return () => router;
-// });
 jest.mock('use-react-router', () => jest.fn());
 
 import useReactRouter from 'use-react-router'; // eslint-disable-line import/first
@@ -102,7 +96,7 @@ describe('VideoNavbar', () => {
 
     describe('click actions', () => {
         beforeEach(() => {
-            // useReactRouter().history.push.mockClear();
+            push.mockClear();
         });
 
         it('clicks on scan directory link', async () => {
@@ -112,7 +106,6 @@ describe('VideoNavbar', () => {
                 { type: 'startFileScan' }
             ]);
             jest.advanceTimersByTime(10000);
-            console.log('Test', push.mock); // TODO delete this
             expect(push).toHaveBeenCalledWith('/scanning');
         });
 

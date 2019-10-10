@@ -15,12 +15,9 @@ const VideoNavbar = (props) => {
     const [ isOpen, setOpen ] = useState(false);
     const { disabled } = props;
 
-    console.log('History', history); // TODO delete this
-
     const onScanDirClick = async () => {
         await dispatch(startFileScan());
         history.push('/scanning');
-        console.log('Code', history.push.mock); // TODO delete this
     };
 
     return (
