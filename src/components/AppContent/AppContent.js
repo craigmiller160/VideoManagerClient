@@ -42,7 +42,7 @@ const AppContent = () => {
 
     const saveFileChanges = async () => {
         await dispatch(saveVideoFileEdits());
-        history.push('/');
+        history.push('/list');
     };
 
     const hideAlertOnClick = () => dispatch(hideAlert());
