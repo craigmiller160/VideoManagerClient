@@ -5,7 +5,6 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Switch, Route, MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
-import useReactRouter from 'use-react-router';
 
 jest.mock('store/scanning/scanning.actions', () => ({
     startFileScan: () => ({ type: 'startFileScan' })
@@ -17,9 +16,20 @@ jest.mock('components/AppContent/VideoNavbar/NavbarItem', () => {
     const NavbarItem = () => <div />;
     return NavbarItem;
 });
-jest.mock('use-react-router', () => () => ({
+// jest.mock('use-react-router', () => {
+//     console.log('Mocking'); // TODO delete this
+//     const router = require('./useReactRouterMock');
+//     console.log(router); // TODO delete this
+//     return () => router;
+// });
+jest.mock('use-react-router', () => jest.fn());
+
+import useReactRouter from 'use-react-router'; // eslint-disable-line import/first
+
+const push = jest.fn();
+useReactRouter.mockImplementation(() => ({
     history: {
-        push: jest.fn()
+        push
     }
 }));
 
@@ -92,16 +102,18 @@ describe('VideoNavbar', () => {
 
     describe('click actions', () => {
         beforeEach(() => {
-            useReactRouter().history.push.mockClear();
+            // useReactRouter().history.push.mockClear();
         });
 
-        it('clicks on scan directory link', () => {
+        it('clicks on scan directory link', async () => {
             const [component, store] = doMount();
-            component.find('NavbarItem#scanDirectoryLink').props().onClick();
+            await component.find('NavbarItem#scanDirectoryLink').props().onClick();
             expect(store.getActions()).toEqual([
                 { type: 'startFileScan' }
             ]);
-            expect(useReactRouter().history.push).toHaveBeenCalledWith('/scanning');
+            jest.advanceTimersByTime(10000);
+            console.log('Test', push.mock); // TODO delete this
+            expect(push).toHaveBeenCalledWith('/scanning');
         });
 
         it('clicks on logout link', () => {
