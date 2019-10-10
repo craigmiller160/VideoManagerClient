@@ -10,23 +10,34 @@ const NavbarItem = (props) => {
     const {
         id,
         to,
-        text
+        text,
+        exact,
+        isLink,
+        onClick
     } = props;
 
     return (
-        <NavItem className={ classes.NavbarItem } active={ pathname === to }>
+        <NavItem className={ classes.NavbarItem } active={ to && pathname === to }>
             <BootLink
                 tag="div"
                 id={ id }
+                className={ classes['use-pointer'] }
+                onClick={ onClick }
             >
-                <NavLink
-                    to={ to }
-                    activeClassName={ classes.active }
-                    className={ classes.link }
-                    exact
-                >
-                    { text }
-                </NavLink>
+                {
+                    isLink &&
+                    <NavLink
+                        to={ to }
+                        activeClassName={ classes.active }
+                        className={ classes.link }
+                        exact={ exact }
+                    >
+                        { text }
+                    </NavLink>
+                }
+                {
+                    !isLink && text
+                }
             </BootLink>
         </NavItem>
     );
@@ -34,7 +45,14 @@ const NavbarItem = (props) => {
 NavbarItem.propTypes = {
     id: PropTypes.string,
     to: PropTypes.string,
-    text: PropTypes.string
+    text: PropTypes.string,
+    exact: PropTypes.bool,
+    isLink: PropTypes.bool,
+    onClick: PropTypes.func
+};
+NavbarItem.defaultProps = {
+    exact: false,
+    isLink: false
 };
 
 export default NavbarItem;

@@ -1,4 +1,10 @@
+@import './navbar';
 
 .NavbarItem {
-
+  .use-pointer {
+    cursor: pointer;
+  }
+  .link {
+    @include link;
+  }
 }

@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink as BootLink } from 'reactstrap';
-import * as classes from './VideoNavbar.scss'
+import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler } from 'reactstrap';
+import * as classes from './VideoNavbar.scss';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useReactRouter from 'use-react-router';
 import { startFileScan } from '../../../store/scanning/scanning.actions';
 import { logout } from '../../../store/auth/auth.actions';
+import NavbarItem from './NavbarItem';
 
 const VideoNavbar = (props) => {
     const dispatch = useDispatch();
     const { history } = useReactRouter();
     const [ isOpen, setOpen ] = useState(false);
     const { disabled } = props;
-    const pathname = history.location.pathname;
+
+    const onScanDirClick = async () => {
+        await dispatch(startFileScan());
+        history.push('/scanning');
+    };
 
     return (
         <Navbar className={ classes.VideoNavbar } color="dark" dark expand="md">
@@ -36,55 +41,32 @@ const VideoNavbar = (props) => {
                         <NavbarToggler onClick={ () => setOpen(!isOpen) } />
                         <Collapse isOpen={ isOpen } navbar>
                             <Nav navbar>
-                                <NavItem active={ pathname === '/list' }>
-                                    <BootLink
-                                        tag="div"
-                                        id="videoList"
-                                    >
-                                        <NavLink
-                                            to="/list"
-                                            activeClassName={ classes.active }
-                                            className={ classes.link }
-                                            exact
-                                        >
-                                            Video List
-                                        </NavLink>
-                                    </BootLink>
-                                </NavItem>
-                                <NavItem active={ pathname === '/filters' }>
-                                    <BootLink
-                                        tag="div"
-                                        id="manageFilters"
-                                    >
-                                        <NavLink
-                                            to="/filters"
-                                            activeClassName={ classes.active }
-                                            className={ classes.link }
-                                        >
-                                            Manage Filters
-                                        </NavLink>
-                                    </BootLink>
-                                </NavItem>
+                                <NavbarItem
+                                    id="videoListLink"
+                                    to="/list"
+                                    exact
+                                    text="Video List"
+                                    isLink
+                                />
+                                <NavbarItem
+                                    id="manageFiltersLink"
+                                    to="/filters"
+                                    exact
+                                    text="Manage Filters"
+                                    isLink
+                                />
                             </Nav>
                             <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    <BootLink
-                                        id="scanDirectory"
-                                        className={ classes['use-pointer'] }
-                                        onClick={ () => dispatch(startFileScan()) }
-                                    >
-                                        Scan Directory
-                                    </BootLink>
-                                </NavItem>
-                                <NavItem>
-                                    <BootLink
-                                        id="logout"
-                                        className={ classes['use-pointer'] }
-                                        onClick={ () => dispatch(logout()) }
-                                    >
-                                        Logout
-                                    </BootLink>
-                                </NavItem>
+                                <NavbarItem
+                                    id="scanDirectoryLink"
+                                    onClick={ onScanDirClick }
+                                    text="Scan Directory"
+                                />
+                                <NavbarItem
+                                    id="logoutLink"
+                                    onClick={ () => dispatch(logout()) }
+                                    text="Logout"
+                                />
                             </Nav>
                         </Collapse>
                     </>
