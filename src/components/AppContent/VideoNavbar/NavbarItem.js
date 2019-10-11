@@ -23,7 +23,7 @@ const NavbarItem = (props) => {
     }
 
     return (
-        <NavItem className={ navItemClasses.join(' ') } active={ to && pathname === to }>
+        <NavItem tag="div" className={ navItemClasses.join(' ') } active={ to && pathname === to }>
             <BootLink
                 tag="div"
                 id={ id }
