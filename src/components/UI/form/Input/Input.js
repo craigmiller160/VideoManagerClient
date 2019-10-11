@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useEffect } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import StyledInput from '../../Styled/StyledInput';
 import StyledLabel from '../../Styled/StyledLabel';
@@ -31,7 +31,8 @@ export const InputComponent = (props) => {
         textarea,
         inputProps,
         meta: { touched, error },
-        focusOnRender
+        focusOnRender,
+        disabled
     } = props;
 
     const id = newid();
@@ -61,6 +62,7 @@ export const InputComponent = (props) => {
                 resize={ textarea ? textarea.resize : false }
                 hasError={ hasError }
                 ref={ inputRef }
+                disabled={ disabled }
             />
             {
                 hasError &&
@@ -76,7 +78,8 @@ InputComponent.defaultProps = {
         resize: false
     },
     inputProps: {},
-    focusOnRender: false
+    focusOnRender: false,
+    disabled: false
 };
 
 InputComponent.propTypes = {
@@ -95,7 +98,8 @@ InputComponent.propTypes = {
         touched: PropTypes.bool,
         error: PropTypes.string
     }),
-    focusOnRender: PropTypes.bool
+    focusOnRender: PropTypes.bool,
+    disabled: PropTypes.bool
 };
 
 const Field = createField(InputComponent);
@@ -104,7 +108,8 @@ Field.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
     validate: PropTypes.arrayOf(PropTypes.func),
-    focusOnRender: PropTypes.bool
+    focusOnRender: PropTypes.bool,
+    disabled: PropTypes.bool
 };
 
 export default Field;
