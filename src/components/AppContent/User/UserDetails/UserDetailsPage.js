@@ -5,11 +5,18 @@ import Input from 'components/UI/form/Input/Input';
 import Form from 'components/UI/form/Form/Form';
 import classes from './UserDetailsPage.scss';
 import { Button } from 'reactstrap';
+import useReactRouter from 'use-react-router';
 
 const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 
 const UserDetailsPage = () => {
+    const { location } = useReactRouter();
     const userDetails = useSelector(state => state.auth.userDetails, shallowEqual);
+
+    let formInitValues = {};
+    if (location.pathname === '/profile') {
+        formInitValues = userDetails;
+    }
 
     const onSubmit = () => {};
 
@@ -18,7 +25,7 @@ const UserDetailsPage = () => {
             form={ USER_DETAILS_FORM_NAME }
             onSubmit={ onSubmit }
             className={ classes.UserDetailsPage }
-            initialValues={ userDetails }
+            initialValues={ formInitValues }
         >
             <FlexRow>
                 <div className={ classes.title }>
