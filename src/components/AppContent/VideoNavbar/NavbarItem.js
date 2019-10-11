@@ -13,11 +13,17 @@ const NavbarItem = (props) => {
         text,
         exact,
         isLink,
-        onClick
+        onClick,
+        className
     } = props;
 
+    const navItemClasses = [classes.NavbarItem];
+    if (className) {
+        navItemClasses.push(className);
+    }
+
     return (
-        <NavItem className={ classes.NavbarItem } active={ to && pathname === to }>
+        <NavItem className={ navItemClasses.join(' ') } active={ to && pathname === to }>
             <BootLink
                 tag="div"
                 id={ id }
@@ -48,7 +54,8 @@ NavbarItem.propTypes = {
     text: PropTypes.string,
     exact: PropTypes.bool,
     isLink: PropTypes.bool,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    className: PropTypes.string
 };
 NavbarItem.defaultProps = {
     exact: false,
