@@ -15,6 +15,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const loginFormErrors = useSelector(loginFormHasErrors, shallowEqual);
     const loginLoading = useSelector((state) => state.auth?.loginLoading, shallowEqual);
+    // const usernameRef = useRef(null);
 
     return (
         <Form
@@ -44,6 +45,7 @@ const Login = () => {
                                     isRequired,
                                     isValidEmail
                                 ] }
+                                focusOnRender
                             />
                             <Input
                                 label="Password"

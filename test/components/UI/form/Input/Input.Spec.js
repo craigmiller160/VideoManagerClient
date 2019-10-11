@@ -118,4 +118,16 @@ describe('Input', () => {
         }));
         expect(component.find('span.text-danger')).toHaveLength(1);
     });
+
+    it('focuses on render', () => {
+        const newProps = {
+            ...props,
+            focusOnRender: true
+        };
+        const component = mount(
+            <InputComponent { ...newProps } />
+        );
+
+        expect(component.find('input').getDOMNode()).toEqual(document.activeElement);
+    });
 });
