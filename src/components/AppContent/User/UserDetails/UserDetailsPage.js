@@ -4,6 +4,8 @@ import { shallowEqual, useSelector } from 'react-redux';
 import FlexRow from '../../../UI/Grid/FlexRow';
 import Input from 'components/UI/form/Input/Input';
 import Form from 'components/UI/form/Form/Form';
+import classes from './UserDetailsPage.scss';
+import { Button } from 'reactstrap';
 
 const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 
@@ -16,20 +18,60 @@ const UserDetailsPage = () => {
         <Form
             form={ USER_DETAILS_FORM_NAME }
             onSubmit={ onSubmit }
+            className={ classes.UserDetailsPage }
         >
             <FlexRow>
+                <div className={ classes.title }>
+                    <h3>User Profile</h3>
+                </div>
+            </FlexRow>
+            <FlexRow className="mt-3" justifyContent="space-around">
                 <Input
                     label="Username"
                     name="userName"
                     type="email"
                     disabled
+                    divClassName={ classes.Input }
                 />
                 <Input
                     label="Password"
                     name="password"
                     type="password"
+                    divClassName={ classes.Input }
+                />
+            </FlexRow>
+            <FlexRow justifyContent="space-around">
+                <Input
+                    label="First Name"
+                    name="firstName"
+                    type="text"
+                    divClassName={ classes.Input }
+                />
+                <Input
+                    label="Last Name"
+                    name="lastName"
+                    type="text"
+                    divClassName={ classes.Input }
+                />
+            </FlexRow>
+            <FlexRow justifyContent="space-around">
+                <Input
+                    label="Roles"
+                    name="roles"
+                    type="text"
+                    divClassName={ classes.Input }
+                />
+                <Input
+                    label="Last Authenticated"
+                    name="lastAuth"
+                    type="text"
+                    divClassName={ classes.Input }
                     disabled
                 />
+            </FlexRow>
+            <FlexRow className="mt-5" justifyContent="space-around">
+                <Button color="primary">Save</Button>
+                {/*<Button color="info">Revoke Login</Button>*/}
             </FlexRow>
         </Form>
     );

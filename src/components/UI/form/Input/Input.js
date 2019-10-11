@@ -32,7 +32,9 @@ export const InputComponent = (props) => {
         inputProps,
         meta: { touched, error },
         focusOnRender,
-        disabled
+        disabled,
+        divClassName,
+        inputClassName
     } = props;
 
     const id = newid();
@@ -45,7 +47,7 @@ export const InputComponent = (props) => {
     }, []);
 
     return (
-        <StyledFormGroupDiv hidden={ 'hidden' === type.toLowerCase() }>
+        <StyledFormGroupDiv className={ divClassName } hidden={ 'hidden' === type.toLowerCase() }>
             <StyledLabel
                 htmlForm={ id }
             >
@@ -63,6 +65,7 @@ export const InputComponent = (props) => {
                 hasError={ hasError }
                 ref={ inputRef }
                 disabled={ disabled }
+                className={ inputClassName }
             />
             {
                 hasError &&
@@ -99,7 +102,9 @@ InputComponent.propTypes = {
         error: PropTypes.string
     }),
     focusOnRender: PropTypes.bool,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    divClassName: PropTypes.string,
+    inputClassName: PropTypes.string
 };
 
 const Field = createField(InputComponent);
@@ -109,7 +114,9 @@ Field.propTypes = {
     name: PropTypes.string.isRequired,
     validate: PropTypes.arrayOf(PropTypes.func),
     focusOnRender: PropTypes.bool,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    divClassName: PropTypes.string,
+    inputClassName: PropTypes.string
 };
 
 export default Field;

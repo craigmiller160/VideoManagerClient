@@ -6,6 +6,7 @@ const FlexRow = styled.div`
     flex-direction: row;
     justify-content: ${(props) => props.justifyContent};
     align-items: ${(props) => props.alignItems};
+    width: 100%;
 `;
 FlexRow.displayName = 'FlexRow';
 FlexRow.propTypes = {

@@ -6,6 +6,7 @@ const FlexCol = styled.div`
     flex-direction: column;
     justify-content: ${(props) => props.justifyContent};
     align-items: ${(props) => props.alignItems};
+    height: 100%;
 `;
 FlexCol.displayName = 'FlexCol';
 FlexCol.propTypes = {
