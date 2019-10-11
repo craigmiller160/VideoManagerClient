@@ -1,4 +1,3 @@
-/* eslint-disable */ // TODO delete this
 import React from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import FlexRow from '../../../UI/Grid/FlexRow';
@@ -19,6 +18,7 @@ const UserDetailsPage = () => {
             form={ USER_DETAILS_FORM_NAME }
             onSubmit={ onSubmit }
             className={ classes.UserDetailsPage }
+            initialValues={ userDetails }
         >
             <FlexRow>
                 <div className={ classes.title }>
