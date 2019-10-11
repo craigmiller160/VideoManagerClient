@@ -9,6 +9,7 @@ import VideoListLayout from './VideoListLayout/VideoListLayout';
 import Login from './Login/Login';
 import ProtectedRoute from '../Routing/ProtectedRoute';
 import Home from './Home/Home';
+import UserDetailsPage from './User/UserDetails/UserDetailsPage';
 
 const AppRoutes = (props) => {
     const {
@@ -60,6 +61,14 @@ const AppRoutes = (props) => {
             <ProtectedRoute
                 path="/list"
                 component={ VideoListLayout }
+                rules={ [
+                    { allow: () => isAuth, redirect: '/login' },
+                    { allow: () => !isScanning, redirect: '/scanning' }
+                ] }
+            />
+            <ProtectedRoute
+                path="/profile"
+                component={ UserDetailsPage }
                 rules={ [
                     { allow: () => isAuth, redirect: '/login' },
                     { allow: () => !isScanning, redirect: '/scanning' }

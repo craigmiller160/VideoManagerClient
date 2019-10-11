@@ -19,6 +19,9 @@ const NavbarDropdown = () => {
                     id="userProfileLink"
                     text="Profile"
                     className={ classes.dropdownItem }
+                    isLink
+                    exact
+                    to="/profile"
                 />
                 <NavbarItem
                     id="logoutLink"
