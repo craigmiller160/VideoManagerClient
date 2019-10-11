@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import StyledInput from '../../Styled/StyledInput';
 import StyledLabel from '../../Styled/StyledLabel';
@@ -7,33 +7,41 @@ import createField from "../createField";
 import StyledFormGroupDiv from '../../Styled/StyledFormGroupDiv';
 import StyledTextArea from '../../Styled/StyledTextArea';
 
-export const InnerComponent = (props) => {
+export const InnerComponent = forwardRef((props, ref) => { // eslint-disable-line react/display-name
     if (props.type === 'textarea') {
         return (
-            <StyledTextArea { ...props } />
+            <StyledTextArea { ...props } ref={ ref } />
         );
     }
 
     return (
-        <StyledInput { ...props } />
+        <StyledInput { ...props } ref={ ref } />
     );
-};
+});
 InnerComponent.propTypes = {
     type: PropTypes.string
 };
 
 export const InputComponent = (props) => {
+    const inputRef = useRef(null);
     const {
         label,
         type,
         input,
         textarea,
         inputProps,
-        meta: { touched, error }
+        meta: { touched, error },
+        focusOnRender
     } = props;
 
     const id = newid();
     const hasError = touched && !!error;
+
+    useEffect(() => {
+        if (focusOnRender) {
+            inputRef.current?.focus();
+        }
+    }, []);
 
     return (
         <StyledFormGroupDiv hidden={ 'hidden' === type.toLowerCase() }>
@@ -52,6 +60,7 @@ export const InputComponent = (props) => {
                 cols={ textarea ? textarea.cols : null }
                 resize={ textarea ? textarea.resize : false }
                 hasError={ hasError }
+                ref={ inputRef }
             />
             {
                 hasError &&
@@ -66,7 +75,8 @@ InputComponent.defaultProps = {
     textarea: {
         resize: false
     },
-    inputProps: {}
+    inputProps: {},
+    focusOnRender: false
 };
 
 InputComponent.propTypes = {
@@ -84,7 +94,8 @@ InputComponent.propTypes = {
     meta: PropTypes.shape({
         touched: PropTypes.bool,
         error: PropTypes.string
-    })
+    }),
+    focusOnRender: PropTypes.bool
 };
 
 const Field = createField(InputComponent);
@@ -92,7 +103,8 @@ Field.propTypes = {
     type: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
-    validate: PropTypes.arrayOf(PropTypes.func)
+    validate: PropTypes.arrayOf(PropTypes.func),
+    focusOnRender: PropTypes.bool
 };
 
 export default Field;
