@@ -83,6 +83,8 @@ describe('VideoNavbar', () => {
             onClick: expect.any(Function),
             text: 'Logout'
         });
+
+        throw new Error('Add tests for dropdown');
     });
 
     it('hides/disables items', () => {

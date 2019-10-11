@@ -5,4 +5,19 @@
     .link {
         @include link;
     }
+
+    .dropdown {
+        background-color: #343a40;
+        border: none;
+        button {
+            color: rgba(255, 255, 255, 0.5);
+            &:hover {
+                background-color: #343a40;
+                color: white;
+            }
+            &.active {
+                color: white;
+            }
+        }
+    }
 }

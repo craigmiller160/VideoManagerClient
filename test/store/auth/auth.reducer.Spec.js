@@ -42,4 +42,8 @@ describe('auth.reducer', () => {
         };
         expect(authReducer(authInitState, action)).toEqual(expectedState);
     });
+
+    it('handleSetUserDetails null value', () => {
+        throw new Error('Finish this');
+    });
 });

@@ -5,7 +5,7 @@ export const initialState = {
     isAuth: false,
     loginLoading: false,
     csrfToken: null,
-    userDetails: null
+    userDetails: {}
 };
 
 const handleSetIsAuth = (state, action) => ({
@@ -25,7 +25,7 @@ const handleSetCsrfToken = (state, action) => ({
 
 const handleSetUserDetails = (state, action) => ({
     ...state,
-    userDetails: action.payload
+    userDetails: action.payload ?? {}
 });
 
 export default createReducer(initialState, {
