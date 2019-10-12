@@ -10,11 +10,11 @@ import Login from './Login/Login';
 import ProtectedRoute from '../Routing/ProtectedRoute';
 import Home from './Home/Home';
 import UserDetailsPage from './User/UserDetails/UserDetailsPage';
-import { shallowEqual, useSelector } from 'react-redux';
-import { ROLE_EDIT } from '../../utils/securityConstants';
+import { useSelector } from 'react-redux';
+import { hasEditRole as hasEditRoleSelector } from '../../store/auth/auth.selectors';
 
 const AppRoutes = (props) => {
-    const userDetails = useSelector(state => state.auth.userDetails, shallowEqual);
+    const hasEditRole = useSelector(hasEditRoleSelector);
     const {
         selectedVideo,
         saveFileChanges,
@@ -23,7 +23,7 @@ const AppRoutes = (props) => {
     } = props;
 
     const hasEditRoleRule = {
-        allow: () => !!userDetails?.roles?.find((role) => role.name === ROLE_EDIT),
+        allow: () => hasEditRole,
         redirect: '/'
     };
 
