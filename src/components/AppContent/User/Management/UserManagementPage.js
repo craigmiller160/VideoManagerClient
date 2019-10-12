@@ -37,7 +37,7 @@ const UserManagementPage = () => {
                     <h3>User Management</h3>
                 </div>
             </FlexRow>
-            <FlexCol>
+            <FlexCol className={ classes.list }>
                 {
                     displayUsers.map((user) => (
                         <UserListItem

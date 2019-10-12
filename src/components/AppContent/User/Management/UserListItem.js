@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classes from './UserListItem.scss';
 
 const UserListItem = (props) => {
     const {
@@ -7,7 +8,9 @@ const UserListItem = (props) => {
     } = props;
 
     return (
-        <div>{ user.userName }</div>
+        <div className={ classes.UserListItem }>
+            <p>{ user.userName }</p>
+        </div>
     );
 };
 UserListItem.propTypes = {

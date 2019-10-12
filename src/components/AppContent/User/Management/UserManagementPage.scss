@@ -4,4 +4,8 @@
   .title {
     @include page-title;
   }
+
+  .list {
+    margin-top: 20px;
+  }
 }
