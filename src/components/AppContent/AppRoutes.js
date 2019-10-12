@@ -76,7 +76,8 @@ const AppRoutes = (props) => {
                 component={ ManageVideoFilters }
                 rules={ [
                     isAuthenticatedRule,
-                    isNotScanningRule
+                    isNotScanningRule,
+                    hasEditRoleRule
                 ] }
             />
             <ProtectedRoute

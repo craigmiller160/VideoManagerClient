@@ -113,6 +113,14 @@ describe('VideoNavbar', () => {
         }));
     });
 
+    it('renders without scanning role', () => {
+        throw new Error('Finish this');
+    });
+
+    it('renders without edit role', () => {
+        throw new Error('Finish this');
+    });
+
     describe('click actions', () => {
         beforeEach(() => {
             push.mockClear();
