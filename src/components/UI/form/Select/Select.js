@@ -71,6 +71,10 @@ Field.propTypes = {
     name: PropTypes.string,
     multi: PropTypes.bool,
     divClassName: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    options: PropTypes.arrayOf(PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.any
+    }))
 };
 export default Field;

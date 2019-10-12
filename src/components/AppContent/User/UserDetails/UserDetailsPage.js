@@ -1,30 +1,45 @@
 /* eslint-disable */ // TODO delete this
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import FlexRow from '../../../UI/Grid/FlexRow';
 import Input from 'components/UI/form/Input/Input';
 import Form from 'components/UI/form/Form/Form';
 import Select from 'components/UI/form/Select/Select';
-import classes from './UserDetailsPage.scss';
 import { Button } from 'reactstrap';
 import useReactRouter from 'use-react-router';
+import classes from './UserDetailsPage.scss';
 import { hasAdminRole as hasAdminRoleSelector } from '../../../../store/auth/auth.selectors';
+import * as AuthApiService from 'services/AuthApiService';
 
 const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 
 // TODO for the roles dropdown, admin users need to load all the roles from the server, then select only the ones from the user
 // TODO revoke login needs to be made to work
 
+const formatRoles = (roles) => roles.map(role => ({ value: role.roleId, label: role.name }));
+
 const UserDetailsPage = () => {
     const { location } = useReactRouter();
     const userDetails = useSelector(state => state.auth.userDetails, shallowEqual);
     const hasAdminRole = useSelector(hasAdminRoleSelector);
+    const [allRoles, setAllRoles] = useState([]);
+
+    useEffect(() => {
+        const loadRoles = async () => {
+            const res = await AuthApiService.getRoles();
+            setAllRoles(formatRoles(res.data));
+        };
+
+        if (hasAdminRole) {
+            loadRoles();
+        }
+    }, []);
 
     let formInitValues = {};
     if (location.pathname === '/profile') {
         formInitValues = {
             ...userDetails,
-            roles: userDetails.roles.map(role => ({ value: role.roleId, label: role.name }))
+            roles: formatRoles(userDetails.roles)
         }
     }
 
@@ -78,6 +93,7 @@ const UserDetailsPage = () => {
                     divClassName={ classes.Input }
                     multi
                     disabled={ !hasAdminRole }
+                    options={ allRoles }
                 />
                 <Input
                     label="Last Authenticated"
