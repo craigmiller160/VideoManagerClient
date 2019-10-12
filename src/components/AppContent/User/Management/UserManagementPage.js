@@ -1,9 +1,15 @@
 import React from 'react';
+import classes from './UserManagementPage.scss';
+import FlexRow from '../../../UI/Grid/FlexRow';
 
 const UserManagementPage = () => {
     return (
-        <div>
-            <h1>User Management</h1>
+        <div className={ classes.UserManagementPage }>
+            <FlexRow>
+                <div className={ classes.title }>
+                    <h3>User Management</h3>
+                </div>
+            </FlexRow>
         </div>
     );
 };
