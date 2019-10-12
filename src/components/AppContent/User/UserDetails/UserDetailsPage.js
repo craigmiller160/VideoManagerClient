@@ -1,6 +1,6 @@
 /* eslint-disable */ // TODO delete this
 import React, { useState, useEffect } from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import FlexRow from '../../../UI/Grid/FlexRow';
 import Input from 'components/UI/form/Input/Input';
@@ -11,16 +11,19 @@ import useReactRouter from 'use-react-router';
 import classes from './UserDetailsPage.scss';
 import { hasAdminRole as hasAdminRoleSelector } from '../../../../store/auth/auth.selectors';
 import * as AuthApiService from 'services/AuthApiService';
+import { saveUserProfile } from '../../../../store/auth/auth.actions';
 
 const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 
 // TODO for the roles dropdown, admin users need to load all the roles from the server, then select only the ones from the user
 // TODO revoke login needs to be made to work
+// TODO need a saveUserDetails alternative to saveUserProfile
 
 const formatRoles = (roles) => roles.map(role => ({ value: role.roleId, label: role.name }));
 const TIMESTAMP_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS';
 
 const UserDetailsPage = () => {
+    const dispatch = useDispatch();
     const { location } = useReactRouter();
     const userDetails = useSelector(state => state.auth.userDetails, shallowEqual);
     const hasAdminRole = useSelector(hasAdminRoleSelector);
@@ -46,12 +49,10 @@ const UserDetailsPage = () => {
         }
     }
 
-    const onSubmit = () => {}; // TODO need better onSubmit
-
     return (
         <Form
             form={ USER_DETAILS_FORM_NAME }
-            onSubmit={ onSubmit }
+            onSubmit={ (values) => dispatch(saveUserProfile(values)) }
             className={ classes.UserDetailsPage }
             initialValues={ formInitValues }
         >

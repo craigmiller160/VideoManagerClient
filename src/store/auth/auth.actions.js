@@ -52,3 +52,8 @@ export const logout = () => async (dispatch) => {
     dispatch(setIsAuth(false));
     dispatch(setUserDetails(null));
 };
+
+/* eslint-disable */ // TODO delete this
+export const saveUserProfile = (values) => async (dispatch) => {
+    console.log(values); // TODO delete this
+};

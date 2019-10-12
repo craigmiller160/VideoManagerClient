@@ -153,5 +153,11 @@ describe('auth.actions', () => {
                 expect(store.getActions()).toEqual(expectedActions);
             });
         });
+
+        describe('saveUserProfile', () => {
+            it('saves user profile', () => {
+                throw new Error('Finish this');
+            });
+        });
     });
 });
