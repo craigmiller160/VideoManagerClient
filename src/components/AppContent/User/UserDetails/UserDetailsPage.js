@@ -1,6 +1,7 @@
 /* eslint-disable */ // TODO delete this
 import React, { useState, useEffect } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
+import moment from 'moment';
 import FlexRow from '../../../UI/Grid/FlexRow';
 import Input from 'components/UI/form/Input/Input';
 import Form from 'components/UI/form/Form/Form';
@@ -17,6 +18,7 @@ const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 // TODO revoke login needs to be made to work
 
 const formatRoles = (roles) => roles.map(role => ({ value: role.roleId, label: role.name }));
+const TIMESTAMP_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS';
 
 const UserDetailsPage = () => {
     const { location } = useReactRouter();
@@ -39,7 +41,8 @@ const UserDetailsPage = () => {
     if (location.pathname === '/profile') {
         formInitValues = {
             ...userDetails,
-            roles: formatRoles(userDetails.roles)
+            roles: formatRoles(userDetails.roles),
+            lastAuthenticated: moment(userDetails.lastAuthenticated).format(TIMESTAMP_FORMAT)
         }
     }
 
@@ -97,7 +100,7 @@ const UserDetailsPage = () => {
                 />
                 <Input
                     label="Last Authenticated"
-                    name="lastAuth"
+                    name="lastAuthenticated"
                     type="text"
                     divClassName={ classes.Input }
                     disabled
