@@ -3,22 +3,20 @@ import PropTypes from 'prop-types';
 import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler } from 'reactstrap';
 import * as classes from './VideoNavbar.scss';
 import { NavLink } from 'react-router-dom';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useReactRouter from 'use-react-router';
 import { startFileScan } from '../../../store/scanning/scanning.actions';
 import NavbarItem from './NavbarItem';
 import NavbarDropdown from './NavbarDropdown';
-import { ROLE_EDIT, ROLE_SCAN } from '../../../utils/securityConstants';
+import { hasEditRole as hasEditRoleSelector, hasScanRole as hasScanRoleSelector } from '../../../store/auth/auth.selectors';
 
 const VideoNavbar = (props) => {
     const dispatch = useDispatch();
     const { history } = useReactRouter();
     const [ isOpen, setOpen ] = useState(false);
-    const userDetails = useSelector(state => state.auth.userDetails, shallowEqual);
+    const hasEditRole = useSelector(hasEditRoleSelector);
+    const hasScanRole = useSelector(hasScanRoleSelector);
     const { disabled } = props;
-
-    const hasEditRole = !!userDetails?.roles?.find((role) => role.name === ROLE_EDIT);
-    const hasScanningRole = !!userDetails?.roles?.find((role) => role.name === ROLE_SCAN);
 
     const onScanDirClick = async () => {
         await dispatch(startFileScan());
@@ -66,7 +64,7 @@ const VideoNavbar = (props) => {
                             </Nav>
                             <Nav className="ml-auto" navbar>
                                 {
-                                    hasScanningRole &&
+                                    hasScanRole &&
                                     <NavbarItem
                                         id="scanDirectoryLink"
                                         onClick={ onScanDirClick }

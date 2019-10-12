@@ -1,6 +1,6 @@
 import { LOGIN_FORM_NAME } from 'components/AppContent/Login/Login';
 import {
-    hasAdmiRole,
+    hasAdminRole,
     hasEditRole,
     hasScanRole,
     loginFormHasErrors
@@ -69,7 +69,7 @@ describe('auth.selectors', () => {
                     }
                 }
             };
-            const result = hasAdmiRole(state);
+            const result = hasAdminRole(state);
             expect(result).toEqual(true);
         });
 
@@ -81,7 +81,7 @@ describe('auth.selectors', () => {
                     }
                 }
             };
-            const result = hasAdmiRole(state);
+            const result = hasAdminRole(state);
             expect(result).toEqual(false);
         });
     });

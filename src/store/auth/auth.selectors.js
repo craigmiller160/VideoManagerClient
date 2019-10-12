@@ -15,7 +15,7 @@ export const hasEditRole = createSelector(
     (userDetails) => !!userDetails?.roles?.find((role) => role.name === ROLE_EDIT)
 );
 
-export const hasAdmiRole = createSelector(
+export const hasAdminRole = createSelector(
     ['auth.userDetails'],
     (userDetails) => !!userDetails?.roles?.find((role) => role.name === ROLE_ADMIN)
 );

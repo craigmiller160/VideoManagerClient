@@ -8,7 +8,7 @@ import Select from 'components/UI/form/Select/Select';
 import classes from './UserDetailsPage.scss';
 import { Button } from 'reactstrap';
 import useReactRouter from 'use-react-router';
-import { ROLE_ADMIN } from '../../../../utils/securityConstants';
+import { hasAdminRole as hasAdminRoleSelector } from '../../../../store/auth/auth.selectors';
 
 const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 
@@ -18,6 +18,7 @@ const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 const UserDetailsPage = () => {
     const { location } = useReactRouter();
     const userDetails = useSelector(state => state.auth.userDetails, shallowEqual);
+    const hasAdminRole = useSelector(hasAdminRoleSelector);
 
     let formInitValues = {};
     if (location.pathname === '/profile') {
@@ -26,8 +27,6 @@ const UserDetailsPage = () => {
             roles: userDetails.roles.map(role => ({ value: role.roleId, label: role.name }))
         }
     }
-
-    const hasAdminRole = !!userDetails.roles.find((role) => role.name === ROLE_ADMIN);
 
     const onSubmit = () => {}; // TODO need better onSubmit
 
