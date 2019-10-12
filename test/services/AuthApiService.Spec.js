@@ -1,13 +1,20 @@
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
-import { checkAuth, getRoles, getVideoToken, login, logout } from 'services/AuthApiService';
+import {
+    checkAuth,
+    getRoles,
+    getVideoToken,
+    login,
+    logout,
+    saveUserProfile
+} from 'services/AuthApiService';
 import {
     CSRF_TOKEN_TEST,
     mockCheckAuthSuccess, mockCsrfToken, mockGetRoles, mockGetVideoToken,
     mockLoginSuccess,
     mockLogout,
-    mockPassword, mockRoles,
-    mockTokenResponse,
+    mockPassword, mockRoles, mockSaveUserProfile,
+    mockTokenResponse, mockUserDetails,
     mockUserName
 } from '../exclude/mock/mockApiConfig/authApi';
 import { CSRF_TOKEN_KEY } from '../../src/utils/securityConstants';
@@ -22,6 +29,7 @@ describe('AuthApiService', () => {
         mockLogout(mockApi);
         mockGetVideoToken(mockApi);
         mockGetRoles(mockApi);
+        mockSaveUserProfile(mockApi);
     });
 
     it('login', async () => {
@@ -60,6 +68,14 @@ describe('AuthApiService', () => {
         expect(res).toEqual(expect.objectContaining({
             status: 200,
             data: mockRoles
+        }));
+    });
+
+    it('saveUserProfile', async () => {
+        const res = await saveUserProfile(mockUserDetails);
+        expect(res).toEqual(expect.objectContaining({
+            status: 200,
+            data: mockUserDetails
         }));
     });
 });

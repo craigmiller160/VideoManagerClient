@@ -56,3 +56,7 @@ export const mockGetVideoToken = (mockApi) =>
 export const mockGetRoles = (mockApi) =>
     mockApi.onGet('/auth/roles')
         .reply(200, mockRoles);
+
+export const mockSaveUserProfile = (mockApi) =>
+    mockApi.onPut('/auth/users/self', mockUserDetails)
+        .reply(200, mockUserDetails);

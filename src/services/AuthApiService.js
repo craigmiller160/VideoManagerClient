@@ -19,3 +19,6 @@ export const getVideoToken = (videoId) =>
 
 export const getRoles = () =>
     API.get('/auth/roles');
+
+export const saveUserProfile = (userDetails) =>
+    API.put('/auth/users/self', userDetails);
