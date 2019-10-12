@@ -19,14 +19,34 @@ const AppRoutes = (props) => {
         isAuth
     } = props;
 
+    const isAuthenticatedRule = {
+        allow: () => isAuth, redirect: '/login'
+    };
+
+    const isNotAuthenticatedRule = {
+        allow: () => !isAuth, redirect: '/'
+    };
+
+    const isScanningRule = {
+        allow: () => isScanning, redirect: '/'
+    };
+
+    const isNotScanningRule = {
+        allow: () => !isScanning, redirect: '/scanning'
+    };
+
+    const hasSelectedVideoRule = {
+        allow: () => !!selectedVideo?.fileName, redirect: '/'
+    };
+
     return (
         <Switch>
             <ProtectedRoute
                 path="/scanning"
                 component={ Scanning }
                 rules={ [
-                    { allow: () => isAuth, redirect: '/login' },
-                    { allow: () => isScanning, redirect: '/' }
+                    isAuthenticatedRule,
+                    isScanningRule
                 ] }
             />
             <ProtectedRoute
@@ -37,41 +57,41 @@ const AppRoutes = (props) => {
                     saveFileChanges
                 } }
                 rules={ [
-                    { allow: () => isAuth, redirect: '/login' },
-                    { allow: () => !isScanning, redirect: '/scanning' },
-                    { allow: () => !!selectedVideo?.fileName, redirect: '/' }
+                    isAuthenticatedRule,
+                    isNotScanningRule,
+                    hasSelectedVideoRule
                 ] }
             />
             <ProtectedRoute
                 path="/filters"
                 component={ ManageVideoFilters }
                 rules={ [
-                    { allow: () => isAuth, redirect: '/login' },
-                    { allow: () => !isScanning, redirect: '/scanning' }
+                    isAuthenticatedRule,
+                    isNotScanningRule
                 ] }
             />
             <ProtectedRoute
                 path="/play/:fileId"
                 component={ VideoPlayerPage }
                 rules={ [
-                    { allow: () => isAuth, redirect: '/login' },
-                    { allow: () => !isScanning, redirect: '/scanning' }
+                    isAuthenticatedRule,
+                    isNotScanningRule
                 ] }
             />
             <ProtectedRoute
                 path="/list"
                 component={ VideoListLayout }
                 rules={ [
-                    { allow: () => isAuth, redirect: '/login' },
-                    { allow: () => !isScanning, redirect: '/scanning' }
+                    isAuthenticatedRule,
+                    isNotScanningRule
                 ] }
             />
             <ProtectedRoute
                 path="/profile"
                 component={ UserDetailsPage }
                 rules={ [
-                    { allow: () => isAuth, redirect: '/login' },
-                    { allow: () => !isScanning, redirect: '/scanning' }
+                    isAuthenticatedRule,
+                    isNotScanningRule
                 ] }
             />
             <ProtectedRoute
@@ -79,7 +99,7 @@ const AppRoutes = (props) => {
                 exact
                 component={ Login }
                 rules={ [
-                    { allow: () => !isAuth, redirect: '/' }
+                    isNotAuthenticatedRule
                 ] }
             />
             <ProtectedRoute
@@ -87,7 +107,7 @@ const AppRoutes = (props) => {
                 exact
                 component={ Home }
                 rules={ [
-                    { allow: () => isAuth, redirect: '/login' }
+                    isAuthenticatedRule
                 ] }
             />
         </Switch>
