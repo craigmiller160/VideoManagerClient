@@ -1,13 +1,17 @@
+/* eslint-disable */ // TODO delete this
 import React from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import FlexRow from '../../../UI/Grid/FlexRow';
 import Input from 'components/UI/form/Input/Input';
 import Form from 'components/UI/form/Form/Form';
+import Select from 'components/UI/form/Select/Select';
 import classes from './UserDetailsPage.scss';
 import { Button } from 'reactstrap';
 import useReactRouter from 'use-react-router';
 
 const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
+
+// TODO for the roles dropdown, admin users need to load all the roles from the server, then select only the ones from the user
 
 const UserDetailsPage = () => {
     const { location } = useReactRouter();
@@ -15,10 +19,15 @@ const UserDetailsPage = () => {
 
     let formInitValues = {};
     if (location.pathname === '/profile') {
-        formInitValues = userDetails;
+        formInitValues = {
+            ...userDetails,
+            roles: userDetails.roles.map(role => ({ value: role.roleId, label: role.name }))
+        }
     }
 
-    const onSubmit = () => {};
+    const hasAdminRole = !!userDetails.roles.find((role) => role.name === 'ROLE_ADMIN'); // TODO make roles constants
+
+    const onSubmit = () => {}; // TODO need better onSubmit
 
     return (
         <Form
@@ -62,11 +71,12 @@ const UserDetailsPage = () => {
                 />
             </FlexRow>
             <FlexRow justifyContent="space-around">
-                <Input
+                <Select
                     label="Roles"
                     name="roles"
-                    type="text"
                     divClassName={ classes.Input }
+                    multi
+                    disabled={ !hasAdminRole }
                 />
                 <Input
                     label="Last Authenticated"

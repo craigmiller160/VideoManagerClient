@@ -12,12 +12,14 @@ export const SelectComponent = (props) => {
         input,
         options,
         multi,
-        inputProps
+        inputProps,
+        divClassName,
+        disabled
     } = props;
 
     const id = newid();
     return (
-        <StyledFormGroupDiv>
+        <StyledFormGroupDiv className={ divClassName }>
             <StyledLabel
                 htmlFor={ id }
             >
@@ -34,6 +36,7 @@ export const SelectComponent = (props) => {
                 isSearchable
                 isClearable
                 isMulti={ multi }
+                isDisabled={ disabled }
             />
         </StyledFormGroupDiv>
     );
@@ -50,19 +53,24 @@ SelectComponent.propTypes = {
         onChange: PropTypes.func
     }),
     multi: PropTypes.bool,
-    inputProps: PropTypes.object
+    inputProps: PropTypes.object,
+    divClassName: PropTypes.string,
+    disabled: PropTypes.bool
 };
 
 SelectComponent.defaultProps = {
     options: [],
     multi: false,
-    inputProps: {}
+    inputProps: {},
+    disabled: false
 };
 
 const Field = createField(SelectComponent);
 Field.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string,
-    multi: PropTypes.bool
+    multi: PropTypes.bool,
+    divClassName: PropTypes.string,
+    disabled: PropTypes.bool
 };
 export default Field;
