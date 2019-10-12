@@ -13,6 +13,7 @@ import { ROLE_ADMIN } from '../../../../utils/securityConstants';
 const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 
 // TODO for the roles dropdown, admin users need to load all the roles from the server, then select only the ones from the user
+// TODO revoke login needs to be made to work
 
 const UserDetailsPage = () => {
     const { location } = useReactRouter();

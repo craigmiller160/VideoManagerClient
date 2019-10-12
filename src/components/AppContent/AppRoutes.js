@@ -10,14 +10,22 @@ import Login from './Login/Login';
 import ProtectedRoute from '../Routing/ProtectedRoute';
 import Home from './Home/Home';
 import UserDetailsPage from './User/UserDetails/UserDetailsPage';
+import { shallowEqual, useSelector } from 'react-redux';
+import { ROLE_EDIT } from '../../utils/securityConstants';
 
 const AppRoutes = (props) => {
+    const userDetails = useSelector(state => state.auth.userDetails, shallowEqual);
     const {
         selectedVideo,
         saveFileChanges,
         isScanning,
         isAuth
     } = props;
+
+    const hasEditRoleRule = {
+        allow: () => !!userDetails?.roles?.find((role) => role.name === ROLE_EDIT),
+        redirect: '/'
+    };
 
     const isAuthenticatedRule = {
         allow: () => isAuth, redirect: '/login'
@@ -59,7 +67,8 @@ const AppRoutes = (props) => {
                 rules={ [
                     isAuthenticatedRule,
                     isNotScanningRule,
-                    hasSelectedVideoRule
+                    hasSelectedVideoRule,
+                    hasEditRoleRule
                 ] }
             />
             <ProtectedRoute
