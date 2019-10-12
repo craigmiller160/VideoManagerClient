@@ -52,4 +52,8 @@ describe('VideoListItem', () => {
             { type: 'videoList/expandVideoFile', payload: 1 }
         ]);
     });
+
+    it('renders without edit role', () => {
+        throw new Error('Finish this');
+    });
 });

@@ -12,12 +12,14 @@ import {
 import { Link } from 'react-router-dom';
 import VideoDate from 'model/VideoDate';
 import WordWrapCol from 'components/UI/WordWrapCol/WordWrapCol';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { reset as videoPlayerReset } from 'store/videoPlayer/videoPlayer.actions';
 import { expandVideoFile } from '../../../../../store/videoList/videoList.actions';
+import { ROLE_EDIT } from '../../../../../utils/securityConstants';
 
 const VideoListItem = (props) => {
     const dispatch = useDispatch();
+    const userDetails = useSelector(state => state.auth.userDetails, shallowEqual);
     const {
         videoFile: {
             fileId,
@@ -33,6 +35,8 @@ const VideoListItem = (props) => {
             fileAdded
         }
     } = props;
+
+    const hasEditRole = !!userDetails?.roles?.find((role) => role.name === ROLE_EDIT);
 
     const leftColSize = 6;
     const rootClasses = [ classes.VideoListItem, (expanded ? classes.active : '') ].join(' ');
@@ -109,9 +113,12 @@ const VideoListItem = (props) => {
                     </Row>
                     <Row>
                         <WordWrapCol className="text-right">
-                            <Link to="/edit">
-                                <Button color="info">Edit</Button>
-                            </Link>
+                            {
+                                hasEditRole &&
+                                <Link to="/edit">
+                                    <Button color="info">Edit</Button>
+                                </Link>
+                            }
                             <Button color="primary" onClick={ playVideoClick }>Play</Button>
                         </WordWrapCol>
                     </Row>
