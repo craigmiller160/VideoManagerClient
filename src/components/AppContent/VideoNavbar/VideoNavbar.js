@@ -8,7 +8,11 @@ import useReactRouter from 'use-react-router';
 import { startFileScan } from '../../../store/scanning/scanning.actions';
 import NavbarItem from './NavbarItem';
 import NavbarDropdown from './NavbarDropdown';
-import { hasEditRole as hasEditRoleSelector, hasScanRole as hasScanRoleSelector } from '../../../store/auth/auth.selectors';
+import {
+    hasEditRole as hasEditRoleSelector,
+    hasScanRole as hasScanRoleSelector,
+    hasAdminRole as hasAdminRoleSelector
+} from '../../../store/auth/auth.selectors';
 
 const VideoNavbar = (props) => {
     const dispatch = useDispatch();
@@ -16,6 +20,7 @@ const VideoNavbar = (props) => {
     const [ isOpen, setOpen ] = useState(false);
     const hasEditRole = useSelector(hasEditRoleSelector);
     const hasScanRole = useSelector(hasScanRoleSelector);
+    const hasAdminRole = useSelector(hasAdminRoleSelector);
     const { disabled } = props;
 
     const onScanDirClick = async () => {
@@ -58,6 +63,16 @@ const VideoNavbar = (props) => {
                                         to="/filters"
                                         exact
                                         text="Manage Filters"
+                                        isLink
+                                    />
+                                }
+                                {
+                                    hasAdminRole &&
+                                    <NavbarItem
+                                        id="userManagementLink"
+                                        to="/usermanagement"
+                                        exact
+                                        text="User Management"
                                         isLink
                                     />
                                 }

@@ -11,10 +11,12 @@ import ProtectedRoute from '../Routing/ProtectedRoute';
 import Home from './Home/Home';
 import UserDetailsPage from './User/UserDetails/UserDetailsPage';
 import { useSelector } from 'react-redux';
-import { hasEditRole as hasEditRoleSelector } from '../../store/auth/auth.selectors';
+import { hasEditRole as hasEditRoleSelector, hasAdminRole as hasAdminRoleSelector } from '../../store/auth/auth.selectors';
+import UserManagementPage from './User/Management/UserManagementPage';
 
 const AppRoutes = (props) => {
     const hasEditRole = useSelector(hasEditRoleSelector);
+    const hasAdminRole = useSelector(hasAdminRoleSelector);
     const {
         selectedVideo,
         saveFileChanges,
@@ -23,8 +25,11 @@ const AppRoutes = (props) => {
     } = props;
 
     const hasEditRoleRule = {
-        allow: () => hasEditRole,
-        redirect: '/'
+        allow: () => hasEditRole, redirect: '/'
+    };
+
+    const hasAdminRoleRule = {
+        allow: () => hasAdminRole, redirect: '/'
     };
 
     const isAuthenticatedRule = {
@@ -102,6 +107,15 @@ const AppRoutes = (props) => {
                 rules={ [
                     isAuthenticatedRule,
                     isNotScanningRule
+                ] }
+            />
+            <ProtectedRoute
+                path="/usermanagement"
+                component={ UserManagementPage }
+                rules={ [
+                    isAuthenticatedRule,
+                    isNotScanningRule,
+                    hasAdminRoleRule
                 ] }
             />
             <ProtectedRoute
