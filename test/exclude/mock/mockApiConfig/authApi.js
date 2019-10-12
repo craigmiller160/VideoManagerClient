@@ -11,6 +11,9 @@ export const mockUserDetails = {
     lastName: 'lastName',
     roles: []
 };
+export const mockRoles = [
+    { roleId: 1, name: 'Role' }
+];
 
 export const mockCheckAuthSuccess = (mockApi) =>
     mockApi.onGet('/auth/check')
@@ -49,3 +52,7 @@ export const mockLogout = (mockApi) =>
 export const mockGetVideoToken = (mockApi) =>
     mockApi.onGet('/auth/videotoken/3')
         .reply(200, mockTokenResponse);
+
+export const mockGetRoles = (mockApi) =>
+    mockApi.onGet('/auth/roles')
+        .reply(200, mockRoles);

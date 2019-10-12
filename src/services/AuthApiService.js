@@ -16,3 +16,6 @@ export const logout = () =>
 
 export const getVideoToken = (videoId) =>
     API.get(`/auth/videotoken/${videoId}`);
+
+export const getRoles = () =>
+    API.get('/auth/roles');
