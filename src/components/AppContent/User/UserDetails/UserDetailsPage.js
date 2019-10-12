@@ -89,7 +89,10 @@ const UserDetailsPage = () => {
             </FlexRow>
             <FlexRow className="mt-5" justifyContent="space-around">
                 <Button color="primary">Save</Button>
-                {/*<Button color="info">Revoke Login</Button>*/}
+                {
+                    hasAdminRole &&
+                    <Button color="info">Revoke Login</Button>
+                }
             </FlexRow>
         </Form>
     );
