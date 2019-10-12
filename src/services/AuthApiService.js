@@ -22,3 +22,6 @@ export const getRoles = () =>
 
 export const saveUserProfile = (userDetails) =>
     API.put('/auth/users/self', userDetails);
+
+export const getAllUsers = () =>
+    API.get('/auth/users');

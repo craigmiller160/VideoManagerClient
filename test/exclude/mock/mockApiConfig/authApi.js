@@ -60,3 +60,7 @@ export const mockGetRoles = (mockApi) =>
 export const mockSaveUserProfile = (mockApi) =>
     mockApi.onPut('/auth/users/self', mockUserDetails)
         .reply(200, mockUserDetails);
+
+export const mockGetAllUsers = (mockApi) =>
+    mockApi.onGet('/auth/users')
+        .reply(200, [mockUserDetails]);

@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
 import {
-    checkAuth,
+    checkAuth, getAllUsers,
     getRoles,
     getVideoToken,
     login,
@@ -10,7 +10,7 @@ import {
 } from 'services/AuthApiService';
 import {
     CSRF_TOKEN_TEST,
-    mockCheckAuthSuccess, mockCsrfToken, mockGetRoles, mockGetVideoToken,
+    mockCheckAuthSuccess, mockCsrfToken, mockGetAllUsers, mockGetRoles, mockGetVideoToken,
     mockLoginSuccess,
     mockLogout,
     mockPassword, mockRoles, mockSaveUserProfile,
@@ -30,6 +30,7 @@ describe('AuthApiService', () => {
         mockGetVideoToken(mockApi);
         mockGetRoles(mockApi);
         mockSaveUserProfile(mockApi);
+        mockGetAllUsers(mockApi);
     });
 
     it('login', async () => {
@@ -76,6 +77,14 @@ describe('AuthApiService', () => {
         expect(res).toEqual(expect.objectContaining({
             status: 200,
             data: mockUserDetails
+        }));
+    });
+
+    it('getAllUsers', async () => {
+        const res = await getAllUsers();
+        expect(res).toEqual(expect.objectContaining({
+            status: 200,
+            data: [mockUserDetails]
         }));
     });
 });
