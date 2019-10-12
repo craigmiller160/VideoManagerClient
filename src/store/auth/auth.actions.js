@@ -58,9 +58,9 @@ export const logout = () => async (dispatch) => {
 export const saveUserProfile = (values) => async (dispatch) => {
     const payload = {
         ...values,
-        roles: formatRoles(values.roles),
-        lastAuthenticated: undefined
+        roles: formatRoles(values.roles)
     };
+    delete payload.lastAuthenticated;
 
     try {
         await AuthService.saveUserProfile(payload);

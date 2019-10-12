@@ -2,10 +2,11 @@ import {
     checkAuth,
     handleCsrfToken,
     login,
-    logout,
+    logout, saveUserProfile,
     setCsrfToken,
     setIsAuth,
-    setLoginLoading, setUserDetails
+    setLoginLoading,
+    setUserDetails
 } from 'store/auth/auth.actions';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -18,11 +19,12 @@ import {
     mockLoginFail,
     mockLoginSuccess,
     mockLogout,
-    mockPassword, mockUserDetails,
+    mockPassword, mockSaveUserProfile,
+    mockUserDetails,
     mockUserName
 } from '../../exclude/mock/mockApiConfig/authApi';
-import { showErrorAlert } from 'store/alert/alert.actions';
-import { CSRF_TOKEN_KEY } from '../../../src/utils/securityConstants';
+import { showErrorAlert, showSuccessAlert } from 'store/alert/alert.actions';
+import { CSRF_TOKEN_KEY, ROLE_EDIT } from '../../../src/utils/securityConstants';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -155,8 +157,21 @@ describe('auth.actions', () => {
         });
 
         describe('saveUserProfile', () => {
-            it('saves user profile', () => {
-                throw new Error('Finish this');
+            it('saves user profile', async () => {
+                mockSaveUserProfile(mockApi);
+                mockCheckAuthSuccess(mockApi);
+                const values = {
+                    ...mockUserDetails,
+                    roles: [ { value: 1, label: ROLE_EDIT } ]
+                };
+                const expectedActions = [
+                    { type: setCsrfToken.toString(), payload: mockCsrfToken },
+                    { type: setIsAuth.toString(), payload: true },
+                    { type: setUserDetails.toString(), payload: mockUserDetails },
+                    { type: showSuccessAlert.toString(), payload: 'Successfully saved user profile' }
+                ];
+                await store.dispatch(saveUserProfile(values));
+                expect(store.getActions()).toEqual(expectedActions);
             });
         });
     });

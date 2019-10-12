@@ -1,4 +1,4 @@
-import { CSRF_TOKEN_KEY } from '../../../../src/utils/securityConstants';
+import { CSRF_TOKEN_KEY, ROLE_EDIT } from '../../../../src/utils/securityConstants';
 
 export const mockTokenResponse = { token: 'ABCDEFG' };
 export const mockUserName = 'userName';
@@ -9,7 +9,7 @@ export const mockUserDetails = {
     userName: mockUserName,
     firstName: 'firstName',
     lastName: 'lastName',
-    roles: []
+    roles: [ { roleId: 1, name: ROLE_EDIT } ]
 };
 export const mockRoles = [
     { roleId: 1, name: 'Role' }
