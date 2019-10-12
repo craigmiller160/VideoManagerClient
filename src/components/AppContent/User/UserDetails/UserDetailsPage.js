@@ -8,6 +8,7 @@ import Select from 'components/UI/form/Select/Select';
 import classes from './UserDetailsPage.scss';
 import { Button } from 'reactstrap';
 import useReactRouter from 'use-react-router';
+import { ROLE_ADMIN } from '../../../../utils/securityConstants';
 
 const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 
@@ -25,7 +26,7 @@ const UserDetailsPage = () => {
         }
     }
 
-    const hasAdminRole = !!userDetails.roles.find((role) => role.name === 'ROLE_ADMIN'); // TODO make roles constants
+    const hasAdminRole = !!userDetails.roles.find((role) => role.name === ROLE_ADMIN);
 
     const onSubmit = () => {}; // TODO need better onSubmit
 
