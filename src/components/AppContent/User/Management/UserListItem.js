@@ -18,8 +18,13 @@ const UserListItem = (props) => {
         }
     };
 
+    const listItemClasses = [classes.UserListItem];
+    if (user.expanded) {
+        listItemClasses.push(classes.active);
+    }
+
     return (
-        <div className={ classes.UserListItem } onClick={ onItemClick }>
+        <div className={ listItemClasses.join(' ') } onClick={ onItemClick }>
             <FlexRow justifyContent="space-around">
                 <p>{ user.userName }</p>
                 <p>{ fullName }</p>
