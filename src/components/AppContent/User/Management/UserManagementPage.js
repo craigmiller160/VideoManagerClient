@@ -30,6 +30,14 @@ const UserManagementPage = () => {
 
     const displayUsers = allUsers.sort(userNameSort);
 
+    const changeExpanded = (userId) => {
+        const newUsers = allUsers.map((user) => ({
+            ...user,
+            expanded: user.userId === userId
+        }));
+        setAllUsers(newUsers);
+    };
+
     return (
         <div className={ classes.UserManagementPage }>
             <FlexRow>
@@ -43,6 +51,7 @@ const UserManagementPage = () => {
                         <UserListItem
                             user={ user }
                             key={ user.userId }
+                            changeExpanded={ changeExpanded }
                         />
                     ))
                 }
