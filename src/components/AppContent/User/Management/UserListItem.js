@@ -3,6 +3,7 @@ import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import classes from './UserListItem.scss';
 import FlexRow from '../../../UI/Grid/FlexRow';
+import { Button } from 'reactstrap';
 
 const UserListItem = (props) => {
     const {
@@ -41,8 +42,8 @@ const UserListItem = (props) => {
             </FlexRow>
             {
                 user.expanded &&
-                <FlexRow justifyContent="flex-end">
-                    <p>Working</p>
+                <FlexRow className="mt-4" justifyContent="flex-end">
+                    <Button color="info">Edit</Button>
                 </FlexRow>
             }
         </div>
