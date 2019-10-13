@@ -1,5 +1,5 @@
 /* eslint-disable */ // TODO delete this
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classes from './UserListItem.scss';
 import FlexRow from '../../../UI/Grid/FlexRow';
@@ -25,7 +25,10 @@ const UserListItem = (props) => {
     }
 
     return (
-        <div className={ listItemClasses.join(' ') } onClick={ onItemClick }>
+        <div
+            className={ listItemClasses.join(' ') }
+            onClick={ onItemClick }
+        >
             <FlexRow justifyContent="space-around">
                 <p>{ user.userName }</p>
                 <p>{ fullName }</p>
