@@ -25,3 +25,6 @@ export const saveUserProfile = (userDetails) =>
 
 export const getAllUsers = () =>
     API.get('/auth/users');
+
+export const getUser = (userId) =>
+    API.get(`/auth/users/admin/${userId}`);
