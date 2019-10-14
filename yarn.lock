@@ -10599,6 +10599,14 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-animate-height@^2.0.16:
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/react-animate-height/-/react-animate-height-2.0.16.tgz#f7f55cea8017b277ef352e2c590bb9a34286503d"
+  integrity sha512-R7J3rzxR5VZzHFoK46uhfpW9kHltCwBbN4vZu9qQXPn7pXtIjp7GnCUzC7Tg8ymrhXuA2iSvbCNGfHolNp/7NQ==
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.1"
+
 react-app-polyfill@^0.2.0:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/react-app-polyfill/-/react-app-polyfill-0.2.2.tgz#a903b61a8bfd9c5e5f16fc63bebe44d6922a44fb"

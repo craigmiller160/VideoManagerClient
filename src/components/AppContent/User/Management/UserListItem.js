@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classes from './UserListItem.scss';
 import FlexRow from '../../../UI/Grid/FlexRow';
 import { Button } from 'reactstrap';
+import AnimateHeight from 'react-animate-height';
 
 const UserListItem = (props) => {
     const {
@@ -24,6 +25,8 @@ const UserListItem = (props) => {
         listItemClasses.push(classes.active);
     }
 
+    const animateHeight = user.expanded ? 'auto' : 0;
+
     return (
         <div
             className={ listItemClasses.join(' ') }
@@ -43,12 +46,14 @@ const UserListItem = (props) => {
                     }
                 </p>
             </FlexRow>
-            {
-                user.expanded &&
+            <AnimateHeight
+                duration={ 500 }
+                height={ animateHeight }
+            >
                 <FlexRow className="mt-4" justifyContent="flex-end">
                     <Button color="info">Edit</Button>
                 </FlexRow>
-            }
+            </AnimateHeight>
         </div>
 
     );
