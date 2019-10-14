@@ -18,6 +18,7 @@ const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 // TODO for the roles dropdown, admin users need to load all the roles from the server, then select only the ones from the user
 // TODO revoke login needs to be made to work
 // TODO need a saveUserDetails alternative to saveUserProfile
+// TODO delete user needs to be made to work
 
 const formatRoles = (roles) => roles.map(role => ({ value: role.roleId, label: role.name }));
 const TIMESTAMP_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS';
@@ -110,10 +111,14 @@ const UserDetailsPage = () => {
                 />
             </FlexRow>
             <FlexRow className="mt-5" justifyContent="space-around">
-                <Button color="primary">Save</Button>
                 {
                     hasAdminRole &&
                     <Button color="info">Revoke Login</Button>
+                }
+                <Button color="primary">Save</Button>
+                {
+                    hasAdminRole &&
+                    <Button color="danger">Delete User</Button>
                 }
             </FlexRow>
         </Form>
