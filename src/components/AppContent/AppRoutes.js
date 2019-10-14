@@ -110,6 +110,15 @@ const AppRoutes = (props) => {
                 ] }
             />
             <ProtectedRoute
+                path="/user/:userId"
+                component={ UserDetailsPage }
+                rules={ [
+                    isAuthenticatedRule,
+                    hasAdminRoleRule,
+                    isNotScanningRule
+                ] }
+            />
+            <ProtectedRoute
                 path="/usermanagement"
                 component={ UserManagementPage }
                 rules={ [

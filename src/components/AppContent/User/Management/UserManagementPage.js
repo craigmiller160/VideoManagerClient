@@ -4,6 +4,7 @@ import classes from './UserManagementPage.scss';
 import FlexRow from '../../../UI/Grid/FlexRow';
 import UserListItem from './UserListItem';
 import FlexCol from '../../../UI/Grid/FlexCol';
+import { Button } from 'reactstrap';
 
 const userNameSort = (user1, user2) => {
     if (user1.userName < user2.userName) {
@@ -16,6 +17,8 @@ const userNameSort = (user1, user2) => {
 
     return 0;
 };
+
+// TODO implement AddUser behavior
 
 const UserManagementPage = () => {
     const [allUsers, setAllUsers] = useState([]);
@@ -56,6 +59,9 @@ const UserManagementPage = () => {
                     ))
                 }
             </FlexCol>
+            <FlexRow className="mt-4" justifyContent="flex-end">
+                <Button color="primary">Add User</Button>
+            </FlexRow>
         </div>
     );
 };

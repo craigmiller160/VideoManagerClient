@@ -24,10 +24,12 @@ const TIMESTAMP_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS';
 
 const UserDetailsPage = () => {
     const dispatch = useDispatch();
-    const { location } = useReactRouter();
+    const { location, match } = useReactRouter();
     const userDetails = useSelector(state => state.auth.userDetails, shallowEqual);
     const hasAdminRole = useSelector(hasAdminRoleSelector);
     const [allRoles, setAllRoles] = useState([]);
+
+    console.log(location, match); // TODO delete this
 
     useEffect(() => {
         const loadRoles = async () => {

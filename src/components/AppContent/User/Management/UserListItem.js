@@ -1,6 +1,7 @@
 /* eslint-disable */ // TODO delete this
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import classes from './UserListItem.scss';
 import FlexRow from '../../../UI/Grid/FlexRow';
 import { Button } from 'reactstrap';
@@ -51,7 +52,9 @@ const UserListItem = (props) => {
                 height={ animateHeight }
             >
                 <FlexRow className="mt-4" justifyContent="flex-end">
-                    <Button color="info">Edit</Button>
+                    <Link to={ `/user/${user.userId}` }>
+                        <Button color="info">Edit</Button>
+                    </Link>
                 </FlexRow>
             </AnimateHeight>
         </div>
