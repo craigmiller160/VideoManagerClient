@@ -1,19 +1,11 @@
-/* eslint-disable */ // TODO delete this
-import React, { useState, useEffect } from 'react';
+/* eslint-disable */  // TODO delete this
+import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import FlexRow from '../../../UI/Grid/FlexRow';
-import Input from 'components/UI/form/Input/Input';
-import Form from 'components/UI/form/Form/Form';
-import Select from 'components/UI/form/Select/Select';
-import { Button } from 'reactstrap';
 import useReactRouter from 'use-react-router';
-import classes from './UserDetailsPage.scss';
 import { hasAdminRole as hasAdminRoleSelector } from '../../../../store/auth/auth.selectors';
 import * as AuthApiService from 'services/AuthApiService';
-import { saveUserProfile } from '../../../../store/auth/auth.actions';
-
-const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
+import UserDetailsForm from './UserDetailsForm';
 
 // TODO for the roles dropdown, admin users need to load all the roles from the server, then select only the ones from the user
 // TODO revoke login needs to be made to work
@@ -53,75 +45,13 @@ const UserDetailsPage = () => {
     }
 
     return (
-        <Form
-            form={ USER_DETAILS_FORM_NAME }
-            onSubmit={ (values) => dispatch(saveUserProfile(values)) }
-            className={ classes.UserDetailsPage }
-            initialValues={ formInitValues }
-        >
-            <FlexRow>
-                <div className={ classes.title }>
-                    <h3>User Profile</h3>
-                </div>
-            </FlexRow>
-            <FlexRow className="mt-3" justifyContent="space-around">
-                <Input
-                    label="Username"
-                    name="userName"
-                    type="email"
-                    disabled
-                    divClassName={ classes.Input }
-                />
-                <Input
-                    label="Password"
-                    name="password"
-                    type="password"
-                    divClassName={ classes.Input }
-                />
-            </FlexRow>
-            <FlexRow justifyContent="space-around">
-                <Input
-                    label="First Name"
-                    name="firstName"
-                    type="text"
-                    divClassName={ classes.Input }
-                />
-                <Input
-                    label="Last Name"
-                    name="lastName"
-                    type="text"
-                    divClassName={ classes.Input }
-                />
-            </FlexRow>
-            <FlexRow justifyContent="space-around">
-                <Select
-                    label="Roles"
-                    name="roles"
-                    divClassName={ classes.Input }
-                    multi
-                    disabled={ !hasAdminRole }
-                    options={ allRoles }
-                />
-                <Input
-                    label="Last Authenticated"
-                    name="lastAuthenticated"
-                    type="text"
-                    divClassName={ classes.Input }
-                    disabled
-                />
-            </FlexRow>
-            <FlexRow className="mt-5" justifyContent="space-around">
-                {
-                    hasAdminRole &&
-                    <Button color="info">Revoke Login</Button>
-                }
-                <Button color="primary">Save</Button>
-                {
-                    hasAdminRole &&
-                    <Button color="danger">Delete User</Button>
-                }
-            </FlexRow>
-        </Form>
+        <div>
+            <UserDetailsForm
+                hasAdminRole={ hasAdminRole }
+                allRoles={ allRoles }
+                initValues={ formInitValues }
+            />
+        </div>
     );
 };
 
