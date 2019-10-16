@@ -10,7 +10,7 @@ const ProtectedRoute = (props) => {
         componentProps,
         component,
         exact,
-        key
+        routeKey
     } = props;
 
     const failedRule = rules.find((rule) => !rule.allow());
@@ -24,7 +24,7 @@ const ProtectedRoute = (props) => {
         <Route
             path={ path }
             exact={ exact }
-            key={ key }
+            key={ routeKey }
             render={ (routeProps) => (
                 <Component
                     { ...routeProps }
@@ -43,7 +43,7 @@ ProtectedRoute.propTypes = {
         allow: PropTypes.func,
         redirect: PropTypes.string
     })),
-    key: PropTypes.string
+    routeKey: PropTypes.string
 };
 ProtectedRoute.defaultProps = {
     rules: [],

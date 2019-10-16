@@ -105,7 +105,7 @@ const AppRoutes = (props) => {
                 ] }
             />
             <ProtectedRoute
-                key="/profile"
+                routeKey="/profile"
                 path="/profile"
                 component={ UserDetailsPage }
                 rules={ [
@@ -114,7 +114,7 @@ const AppRoutes = (props) => {
                 ] }
             />
             <ProtectedRoute
-                key="/user/userId"
+                routeKey="/user/userId"
                 path="/user/:userId"
                 component={ UserDetailsPage }
                 rules={ [
