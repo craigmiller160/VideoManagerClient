@@ -11,7 +11,10 @@ import ProtectedRoute from '../Routing/ProtectedRoute';
 import Home from './Home/Home';
 import UserDetailsPage from './User/UserDetails/UserDetailsPage';
 import { useSelector } from 'react-redux';
-import { hasEditRole as hasEditRoleSelector, hasAdminRole as hasAdminRoleSelector } from '../../store/auth/auth.selectors';
+import {
+    hasAdminRole as hasAdminRoleSelector,
+    hasEditRole as hasEditRoleSelector
+} from '../../store/auth/auth.selectors';
 import UserManagementPage from './User/Management/UserManagementPage';
 
 const AppRoutes = (props) => {
@@ -102,6 +105,7 @@ const AppRoutes = (props) => {
                 ] }
             />
             <ProtectedRoute
+                key="/profile"
                 path="/profile"
                 component={ UserDetailsPage }
                 rules={ [
@@ -110,6 +114,7 @@ const AppRoutes = (props) => {
                 ] }
             />
             <ProtectedRoute
+                key="/user/userId"
                 path="/user/:userId"
                 component={ UserDetailsPage }
                 rules={ [
