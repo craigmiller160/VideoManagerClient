@@ -33,19 +33,19 @@ const UserDetailsPage = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [userDetails, setUserDetails] = useState({});
 
-    const isNotProfile = /^\/user\/\d{1,3}/.test(location.pathname);
+    const isUserDetailsPage = /^\/user\/\d{1,3}/.test(location.pathname);
 
     useEffect(() => {
         const adminSetup = async () => {
             const apis = [AuthApiService.getRoles()];
-            if (isNotProfile) {
+            if (isUserDetailsPage) {
                 apis.push(AuthApiService.getUser(match.params.userId));
             }
 
             const resArray = await Promise.all(apis);
             setAllRoles(formatRoles(resArray[0].data));
 
-            if (isNotProfile) {
+            if (isUserDetailsPage) {
                 setUserDetails(resArray[1].data);
             }
             setLoading(false);
@@ -57,17 +57,24 @@ const UserDetailsPage = (props) => {
     }, []);
 
     let formInitValues = {};
-    if (isNotProfile) {
+    if (isUserDetailsPage) {
         formInitValues = formatUser(userDetails);
     } else {
         formInitValues = formatUser(authUserDetails);
+    }
+
+    let pageTitle = '';
+    if (isUserDetailsPage) {
+        pageTitle = 'User Details';
+    } else {
+        pageTitle = 'User Profile';
     }
 
     return (
         <div className={ classes.UserDetailsPage }>
             <FlexRow>
                 <div className={ classes.title }>
-                    <h3>User Profile</h3>
+                    <h3>{ pageTitle }</h3>
                 </div>
             </FlexRow>
             {
