@@ -97,7 +97,7 @@ const AppRoutes = (props) => {
                 ] }
             />
             <ProtectedRoute
-                path="/list"
+                path="/videos"
                 component={ VideoListLayout }
                 rules={ [
                     isAuthenticatedRule,

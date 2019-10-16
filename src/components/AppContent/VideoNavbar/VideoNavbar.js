@@ -51,9 +51,9 @@ const VideoNavbar = (props) => {
                             <Nav navbar>
                                 <NavbarItem
                                     id="videoListLink"
-                                    to="/list"
+                                    to="/videos"
                                     exact
-                                    text="Video List"
+                                    text="Videos"
                                     isLink
                                 />
                                 {
@@ -62,7 +62,7 @@ const VideoNavbar = (props) => {
                                         id="manageFiltersLink"
                                         to="/filters"
                                         exact
-                                        text="Manage Filters"
+                                        text="Filters"
                                         isLink
                                     />
                                 }
@@ -71,7 +71,7 @@ const VideoNavbar = (props) => {
                                     <NavbarItem
                                         id="userManagementLink"
                                         to="/users"
-                                        text="User Management"
+                                        text="Users"
                                         isLink
                                     />
                                 }
@@ -82,7 +82,7 @@ const VideoNavbar = (props) => {
                                     <NavbarItem
                                         id="scanDirectoryLink"
                                         onClick={ onScanDirClick }
-                                        text="Scan Directory"
+                                        text="Scan"
                                     />
                                 }
                                 <NavbarDropdown />
