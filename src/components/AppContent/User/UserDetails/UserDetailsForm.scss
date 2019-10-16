@@ -1,10 +1,4 @@
-@import '../../../../assets/styles/pages';
-
 .UserDetailsForm {
-  .title {
-    @include page-title;
-  }
-
   .Input {
     width: 20rem;
   }

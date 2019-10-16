@@ -1,58 +1,93 @@
-/* eslint-disable */  // TODO delete this
+/* eslint-disable */        // TODO delete this
 import React, { useEffect, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { shallowEqual, useSelector } from 'react-redux';
 import moment from 'moment';
-import useReactRouter from 'use-react-router';
 import { hasAdminRole as hasAdminRoleSelector } from '../../../../store/auth/auth.selectors';
 import * as AuthApiService from 'services/AuthApiService';
 import UserDetailsForm from './UserDetailsForm';
+import Spinner from '../../../UI/Spinner/Spinner';
+import classes from './UserDetailsPage.scss';
+import FlexRow from '../../../UI/Grid/FlexRow';
 
 // TODO for the roles dropdown, admin users need to load all the roles from the server, then select only the ones from the user
 // TODO revoke login needs to be made to work
 // TODO need a saveUserDetails alternative to saveUserProfile
 // TODO delete user needs to be made to work
 
-const formatRoles = (roles) => roles.map(role => ({ value: role.roleId, label: role.name }));
+const formatRoles = (roles) => roles?.map(role => ({ value: role.roleId, label: role.name }));
+const formatUser = (user) => ({
+    ...user,
+    roles: formatRoles(user?.roles),
+    lastAuthenticated: user?.lastAuthenticated ? moment(user.lastAuthenticated).format(TIMESTAMP_FORMAT) : ''
+});
 const TIMESTAMP_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS';
 
-const UserDetailsPage = () => {
-    const dispatch = useDispatch();
-    const { location, match } = useReactRouter();
-    const userDetails = useSelector(state => state.auth.userDetails, shallowEqual);
-    const hasAdminRole = useSelector(hasAdminRoleSelector);
-    const [allRoles, setAllRoles] = useState([]);
+const UserDetailsPage = (props) => {
+    const { location, match } = props;
 
-    console.log(location, match); // TODO delete this
+    const authUserDetails = useSelector(state => state.auth.userDetails, shallowEqual);
+    const hasAdminRole = useSelector(hasAdminRoleSelector);
+
+    const [allRoles, setAllRoles] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+    const [userDetails, setUserDetails] = useState({});
+
+    const isNotProfile = /^\/user\/\d{1,3}/.test(location.pathname);
 
     useEffect(() => {
-        const loadRoles = async () => {
-            const res = await AuthApiService.getRoles();
-            setAllRoles(formatRoles(res.data));
+        const adminSetup = async () => {
+            const apis = [AuthApiService.getRoles()];
+            if (isNotProfile) {
+                apis.push(AuthApiService.getUser(match.params.userId));
+            }
+
+            const resArray = await Promise.all(apis);
+            setAllRoles(formatRoles(resArray[0].data));
+
+            if (isNotProfile) {
+                setUserDetails(resArray[1].data);
+            }
+            setLoading(false);
         };
 
         if (hasAdminRole) {
-            loadRoles();
+            adminSetup();
         }
     }, []);
 
     let formInitValues = {};
-    if (location.pathname === '/profile') {
-        formInitValues = {
-            ...userDetails,
-            roles: formatRoles(userDetails.roles),
-            lastAuthenticated: moment(userDetails.lastAuthenticated).format(TIMESTAMP_FORMAT)
-        }
+    if (isNotProfile) {
+        formInitValues = formatUser(userDetails);
+    } else {
+        formInitValues = formatUser(authUserDetails);
     }
 
     return (
-        <div>
-            <UserDetailsForm
-                hasAdminRole={ hasAdminRole }
-                allRoles={ allRoles }
-                initValues={ formInitValues }
-            />
+        <div className={ classes.UserDetailsPage }>
+            <FlexRow>
+                <div className={ classes.title }>
+                    <h3>User Profile</h3>
+                </div>
+            </FlexRow>
+            {
+                isLoading &&
+                <Spinner />
+            }
+            {
+                !isLoading &&
+                <UserDetailsForm
+                    hasAdminRole={ hasAdminRole }
+                    allRoles={ allRoles }
+                    initValues={ formInitValues }
+                />
+            }
         </div>
     );
+};
+UserDetailsPage.propTypes = {
+    location: PropTypes.object,
+    match: PropTypes.object
 };
 
 export default UserDetailsPage;

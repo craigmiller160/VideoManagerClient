@@ -29,11 +29,6 @@ const UserDetailsForm = (props) => {
             className={ classes.UserDetailsForm }
             initialValues={ initValues }
         >
-            <FlexRow>
-                <div className={ classes.title }>
-                    <h3>User Profile</h3>
-                </div>
-            </FlexRow>
             <FlexRow className="mt-3" justifyContent="space-around">
                 <Input
                     label="Username"
