@@ -9,13 +9,14 @@ import VideoListLayout from './VideoListLayout/VideoListLayout';
 import Login from './Login/Login';
 import ProtectedRoute from '../Routing/ProtectedRoute';
 import Home from './Home/Home';
-import UserDetailsPage from './User/UserDetails/UserDetailsPage';
 import { useSelector } from 'react-redux';
 import {
     hasAdminRole as hasAdminRoleSelector,
     hasEditRole as hasEditRoleSelector
 } from '../../store/auth/auth.selectors';
 import UserManagementPage from './User/Management/UserManagementPage';
+import UserProfile from './User/UserDetails/UserProfile';
+import EditUser from './User/UserDetails/EditUser';
 
 const AppRoutes = (props) => {
     const hasEditRole = useSelector(hasEditRoleSelector);
@@ -107,7 +108,7 @@ const AppRoutes = (props) => {
             <ProtectedRoute
                 routeKey="/profile"
                 path="/profile"
-                component={ UserDetailsPage }
+                component={ UserProfile }
                 rules={ [
                     isAuthenticatedRule,
                     isNotScanningRule
@@ -116,7 +117,7 @@ const AppRoutes = (props) => {
             <ProtectedRoute
                 routeKey="/users/userId"
                 path="/users/:userId"
-                component={ UserDetailsPage }
+                component={ EditUser }
                 rules={ [
                     isAuthenticatedRule,
                     hasAdminRoleRule,

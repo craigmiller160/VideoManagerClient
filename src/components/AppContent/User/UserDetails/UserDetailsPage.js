@@ -24,7 +24,11 @@ const formatUser = (user) => ({
 const TIMESTAMP_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS';
 
 const UserDetailsPage = (props) => {
-    const { location, match } = props;
+    const {
+        location,
+        match,
+        pageTitle
+    } = props;
 
     const authUserDetails = useSelector(state => state.auth.userDetails, shallowEqual);
     const hasAdminRole = useSelector(hasAdminRoleSelector);
@@ -65,13 +69,6 @@ const UserDetailsPage = (props) => {
         formInitValues = formatUser(authUserDetails);
     }
 
-    let pageTitle = '';
-    if (isUserDetailsPage) {
-        pageTitle = 'User Details';
-    } else {
-        pageTitle = 'User Profile';
-    }
-
     return (
         <div className={ classes.UserDetailsPage }>
             <FlexRow>
@@ -98,7 +95,8 @@ const UserDetailsPage = (props) => {
 };
 UserDetailsPage.propTypes = {
     location: PropTypes.object,
-    match: PropTypes.object
+    match: PropTypes.object,
+    pageTitle: PropTypes.string
 };
 
 export default UserDetailsPage;

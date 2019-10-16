@@ -1,12 +1,12 @@
 import React from 'react';
 import UserDetailsPage from './UserDetailsPage';
 
-const UserProfile = () => {
+const EditUser = () => {
     return (
         <UserDetailsPage
-            pageTitle="User Profile"
+            pageTitle="Edit User"
         />
     );
 };
 
-export default UserProfile;
+export default EditUser;
