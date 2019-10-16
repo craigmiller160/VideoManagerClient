@@ -70,8 +70,7 @@ const VideoNavbar = (props) => {
                                     hasAdminRole &&
                                     <NavbarItem
                                         id="userManagementLink"
-                                        to="/usermanagement"
-                                        exact
+                                        to="/users"
                                         text="User Management"
                                         isLink
                                     />

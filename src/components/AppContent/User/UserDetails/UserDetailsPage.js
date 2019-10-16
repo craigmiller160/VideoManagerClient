@@ -33,7 +33,7 @@ const UserDetailsPage = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [userDetails, setUserDetails] = useState({});
 
-    const isUserDetailsPage = /^\/user\/\d{1,3}/.test(location.pathname);
+    const isUserDetailsPage = /^\/users\/\d{1,3}/.test(location.pathname);
 
     useEffect(() => {
         const adminSetup = async () => {

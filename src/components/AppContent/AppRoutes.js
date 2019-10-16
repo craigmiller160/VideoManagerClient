@@ -114,8 +114,8 @@ const AppRoutes = (props) => {
                 ] }
             />
             <ProtectedRoute
-                routeKey="/user/userId"
-                path="/user/:userId"
+                routeKey="/users/userId"
+                path="/users/:userId"
                 component={ UserDetailsPage }
                 rules={ [
                     isAuthenticatedRule,
@@ -124,7 +124,7 @@ const AppRoutes = (props) => {
                 ] }
             />
             <ProtectedRoute
-                path="/usermanagement"
+                path="/users"
                 component={ UserManagementPage }
                 rules={ [
                     isAuthenticatedRule,

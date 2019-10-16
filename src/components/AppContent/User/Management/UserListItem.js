@@ -52,7 +52,7 @@ const UserListItem = (props) => {
                 height={ animateHeight }
             >
                 <FlexRow className="mt-4" justifyContent="flex-end">
-                    <Link to={ `/user/${user.userId}` }>
+                    <Link to={ `/users/${user.userId}` }>
                         <Button color="info">Edit</Button>
                     </Link>
                 </FlexRow>
