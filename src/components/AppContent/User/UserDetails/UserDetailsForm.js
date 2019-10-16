@@ -17,9 +17,11 @@ const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 const UserDetailsForm = (props) => {
     const dispatch = useDispatch();
     const {
-        hasAdminRole,
+        showRevokeLogin,
+        showDelete,
         allRoles,
-        initValues
+        initValues,
+        enableRoles
     } = props;
 
     return (
@@ -64,7 +66,7 @@ const UserDetailsForm = (props) => {
                     name="roles"
                     divClassName={ classes.Input }
                     multi
-                    disabled={ !hasAdminRole }
+                    disabled={ !enableRoles }
                     options={ allRoles }
                 />
                 <Input
@@ -77,12 +79,12 @@ const UserDetailsForm = (props) => {
             </FlexRow>
             <FlexRow className="mt-5" justifyContent="space-around">
                 {
-                    hasAdminRole &&
+                    showRevokeLogin &&
                     <Button color="info">Revoke Login</Button>
                 }
-                <Button color="primary">Save</Button>
+                <Button color="primary">Save Changes</Button>
                 {
-                    hasAdminRole &&
+                    showDelete &&
                     <Button color="danger">Delete User</Button>
                 }
             </FlexRow>
@@ -90,14 +92,19 @@ const UserDetailsForm = (props) => {
     )
 };
 UserDetailsForm.propTypes = {
-    hasAdminRole: PropTypes.bool,
     allRoles: PropTypes.array,
-    initValues: PropTypes.object
+    initValues: PropTypes.object,
+    showRevokeLogin: PropTypes.bool,
+    showDelete: PropTypes.bool,
+    enableRoles: PropTypes.bool
 };
 UserDetailsForm.defaultProps = {
     hasAdminRole: false,
     allRoles: [],
-    initValues: {}
+    initValues: {},
+    showRevokeLogin: false,
+    showDelete: false,
+    enableRoles: false
 };
 
 export default UserDetailsForm;
