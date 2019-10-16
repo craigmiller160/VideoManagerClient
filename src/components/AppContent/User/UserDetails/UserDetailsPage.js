@@ -53,6 +53,8 @@ const UserDetailsPage = (props) => {
 
         if (hasAdminRole) {
             adminSetup();
+        } else {
+            setLoading(false);
         }
     }, []);
 
