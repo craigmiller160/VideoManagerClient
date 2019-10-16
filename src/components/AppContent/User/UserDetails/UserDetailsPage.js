@@ -88,6 +88,7 @@ const UserDetailsPage = (props) => {
                 <UserDetailsForm
                     showDelete={ hasAdminRole }
                     showRevokeLogin={ hasAdminRole }
+                    enableRoles={ hasAdminRole }
                     allRoles={ allRoles }
                     initValues={ formInitValues }
                 />
