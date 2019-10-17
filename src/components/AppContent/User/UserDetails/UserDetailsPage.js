@@ -25,49 +25,25 @@ const TIMESTAMP_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS';
 
 const UserDetailsPage = (props) => {
     const {
-        location,
-        match,
+        setup,
         pageTitle
     } = props;
 
-    const authUserDetails = useSelector(state => state.auth.userDetails, shallowEqual);
     const hasAdminRole = useSelector(hasAdminRoleSelector);
 
     const [allRoles, setAllRoles] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [userDetails, setUserDetails] = useState({});
 
-    const isUserDetailsPage = /^\/users\/\d{1,3}/.test(location.pathname);
-
     useEffect(() => {
-        const adminSetup = async () => {
-            const apis = [AuthApiService.getRoles()];
-            if (isUserDetailsPage) {
-                apis.push(AuthApiService.getUser(match.params.userId));
-            }
-
-            const resArray = await Promise.all(apis);
-            setAllRoles(formatRoles(resArray[0].data));
-
-            if (isUserDetailsPage) {
-                setUserDetails(resArray[1].data);
-            }
+        const doSetup = async () => {
+            const res = await setup();
+            setAllRoles(res.roles);
+            setUserDetails(res.userDetails);
             setLoading(false);
         };
-
-        if (hasAdminRole) {
-            adminSetup();
-        } else {
-            setLoading(false);
-        }
+        doSetup();
     }, []);
-
-    let formInitValues = {};
-    if (isUserDetailsPage) {
-        formInitValues = formatUser(userDetails);
-    } else {
-        formInitValues = formatUser(authUserDetails);
-    }
 
     return (
         <div className={ classes.UserDetailsPage }>
@@ -87,16 +63,23 @@ const UserDetailsPage = (props) => {
                     showRevokeLogin={ hasAdminRole }
                     enableRoles={ hasAdminRole }
                     allRoles={ allRoles }
-                    initValues={ formInitValues }
+                    initValues={ userDetails }
                 />
             }
         </div>
     );
 };
 UserDetailsPage.propTypes = {
-    location: PropTypes.object,
-    match: PropTypes.object,
-    pageTitle: PropTypes.string
+    pageTitle: PropTypes.string,
+    setup: PropTypes.func,
+    showDelete: PropTypes.bool,
+    showRevokeLogin: PropTypes.bool,
+    enableRoles: PropTypes.bool
+};
+UserDetailsPage.defaultProps = {
+    showDelete: false,
+    showRevokeLogin: false,
+    enableRoles: false
 };
 
 export default UserDetailsPage;
