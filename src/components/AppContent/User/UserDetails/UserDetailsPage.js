@@ -15,35 +15,30 @@ import FlexRow from '../../../UI/Grid/FlexRow';
 // TODO need a saveUserDetails alternative to saveUserProfile
 // TODO delete user needs to be made to work
 
-const formatRoles = (roles) => roles?.map(role => ({ value: role.roleId, label: role.name }));
-const formatUser = (user) => ({
-    ...user,
-    roles: formatRoles(user?.roles),
-    lastAuthenticated: user?.lastAuthenticated ? moment(user.lastAuthenticated).format(TIMESTAMP_FORMAT) : ''
-});
-const TIMESTAMP_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS';
-
 const UserDetailsPage = (props) => {
     const {
-        setup,
-        pageTitle
+        loading,
+        userDetails,
+        roles,
+        pageTitle,
+        showDelete,
+        showRevokeLogin,
+        enableRoles
     } = props;
 
-    const hasAdminRole = useSelector(hasAdminRoleSelector);
+    // const [allRoles, setAllRoles] = useState([]);
+    // const [isLoading, setLoading] = useState(true);
+    // const [userDetails, setUserDetails] = useState({});
 
-    const [allRoles, setAllRoles] = useState([]);
-    const [isLoading, setLoading] = useState(true);
-    const [userDetails, setUserDetails] = useState({});
-
-    useEffect(() => {
-        const doSetup = async () => {
-            const res = await setup();
-            setAllRoles(res.roles);
-            setUserDetails(res.userDetails);
-            setLoading(false);
-        };
-        doSetup();
-    }, []);
+    // useEffect(() => {
+    //     const doSetup = async () => {
+    //         const res = await setup();
+    //         setAllRoles(res.roles);
+    //         setUserDetails(res.userDetails);
+    //         setLoading(false);
+    //     };
+    //     doSetup();
+    // }, []);
 
     return (
         <div className={ classes.UserDetailsPage }>
@@ -53,16 +48,16 @@ const UserDetailsPage = (props) => {
                 </div>
             </FlexRow>
             {
-                isLoading &&
+                loading &&
                 <Spinner />
             }
             {
-                !isLoading &&
+                !loading &&
                 <UserDetailsForm
-                    showDelete={ hasAdminRole }
-                    showRevokeLogin={ hasAdminRole }
-                    enableRoles={ hasAdminRole }
-                    allRoles={ allRoles }
+                    showDelete={ showDelete }
+                    showRevokeLogin={ showRevokeLogin }
+                    enableRoles={ enableRoles }
+                    allRoles={ roles }
                     initValues={ userDetails }
                 />
             }
@@ -71,10 +66,12 @@ const UserDetailsPage = (props) => {
 };
 UserDetailsPage.propTypes = {
     pageTitle: PropTypes.string,
-    setup: PropTypes.func,
     showDelete: PropTypes.bool,
     showRevokeLogin: PropTypes.bool,
-    enableRoles: PropTypes.bool
+    enableRoles: PropTypes.bool,
+    loading: PropTypes.bool,
+    userDetails: PropTypes.object,
+    roles: PropTypes.array
 };
 UserDetailsPage.defaultProps = {
     showDelete: false,

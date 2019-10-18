@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable */ // TODO delete this
+import React, { useEffect, useState } from 'react';
 import UserDetailsPage from './UserDetailsPage';
 import * as AuthApiService from '../../../../services/AuthApiService';
 import { formatRoles, formatUser } from './userUtils';
@@ -8,20 +9,33 @@ const EditUser = (props) => {
         match
     } = props;
 
-    const setup = async () => {
-        const resArray = await Promise.all([
-            AuthApiService.getRoles(),
-            AuthApiService.getUser(match.params.userId)
-        ]);
-        return {
-            roles: formatRoles(resArray[0].data),
-            userDetails: formatUser(resArray[1].data)
+    const [isLoading, setLoading] = useState(true);
+    const [allRoles, setAllRoles] = useState([]);
+    const [userDetails, setUserDetails] = useState({});
+
+    useEffect(() => {
+        const setup = async () => {
+            const resArray = await Promise.all([
+                AuthApiService.getRoles(),
+                AuthApiService.getUser(match.params.userId)
+            ]);
+
+            setAllRoles(formatRoles(resArray[0].data));
+            setUserDetails(formatUser(resArray[1].data));
+            setLoading(false);
         };
-    };
+        setup();
+    }, []);
 
     return (
         <UserDetailsPage
             pageTitle="Edit User"
+            enableRoles
+            showDelete
+            showRevokeLogin
+            roles={ allRoles }
+            userDetails={ userDetails }
+            loading={ isLoading }
         />
     );
 };

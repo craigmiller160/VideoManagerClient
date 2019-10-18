@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable */ // TODO delete this
+import React, { useEffect, useState } from 'react';
 import UserDetailsPage from './UserDetailsPage';
 import { shallowEqual, useSelector } from 'react-redux';
 import * as AuthApiService from '../../../../services/AuthApiService';
@@ -8,25 +9,34 @@ import { hasAdminRole as hasAdminRoleSelector } from '../../../../store/auth/aut
 const UserProfile = () => {
     const authUserDetails = useSelector(state => state.auth.userDetails, shallowEqual);
     const hasAdminRole = useSelector(hasAdminRoleSelector);
+    const [isLoading, setLoading] = useState(true);
+    const [allRoles, setAllRoles] = useState([]);
+    const [userDetails, setUserDetails] = useState({});
 
-    const setup = async () => {
-        let roles = [];
-        if (hasAdminRole) {
-            const res = await AuthApiService.getRoles();
-            roles = res.data;
-        }
+    useEffect(() => {
+        const setup = async () => {
+            let roles = [];
+            if (hasAdminRole) {
+                const res = await AuthApiService.getRoles();
+                roles = res.data;
+            }
 
-        return {
-            roles: formatRoles(roles),
-            userDetails: formatUser(authUserDetails)
+            setAllRoles(formatRoles(roles));
+            setUserDetails(formatUser(authUserDetails));
+            setLoading(false);
         };
-    };
+        setup();
+    }, []);
+
+    // TODO need a save method that is restricted to only changes to self
 
     return (
         <UserDetailsPage
             pageTitle="User Profile"
-            setup={ setup }
             enableRoles={ hasAdminRole }
+            loading={ isLoading }
+            userDetails={ userDetails }
+            roles={ allRoles }
         />
     );
 };
