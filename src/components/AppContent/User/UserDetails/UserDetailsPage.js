@@ -23,22 +23,9 @@ const UserDetailsPage = (props) => {
         pageTitle,
         showDelete,
         showRevokeLogin,
-        enableRoles
+        enableRoles,
+        saveUser
     } = props;
-
-    // const [allRoles, setAllRoles] = useState([]);
-    // const [isLoading, setLoading] = useState(true);
-    // const [userDetails, setUserDetails] = useState({});
-
-    // useEffect(() => {
-    //     const doSetup = async () => {
-    //         const res = await setup();
-    //         setAllRoles(res.roles);
-    //         setUserDetails(res.userDetails);
-    //         setLoading(false);
-    //     };
-    //     doSetup();
-    // }, []);
 
     return (
         <div className={ classes.UserDetailsPage }>
@@ -59,6 +46,7 @@ const UserDetailsPage = (props) => {
                     enableRoles={ enableRoles }
                     allRoles={ roles }
                     initValues={ userDetails }
+                    saveUser={ saveUser }
                 />
             }
         </div>
@@ -71,7 +59,10 @@ UserDetailsPage.propTypes = {
     enableRoles: PropTypes.bool,
     loading: PropTypes.bool,
     userDetails: PropTypes.object,
-    roles: PropTypes.array
+    roles: PropTypes.array,
+    saveUser: PropTypes.func,
+    deleteUser: PropTypes.func,
+    revokeUser: PropTypes.func
 };
 UserDetailsPage.defaultProps = {
     showDelete: false,

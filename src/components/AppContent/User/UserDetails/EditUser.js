@@ -27,6 +27,10 @@ const EditUser = (props) => {
         setup();
     }, []);
 
+    const save = () => {
+        throw new Error('Finish this');
+    };
+
     return (
         <UserDetailsPage
             pageTitle="Edit User"
@@ -36,6 +40,7 @@ const EditUser = (props) => {
             roles={ allRoles }
             userDetails={ userDetails }
             loading={ isLoading }
+            saveUser={ save }
         />
     );
 };

@@ -1,33 +1,29 @@
-/* eslint-disable */ // TODO delete this
+/* eslint-disable */  // TODO delete this
 import React from 'react';
 import PropTypes from 'prop-types';
-import { saveUserProfile } from '../../../../store/auth/auth.actions';
 import classes from './UserDetailsForm.scss';
 import FlexRow from '../../../UI/Grid/FlexRow';
 import Input from '../../../UI/form/Input/Input';
 import Select from '../../../UI/form/Select/Select';
 import { Button } from 'reactstrap';
 import Form from '../../../UI/form/Form/Form';
-import { useDispatch } from 'react-redux';
 
 const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 
-// TODO need formInitValues
-
 const UserDetailsForm = (props) => {
-    const dispatch = useDispatch();
     const {
         showRevokeLogin,
         showDelete,
         allRoles,
         initValues,
-        enableRoles
+        enableRoles,
+        saveUser
     } = props;
 
     return (
         <Form
             form={ USER_DETAILS_FORM_NAME }
-            onSubmit={ (values) => dispatch(saveUserProfile(values)) }
+            onSubmit={ saveUser }
             className={ classes.UserDetailsForm }
             initialValues={ initValues }
         >
@@ -96,7 +92,8 @@ UserDetailsForm.propTypes = {
     initValues: PropTypes.object,
     showRevokeLogin: PropTypes.bool,
     showDelete: PropTypes.bool,
-    enableRoles: PropTypes.bool
+    enableRoles: PropTypes.bool,
+    saveUser: PropTypes.func
 };
 UserDetailsForm.defaultProps = {
     hasAdminRole: false,
