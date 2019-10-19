@@ -21,10 +21,10 @@ const UserDetailsPage = (props) => {
         userDetails,
         roles,
         pageTitle,
-        showDelete,
-        showRevokeLogin,
         enableRoles,
-        saveUser
+        saveUser,
+        deleteUser,
+        revokeUser
     } = props;
 
     return (
@@ -41,8 +41,8 @@ const UserDetailsPage = (props) => {
             {
                 !loading &&
                 <UserDetailsForm
-                    showDelete={ showDelete }
-                    showRevokeLogin={ showRevokeLogin }
+                    deleteUser={ deleteUser }
+                    revokeUser={ revokeUser }
                     enableRoles={ enableRoles }
                     allRoles={ roles }
                     initValues={ userDetails }
@@ -54,8 +54,6 @@ const UserDetailsPage = (props) => {
 };
 UserDetailsPage.propTypes = {
     pageTitle: PropTypes.string,
-    showDelete: PropTypes.bool,
-    showRevokeLogin: PropTypes.bool,
     enableRoles: PropTypes.bool,
     loading: PropTypes.bool,
     userDetails: PropTypes.object,

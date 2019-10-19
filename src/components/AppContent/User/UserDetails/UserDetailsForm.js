@@ -12,12 +12,12 @@ const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 
 const UserDetailsForm = (props) => {
     const {
-        showRevokeLogin,
-        showDelete,
         allRoles,
         initValues,
         enableRoles,
-        saveUser
+        saveUser,
+        deleteUser,
+        revokeUser
     } = props;
 
     return (
@@ -75,12 +75,12 @@ const UserDetailsForm = (props) => {
             </FlexRow>
             <FlexRow className="mt-5" justifyContent="space-around">
                 {
-                    showRevokeLogin &&
+                    revokeUser &&
                     <Button color="info">Revoke Login</Button>
                 }
                 <Button color="primary">Save Changes</Button>
                 {
-                    showDelete &&
+                    deleteUser &&
                     <Button color="danger">Delete User</Button>
                 }
             </FlexRow>
@@ -90,10 +90,10 @@ const UserDetailsForm = (props) => {
 UserDetailsForm.propTypes = {
     allRoles: PropTypes.array,
     initValues: PropTypes.object,
-    showRevokeLogin: PropTypes.bool,
-    showDelete: PropTypes.bool,
     enableRoles: PropTypes.bool,
-    saveUser: PropTypes.func
+    saveUser: PropTypes.func,
+    deleteUser: PropTypes.func,
+    revokeUser: PropTypes.func
 };
 UserDetailsForm.defaultProps = {
     hasAdminRole: false,

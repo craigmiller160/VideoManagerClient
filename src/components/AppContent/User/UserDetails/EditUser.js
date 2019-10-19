@@ -31,16 +31,24 @@ const EditUser = (props) => {
         throw new Error('Finish this');
     };
 
+    const deleteUser = () => {
+        throw new Error('Finish this');
+    };
+
+    const revokeUser = () => {
+        throw new Error('Finish this');
+    };
+
     return (
         <UserDetailsPage
             pageTitle="Edit User"
             enableRoles
-            showDelete
-            showRevokeLogin
             roles={ allRoles }
             userDetails={ userDetails }
             loading={ isLoading }
             saveUser={ save }
+            deleteUser={ deleteUser }
+            revokeUser={ revokeUser }
         />
     );
 };

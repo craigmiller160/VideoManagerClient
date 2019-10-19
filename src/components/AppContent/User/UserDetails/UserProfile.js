@@ -32,8 +32,6 @@ const UserProfile = () => {
 
     const save = (values) => dispatch(saveUserProfile(values));
 
-    // TODO need a save method that is restricted to only changes to self
-
     return (
         <UserDetailsPage
             pageTitle="User Profile"
