@@ -4,4 +4,10 @@
   .title {
     @include page-title;
   }
+
+  .UserDetailsForm {
+    .Input {
+      width: 20rem;
+    }
+  }
 }
