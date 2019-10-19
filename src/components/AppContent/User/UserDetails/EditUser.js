@@ -42,7 +42,6 @@ const EditUser = (props) => {
     return (
         <UserDetailsPage
             pageTitle="Edit User"
-            enableRoles
             roles={ allRoles }
             userDetails={ userDetails }
             loading={ isLoading }

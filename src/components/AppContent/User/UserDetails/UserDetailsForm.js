@@ -14,11 +14,12 @@ const UserDetailsForm = (props) => {
     const {
         allRoles,
         initValues,
-        enableRoles,
         saveUser,
         deleteUser,
         revokeUser
     } = props;
+
+    const disableRoles = !allRoles || allRoles.length === 0;
 
     return (
         <Form
@@ -62,7 +63,7 @@ const UserDetailsForm = (props) => {
                     name="roles"
                     divClassName={ classes.Input }
                     multi
-                    disabled={ !enableRoles }
+                    disabled={ disableRoles }
                     options={ allRoles }
                 />
                 <Input
@@ -90,14 +91,12 @@ const UserDetailsForm = (props) => {
 UserDetailsForm.propTypes = {
     allRoles: PropTypes.array,
     initValues: PropTypes.object,
-    enableRoles: PropTypes.bool,
     saveUser: PropTypes.func,
     deleteUser: PropTypes.func,
     revokeUser: PropTypes.func
 };
 UserDetailsForm.defaultProps = {
     hasAdminRole: false,
-    allRoles: [],
     initValues: {},
     showRevokeLogin: false,
     showDelete: false,
