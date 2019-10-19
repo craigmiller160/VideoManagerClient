@@ -28,3 +28,6 @@ export const getAllUsers = () =>
 
 export const getUser = (userId) =>
     API.get(`/auth/users/admin/${userId}`);
+
+export const saveUserAdmin = (userId, userDetails) =>
+    API.put(`/auth/users/admin/${userId}`, userDetails);
