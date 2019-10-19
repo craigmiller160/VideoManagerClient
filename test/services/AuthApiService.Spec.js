@@ -103,6 +103,6 @@ describe('AuthApiService', () => {
         expect(res).toEqual(expect.objectContaining({
             status: 200,
             data: mockUserDetails
-        }))
+        }));
     });
 });

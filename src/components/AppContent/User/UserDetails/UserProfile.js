@@ -30,7 +30,11 @@ const UserProfile = () => {
         setup();
     }, []);
 
-    const save = (values) => dispatch(saveUserProfile(values));
+    const save = async (values) => {
+        setLoading(true);
+        await dispatch(saveUserProfile(values));
+        setLoading(false);
+    };
 
     return (
         <UserDetailsPage

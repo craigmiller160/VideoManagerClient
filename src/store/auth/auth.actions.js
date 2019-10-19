@@ -70,3 +70,19 @@ export const saveUserProfile = (values) => async (dispatch) => {
         dispatch(showErrorAlert(ex.message));
     }
 };
+
+export const saveUserAdmin = (userId, values) => async (dispatch) => {
+    const payload = {
+        ...values,
+        roles: formatRoles(values.roles)
+    };
+    delete payload.lastAuthenticated;
+
+    try {
+        await AuthService.saveUserAdmin(userId, payload);
+
+        dispatch(showSuccessAlert('Successfully saved user'));
+    } catch (ex) {
+        dispatch(showErrorAlert(ex.message));
+    }
+};

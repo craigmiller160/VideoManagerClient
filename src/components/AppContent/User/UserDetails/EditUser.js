@@ -27,8 +27,10 @@ const EditUser = (props) => {
         setup();
     }, []);
 
-    const save = () => {
-        throw new Error('Finish this');
+    const save = (values) => {
+        setLoading(true);
+        // TODO do the save action
+        setLoading(false);
     };
 
     const deleteUser = () => {
