@@ -3,8 +3,11 @@ import React, { useEffect, useState } from 'react';
 import UserDetailsPage from './UserDetailsPage';
 import * as AuthApiService from '../../../../services/AuthApiService';
 import { formatRoles, formatUser } from './userUtils';
+import { showErrorAlert, showSuccessAlert } from '../../../../store/alert/alert.actions';
+import { useDispatch } from 'react-redux';
 
 const EditUser = (props) => {
+    const dispatch = useDispatch();
     const {
         match
     } = props;
@@ -27,9 +30,21 @@ const EditUser = (props) => {
         setup();
     }, []);
 
-    const save = (values) => {
+    const save = async (values) => {
         setLoading(true);
-        // TODO do the save action
+        const payload = {
+            ...values,
+            roles: formatRoles(values.roles)
+        };
+        delete payload.lastAuthenticated;
+
+        try {
+            const res = await AuthApiService.saveUserAdmin(match.params.userId, payload);
+            setUserDetails(formatUser(res.data));
+            dispatch(showSuccessAlert('Successfully saved user'));
+        } catch (ex) {
+            dispatch(showErrorAlert(ex.message));
+        }
         setLoading(false);
     };
 
