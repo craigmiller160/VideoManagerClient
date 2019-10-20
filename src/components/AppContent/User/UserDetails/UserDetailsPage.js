@@ -37,7 +37,7 @@ const UserDetailsPage = (props) => {
     } = props;
 
     const disableRoles = !roles || roles.length === 0;
-    const disableSave = form?.syncErrors;
+    const disableSave = !!form?.syncErrors;
 
     const passwordValidate = [];
     if (requirePassword) {

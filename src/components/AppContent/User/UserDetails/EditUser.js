@@ -1,5 +1,6 @@
 /* eslint-disable */ // TODO delete this
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import UserDetailsPage from './UserDetailsPage';
 import * as AuthApiService from '../../../../services/AuthApiService';
 import { formatRoles, formatUser, unFormatRoles } from './userUtils';
@@ -9,7 +10,8 @@ import { useDispatch } from 'react-redux';
 const EditUser = (props) => {
     const dispatch = useDispatch();
     const {
-        match
+        match,
+        history
     } = props;
 
     const [isLoading, setLoading] = useState(true);
@@ -48,8 +50,14 @@ const EditUser = (props) => {
         setLoading(false);
     };
 
-    const deleteUser = () => {
-        throw new Error('Finish this');
+    const deleteUser = async () => {
+        try {
+            await AuthApiService.deleteUser(match.params.userId);
+            dispatch(showSuccessAlert('Successfully saved user'));
+            history.push('/users');
+        } catch (ex) {
+            dispatch(showErrorAlert(ex.message));
+        }
     };
 
     const revokeUser = async () => {
@@ -75,6 +83,10 @@ const EditUser = (props) => {
             revokeUser={ revokeUser }
         />
     );
+};
+EditUser.propTypes = {
+    match: PropTypes.object,
+    history: PropTypes.object
 };
 
 export default EditUser;
