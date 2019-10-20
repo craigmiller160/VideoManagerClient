@@ -44,6 +44,11 @@ describe('auth.reducer', () => {
     });
 
     it('handleSetUserDetails null value', () => {
-        throw new Error('Finish this');
+        const action = { type: setUserDetails.toString(), payload: null };
+        const expectedState = {
+            ...authInitState,
+            userDetails: {}
+        };
+        expect(authReducer(authInitState, action)).toEqual(expectedState);
     });
 });
