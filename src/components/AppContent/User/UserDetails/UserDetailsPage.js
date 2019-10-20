@@ -19,7 +19,7 @@ import Form from '../../../UI/form/Form/Form';
 // TODO need a saveUserDetails alternative to saveUserProfile
 // TODO delete user needs to be made to work
 
-const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
+export const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 
 const UserDetailsPage = (props) => {
     const {
@@ -52,6 +52,7 @@ const UserDetailsPage = (props) => {
                     onSubmit={ saveUser }
                     className={ classes.UserDetailsForm }
                     initialValues={ userDetails }
+                    enableReinitialize
                 >
                     <FlexRow className="mt-3" justifyContent="space-around">
                         <Input

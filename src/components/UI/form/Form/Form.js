@@ -42,7 +42,8 @@ ReduxFormForm.propTypes = {
     className: PropTypes.string,
     initialValues: PropTypes.object,
     children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
-    destroyOnUnmount: PropTypes.bool
+    destroyOnUnmount: PropTypes.bool,
+    enableReinitialize: PropTypes.bool
 };
 
 export default ReduxFormForm;

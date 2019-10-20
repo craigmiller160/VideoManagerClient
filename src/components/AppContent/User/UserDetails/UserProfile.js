@@ -1,7 +1,8 @@
 /* eslint-disable */ // TODO delete this
 import React, { useEffect, useState } from 'react';
-import UserDetailsPage from './UserDetailsPage';
+import UserDetailsPage, { USER_DETAILS_FORM_NAME } from './UserDetailsPage';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { reset } from 'redux-form';
 import * as AuthApiService from '../../../../services/AuthApiService';
 import { formatRoles, formatUser } from './userUtils';
 import { hasAdminRole as hasAdminRoleSelector } from '../../../../store/auth/auth.selectors';
@@ -13,7 +14,7 @@ const UserProfile = () => {
     const hasAdminRole = useSelector(hasAdminRoleSelector);
     const [isLoading, setLoading] = useState(true);
     const [allRoles, setAllRoles] = useState([]);
-    const [userDetails, setUserDetails] = useState({});
+    // const [userDetails, setUserDetails] = useState({});
 
     useEffect(() => {
         const setup = async () => {
@@ -24,7 +25,7 @@ const UserProfile = () => {
             }
 
             setAllRoles(formatRoles(roles));
-            setUserDetails(formatUser(authUserDetails));
+            // setUserDetails(formatUser(authUserDetails));
             setLoading(false);
         };
         setup();
@@ -33,6 +34,7 @@ const UserProfile = () => {
     const save = async (values) => {
         setLoading(true);
         await dispatch(saveUserProfile(values));
+        // dispatch(reset(USER_DETAILS_FORM_NAME));
         setLoading(false);
     };
 
@@ -41,7 +43,7 @@ const UserProfile = () => {
             pageTitle="User Profile"
             enableRoles={ hasAdminRole }
             loading={ isLoading }
-            userDetails={ userDetails }
+            userDetails={ formatUser(authUserDetails) }
             roles={ allRoles }
             saveUser={ save }
         />
