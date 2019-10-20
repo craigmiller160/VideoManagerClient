@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import UserDetailsPage from './UserDetailsPage';
 import * as AuthApiService from '../../../../services/AuthApiService';
-import { formatRoles, formatUser } from './userUtils';
+import { formatRoles, formatUser, unFormatRoles } from './userUtils';
 import { showErrorAlert, showSuccessAlert } from '../../../../store/alert/alert.actions';
 import { useDispatch } from 'react-redux';
 
@@ -34,7 +34,7 @@ const EditUser = (props) => {
         setLoading(true);
         const payload = {
             ...values,
-            roles: formatRoles(values.roles)
+            roles: unFormatRoles(values.roles)
         };
         delete payload.lastAuthenticated;
 

@@ -2,13 +2,12 @@ import { createAction } from 'redux-starter-kit';
 import * as AuthService from 'services/AuthApiService';
 import { CSRF_TOKEN_KEY } from '../../utils/securityConstants';
 import { showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
+import { unFormatRoles } from '../../components/AppContent/User/UserDetails/userUtils';
 
 export const setIsAuth = createAction('auth/setIsAuth');
 export const setLoginLoading = createAction('auth/setLoginLoading');
 export const setCsrfToken = createAction('auth/setCsrfToken');
 export const setUserDetails = createAction('auth/setUserDetails');
-
-const formatRoles = (roles) => roles.map((role) => ({ roleId: role.value, name: role.label }));
 
 export const handleCsrfToken = (response) => (dispatch) => {
     const csrfToken = response?.headers?.[CSRF_TOKEN_KEY];
@@ -58,7 +57,7 @@ export const logout = () => async (dispatch) => {
 export const saveUserProfile = (values) => async (dispatch) => {
     const payload = {
         ...values,
-        roles: formatRoles(values.roles)
+        roles: unFormatRoles(values.roles)
     };
     delete payload.lastAuthenticated;
 
