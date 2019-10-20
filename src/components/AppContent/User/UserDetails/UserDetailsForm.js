@@ -9,6 +9,8 @@ import { Button } from 'reactstrap';
 import Form from '../../../UI/form/Form/Form';
 
 
+// TODO delete this component
+
 
 const UserDetailsForm = (props) => {
     const {

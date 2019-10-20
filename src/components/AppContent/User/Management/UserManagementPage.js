@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import * as AuthApiService from 'services/AuthApiService';
 import classes from './UserManagementPage.scss';
 import FlexRow from '../../../UI/Grid/FlexRow';
@@ -20,7 +21,8 @@ const userNameSort = (user1, user2) => {
 
 // TODO implement AddUser behavior
 
-const UserManagementPage = () => {
+const UserManagementPage = (props) => {
+    const { history } = props;
     const [allUsers, setAllUsers] = useState([]);
 
     useEffect(() => {
@@ -60,10 +62,19 @@ const UserManagementPage = () => {
                 }
             </FlexCol>
             <FlexRow className="mt-4" justifyContent="flex-end">
-                <Button color="primary">Add User</Button>
+                <Button
+                    type="button"
+                    color="primary"
+                    onClick={ () => history.push('/users/new') }
+                >
+                    Add User
+                </Button>
             </FlexRow>
         </div>
     );
+};
+UserManagementPage.propTypes = {
+    history: PropTypes.object
 };
 
 export default UserManagementPage;
