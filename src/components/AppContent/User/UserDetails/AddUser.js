@@ -21,6 +21,10 @@ const AddUser = () => {
         throw new Error('Finish this');
     };
 
+    // TODO need to add field validation for UserDetailsPage and its form.
+    // TODO username, firstname, lastname fields should always be required
+    // TODO password should be required for AddUser
+
     return (
         <UserDetailsPage
             pageTitle="Add User"
