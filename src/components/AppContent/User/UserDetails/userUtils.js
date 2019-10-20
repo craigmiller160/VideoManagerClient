@@ -1,4 +1,3 @@
-/* eslint-disable */ // TODO delete this
 import moment from 'moment';
 
 const TIMESTAMP_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS';

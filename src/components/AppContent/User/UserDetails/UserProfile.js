@@ -1,4 +1,3 @@
-/* eslint-disable */  // TODO delete this
 import React, { useEffect, useState } from 'react';
 import UserDetailsPage from './UserDetailsPage';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';

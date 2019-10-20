@@ -19,8 +19,6 @@ const userNameSort = (user1, user2) => {
     return 0;
 };
 
-// TODO implement AddUser behavior
-
 const UserManagementPage = (props) => {
     const { history } = props;
     const [allUsers, setAllUsers] = useState([]);

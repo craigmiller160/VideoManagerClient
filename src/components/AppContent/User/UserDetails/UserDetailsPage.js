@@ -1,11 +1,6 @@
-/* eslint-disable */        // TODO delete this
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { shallowEqual, useSelector } from 'react-redux';
-import moment from 'moment';
-import { hasAdminRole as hasAdminRoleSelector } from '../../../../store/auth/auth.selectors';
-import * as AuthApiService from 'services/AuthApiService';
-import UserDetailsForm from './UserDetailsForm';
 import Spinner from '../../../UI/Spinner/Spinner';
 import classes from './UserDetailsPage.scss';
 import FlexRow from '../../../UI/Grid/FlexRow';
@@ -14,11 +9,6 @@ import Select from '../../../UI/form/Select/Select';
 import { Button } from 'reactstrap';
 import Form from '../../../UI/form/Form/Form';
 import { isRequired } from '../../../../utils/validations';
-
-// TODO for the roles dropdown, admin users need to load all the roles from the server, then select only the ones from the user
-// TODO revoke login needs to be made to work
-// TODO need a saveUserDetails alternative to saveUserProfile
-// TODO delete user needs to be made to work
 
 const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 

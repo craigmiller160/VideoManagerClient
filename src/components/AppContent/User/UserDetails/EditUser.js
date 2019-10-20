@@ -1,4 +1,3 @@
-/* eslint-disable */ // TODO delete this
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import UserDetailsPage from './UserDetailsPage';
