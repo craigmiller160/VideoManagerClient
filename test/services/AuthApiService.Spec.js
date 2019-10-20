@@ -5,7 +5,7 @@ import {
     getRoles, getUser,
     getVideoToken,
     login,
-    logout, saveUserAdmin,
+    logout, revokeUser, saveUserAdmin,
     saveUserProfile
 } from 'services/AuthApiService';
 import {
@@ -13,7 +13,7 @@ import {
     mockCheckAuthSuccess, mockCsrfToken, mockGetAllUsers, mockGetRoles, mockGetUser, mockGetVideoToken,
     mockLoginSuccess,
     mockLogout,
-    mockPassword, mockRoles, mockSaveUserAdmin, mockSaveUserProfile,
+    mockPassword, mockRevokeUser, mockRoles, mockSaveUserAdmin, mockSaveUserProfile,
     mockTokenResponse, mockUserDetails,
     mockUserName
 } from '../exclude/mock/mockApiConfig/authApi';
@@ -33,6 +33,7 @@ describe('AuthApiService', () => {
         mockGetAllUsers(mockApi);
         mockGetUser(mockApi);
         mockSaveUserAdmin(mockApi);
+        mockRevokeUser(mockApi);
     });
 
     it('login', async () => {
@@ -100,6 +101,14 @@ describe('AuthApiService', () => {
 
     it('saveUserAdmin', async () => {
         const res = await saveUserAdmin(1, mockUserDetails);
+        expect(res).toEqual(expect.objectContaining({
+            status: 200,
+            data: mockUserDetails
+        }));
+    });
+
+    it('revokeUser', async () => {
+        const res = await revokeUser(1);
         expect(res).toEqual(expect.objectContaining({
             status: 200,
             data: mockUserDetails
