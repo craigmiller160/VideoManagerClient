@@ -33,6 +33,7 @@ const AddUser = () => {
             loading={ isLoading }
             saveUser={ save }
             enableUsername
+            requirePassword
         />
     );
 };

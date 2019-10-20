@@ -13,6 +13,7 @@ import Input from '../../../UI/form/Input/Input';
 import Select from '../../../UI/form/Select/Select';
 import { Button } from 'reactstrap';
 import Form from '../../../UI/form/Form/Form';
+import { isRequired } from '../../../../utils/validations';
 
 // TODO for the roles dropdown, admin users need to load all the roles from the server, then select only the ones from the user
 // TODO revoke login needs to be made to work
@@ -30,10 +31,15 @@ const UserDetailsPage = (props) => {
         saveUser,
         deleteUser,
         revokeUser,
-        enableUsername
+        enableUsername,
+        requirePassword
     } = props;
 
     const disableRoles = !roles || roles.length === 0;
+    const passwordValidate = [];
+    if (requirePassword) {
+        passwordValidate.push(isRequired);
+    }
 
     return (
         <div className={ classes.UserDetailsPage }>
@@ -62,12 +68,16 @@ const UserDetailsPage = (props) => {
                             type="email"
                             disabled={ !enableUsername }
                             divClassName={ classes.Input }
+                            validate={ [
+                                isRequired
+                            ] }
                         />
                         <Input
                             label="Password"
                             name="password"
                             type="password"
                             divClassName={ classes.Input }
+                            validate={ passwordValidate }
                         />
                     </FlexRow>
                     <FlexRow justifyContent="space-around">
@@ -76,12 +86,18 @@ const UserDetailsPage = (props) => {
                             name="firstName"
                             type="text"
                             divClassName={ classes.Input }
+                            validate={ [
+                                isRequired
+                            ] }
                         />
                         <Input
                             label="Last Name"
                             name="lastName"
                             type="text"
                             divClassName={ classes.Input }
+                            validate={ [
+                                isRequired
+                            ] }
                         />
                     </FlexRow>
                     <FlexRow justifyContent="space-around">
@@ -137,10 +153,12 @@ UserDetailsPage.propTypes = {
     saveUser: PropTypes.func,
     deleteUser: PropTypes.func,
     revokeUser: PropTypes.func,
-    enableUsername: PropTypes.bool
+    enableUsername: PropTypes.bool,
+    requirePassword: PropTypes.bool
 };
 UserDetailsPage.defaultProps = {
-    enableUsername: false
+    enableUsername: false,
+    requirePassword: false
 };
 
 export default UserDetailsPage;
