@@ -20,9 +20,10 @@ import { isRequired } from '../../../../utils/validations';
 // TODO need a saveUserDetails alternative to saveUserProfile
 // TODO delete user needs to be made to work
 
-export const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
+const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 
 const UserDetailsPage = (props) => {
+    const form = useSelector((state) => state.form?.[USER_DETAILS_FORM_NAME], shallowEqual);
     const {
         loading,
         userDetails,
@@ -36,6 +37,8 @@ const UserDetailsPage = (props) => {
     } = props;
 
     const disableRoles = !roles || roles.length === 0;
+    const disableSave = form?.syncErrors;
+
     const passwordValidate = [];
     if (requirePassword) {
         passwordValidate.push(isRequired);
@@ -128,7 +131,12 @@ const UserDetailsPage = (props) => {
                                 Revoke Login
                             </Button>
                         }
-                        <Button color="primary">Save Changes</Button>
+                        <Button
+                            color="primary"
+                            disabled={ disableSave }
+                        >
+                            Save Changes
+                        </Button>
                         {
                             deleteUser &&
                             <Button
