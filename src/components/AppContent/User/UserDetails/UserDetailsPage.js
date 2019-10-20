@@ -29,7 +29,8 @@ const UserDetailsPage = (props) => {
         pageTitle,
         saveUser,
         deleteUser,
-        revokeUser
+        revokeUser,
+        enableUsername
     } = props;
 
     const disableRoles = !roles || roles.length === 0;
@@ -59,7 +60,7 @@ const UserDetailsPage = (props) => {
                             label="Username"
                             name="userName"
                             type="email"
-                            disabled
+                            disabled={ !enableUsername }
                             divClassName={ classes.Input }
                         />
                         <Input
@@ -135,12 +136,11 @@ UserDetailsPage.propTypes = {
     roles: PropTypes.array,
     saveUser: PropTypes.func,
     deleteUser: PropTypes.func,
-    revokeUser: PropTypes.func
+    revokeUser: PropTypes.func,
+    enableUsername: PropTypes.bool
 };
 UserDetailsPage.defaultProps = {
-    showDelete: false,
-    showRevokeLogin: false,
-    enableRoles: false
+    enableUsername: false
 };
 
 export default UserDetailsPage;

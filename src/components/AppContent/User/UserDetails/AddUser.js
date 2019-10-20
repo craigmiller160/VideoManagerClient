@@ -28,6 +28,7 @@ const AddUser = () => {
             userDetails={ {} }
             loading={ isLoading }
             saveUser={ save }
+            enableUsername
         />
     );
 };
