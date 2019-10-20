@@ -13,4 +13,4 @@ export const formatUser = (user) => ({
     lastAuthenticated: user?.lastAuthenticated ? moment(user.lastAuthenticated).format(TIMESTAMP_FORMAT) : ''
 });
 
-export const unFormatRoles = (roles) => roles.map((role) => ({ roleId: role.value, name: role.label }));
+export const unFormatRoles = (roles) => roles?.map((role) => ({ roleId: role.value, name: role.label }));
