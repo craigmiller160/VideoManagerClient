@@ -17,6 +17,10 @@ jest.mock('components/AppContent/VideoNavbar/NavbarItem', () => {
     const NavbarItem = () => <div />;
     return NavbarItem;
 });
+jest.mock('components/AppContent/VideoNavbar/NavbarDropdown', () => {
+    const NavbarDropdown = () => <div />;
+    return NavbarDropdown;
+});
 jest.mock('use-react-router', () => jest.fn());
 
 const push = jest.fn();
@@ -32,10 +36,24 @@ const defaultProps = {
     disabled: false
 };
 
-const doMount = (props = defaultProps) => {
-    const store = mockStore({});
+const defaultStore = {
+    auth: {
+        userDetails: {
+            firstName: 'firstName',
+            lastName: 'lastName',
+            roles: [
+                { roleId: 1, name: 'ROLE_ADMIN' },
+                { roleId: 2, name: 'ROLE_EDIT' },
+                { roleId: 3, name: 'ROLE_SCAN' }
+            ]
+        }
+    }
+};
+
+const doMount = (props = defaultProps, store = defaultStore) => {
+    const reduxStore = mockStore(store);
     const component = mount(
-        <Provider store={ store }>
+        <Provider store={ reduxStore }>
             <MemoryRouter initialEntries={ ['/'] }>
                 <VideoNavbar { ...props } />
             </MemoryRouter>
@@ -44,86 +62,101 @@ const doMount = (props = defaultProps) => {
     return [component, store];
 };
 
-describe('VideoNavbar', () => {
-    it('renders successfully', () => {
-        const [component] = doMount();
-        expect(component.find('VideoNavbar')).toHaveLength(1);
-        expect(component.find('VideoNavbar').props()).toEqual(expect.objectContaining({
-            disabled: false
-        }));
-        expect(component.find('NavbarBrand')).toHaveLength(1);
+const testRendering = (component, {
+    disabled = false
+} = {}) => {
+    expect(component.find('VideoNavbar')).toHaveLength(1);
+    expect(component.find('VideoNavbar').props()).toEqual(expect.objectContaining({
+        disabled
+    }));
+    expect(component.find('NavbarBrand')).toHaveLength(1);
+
+    const testNavbarItem = (index, props) => {
+        expect(component.find('NavbarItem').at(index).props()).toEqual(props);
+    };
+
+    if (disabled) {
+        expect(component.find('NavbarItem')).toHaveLength(0);
+        expect(component.find('NavbarToggler')).toHaveLength(0);
+    } else {
         expect(component.find('NavbarItem')).toHaveLength(4);
         expect(component.find('NavbarToggler')).toHaveLength(1);
-
-        const testNavbarItem = (index, props) => {
-            expect(component.find('NavbarItem').at(index).props()).toEqual(props);
-        };
+        expect(component.find('NavbarDropdown')).toHaveLength(1);
 
         testNavbarItem(0, {
             id: 'videoListLink',
-            to: '/list',
+            to: '/videos',
             exact: true,
             isLink: true,
-            text: 'Video List'
+            text: 'Videos'
         });
         testNavbarItem(1, {
             id: 'manageFiltersLink',
             to: '/filters',
             exact: true,
             isLink: true,
-            text: 'Manage Filters'
+            text: 'Filters'
         });
         testNavbarItem(2, {
-            id: 'scanDirectoryLink',
-            onClick: expect.any(Function),
-            text: 'Scan Directory'
+            id: 'userManagementLink',
+            to: '/users',
+            isLink: true,
+            text: 'Users'
         });
         testNavbarItem(3, {
-            id: 'logoutLink',
+            id: 'scanDirectoryLink',
             onClick: expect.any(Function),
-            text: 'Logout'
+            text: 'Scan'
+        });
+    }
+
+};
+
+describe('VideoNavbar', () => {
+    describe('rendering', () => {
+        it('renders with all roles', () => {
+            const [component] = doMount();
+            testRendering(component);
         });
 
-        throw new Error('Add tests for dropdown');
-    });
-
-    it('hides/disables items', () => {
-        const [component] = doMount({
-            ...defaultProps,
-            disabled: true
+        it('renders with disabled', () => {
+            const [component] = doMount({
+                ...defaultProps,
+                disabled: true
+            });
+            testRendering(component, {
+                disabled: true
+            });
         });
-        expect(component.find('VideoNavbar')).toHaveLength(1);
-        expect(component.find('VideoNavbar').props()).toEqual(expect.objectContaining({
-            disabled: true
-        }));
-        expect(component.find('NavbarBrand')).toHaveLength(1);
-        expect(component.find('NavbarItem')).toHaveLength(0);
-        expect(component.find('NavbarToggler')).toHaveLength(0);
-    });
 
-    it('toggles the collapse open and closed', () => {
-        const [component] = doMount();
-        const toggle = component.find('VideoNavbar NavbarToggler');
-        expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
-            isOpen: false
-        }));
-        toggle.simulate('click');
-        expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
-            isOpen: true
-        }));
-    });
+        it('renders without scanning role', () => {
+            throw new Error('Finish this');
+        });
 
-    it('renders without scanning role', () => {
-        throw new Error('Finish this');
-    });
+        it('renders without edit role', () => {
+            throw new Error('Finish this');
+        });
 
-    it('renders without edit role', () => {
-        throw new Error('Finish this');
+        it('renders without admin role', () => {
+            throw new Error('Finish this');
+        });
     });
 
     describe('click actions', () => {
         beforeEach(() => {
             push.mockClear();
+        });
+
+        it('toggles the collapse open and closed', () => {
+            const [component] = doMount();
+            const toggle = component.find('VideoNavbar NavbarToggler');
+            expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
+                isOpen: false
+            }));
+            toggle.simulate('click');
+            expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
+                isOpen: true
+            }));
         });
 
         it('clicks on scan directory link', async () => {
