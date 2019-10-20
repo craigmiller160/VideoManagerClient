@@ -80,3 +80,7 @@ export const mockRevokeAccess = (mockApi) =>
 export const mockCreateUser = (mockApi) =>
     mockApi.onPost('/auth/users', mockUserDetails)
         .reply(200, mockUserDetails);
+
+export const mockDeleteUser = (mockApi) =>
+    mockApi.onDelete('/auth/users/1')
+        .reply(200, mockUserDetails);

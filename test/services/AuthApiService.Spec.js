@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
 import {
-    checkAuth, createUser, getAllUsers,
+    checkAuth, createUser, deleteUser, getAllUsers,
     getRoles, getUser,
     getVideoToken,
     login,
@@ -10,11 +10,23 @@ import {
 } from 'services/AuthApiService';
 import {
     CSRF_TOKEN_TEST,
-    mockCheckAuthSuccess, mockCreateUser, mockCsrfToken, mockGetAllUsers, mockGetRoles, mockGetUser, mockGetVideoToken,
+    mockCheckAuthSuccess,
+    mockCreateUser,
+    mockCsrfToken,
+    mockDeleteUser,
+    mockGetAllUsers,
+    mockGetRoles,
+    mockGetUser,
+    mockGetVideoToken,
     mockLoginSuccess,
     mockLogout,
-    mockPassword, mockRevokeAccess, mockRoles, mockSaveUserAdmin, mockSaveUserProfile,
-    mockTokenResponse, mockUserDetails,
+    mockPassword,
+    mockRevokeAccess,
+    mockRoles,
+    mockSaveUserAdmin,
+    mockSaveUserProfile,
+    mockTokenResponse,
+    mockUserDetails,
     mockUserName
 } from '../exclude/mock/mockApiConfig/authApi';
 import { CSRF_TOKEN_KEY } from '../../src/utils/securityConstants';
@@ -35,6 +47,7 @@ describe('AuthApiService', () => {
         mockSaveUserAdmin(mockApi);
         mockRevokeAccess(mockApi);
         mockCreateUser(mockApi);
+        mockDeleteUser(mockApi);
     });
 
     it('login', async () => {
@@ -118,6 +131,14 @@ describe('AuthApiService', () => {
 
     it('createUser', async () => {
         const res = await createUser(mockUserDetails);
+        expect(res).toEqual(expect.objectContaining({
+            status: 200,
+            data: mockUserDetails
+        }));
+    });
+
+    it('deleteUser', async () => {
+        const res = await deleteUser(1);
         expect(res).toEqual(expect.objectContaining({
             status: 200,
             data: mockUserDetails

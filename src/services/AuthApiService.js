@@ -37,3 +37,6 @@ export const revokeAccess = (userId) =>
 
 export const createUser = (userDetails) =>
     API.post('/auth/users', userDetails);
+
+export const deleteUser = (userId) =>
+    API.delete(`/auth/users/${userId}`);
