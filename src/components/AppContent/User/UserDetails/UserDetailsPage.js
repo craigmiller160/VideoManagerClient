@@ -103,12 +103,24 @@ const UserDetailsPage = (props) => {
                     <FlexRow className="mt-5" justifyContent="space-around">
                         {
                             revokeUser &&
-                            <Button color="info">Revoke Login</Button>
+                            <Button
+                                type="button"
+                                color="info"
+                                onClick={ revokeUser }
+                            >
+                                Revoke Login
+                            </Button>
                         }
                         <Button color="primary">Save Changes</Button>
                         {
                             deleteUser &&
-                            <Button color="danger">Delete User</Button>
+                            <Button
+                                type="button"
+                                color="danger"
+                                onClick={ deleteUser }
+                            >
+                                Delete User
+                            </Button>
                         }
                     </FlexRow>
                 </Form>

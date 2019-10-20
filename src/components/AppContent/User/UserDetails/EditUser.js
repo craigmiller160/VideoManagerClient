@@ -52,8 +52,16 @@ const EditUser = (props) => {
         throw new Error('Finish this');
     };
 
-    const revokeUser = () => {
-        throw new Error('Finish this');
+    const revokeUser = async () => {
+        setLoading(true);
+        try {
+            const res = await AuthApiService.revokeAccess(match.params.userId);
+            setUserDetails(formatUser(res.data));
+            dispatch(showSuccessAlert('Successfully revoked user access'));
+        } catch (ex) {
+            dispatch(showErrorAlert(ex.message));
+        }
+        setLoading(false);
     };
 
     return (
