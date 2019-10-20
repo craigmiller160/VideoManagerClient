@@ -2,8 +2,6 @@ import moment from 'moment';
 
 const TIMESTAMP_FORMAT = 'YYYY-MM-DD HH:mm:ss.SSS';
 
-// TODO unit tests
-
 export const formatRoles = (roles) => roles?.map(role => ({ value: role.roleId, label: role.name }));
 
 export const formatUser = (user) => ({
