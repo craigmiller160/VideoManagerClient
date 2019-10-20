@@ -73,6 +73,6 @@ export const mockSaveUserAdmin = (mockApi) =>
     mockApi.onPut('/auth/users/admin/1', mockUserDetails)
         .reply(200, mockUserDetails);
 
-export const mockRevokeUser = (mockApi) =>
+export const mockRevokeAccess = (mockApi) =>
     mockApi.onPost('/auth/users/revoke/1')
         .reply(200, mockUserDetails);

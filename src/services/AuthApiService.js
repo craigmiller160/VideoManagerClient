@@ -32,5 +32,5 @@ export const getUser = (userId) =>
 export const saveUserAdmin = (userId, userDetails) =>
     API.put(`/auth/users/admin/${userId}`, userDetails);
 
-export const revokeUser = (userId) =>
+export const revokeAccess = (userId) =>
     API.post(`/auth/users/revoke/${userId}`);
