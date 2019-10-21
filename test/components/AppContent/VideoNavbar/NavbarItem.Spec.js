@@ -1,7 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router';
-import NavbarItem from '../../../../src/components/AppContent/VideoNavbar/NavbarItem';
+import NavbarItem from 'components/AppContent/VideoNavbar/NavbarItem';
+import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
 
 const onClick = jest.fn();
 const defaultProps = {
@@ -14,16 +15,15 @@ const defaultProps = {
     className: 'className'
 };
 
-const doMount = (props = defaultProps) => mount(
-    <MemoryRouter initialEntries={ ['/'] }>
-        <NavbarItem { ...props } />
-    </MemoryRouter>
-);
+const doMount = mountTestComponent(NavbarItem, {
+    defaultProps,
+    defaultInitialRouterEntries: ['/']
+});
 
 describe('NavbarItem', () => {
     describe('rendering', () => {
         it('renders as link', () => {
-            const component = doMount();
+            const { component } = doMount();
             console.log(component.debug()); // TODO delete this
         });
 

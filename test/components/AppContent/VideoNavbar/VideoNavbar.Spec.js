@@ -31,8 +31,6 @@ useReactRouter.mockImplementation(() => ({
     }
 }));
 
-// const mockStore = configureMockStore([thunk]);
-
 const defaultProps = {
     disabled: false
 };

@@ -38,7 +38,7 @@ const creator = (Component, { defaultProps, defaultStoreState, defaultInitialRou
     return ({ props, storeState, initialRouterEntries, useThunk } = {}) => {
         const actualProps = { ...defaultProps, ...props };
 
-        let Provider = <div />;
+        let Provider = (props) => <div>{ props.children }</div>;
         let store = {};
         if (defaultStoreState || storeState) {
             const providerAndStore = createProvider({ ...defaultStoreState, ...storeState }, useThunk || defaultUseThunk);
@@ -46,7 +46,7 @@ const creator = (Component, { defaultProps, defaultStoreState, defaultInitialRou
             store = providerAndStore[1];
         }
 
-        let Router = <div />;
+        let Router = (props) => <div>{ props.children }</div>;
         if (defaultInitialRouterEntries || initialRouterEntries) {
             Router = createRouter(initialRouterEntries);
         }
