@@ -1,5 +1,17 @@
 describe('NavbarItem', () => {
-    it('implement unit tests', () => {
-        throw new Error('Finish this');
+    describe('rendering', () => {
+        it('renders as link', () => {
+            throw new Error('Finish this');
+        });
+
+        it('renders when not link', () => {
+            throw new Error('Finish this');
+        });
+    });
+
+    describe('callbacks', () => {
+        it('handles onClick', () => {
+            throw new Error('Finish this');
+        });
     });
 });
