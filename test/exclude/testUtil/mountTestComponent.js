@@ -14,11 +14,11 @@ const createRouter = (initialRouterEntries) => {
 
 const createProvider = (storeState, useThunk) => {
     const { Provider } = require('react-redux');
-    const configureMockStore = require('redux-mock-store');
+    const configureMockStore = require('redux-mock-store').default;
 
     let middleware = [];
     if (useThunk) {
-        const thunk = require('redux-thunk');
+        const thunk = require('redux-thunk').default;
         middleware.push(thunk);
     }
 
@@ -34,14 +34,14 @@ const createProvider = (storeState, useThunk) => {
     return [ReduxProvider, store];
 };
 
-const creator = ({ defaultProps, defaultStoreState, defaultInitialRouterEntries, defaultUseThunk } = {}) => {
-    return (Component, { props, storeState, initialRouterEntries, useThunk } = {}) => {
+const creator = (Component, { defaultProps, defaultStoreState, defaultInitialRouterEntries, defaultUseThunk } = {}) => {
+    return ({ props, storeState, initialRouterEntries, useThunk } = {}) => {
         const actualProps = { ...defaultProps, ...props };
 
         let Provider = <div />;
         let store = {};
         if (defaultStoreState || storeState) {
-            const providerAndStore = createProvider({ ...defaultStoreState, ...storeState });
+            const providerAndStore = createProvider({ ...defaultStoreState, ...storeState }, useThunk || defaultUseThunk);
             Provider = providerAndStore[0];
             store = providerAndStore[1];
         }

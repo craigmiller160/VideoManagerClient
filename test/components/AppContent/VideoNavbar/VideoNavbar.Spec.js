@@ -5,7 +5,8 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
-import useReactRouter from 'use-react-router'; // eslint-disable-line import/first
+import useReactRouter from 'use-react-router';
+import mountTestComponent from '../../../exclude/testUtil/mountTestComponent'; // eslint-disable-line import/first
 
 jest.mock('store/scanning/scanning.actions', () => ({
     startFileScan: () => ({ type: 'startFileScan' })
@@ -30,13 +31,13 @@ useReactRouter.mockImplementation(() => ({
     }
 }));
 
-const mockStore = configureMockStore([thunk]);
+// const mockStore = configureMockStore([thunk]);
 
 const defaultProps = {
     disabled: false
 };
 
-const defaultStore = {
+const defaultStoreState = {
     auth: {
         userDetails: {
             firstName: 'firstName',
@@ -50,17 +51,12 @@ const defaultStore = {
     }
 };
 
-const doMount = (props = defaultProps, store = defaultStore) => {
-    const reduxStore = mockStore(store);
-    const component = mount(
-        <Provider store={ reduxStore }>
-            <MemoryRouter initialEntries={ ['/'] }>
-                <VideoNavbar { ...props } />
-            </MemoryRouter>
-        </Provider>
-    );
-    return [component, store];
-};
+const doMount = mountTestComponent(VideoNavbar, {
+    defaultProps,
+    defaultStoreState,
+    defaultInitialRouterEntries: ['/'],
+    defaultUseThunk: true
+});
 
 const testRendering = (component, {
     disabled = false,
@@ -130,14 +126,15 @@ const testRendering = (component, {
 describe('VideoNavbar', () => {
     describe('rendering', () => {
         it('renders with all roles', () => {
-            const [component] = doMount();
+            const { component } = doMount();
             testRendering(component);
         });
 
         it('renders with disabled', () => {
-            const [component] = doMount({
-                ...defaultProps,
-                disabled: true
+            const { component } = doMount({
+                props: {
+                    disabled: true
+                }
             });
             testRendering(component, {
                 disabled: true
@@ -145,15 +142,16 @@ describe('VideoNavbar', () => {
         });
 
         it('renders without scanning role', () => {
-            const [component] = doMount(defaultProps, {
-                ...defaultStore,
-                auth: {
-                    userDetails: {
-                        ...defaultStore.auth.userDetails,
-                        roles: [
-                            { roleId: 1, name: 'ROLE_ADMIN' },
-                            { roleId: 2, name: 'ROLE_EDIT' }
-                        ]
+            const { component } = doMount({
+                storeState: {
+                    auth: {
+                        userDetails: {
+                            ...defaultStoreState.auth.userDetails,
+                            roles: [
+                                { roleId: 1, name: 'ROLE_ADMIN' },
+                                { roleId: 2, name: 'ROLE_EDIT' }
+                            ]
+                        }
                     }
                 }
             });
@@ -165,15 +163,16 @@ describe('VideoNavbar', () => {
         });
 
         it('renders without edit role', () => {
-            const [component] = doMount(defaultProps, {
-                ...defaultStore,
-                auth: {
-                    userDetails: {
-                        ...defaultStore.auth.userDetails,
-                        roles: [
-                            { roleId: 1, name: 'ROLE_ADMIN' },
-                            { roleId: 3, name: 'ROLE_SCAN' }
-                        ]
+            const { component } = doMount({
+                storeState: {
+                    auth: {
+                        userDetails: {
+                            ...defaultStoreState.auth.userDetails,
+                            roles: [
+                                { roleId: 1, name: 'ROLE_ADMIN' },
+                                { roleId: 3, name: 'ROLE_SCAN' }
+                            ]
+                        }
                     }
                 }
             });
@@ -185,15 +184,16 @@ describe('VideoNavbar', () => {
         });
 
         it('renders without admin role', () => {
-            const [component] = doMount(defaultProps, {
-                ...defaultStore,
-                auth: {
-                    userDetails: {
-                        ...defaultStore.auth.userDetails,
-                        roles: [
-                            { roleId: 3, name: 'ROLE_SCAN' },
-                            { roleId: 2, name: 'ROLE_EDIT' }
-                        ]
+            const { component } = doMount({
+                storeState: {
+                    auth: {
+                        userDetails: {
+                            ...defaultStoreState.auth.userDetails,
+                            roles: [
+                                { roleId: 3, name: 'ROLE_SCAN' },
+                                { roleId: 2, name: 'ROLE_EDIT' }
+                            ]
+                        }
                     }
                 }
             });
@@ -211,7 +211,7 @@ describe('VideoNavbar', () => {
         });
 
         it('toggles the collapse open and closed', () => {
-            const [component] = doMount();
+            const { component } = doMount();
             const toggle = component.find('VideoNavbar NavbarToggler');
             expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
                 isOpen: false
@@ -223,7 +223,7 @@ describe('VideoNavbar', () => {
         });
 
         it('clicks on scan directory link', async () => {
-            const [component, store] = doMount();
+            const { component, store }= doMount();
             await component.find('NavbarItem#scanDirectoryLink').props().onClick();
             expect(store.getActions()).toEqual([
                 { type: 'startFileScan' }
@@ -232,7 +232,7 @@ describe('VideoNavbar', () => {
         });
 
         it('clicks on logout link', () => {
-            const [component, store] = doMount();
+            const { component, store } = doMount();
             component.find('NavbarItem#logoutLink').props().onClick();
             expect(store.getActions()).toEqual([
                 { type: 'logout' }
