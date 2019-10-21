@@ -63,8 +63,10 @@ const doMount = (props = defaultProps, store = defaultStore) => {
 };
 
 const testRendering = (component, {
-    disabled = false
+    disabled = false,
+    roles = {}
 } = {}) => {
+    const { hasEdit = true, hasAdmin = true, hasScan = true } = roles;
     expect(component.find('VideoNavbar')).toHaveLength(1);
     expect(component.find('VideoNavbar').props()).toEqual(expect.objectContaining({
         disabled
@@ -79,35 +81,48 @@ const testRendering = (component, {
         expect(component.find('NavbarItem')).toHaveLength(0);
         expect(component.find('NavbarToggler')).toHaveLength(0);
     } else {
-        expect(component.find('NavbarItem')).toHaveLength(4);
         expect(component.find('NavbarToggler')).toHaveLength(1);
         expect(component.find('NavbarDropdown')).toHaveLength(1);
 
-        testNavbarItem(0, {
+        let itemIndex = 0;
+
+        testNavbarItem(itemIndex, {
             id: 'videoListLink',
             to: '/videos',
             exact: true,
             isLink: true,
             text: 'Videos'
         });
-        testNavbarItem(1, {
-            id: 'manageFiltersLink',
-            to: '/filters',
-            exact: true,
-            isLink: true,
-            text: 'Filters'
-        });
-        testNavbarItem(2, {
-            id: 'userManagementLink',
-            to: '/users',
-            isLink: true,
-            text: 'Users'
-        });
-        testNavbarItem(3, {
-            id: 'scanDirectoryLink',
-            onClick: expect.any(Function),
-            text: 'Scan'
-        });
+        itemIndex++;
+        if (hasEdit) {
+            testNavbarItem(itemIndex, {
+                id: 'manageFiltersLink',
+                to: '/filters',
+                exact: true,
+                isLink: true,
+                text: 'Filters'
+            });
+            itemIndex++;
+        }
+        if (hasAdmin) {
+            testNavbarItem(itemIndex, {
+                id: 'userManagementLink',
+                to: '/users',
+                isLink: true,
+                text: 'Users'
+            });
+            itemIndex++;
+        }
+        if (hasScan) {
+            testNavbarItem(itemIndex, {
+                id: 'scanDirectoryLink',
+                onClick: expect.any(Function),
+                text: 'Scan'
+            });
+            itemIndex++;
+        }
+
+        expect(component.find('NavbarItem')).toHaveLength(itemIndex);
     }
 
 };
@@ -130,15 +145,63 @@ describe('VideoNavbar', () => {
         });
 
         it('renders without scanning role', () => {
-            throw new Error('Finish this');
+            const [component] = doMount(defaultProps, {
+                ...defaultStore,
+                auth: {
+                    userDetails: {
+                        ...defaultStore.auth.userDetails,
+                        roles: [
+                            { roleId: 1, name: 'ROLE_ADMIN' },
+                            { roleId: 2, name: 'ROLE_EDIT' }
+                        ]
+                    }
+                }
+            });
+            testRendering(component, {
+                roles: {
+                    hasScan: false
+                }
+            });
         });
 
         it('renders without edit role', () => {
-            throw new Error('Finish this');
+            const [component] = doMount(defaultProps, {
+                ...defaultStore,
+                auth: {
+                    userDetails: {
+                        ...defaultStore.auth.userDetails,
+                        roles: [
+                            { roleId: 1, name: 'ROLE_ADMIN' },
+                            { roleId: 3, name: 'ROLE_SCAN' }
+                        ]
+                    }
+                }
+            });
+            testRendering(component, {
+                roles: {
+                    hasEdit: false
+                }
+            });
         });
 
         it('renders without admin role', () => {
-            throw new Error('Finish this');
+            const [component] = doMount(defaultProps, {
+                ...defaultStore,
+                auth: {
+                    userDetails: {
+                        ...defaultStore.auth.userDetails,
+                        roles: [
+                            { roleId: 3, name: 'ROLE_SCAN' },
+                            { roleId: 2, name: 'ROLE_EDIT' }
+                        ]
+                    }
+                }
+            });
+            testRendering(component, {
+                roles: {
+                    hasAdmin: false
+                }
+            });
         });
     });
 
