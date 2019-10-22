@@ -25,6 +25,7 @@ describe('NavbarItem', () => {
         it('renders as link', () => {
             const { component } = doMount();
             console.log(component.debug()); // TODO delete this
+            throw new Error('Finish this');
         });
 
         it('renders when not link', () => {
