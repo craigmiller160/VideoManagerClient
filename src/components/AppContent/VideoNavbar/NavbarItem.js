@@ -7,7 +7,7 @@ import useReactRouter from 'use-react-router';
 import newid from '../../../utils/newid';
 
 const NavbarItem = (props) => {
-    const { history: { pathname } } = useReactRouter();
+    const { history: { location: { pathname } } } = useReactRouter();
     const {
         id,
         to,

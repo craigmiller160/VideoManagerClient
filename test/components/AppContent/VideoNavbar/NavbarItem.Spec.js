@@ -17,8 +17,13 @@ const doMount = mountTestComponent(NavbarItem, {
     defaultInitialRouterEntries: ['/']
 });
 
-const testRendering = (component, { isLink = false, isActive = false } = {}) => {
-    expect(component.find('NavItem')).toHaveLength(1);
+const testRendering = (component, { isLink = true, isActive = false } = {}) => {
+    const navItem = component.find('NavItem');
+    expect(navItem).toHaveLength(1);
+    expect(navItem.props()).toEqual(expect.objectContaining({
+        className: 'NavbarItem className',
+        active: isActive
+    }));
 
     const bootLink = component.find('NavLink#id_bootLink');
     const navLink = component.find('NavLink#id_navLink');
@@ -48,6 +53,10 @@ const testRendering = (component, { isLink = false, isActive = false } = {}) => 
 };
 
 describe('NavbarItem', () => {
+    beforeEach(() => {
+        onClick.mockClear();
+    });
+
     describe('rendering', () => {
         it('renders as link', () => {
             const { component } = doMount();
@@ -64,13 +73,19 @@ describe('NavbarItem', () => {
         });
 
         it('renders when active', () => {
-            throw new Error('Finish this');
+            const { component } = doMount({
+                initialRouterEntries: ['/list']
+            });
+            testRendering(component, { isActive: true });
         });
     });
 
     describe('callbacks', () => {
         it('handles onClick', () => {
-            throw new Error('Finish this');
+            const { component } = doMount();
+            const value = 'hello';
+            component.find('NavLink#id_bootLink').props().onClick(value);
+            expect(onClick).toHaveBeenCalledWith(value);
         });
     });
 });
