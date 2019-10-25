@@ -1,6 +1,3 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import { MemoryRouter } from 'react-router';
 import NavbarItem from 'components/AppContent/VideoNavbar/NavbarItem';
 import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
 
@@ -24,8 +21,25 @@ describe('NavbarItem', () => {
     describe('rendering', () => {
         it('renders as link', () => {
             const { component } = doMount();
-            console.log(component.debug()); // TODO delete this
-            throw new Error('Finish this');
+            expect(component.find('NavItem')).toHaveLength(1);
+
+            const bootLink = component.find('NavLink#id_bootLink');
+            expect(bootLink).toHaveLength(1);
+            expect(bootLink.props()).toEqual(expect.objectContaining({
+                tag: 'div',
+                onClick: expect.any(Function)
+            }));
+
+            const navLink = component.find('NavLink#id_navLink');
+            expect(navLink).toHaveLength(1);
+            expect(navLink.props()).toEqual(expect.objectContaining({
+                to: defaultProps.to,
+                exact: defaultProps.exact
+            }));
+            expect(navLink.text()).toEqual(defaultProps.text);
+
+            const textSpan = component.find('span#id_text');
+            expect(textSpan).toHaveLength(0);
         });
 
         it('renders when not link', () => {

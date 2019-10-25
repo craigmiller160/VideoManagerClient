@@ -1,10 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import { MemoryRouter } from 'react-router';
-import { Provider } from 'react-redux';
 import useReactRouter from 'use-react-router';
 import mountTestComponent from '../../../exclude/testUtil/mountTestComponent'; // eslint-disable-line import/first
 

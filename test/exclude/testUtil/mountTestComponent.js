@@ -34,29 +34,30 @@ const createProvider = (storeState, useThunk) => {
     return [ReduxProvider, store];
 };
 
+// defaultProps and defaultStoreState can have individual properties overridden, defaultInitialRouteEntries gets overridden in its entirety
 const creator = (Component, { defaultProps, defaultStoreState, defaultInitialRouterEntries, defaultUseThunk } = {}) => {
     return ({ props, storeState, initialRouterEntries, useThunk } = {}) => {
         const actualProps = { ...defaultProps, ...props };
 
-        let Provider = (props) => <div>{ props.children }</div>;
+        let TestProviderWrapper = (props) => <div>{ props.children }</div>;
         let store = {};
         if (defaultStoreState || storeState) {
             const providerAndStore = createProvider({ ...defaultStoreState, ...storeState }, useThunk || defaultUseThunk);
-            Provider = providerAndStore[0];
+            TestProviderWrapper = providerAndStore[0];
             store = providerAndStore[1];
         }
 
-        let Router = (props) => <div>{ props.children }</div>;
+        let TestRouterWrapper = (props) => <div>{ props.children }</div>;
         if (defaultInitialRouterEntries || initialRouterEntries) {
-            Router = createRouter(initialRouterEntries);
+            TestRouterWrapper = createRouter(initialRouterEntries || defaultInitialRouterEntries || []);
         }
 
         const component = mount(
-            <Provider>
-                <Router>
+            <TestProviderWrapper>
+                <TestRouterWrapper>
                     <Component { ...actualProps } />
-                </Router>
-            </Provider>
+                </TestRouterWrapper>
+            </TestProviderWrapper>
         );
 
         return {

@@ -4,6 +4,7 @@ import { NavItem, NavLink as BootLink } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import classes from './NavbarItem.scss';
 import useReactRouter from 'use-react-router';
+import newid from '../../../utils/newid';
 
 const NavbarItem = (props) => {
     const { history: { pathname } } = useReactRouter();
@@ -22,17 +23,20 @@ const NavbarItem = (props) => {
         navItemClasses.push(className);
     }
 
+    const baseId = id || newid();
+
     return (
         <NavItem tag="div" className={ navItemClasses.join(' ') } active={ to && pathname === to }>
             <BootLink
                 tag="div"
-                id={ id }
+                id={ `${baseId}_bootLink` }
                 className={ classes['use-pointer'] }
                 onClick={ onClick }
             >
                 {
                     isLink &&
                     <NavLink
+                        id={ `${baseId}_navLink` }
                         to={ to }
                         activeClassName={ classes.active }
                         className={ classes.link }
@@ -42,7 +46,8 @@ const NavbarItem = (props) => {
                     </NavLink>
                 }
                 {
-                    !isLink && text
+                    !isLink &&
+                        <span id={ `${baseId}_text` }>{ text }</span>
                 }
             </BootLink>
         </NavItem>
