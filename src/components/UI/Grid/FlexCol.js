@@ -13,5 +13,9 @@ FlexCol.propTypes = {
     justifyContent: PropTypes.string,
     alignItems: PropTypes.string
 };
+FlexCol.defaultProps = {
+    justifyContent: 'flex-start',
+    alignItems: 'stretch'
+};
 
 export default FlexCol;
