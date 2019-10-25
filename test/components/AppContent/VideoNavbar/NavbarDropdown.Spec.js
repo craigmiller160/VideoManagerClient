@@ -87,7 +87,11 @@ describe('NavbarDropdown', () => {
 
     describe('callbacks', () => {
         it('dispatches logout action', () => {
-            throw new Error('Finish this');
+            const { component, store } = doMount();
+            component.find('NavbarItem#logoutLink').props().onClick();
+            expect(store.getActions()).toEqual([
+                { type: 'LOGOUT' }
+            ]);
         });
     });
 });
