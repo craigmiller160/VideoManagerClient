@@ -17,33 +17,50 @@ const doMount = mountTestComponent(NavbarItem, {
     defaultInitialRouterEntries: ['/']
 });
 
+const testRendering = (component, { isLink = false, isActive = false } = {}) => {
+    expect(component.find('NavItem')).toHaveLength(1);
+
+    const bootLink = component.find('NavLink#id_bootLink');
+    const navLink = component.find('NavLink#id_navLink');
+    const textSpan = component.find('span#id_text');
+
+    expect(bootLink).toHaveLength(1);
+    expect(bootLink.props()).toEqual(expect.objectContaining({
+        tag: 'div',
+        onClick: expect.any(Function)
+    }));
+
+    if (isLink) {
+        expect(navLink).toHaveLength(1);
+        expect(navLink.props()).toEqual(expect.objectContaining({
+            to: defaultProps.to,
+            exact: defaultProps.exact
+        }));
+        expect(navLink.text()).toEqual(defaultProps.text);
+
+        expect(textSpan).toHaveLength(0);
+    } else {
+        expect(navLink).toHaveLength(0);
+
+        expect(textSpan).toHaveLength(1);
+        expect(textSpan.text()).toEqual(defaultProps.text);
+    }
+};
+
 describe('NavbarItem', () => {
     describe('rendering', () => {
         it('renders as link', () => {
             const { component } = doMount();
-            expect(component.find('NavItem')).toHaveLength(1);
-
-            const bootLink = component.find('NavLink#id_bootLink');
-            expect(bootLink).toHaveLength(1);
-            expect(bootLink.props()).toEqual(expect.objectContaining({
-                tag: 'div',
-                onClick: expect.any(Function)
-            }));
-
-            const navLink = component.find('NavLink#id_navLink');
-            expect(navLink).toHaveLength(1);
-            expect(navLink.props()).toEqual(expect.objectContaining({
-                to: defaultProps.to,
-                exact: defaultProps.exact
-            }));
-            expect(navLink.text()).toEqual(defaultProps.text);
-
-            const textSpan = component.find('span#id_text');
-            expect(textSpan).toHaveLength(0);
+            testRendering(component, { isLink: true });
         });
 
         it('renders when not link', () => {
-            throw new Error('Finish this');
+            const { component } = doMount({
+                props: {
+                    isLink: false
+                }
+            });
+            testRendering(component, { isLink: false });
         });
 
         it('renders when active', () => {
