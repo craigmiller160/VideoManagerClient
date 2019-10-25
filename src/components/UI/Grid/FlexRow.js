@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import FlexCol from './FlexCol';
 
 const FlexRow = styled.div`
     display: flex;
@@ -12,6 +13,10 @@ FlexRow.displayName = 'FlexRow';
 FlexRow.propTypes = {
     justifyContent: PropTypes.string,
     alignItems: PropTypes.string
+};
+FlexRow.defaultProps = {
+    justifyContent: 'flex-start',
+    alignItems: 'stretch'
 };
 
 export default FlexRow;
