@@ -223,13 +223,5 @@ describe('VideoNavbar', () => {
             ]);
             expect(push).toHaveBeenCalledWith('/scanning');
         });
-
-        it('clicks on logout link', () => {
-            const { component, store } = doMount();
-            component.find('NavbarItem#logoutLink').props().onClick();
-            expect(store.getActions()).toEqual([
-                { type: 'logout' }
-            ]);
-        });
     });
 });
