@@ -2,6 +2,21 @@ import VideoListItem from 'components/AppContent/VideoListLayout/VideoList/Video
 import mountTestComponent from '../../../../../exclude/testUtil/mountTestComponent';
 import { ROLE_EDIT } from 'utils/securityConstants';
 
+jest.mock('store/videoList/videoList.actions', () => ({
+    expandVideoFile: () => ({
+        type: 'EXPAND_VIDEO_FILE'
+    })
+}));
+jest.mock('store/videoPlayer/videoPlayer.actions', () => ({
+    reset: () => ({
+        type: 'RESET'
+    })
+}));
+
+const open = jest.fn();
+// Object.defineProperty(window, 'open', open);
+window.open = open;
+
 const defaultProps = {
     videoFile: {
         fileId: 1,
@@ -100,6 +115,10 @@ const testRendering = (component, { isExpanded = false, hasDisplayName = true, h
 };
 
 describe('VideoListItem', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     describe('Rendering', () => {
         it('renders without expanding', () => {
             const { component } = doMount();
@@ -150,37 +169,28 @@ describe('VideoListItem', () => {
 
     describe('Callbacks and actions', () => {
         it('dispatches expandVideoFile', () => {
-            throw new Error('Finish this');
+            const { component, store } = doMount();
+            component.find('div[data-name="video-list-item-root"]').props().onClick();
+            expect(store.getActions()).toEqual([
+                { type: 'EXPAND_VIDEO_FILE' }
+            ]);
         });
 
-        it('calls playVideoClick', () => {
-            throw new Error('Finish this');
+        it('calls playVideoClick', async () => {
+            const { component, store } = doMount({
+                props: {
+                    ...defaultProps,
+                    videoFile: {
+                        ...defaultProps.videoFile,
+                        expanded: true
+                    }
+                }
+            });
+            await component.find('Button[data-name="play-btn"]').props().onClick();
+            expect(store.getActions()).toEqual([
+                { type: 'RESET' }
+            ]);
+            expect(open).toHaveBeenCalledWith(`/play/${defaultProps.videoFile.fileId}`, '_blank');
         });
     });
-
-    // it('shows smaller view', () => {
-    //     const [component] = doMount();
-    //     expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
-    //         isOpen: false
-    //     }));
-    // });
-    //
-    // it('shows expanded view', () => {
-    //     const [component] = doMount({ ...defaultProps, videoFile: { ...defaultProps.videoFile, expanded: true } });
-    //     expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
-    //         isOpen: true
-    //     }));
-    // });
-    //
-    // it('handles clicks', () => {
-    //     const [component, store] = doMount();
-    //     component.simulate('click');
-    //     expect(store.getActions()).toEqual([
-    //         { type: 'videoList/expandVideoFile', payload: 1 }
-    //     ]);
-    // });
-    //
-    // it('renders without edit role', () => {
-    //     throw new Error('Finish this');
-    // });
 });
