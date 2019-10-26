@@ -31,29 +31,57 @@ const doMount = (props = defaultProps) => {
 };
 
 describe('VideoListItem', () => {
-    it('shows smaller view', () => {
-        const [component] = doMount();
-        expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
-            isOpen: false
-        }));
+    describe('Rendering', () => {
+        it('renders without expanding', () => {
+            throw new Error('Finish this');
+        });
+
+        it('renders with expanding', () => {
+            throw new Error('Finish this');
+        });
+
+        it('renders without edit role', () => {
+            throw new Error('Finish this');
+        });
+
+        it('renders without display name', () => {
+            throw new Error('Finish this');
+        });
     });
 
-    it('shows expanded view', () => {
-        const [component] = doMount({ ...defaultProps, videoFile: { ...defaultProps.videoFile, expanded: true } });
-        expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
-            isOpen: true
-        }));
+    describe('Callbacks and actions', () => {
+        it('dispatches expandVideoFile', () => {
+            throw new Error('Finish this');
+        });
+
+        it('calls playVideoClick', () => {
+            throw new Error('Finish this');
+        });
     });
 
-    it('handles clicks', () => {
-        const [component, store] = doMount();
-        component.simulate('click');
-        expect(store.getActions()).toEqual([
-            { type: 'videoList/expandVideoFile', payload: 1 }
-        ]);
-    });
-
-    it('renders without edit role', () => {
-        throw new Error('Finish this');
-    });
+    // it('shows smaller view', () => {
+    //     const [component] = doMount();
+    //     expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
+    //         isOpen: false
+    //     }));
+    // });
+    //
+    // it('shows expanded view', () => {
+    //     const [component] = doMount({ ...defaultProps, videoFile: { ...defaultProps.videoFile, expanded: true } });
+    //     expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
+    //         isOpen: true
+    //     }));
+    // });
+    //
+    // it('handles clicks', () => {
+    //     const [component, store] = doMount();
+    //     component.simulate('click');
+    //     expect(store.getActions()).toEqual([
+    //         { type: 'videoList/expandVideoFile', payload: 1 }
+    //     ]);
+    // });
+    //
+    // it('renders without edit role', () => {
+    //     throw new Error('Finish this');
+    // });
 });

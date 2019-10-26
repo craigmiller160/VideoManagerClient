@@ -38,7 +38,7 @@ const VideoListItem = (props) => {
 
     const leftColSize = 6;
     const rootClasses = [ classes.VideoListItem, (expanded ? classes.active : '') ].join(' ');
-    const actualDisplayName = displayName ? displayName : fileName;
+    const actualDisplayName = displayName || fileName;
     const formattedLastViewed = lastViewed ? new VideoDate(lastViewed).formatDateTime() : '';
     const formattedFileAdded = fileAdded ? new VideoDate(fileAdded).formatDateTime() : '';
 
