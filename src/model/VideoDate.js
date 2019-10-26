@@ -5,16 +5,18 @@ const DATE_TIME_FORMAT = 'YYYY-MM-DD hh:mm a';
 
 class VideoDate {
 
+    #date;
+
     constructor(date) {
-        this._date = moment(date, SERVER_DATE_TIME_FORMAT);
+        this.#date = moment(date, SERVER_DATE_TIME_FORMAT);
     }
 
     formatDateTime() {
-        return this._date.format(DATE_TIME_FORMAT);
+        return this.#date.format(DATE_TIME_FORMAT);
     }
 
     getDate() {
-        return this._date;
+        return this.#date;
     }
 }
 

@@ -37,7 +37,10 @@ const VideoListItem = (props) => {
     } = props;
 
     const leftColSize = 6;
-    const rootClasses = [ classes.VideoListItem, (expanded ? classes.active : '') ].join(' ');
+    const rootClasses = [classes.VideoListItem];
+    if (expanded) {
+        rootClasses.push(classes.active);
+    }
     const actualDisplayName = displayName || fileName;
     const formattedLastViewed = lastViewed ? new VideoDate(lastViewed).formatDateTime() : '';
     const formattedFileAdded = fileAdded ? new VideoDate(fileAdded).formatDateTime() : '';
@@ -48,7 +51,11 @@ const VideoListItem = (props) => {
     };
 
     return (
-        <div className={ rootClasses } onClick={ () => dispatch(expandVideoFile(fileId)) }>
+        <div
+            data-name="video-list-item-root"
+            className={ rootClasses.join(' ') }
+            onClick={ () => dispatch(expandVideoFile(fileId)) }
+        >
             <ListGroupItem>
                 <Row>
                     <WordWrapCol xs={ leftColSize }>
@@ -59,33 +66,48 @@ const VideoListItem = (props) => {
                         </ListGroupItemHeading>
                     </WordWrapCol>
                     <WordWrapCol>
-                        <span className={ classes.label }>Series:</span>
+                        <span
+                            data-name="series-label"
+                            className={ classes.label }
+                        >
+                            Series:
+                        </span>
                     </WordWrapCol>
                     <WordWrapCol className="text-center">
-                        <span className={ classes.label }>Categories:</span>
+                        <span
+                            data-name="categories-label"
+                            className={ classes.label }
+                        >
+                            Categories:
+                        </span>
                     </WordWrapCol>
                     <WordWrapCol className="text-right">
-                        <span className={ classes.label }>Stars:</span>
+                        <span
+                            data-name="stars-label"
+                            className={ classes.label }
+                        >
+                            Stars:
+                        </span>
                     </WordWrapCol>
                 </Row>
                 <Row>
                     <WordWrapCol xs={ leftColSize }>
-                        <ListGroupItemText>
+                        <ListGroupItemText data-name="description-text">
                             { description }
                         </ListGroupItemText>
                     </WordWrapCol>
                     <WordWrapCol>
-                        <ListGroupItemText>
+                        <ListGroupItemText data-name="series-text">
                             { series.map(s => s.seriesName ).join(', ') }
                         </ListGroupItemText>
                     </WordWrapCol>
                     <WordWrapCol className="text-center">
-                        <ListGroupItemText>
+                        <ListGroupItemText data-name="categories-text">
                             { categories.map(cat => cat.categoryName).join(', ') }
                         </ListGroupItemText>
                     </WordWrapCol>
                     <WordWrapCol className="text-right">
-                        <ListGroupItemText>
+                        <ListGroupItemText data-name="stars-text">
                             { stars.map(star => star.starName).join(', ') }
                         </ListGroupItemText>
                     </WordWrapCol>
@@ -93,20 +115,20 @@ const VideoListItem = (props) => {
                 <Collapse isOpen={ expanded }>
                     <Row>
                         <WordWrapCol xs={ leftColSize }>
-                            <p className={ classes.heading }>File Name:</p>
-                            <p>{ fileName }</p>
+                            <p data-name="file-name-label" className={ classes.heading }>File Name:</p>
+                            <p data-name="file-name-text">{ fileName }</p>
                         </WordWrapCol>
                         <WordWrapCol>
-                            <p className={ classes.label }>Views:</p>
-                            <p className={ classes['push-text'] }>{ viewCount }</p>
+                            <p data-name="views-label" className={ classes.label }>Views:</p>
+                            <p data-name="views-text" className={ classes['push-text'] }>{ viewCount }</p>
                         </WordWrapCol>
                         <WordWrapCol className="text-center">
-                            <p className={ classes.label }>Last Viewed:</p>
-                            <p>{ formattedLastViewed }</p>
+                            <p data-name="last-viewed-label" className={ classes.label }>Last Viewed:</p>
+                            <p data-name="last-viewed-text">{ formattedLastViewed }</p>
                         </WordWrapCol>
                         <WordWrapCol className="text-right">
-                            <p className={ classes.label }>File Added:</p>
-                            <p>{ formattedFileAdded }</p>
+                            <p data-name="file-added-label" className={ classes.label }>File Added:</p>
+                            <p data-name="file-added-text">{ formattedFileAdded }</p>
                         </WordWrapCol>
                     </Row>
                     <Row>
@@ -114,10 +136,10 @@ const VideoListItem = (props) => {
                             {
                                 hasEditRole &&
                                 <Link to="/edit">
-                                    <Button color="info">Edit</Button>
+                                    <Button data-name="edit-btn" color="info">Edit</Button>
                                 </Link>
                             }
-                            <Button color="primary" onClick={ playVideoClick }>Play</Button>
+                            <Button data-name="play-btn" color="primary" onClick={ playVideoClick }>Play</Button>
                         </WordWrapCol>
                     </Row>
                 </Collapse>
