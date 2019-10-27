@@ -29,17 +29,18 @@ const UserListItem = (props) => {
 
     return (
         <div
+            data-name="user-list-item-root"
             className={ listItemClasses.join(' ') }
             onClick={ onItemClick }
         >
             <FlexRow justifyContent="space-around">
-                <p>{ user.userName }</p>
-                <p>{ fullName }</p>
-                <p>
+                <p data-name="user-item-user-name">{ user.userName }</p>
+                <p data-name="user-item-full-name">{ fullName }</p>
+                <p data-name="user-item-roles">
                     {
                         user.roles.map((role) => (
                             <Fragment key={ role.roleId }>
-                                <span key={ role.roleId }>{ role.name }</span>
+                                <span data-name={ `role_${role.roleId}` } key={ role.roleId }>{ role.name }</span>
                                 <br />
                             </Fragment>
                         ))
@@ -52,7 +53,7 @@ const UserListItem = (props) => {
             >
                 <FlexRow className="mt-4" justifyContent="flex-end">
                     <Link to={ `/users/${user.userId}` }>
-                        <Button color="info">Edit</Button>
+                        <Button data-name="user-item-edit-btn" color="info">Edit</Button>
                     </Link>
                 </FlexRow>
             </AnimateHeight>
