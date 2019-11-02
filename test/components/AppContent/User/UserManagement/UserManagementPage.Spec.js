@@ -1,17 +1,8 @@
 import API from 'services/API';
 import MockAdapter from 'axios-mock-adapter';
-import { act } from 'react-dom/test-utils';
 import UserManagementPage from 'components/AppContent/User/Management/UserManagementPage';
 import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent';
 import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
-
-// TODO might be a useful bit of code for the future
-const doImmediate = (action) => new Promise((resolve) => {
-    setImmediate(() => {
-        action();
-        resolve();
-    });
-});
 
 const defaultProps = {
     history: {
@@ -60,10 +51,7 @@ describe('UserManagementPage', () => {
     describe('rendering', () => {
         it('renders all users', async () => {
             const { component } = doMount();
-            await act(async () => {
-                await resolveComponent(component);
-                component.update();
-            });
+            await resolveComponent(component);
 
             expect(component.find('div.title > h3').text()).toEqual('User Management');
             expect(component.find('UserListItem')).toHaveLength(4);
