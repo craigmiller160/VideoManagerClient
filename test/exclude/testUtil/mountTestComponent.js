@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 
 const createRouter = (initialRouterEntries) => {
     const { MemoryRouter } = require('react-router');
@@ -52,13 +53,17 @@ const creator = (Component, { defaultProps, defaultStoreState, defaultInitialRou
             TestRouterWrapper = createRouter(initialRouterEntries || defaultInitialRouterEntries || []);
         }
 
-        const component = await mount(
-            <TestProviderWrapper>
-                <TestRouterWrapper>
-                    <Component { ...actualProps } />
-                </TestRouterWrapper>
-            </TestProviderWrapper>
-        );
+        let component;
+        await act(async () => {
+            component = await mount(
+                <TestProviderWrapper>
+                    <TestRouterWrapper>
+                        <Component { ...actualProps } />
+                    </TestRouterWrapper>
+                </TestProviderWrapper>
+            );
+        });
+        component.update();
 
         return {
             component,

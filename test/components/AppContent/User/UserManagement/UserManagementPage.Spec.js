@@ -19,25 +19,30 @@ const defaultProps = {
 };
 
 const doMount = mountTestComponent(UserManagementPage, {
-    defaultProps
+    defaultProps,
+    defaultInitialRouterEntries: ['/']
 });
 
 const users = [
     {
         userId: 3,
-        userName: 'user3'
+        userName: 'user3',
+        roles: []
     },
     {
         userId: 1,
-        userName: 'user1'
+        userName: 'user1',
+        roles: []
     },
     {
         userId: 4,
-        userName: 'user4'
+        userName: 'user4',
+        roles: []
     },
     {
         userId: 2,
-        userName: 'user2'
+        userName: 'user2',
+        roles: []
     }
 ];
 
@@ -52,15 +57,12 @@ describe('UserManagementPage', () => {
     });
 
     describe('rendering', () => {
-        it('renders all users', async (done) => {
+        it('renders all users', async () => {
             const { component } = await doMount();
 
-            component.update();
             console.log(component.debug()); // TODO delete this
 
-
-            // component.find('UserManagementPage').update();
-
+            throw new Error('Finish this');
         });
     });
 
