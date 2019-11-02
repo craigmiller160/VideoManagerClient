@@ -1,5 +1,6 @@
 import API from 'services/API';
 import MockAdapter from 'axios-mock-adapter';
+import { act } from 'react-dom/test-utils';
 import UserManagementPage from 'components/AppContent/User/Management/UserManagementPage';
 import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent';
 import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
@@ -73,12 +74,26 @@ describe('UserManagementPage', () => {
     });
 
     describe('callbacks and actions', () => {
-        it('calls history.push when clicking add button', () => {
-            throw new Error('Finish this');
+        it('calls history.push when clicking add button', async () => {
+            const { component } = doMount();
+            await resolveComponent(component);
+            component.find('Button#add-user-btn').simulate('click');
+            expect(defaultProps.history.push).toHaveBeenCalledWith('/users/new');
         });
 
-        it('updates state in changeExpanded', () => {
-            throw new Error('Finish this');
+        it('updates state in changeExpanded', async () => {
+            const { component } = doMount();
+            await resolveComponent(component);
+
+            await act(async () => {
+                component.find('UserListItem').at(0).props().changeExpanded(1);
+                await resolveComponent(component);
+            });
+
+            expect(component.find('UserListItem').at(0).props().user).toEqual({
+                ...users[1],
+                expanded: true
+            });
         });
 
         it('dispatches an error if API call fails', () => {

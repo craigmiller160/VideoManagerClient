@@ -27,7 +27,10 @@ const UserManagementPage = (props) => {
         const loadUsers = async () => {
             try {
                 const res = await AuthApiService.getAllUsers();
-                setAllUsers(res.data ?? []);
+                const users = res.data || [];
+                const displayUsers = [...users];
+                displayUsers.sort(userNameSort);
+                setAllUsers(displayUsers);
             } catch(ex) {
                 // TODO include some actual error handling
                 console.log(ex); // TODO delete this
@@ -36,9 +39,6 @@ const UserManagementPage = (props) => {
         };
         loadUsers();
     }, []);
-
-    const displayUsers = [...allUsers];
-    displayUsers.sort(userNameSort);
 
     const changeExpanded = (userId) => {
         const newUsers = allUsers.map((user) => ({
@@ -57,7 +57,7 @@ const UserManagementPage = (props) => {
             </FlexRow>
             <FlexCol className={ classes.list }>
                 {
-                    displayUsers.map((user) => (
+                    allUsers.map((user) => (
                         <UserListItem
                             user={ user }
                             key={ user.userId }
