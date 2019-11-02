@@ -1,5 +1,5 @@
 import { createAction } from 'redux-starter-kit';
 
-export const showErrorAlert = createAction('filterInputModal/showErrorAlert');
-export const showSuccessAlert = createAction('filterInputModal/showSuccessAlert');
-export const hideAlert = createAction('filterInputModal/hideAlert');
+export const showErrorAlert = createAction('alert/showErrorAlert');
+export const showSuccessAlert = createAction('alert/showSuccessAlert');
+export const hideAlert = createAction('alert/hideAlert');
