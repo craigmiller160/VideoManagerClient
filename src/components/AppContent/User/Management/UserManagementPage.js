@@ -24,9 +24,19 @@ const UserManagementPage = (props) => {
     const [allUsers, setAllUsers] = useState([]);
 
     useEffect(() => {
+        console.log('Running effect'); // TODO delete this
         const loadUsers = async () => {
-            const res = await AuthApiService.getAllUsers();
-            setAllUsers(res.data ?? []);
+            console.log('In async'); // TODO delete this
+            try {
+                const res = await AuthApiService.getAllUsers();
+                console.log('After API'); // TODO delete this
+                setAllUsers(res.data ?? []);
+                console.log('Set state'); // TODO delete this
+            } catch(ex) {
+                // TODO include some actual error handling
+                console.log(ex); // TODO delete this
+            }
+
         };
         loadUsers();
     }, []);
