@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import FlexCol from './FlexCol';
 
 const FlexRow = styled.div`
     display: flex;

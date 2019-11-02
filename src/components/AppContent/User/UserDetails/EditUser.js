@@ -6,6 +6,8 @@ import { formatRoles, formatUser, unFormatRoles } from './userUtils';
 import { showErrorAlert, showSuccessAlert } from '../../../../store/alert/alert.actions';
 import { useDispatch } from 'react-redux';
 
+// TODO need to re-load user details for editing current authenticated user
+
 const EditUser = (props) => {
     const dispatch = useDispatch();
     const {

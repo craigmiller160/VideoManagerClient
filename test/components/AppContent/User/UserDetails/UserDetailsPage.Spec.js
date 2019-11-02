@@ -255,15 +255,21 @@ describe('UserDetailsPage', () => {
 
     describe('actions and callbacks', () => {
         it('calls saveUser', () => {
-            throw new Error();
+            const { component } = doMount();
+            component.find('Button#user-details-save').simulate('submit');
+            expect(defaultProps.saveUser).toHaveBeenCalled();
         });
 
         it('calls revokeUser', () => {
-            throw new Error();
+            const { component } = doMount();
+            component.find('Button#user-details-revoke').simulate('click');
+            expect(defaultProps.revokeUser).toHaveBeenCalled();
         });
 
         it('calls deleteUser', () => {
-            throw new Error();
+            const { component } = doMount();
+            component.find('Button#user-details-delete').simulate('click');
+            expect(defaultProps.deleteUser).toHaveBeenCalled();
         });
     });
 });
