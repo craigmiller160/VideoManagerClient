@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import UserDetailsPage from './UserDetailsPage';
 import * as AuthApiService from '../../../../services/AuthApiService';
 import { formatRoles, formatUser, unFormatRoles } from './userUtils';
 import { showErrorAlert, showSuccessAlert } from '../../../../store/alert/alert.actions';
-import { useDispatch } from 'react-redux';
-
-// TODO need to re-load user details for editing current authenticated user
+import { checkAuth } from '../../../../store/auth/auth.actions';
 
 const EditUser = (props) => {
     const dispatch = useDispatch();
@@ -48,6 +47,7 @@ const EditUser = (props) => {
         try {
             const res = await AuthApiService.saveUserAdmin(match.params.userId, payload);
             setUserDetails(formatUser(res.data));
+            dispatch(checkAuth());
             dispatch(showSuccessAlert('Successfully saved user'));
             history.push('/users');
         } catch (ex) {

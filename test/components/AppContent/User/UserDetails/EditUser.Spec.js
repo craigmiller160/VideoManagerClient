@@ -6,6 +6,12 @@ import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent'
 import { ROLE_ADMIN, ROLE_EDIT } from '../../../../../src/utils/securityConstants';
 import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
 
+jest.mock('store/auth/auth.actions', () => ({
+    checkAuth: () => ({
+        type: 'checkAuth'
+    })
+}));
+
 const roles = [
     { roleId: 1, name: ROLE_ADMIN },
     { roleId: 2, name: ROLE_EDIT }
@@ -114,6 +120,7 @@ describe('EditUser', () => {
             await resolveComponent(component);
             testRendering(component);
             expect(store.getActions()).toEqual(expect.arrayContaining([
+                { type: 'checkAuth' },
                 { type: 'alert/showSuccessAlert', payload: 'Successfully saved user' }
             ]));
             expect(defaultProps.history.push).toHaveBeenCalledWith('/users');
