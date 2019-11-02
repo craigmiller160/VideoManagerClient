@@ -1,8 +1,16 @@
-import axios from 'axios';
+import API from 'services/API';
 import MockAdapter from 'axios-mock-adapter';
 import { act } from 'react-dom/test-utils';
 import UserManagementPage from 'components/AppContent/User/Management/UserManagementPage';
 import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent';
+
+// TODO might be a useful bit of code for the future
+const doImmediate = (action) => new Promise((resolve) => {
+    setImmediate(() => {
+        action();
+        resolve();
+    });
+});
 
 const defaultProps = {
     history: {
@@ -33,7 +41,7 @@ const users = [
     }
 ];
 
-const mockApi = new MockAdapter(axios);
+const mockApi = new MockAdapter(API);
 
 describe('UserManagementPage', () => {
     beforeEach(() => {
@@ -44,14 +52,15 @@ describe('UserManagementPage', () => {
     });
 
     describe('rendering', () => {
-        it('renders all users', async () => {
-            const { component } = doMount();
-            await act(async () => {
-                // jest.advanceTimersByTime(100000);
-                jest.runAllImmediates();
-            });
+        it('renders all users', async (done) => {
+            const { component } = await doMount();
+
             component.update();
             console.log(component.debug()); // TODO delete this
+
+
+            // component.find('UserManagementPage').update();
+
         });
     });
 

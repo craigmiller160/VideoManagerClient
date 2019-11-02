@@ -36,7 +36,7 @@ const createProvider = (storeState, useThunk) => {
 
 // defaultProps and defaultStoreState can have individual properties overridden, defaultInitialRouteEntries gets overridden in its entirety
 const creator = (Component, { defaultProps, defaultStoreState, defaultInitialRouterEntries, defaultUseThunk } = {}) => {
-    return ({ props, storeState, initialRouterEntries, useThunk } = {}) => {
+    return async ({ props, storeState, initialRouterEntries, useThunk } = {}) => {
         const actualProps = { ...defaultProps, ...props };
 
         let TestProviderWrapper = (props) => <div>{ props.children }</div>;
@@ -52,7 +52,7 @@ const creator = (Component, { defaultProps, defaultStoreState, defaultInitialRou
             TestRouterWrapper = createRouter(initialRouterEntries || defaultInitialRouterEntries || []);
         }
 
-        const component = mount(
+        const component = await mount(
             <TestProviderWrapper>
                 <TestRouterWrapper>
                     <Component { ...actualProps } />
