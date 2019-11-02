@@ -10,7 +10,7 @@ import { Button } from 'reactstrap';
 import Form from '../../../UI/form/Form/Form';
 import { isRequired } from '../../../../utils/validations';
 
-const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
+export const USER_DETAILS_FORM_NAME = 'UserDetailsForm';
 
 const UserDetailsPage = (props) => {
     const form = useSelector((state) => state.form?.[USER_DETAILS_FORM_NAME], shallowEqual);
@@ -38,12 +38,12 @@ const UserDetailsPage = (props) => {
         <div className={ classes.UserDetailsPage }>
             <FlexRow>
                 <div className={ classes.title }>
-                    <h3>{ pageTitle }</h3>
+                    <h3 id="user-details-title">{ pageTitle }</h3>
                 </div>
             </FlexRow>
             {
                 loading &&
-                <Spinner />
+                <Spinner id="user-details-spinner" />
             }
             {
                 !loading &&
