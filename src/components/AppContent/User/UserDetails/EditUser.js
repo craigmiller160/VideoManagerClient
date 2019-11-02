@@ -49,8 +49,9 @@ const EditUser = (props) => {
             const res = await AuthApiService.saveUserAdmin(match.params.userId, payload);
             setUserDetails(formatUser(res.data));
             dispatch(showSuccessAlert('Successfully saved user'));
+            history.push('/users');
         } catch (ex) {
-            dispatch(showErrorAlert(ex.message));
+            dispatch(showErrorAlert(`Error saving user: ${ex.message}`));
         }
         setLoading(false);
     };
@@ -58,10 +59,10 @@ const EditUser = (props) => {
     const deleteUser = async () => {
         try {
             await AuthApiService.deleteUser(match.params.userId);
-            dispatch(showSuccessAlert('Successfully saved user'));
+            dispatch(showSuccessAlert('Successfully deleted user'));
             history.push('/users');
         } catch (ex) {
-            dispatch(showErrorAlert(ex.message));
+            dispatch(showErrorAlert(`Error deleting user: ${ex.message}`));
         }
     };
 
@@ -70,9 +71,9 @@ const EditUser = (props) => {
         try {
             const res = await AuthApiService.revokeAccess(match.params.userId);
             setUserDetails(formatUser(res.data));
-            dispatch(showSuccessAlert('Successfully revoked user access'));
+            dispatch(showSuccessAlert('Successfully revoked user login'));
         } catch (ex) {
-            dispatch(showErrorAlert(ex.message));
+            dispatch(showErrorAlert(`Error revoking user login: ${ex.message}`));
         }
         setLoading(false);
     };

@@ -1,5 +1,6 @@
 import API from 'services/API';
 import MockAdapter from 'axios-mock-adapter';
+import { act } from 'react-dom/test-utils';
 import EditUser from 'components/AppContent/User/UserDetails/EditUser';
 import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent';
 import { ROLE_ADMIN, ROLE_EDIT } from '../../../../../src/utils/securityConstants';
@@ -25,7 +26,9 @@ const defaultProps = {
             userId: 1
         }
     },
-    history: {}
+    history: {
+        push: jest.fn()
+    }
 };
 
 const doMount = mountTestComponent(EditUser, {
@@ -84,16 +87,48 @@ describe('EditUser', () => {
     });
 
     describe('behavior', () => {
-        it('save', () => {
-            throw new Error('Finish this');
+        beforeEach(() => {
+            mockApi.onGet('/api/auth/roles')
+                .reply(200, roles);
+            mockApi.onGet('/api/auth/users/admin/1')
+                .reply(200, userDetails);
         });
 
-        it('deleteUser', () => {
-            throw new Error('Finish this');
+        it('save', async () => {
+            const values = {
+                ...userDetails,
+                roles: formattedRoles,
+                lastAuthenticated: 'abcdefg'
+            };
+            const formattedValues = {
+                ...userDetails,
+                roles
+            };
+            mockApi.onPut('/auth/users/admin/1', formattedValues)
+                .reply(200, userDetails);
+            const { component, store } = doMount();
+            await resolveComponent(component);
+            await act(async () => {
+                component.find('UserDetailsPage').props().saveUser(values);
+            });
+            await resolveComponent(component);
+            testRendering(component);
+            expect(store.getActions()).toEqual(expect.arrayContaining([
+                { type: 'alert/showSuccessAlert', payload: 'Successfully saved user' }
+            ]));
+            expect(defaultProps.history.push).toHaveBeenCalledWith('/users');
         });
 
-        it('revokeUser', () => {
-            throw new Error('Finish this');
+        it('deleteUser', async () => {
+            const { component, store } = doMount();
+            await resolveComponent(component);
+            component.find('UserDetailsPage').props().deleteUser();
+        });
+
+        it('revokeUser', async () => {
+            const { component, store } = doMount();
+            await resolveComponent(component);
+            component.find('UserDetailsPage').props().revokeUser();
         });
     });
 });
