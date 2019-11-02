@@ -13,7 +13,8 @@ const defaultProps = {
 
 const doMount = mountTestComponent(UserManagementPage, {
     defaultProps,
-    defaultInitialRouterEntries: ['/']
+    defaultInitialRouterEntries: ['/'],
+    defaultStoreState: {}
 });
 
 const users = [
@@ -96,8 +97,21 @@ describe('UserManagementPage', () => {
             });
         });
 
-        it('dispatches an error if API call fails', () => {
-            throw new Error('Finish this');
+        it('dispatches an error if API call fails', async () => {
+            mockApi.reset();
+            mockApi.onGet('/api/auth/users')
+                .reply(500);
+
+            const { component, store } = doMount();
+            await resolveComponent(component);
+
+            const expectedActions = [
+                {
+                    type: 'alert/showErrorAlert',
+                    payload: 'Request failed with status code 500'
+                }
+            ];
+            expect(store.getActions()).toEqual(expectedActions);
         });
     });
 });

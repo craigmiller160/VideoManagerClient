@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as AuthApiService from 'services/AuthApiService';
+import { Button } from 'reactstrap';
+import { useDispatch } from 'react-redux';
 import classes from './UserManagementPage.scss';
 import FlexRow from '../../../UI/Grid/FlexRow';
 import UserListItem from './UserListItem';
 import FlexCol from '../../../UI/Grid/FlexCol';
-import { Button } from 'reactstrap';
+import { showErrorAlert } from '../../../../store/alert/alert.actions';
 
 const userNameSort = (user1, user2) => {
     if (user1.userName < user2.userName) {
@@ -22,6 +24,7 @@ const userNameSort = (user1, user2) => {
 const UserManagementPage = (props) => {
     const { history } = props;
     const [allUsers, setAllUsers] = useState([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const loadUsers = async () => {
@@ -32,8 +35,7 @@ const UserManagementPage = (props) => {
                 displayUsers.sort(userNameSort);
                 setAllUsers(displayUsers);
             } catch(ex) {
-                // TODO include some actual error handling
-                console.log(ex); // TODO delete this
+                dispatch(showErrorAlert(ex.message));
             }
 
         };
