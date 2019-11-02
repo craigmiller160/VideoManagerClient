@@ -54,6 +54,7 @@ const testRendering = (component, { hasAdminRole = false, hasError = false } = {
 
 describe('UserProfile', () => {
     beforeEach(() => {
+        jest.clearAllMocks();
         mockApi.reset();
     });
 
@@ -80,7 +81,7 @@ describe('UserProfile', () => {
                 hasAdminRole: true
             });
             expect(store.getActions()).not.toEqual(expect.arrayContaining([
-                { type: 'alert/showErrorAlert' }
+                { type: 'alert/showErrorAlert', payload: expect.any(String) }
             ]));
         });
 
@@ -91,7 +92,7 @@ describe('UserProfile', () => {
             await resolveComponent(component);
             testRendering(component);
             expect(store.getActions()).not.toEqual(expect.arrayContaining([
-                { type: 'alert/showErrorAlert' }
+                { type: 'alert/showErrorAlert', payload: expect.any(String) }
             ]));
         });
 
@@ -124,10 +125,10 @@ describe('UserProfile', () => {
         });
     });
 
-    describe('actions and callbacks', () => {
+    describe('actions and callbacks', async () => {
         it('save', () => {
             const { component, store } = doMount();
-            resolveComponent(component);
+            await resolveComponent(component);
             const payload = { userId: 1 };
             component.find('UserDetailsPage').props().saveUser(payload);
             expect(store.getActions()).toEqual(expect.arrayContaining([

@@ -21,13 +21,17 @@ const EditUser = (props) => {
 
     useEffect(() => {
         const setup = async () => {
-            const resArray = await Promise.all([
-                AuthApiService.getRoles(),
-                AuthApiService.getUser(match.params.userId)
-            ]);
+            try {
+                const resArray = await Promise.all([
+                    AuthApiService.getRoles(),
+                    AuthApiService.getUser(match.params.userId)
+                ]);
 
-            setAllRoles(formatRoles(resArray[0].data));
-            setUserDetails(formatUser(resArray[1].data));
+                setAllRoles(formatRoles(resArray[0].data));
+                setUserDetails(formatUser(resArray[1].data));
+            } catch (ex) {
+                dispatch(showErrorAlert(`Error loading data for page: ${ex.message}`));
+            }
             setLoading(false);
         };
         setup();
@@ -86,8 +90,12 @@ const EditUser = (props) => {
     );
 };
 EditUser.propTypes = {
-    match: PropTypes.object,
-    history: PropTypes.object
+    match: PropTypes.shape({
+        params: PropTypes.object
+    }),
+    history: PropTypes.shape({
+        push: PropTypes.func
+    })
 };
 
 export default EditUser;
