@@ -120,15 +120,32 @@ describe('EditUser', () => {
         });
 
         it('deleteUser', async () => {
+            mockApi.onDelete('/auth/users/1')
+                .reply(200);
             const { component, store } = doMount();
             await resolveComponent(component);
-            component.find('UserDetailsPage').props().deleteUser();
+            await act(async () => {
+                component.find('UserDetailsPage').props().deleteUser();
+            });
+            expect(store.getActions()).toEqual(expect.arrayContaining([
+                { type: 'alert/showSuccessAlert', payload: 'Successfully deleted user' }
+            ]));
+            expect(defaultProps.history.push).toHaveBeenCalledWith('/users');
         });
 
         it('revokeUser', async () => {
+            mockApi.onPost('/auth/users/revoke/1')
+                .reply(200, userDetails);
             const { component, store } = doMount();
             await resolveComponent(component);
-            component.find('UserDetailsPage').props().revokeUser();
+            await act(async () => {
+                component.find('UserDetailsPage').props().revokeUser();
+            });
+            await resolveComponent(component);
+            testRendering(component);
+            expect(store.getActions()).toEqual(expect.arrayContaining([
+                { type: 'alert/showSuccessAlert', payload: 'Successfully revoked user login' }
+            ]));
         });
     });
 });

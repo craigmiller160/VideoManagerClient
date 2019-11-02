@@ -57,6 +57,7 @@ const EditUser = (props) => {
     };
 
     const deleteUser = async () => {
+        setLoading(true);
         try {
             await AuthApiService.deleteUser(match.params.userId);
             dispatch(showSuccessAlert('Successfully deleted user'));
@@ -64,6 +65,7 @@ const EditUser = (props) => {
         } catch (ex) {
             dispatch(showErrorAlert(`Error deleting user: ${ex.message}`));
         }
+        setLoading(false);
     };
 
     const revokeUser = async () => {
