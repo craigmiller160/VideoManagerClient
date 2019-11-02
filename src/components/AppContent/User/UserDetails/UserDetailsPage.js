@@ -114,6 +114,7 @@ const UserDetailsPage = (props) => {
                         {
                             revokeUser &&
                             <Button
+                                id="user-details-revoke"
                                 type="button"
                                 color="info"
                                 onClick={ revokeUser }
@@ -122,6 +123,8 @@ const UserDetailsPage = (props) => {
                             </Button>
                         }
                         <Button
+                            id="user-details-save"
+                            type="submit"
                             color="primary"
                             disabled={ disableSave }
                         >
@@ -130,6 +133,7 @@ const UserDetailsPage = (props) => {
                         {
                             deleteUser &&
                             <Button
+                                id="user-details-delete"
                                 type="button"
                                 color="danger"
                                 onClick={ deleteUser }
