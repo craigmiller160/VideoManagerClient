@@ -125,8 +125,8 @@ describe('UserProfile', () => {
         });
     });
 
-    describe('actions and callbacks', async () => {
-        it('save', () => {
+    describe('actions and callbacks', () => {
+        it('save', async () => {
             const { component, store } = doMount();
             await resolveComponent(component);
             const payload = { userId: 1 };

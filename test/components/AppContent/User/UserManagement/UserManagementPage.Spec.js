@@ -108,7 +108,7 @@ describe('UserManagementPage', () => {
             const expectedActions = [
                 {
                     type: 'alert/showErrorAlert',
-                    payload: 'Request failed with status code 500'
+                    payload: 'Error loading users: Request failed with status code 500'
                 }
             ];
             expect(store.getActions()).toEqual(expectedActions);
