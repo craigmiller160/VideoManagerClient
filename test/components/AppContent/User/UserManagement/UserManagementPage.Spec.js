@@ -58,7 +58,11 @@ describe('UserManagementPage', () => {
 
     describe('rendering', () => {
         it('renders all users', async () => {
-            const { component } = await doMount();
+            const { component } = doMount();
+            await act(async () => {
+                await Promise.resolve(component);
+                component.update();
+            });
 
             console.log(component.debug()); // TODO delete this
 
