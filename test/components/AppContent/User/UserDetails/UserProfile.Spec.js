@@ -5,6 +5,13 @@ import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent'
 import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
 import { ROLE_ADMIN, ROLE_EDIT } from 'utils/securityConstants';
 
+jest.mock('store/auth/auth.actions', () => ({
+    saveUserProfile: (values) => ({
+        type: 'saveUserProfile',
+        payload: values
+    })
+}));
+
 const roles = [
     { roleId: 1, name: ROLE_ADMIN },
     { roleId: 2, name: ROLE_EDIT }
@@ -119,7 +126,13 @@ describe('UserProfile', () => {
 
     describe('actions and callbacks', () => {
         it('save', () => {
-            throw new Error('Finish this');
+            const { component, store } = doMount();
+            resolveComponent(component);
+            const payload = { userId: 1 };
+            component.find('UserDetailsPage').props().saveUser(payload);
+            expect(store.getActions()).toEqual(expect.arrayContaining([
+                { type: 'saveUserProfile', payload }
+            ]));
         });
     });
 });

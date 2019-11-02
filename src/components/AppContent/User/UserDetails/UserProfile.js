@@ -22,7 +22,6 @@ const UserProfile = () => {
                     const res = await AuthApiService.getRoles();
                     roles = res.data;
                 } catch (ex) {
-                    console.log('Ex: ' + ex.message); // TODO delete this
                     dispatch(showErrorAlert(`Error loading roles: ${ex.message}`));
                 }
             }
