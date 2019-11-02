@@ -5,6 +5,7 @@ import * as AuthApiService from '../../../../services/AuthApiService';
 import { formatRoles, formatUser } from './userUtils';
 import { hasAdminRole as hasAdminRoleSelector } from '../../../../store/auth/auth.selectors';
 import { saveUserProfile } from '../../../../store/auth/auth.actions';
+import { showErrorAlert } from '../../../../store/alert/alert.actions';
 
 const UserProfile = () => {
     const dispatch = useDispatch();
@@ -17,8 +18,13 @@ const UserProfile = () => {
         const setup = async () => {
             let roles = [];
             if (hasAdminRole) {
-                const res = await AuthApiService.getRoles();
-                roles = res.data;
+                try {
+                    const res = await AuthApiService.getRoles();
+                    roles = res.data;
+                } catch (ex) {
+                    console.log('Ex: ' + ex.message); // TODO delete this
+                    dispatch(showErrorAlert(`Error loading roles: ${ex.message}`));
+                }
             }
 
             setAllRoles(formatRoles(roles));

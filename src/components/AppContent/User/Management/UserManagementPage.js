@@ -35,7 +35,7 @@ const UserManagementPage = (props) => {
                 displayUsers.sort(userNameSort);
                 setAllUsers(displayUsers);
             } catch(ex) {
-                dispatch(showErrorAlert(ex.message));
+                dispatch(showErrorAlert(`Error loading users: ${ex.message}`));
             }
 
         };
