@@ -3,6 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { act } from 'react-dom/test-utils';
 import UserManagementPage from 'components/AppContent/User/Management/UserManagementPage';
 import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent';
+import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
 
 // TODO might be a useful bit of code for the future
 const doImmediate = (action) => new Promise((resolve) => {
@@ -60,13 +61,11 @@ describe('UserManagementPage', () => {
         it('renders all users', async () => {
             const { component } = doMount();
             await act(async () => {
-                await Promise.resolve(component);
+                await resolveComponent(component);
                 component.update();
             });
 
             console.log(component.debug()); // TODO delete this
-
-            throw new Error('Finish this');
         });
     });
 

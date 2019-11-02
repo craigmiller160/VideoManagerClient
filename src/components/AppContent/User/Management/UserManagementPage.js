@@ -51,6 +51,8 @@ const UserManagementPage = (props) => {
         setAllUsers(newUsers);
     };
 
+    console.log(displayUsers); // TODO delete this
+
     return (
         <div className={ classes.UserManagementPage }>
             <FlexRow>
