@@ -65,7 +65,22 @@ describe('UserManagementPage', () => {
                 component.update();
             });
 
-            console.log(component.debug()); // TODO delete this
+            expect(component.find('div.title > h3').text()).toEqual('User Management');
+            expect(component.find('UserListItem')).toHaveLength(4);
+
+            const testItem = (index, user) => {
+                expect(component.find('UserListItem').at(index).props()).toEqual({
+                    user: user,
+                    changeExpanded: expect.any(Function)
+                });
+            };
+
+            testItem(0, users[1]);
+            testItem(1, users[3]);
+            testItem(2, users[0]);
+            testItem(3, users[2]);
+
+            expect(component.find('Button#add-user-btn')).toHaveLength(1);
         });
     });
 

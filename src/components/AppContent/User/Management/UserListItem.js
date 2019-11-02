@@ -27,8 +27,6 @@ const UserListItem = (props) => {
 
     const animateHeight = user.expanded ? 'auto' : 0;
 
-    console.log('UserListItem rendering'); // TODO delete this
-
     return (
         <div
             data-name="user-list-item-root"
