@@ -1,6 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
 
 const createRouter = (initialRouterEntries) => {
     const { MemoryRouter } = require('react-router');
