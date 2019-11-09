@@ -14,8 +14,12 @@ const AddUser = (props) => {
 
     useEffect(() => {
         const setup = async () => {
-            const res = await AuthApiService.getRoles();
-            setAllRoles(formatRoles(res.data));
+            try {
+                const res = await AuthApiService.getRoles();
+                setAllRoles(formatRoles(res.data));
+            } catch (ex) {
+                dispatch(showErrorAlert(`Error loading data for page: ${ex.message}`));
+            }
             setLoading(false);
         };
 
