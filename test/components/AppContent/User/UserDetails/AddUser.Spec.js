@@ -1,5 +1,6 @@
 import API from 'services/API';
 import MockAdapter from 'axios-mock-adapter';
+import { act } from 'react-dom/test-utils';
 import AddUser from 'components/AppContent/User/UserDetails/AddUser';
 import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent';
 import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
@@ -27,6 +28,10 @@ const formattedRoles = roles
 
 const mockApi = new MockAdapter(API);
 
+const userDetails = {
+    userId: 1
+};
+
 const testRendering = (component, { hasError = false } = {}) => {
     const userDetailsPage = component.find('UserDetailsPage');
 
@@ -45,6 +50,7 @@ const testRendering = (component, { hasError = false } = {}) => {
 describe('AddUser', () => {
     beforeEach(() => {
         mockApi.reset();
+        jest.clearAllMocks();
     });
 
     describe('rendering', () => {
@@ -75,13 +81,42 @@ describe('AddUser', () => {
     });
 
     describe('actions', () => {
-        describe('save', () => {
-            it('successful', () => {
-                throw new Error('Finish this');
+        describe('save',  () => {
+            it('successful', async () => {
+                mockApi.onGet('/auth/roles')
+                    .reply(200, roles);
+                mockApi.onPost('/auth/users')
+                    .reply(200, userDetails);
+                const { component, store } = doMount();
+                await resolveComponent(component);
+                await act(async () => {
+                    await component.find('UserDetailsPage').props()
+                        .saveUser({
+                            ...userDetails,
+                            roles: formattedRoles
+                        });
+                });
+                expect(store.getActions()).toEqual(expect.arrayContaining([
+                    { type: 'alert/showSuccessAlert', payload: 'Successfully created user' }
+                ]));
+                expect(defaultProps.history.push).toHaveBeenCalledWith('/users/1');
             });
 
-            it('fails', () => {
-                throw new Error('Finish this');
+            it('fails', async () => {
+                mockApi.onGet('/auth/roles')
+                    .reply(200, roles);
+                const { component, store } = doMount();
+                await resolveComponent(component);
+                await act(async () => {
+                    await component.find('UserDetailsPage').props()
+                        .saveUser({
+                            ...userDetails,
+                            roles: formattedRoles
+                        });
+                });
+                expect(store.getActions()).toEqual(expect.arrayContaining([
+                    { type: 'alert/showErrorAlert', payload: 'Request failed with status code 404' }
+                ]));
             });
         });
     });
