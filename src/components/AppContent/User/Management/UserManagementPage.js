@@ -8,6 +8,7 @@ import FlexRow from '../../../UI/Grid/FlexRow';
 import UserListItem from './UserListItem';
 import FlexCol from '../../../UI/Grid/FlexCol';
 import { showErrorAlert } from '../../../../store/alert/alert.actions';
+import Spinner from '../../../UI/Spinner/Spinner';
 
 const userNameSort = (user1, user2) => {
     if (user1.userName < user2.userName) {
@@ -24,6 +25,7 @@ const userNameSort = (user1, user2) => {
 const UserManagementPage = (props) => {
     const { history } = props;
     const [allUsers, setAllUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -37,7 +39,7 @@ const UserManagementPage = (props) => {
             } catch(ex) {
                 dispatch(showErrorAlert(`Error loading users: ${ex.message}`));
             }
-
+            setLoading(false);
         };
         loadUsers();
     }, []);
@@ -57,27 +59,36 @@ const UserManagementPage = (props) => {
                     <h3>User Management</h3>
                 </div>
             </FlexRow>
-            <FlexCol className={ classes.list }>
-                {
-                    allUsers.map((user) => (
-                        <UserListItem
-                            user={ user }
-                            key={ user.userId }
-                            changeExpanded={ changeExpanded }
-                        />
-                    ))
-                }
-            </FlexCol>
-            <FlexRow className="mt-4" justifyContent="flex-end">
-                <Button
-                    id="add-user-btn"
-                    type="button"
-                    color="primary"
-                    onClick={ () => history.push('/users/new') }
-                >
-                    Add User
-                </Button>
-            </FlexRow>
+            {
+                loading &&
+                <Spinner id="user-details-spinner" />
+            }
+            {
+                !loading &&
+                <>
+                    <FlexCol className={ classes.list }>
+                        {
+                            allUsers.map((user) => (
+                                <UserListItem
+                                    user={ user }
+                                    key={ user.userId }
+                                    changeExpanded={ changeExpanded }
+                                />
+                            ))
+                        }
+                    </FlexCol>
+                    <FlexRow className="mt-4" justifyContent="flex-end">
+                        <Button
+                            id="add-user-btn"
+                            type="button"
+                            color="primary"
+                            onClick={ () => history.push('/users/new') }
+                        >
+                            Add User
+                        </Button>
+                    </FlexRow>
+                </>
+            }
         </div>
     );
 };
