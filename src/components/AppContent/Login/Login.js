@@ -8,6 +8,9 @@ import { isRequired, isValidEmail } from '../../../utils/validations';
 import { login } from '../../../store/auth/auth.actions';
 import { loginFormHasErrors } from '../../../store/auth/auth.selectors';
 import Spinner from '../../UI/Spinner/Spinner';
+import FileChooser from '../../UI/FileChooser';
+
+// TODO delete the file chooser
 
 export const LOGIN_FORM_NAME = 'LoginForm';
 
@@ -15,7 +18,6 @@ const Login = () => {
     const dispatch = useDispatch();
     const loginFormErrors = useSelector(loginFormHasErrors, shallowEqual);
     const loginLoading = useSelector((state) => state.auth?.loginLoading, shallowEqual);
-    // const usernameRef = useRef(null);
 
     return (
         <Form
@@ -70,6 +72,7 @@ const Login = () => {
                     </Row>
                 </>
             }
+            <FileChooser />
         </Form>
     );
 };
