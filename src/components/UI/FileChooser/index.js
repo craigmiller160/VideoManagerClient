@@ -10,10 +10,10 @@ import FileChooserContext from './FileChooserContext';
 
 const loadFiles = (path, directoriesOnly) => {
     if (directoriesOnly) {
-        return getDirectoriesFromDirectory();
+        return getDirectoriesFromDirectory(path);
     }
 
-    return getFilesFromDirectory();
+    return getFilesFromDirectory(path);
 };
 
 const FileChooser = (props) => {
