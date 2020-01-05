@@ -6,7 +6,7 @@ import FileListContainer from './FileListContainer';
 
 const FileChooser = (props) => {
     const [state, setState] = useState({
-        files: [],
+        fileList: { rootPath: '', files: [] },
         selectedFile: null
     });
 
@@ -15,7 +15,7 @@ const FileChooser = (props) => {
             const res = await getDirectoriesFromDirectory();
             setState((prevState) => ({
                 ...prevState,
-                files: res.data
+                fileList: res.data
             }));
         };
 
@@ -25,7 +25,7 @@ const FileChooser = (props) => {
     // TODO need a loading indicator
 
     return (
-        <FileListContainer files={ state.files } />
+        <FileListContainer fileList={ state.fileList } />
     );
 };
 FileChooser.propTypes = {

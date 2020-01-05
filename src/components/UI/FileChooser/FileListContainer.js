@@ -2,20 +2,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './FileListContainer.scss';
+import FileListItem from './FileListItem';
 
 const FileListContainer = (props) => {
     const {
-        files
+        fileList
     } = props;
 
     return (
         <div className={ classes.FileListContainer }>
-            <h1>Hello World</h1>
+            <h3 className={ classes.path }>Path: { fileList.rootPath }</h3>
+            {
+                fileList.files.map((file) => (
+                    <FileListItem file={ file } />
+                ))
+            }
         </div>
     );
 };
 FileListContainer.propTypes = {
-    files: PropTypes.array.isRequired // TODO be more specific
+    fileList: PropTypes.object.isRequired // TODO make more detailed
 };
 
 export default FileListContainer;

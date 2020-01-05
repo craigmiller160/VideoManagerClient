@@ -1,3 +1,8 @@
 .FileListContainer {
+  width: 80%; // TODO probably want something better here
+  margin: 0 auto;
 
+  .path {
+    text-align: center;
+  }
 }
