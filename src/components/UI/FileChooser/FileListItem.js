@@ -1,18 +1,23 @@
-/* eslint-disable */  // TODO delete this
-import React from 'react';
+/* eslint-disable */    // TODO delete this
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import classes from './FileListItem.scss';
 import directoryIcon from '../../../assets/images/directory.png';
 import fileIcon from '../../../assets/images/file.png';
-import ItemButtons from './ItemButtons';
+import { Button } from 'reactstrap';
+import FileChooserContext from './FileChooserContext';
 
 const FileListItem = (props) => {
     const {
         file
     } = props;
 
+    const { directoriesOnly } = useContext(FileChooserContext);
+
     const icon = file.directory ? directoryIcon : fileIcon;
     const alt = file.directory ? 'Directory Icon' : 'File Icon';
+
+    const showSelectBtn = (file.directory && directoriesOnly) || !file.directory;
 
     return (
         <div className={ classes.FileListItem }>
@@ -20,7 +25,14 @@ const FileListItem = (props) => {
                 <img src={ icon } alt={ alt } />
                 <p>{ file.fileName }</p>
             </div>
-            <ItemButtons directory={ file.directory } />
+            {
+                file.directory &&
+                <Button color="info">Open</Button>
+            }
+            {
+                showSelectBtn &&
+                <Button color="primary">Select</Button>
+            }
         </div>
     );
 };

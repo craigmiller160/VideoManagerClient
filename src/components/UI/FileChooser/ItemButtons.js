@@ -4,6 +4,8 @@ import { Button } from 'reactstrap';
 import FileChooserContext from './FileChooserContext';
 import classes from './ItemButtons.scss';
 
+// TODO delete if unused
+
 const ItemButtons = (props) => {
     const {
         directory
