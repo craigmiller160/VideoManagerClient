@@ -7,7 +7,7 @@ const Home = () => (
         <div className={ classes.title }>
             <h3>Welcome to VideoManager</h3>
         </div>
-        <FileChooser />
+        <FileChooser directoriesOnly />
     </div>
 );
 

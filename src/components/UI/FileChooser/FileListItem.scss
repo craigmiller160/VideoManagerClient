@@ -10,6 +10,7 @@
   .label-container {
     display: flex;
     flex-direction: row;
+    align-items: center;
 
     img {
       width: 25px;
@@ -19,5 +20,11 @@
     p {
       margin: 0;
     }
+  }
+
+  .btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 }

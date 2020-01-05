@@ -25,14 +25,16 @@ const FileListItem = (props) => {
                 <img src={ icon } alt={ alt } />
                 <p>{ file.fileName }</p>
             </div>
-            {
-                file.directory &&
-                <Button color="info">Open</Button>
-            }
-            {
-                showSelectBtn &&
-                <Button color="primary">Select</Button>
-            }
+            <div className={ classes['btn-container'] }>
+                {
+                    file.directory &&
+                    <Button color="info">Open</Button>
+                }
+                {
+                    showSelectBtn &&
+                    <Button color="primary">Select</Button>
+                }
+            </div>
         </div>
     );
 };
