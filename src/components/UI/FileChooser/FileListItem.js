@@ -12,7 +12,11 @@ const FileListItem = (props) => {
         file
     } = props;
 
-    const { directoriesOnly } = useContext(FileChooserContext);
+    const {
+        directoriesOnly,
+        selectFile,
+        openDirectory
+    } = useContext(FileChooserContext);
 
     const icon = file.directory ? directoryIcon : fileIcon;
     const alt = file.directory ? 'Directory Icon' : 'File Icon';
@@ -28,11 +32,21 @@ const FileListItem = (props) => {
             <div className={ classes['btn-container'] }>
                 {
                     file.directory &&
-                    <Button color="info">Open</Button>
+                    <Button
+                        color="info"
+                        onClick={ () => openDirectory(file) }
+                    >
+                        Open
+                    </Button>
                 }
                 {
                     showSelectBtn &&
-                    <Button color="primary">Select</Button>
+                    <Button
+                        color="primary"
+                        onClick={ () => selectFile(file) }
+                    >
+                        Select
+                    </Button>
                 }
             </div>
         </div>

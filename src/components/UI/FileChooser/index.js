@@ -8,9 +8,18 @@ import {
 import FileListContainer from './FileListContainer';
 import FileChooserContext from './FileChooserContext';
 
+const loadFiles = (path, directoriesOnly) => {
+    if (directoriesOnly) {
+        return getDirectoriesFromDirectory();
+    }
+
+    return getFilesFromDirectory();
+};
+
 const FileChooser = (props) => {
     const {
-        directoriesOnly
+        directoriesOnly,
+        selectFile
     } = props;
 
     const [state, setState] = useState({
@@ -20,12 +29,7 @@ const FileChooser = (props) => {
 
     useEffect(() => {
         const loadInitialFiles = async () => {
-            let res;
-            if (directoriesOnly) {
-                res = await getDirectoriesFromDirectory();
-            } else {
-                res = await getFilesFromDirectory();
-            }
+            const res = await loadFiles(null, directoriesOnly);
 
             setState((prevState) => ({
                 ...prevState,
@@ -36,10 +40,20 @@ const FileChooser = (props) => {
         loadInitialFiles();
     }, []);
 
+    const openDirectory = async (file) => {
+        const res = await loadFiles(file.filePath, directoriesOnly);
+        setState((prevState) => ({
+            ...prevState,
+            fileList: res.data
+        }));
+    };
+
     // TODO need a loading indicator
 
     const context = {
-        directoriesOnly
+        directoriesOnly,
+        selectFile,
+        openDirectory
     };
 
     return (
@@ -49,10 +63,12 @@ const FileChooser = (props) => {
     );
 };
 FileChooser.propTypes = {
-    directoriesOnly: PropTypes.bool
+    directoriesOnly: PropTypes.bool,
+    selectFile: PropTypes.func
 };
 FileChooser.defaultProps = {
-    directoriesOnly: false
+    directoriesOnly: false,
+    selectFile: () => {}
 };
 
 export default FileChooser;
