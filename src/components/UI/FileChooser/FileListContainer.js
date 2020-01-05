@@ -13,8 +13,8 @@ const FileListContainer = (props) => {
         <div className={ classes.FileListContainer }>
             <h3 className={ classes.path }>Path: { fileList.rootPath }</h3>
             {
-                fileList.files.map((file) => (
-                    <FileListItem file={ file } />
+                fileList.files.map((file, index) => (
+                    <FileListItem key={ index } file={ file } />
                 ))
             }
         </div>

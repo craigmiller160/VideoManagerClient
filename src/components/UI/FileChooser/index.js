@@ -10,6 +10,8 @@ const FileChooser = (props) => {
         selectedFile: null
     });
 
+    // TODO need some kind of loading indicator
+
     useEffect(() => {
         const loadInitialFiles = async () => {
             const res = await getDirectoriesFromDirectory();
