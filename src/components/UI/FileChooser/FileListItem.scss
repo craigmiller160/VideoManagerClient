@@ -2,4 +2,16 @@
 .FileListItem {
   border: 1px solid rgba(0,0,0,0.125);
   border-radius: 0.25rem;
+  padding: 1rem;
+
+  img {
+    width: 25px;
+    display: inline-block;
+    margin-right: 0.2rem;
+  }
+
+  p {
+    margin: 0;
+    display: inline-block;
+  }
 }
