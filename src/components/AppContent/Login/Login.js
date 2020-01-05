@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Row } from 'reactstrap';
 import Form from 'components/UI/form/Form/Form';
 import Input from 'components/UI/form/Input/Input';
@@ -8,9 +8,6 @@ import { isRequired, isValidEmail } from '../../../utils/validations';
 import { login } from '../../../store/auth/auth.actions';
 import { loginFormHasErrors } from '../../../store/auth/auth.selectors';
 import Spinner from '../../UI/Spinner/Spinner';
-import FileChooser from '../../UI/FileChooser';
-
-// TODO delete the file chooser
 
 export const LOGIN_FORM_NAME = 'LoginForm';
 
@@ -72,7 +69,6 @@ const Login = () => {
                     </Row>
                 </>
             }
-            <FileChooser />
         </Form>
     );
 };
