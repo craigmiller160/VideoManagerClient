@@ -7,6 +7,7 @@ import {
 } from '../../../services/LocalFileApiService';
 import FileListContainer from './FileListContainer';
 import FileChooserContext from './FileChooserContext';
+import Spinner from '../Spinner/Spinner';
 
 const loadFiles = (path, directoriesOnly) => {
     if (directoriesOnly) {
@@ -24,16 +25,19 @@ const FileChooser = (props) => {
 
     const [state, setState] = useState({
         fileList: { rootPath: '', parentPath: '', files: [] },
-        selectedFile: null
+        selectedFile: null,
+        loading: true
     });
 
     useEffect(() => {
         const loadInitialFiles = async () => {
             const res = await loadFiles(null, directoriesOnly);
+            // TODO add error handling here
 
             setState((prevState) => ({
                 ...prevState,
-                fileList: res.data
+                fileList: res.data,
+                loading: false
             }));
         };
 
@@ -48,7 +52,9 @@ const FileChooser = (props) => {
         }));
     };
 
-    // TODO need a loading indicator
+    if (state.loading) {
+        return <Spinner />
+    }
 
     const context = {
         directoriesOnly,

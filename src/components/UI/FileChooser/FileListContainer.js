@@ -1,6 +1,5 @@
 /* eslint-disable */ // TODO delete this
 import React from 'react';
-import PropTypes from 'prop-types';
 import classes from './FileListContainer.scss';
 import FileListItem from './FileListItem';
 import { fileListPropType } from './fileChooserPropTypes';
