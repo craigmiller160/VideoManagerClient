@@ -1,7 +1,7 @@
 @import './filechooser';
 
 .FileListContainer {
-  width: 40rem;
+  width: $container-width;
   margin: 0 auto;
 
   .path {
@@ -16,7 +16,7 @@
     height: 30rem;
     overflow-y: scroll;
     border: 1px solid $border-color;
-    border-radius: 0.25rem;
+    border-radius: $border-radius;
     padding: 0.5rem;
   }
 }
