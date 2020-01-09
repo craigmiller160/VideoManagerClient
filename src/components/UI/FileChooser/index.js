@@ -23,7 +23,7 @@ const FileChooser = (props) => {
     } = props;
 
     const [state, setState] = useState({
-        fileList: { rootPath: '', files: [] },
+        fileList: { rootPath: '', parentPath: '', files: [] },
         selectedFile: null
     });
 

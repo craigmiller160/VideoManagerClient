@@ -15,6 +15,10 @@ const FileListContainer = (props) => {
                 <span className={ classes.bold }>Path:</span> { fileList.rootPath }
             </h3>
             {
+                fileList.parentPath &&
+                    <FileListItem file={ { directory: true, fileName: '../', filePath: fileList.parentPath } } />
+            }
+            {
                 fileList.files.map((file, index) => (
                     <FileListItem key={ index } file={ file } />
                 ))
