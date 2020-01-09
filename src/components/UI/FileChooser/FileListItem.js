@@ -54,7 +54,11 @@ const FileListItem = (props) => {
     );
 };
 FileListItem.propTypes = {
-    file: PropTypes.object.isRequired, // TODO be more specific
+    file: PropTypes.shape({
+        directory: PropTypes.bool.isRequired,
+        fileName: PropTypes.string.isRequired,
+        filePath: PropTypes.string.isRequired
+    }).isRequired,
     hideSelect: PropTypes.bool
 };
 FileListItem.defaultProps = {

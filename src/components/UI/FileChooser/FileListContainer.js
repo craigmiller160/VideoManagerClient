@@ -32,7 +32,17 @@ const FileListContainer = (props) => {
     );
 };
 FileListContainer.propTypes = {
-    fileList: PropTypes.object.isRequired // TODO make more detailed
+    fileList: PropTypes.shape({
+        rootPath: PropTypes.string.isRequired,
+        parentPath: PropTypes.string.isRequired,
+        files: PropTypes.arrayOf(
+            PropTypes.shape({
+                directory: PropTypes.bool.isRequired,
+                fileName: PropTypes.string.isRequired,
+                filePath: PropTypes.string.isRequired
+            }).isRequired
+        ).isRequired
+    }).isRequired
 };
 
 export default FileListContainer;
