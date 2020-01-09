@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './FileListContainer.scss';
 import FileListItem from './FileListItem';
+import { fileListPropType } from './fileChooserPropTypes';
 
 const FileListContainer = (props) => {
     const {
@@ -32,17 +33,7 @@ const FileListContainer = (props) => {
     );
 };
 FileListContainer.propTypes = {
-    fileList: PropTypes.shape({
-        rootPath: PropTypes.string.isRequired,
-        parentPath: PropTypes.string.isRequired,
-        files: PropTypes.arrayOf(
-            PropTypes.shape({
-                directory: PropTypes.bool.isRequired,
-                fileName: PropTypes.string.isRequired,
-                filePath: PropTypes.string.isRequired
-            }).isRequired
-        ).isRequired
-    }).isRequired
+    fileList: fileListPropType
 };
 
 export default FileListContainer;

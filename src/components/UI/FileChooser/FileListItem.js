@@ -6,6 +6,7 @@ import directoryIcon from '../../../assets/images/directory.png';
 import fileIcon from '../../../assets/images/file.png';
 import { Button } from 'reactstrap';
 import FileChooserContext from './FileChooserContext';
+import { filePropType } from './fileChooserPropTypes';
 
 const FileListItem = (props) => {
     const {
@@ -54,11 +55,7 @@ const FileListItem = (props) => {
     );
 };
 FileListItem.propTypes = {
-    file: PropTypes.shape({
-        directory: PropTypes.bool.isRequired,
-        fileName: PropTypes.string.isRequired,
-        filePath: PropTypes.string.isRequired
-    }).isRequired,
+    file: filePropType,
     hideSelect: PropTypes.bool
 };
 FileListItem.defaultProps = {
