@@ -1,6 +1,7 @@
+@import './filechooser';
 
 .FileListItem {
-  border: 1px solid rgba(0,0,0,0.125);
+  border: 1px solid $border-color;
   border-radius: 0.25rem;
   padding: 1rem;
   display: flex;
@@ -11,6 +12,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 25rem;
 
     img {
       width: 25px;
@@ -19,6 +23,9 @@
 
     p {
       margin: 0;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      width: inherit;
     }
   }
 
