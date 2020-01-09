@@ -4,9 +4,17 @@
 
   .path {
     text-align: center;
+
+    .bold {
+      font-weight: bold;
+    }
   }
 
-  .bold {
-    font-weight: bold;
+  .list {
+    height: 30rem;
+    overflow-y: scroll;
+    border: 1px solid rgba(0,0,0,0.125);
+    border-radius: 0.25rem;
+    padding: 0.5rem;
   }
 }
