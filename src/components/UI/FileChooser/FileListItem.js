@@ -9,7 +9,8 @@ import FileChooserContext from './FileChooserContext';
 
 const FileListItem = (props) => {
     const {
-        file
+        file,
+        hideSelect
     } = props;
 
     const {
@@ -21,7 +22,7 @@ const FileListItem = (props) => {
     const icon = file.directory ? directoryIcon : fileIcon;
     const alt = file.directory ? 'Directory Icon' : 'File Icon';
 
-    const showSelectBtn = (file.directory && directoriesOnly) || !file.directory;
+    const showSelectBtn = !hideSelect && ((file.directory && directoriesOnly) || !file.directory);
 
     return (
         <div className={ classes.FileListItem }>
@@ -53,7 +54,11 @@ const FileListItem = (props) => {
     );
 };
 FileListItem.propTypes = {
-    file: PropTypes.object.isRequired // TODO be more specific
+    file: PropTypes.object.isRequired, // TODO be more specific
+    hideSelect: PropTypes.bool
+};
+FileListItem.defaultProps = {
+    hideSelect: false
 };
 
 export default FileListItem;

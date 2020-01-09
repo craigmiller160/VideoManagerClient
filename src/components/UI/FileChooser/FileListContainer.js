@@ -17,7 +17,10 @@ const FileListContainer = (props) => {
             <div className={ classes.list }>
                 {
                     fileList.parentPath &&
-                    <FileListItem file={ { directory: true, fileName: '../', filePath: fileList.parentPath } } />
+                    <FileListItem
+                        file={ { directory: true, fileName: '../', filePath: fileList.parentPath } }
+                        hideSelect
+                    />
                 }
                 {
                     fileList.files.map((file, index) => (
