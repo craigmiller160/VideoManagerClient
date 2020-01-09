@@ -52,6 +52,7 @@ const FileChooser = (props) => {
         }));
     };
 
+    // TODO I kind of want the border at this level, so it wraps around the loading indicator
     if (state.loading) {
         return <Spinner />
     }
