@@ -1,6 +1,7 @@
 /* eslint-disable */ // TODO delete this
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import {
     getDirectoriesFromDirectory,
     getFilesFromDirectory
@@ -8,6 +9,7 @@ import {
 import FileListContainer from './FileListContainer';
 import FileChooserContext from './FileChooserContext';
 import Spinner from '../Spinner/Spinner';
+import { showErrorAlert } from '../../../store/alert/alert.actions';
 
 const loadFiles = (path, directoriesOnly) => {
     if (directoriesOnly) {
@@ -18,6 +20,7 @@ const loadFiles = (path, directoriesOnly) => {
 };
 
 const FileChooser = (props) => {
+    const dispatch = useDispatch();
     const {
         directoriesOnly,
         selectFile
@@ -31,28 +34,34 @@ const FileChooser = (props) => {
 
     useEffect(() => {
         const loadInitialFiles = async () => {
-            const res = await loadFiles(null, directoriesOnly);
-            // TODO add error handling here
+            try {
+                const res = await loadFiles(null, directoriesOnly);
 
-            setState((prevState) => ({
-                ...prevState,
-                fileList: res.data,
-                loading: false
-            }));
+                setState((prevState) => ({
+                    ...prevState,
+                    fileList: res.data,
+                    loading: false
+                }));
+            } catch (ex) {
+                dispatch(showErrorAlert(`Error loading files: ${ex.message}`));
+            }
         };
 
         loadInitialFiles();
     }, []);
 
     const openDirectory = async (file) => {
-        const res = await loadFiles(file.filePath, directoriesOnly);
-        setState((prevState) => ({
-            ...prevState,
-            fileList: res.data
-        }));
+        try {
+            const res = await loadFiles(file.filePath, directoriesOnly);
+            setState((prevState) => ({
+                ...prevState,
+                fileList: res.data
+            }));
+        } catch (ex) {
+            dispatch(showErrorAlert(`Error loading files: ${ex.message}`));
+        }
     };
 
-    // TODO I kind of want the border at this level, so it wraps around the loading indicator
     if (state.loading) {
         return <Spinner />
     }
