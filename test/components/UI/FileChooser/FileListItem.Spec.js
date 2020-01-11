@@ -33,7 +33,6 @@ const testRendering = (component, {
     directoriesOnly = false
 } = {}) => {
     const fileListItem = component.find('FileListItem');
-    console.log(fileListItem.debug()); // TODO delete this
 
     expect(fileListItem.find('img')).toHaveLength(1);
     expect(fileListItem.find('img').props()).toEqual({
@@ -126,11 +125,26 @@ describe('FileListItem', () => {
 
     describe('actions', () => {
         it('openDirectory', () => {
-            throw new Error();
+            const { component } = doMount({
+                props: {
+                    ...defaultProps,
+                    file: {
+                        ...defaultProps.file,
+                        directory: true
+                    }
+                }
+            });
+            component.find('Button[data-name="open-btn"]').props().onClick();
+            expect(openDirectory).toHaveBeenCalledWith({
+                ...defaultProps.file,
+                directory: true
+            });
         });
 
         it('selectFile', () => {
-            throw new Error();
+            const { component } = doMount();
+            component.find('Button[data-name="select-btn"]').props().onClick();
+            expect(selectFile).toHaveBeenCalledWith(defaultProps.file);
         });
     });
 });
