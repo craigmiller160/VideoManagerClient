@@ -1,5 +1,4 @@
 import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
-import resolveComponent from '../../../exclude/testUtil/resolveComponent';
 import FileListItem from 'components/UI/FileChooser/FileListItem';
 import FileChooserContext from 'components/UI/FileChooser/FileChooserContext';
 
