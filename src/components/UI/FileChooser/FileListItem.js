@@ -34,6 +34,7 @@ const FileListItem = (props) => {
                 {
                     file.directory &&
                     <Button
+                        data-name="open-btn"
                         color="info"
                         onClick={ () => openDirectory(file) }
                     >
@@ -43,6 +44,7 @@ const FileListItem = (props) => {
                 {
                     showSelectBtn &&
                     <Button
+                        data-name="select-btn"
                         color="primary"
                         onClick={ () => selectFile(file) }
                     >

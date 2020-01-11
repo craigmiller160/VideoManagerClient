@@ -34,11 +34,15 @@ const createProvider = (storeState, useThunk) => {
     return [ReduxProvider, store];
 };
 
-const createContext = (ContextType, contextValue) => (props) => (
-    <ContextType value={ contextValue }>
-        { props.children }
-    </ContextType>
-);
+const createContext = (ContextType, contextValue) => {
+    const TestContext = (props) => (
+        <ContextType.Provider value={ contextValue }>
+            { props.children }
+        </ContextType.Provider>
+    );
+
+    return TestContext;
+};
 
 // defaultProps and defaultStoreState can have individual properties overridden, defaultInitialRouteEntries gets overridden in its entirety
 const creator = (Component, { defaultProps, defaultStoreState, ContextType, defaultContextValue, defaultInitialRouterEntries, defaultUseThunk } = {}) => {
