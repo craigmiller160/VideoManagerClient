@@ -8,8 +8,6 @@ const FileListContainer = (props) => {
         fileList
     } = props;
 
-    console.log(fileList); // TODO delete this
-
     return (
         <div className={ classes.FileListContainer }>
             <h3 className={ classes.path } data-name="file-list-title">
