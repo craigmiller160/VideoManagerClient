@@ -1,4 +1,3 @@
-/* eslint-disable */ // TODO delete this
 import React from 'react';
 import classes from './FileListContainer.scss';
 import FileListItem from './FileListItem';

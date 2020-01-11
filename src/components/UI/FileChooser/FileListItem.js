@@ -1,4 +1,3 @@
-/* eslint-disable */    // TODO delete this
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import classes from './FileListItem.scss';
