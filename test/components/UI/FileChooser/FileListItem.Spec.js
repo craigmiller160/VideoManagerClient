@@ -1,4 +1,13 @@
+import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
+import FileListItem from 'components/UI/FileChooser/FileListItem';
 
+const defaultProps = {
+
+};
+
+const doMount = mountTestComponent(FileListItem, {
+    defaultProps
+});
 
 describe('FileListItem', () => {
     describe('rendering', () => {
