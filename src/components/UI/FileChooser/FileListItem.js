@@ -7,8 +7,6 @@ import { Button } from 'reactstrap';
 import FileChooserContext from './FileChooserContext';
 import { filePropType } from './fileChooserPropTypes';
 
-// TODO I don't need directoriesOnly here... it affects the loaded content
-
 const FileListItem = (props) => {
     const {
         file,

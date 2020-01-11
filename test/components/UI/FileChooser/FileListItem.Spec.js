@@ -9,6 +9,10 @@ describe('FileListItem', () => {
         it('renders with a directory', () => {
             throw new Error();
         });
+
+        it('renders with a directory and is directories only', () => {
+            throw new Error();
+        });
     });
 
     describe('actions', () => {
