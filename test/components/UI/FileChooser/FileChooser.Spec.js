@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     getDirectoriesFromDirectory,
     getFilesFromDirectory
@@ -5,11 +6,17 @@ import {
 import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
 import FileChooser from 'components/UI/FileChooser';
 import resolveComponent from '../../../exclude/testUtil/resolveComponent';
+import Spinner from 'components/UI/Spinner/Spinner';
 
 jest.mock('services/LocalFileApiService', () => ({
     getDirectoriesFromDirectory: jest.fn(),
     getFilesFromDirectory: jest.fn()
 }));
+
+jest.mock('components/UI/FileChooser/FileListContainer', () => {
+    const FileListContainer = () => <div />;
+    return FileListContainer;
+});
 
 const selectFile = jest.fn();
 
@@ -25,22 +32,52 @@ const doMount = mountTestComponent(FileChooser, {
     defaultStoreState
 });
 
+const getFilesData = { type: 'files' };
+const getDirsData = { type: 'dirs' };
+
+const testRendering = (component, { loading = false, loadDirs = false } = {}) => {
+    if (loading) {
+        expect(component.find(Spinner)).toHaveLength(1);
+        expect(component.find('FileListContainer')).toHaveLength(0);
+        return;
+    }
+
+    const fileList = loadDirs ? getDirsData : getFilesData;
+
+    expect(component.find('FileListContainer')).toHaveLength(1);
+    expect(component.find('FileListContainer').props()).toEqual({
+        fileList
+    });
+};
+
 describe('FileChooser', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     describe('rendering', () => {
         it('renders while loading', () => {
             const { component } = doMount();
-            console.log(component.debug()); // TODO delete this
-            throw new Error();
+            testRendering(component, {
+                loading: true
+            });
         });
 
         it('renders after loading completed', async () => {
+            getFilesFromDirectory.mockResolvedValue({
+                data: getFilesData
+            });
+
             const { component } = doMount();
             await resolveComponent(component);
-            console.log(component.debug()); // TODO delete this
-            throw new Error();
+            testRendering(component);
         });
 
         it('loads only directories', async () => {
+            getDirectoriesFromDirectory.mockResolvedValue({
+                data: getDirsData
+            });
+
             const { component } = doMount({
                 props: {
                     ...defaultProps,
@@ -48,8 +85,9 @@ describe('FileChooser', () => {
                 }
             });
             await resolveComponent(component);
-            console.log(component.debug()); // TODO delete this
-            throw new Error();
+            testRendering(component, {
+                loadDirs: true
+            });
         });
     });
 
