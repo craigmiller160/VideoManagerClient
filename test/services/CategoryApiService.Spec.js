@@ -1,5 +1,5 @@
-import CategoryApiService from '../../src/services/CategoryApiService';
-import API from '../../src/services/API';
+import CategoryApiService from 'services/CategoryApiService';
+import API from 'services/API';
 import MockAdapter from 'axios-mock-adapter';
 import { BASE_CATEGORIES, NEW_CATEGORY } from '../exclude/mock/mockData/categoryData';
 import {

@@ -1,0 +1,22 @@
+@import './filechooser';
+
+.FileListContainer {
+  width: $container-width;
+  margin: 0 auto;
+
+  .path {
+    text-align: center;
+
+    .bold {
+      font-weight: bold;
+    }
+  }
+
+  .list {
+    height: 30rem;
+    overflow-y: scroll;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    padding: 0.5rem;
+  }
+}
