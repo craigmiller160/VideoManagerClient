@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import {
     getDirectoriesFromDirectory,
     getFilesFromDirectory
@@ -83,7 +84,6 @@ describe('FileChooser', () => {
 
             const { component } = doMount();
             await resolveComponent(component);
-            console.log(component.debug()); // TODO delete this
             testRendering(component);
         });
 
@@ -106,12 +106,28 @@ describe('FileChooser', () => {
     });
 
     describe('actions', () => {
-        it('openDirectory', () => {
-            throw new Error();
+        it('openDirectory', async () => {
+            getFilesFromDirectory.mockResolvedValue({
+                data: getFilesData
+            });
+
+            const { component } = doMount();
+            await resolveComponent(component);
+            await act(async () => {
+                await component.find('div#context-div').props().openDirectory({ filePath: 'path' });
+            });
+            expect(getFilesFromDirectory).toHaveBeenNthCalledWith(2, 'path');
         });
 
-        it('selectFile', () => {
-            throw new Error();
+        it('selectFile', async () => {
+            getFilesFromDirectory.mockResolvedValue({
+                data: getFilesData
+            });
+
+            const { component } = doMount();
+            await resolveComponent(component);
+            component.find('div#context-div').props().selectFile({ fileName: 'file' });
+            expect(selectFile).toHaveBeenCalledWith({ fileName: 'file' });
         });
 
         it('handles loading error', async () => {
