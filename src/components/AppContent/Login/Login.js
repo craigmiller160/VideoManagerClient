@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { Button, Col, Row } from 'reactstrap';
 import Form from 'components/UI/form/Form/Form';
 import Input from 'components/UI/form/Input/Input';
@@ -15,6 +15,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const loginFormErrors = useSelector(loginFormHasErrors, shallowEqual);
     const loginLoading = useSelector((state) => state.auth?.loginLoading, shallowEqual);
+    // const usernameRef = useRef(null);
 
     return (
         <Form
