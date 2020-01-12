@@ -85,6 +85,15 @@ const VideoNavbar = (props) => {
                                         text="Scan"
                                     />
                                 }
+                                {
+                                    hasAdminRole &&
+                                    <NavbarItem
+                                        id="settingsLink"
+                                        to="/settings"
+                                        text="Settings"
+                                        isLink
+                                    />
+                                }
                                 <NavbarDropdown />
                             </Nav>
                         </Collapse>
