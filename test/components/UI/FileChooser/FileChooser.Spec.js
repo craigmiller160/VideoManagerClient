@@ -48,6 +48,12 @@ const testRendering = (component, { loading = false, loadDirs = false } = {}) =>
     expect(component.find('FileListContainer').props()).toEqual({
         fileList
     });
+
+    if (loadDirs) {
+        expect(getDirectoriesFromDirectory).toHaveBeenLastCalledWith(null);
+    } else {
+        expect(getFilesFromDirectory).toHaveBeenLastCalledWith(null);
+    }
 };
 
 describe('FileChooser', () => {
@@ -100,8 +106,20 @@ describe('FileChooser', () => {
             throw new Error();
         });
 
-        it('handles loading error', () => {
-            throw new Error();
+        it('handles loading error', async () => {
+            getFilesFromDirectory.mockRejectedValue({
+                message: 'It failed'
+            });
+
+            const { component, store } = doMount();
+            await resolveComponent(component);
+
+            expect(store.getActions()).toEqual([
+                {
+                    type: 'alert/showErrorAlert',
+                    payload: 'Error loading files: It failed'
+                }
+            ]);
         });
     });
 });
