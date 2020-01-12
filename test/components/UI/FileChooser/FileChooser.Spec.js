@@ -14,7 +14,14 @@ jest.mock('services/LocalFileApiService', () => ({
 }));
 
 jest.mock('components/UI/FileChooser/FileListContainer', () => {
-    const FileListContainer = () => <div />;
+    const FileChooserContext = require('components/UI/FileChooser/FileChooserContext').default;
+    const { useContext } = require('react');
+    const FileListContainer = () => {
+        const value = useContext(FileChooserContext);
+        return (
+            <div id="context-div" { ...value } />
+        );
+    };
     return FileListContainer;
 });
 
@@ -76,6 +83,7 @@ describe('FileChooser', () => {
 
             const { component } = doMount();
             await resolveComponent(component);
+            console.log(component.debug()); // TODO delete this
             testRendering(component);
         });
 
