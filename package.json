@@ -3,7 +3,6 @@
   "version": "1.8.0-beta",
   "private": true,
   "dependencies": {
-    "add": "^2.0.6",
     "axios": "^0.18.0",
     "bfj": "6.1.1",
     "bootstrap": "^4.2.1",
@@ -31,8 +30,7 @@
     "redux-thunk": "^2.3.0",
     "resolve": "1.8.1",
     "styled-components": "^4.2.0",
-    "use-react-router": "^1.0.7",
-    "yarn": "^1.21.1"
+    "use-react-router": "^1.0.7"
   },
   "scripts": {
     "start": "node scripts/start.js",
