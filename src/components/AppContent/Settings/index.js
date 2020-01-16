@@ -1,27 +1,20 @@
 /* eslint-disable */ // TODO delete this
 import React, { useEffect, useState } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import classes from './Settings.scss';
 import FlexRow from '../../UI/Grid/FlexRow';
-import { getSettings } from '../../../services/SettingsApiService';
 import Spinner from '../../UI/Spinner/Spinner';
-import SettingsForm from './SettingsForm';
+import { loadSettings, saveSettings } from '../../../store/settings/settings.actions';
+import Form from '../../UI/form/Form/Form';
+
+export const FORM_NAME = 'Settings_Form';
 
 const Settings = () => {
-    const [state, setState] = useState({
-        initialValues: {},
-        loading: true
-    });
+    const dispatch = useDispatch();
+    const { loading, settingsValues } = useSelector((state) => state.settings, shallowEqual);
 
     useEffect(() => {
-        const loadData = async () => {
-            const res = await getSettings();
-            setState((prevState) => ({
-                ...prevState,
-                initialValues: res.data,
-                loading: false
-            }));
-        };
-        loadData();
+        dispatch(loadSettings());
     }, []);
 
     return (
@@ -32,12 +25,19 @@ const Settings = () => {
                 </div>
             </FlexRow>
             {
-                state.loading &&
+                loading &&
                     <Spinner />
             }
             {
-                !state.loading &&
-                    <SettingsForm />
+                !loading &&
+                <Form
+                    form={ FORM_NAME }
+                    onSubmit={ (values) => dispatch(saveSettings(values)) }
+                    initialValues={ settingsValues }
+                    enableReinitialize
+                >
+
+                </Form>
             }
         </div>
     );
