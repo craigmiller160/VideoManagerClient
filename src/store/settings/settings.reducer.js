@@ -1,16 +1,10 @@
 // TODO write tests
 import { createReducer } from 'redux-starter-kit';
-import { setLoading, setSettingsValues } from './settings.actions';
+import { setLoading } from './settings.actions';
 
 const intialState = {
-    loading: false,
-    settingsValues: {}
+    loading: false
 };
-
-const handleSetSettingsValues = (state, action) => ({
-    ...state,
-    settingsValues: action.payload
-});
 
 const handleSetLoading = (state, action) => ({
     ...state,
@@ -18,6 +12,5 @@ const handleSetLoading = (state, action) => ({
 });
 
 export default createReducer(intialState, {
-    [setSettingsValues]: handleSetSettingsValues,
     [setLoading]: handleSetLoading
 });
