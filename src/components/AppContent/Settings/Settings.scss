@@ -4,4 +4,12 @@
   .title {
     @include page-title;
   }
+
+  .form {
+    margin-top: 1rem;
+
+    .rootDir {
+      width: 20rem;
+    }
+  }
 }

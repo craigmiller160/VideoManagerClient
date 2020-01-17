@@ -6,6 +6,8 @@ import FlexRow from '../../UI/Grid/FlexRow';
 import Spinner from '../../UI/Spinner/Spinner';
 import { loadSettings, saveSettings } from '../../../store/settings/settings.actions';
 import Form from '../../UI/form/Form/Form';
+import Input from '../../UI/form/Input/Input';
+import { Button } from 'reactstrap';
 
 export const FORM_NAME = 'Settings_Form';
 
@@ -35,8 +37,27 @@ const Settings = () => {
                     onSubmit={ (values) => dispatch(saveSettings(values)) }
                     initialValues={ settingsValues }
                     enableReinitialize
+                    className={ classes.form }
                 >
-
+                    <FlexRow
+                        justifyContent="center"
+                    >
+                        <Input
+                            name="rootDir"
+                            label="Directory to Scan"
+                            divClassName={ classes.rootDir }
+                        />
+                    </FlexRow>
+                    <FlexRow
+                        justifyContent="center"
+                    >
+                        <Button
+                            type="submit"
+                            color="primary"
+                        >
+                            Save
+                        </Button>
+                    </FlexRow>
                 </Form>
             }
         </div>
