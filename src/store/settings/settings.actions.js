@@ -1,4 +1,5 @@
 // TODO write tests
+/* eslint-disable */ // TODO delete this
 import { createAction } from 'redux-starter-kit';
 import { getSettings } from '../../services/SettingsApiService';
 import { showErrorAlert } from '../alert/alert.actions';
@@ -17,4 +18,5 @@ export const loadSettings = () => async (dispatch) => {
 
 export const saveSettings = (values) => async (dispatch) => {
     // TODO finish this
+    console.log(values); // TODO delete this
 };

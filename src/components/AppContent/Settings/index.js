@@ -8,6 +8,7 @@ import { loadSettings, saveSettings } from '../../../store/settings/settings.act
 import Form from '../../UI/form/Form/Form';
 import Input from '../../UI/form/Input/Input';
 import { Button } from 'reactstrap';
+import { isRequired } from '../../../utils/validations';
 
 export const FORM_NAME = 'Settings_Form';
 
@@ -46,6 +47,9 @@ const Settings = () => {
                             name="rootDir"
                             label="Directory to Scan"
                             divClassName={ classes.rootDir }
+                            validate={ [
+                                isRequired
+                            ] }
                         />
                     </FlexRow>
                     <FlexRow
