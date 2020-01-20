@@ -1,7 +1,7 @@
 import { createReducer } from 'redux-starter-kit';
 import { setLoading } from './settings.actions';
 
-const intialState = {
+export const initialState = {
     loading: false
 };
 
@@ -10,6 +10,6 @@ const handleSetLoading = (state, action) => ({
     loading: action.payload
 });
 
-export default createReducer(intialState, {
+export default createReducer(initialState, {
     [setLoading]: handleSetLoading
 });
