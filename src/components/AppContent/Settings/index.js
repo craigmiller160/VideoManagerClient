@@ -1,5 +1,5 @@
 /* eslint-disable */  // TODO delete this
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './Settings.scss';
 import FlexRow from '../../UI/Grid/FlexRow';
@@ -16,10 +16,23 @@ export const FORM_NAME = 'Settings_Form';
 const Settings = () => {
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.settings.loading);
+    const [state, setState] = useState({
+        rootDirEditing: false
+    });
 
     useEffect(() => {
         dispatch(loadSettings());
     }, []);
+
+    const editRootDir = () => setState((prevState) => ({
+        ...prevState,
+        rootDirEditing: true
+    }));
+
+    const showFileChooserClass = state.rootDirEditing ? classes.show : '';
+    const showSaveClass = state.rootDirEditing ? '' : classes.show;
+
+    console.log(showFileChooserClass, showSaveClass); // TODO delete this
 
     return (
         <div className={ classes.Settings }>
@@ -57,13 +70,14 @@ const Settings = () => {
                             />
                             <Button
                                 color="info"
+                                onClick={ editRootDir }
                             >
                                 Set
                             </Button>
                         </FlexRow>
                         <FlexRow
                             justifyContent="center"
-                            className={ classes.fileChooser }
+                            className={ [classes.fileChooser, showFileChooserClass].join(' ') }
                         >
                             <FileChooser
                                 directoriesOnly
@@ -71,6 +85,7 @@ const Settings = () => {
                         </FlexRow>
                         <FlexRow
                             justifyContent="center"
+                            className={ [classes.submit, showSaveClass].join(' ') }
                         >
                             <Button
                                 type="submit"

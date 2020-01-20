@@ -22,6 +22,19 @@
 
     .fileChooser {
       margin: 1rem;
+      display: none;
+
+      &.show {
+        display: flex;
+      }
+    }
+
+    .submit {
+      display: none;
+
+      &.show {
+        display: flex;
+      }
     }
   }
 }
