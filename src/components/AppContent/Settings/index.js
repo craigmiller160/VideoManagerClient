@@ -1,4 +1,3 @@
-/* eslint-disable */  // TODO delete this
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './Settings.scss';
