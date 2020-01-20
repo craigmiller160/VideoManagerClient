@@ -55,6 +55,7 @@ const Settings = () => {
                         </FlexRow>
                         <FlexRow
                             justifyContent="center"
+                            className={ classes.fileChooser }
                         >
                             <FileChooser
                                 directoriesOnly
