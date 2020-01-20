@@ -110,6 +110,15 @@ const testRendering = (component, {
             });
             itemIndex++;
         }
+        if (hasAdmin) {
+            testNavbarItem(itemIndex, {
+                id: 'settingsLink',
+                text: 'Settings',
+                isLink: true,
+                to: '/settings'
+            });
+            itemIndex++;
+        }
 
         expect(component.find('NavbarItem')).toHaveLength(itemIndex);
     }
