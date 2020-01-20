@@ -1,5 +1,3 @@
-// TODO write tests
-/* eslint-disable */ // TODO delete this
 import { createAction } from 'redux-starter-kit';
 import { getSettings, updateSettings } from '../../services/SettingsApiService';
 import { showErrorAlert, showSuccessAlert } from '../alert/alert.actions';

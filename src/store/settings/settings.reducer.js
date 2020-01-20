@@ -1,4 +1,3 @@
-// TODO write tests
 import { createReducer } from 'redux-starter-kit';
 import { setLoading } from './settings.actions';
 
