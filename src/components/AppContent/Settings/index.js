@@ -10,6 +10,7 @@ import Input from '../../UI/form/Input/Input';
 import { Button } from 'reactstrap';
 import { isRequired } from '../../../utils/validations';
 import FileChooser from '../../UI/FileChooser';
+import { change } from 'redux-form';
 
 export const FORM_NAME = 'Settings_Form';
 
@@ -29,10 +30,16 @@ const Settings = () => {
         rootDirEditing: true
     }));
 
+    const selectDir = (selected) => {
+        setState((prevState) => ({
+            ...prevState,
+            rootDirEditing: false
+        }));
+        dispatch(change(FORM_NAME, 'rootDir', selected.filePath));
+    };
+
     const showFileChooserClass = state.rootDirEditing ? classes.show : '';
     const showSaveClass = state.rootDirEditing ? '' : classes.show;
-
-    console.log(showFileChooserClass, showSaveClass); // TODO delete this
 
     return (
         <div className={ classes.Settings }>
@@ -81,6 +88,7 @@ const Settings = () => {
                         >
                             <FileChooser
                                 directoriesOnly
+                                selectFile={ selectDir }
                             />
                         </FlexRow>
                         <FlexRow
