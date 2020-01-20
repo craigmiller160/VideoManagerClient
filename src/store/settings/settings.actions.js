@@ -6,7 +6,7 @@ import { initialize } from 'redux-form';
 
 export const setLoading = createAction('settings/setLoading');
 
-export const loadSettings = () => async (dispatch, getState) => {
+export const loadSettings = () => async (dispatch) => {
     try {
         dispatch(setLoading(true));
         const res = await getSettings();
