@@ -42,7 +42,9 @@ const Settings = () => {
                     !loading &&
                     <>
                         <FlexRow
+                            className={ classes.rootDirWrapper }
                             justifyContent="center"
+                            alignItems="flex-end"
                         >
                             <Input
                                 name="rootDir"
@@ -51,7 +53,13 @@ const Settings = () => {
                                 validate={ [
                                     isRequired
                                 ] }
+                                disabled
                             />
+                            <Button
+                                color="info"
+                            >
+                                Set
+                            </Button>
                         </FlexRow>
                         <FlexRow
                             justifyContent="center"
