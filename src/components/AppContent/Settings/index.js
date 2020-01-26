@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './Settings.scss';
 import FlexRow from '../../UI/Grid/FlexRow';
@@ -13,11 +14,14 @@ import { change } from 'redux-form';
 
 export const FORM_NAME = 'Settings_Form';
 
-const Settings = () => {
+const Settings = (props) => {
+    const {
+        rootDirEditing
+    } = props;
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.settings.loading);
     const [state, setState] = useState({
-        rootDirEditing: false
+        rootDirEditing
     });
 
     useEffect(() => {
@@ -59,7 +63,7 @@ const Settings = () => {
                 }
                 {
                     !loading &&
-                    <>
+                    <div id="settings-form-content">
                         <FlexRow
                             className={ classes.rootDirWrapper }
                             justifyContent="center"
@@ -75,6 +79,7 @@ const Settings = () => {
                                 disabled
                             />
                             <Button
+                                id="set-root-dir-btn"
                                 color="info"
                                 onClick={ editRootDir }
                             >
@@ -95,17 +100,24 @@ const Settings = () => {
                             className={ [classes.submit, showSaveClass].join(' ') }
                         >
                             <Button
+                                id="save-btn"
                                 type="submit"
                                 color="primary"
                             >
                                 Save
                             </Button>
                         </FlexRow>
-                    </>
+                    </div>
                 }
             </Form>
         </div>
     );
+};
+Settings.propTypes = {
+    rootDirEditing: PropTypes.bool
+};
+Settings.defaultProps = {
+    rootDirEditing: false
 };
 
 export default Settings;
