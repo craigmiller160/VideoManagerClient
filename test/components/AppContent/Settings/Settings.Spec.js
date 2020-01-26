@@ -26,7 +26,8 @@ const defaultProps = {
 };
 
 const doMount = mountTestComponent(Settings, {
-    defaultStoreState
+    defaultStoreState,
+    defaultProps
 });
 
 const testRendering = (component, { loading = false, fileChooser = false } = {}) => {
