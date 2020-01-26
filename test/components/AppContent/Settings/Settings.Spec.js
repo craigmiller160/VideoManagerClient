@@ -67,6 +67,26 @@ const testRendering = (component, { loading = false, fileChooser = false } = {})
         color: 'primary'
     }));
     expect(component.find('Button#save-btn').text()).toEqual('Save');
+
+    expect(component.find('FileChooser').props()).toEqual({
+        directoriesOnly: true,
+        selectFile: expect.any(Function)
+    });
+
+    let fileChooserClassName = 'fileChooser';
+    if (fileChooser) {
+        fileChooserClassName = `${fileChooserClassName} show`;
+    }
+    expect(component.find('div#file-chooser-container').props().className)
+        .toEqual(expect.stringContaining(fileChooserClassName));
+
+    let btnClassName = 'submit';
+    if (!fileChooser) {
+        btnClassName = `${btnClassName} show`;
+    }
+
+    expect(component.find('div#btn-container').props().className)
+        .toEqual(expect.stringContaining(btnClassName));
 };
 
 describe('Settings', () => {
@@ -92,11 +112,14 @@ describe('Settings', () => {
         });
 
         it('renders with form and file chooser', () => {
-            const { component } = doMount();
+            const { component } = doMount({
+                props: {
+                    rootDirEditing: true
+                }
+            });
             testRendering(component, {
                 fileChooser: true
             });
-            throw new Error('Integrate file chooser tests');
         });
     });
 

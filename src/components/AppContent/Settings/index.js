@@ -65,6 +65,7 @@ const Settings = (props) => {
                     !loading &&
                     <div id="settings-form-content">
                         <FlexRow
+                            id="root-dir-container"
                             className={ classes.rootDirWrapper }
                             justifyContent="center"
                             alignItems="flex-end"
@@ -87,6 +88,7 @@ const Settings = (props) => {
                             </Button>
                         </FlexRow>
                         <FlexRow
+                            id="file-chooser-container"
                             justifyContent="center"
                             className={ [classes.fileChooser, showFileChooserClass].join(' ') }
                         >
@@ -96,6 +98,7 @@ const Settings = (props) => {
                             />
                         </FlexRow>
                         <FlexRow
+                            id="btn-container"
                             justifyContent="center"
                             className={ [classes.submit, showSaveClass].join(' ') }
                         >
