@@ -62,11 +62,27 @@ describe('alert.actions', () => {
         });
 
         it('dispatches the response.data', () => {
-            throw new Error();
+            const error = {
+                response: {
+                    data: 'The message'
+                }
+            };
+            const expectedActions = [
+                { type: 'alert/showErrorAlert', payload: error.response.data }
+            ];
+            store.dispatch(handleApiError(error));
+            expect(store.getActions()).toEqual(expectedActions);
         });
 
         it('dispatches the error message', () => {
-            throw new Error();
+            const error = {
+                message: 'The message'
+            };
+            const expectedActions = [
+                { type: 'alert/showErrorAlert', payload: error.message }
+            ];
+            store.dispatch(handleApiError(error));
+            expect(store.getActions()).toEqual(expectedActions);
         });
     });
 });
