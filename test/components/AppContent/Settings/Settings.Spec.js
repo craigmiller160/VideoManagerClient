@@ -125,8 +125,14 @@ describe('Settings', () => {
     });
 
     describe('actions', () => {
+        const removeReduxForm = (action) => !action.type.includes('@@redux-form');
+
         it('dispatches loadSettings on mount', () => {
-            throw new Error();
+            const { component, store } = doMount();
+            const actions = store.getActions();
+            expect(store.getActions().filter(removeReduxForm)).toEqual([
+                { type: 'settings/loadSettings' }
+            ]);
         });
 
         it('calls editRootDir', () => {
@@ -138,7 +144,12 @@ describe('Settings', () => {
         });
 
         it('submits form', () => {
-            throw new Error();
+            const { component, store } = doMount();
+            component.find('form').simulate('submit');
+            expect(store.getActions().filter(removeReduxForm)).toEqual([
+                { type: 'settings/loadSettings' },
+                { type: 'settings/saveSettings', payload: {} }
+            ])
         });
     });
 });
