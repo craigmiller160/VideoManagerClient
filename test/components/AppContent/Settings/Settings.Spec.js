@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
 import Settings, { FORM_NAME } from 'components/AppContent/Settings';
 import { isRequired } from '../../../../src/utils/validations';
@@ -126,21 +127,43 @@ describe('Settings', () => {
 
     describe('actions', () => {
         const removeReduxForm = (action) => !action.type.includes('@@redux-form');
-
         it('dispatches loadSettings on mount', () => {
-            const { component, store } = doMount();
-            const actions = store.getActions();
+            const { store } = doMount();
             expect(store.getActions().filter(removeReduxForm)).toEqual([
                 { type: 'settings/loadSettings' }
             ]);
         });
 
         it('calls editRootDir', () => {
-            throw new Error();
+            const { component } = doMount();
+            expect(component.find('div#file-chooser-container').props().className)
+                .toEqual(expect.stringContaining('fileChooser'));
+            expect(component.find('div#btn-container').props().className)
+                .toEqual(expect.stringContaining('submit show'));
+
+            act(() => {
+                component.find('Button#set-root-dir-btn').props().onClick();
+            });
+            component.update();
+
+            expect(component.find('div#file-chooser-container').props().className)
+                .toEqual(expect.stringContaining('fileChooser show'));
+            expect(component.find('div#btn-container').props().className)
+                .toEqual(expect.stringContaining('submit'));
         });
 
         it('calls selectDir', () => {
-            throw new Error();
+            const value = { filePath: 'filePath' };
+            const { component, store } = doMount();
+            act(() => {
+                component.find('FileChooser').props().selectFile(value);
+            });
+            expect(store.getActions()).toEqual(expect.arrayContaining([
+                expect.objectContaining({
+                    type: '@@redux-form/CHANGE',
+                    payload: value.filePath
+                })
+            ]))
         });
 
         it('submits form', () => {
@@ -149,7 +172,7 @@ describe('Settings', () => {
             expect(store.getActions().filter(removeReduxForm)).toEqual([
                 { type: 'settings/loadSettings' },
                 { type: 'settings/saveSettings', payload: {} }
-            ])
+            ]);
         });
     });
 });
