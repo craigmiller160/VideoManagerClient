@@ -1,0 +1,40 @@
+@import '../../../assets/styles/pages';
+
+.Settings {
+  .title {
+    @include page-title;
+  }
+
+  .form {
+    margin-top: 1rem;
+
+    .rootDirWrapper {
+      .rootDir {
+        width: 20rem;
+      }
+
+      button {
+        margin-left: 0.25rem;
+        height: 2.5rem;
+        margin-bottom: 10px;
+      }
+    }
+
+    .fileChooser {
+      margin: 1rem;
+      display: none;
+
+      &.show {
+        display: flex;
+      }
+    }
+
+    .submit {
+      display: none;
+
+      &.show {
+        display: flex;
+      }
+    }
+  }
+}

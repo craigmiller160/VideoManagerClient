@@ -18,6 +18,7 @@ import UserManagementPage from './User/Management/UserManagementPage';
 import UserProfile from './User/UserDetails/UserProfile';
 import EditUser from './User/UserDetails/EditUser';
 import AddUser from './User/UserDetails/AddUser';
+import Settings from './Settings';
 
 const AppRoutes = (props) => {
     const hasEditRole = useSelector(hasEditRoleSelector);
@@ -140,6 +141,14 @@ const AppRoutes = (props) => {
                 rules={ [
                     isAuthenticatedRule,
                     isNotScanningRule,
+                    hasAdminRoleRule
+                ] }
+            />
+            <ProtectedRoute
+                component={ Settings }
+                path="/settings"
+                rules={ [
+                    isAuthenticatedRule,
                     hasAdminRoleRule
                 ] }
             />
