@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import UserDetailsPage from './UserDetailsPage';
 import * as AuthApiService from '../../../../services/AuthApiService';
 import { formatRoles, unFormatRoles } from './userUtils';
-import { showErrorAlert, showSuccessAlert } from '../../../../store/alert/alert.actions';
+import { handleApiError, showSuccessAlert } from '../../../../store/alert/alert.actions';
 import { useDispatch } from 'react-redux';
 
 const AddUser = (props) => {
@@ -18,7 +18,7 @@ const AddUser = (props) => {
                 const res = await AuthApiService.getRoles();
                 setAllRoles(formatRoles(res.data));
             } catch (ex) {
-                dispatch(showErrorAlert(`Error loading data for page: ${ex.message}`));
+                dispatch(handleApiError(ex, 'Error loading data for page.'));
             }
             setLoading(false);
         };
@@ -39,7 +39,7 @@ const AddUser = (props) => {
             history.push(`/users/${userId}`);
             dispatch(showSuccessAlert('Successfully created user'));
         } catch (ex) {
-            dispatch(showErrorAlert(ex.message));
+            dispatch(handleApiError(ex));
         }
     };
 

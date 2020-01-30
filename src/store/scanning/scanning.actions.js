@@ -1,6 +1,6 @@
 import { createAction } from 'redux-starter-kit';
 import VideoApiService from '../../services/VideoApiService';
-import { showErrorAlert } from '../alert/alert.actions';
+import { handleApiError, showErrorAlert } from '../alert/alert.actions';
 
 export const checkIsScanning = () => async (dispatch) => {
     try {
@@ -8,7 +8,7 @@ export const checkIsScanning = () => async (dispatch) => {
         handleScanStatus(result, dispatch);
     }
     catch (ex) {
-        dispatch(showErrorAlert(ex.message));
+        dispatch(handleApiError(ex));
     }
 };
 
@@ -27,7 +27,7 @@ export const startFileScan = () => async (dispatch) => {
         handleScanStatus(result, dispatch);
     }
     catch (ex) {
-        dispatch(showErrorAlert(ex.message));
+        dispatch(handleApiError(ex));
     }
 };
 

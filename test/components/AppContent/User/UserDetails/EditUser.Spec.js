@@ -39,7 +39,8 @@ const defaultProps = {
 
 const doMount = mountTestComponent(EditUser, {
     defaultProps,
-    defaultStoreState: {}
+    defaultStoreState: {},
+    defaultUseThunk: true
 });
 
 const mockApi = new MockAdapter(API);
@@ -86,7 +87,7 @@ describe('EditUser', () => {
             expect(store.getActions()).toEqual(expect.arrayContaining([
                 {
                     type: 'alert/showErrorAlert',
-                    payload: 'Error loading data for page: Request failed with status code 404'
+                    payload: 'Error: Error loading data for page. Message: Request failed with status code 404'
                 }
             ]));
         });

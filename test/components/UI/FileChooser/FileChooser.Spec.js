@@ -37,7 +37,8 @@ const defaultStoreState = {};
 
 const doMount = mountTestComponent(FileChooser, {
     defaultProps,
-    defaultStoreState
+    defaultStoreState,
+    defaultUseThunk: true
 });
 
 const getFilesData = { type: 'files' };
@@ -141,7 +142,7 @@ describe('FileChooser', () => {
             expect(store.getActions()).toEqual([
                 {
                     type: 'alert/showErrorAlert',
-                    payload: 'Error loading files: It failed'
+                    payload: 'Error: Error loading files. Message: It failed'
                 }
             ]);
         });

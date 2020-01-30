@@ -1,7 +1,7 @@
 import { createAction } from 'redux-starter-kit';
 import * as AuthService from 'services/AuthApiService';
 import { CSRF_TOKEN_KEY } from '../../utils/securityConstants';
-import { showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
+import { handleApiError, showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
 import { unFormatRoles } from '../../components/AppContent/User/UserDetails/userUtils';
 
 export const setIsAuth = createAction('auth/setIsAuth');
@@ -40,7 +40,7 @@ export const login = ({ userName, password }) => async (dispatch) => {
             dispatch(showErrorAlert('Invalid login'));
         }
         else {
-            dispatch(showErrorAlert(ex.message));
+            dispatch(handleApiError(ex));
         }
     }
     finally {
@@ -66,6 +66,6 @@ export const saveUserProfile = (values) => async (dispatch) => {
         await dispatch(checkAuth());
         dispatch(showSuccessAlert('Successfully saved user profile'));
     } catch (ex) {
-        dispatch(showErrorAlert(ex.message));
+        dispatch(handleApiError(ex));
     }
 };
