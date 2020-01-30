@@ -51,11 +51,12 @@ describe('alert.actions', () => {
                 response: {
                     data: {
                         message: 'The message'
-                    }
+                    },
+                    status: 500
                 }
             };
             const expectedActions = [
-                { type: 'alert/showErrorAlert', payload: error.response.data.message }
+                { type: 'alert/showErrorAlert', payload: `Error. Status: ${error.response.status} Message: ${error.response.data.message}` }
             ];
             store.dispatch(handleApiError(error));
             expect(store.getActions()).toEqual(expectedActions);
@@ -64,11 +65,12 @@ describe('alert.actions', () => {
         it('dispatches the response.data', () => {
             const error = {
                 response: {
-                    data: 'The message'
+                    data: 'The message',
+                    status: 500
                 }
             };
             const expectedActions = [
-                { type: 'alert/showErrorAlert', payload: error.response.data }
+                { type: 'alert/showErrorAlert', payload: `Error. Status: ${error.response.status} Message: ${error.response.data}` }
             ];
             store.dispatch(handleApiError(error));
             expect(store.getActions()).toEqual(expectedActions);
@@ -79,9 +81,38 @@ describe('alert.actions', () => {
                 message: 'The message'
             };
             const expectedActions = [
-                { type: 'alert/showErrorAlert', payload: error.message }
+                { type: 'alert/showErrorAlert', payload: `Error: Message: ${error.message}` }
             ];
             store.dispatch(handleApiError(error));
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+
+        it('dispatches error with response and description', () => {
+            const description = 'Hello World';
+            const error = {
+                response: {
+                    data: {
+                        message: 'The message'
+                    },
+                    status: 500
+                }
+            };
+            const expectedActions = [
+                { type: 'alert/showErrorAlert', payload: `Error. ${description} Status: ${error.response.status} Message: ${error.response.data.message}` }
+            ];
+            store.dispatch(handleApiError(error, description));
+            expect(store.getActions()).toEqual(expectedActions);
+        });
+
+        it('dispatches error without repsonse and description', () => {
+            const description = 'Hello World';
+            const error = {
+                message: 'The message'
+            };
+            const expectedActions = [
+                { type: 'alert/showErrorAlert', payload: `Error: ${description} Message: ${error.message}` }
+            ];
+            store.dispatch(handleApiError(error, description));
             expect(store.getActions()).toEqual(expectedActions);
         });
     });
