@@ -1,14 +1,16 @@
 import { createAction } from 'redux-starter-kit';
 import VideoApiService from '../../services/VideoApiService';
-import { handleApiError, showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
+import { handleApiError, showSuccessAlert } from '../alert/alert.actions';
 import { setSearching } from '../videoSearch/videoSearch.actions';
 import { FORM_NAME } from 'components/AppContent/VideoFileEdit/VideoFileEdit';
 import { convertFiltersToFile } from '../../utils/videoFileConverter';
 import {
-    SORT_ASC, SORT_BY_FILE_ADDED,
+    SORT_ASC,
+    SORT_BY_FILE_ADDED,
     SORT_BY_LAST_VIEWED,
     SORT_BY_NAME,
-    SORT_BY_VIEWS, SORT_DESC
+    SORT_BY_VIEWS,
+    SORT_DESC
 } from '../../components/AppContent/VideoListLayout/VideoSearch/VideoSearch.options';
 
 export const searchForVideos = () => async (dispatch, getState) => {

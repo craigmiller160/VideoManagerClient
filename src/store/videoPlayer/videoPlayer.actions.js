@@ -1,5 +1,5 @@
 import { createAction } from 'redux-starter-kit';
-import { handleApiError, showErrorAlert } from '../alert/alert.actions';
+import { handleApiError } from '../alert/alert.actions';
 import VideoApiService from '../../services/VideoApiService';
 import * as AuthApiService from '../../services/AuthApiService';
 

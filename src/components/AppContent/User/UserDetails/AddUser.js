@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import UserDetailsPage from './UserDetailsPage';
 import * as AuthApiService from '../../../../services/AuthApiService';
 import { formatRoles, unFormatRoles } from './userUtils';
-import { handleApiError, showErrorAlert, showSuccessAlert } from '../../../../store/alert/alert.actions';
+import { handleApiError, showSuccessAlert } from '../../../../store/alert/alert.actions';
 import { useDispatch } from 'react-redux';
 
 const AddUser = (props) => {

@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import {
-    getDirectoriesFromDirectory,
-    getFilesFromDirectory
-} from '../../../services/LocalFileApiService';
+import { getDirectoriesFromDirectory, getFilesFromDirectory } from '../../../services/LocalFileApiService';
 import FileListContainer from './FileListContainer';
 import FileChooserContext from './FileChooserContext';
 import Spinner from '../Spinner/Spinner';
-import { handleApiError, showErrorAlert } from '../../../store/alert/alert.actions';
+import { handleApiError } from '../../../store/alert/alert.actions';
 
 const loadFiles = (path, directoriesOnly) => {
     if (directoriesOnly) {
