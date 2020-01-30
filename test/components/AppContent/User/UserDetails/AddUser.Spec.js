@@ -16,7 +16,8 @@ const defaultStoreState = {};
 
 const doMount = mountTestComponent(AddUser, {
     defaultProps,
-    defaultStoreState
+    defaultStoreState,
+    defaultUseThunk: true
 });
 
 const roles = [
@@ -74,7 +75,7 @@ describe('AddUser', () => {
             expect(store.getActions()).toEqual(expect.arrayContaining([
                 {
                     type: 'alert/showErrorAlert',
-                    payload: 'Error loading data for page: Request failed with status code 404'
+                    payload: 'Error: Error loading data for page. Message: Request failed with status code 404'
                 }
             ]));
         });
@@ -115,7 +116,7 @@ describe('AddUser', () => {
                         });
                 });
                 expect(store.getActions()).toEqual(expect.arrayContaining([
-                    { type: 'alert/showErrorAlert', payload: 'Request failed with status code 404' }
+                    { type: 'alert/showErrorAlert', payload: 'Error: Message: Request failed with status code 404' }
                 ]));
             });
         });

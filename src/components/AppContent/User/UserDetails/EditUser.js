@@ -29,7 +29,7 @@ const EditUser = (props) => {
                 setAllRoles(formatRoles(resArray[0].data));
                 setUserDetails(formatUser(resArray[1].data));
             } catch (ex) {
-                dispatch(handleApiError(ex, 'Error loading data for page'));
+                dispatch(handleApiError(ex, 'Error loading data for page.'));
             }
             setLoading(false);
         };

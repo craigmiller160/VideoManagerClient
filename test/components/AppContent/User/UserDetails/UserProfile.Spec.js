@@ -33,7 +33,8 @@ const defaultStoreState = {
 };
 
 const doMount = mountTestComponent(UserProfile, {
-    defaultStoreState
+    defaultStoreState,
+    defaultUseThunk: true
 });
 
 const mockApi = new MockAdapter(API);
@@ -119,7 +120,7 @@ describe('UserProfile', () => {
             expect(store.getActions()).toEqual(expect.arrayContaining([
                 {
                     type: 'alert/showErrorAlert',
-                    payload: 'Error loading roles: Request failed with status code 404'
+                    payload: 'Error: Error loading roles Message: Request failed with status code 404'
                 }
             ]));
         });
