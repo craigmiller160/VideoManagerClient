@@ -8,7 +8,7 @@ export const checkIsScanning = () => async (dispatch) => {
         handleScanStatus(result, dispatch);
     }
     catch (ex) {
-        dispatch(showErrorAlert(ex.message));
+        dispatch(handleApiError(ex));
     }
 };
 

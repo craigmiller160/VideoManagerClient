@@ -2,7 +2,7 @@ import { createAction } from 'redux-starter-kit';
 import CategoryApiService from '../../services/CategoryApiService';
 import SeriesApiService from '../../services/SeriesApiService';
 import StarApiService from '../../services/StarApiService';
-import { showErrorAlert } from '../alert/alert.actions';
+import { handleApiError, showErrorAlert } from '../alert/alert.actions';
 import { convertCategoryToFilter, convertSeriesToFilter, convertStarToFilter } from '../../utils/videoFileConverter';
 
 export const loadFilterOptions = () => async (dispatch) => {
@@ -12,7 +12,7 @@ export const loadFilterOptions = () => async (dispatch) => {
         await dispatch(loadStarOptions());
     }
     catch (ex) {
-        dispatch(showErrorAlert(ex.message));
+        dispatch(handleApiError(ex));
     }
 };
 

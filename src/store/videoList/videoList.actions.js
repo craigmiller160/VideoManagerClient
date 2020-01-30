@@ -1,6 +1,6 @@
 import { createAction } from 'redux-starter-kit';
 import VideoApiService from '../../services/VideoApiService';
-import { showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
+import { handleApiError, showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
 import { setSearching } from '../videoSearch/videoSearch.actions';
 import { FORM_NAME } from 'components/AppContent/VideoFileEdit/VideoFileEdit';
 import { convertFiltersToFile } from '../../utils/videoFileConverter';
@@ -40,7 +40,7 @@ export const searchForVideos = () => async (dispatch, getState) => {
         dispatch(setVideoList(result.data.videoList));
     }
     catch (ex) {
-        dispatch(showErrorAlert(ex.message));
+        dispatch(handleApiError(ex));
     }
     finally {
         dispatch(setSearching(false));
@@ -87,7 +87,7 @@ export const saveVideoFile = (videoFile) => async (dispatch) => {
         await dispatch(searchForVideos());
     }
     catch (ex) {
-        dispatch(showErrorAlert(ex.message));
+        dispatch(handleApiError(ex));
     }
 };
 

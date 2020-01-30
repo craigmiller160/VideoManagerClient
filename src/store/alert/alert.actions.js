@@ -1,10 +1,12 @@
 import { createAction } from 'redux-starter-kit';
 
-export const handleApiError = (ex) => (dispatch) => {
+export const handleApiError = (ex, description) => (dispatch) => {
     if (ex.response) {
-        dispatch(showErrorAlert(ex.response.data.message || ex.response.data));
+        const message = ex.response.data.message || ex.response.data;
+        const status = ex.response.status;
+        dispatch(showErrorAlert(`Error. ${description} Status: ${status} Message: ${message}`));
     } else {
-        dispatch(showErrorAlert(ex.message));
+        dispatch(showErrorAlert(`Error: ${description} Message: ${ex.message}`));
     }
 };
 

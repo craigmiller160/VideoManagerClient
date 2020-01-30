@@ -1,6 +1,6 @@
 import { createAction } from 'redux-starter-kit';
 import { getSettings, updateSettings } from '../../services/SettingsApiService';
-import { showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
+import { handleApiError, showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
 import { FORM_NAME } from '../../components/AppContent/Settings';
 import { initialize } from 'redux-form';
 
@@ -12,7 +12,7 @@ export const loadSettings = () => async (dispatch) => {
         const res = await getSettings();
         dispatch(initialize(FORM_NAME, res.data));
     } catch (ex) {
-        dispatch(showErrorAlert(`Error loading settings: ${ex.message}`));
+        dispatch(handleApiError(ex, 'Error loading settings.'));
     } finally {
         dispatch(setLoading(false));
     }
@@ -25,7 +25,7 @@ export const saveSettings = (values) => async (dispatch) => {
         dispatch(initialize(FORM_NAME, res.data));
         dispatch(showSuccessAlert('Settings saved successfully'));
     } catch (ex) {
-        dispatch(showErrorAlert(`Error saving settings: ${ex.message}`));
+        dispatch(handleApiError(ex, 'Error saving settings.'));
     } finally {
         dispatch(setLoading(false));
     }

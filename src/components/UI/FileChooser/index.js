@@ -8,7 +8,7 @@ import {
 import FileListContainer from './FileListContainer';
 import FileChooserContext from './FileChooserContext';
 import Spinner from '../Spinner/Spinner';
-import { showErrorAlert } from '../../../store/alert/alert.actions';
+import { handleApiError, showErrorAlert } from '../../../store/alert/alert.actions';
 
 const loadFiles = (path, directoriesOnly) => {
     if (directoriesOnly) {
@@ -42,7 +42,7 @@ const FileChooser = (props) => {
                     loading: false
                 }));
             } catch (ex) {
-                dispatch(showErrorAlert(`Error loading files: ${ex.message}`));
+                dispatch(handleApiError(ex, 'Error loading files.'));
             }
         };
 
@@ -57,7 +57,7 @@ const FileChooser = (props) => {
                 fileList: res.data
             }));
         } catch (ex) {
-            dispatch(showErrorAlert(`Error loading files: ${ex.message}`));
+            dispatch(handleApiError(ex, 'Error loading files'));
         }
     };
 
