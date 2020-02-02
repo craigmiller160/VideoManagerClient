@@ -61,7 +61,8 @@ describe('settings.actions', () => {
 
             it('saves settings', async () => {
                 mockUpdateSettings(mockApi);
-                await store.dispatch(saveSettings(values));
+                const result = await store.dispatch(saveSettings(values));
+                expect(result).toEqual(true);
                 expect(store.getActions()).toEqual([
                     { type: setLoading.toString(), payload: true },
                     expect.objectContaining({
@@ -74,7 +75,9 @@ describe('settings.actions', () => {
             });
 
             it('has error', async () => {
-                await store.dispatch(saveSettings(values));
+                const result = await store.dispatch(saveSettings(values));
+                console.log(store.getActions()); // TODO delete this
+                expect(result).toEqual(true);
                 expect(store.getActions()).toEqual([
                     { type: setLoading.toString(), payload: true },
                     {
