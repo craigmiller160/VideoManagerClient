@@ -7,7 +7,7 @@ const openDirectory = jest.fn();
 
 const defaultProps = {
     file: {
-        directory: false,
+        isDirectory: false,
         fileName: 'file',
         filePath: 'path/file'
     },
@@ -92,7 +92,7 @@ describe('FileListItem', () => {
                     ...defaultProps,
                     file: {
                         ...defaultProps.file,
-                        directory: true
+                        isDirectory: true
                     }
                 }
             });
@@ -107,7 +107,7 @@ describe('FileListItem', () => {
                     ...defaultProps,
                     file: {
                         ...defaultProps.file,
-                        directory: true
+                        isDirectory: true
                     }
                 },
                 contextValue: {
@@ -129,14 +129,14 @@ describe('FileListItem', () => {
                     ...defaultProps,
                     file: {
                         ...defaultProps.file,
-                        directory: true
+                        isDirectory: true
                     }
                 }
             });
             component.find('Button[data-name="open-btn"]').props().onClick();
             expect(openDirectory).toHaveBeenCalledWith({
                 ...defaultProps.file,
-                directory: true
+                isDirectory: true
             });
         });
 
