@@ -14,7 +14,8 @@ const defaultProps = {
 const doMount = mountTestComponent(UserManagementPage, {
     defaultProps,
     defaultInitialRouterEntries: ['/'],
-    defaultStoreState: {}
+    defaultStoreState: {},
+    defaultUseThunk: true
 });
 
 const users = [
@@ -108,7 +109,7 @@ describe('UserManagementPage', () => {
             const expectedActions = [
                 {
                     type: 'alert/showErrorAlert',
-                    payload: 'Error loading users: Request failed with status code 500'
+                    payload: 'Error: Failed to load users. Message: Request failed with status code 500'
                 }
             ];
             expect(store.getActions()).toEqual(expectedActions);

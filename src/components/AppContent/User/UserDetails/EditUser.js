@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import UserDetailsPage from './UserDetailsPage';
 import * as AuthApiService from '../../../../services/AuthApiService';
 import { formatRoles, formatUser, unFormatRoles } from './userUtils';
-import { showErrorAlert, showSuccessAlert } from '../../../../store/alert/alert.actions';
+import { handleApiError, showSuccessAlert } from '../../../../store/alert/alert.actions';
 import { checkAuth } from '../../../../store/auth/auth.actions';
 
 const EditUser = (props) => {
@@ -29,7 +29,7 @@ const EditUser = (props) => {
                 setAllRoles(formatRoles(resArray[0].data));
                 setUserDetails(formatUser(resArray[1].data));
             } catch (ex) {
-                dispatch(showErrorAlert(`Error loading data for page: ${ex.message}`));
+                dispatch(handleApiError(ex, 'Error loading data for page.'));
             }
             setLoading(false);
         };
@@ -51,7 +51,7 @@ const EditUser = (props) => {
             dispatch(showSuccessAlert('Successfully saved user'));
             history.push('/users');
         } catch (ex) {
-            dispatch(showErrorAlert(`Error saving user: ${ex.message}`));
+            dispatch(handleApiError(ex, 'Error saving user.'));
         }
         setLoading(false);
     };
@@ -63,7 +63,7 @@ const EditUser = (props) => {
             dispatch(showSuccessAlert('Successfully deleted user'));
             history.push('/users');
         } catch (ex) {
-            dispatch(showErrorAlert(`Error deleting user: ${ex.message}`));
+            dispatch(handleApiError(ex, 'Error deleting user.'));
         }
         setLoading(false);
     };
@@ -75,7 +75,7 @@ const EditUser = (props) => {
             setUserDetails(formatUser(res.data));
             dispatch(showSuccessAlert('Successfully revoked user login'));
         } catch (ex) {
-            dispatch(showErrorAlert(`Error revoking user login: ${ex.message}`));
+            dispatch(handleApiError(ex, 'Error revoking user login'));
         }
         setLoading(false);
     };

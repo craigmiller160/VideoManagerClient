@@ -1,7 +1,7 @@
 import { createAction } from 'redux-starter-kit';
 import { ADD_ACTION, CATEGORY_TYPE, SERIES_TYPE, STAR_TYPE } from './filterInputModal.constants';
 import CategoryApiService from '../../services/CategoryApiService';
-import { showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
+import { handleApiError, showErrorAlert, showSuccessAlert } from '../alert/alert.actions';
 import { loadCategoryOptions, loadSeriesOptions, loadStarOptions } from '../videoSearch/videoSearch.actions';
 import SeriesApiService from '../../services/SeriesApiService';
 import StarApiService from '../../services/StarApiService';
@@ -38,7 +38,7 @@ export const deleteFilter = () => async (dispatch, getState) => {
         dispatch(showSuccessAlert(`Successfully deleted ${type} filter`));
     }
     catch (ex) {
-        dispatch(showErrorAlert(ex.message));
+        dispatch(handleApiError(ex));
     }
 };
 
@@ -75,7 +75,7 @@ export const saveFilterChanges = () => async (dispatch, getState) => {
         dispatch(showSuccessAlert(`Successfully saved ${type} filter`));
     }
     catch (ex) {
-        dispatch(showErrorAlert(ex.message));
+        dispatch(handleApiError(ex));
     }
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import * as AuthApiService from 'services/AuthApiService';
 import { Button } from 'reactstrap';
@@ -7,7 +7,7 @@ import classes from './UserManagementPage.scss';
 import FlexRow from '../../../UI/Grid/FlexRow';
 import UserListItem from './UserListItem';
 import FlexCol from '../../../UI/Grid/FlexCol';
-import { showErrorAlert } from '../../../../store/alert/alert.actions';
+import { handleApiError } from '../../../../store/alert/alert.actions';
 import Spinner from '../../../UI/Spinner/Spinner';
 
 const userNameSort = (user1, user2) => {
@@ -37,7 +37,7 @@ const UserManagementPage = (props) => {
                 displayUsers.sort(userNameSort);
                 setAllUsers(displayUsers);
             } catch(ex) {
-                dispatch(showErrorAlert(`Error loading users: ${ex.message}`));
+                dispatch(handleApiError(ex, 'Failed to load users.'));
             }
             setLoading(false);
         };

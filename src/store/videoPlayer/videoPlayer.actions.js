@@ -1,5 +1,5 @@
 import { createAction } from 'redux-starter-kit';
-import { showErrorAlert } from '../alert/alert.actions';
+import { handleApiError } from '../alert/alert.actions';
 import VideoApiService from '../../services/VideoApiService';
 import * as AuthApiService from '../../services/AuthApiService';
 
@@ -15,7 +15,7 @@ export const loadDataForPlayback = (fileId) => async (dispatch) => {
         await VideoApiService.recordNewVideoPlay(fileId);
     }
     catch (ex) {
-        dispatch(showErrorAlert(ex.message));
+        dispatch(handleApiError(ex));
     }
     finally {
         dispatch(setLoading(false));

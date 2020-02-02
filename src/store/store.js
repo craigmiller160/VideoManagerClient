@@ -7,6 +7,7 @@ import videoPlayerReducer from './videoPlayer/videoPlayer.reducer';
 import { reducer as formReducer } from 'redux-form';
 import alertReducer from './alert/alert.reducer';
 import authReducer from './auth/auth.reducer';
+import settingsReducer from './settings/settings.reducer';
 
 const reducer = {
     videoList: videoListReducer,
@@ -16,7 +17,8 @@ const reducer = {
     scanning: scanningReducer,
     filterInputModal: filterInputModalReducer,
     videoPlayer: videoPlayerReducer,
-    auth: authReducer
+    auth: authReducer,
+    settings: settingsReducer
 };
 
 export default configureStore({

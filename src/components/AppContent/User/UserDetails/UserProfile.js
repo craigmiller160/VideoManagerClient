@@ -5,7 +5,7 @@ import * as AuthApiService from '../../../../services/AuthApiService';
 import { formatRoles, formatUser } from './userUtils';
 import { hasAdminRole as hasAdminRoleSelector } from '../../../../store/auth/auth.selectors';
 import { saveUserProfile } from '../../../../store/auth/auth.actions';
-import { showErrorAlert } from '../../../../store/alert/alert.actions';
+import { handleApiError } from '../../../../store/alert/alert.actions';
 
 const UserProfile = () => {
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const UserProfile = () => {
                     const res = await AuthApiService.getRoles();
                     roles = res.data;
                 } catch (ex) {
-                    dispatch(showErrorAlert(`Error loading roles: ${ex.message}`));
+                    dispatch(handleApiError(ex, 'Error loading roles'));
                 }
             }
 
