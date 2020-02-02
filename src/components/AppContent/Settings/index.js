@@ -14,8 +14,6 @@ import { change } from 'redux-form';
 
 export const FORM_NAME = 'Settings_Form';
 
-/* eslint-disable */ // TODO delete this
-
 const Settings = (props) => {
     const {
         rootDirEditing
