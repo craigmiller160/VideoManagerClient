@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import classes from './Settings.scss';
 import FlexRow from '../../UI/Grid/FlexRow';
 import Spinner from '../../UI/Spinner/Spinner';
@@ -14,12 +14,16 @@ import { change } from 'redux-form';
 
 export const FORM_NAME = 'Settings_Form';
 
+/* eslint-disable */ // TODO delete this
+
 const Settings = (props) => {
     const {
         rootDirEditing
     } = props;
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.settings.loading);
+    const form = useSelector((state) => state.form[FORM_NAME], shallowEqual);
+    console.log(form); // TODO delete this
     const [state, setState] = useState({
         rootDirEditing
     });
