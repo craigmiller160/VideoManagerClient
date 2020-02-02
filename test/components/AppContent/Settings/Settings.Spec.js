@@ -19,9 +19,18 @@ jest.mock('components/UI/FileChooser', () => {
     return FileChooser;
 });
 
+const rootDir = 'rootDir';
+
 const defaultStoreState = {
     settings: {
         loading: false
+    },
+    form: {
+        [FORM_NAME]: {
+            values: {
+                rootDir
+            }
+        }
     }
 };
 
@@ -77,7 +86,8 @@ const testRendering = (component, { loading = false, fileChooser = false } = {})
 
     expect(component.find('FileChooser').props()).toEqual({
         directoriesOnly: true,
-        selectFile: expect.any(Function)
+        selectFile: expect.any(Function),
+        initialDir: rootDir
     });
 
     let fileChooserClassName = 'fileChooser';
