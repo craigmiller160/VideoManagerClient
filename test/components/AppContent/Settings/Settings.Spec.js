@@ -10,7 +10,7 @@ jest.mock('store/settings/settings.actions', () => ({
     loadSettings: () => ({ type: 'settings/loadSettings' }),
     saveSettings: (values) => async (dispatch) => {
         dispatch({ type: 'settings/saveSettings', payload: values });
-        return true; // TODO work on this
+        return values.result;
     }
 }));
 
@@ -180,6 +180,15 @@ describe('Settings', () => {
                     props: {
                         ...defaultProps,
                         rootDirModified: true
+                    },
+                    storeState: {
+                        form: {
+                            [FORM_NAME]: {
+                                values: {
+                                    result: true
+                                }
+                            }
+                        }
                     }
                 });
                 await act(async () => {
@@ -188,7 +197,7 @@ describe('Settings', () => {
                 component.update();
                 expect(store.getActions().filter(removeReduxForm)).toEqual([
                     { type: 'settings/loadSettings' },
-                    { type: 'settings/saveSettings', payload: {} }
+                    { type: 'settings/saveSettings', payload:  { result: true } }
                 ]);
                 expect(component.find('Button#save-btn').props().disabled).toEqual(true);
             });
@@ -198,6 +207,15 @@ describe('Settings', () => {
                     props: {
                         ...defaultProps,
                         rootDirModified: true
+                    },
+                    storeState: {
+                        form: {
+                            [FORM_NAME]: {
+                                values: {
+                                    result: false
+                                }
+                            }
+                        }
                     }
                 });
                 await act(async () => {
@@ -206,7 +224,7 @@ describe('Settings', () => {
                 component.update();
                 expect(store.getActions().filter(removeReduxForm)).toEqual([
                     { type: 'settings/loadSettings' },
-                    { type: 'settings/saveSettings', payload: {} }
+                    { type: 'settings/saveSettings', payload: { result: false } }
                 ]);
                 expect(component.find('Button#save-btn').props().disabled).toEqual(false);
             });
