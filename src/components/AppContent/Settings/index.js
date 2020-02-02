@@ -45,7 +45,6 @@ const Settings = (props) => {
     };
 
     const submit = async (values) => {
-        console.log('Pre-disaptch'); // TODO delete this
         const successful = await dispatch(saveSettings(values));
         if (successful) {
             setState((prevState) => ({

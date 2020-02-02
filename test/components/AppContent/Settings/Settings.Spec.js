@@ -6,11 +6,9 @@ import { isRequired } from '../../../../src/utils/validations';
 import Input from 'components/UI/form/Input/Input';
 import Spinner from 'components/UI/Spinner/Spinner';
 
-// TODO eliminate this mock and mock the API calls so you can use the real thing
 jest.mock('store/settings/settings.actions', () => ({
     loadSettings: () => ({ type: 'settings/loadSettings' }),
     saveSettings: (values) => async (dispatch) => {
-        console.log('Working'); // TODO delete this
         dispatch({ type: 'settings/saveSettings', payload: values });
         return true; // TODO work on this
     }
@@ -34,7 +32,8 @@ const defaultProps = {
 
 const doMount = mountTestComponent(Settings, {
     defaultStoreState,
-    defaultProps
+    defaultProps,
+    defaultUseThunk: true
 });
 
 const testRendering = (component, { loading = false, fileChooser = false } = {}) => {
@@ -183,7 +182,10 @@ describe('Settings', () => {
                         rootDirModified: true
                     }
                 });
-                await component.find('form').simulate('submit');
+                await act(async () => {
+                    await component.find('form').simulate('submit');
+                });
+                component.update();
                 expect(store.getActions().filter(removeReduxForm)).toEqual([
                     { type: 'settings/loadSettings' },
                     { type: 'settings/saveSettings', payload: {} }
@@ -198,7 +200,10 @@ describe('Settings', () => {
                         rootDirModified: true
                     }
                 });
-                await component.find('form').simulate('submit');
+                await act(async () => {
+                    await component.find('form').simulate('submit');
+                });
+                component.update();
                 expect(store.getActions().filter(removeReduxForm)).toEqual([
                     { type: 'settings/loadSettings' },
                     { type: 'settings/saveSettings', payload: {} }
