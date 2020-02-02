@@ -27,6 +27,7 @@ jest.mock('components/UI/FileChooser/FileListContainer', () => {
 });
 
 const selectFile = jest.fn();
+const initialDir = '/home/user/videos';
 
 const defaultProps = {
     directoriesOnly: false,
@@ -44,7 +45,7 @@ const doMount = mountTestComponent(FileChooser, {
 const getFilesData = { type: 'files' };
 const getDirsData = { type: 'dirs' };
 
-const testRendering = (component, { loading = false, loadDirs = false } = {}) => {
+const testRendering = (component, { loading = false, loadDirs = false, initialDir } = {}) => {
     if (loading) {
         expect(component.find(Spinner)).toHaveLength(1);
         expect(component.find('FileListContainer')).toHaveLength(0);
@@ -59,9 +60,9 @@ const testRendering = (component, { loading = false, loadDirs = false } = {}) =>
     });
 
     if (loadDirs) {
-        expect(getDirectoriesFromDirectory).toHaveBeenLastCalledWith(null);
+        expect(getDirectoriesFromDirectory).toHaveBeenLastCalledWith(initialDir);
     } else {
-        expect(getFilesFromDirectory).toHaveBeenLastCalledWith(null);
+        expect(getFilesFromDirectory).toHaveBeenLastCalledWith(initialDir);
     }
 };
 
@@ -72,13 +73,15 @@ describe('FileChooser', () => {
 
     describe('rendering', () => {
         it('renders while loading', () => {
+            // Deliberately not using act() here because I want to see the state before
+            // the asynchronous updates are resolved
             const { component } = doMount();
             testRendering(component, {
                 loading: true
             });
         });
 
-        it('renders after loading completed', async () => {
+        it('renders after loading files and directories', async () => {
             getFilesFromDirectory.mockResolvedValue({
                 data: getFilesData
             });
@@ -88,7 +91,7 @@ describe('FileChooser', () => {
             testRendering(component);
         });
 
-        it('loads only directories', async () => {
+        it('renders after loading only directories', async () => {
             getDirectoriesFromDirectory.mockResolvedValue({
                 data: getDirsData
             });
@@ -102,6 +105,42 @@ describe('FileChooser', () => {
             await resolveComponent(component);
             testRendering(component, {
                 loadDirs: true
+            });
+        });
+
+        it('renders after loading files and directories, with initialDir', async () => {
+            getFilesFromDirectory.mockResolvedValue({
+                data: getFilesData
+            });
+
+            const { component } = doMount({
+                props: {
+                    ...defaultProps,
+                    initialDir
+                }
+            });
+            await resolveComponent(component);
+            testRendering(component, {
+                initialDir
+            });
+        });
+
+        it('renders after loading only directories, with initialDir', async () => {
+            getDirectoriesFromDirectory.mockResolvedValue({
+                data: getDirsData
+            });
+
+            const { component } = doMount({
+                props: {
+                    ...defaultProps,
+                    directoriesOnly: true,
+                    initialDir
+                }
+            });
+            await resolveComponent(component);
+            testRendering(component, {
+                loadDirs: true,
+                initialDir
             });
         });
     });
