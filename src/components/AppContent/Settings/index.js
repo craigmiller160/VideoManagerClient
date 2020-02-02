@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import classes from './Settings.scss';
 import FlexRow from '../../UI/Grid/FlexRow';
 import Spinner from '../../UI/Spinner/Spinner';
@@ -22,10 +22,9 @@ const Settings = (props) => {
     } = props;
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.settings.loading);
-    const form = useSelector((state) => state.form[FORM_NAME], shallowEqual);
-    console.log(form); // TODO delete this
     const [state, setState] = useState({
-        rootDirEditing
+        rootDirEditing,
+        rootDirModified: false
     });
 
     useEffect(() => {
@@ -40,13 +39,27 @@ const Settings = (props) => {
     const selectDir = (selected) => {
         setState((prevState) => ({
             ...prevState,
-            rootDirEditing: false
+            rootDirEditing: false,
+            rootDirModified: true // TODO add to unit tests
         }));
         dispatch(change(FORM_NAME, 'rootDir', selected.filePath));
     };
 
+    const submit = async (values) => { // TODO add to unit tests
+        const successful = await dispatch(saveSettings(values));
+        if (successful) {
+            setState((prevState) => ({
+                ...prevState,
+                rootDirModified: false
+            }));
+        }
+    };
+
     const showFileChooserClass = state.rootDirEditing ? classes.show : '';
     const showSaveClass = state.rootDirEditing ? '' : classes.show;
+
+    // Separate variable for this to make it easily extensible
+    const enableSaveBtn = state.rootDirModified; // TODO add to unit tests
 
     return (
         <div className={ classes.Settings }>
@@ -57,7 +70,7 @@ const Settings = (props) => {
             </FlexRow>
             <Form
                 form={ FORM_NAME }
-                onSubmit={ (values) => dispatch(saveSettings(values)) }
+                onSubmit={ submit }
                 destroyOnUnmount={ false }
                 className={ classes.form }
             >
@@ -110,6 +123,7 @@ const Settings = (props) => {
                                 id="save-btn"
                                 type="submit"
                                 color="primary"
+                                disabled={ !enableSaveBtn }
                             >
                                 Save
                             </Button>
