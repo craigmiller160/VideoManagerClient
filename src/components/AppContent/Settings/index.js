@@ -16,13 +16,14 @@ export const FORM_NAME = 'Settings_Form';
 
 const Settings = (props) => {
     const {
-        rootDirEditing
+        rootDirEditing,
+        rootDirModified
     } = props;
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.settings.loading);
     const [state, setState] = useState({
         rootDirEditing,
-        rootDirModified: false
+        rootDirModified
     });
 
     useEffect(() => {
@@ -38,12 +39,13 @@ const Settings = (props) => {
         setState((prevState) => ({
             ...prevState,
             rootDirEditing: false,
-            rootDirModified: true // TODO add to unit tests
+            rootDirModified: true
         }));
         dispatch(change(FORM_NAME, 'rootDir', selected.filePath));
     };
 
-    const submit = async (values) => { // TODO add to unit tests
+    const submit = async (values) => {
+        console.log('Pre-disaptch'); // TODO delete this
         const successful = await dispatch(saveSettings(values));
         if (successful) {
             setState((prevState) => ({
@@ -57,7 +59,7 @@ const Settings = (props) => {
     const showSaveClass = state.rootDirEditing ? '' : classes.show;
 
     // Separate variable for this to make it easily extensible
-    const enableSaveBtn = state.rootDirModified; // TODO add to unit tests
+    const enableSaveBtn = state.rootDirModified;
 
     return (
         <div className={ classes.Settings }>
@@ -133,10 +135,12 @@ const Settings = (props) => {
     );
 };
 Settings.propTypes = {
-    rootDirEditing: PropTypes.bool
+    rootDirEditing: PropTypes.bool,
+    rootDirModified: PropTypes.bool
 };
 Settings.defaultProps = {
-    rootDirEditing: false
+    rootDirEditing: false,
+    rootDirModified: false
 };
 
 export default Settings;

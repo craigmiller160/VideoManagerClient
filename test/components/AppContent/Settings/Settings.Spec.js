@@ -6,9 +6,14 @@ import { isRequired } from '../../../../src/utils/validations';
 import Input from 'components/UI/form/Input/Input';
 import Spinner from 'components/UI/Spinner/Spinner';
 
+// TODO eliminate this mock and mock the API calls so you can use the real thing
 jest.mock('store/settings/settings.actions', () => ({
     loadSettings: () => ({ type: 'settings/loadSettings' }),
-    saveSettings: (values) => ({ type: 'settings/saveSettings', payload: values })
+    saveSettings: (values) => async (dispatch) => {
+        console.log('Working'); // TODO delete this
+        dispatch({ type: 'settings/saveSettings', payload: values });
+        return true; // TODO work on this
+    }
 }));
 
 jest.mock('components/UI/FileChooser', () => {
@@ -23,7 +28,8 @@ const defaultStoreState = {
 };
 
 const defaultProps = {
-    rootDirEditing: false
+    rootDirEditing: false,
+    rootDirModified: false
 };
 
 const doMount = mountTestComponent(Settings, {
@@ -89,6 +95,7 @@ const testRendering = (component, { loading = false, fileChooser = false } = {})
 
     expect(component.find('div#btn-container').props().className)
         .toEqual(expect.stringContaining(btnClassName));
+    expect(component.find('Button#save-btn').props().disabled).toEqual(true);
 };
 
 describe('Settings', () => {
@@ -158,6 +165,8 @@ describe('Settings', () => {
             act(() => {
                 component.find('FileChooser').props().selectFile(value);
             });
+            component.update();
+            expect(component.find('Button#save-btn').props().disabled).toEqual(false);
             expect(store.getActions()).toEqual(expect.arrayContaining([
                 expect.objectContaining({
                     type: '@@redux-form/CHANGE',
@@ -166,13 +175,36 @@ describe('Settings', () => {
             ]))
         });
 
-        it('submits form', () => {
-            const { component, store } = doMount();
-            component.find('form').simulate('submit');
-            expect(store.getActions().filter(removeReduxForm)).toEqual([
-                { type: 'settings/loadSettings' },
-                { type: 'settings/saveSettings', payload: {} }
-            ]);
+        describe('submits form', () => {
+            it('successful', async () => {
+                const { component, store } = doMount({
+                    props: {
+                        ...defaultProps,
+                        rootDirModified: true
+                    }
+                });
+                await component.find('form').simulate('submit');
+                expect(store.getActions().filter(removeReduxForm)).toEqual([
+                    { type: 'settings/loadSettings' },
+                    { type: 'settings/saveSettings', payload: {} }
+                ]);
+                expect(component.find('Button#save-btn').props().disabled).toEqual(true);
+            });
+
+            it('failed', async () => {
+                const { component, store } = doMount({
+                    props: {
+                        ...defaultProps,
+                        rootDirModified: true
+                    }
+                });
+                await component.find('form').simulate('submit');
+                expect(store.getActions().filter(removeReduxForm)).toEqual([
+                    { type: 'settings/loadSettings' },
+                    { type: 'settings/saveSettings', payload: {} }
+                ]);
+                expect(component.find('Button#save-btn').props().disabled).toEqual(false);
+            });
         });
     });
 });
