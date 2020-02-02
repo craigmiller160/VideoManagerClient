@@ -19,7 +19,8 @@ const FileChooser = (props) => {
     const dispatch = useDispatch();
     const {
         directoriesOnly,
-        selectFile
+        selectFile,
+        initialDir
     } = props;
 
     const [state, setState] = useState({
@@ -31,7 +32,7 @@ const FileChooser = (props) => {
     useEffect(() => {
         const loadInitialFiles = async () => {
             try {
-                const res = await loadFiles(null, directoriesOnly);
+                const res = await loadFiles(initialDir, directoriesOnly);
 
                 setState((prevState) => ({
                     ...prevState,
@@ -76,7 +77,8 @@ const FileChooser = (props) => {
 };
 FileChooser.propTypes = {
     directoriesOnly: PropTypes.bool,
-    selectFile: PropTypes.func
+    selectFile: PropTypes.func,
+    initialDir: PropTypes.string
 };
 FileChooser.defaultProps = {
     directoriesOnly: false,
