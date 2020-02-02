@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 export const filePropType = PropTypes.shape({
-    directory: PropTypes.bool.isRequired,
+    isDirectory: PropTypes.bool.isRequired,
     fileName: PropTypes.string.isRequired,
     filePath: PropTypes.string.isRequired
 }).isRequired;

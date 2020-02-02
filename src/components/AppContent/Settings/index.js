@@ -16,12 +16,14 @@ export const FORM_NAME = 'Settings_Form';
 
 const Settings = (props) => {
     const {
-        rootDirEditing
+        rootDirEditing,
+        rootDirModified
     } = props;
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.settings.loading);
     const [state, setState] = useState({
-        rootDirEditing
+        rootDirEditing,
+        rootDirModified
     });
 
     useEffect(() => {
@@ -36,13 +38,27 @@ const Settings = (props) => {
     const selectDir = (selected) => {
         setState((prevState) => ({
             ...prevState,
-            rootDirEditing: false
+            rootDirEditing: false,
+            rootDirModified: true
         }));
         dispatch(change(FORM_NAME, 'rootDir', selected.filePath));
     };
 
+    const submit = async (values) => {
+        const successful = await dispatch(saveSettings(values));
+        if (successful) {
+            setState((prevState) => ({
+                ...prevState,
+                rootDirModified: false
+            }));
+        }
+    };
+
     const showFileChooserClass = state.rootDirEditing ? classes.show : '';
     const showSaveClass = state.rootDirEditing ? '' : classes.show;
+
+    // Separate variable for this to make it easily extensible
+    const enableSaveBtn = state.rootDirModified;
 
     return (
         <div className={ classes.Settings }>
@@ -53,7 +69,7 @@ const Settings = (props) => {
             </FlexRow>
             <Form
                 form={ FORM_NAME }
-                onSubmit={ (values) => dispatch(saveSettings(values)) }
+                onSubmit={ submit }
                 destroyOnUnmount={ false }
                 className={ classes.form }
             >
@@ -106,6 +122,7 @@ const Settings = (props) => {
                                 id="save-btn"
                                 type="submit"
                                 color="primary"
+                                disabled={ !enableSaveBtn }
                             >
                                 Save
                             </Button>
@@ -117,10 +134,12 @@ const Settings = (props) => {
     );
 };
 Settings.propTypes = {
-    rootDirEditing: PropTypes.bool
+    rootDirEditing: PropTypes.bool,
+    rootDirModified: PropTypes.bool
 };
 Settings.defaultProps = {
-    rootDirEditing: false
+    rootDirEditing: false,
+    rootDirModified: false
 };
 
 export default Settings;

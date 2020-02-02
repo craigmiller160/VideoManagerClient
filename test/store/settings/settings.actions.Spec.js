@@ -1,3 +1,4 @@
+import { act } from 'react-dom/test-utils';
 import { loadSettings, saveSettings, setLoading } from 'store/settings/settings.actions';
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
@@ -61,7 +62,11 @@ describe('settings.actions', () => {
 
             it('saves settings', async () => {
                 mockUpdateSettings(mockApi);
-                await store.dispatch(saveSettings(values));
+                let result;
+                await act(async () => {
+                    result = await store.dispatch(saveSettings(values));
+                });
+                expect(result).toEqual(true);
                 expect(store.getActions()).toEqual([
                     { type: setLoading.toString(), payload: true },
                     expect.objectContaining({
@@ -74,7 +79,11 @@ describe('settings.actions', () => {
             });
 
             it('has error', async () => {
-                await store.dispatch(saveSettings(values));
+                let result;
+                await act(async () => {
+                    result = await store.dispatch(saveSettings(values));
+                });
+                expect(result).toEqual(false);
                 expect(store.getActions()).toEqual([
                     { type: setLoading.toString(), payload: true },
                     {

@@ -17,7 +17,7 @@ const FileListContainer = (props) => {
                 {
                     fileList.parentPath &&
                     <FileListItem
-                        file={ { directory: true, fileName: '../', filePath: fileList.parentPath } }
+                        file={ { isDirectory: true, fileName: '../', filePath: fileList.parentPath } }
                         hideSelect
                     />
                 }

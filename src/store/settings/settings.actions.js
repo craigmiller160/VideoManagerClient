@@ -24,8 +24,11 @@ export const saveSettings = (values) => async (dispatch) => {
         const res = await updateSettings(values);
         dispatch(initialize(FORM_NAME, res.data));
         dispatch(showSuccessAlert('Settings saved successfully'));
+
+        return true;
     } catch (ex) {
         dispatch(handleApiError(ex, 'Error saving settings.'));
+        return false;
     } finally {
         dispatch(setLoading(false));
     }

@@ -8,7 +8,10 @@ import Spinner from 'components/UI/Spinner/Spinner';
 
 jest.mock('store/settings/settings.actions', () => ({
     loadSettings: () => ({ type: 'settings/loadSettings' }),
-    saveSettings: (values) => ({ type: 'settings/saveSettings', payload: values })
+    saveSettings: (values) => async (dispatch) => {
+        dispatch({ type: 'settings/saveSettings', payload: values });
+        return values.result;
+    }
 }));
 
 jest.mock('components/UI/FileChooser', () => {
@@ -23,12 +26,14 @@ const defaultStoreState = {
 };
 
 const defaultProps = {
-    rootDirEditing: false
+    rootDirEditing: false,
+    rootDirModified: false
 };
 
 const doMount = mountTestComponent(Settings, {
     defaultStoreState,
-    defaultProps
+    defaultProps,
+    defaultUseThunk: true
 });
 
 const testRendering = (component, { loading = false, fileChooser = false } = {}) => {
@@ -89,6 +94,7 @@ const testRendering = (component, { loading = false, fileChooser = false } = {})
 
     expect(component.find('div#btn-container').props().className)
         .toEqual(expect.stringContaining(btnClassName));
+    expect(component.find('Button#save-btn').props().disabled).toEqual(true);
 };
 
 describe('Settings', () => {
@@ -158,6 +164,8 @@ describe('Settings', () => {
             act(() => {
                 component.find('FileChooser').props().selectFile(value);
             });
+            component.update();
+            expect(component.find('Button#save-btn').props().disabled).toEqual(false);
             expect(store.getActions()).toEqual(expect.arrayContaining([
                 expect.objectContaining({
                     type: '@@redux-form/CHANGE',
@@ -166,13 +174,60 @@ describe('Settings', () => {
             ]))
         });
 
-        it('submits form', () => {
-            const { component, store } = doMount();
-            component.find('form').simulate('submit');
-            expect(store.getActions().filter(removeReduxForm)).toEqual([
-                { type: 'settings/loadSettings' },
-                { type: 'settings/saveSettings', payload: {} }
-            ]);
+        describe('submits form', () => {
+            it('successful', async () => {
+                const { component, store } = doMount({
+                    props: {
+                        ...defaultProps,
+                        rootDirModified: true
+                    },
+                    storeState: {
+                        form: {
+                            [FORM_NAME]: {
+                                values: {
+                                    result: true
+                                }
+                            }
+                        }
+                    }
+                });
+                await act(async () => {
+                    await component.find('form').simulate('submit');
+                });
+                component.update();
+                expect(store.getActions().filter(removeReduxForm)).toEqual([
+                    { type: 'settings/loadSettings' },
+                    { type: 'settings/saveSettings', payload:  { result: true } }
+                ]);
+                expect(component.find('Button#save-btn').props().disabled).toEqual(true);
+            });
+
+            it('failed', async () => {
+                const { component, store } = doMount({
+                    props: {
+                        ...defaultProps,
+                        rootDirModified: true
+                    },
+                    storeState: {
+                        form: {
+                            [FORM_NAME]: {
+                                values: {
+                                    result: false
+                                }
+                            }
+                        }
+                    }
+                });
+                await act(async () => {
+                    await component.find('form').simulate('submit');
+                });
+                component.update();
+                expect(store.getActions().filter(removeReduxForm)).toEqual([
+                    { type: 'settings/loadSettings' },
+                    { type: 'settings/saveSettings', payload: { result: false } }
+                ]);
+                expect(component.find('Button#save-btn').props().disabled).toEqual(false);
+            });
         });
     });
 });
