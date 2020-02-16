@@ -36,6 +36,7 @@ const VideoNavbar = (props) => {
                     disabled={ disabled }
                 >
                     <NavLink
+                        id="home-link"
                         to="/"
                         activeClassName={ classes.active }
                         className={ classes.link }
