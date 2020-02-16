@@ -28,12 +28,10 @@ const Login = () => {
             }
             {
                 !loginLoading &&
-                <>
-                    <Row>
-                        <Col className="text-center" md={ { size: 4, offset: 4 } }>
-                            <h3 id="login-title">Login</h3>
-                        </Col>
-                    </Row>
+                <div>
+                    <div className={ classes.title }>
+                        <h3 id="login-title">Login</h3>
+                    </div>
                     <Row>
                         <Col md={ { size: 4, offset: 4 } }>
                             <Input
@@ -70,7 +68,7 @@ const Login = () => {
                             </Button>
                         </Col>
                     </Row>
-                </>
+                </div>
             }
         </Form>
     );

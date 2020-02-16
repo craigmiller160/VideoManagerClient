@@ -1,3 +1,9 @@
+@import '../../../assets/styles/pages';
+
 .Login {
   margin-top: 20px;
+  .title {
+    @include page-title;
+    margin-bottom: 20px;
+  }
 }
