@@ -28,15 +28,14 @@ const Login = () => {
             }
             {
                 !loginLoading &&
-                <>
-                    <Row>
-                        <Col className="text-center" md={ { size: 4, offset: 4 } }>
-                            <h3 id="login-title">Login</h3>
-                        </Col>
-                    </Row>
+                <div>
+                    <div className={ classes.title }>
+                        <h3 id="login-title">Login</h3>
+                    </div>
                     <Row>
                         <Col md={ { size: 4, offset: 4 } }>
                             <Input
+                                id="username-field"
                                 label="Username"
                                 name="userName"
                                 type="email"
@@ -47,6 +46,7 @@ const Login = () => {
                                 focusOnRender
                             />
                             <Input
+                                id="password-field"
                                 label="Password"
                                 name="password"
                                 type="password"
@@ -59,6 +59,7 @@ const Login = () => {
                     <Row>
                         <Col className="text-center" md={ { size: 4, offset: 4 } }>
                             <Button
+                                id="login-btn"
                                 type="submit"
                                 color="primary"
                                 disabled={ loginFormErrors }
@@ -67,7 +68,7 @@ const Login = () => {
                             </Button>
                         </Col>
                     </Row>
-                </>
+                </div>
             }
         </Form>
     );

@@ -20,8 +20,8 @@ const NavbarDropdown = () => {
 
     return (
         <UncontrolledDropdown nav inNavbar className={ classes.NavbarDropdown }>
-            <DropdownToggle nav caret className={ toggleClasses.join(' ') }>{ fullName }</DropdownToggle>
-            <DropdownMenu right className={ classes.dropdown }>
+            <DropdownToggle id="vm-navbar-dropdown-toggle" nav caret className={ toggleClasses.join(' ') }>{ fullName }</DropdownToggle>
+            <DropdownMenu id="vm-navbar-dropdown" right className={ classes.dropdown }>
                 <NavbarItem
                     id="userProfileLink"
                     text="Profile"

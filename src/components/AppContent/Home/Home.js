@@ -4,7 +4,7 @@ import classes from './Home.scss';
 const Home = () => (
     <div className={ classes.Home }>
         <div className={ classes.title }>
-            <h3>Welcome to VideoManager</h3>
+            <h3 id="home-title">Welcome to VideoManager</h3>
         </div>
     </div>
 );

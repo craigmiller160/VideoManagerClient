@@ -16,7 +16,7 @@ const Alert = (props) => {
     const click = (event) => event.stopPropagation();
 
     return (
-        <div className={ rootClasses.join(' ') } onClick={ click }>
+        <div id="alert-box" className={ rootClasses.join(' ') } onClick={ click }>
             <button aria-label="close" onClick={ () => dispatch(hideAlert()) }>
                 <span aria-hidden="true">X</span>
             </button>

@@ -25,6 +25,7 @@ InnerComponent.propTypes = {
 export const InputComponent = (props) => {
     const inputRef = useRef(null);
     const {
+        id = newid(),
         label,
         type,
         input,
@@ -37,7 +38,6 @@ export const InputComponent = (props) => {
         inputClassName
     } = props;
 
-    const id = newid();
     const hasError = touched && !!error;
 
     useEffect(() => {
@@ -47,14 +47,14 @@ export const InputComponent = (props) => {
     }, []);
 
     return (
-        <StyledFormGroupDiv className={ divClassName } hidden={ 'hidden' === type.toLowerCase() }>
+        <StyledFormGroupDiv id={ id } className={ divClassName } hidden={ 'hidden' === type.toLowerCase() }>
             <StyledLabel
-                htmlForm={ id }
+                htmlFor={ `${id}-input` }
             >
                 { label }
             </StyledLabel>
             <InnerComponent
-                id={ id }
+                id={ `${id}-input` }
                 { ...input }
                 { ...inputProps }
                 type={ type }
@@ -86,6 +86,7 @@ InputComponent.defaultProps = {
 };
 
 InputComponent.propTypes = {
+    id: PropTypes.string,
     type: PropTypes.string,
     label: PropTypes.string,
     input: PropTypes.shape({
@@ -109,6 +110,7 @@ InputComponent.propTypes = {
 
 const Field = createField(InputComponent);
 Field.propTypes = {
+    id: PropTypes.string,
     type: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
