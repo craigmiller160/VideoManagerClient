@@ -56,7 +56,7 @@ const doMount = mountTestComponent(VideoListItem, {
 });
 
 const testRendering = (component, { isExpanded = false, hasDisplayName = true, hasEditRole = true } = {}) => {
-    const rootDiv = component.find('div[data-name="video-list-item-root"]');
+    const rootDiv = component.find(`div[data-name="video-list-item-${defaultProps.videoFile.fileId}"]`);
     const heading = component.find('ListGroupItemHeading');
     const collapse = component.find('Collapse');
     const findLabelSpan = (dataName, value) =>
@@ -170,7 +170,7 @@ describe('VideoListItem', () => {
     describe('Callbacks and actions', () => {
         it('dispatches expandVideoFile', () => {
             const { component, store } = doMount();
-            component.find('div[data-name="video-list-item-root"]').props().onClick();
+            component.find(`div[data-name="video-list-item-${defaultProps.videoFile.fileId}"]`).props().onClick();
             expect(store.getActions()).toEqual([
                 { type: 'EXPAND_VIDEO_FILE' }
             ]);
