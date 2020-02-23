@@ -22,12 +22,14 @@ export const FilterInputModal = (props) => {
 
     const modalBtns = [
         {
+            id: 'filter-saven-btn',
             color: 'success',
             text: 'Save',
             type: 'submit',
             closeModal: true
         },
         {
+            id: 'filter-cancel-btn',
             color: 'info',
             text: 'Cancel',
             closeModal: true
@@ -36,6 +38,7 @@ export const FilterInputModal = (props) => {
 
     if (EDIT_ACTION === action) {
         modalBtns.unshift({
+            id: 'filter-delete-btn',
             color: 'danger',
             text: 'Delete',
             closeModal: true,

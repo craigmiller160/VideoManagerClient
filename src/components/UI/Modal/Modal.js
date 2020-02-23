@@ -29,6 +29,7 @@ const Modal = (props) => {
             <ModalFooter>
                 { modalBtns.map((btn, index) => (
                     <Button
+                        id={ btn.id }
                         key={ index }
                         color={ btn.color }
                         type={ btn.type ? btn.type : 'button' }
@@ -98,6 +99,7 @@ Modal.propTypes = {
         initialValues: PropTypes.object
     }),
     modalBtns: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
         color: PropTypes.string,
         text: PropTypes.string,
         type: PropTypes.string,
