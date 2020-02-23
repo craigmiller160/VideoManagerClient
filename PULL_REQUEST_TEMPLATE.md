@@ -1,3 +1,3 @@
 # Please Validate this PR
 
-[] Successfully run `gulp validate`
+- [ ] Successfully run `gulp validate`
