@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './ToolTip.scss';
 
-// TODO needs unit test
 const ToolTip = (props) => {
     const {
         children,
