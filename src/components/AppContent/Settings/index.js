@@ -11,6 +11,7 @@ import { Button } from 'reactstrap';
 import { isRequired } from '../../../utils/validations';
 import FileChooser from '../../UI/FileChooser';
 import { change } from 'redux-form';
+import ToolTip from '../../UI/ToolTip';
 
 export const FORM_NAME = 'Settings_Form';
 
@@ -60,6 +61,7 @@ const Settings = (props) => {
 
     // Separate variable for this to make it easily extensible
     const enableSaveBtn = state.rootDirModified;
+    const rootDirToolTipText = form?.values?.rootDir ?? '';
 
     return (
         <div className={ classes.Settings }>
@@ -87,15 +89,17 @@ const Settings = (props) => {
                             justifyContent="center"
                             alignItems="flex-end"
                         >
-                            <Input
-                                name="rootDir"
-                                label="Directory to Scan"
-                                divClassName={ classes.rootDir }
-                                validate={ [
-                                    isRequired
-                                ] }
-                                disabled
-                            />
+                            <ToolTip text={ rootDirToolTipText }>
+                                <Input
+                                    name="rootDir"
+                                    label="Directory to Scan"
+                                    divClassName={ classes.rootDir }
+                                    validate={ [
+                                        isRequired
+                                    ] }
+                                    disabled
+                                />
+                            </ToolTip>
                             <Button
                                 id="set-root-dir-btn"
                                 color="info"

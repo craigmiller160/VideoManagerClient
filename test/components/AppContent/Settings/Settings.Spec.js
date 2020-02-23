@@ -5,6 +5,7 @@ import Settings, { FORM_NAME } from 'components/AppContent/Settings';
 import { isRequired } from '../../../../src/utils/validations';
 import Input from 'components/UI/form/Input/Input';
 import Spinner from 'components/UI/Spinner/Spinner';
+import ToolTip from 'components/UI/ToolTip';
 
 jest.mock('store/settings/settings.actions', () => ({
     loadSettings: () => ({ type: 'settings/loadSettings' }),
@@ -69,6 +70,9 @@ const testRendering = (component, { loading = false, fileChooser = false } = {})
         divClassName: 'rootDir',
         validate: [isRequired],
         disabled: true
+    }));
+    expect(component.find(ToolTip).props()).toEqual(expect.objectContaining({
+        text: 'rootDir'
     }));
     expect(component.find('Button#set-root-dir-btn').props()).toEqual(expect.objectContaining({
         id: 'set-root-dir-btn',
