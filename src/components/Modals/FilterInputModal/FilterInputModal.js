@@ -22,7 +22,7 @@ export const FilterInputModal = (props) => {
 
     const modalBtns = [
         {
-            id: 'filter-saven-btn',
+            id: 'filter-save-btn',
             color: 'success',
             text: 'Save',
             type: 'submit',
