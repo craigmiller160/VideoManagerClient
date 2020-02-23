@@ -2,8 +2,10 @@ import React from 'react';
 import { mount } from 'enzyme';
 import AddButton from 'components/UI/AddButton/AddButton';
 
+const id = 'id';
 const addItem = jest.fn();
 const defaultProps = {
+    id,
     addItem
 };
 
@@ -18,6 +20,7 @@ describe('AddButton', () => {
 
     it('renders correctly', () => {
         const component = doMount();
+        expect(component.find('button').props().id).toEqual(id);
         expect(component.find('button')).toHaveLength(1);
         expect(component.find('button').text()).toEqual('+');
     });

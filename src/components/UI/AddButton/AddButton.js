@@ -4,6 +4,7 @@ import { Button } from 'reactstrap';
 
 const AddButton = (props) => (
     <Button
+        id={ props.id }
         color="info"
         onClick={ props.addItem }
     >
@@ -11,6 +12,7 @@ const AddButton = (props) => (
     </Button>
 );
 AddButton.propTypes = {
+    id: PropTypes.string,
     addItem: PropTypes.func
 };
 

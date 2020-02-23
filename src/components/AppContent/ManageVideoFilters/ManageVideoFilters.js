@@ -36,19 +36,19 @@ const ManageVideoFilters = (props) => {
                     <Row>
                         <Col className="text-center">
                             <div className={ classes.title }>
-                                <h3>Manage Filters</h3>
+                                <h3 id="manage-filters-title">Manage Filters</h3>
                             </div>
                         </Col>
                     </Row>
                     <Row className="mt-3">
-                        <Col>
+                        <Col id="category-filters">
                             <Row>
                                 <Col>
-                                    <h4 className="text-center">Categories</h4>
+                                    <h4 id="category-filters-title" className="text-center">Categories</h4>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col className={ classes.scroll }>
+                                <Col id="category-filters-list" className={ classes.scroll }>
                                     <FilterListItems
                                         items={ categories }
                                         showEditModal={ showEditCategoryModal }
@@ -57,18 +57,18 @@ const ManageVideoFilters = (props) => {
                             </Row>
                             <Row>
                                 <Col className="text-center">
-                                    <AddButton addItem={ showAddCategoryModal } />
+                                    <AddButton id="category-filters-add-btn" addItem={ showAddCategoryModal } />
                                 </Col>
                             </Row>
                         </Col>
-                        <Col>
+                        <Col id="series-filters">
                             <Row>
                                 <Col>
-                                    <h4 className="text-center">Series</h4>
+                                    <h4 id="series-filters-title" className="text-center">Series</h4>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col className={ classes.scroll }>
+                                <Col id="series-filters-list" className={ classes.scroll }>
                                     <FilterListItems
                                         items={ series }
                                         showEditModal={ showEditSeriesModal }
@@ -77,18 +77,18 @@ const ManageVideoFilters = (props) => {
                             </Row>
                             <Row>
                                 <Col className="text-center">
-                                    <AddButton addItem={ showAddSeriesModal } />
+                                    <AddButton id="series-filters-add-btn" addItem={ showAddSeriesModal } />
                                 </Col>
                             </Row>
                         </Col>
-                        <Col>
+                        <Col id="star-filters">
                             <Row>
                                 <Col>
-                                    <h4 className="text-center">Stars</h4>
+                                    <h4 id="star-filters-title" className="text-center">Stars</h4>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col className={ classes.scroll }>
+                                <Col id="star-filters-list" className={ classes.scroll }>
                                     <FilterListItems
                                         items={ stars }
                                         showEditModal={ showEditStarModal }
@@ -97,7 +97,7 @@ const ManageVideoFilters = (props) => {
                             </Row>
                             <Row>
                                 <Col className="text-center">
-                                    <AddButton addItem={ showAddStarModal } />
+                                    <AddButton id="star-filters-add-btn" addItem={ showAddStarModal } />
                                 </Col>
                             </Row>
                         </Col>
