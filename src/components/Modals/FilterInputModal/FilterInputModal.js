@@ -50,6 +50,7 @@ export const FilterInputModal = (props) => {
 
     return (
         <Modal
+            id={ `${type.toLowerCase() || 'empty'}-filter-input-modal` }
             open={ open }
             close={ close }
             title={ `${action} ${type}` }
