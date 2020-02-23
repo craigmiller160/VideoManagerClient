@@ -62,6 +62,7 @@ export const FilterInputModal = (props) => {
             } }
         >
             <Input
+                id={ "filter-name" }
                 label={ `${type} Name` }
                 name="name"
             />
