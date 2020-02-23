@@ -88,7 +88,7 @@ const Settings = (props) => {
                             justifyContent="center"
                             alignItems="flex-end"
                         >
-                            <ToolTip text="Testing 12345">
+                            <ToolTip text="Testing 12345678901234567890123456789012345678901234567890123456789012345678901234567890">
                                 <Input
                                     name="rootDir"
                                     label="Directory to Scan"

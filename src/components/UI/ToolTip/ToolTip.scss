@@ -4,15 +4,15 @@
 
   .ToolTipText {
     visibility: hidden;
-    background-color: #6e6e6e;
-    color: #fff;
+    background-color: rgba(164, 164, 164, 0.9);
+    color: black;
     text-align: center;
     padding: 5px 10px;
     border-radius: 0.25rem;
     position: absolute;
     z-index: 1;
+    left: 0;
     bottom: 0;
-    right: 0;
   }
 
   &:hover {
