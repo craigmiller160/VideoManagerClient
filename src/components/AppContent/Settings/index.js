@@ -61,6 +61,7 @@ const Settings = (props) => {
 
     // Separate variable for this to make it easily extensible
     const enableSaveBtn = state.rootDirModified;
+    const rootDirToolTipText = form?.values?.rootDir ?? '';
 
     return (
         <div className={ classes.Settings }>
@@ -88,7 +89,7 @@ const Settings = (props) => {
                             justifyContent="center"
                             alignItems="flex-end"
                         >
-                            <ToolTip text="Testing 12345678901234567890123456789012345678901234567890123456789012345678901234567890">
+                            <ToolTip text={ rootDirToolTipText }>
                                 <Input
                                     name="rootDir"
                                     label="Directory to Scan"
