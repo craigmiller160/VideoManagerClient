@@ -52,7 +52,7 @@ const VideoListItem = (props) => {
 
     return (
         <div
-            data-name="video-list-item-root"
+            data-name={ `video-list-item-${fileId}` }
             className={ rootClasses.join(' ') }
             onClick={ () => dispatch(expandVideoFile(fileId)) }
         >

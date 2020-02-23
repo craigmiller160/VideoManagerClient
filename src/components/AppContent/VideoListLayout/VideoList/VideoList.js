@@ -19,6 +19,7 @@ const VideoList = () => {
 
     const [ pager1, pager2 ] = [...Array(2).keys()].map((index) => (
         <VideoListPagination
+            id={ `video-pagination-${index}` }
             key={ index }
         />
     ));
@@ -34,9 +35,9 @@ const VideoList = () => {
             }
             {
                 !searching && videoList.length > 0 &&
-                <div>
+                <div id="video-list-contents-wrapper">
                     { pager1 }
-                    <ListGroup>
+                    <ListGroup id="video-list-contents">
                         { videoList.map((videoFile) => (
                             <VideoListItem
                                 key={ videoFile.fileId }
