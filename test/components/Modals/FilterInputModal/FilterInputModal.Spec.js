@@ -37,6 +37,7 @@ describe('FilterInputModal', () => {
 
     it('renders correctly', () => {
         const component = doMount();
+        expect(component.find('Modal').at(0).props().id).toEqual('category-filter-input-modal');
         expect(component.find('h5.modal-title').text()).toEqual('Add Category');
         expect(component.find('label').at(0).text()).toEqual('Category Name');
         expect(component.find('Button')).toHaveLength(2);

@@ -2,10 +2,12 @@ import React from 'react';
 import { mount } from 'enzyme';
 import FilterListItem from 'components/AppContent/ManageVideoFilters/FilterListItems/FilterListItem/FilterListItem';
 
+const id = 'MyId';
 const label = 'MyLabel';
 const click = jest.fn();
 
 const defaultProps = {
+    id,
     label,
     click
 };
@@ -23,6 +25,9 @@ describe('FilterListItem', () => {
         const component = doMount();
         expect(component.find('p')).toHaveLength(1);
         expect(component.find('p').text()).toEqual(label);
+        expect(component.find('p').props()).toEqual(expect.objectContaining({
+            id
+        }));
     });
 
     it('calls click listener', () => {

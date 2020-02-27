@@ -5,6 +5,7 @@ import Form from 'components/UI/form/Form/Form';
 
 const Modal = (props) => {
     const {
+        id,
         open,
         title,
         children,
@@ -28,6 +29,7 @@ const Modal = (props) => {
             <ModalFooter>
                 { modalBtns.map((btn, index) => (
                     <Button
+                        id={ btn.id }
                         key={ index }
                         color={ btn.color }
                         type={ btn.type ? btn.type : 'button' }
@@ -50,6 +52,7 @@ const Modal = (props) => {
 
     return (
         <ReactModal
+            id={ id }
             isOpen={ open }
             { ...modalProps }
         >
@@ -75,6 +78,7 @@ const Modal = (props) => {
 };
 
 Modal.defaultProps = {
+    id: '',
     title: 'Modal',
     modalProps: {},
     modalBtns: [],
@@ -84,6 +88,7 @@ Modal.defaultProps = {
 };
 
 Modal.propTypes = {
+    id: PropTypes.string,
     open: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired,
     title: PropTypes.string,
@@ -94,6 +99,7 @@ Modal.propTypes = {
         initialValues: PropTypes.object
     }),
     modalBtns: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
         color: PropTypes.string,
         text: PropTypes.string,
         type: PropTypes.string,

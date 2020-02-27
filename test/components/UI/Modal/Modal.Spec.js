@@ -11,6 +11,7 @@ describe('Modal component', () => {
     it('renders correctly', () => {
         const title = 'Test Modal';
         const bodyText = 'Hello World';
+        const id = 'id';
         const modalBtns = [
             {
                 color: 'primary',
@@ -22,6 +23,7 @@ describe('Modal component', () => {
 
         const component = mount(
             <Modal
+                id={ id }
                 open
                 close={ closeFn }
                 title={ title }
@@ -31,6 +33,7 @@ describe('Modal component', () => {
             </Modal>
         );
 
+        expect(component.find('Modal').at(0).props().id).toEqual(id);
         expect(component.find('h5.modal-title').text()).toEqual(title);
         expect(component.find('div.modal-body > p').text()).toEqual(bodyText);
         component.find('button.close[type="button"]').simulate('click');
