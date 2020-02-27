@@ -4,11 +4,13 @@ import classes from './FilterListItem.scss';
 
 const FilterListItem = (props) => {
     const {
+        id,
         label,
         click
     } = props;
     return (
         <p
+            id={ id }
             onClick={ click }
             className={ classes.FilterListItem }
         >
@@ -17,6 +19,7 @@ const FilterListItem = (props) => {
     );
 };
 FilterListItem.propTypes = {
+    id: PropTypes.string,
     label: PropTypes.string.isRequired,
     click: PropTypes.func
 };

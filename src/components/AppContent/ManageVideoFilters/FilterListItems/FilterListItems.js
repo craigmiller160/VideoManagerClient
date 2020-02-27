@@ -7,6 +7,7 @@ const FilterListItems = (props) => (
         {
             props.items.map(({ value, label }, index) => (
                 <FilterListItem
+                    id={ `${props.type}-filter-item-${index}` }
                     key={ value }
                     label={ label }
                     value={ value }
@@ -18,6 +19,7 @@ const FilterListItems = (props) => (
 );
 
 FilterListItems.propTypes = {
+    type: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.shape({
         value: PropTypes.number,
         label: PropTypes.string

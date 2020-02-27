@@ -50,6 +50,7 @@ const ManageVideoFilters = (props) => {
                             <Row>
                                 <Col id="category-filters-list" className={ classes.scroll }>
                                     <FilterListItems
+                                        type="category"
                                         items={ categories }
                                         showEditModal={ showEditCategoryModal }
                                     />
@@ -70,6 +71,7 @@ const ManageVideoFilters = (props) => {
                             <Row>
                                 <Col id="series-filters-list" className={ classes.scroll }>
                                     <FilterListItems
+                                        type="series"
                                         items={ series }
                                         showEditModal={ showEditSeriesModal }
                                     />
@@ -90,6 +92,7 @@ const ManageVideoFilters = (props) => {
                             <Row>
                                 <Col id="star-filters-list" className={ classes.scroll }>
                                     <FilterListItems
+                                        type="star"
                                         items={ stars }
                                         showEditModal={ showEditStarModal }
                                     />

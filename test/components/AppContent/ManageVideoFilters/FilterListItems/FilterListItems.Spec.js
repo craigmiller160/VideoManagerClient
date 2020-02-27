@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import FilterListItems from 'components/AppContent/ManageVideoFilters/FilterListItems/FilterListItems';
 
+const type = 'type';
 const items = [
     { value: 1, label: 'label1' },
     { value: 2, label: 'label2' }
@@ -9,6 +10,7 @@ const items = [
 const showEditModal = jest.fn();
 
 const defaultProps = {
+    type,
     items,
     showEditModal
 };
@@ -27,11 +29,13 @@ describe('FilterListItems', () => {
         expect(component.find('FilterListItem')).toHaveLength(2);
         expect(component.find('FilterListItem').at(0).props()).toEqual({
             ...items[0],
-            click: expect.any(Function)
+            click: expect.any(Function),
+            id: `${type}-filter-item-0`
         });
         expect(component.find('FilterListItem').at(1).props()).toEqual({
             ...items[1],
-            click: expect.any(Function)
+            click: expect.any(Function),
+            id: `${type}-filter-item-1`
         });
     });
 
