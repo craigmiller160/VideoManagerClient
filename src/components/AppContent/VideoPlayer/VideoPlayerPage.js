@@ -28,6 +28,17 @@ const VideoPlayerPage = (props) => {
     const formattedLastViewed = videoFile.lastViewed ? new VideoDate(videoFile.lastViewed).formatDateTime() : '';
     const formattedFileAdded = videoFile.fileAdded ? new VideoDate(videoFile.fileAdded).formatDateTime() : '';
 
+    const playerOptions = {
+        autoplay: true,
+        controls: true,
+        sources: [
+            {
+                src: `/api/video-files/play/${params.fileId}?videoToken=${videoToken}`,
+                type: 'video/mp4'
+            }
+        ]
+    };
+
     return (
         <>
             <Helmet
@@ -55,8 +66,7 @@ const VideoPlayerPage = (props) => {
                         <Row>
                             <WordWrapCol className="text-center">
                                 <VideoPlayer
-                                    fileId={ params.fileId }
-                                    videoToken={ videoToken }
+                                    playerOptions={ playerOptions }
                                 />
                             </WordWrapCol>
                         </Row>
