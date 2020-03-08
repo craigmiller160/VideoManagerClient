@@ -5,8 +5,13 @@
     @include page-title;
     margin-bottom: 20px;
   }
-  video {
+
+  :global(.video-js) {
     width: 100%;
+
+    video {
+      width: 100%;
+    }
   }
 
   .bold {
