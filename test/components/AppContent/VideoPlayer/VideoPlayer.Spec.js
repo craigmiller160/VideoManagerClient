@@ -1,6 +1,12 @@
 import VideoPlayer from 'components/AppContent/VideoPlayer/VideoPlayer';
 import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
 
+jest.mock('video.js', () => jest.fn());
+import videojs from 'video.js'; // eslint-disable-line import/first
+
+const dispose = jest.fn();
+videojs.mockImplementation(() => ({ dispose }));
+
 const defaultProps = {
     fileId: 1,
     videoToken: 'token'
@@ -11,6 +17,10 @@ const doMount = mountTestComponent(VideoPlayer, {
 });
 
 describe('VideoPlayer', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     describe('rendering', () => {
         it('renders correctly', () => {
             const { component } = doMount();
@@ -20,7 +30,12 @@ describe('VideoPlayer', () => {
     });
 
     describe('videojs', () => {
-        it('can this be tested', () => {
+        it('configures videojs on mount', () => {
+            const { component } = doMount();
+            expect(videojs).toHaveBeenCalled();
+        });
+
+        it('disposes of videojs on unmount', () => {
             throw new Error();
         });
     });
