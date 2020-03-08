@@ -31,6 +31,7 @@ VideoPlayer.propTypes = {
     playerOptions: PropTypes.shape({
         autoplay: PropTypes.bool,
         controls: PropTypes.bool,
+        nativeControlsForTouch: PropTypes.bool,
         sources: PropTypes.arrayOf(PropTypes.shape({
             src: PropTypes.string.isRequired,
             type: PropTypes.string.isRequired
