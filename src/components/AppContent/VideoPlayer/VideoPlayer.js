@@ -1,4 +1,3 @@
-/* eslint-disable */ // TODO delete this
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import videojs from 'video.js';
@@ -13,8 +12,7 @@ const VideoPlayer = (props) => {
     const videoNode = useRef(null);
 
     useEffect(() => {
-        console.log(videoNode); // TODO delete this
-        player = videojs(videoNode.current, playerOptions, () => console.log('Player is ready')); // TODO remove console.log
+        player = videojs(videoNode.current, playerOptions);
         return () => {
             if (player) {
                 player.dispose();
@@ -30,9 +28,14 @@ const VideoPlayer = (props) => {
     );
 };
 VideoPlayer.propTypes = {
-    // fileId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    // videoToken: PropTypes.string.isRequired,
-    playerOptions: PropTypes.object // TODO be more specific
+    playerOptions: PropTypes.shape({
+        autoplay: PropTypes.bool,
+        controls: PropTypes.bool,
+        sources: PropTypes.arrayOf(PropTypes.shape({
+            src: PropTypes.string.isRequired,
+            type: PropTypes.string.isRequired
+        })).isRequired
+    }).isRequired
 };
 
 export default VideoPlayer;
