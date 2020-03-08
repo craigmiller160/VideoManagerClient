@@ -15,7 +15,6 @@ const VideoPlayer = (props) => {
         autoplay: true,
         controls: true,
         nativeControlsForTouch: true,
-        techOrder: ['html5'],
         sources: [
             {
                 src: `/api/video-files/play/${fileId}?videoToken=${videoToken}`,

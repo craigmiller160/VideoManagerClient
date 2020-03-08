@@ -32,7 +32,20 @@ describe('VideoPlayer', () => {
     describe('videojs', () => {
         it('configures videojs on mount', () => {
             const { component } = doMount();
-            expect(videojs).toHaveBeenCalled();
+            const videoElem = component.find('video').getDOMNode();
+            const playerOptions = {
+                autoplay: true,
+                controls: true,
+                nativeControlsForTouch: true,
+                sources: [
+                    {
+                        src: `/api/video-files/play/${defaultProps.fileId}?videoToken=${defaultProps.videoToken}`,
+                        type: 'video/mp4'
+                    }
+                ]
+            };
+
+            expect(videojs).toHaveBeenCalledWith(videoElem, playerOptions);
         });
 
         it('disposes of videojs on unmount', () => {
