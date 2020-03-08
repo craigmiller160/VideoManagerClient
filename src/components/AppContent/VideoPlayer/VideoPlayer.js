@@ -1,7 +1,7 @@
 /* eslint-disable */ // TODO delete this
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import videojs from 'videojs';
+import videojs from 'video.js';
 
 let player = null; // TODO I don't like this approach
 
@@ -13,6 +13,7 @@ const VideoPlayer = (props) => {
     const videoNode = useRef(null);
 
     useEffect(() => {
+        console.log(videoNode); // TODO delete this
         player = videojs(videoNode, playerOptions, () => console.log('Player is ready')); // TODO remove console.log
         return () => {
             if (player) {
