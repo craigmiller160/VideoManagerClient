@@ -3,7 +3,6 @@ import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import videojs from 'video.js';
 
-// TODO update unit tests for this
 const VideoPlayer = (props) => {
     const {
         fileId,
@@ -35,7 +34,7 @@ const VideoPlayer = (props) => {
     });
 
     return (
-        <div data-vjs-player>
+        <div id="video-player-player" data-vjs-player>
             <video ref={ videoNode } className="video-js" />
         </div>
     );

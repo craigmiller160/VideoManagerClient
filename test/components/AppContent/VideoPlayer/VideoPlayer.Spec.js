@@ -14,11 +14,14 @@ describe('VideoPlayer', () => {
     describe('rendering', () => {
         it('renders correctly', () => {
             const { component } = doMount();
+            expect(component.find('div#video-player-player').getElement().props['data-vjs-player']).toEqual(true);
             expect(component.find('video')).toHaveLength(1);
-            expect(component.find('source')).toHaveLength(1);
-            expect(component.find('source').props()).toEqual({
-                src: '/api/video-files/play/1?videoToken=token'
-            });
+        });
+    });
+
+    describe('videojs', () => {
+        it('can this be tested', () => {
+            throw new Error();
         });
     });
 });
