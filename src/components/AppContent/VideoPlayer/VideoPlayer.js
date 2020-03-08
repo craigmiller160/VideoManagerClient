@@ -9,8 +9,6 @@ videojsChromecast(videojs, {
     preloadWebComponents: true
 });
 
-let player = null; // TODO I don't like this approach
-
 // TODO update unit tests for this
 const VideoPlayer = (props) => {
     const {
@@ -18,6 +16,7 @@ const VideoPlayer = (props) => {
         videoToken
     } = props;
     const videoNode = useRef(null);
+    const videoPlayer = useRef(null);
 
     const playerOptions = {
         autoplay: true,
@@ -31,16 +30,17 @@ const VideoPlayer = (props) => {
             }
         ],
         plugins: {
-            chromecast: {}
+            chromecast: {
+                appId: 'APP_ID'
+            }
         }
     };
 
     useEffect(() => {
-        player = videojs(videoNode.current, playerOptions);
+        videoPlayer.current = videojs(videoNode.current, playerOptions);
         return () => {
-            if (player) {
-                player.dispose();
-                player = null;
+            if (videoPlayer.current) {
+                videoPlayer.current.dispose();
             }
         };
     });
