@@ -1,4 +1,3 @@
-/* eslint-disable */ // TODO delete this
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import videojs from 'video.js';
