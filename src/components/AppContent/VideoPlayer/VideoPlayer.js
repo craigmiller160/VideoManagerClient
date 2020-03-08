@@ -14,7 +14,7 @@ const VideoPlayer = (props) => {
 
     useEffect(() => {
         console.log(videoNode); // TODO delete this
-        player = videojs(videoNode, playerOptions, () => console.log('Player is ready')); // TODO remove console.log
+        player = videojs(videoNode.current, playerOptions, () => console.log('Player is ready')); // TODO remove console.log
         return () => {
             if (player) {
                 player.dispose();
