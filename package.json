@@ -29,7 +29,8 @@
     "redux-thunk": "^2.3.0",
     "resolve": "1.8.1",
     "styled-components": "^4.2.0",
-    "use-react-router": "^1.0.7"
+    "use-react-router": "^1.0.7",
+    "videojs": "^1.0.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -196,6 +197,7 @@
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
     "jest-styled-components": "^6.3.1",
+    "mini-css-extract-plugin": "0.4.3",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.1.0",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -210,7 +212,6 @@
     "webpack": "4.19.1",
     "webpack-dev-server": "3.1.14",
     "webpack-manifest-plugin": "2.0.4",
-    "workbox-webpack-plugin": "3.6.3",
-    "mini-css-extract-plugin": "0.4.3"
+    "workbox-webpack-plugin": "3.6.3"
   }
 }
