@@ -3,7 +3,6 @@
   "version": "1.9.0-beta",
   "private": true,
   "dependencies": {
-    "@silvermine/videojs-chromecast": "^1.2.0",
     "axios": "^0.18.0",
     "bfj": "6.1.1",
     "bootstrap": "^4.2.1",

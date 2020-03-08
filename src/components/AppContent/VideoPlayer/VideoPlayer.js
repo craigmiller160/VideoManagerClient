@@ -2,12 +2,6 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import videojs from 'video.js';
-import videojsChromecast from '@silvermine/videojs-chromecast';
-
-// TODO need to integrate dev dependencies from this one into my project... maybe...
-videojsChromecast(videojs, {
-    preloadWebComponents: true
-});
 
 // TODO update unit tests for this
 const VideoPlayer = (props) => {
@@ -22,18 +16,13 @@ const VideoPlayer = (props) => {
         autoplay: true,
         controls: true,
         nativeControlsForTouch: true,
-        techOrder: ['chromecast', 'html5'],
+        techOrder: ['html5'],
         sources: [
             {
                 src: `/api/video-files/play/${fileId}?videoToken=${videoToken}`,
                 type: 'video/mp4'
             }
-        ],
-        plugins: {
-            chromecast: {
-                appId: 'APP_ID'
-            }
-        }
+        ]
     };
 
     useEffect(() => {
