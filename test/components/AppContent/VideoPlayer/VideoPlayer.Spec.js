@@ -46,10 +46,13 @@ describe('VideoPlayer', () => {
             };
 
             expect(videojs).toHaveBeenCalledWith(videoElem, playerOptions);
+            expect(dispose).not.toHaveBeenCalled();
         });
 
         it('disposes of videojs on unmount', () => {
-            throw new Error();
+            const { component } = doMount();
+            component.unmount();
+            expect(dispose).toHaveBeenCalled();
         });
     });
 });
