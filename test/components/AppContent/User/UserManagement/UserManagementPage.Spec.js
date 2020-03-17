@@ -2,7 +2,7 @@ import API from 'services/API';
 import MockAdapter from 'axios-mock-adapter';
 import { act } from 'react-dom/test-utils';
 import UserManagementPage from 'components/AppContent/User/Management/UserManagementPage';
-import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
 
 const defaultProps = {
@@ -11,11 +11,16 @@ const defaultProps = {
     }
 };
 
-const doMount = mountTestComponent(UserManagementPage, {
-    defaultProps,
-    defaultInitialRouterEntries: ['/'],
-    defaultStoreState: {},
-    defaultUseThunk: true
+const mounter = enzymeCreator({
+    component: UserManagementPage,
+    props: defaultProps,
+    redux: {
+        state: {},
+        useThunk: true
+    },
+    router: {
+        initialRouterEntries: ['/']
+    }
 });
 
 const users = [
@@ -53,7 +58,7 @@ describe('UserManagementPage', () => {
 
     describe('rendering', () => {
         it('renders all users', async () => {
-            const { component } = doMount();
+            const { component } = mounter();
             await resolveComponent(component);
 
             expect(component.find('div.title > h3').text()).toEqual('User Management');
@@ -77,14 +82,14 @@ describe('UserManagementPage', () => {
 
     describe('callbacks and actions', () => {
         it('calls history.push when clicking add button', async () => {
-            const { component } = doMount();
+            const { component } = mounter();
             await resolveComponent(component);
             component.find('Button#add-user-btn').simulate('click');
             expect(defaultProps.history.push).toHaveBeenCalledWith('/users/new');
         });
 
         it('updates state in changeExpanded', async () => {
-            const { component } = doMount();
+            const { component } = mounter();
             await resolveComponent(component);
 
             await act(async () => {
@@ -103,7 +108,7 @@ describe('UserManagementPage', () => {
             mockApi.onGet('/api/auth/users')
                 .reply(500);
 
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             await resolveComponent(component);
 
             const expectedActions = [
