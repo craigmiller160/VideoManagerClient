@@ -3,7 +3,6 @@ import MockAdapter from 'axios-mock-adapter';
 import { act } from 'react-dom/test-utils';
 import enzymeCreator from 'react-enzyme-utils';
 import AddUser from 'components/AppContent/User/UserDetails/AddUser';
-import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
 import { ROLE_EDIT } from '../../../../../src/utils/securityConstants';
 
 const defaultProps = {
@@ -61,8 +60,7 @@ describe('AddUser', () => {
         it('renders', async () => {
             mockApi.onGet('/auth/roles')
                 .reply(200, roles);
-            const { component, store } = mounter();
-            await resolveComponent(component);
+            const { component, store } = await mounter().resolve();
             testRendering(component);
             expect(store.getActions()).not.toEqual(expect.arrayContaining([
                 { type: 'alert/showErrorAlert', payload: expect.any(String) }
@@ -70,8 +68,7 @@ describe('AddUser', () => {
         });
 
         it('renders with error', async () => {
-            const { component, store } = mounter();
-            await resolveComponent(component);
+            const { component, store } = await mounter().resolve();
             testRendering(component, {
                 hasError: true
             });
@@ -91,8 +88,7 @@ describe('AddUser', () => {
                     .reply(200, roles);
                 mockApi.onPost('/auth/users')
                     .reply(200, userDetails);
-                const { component, store } = mounter();
-                await resolveComponent(component);
+                const { component, store } = await mounter().resolve();
                 await act(async () => {
                     await component.find('UserDetailsPage').props()
                         .saveUser({
@@ -109,8 +105,7 @@ describe('AddUser', () => {
             it('fails', async () => {
                 mockApi.onGet('/auth/roles')
                     .reply(200, roles);
-                const { component, store } = mounter();
-                await resolveComponent(component);
+                const { component, store } = await mounter().resolve();
                 await act(async () => {
                     await component.find('UserDetailsPage').props()
                         .saveUser({
