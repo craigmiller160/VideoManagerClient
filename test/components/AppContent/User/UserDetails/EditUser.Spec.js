@@ -2,7 +2,7 @@ import API from 'services/API';
 import MockAdapter from 'axios-mock-adapter';
 import { act } from 'react-dom/test-utils';
 import EditUser from 'components/AppContent/User/UserDetails/EditUser';
-import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 import { ROLE_ADMIN, ROLE_EDIT } from '../../../../../src/utils/securityConstants';
 import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
 
@@ -37,10 +37,13 @@ const defaultProps = {
     }
 };
 
-const doMount = mountTestComponent(EditUser, {
-    defaultProps,
-    defaultStoreState: {},
-    defaultUseThunk: true
+const mounter = enzymeCreator({
+    component: EditUser,
+    props: defaultProps,
+    redux: {
+        state: {},
+        useThunk: true
+    }
 });
 
 const mockApi = new MockAdapter(API);
@@ -70,7 +73,7 @@ describe('EditUser', () => {
                 .reply(200, roles);
             mockApi.onGet('/api/auth/users/admin/1')
                 .reply(200, userDetails);
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             await resolveComponent(component);
             testRendering(component);
             expect(store.getActions()).not.toEqual(expect.arrayContaining([
@@ -79,7 +82,7 @@ describe('EditUser', () => {
         });
 
         it('renders with error', async () => {
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             await resolveComponent(component);
             testRendering(component, {
                 hasError: true
@@ -113,7 +116,7 @@ describe('EditUser', () => {
             };
             mockApi.onPut('/auth/users/admin/1', formattedValues)
                 .reply(200, userDetails);
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             await resolveComponent(component);
             await act(async () => {
                 component.find('UserDetailsPage').props().saveUser(values);
@@ -130,7 +133,7 @@ describe('EditUser', () => {
         it('deleteUser', async () => {
             mockApi.onDelete('/auth/users/1')
                 .reply(200);
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             await resolveComponent(component);
             await act(async () => {
                 component.find('UserDetailsPage').props().deleteUser();
@@ -144,7 +147,7 @@ describe('EditUser', () => {
         it('revokeUser', async () => {
             mockApi.onPost('/auth/users/revoke/1')
                 .reply(200, userDetails);
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             await resolveComponent(component);
             await act(async () => {
                 component.find('UserDetailsPage').props().revokeUser();
