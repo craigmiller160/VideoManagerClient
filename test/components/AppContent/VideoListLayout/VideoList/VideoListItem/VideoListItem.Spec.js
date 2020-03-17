@@ -49,7 +49,7 @@ const defaultStoreState = {
     }
 };
 
-const doMount = enzymeCreator({
+const mounter = enzymeCreator({
     component: VideoListItem,
     props: defaultProps,
     redux: {
@@ -126,12 +126,12 @@ describe('VideoListItem', () => {
 
     describe('Rendering', () => {
         it('renders without expanding', () => {
-            const { component } = doMount();
+            const { component } = mounter();
             testRendering(component);
         });
 
         it('renders with expanding', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     videoFile: {
@@ -144,7 +144,7 @@ describe('VideoListItem', () => {
         });
 
         it('renders without edit role', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 storeState: {
                     ...defaultStoreState,
                     auth: {
@@ -159,7 +159,7 @@ describe('VideoListItem', () => {
         });
 
         it('renders without display name', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     videoFile: {
@@ -174,7 +174,7 @@ describe('VideoListItem', () => {
 
     describe('Callbacks and actions', () => {
         it('dispatches expandVideoFile', () => {
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             component.find(`div[data-name="video-list-item-${defaultProps.videoFile.fileId}"]`).props().onClick();
             expect(store.getActions()).toEqual([
                 { type: 'EXPAND_VIDEO_FILE' }
@@ -182,7 +182,7 @@ describe('VideoListItem', () => {
         });
 
         it('calls playVideoClick', async () => {
-            const { component, store } = doMount({
+            const { component, store } = mounter({
                 props: {
                     ...defaultProps,
                     videoFile: {

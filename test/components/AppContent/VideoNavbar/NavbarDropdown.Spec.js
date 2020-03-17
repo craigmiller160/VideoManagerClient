@@ -1,5 +1,5 @@
 import NavbarDropdown from 'components/AppContent/VideoNavbar/NavbarDropdown';
-import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 
 jest.mock('store/auth/auth.actions', () => ({
     logout: () => ({
@@ -18,9 +18,14 @@ const defaultStoreState = {
     }
 };
 
-const doMount = mountTestComponent(NavbarDropdown, {
-    defaultStoreState,
-    defaultInitialRouterEntries: ['/']
+const mounter = enzymeCreator({
+    component: NavbarDropdown,
+    redux: {
+        state: defaultStoreState
+    },
+    router: {
+        initialRouterEntries: ['/']
+    }
 });
 
 const testRendering = (component, { isProfileRoute = false } = {}) => {
@@ -73,12 +78,12 @@ const testRendering = (component, { isProfileRoute = false } = {}) => {
 describe('NavbarDropdown', () => {
     describe('rendering', () => {
         it('renders correctly', () => {
-            const { component } = doMount();
+            const { component } = mounter();
             testRendering(component);
         });
 
         it('renders with profile route', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 initialRouterEntries: ['/profile']
             });
             testRendering(component, { isProfileRoute: true });
@@ -87,7 +92,7 @@ describe('NavbarDropdown', () => {
 
     describe('callbacks', () => {
         it('dispatches logout action', () => {
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             component.find('NavbarItem#logoutLink').props().onClick();
             expect(store.getActions()).toEqual([
                 { type: 'LOGOUT' }
