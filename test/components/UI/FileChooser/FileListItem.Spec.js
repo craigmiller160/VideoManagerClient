@@ -1,4 +1,4 @@
-import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 import FileListItem from 'components/UI/FileChooser/FileListItem';
 import FileChooserContext from 'components/UI/FileChooser/FileChooserContext';
 
@@ -20,10 +20,13 @@ const defaultContextValue = {
     openDirectory
 };
 
-const doMount = mountTestComponent(FileListItem, {
-    defaultProps,
-    ContextType: FileChooserContext,
-    defaultContextValue
+const mounter = enzymeCreator({
+    component: FileListItem,
+    props: defaultProps,
+    context: {
+        type: FileChooserContext,
+        value: defaultContextValue
+    }
 });
 
 const testRendering = (component, {
@@ -70,12 +73,12 @@ describe('FileListItem', () => {
 
     describe('rendering', () => {
         it('renders with a file', () => {
-            const { component } = doMount();
+            const { component } = mounter();
             testRendering(component);
         });
 
         it('renders with select hidden', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     hideSelect: true
@@ -87,7 +90,7 @@ describe('FileListItem', () => {
         });
 
         it('renders with a directory', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     file: {
@@ -102,7 +105,7 @@ describe('FileListItem', () => {
         });
 
         it('renders with a directory and is directories only', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     file: {
@@ -124,7 +127,7 @@ describe('FileListItem', () => {
 
     describe('actions', () => {
         it('openDirectory', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     file: {
@@ -141,7 +144,7 @@ describe('FileListItem', () => {
         });
 
         it('selectFile', () => {
-            const { component } = doMount();
+            const { component } = mounter();
             component.find('Button[data-name="select-btn"]').props().onClick();
             expect(selectFile).toHaveBeenCalledWith(defaultProps.file);
         });
