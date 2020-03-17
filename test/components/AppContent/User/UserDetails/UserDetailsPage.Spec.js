@@ -1,5 +1,5 @@
 import UserDetailsPage, { USER_DETAILS_FORM_NAME } from 'components/AppContent/User/UserDetails/UserDetailsPage';
-import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 import { ROLE_ADMIN } from '../../../../../src/utils/securityConstants';
 
 const defaultProps = {
@@ -24,9 +24,12 @@ const defaultStoreState = {
     }
 };
 
-const doMount = mountTestComponent(UserDetailsPage, {
-    defaultProps,
-    defaultStoreState
+const doMount = enzymeCreator({
+    component: UserDetailsPage,
+    props: defaultProps,
+    redux: {
+        state: defaultStoreState
+    }
 });
 
 const testRendering = (component, {
@@ -177,6 +180,7 @@ describe('UserDetailsPage', () => {
         it('renders with password validation', () => {
             const { component } = doMount({
                 props: {
+                    ...defaultProps,
                     requirePassword: true
                 }
             });
@@ -199,7 +203,7 @@ describe('UserDetailsPage', () => {
 
         it('renders with save disabled', () => {
             const { component } = doMount({
-                storeState: {
+                reduxState: {
                     ...defaultStoreState,
                     form: {
                         ...defaultStoreState.form,
