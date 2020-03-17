@@ -36,7 +36,7 @@ const defaultProps = {
 
 const defaultStoreState = {};
 
-const doMount = enzymeCreator({
+const mounter = enzymeCreator({
     component: FileChooser,
     props: defaultProps,
     redux: {
@@ -78,7 +78,7 @@ describe('FileChooser', () => {
         it('renders while loading', () => {
             // Deliberately not using act() here because I want to see the state before
             // the asynchronous updates are resolved
-            const { component } = doMount();
+            const { component } = mounter();
             testRendering(component, {
                 loading: true
             });
@@ -89,7 +89,7 @@ describe('FileChooser', () => {
                 data: getFilesData
             });
 
-            const { component } = doMount();
+            const { component } = mounter();
             await resolveComponent(component);
             testRendering(component);
         });
@@ -99,7 +99,7 @@ describe('FileChooser', () => {
                 data: getDirsData
             });
 
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     directoriesOnly: true
@@ -116,7 +116,7 @@ describe('FileChooser', () => {
                 data: getFilesData
             });
 
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     initialDir
@@ -133,7 +133,7 @@ describe('FileChooser', () => {
                 data: getDirsData
             });
 
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     directoriesOnly: true,
@@ -154,7 +154,7 @@ describe('FileChooser', () => {
                 data: getFilesData
             });
 
-            const { component } = doMount();
+            const { component } = mounter();
             await resolveComponent(component);
             await act(async () => {
                 await component.find('div#context-div').props().openDirectory({ filePath: 'path' });
@@ -167,7 +167,7 @@ describe('FileChooser', () => {
                 data: getFilesData
             });
 
-            const { component } = doMount();
+            const { component } = mounter();
             await resolveComponent(component);
             component.find('div#context-div').props().selectFile({ fileName: 'file' });
             expect(selectFile).toHaveBeenCalledWith({ fileName: 'file' });
@@ -178,7 +178,7 @@ describe('FileChooser', () => {
                 message: 'It failed'
             });
 
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             await resolveComponent(component);
 
             expect(store.getActions()).toEqual([

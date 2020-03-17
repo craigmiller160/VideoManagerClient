@@ -1,4 +1,4 @@
-import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 import FileListContainer from 'components/UI/FileChooser/FileListContainer';
 
 const files = [...new Array(5).keys()]
@@ -18,8 +18,9 @@ const defaultProps = {
     fileList
 };
 
-const doMount = mountTestComponent(FileListContainer, {
-    defaultProps
+const mounter = enzymeCreator({
+    component: FileListContainer,
+    props: defaultProps
 });
 
 const testRendering = (component, { hasParentPath = false } = {}) => {
@@ -33,12 +34,12 @@ const testRendering = (component, { hasParentPath = false } = {}) => {
 describe('FileListContainer', () => {
     describe('rendering', () => {
         it('renders files', () => {
-            const { component } = doMount();
+            const { component } = mounter();
             testRendering(component);
         });
 
         it('renders files with parent path', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     fileList: {
