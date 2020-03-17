@@ -1,5 +1,5 @@
 import NavbarItem from 'components/AppContent/VideoNavbar/NavbarItem';
-import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 
 const onClick = jest.fn();
 const defaultProps = {
@@ -12,9 +12,12 @@ const defaultProps = {
     className: 'className'
 };
 
-const doMount = mountTestComponent(NavbarItem, {
-    defaultProps,
-    defaultInitialRouterEntries: ['/']
+const doMount = enzymeCreator({
+    component: NavbarItem,
+    props: defaultProps,
+    router: {
+        initialRouterEntries: ['/']
+    }
 });
 
 const testRendering = (component, { isLink = true, isActive = false } = {}) => {
@@ -66,6 +69,7 @@ describe('NavbarItem', () => {
         it('renders when not link', () => {
             const { component } = doMount({
                 props: {
+                    ...defaultProps,
                     isLink: false
                 }
             });
