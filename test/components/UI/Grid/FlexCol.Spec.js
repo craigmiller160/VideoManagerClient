@@ -1,7 +1,9 @@
 import FlexCol from 'components/UI/Grid/FlexCol';
-import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 
-const doMount = mountTestComponent(FlexCol);
+const doMount = enzymeCreator({
+    component: FlexCol
+});
 
 describe('FlexCol', () => {
     it('renders without custom props', () => {
