@@ -17,6 +17,7 @@
     "react-app-polyfill": "^0.2.0",
     "react-dev-utils": "^7.0.1",
     "react-dom": "16.11.0",
+    "react-enzyme-utils": "file:.yalc/react-enzyme-utils",
     "react-helmet": "^5.2.0",
     "react-redux": "^7.1.1",
     "react-router": "^5.1.2",
@@ -196,6 +197,7 @@
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
     "jest-styled-components": "^6.3.1",
+    "mini-css-extract-plugin": "0.4.3",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.1.0",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -210,7 +212,6 @@
     "webpack": "4.19.1",
     "webpack-dev-server": "3.1.14",
     "webpack-manifest-plugin": "2.0.4",
-    "workbox-webpack-plugin": "3.6.3",
-    "mini-css-extract-plugin": "0.4.3"
+    "workbox-webpack-plugin": "3.6.3"
   }
 }
