@@ -6,7 +6,6 @@ import {
 } from 'services/LocalFileApiService';
 import enzymeCreator from 'react-enzyme-utils';
 import FileChooser from 'components/UI/FileChooser';
-import resolveComponent from '../../../exclude/testUtil/resolveComponent';
 import Spinner from 'components/UI/Spinner/Spinner';
 
 jest.mock('services/LocalFileApiService', () => ({
@@ -89,8 +88,7 @@ describe('FileChooser', () => {
                 data: getFilesData
             });
 
-            const { component } = mounter();
-            await resolveComponent(component);
+            const { component } = await mounter().resolve();
             testRendering(component);
         });
 
@@ -99,13 +97,12 @@ describe('FileChooser', () => {
                 data: getDirsData
             });
 
-            const { component } = mounter({
+            const { component } = await mounter({
                 props: {
                     ...defaultProps,
                     directoriesOnly: true
                 }
-            });
-            await resolveComponent(component);
+            }).resolve();
             testRendering(component, {
                 loadDirs: true
             });
@@ -116,13 +113,12 @@ describe('FileChooser', () => {
                 data: getFilesData
             });
 
-            const { component } = mounter({
+            const { component } = await mounter({
                 props: {
                     ...defaultProps,
                     initialDir
                 }
-            });
-            await resolveComponent(component);
+            }).resolve();
             testRendering(component, {
                 initialDir
             });
@@ -133,14 +129,13 @@ describe('FileChooser', () => {
                 data: getDirsData
             });
 
-            const { component } = mounter({
+            const { component } = await mounter({
                 props: {
                     ...defaultProps,
                     directoriesOnly: true,
                     initialDir
                 }
-            });
-            await resolveComponent(component);
+            }).resolve();
             testRendering(component, {
                 loadDirs: true,
                 initialDir
@@ -154,8 +149,7 @@ describe('FileChooser', () => {
                 data: getFilesData
             });
 
-            const { component } = mounter();
-            await resolveComponent(component);
+            const { component } = await mounter().resolve();
             await act(async () => {
                 await component.find('div#context-div').props().openDirectory({ filePath: 'path' });
             });
@@ -167,8 +161,7 @@ describe('FileChooser', () => {
                 data: getFilesData
             });
 
-            const { component } = mounter();
-            await resolveComponent(component);
+            const { component } = await mounter().resolve();
             component.find('div#context-div').props().selectFile({ fileName: 'file' });
             expect(selectFile).toHaveBeenCalledWith({ fileName: 'file' });
         });
@@ -178,8 +171,7 @@ describe('FileChooser', () => {
                 message: 'It failed'
             });
 
-            const { component, store } = mounter();
-            await resolveComponent(component);
+            const { component, store } = await mounter().resolve();
 
             expect(store.getActions()).toEqual([
                 {
