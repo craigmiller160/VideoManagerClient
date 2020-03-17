@@ -1,17 +1,19 @@
 import FlexRow from 'components/UI/Grid/FlexRow';
-import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 
-const doMount = mountTestComponent(FlexRow);
+const mounter = enzymeCreator({
+    component: FlexRow
+});
 
 describe('FlexRow', () => {
     it('renders without custom props', () => {
-        const { component } = doMount();
+        const { component } = mounter();
         expect(component).toHaveStyleRule('justify-content', 'flex-start');
         expect(component).toHaveStyleRule('align-items', 'stretch');
     });
 
     it('renders with custom props', () => {
-        const { component } = doMount({
+        const { component } = mounter({
             props: {
                 justifyContent: 'center',
                 alignItems: 'flex-start'
