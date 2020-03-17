@@ -1,7 +1,7 @@
 import API from 'services/API';
 import MockAdapter from 'axios-mock-adapter';
 import UserProfile from 'components/AppContent/User/UserDetails/UserProfile';
-import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
 import { ROLE_ADMIN, ROLE_EDIT } from 'utils/securityConstants';
 
@@ -32,9 +32,12 @@ const defaultStoreState = {
     }
 };
 
-const doMount = mountTestComponent(UserProfile, {
-    defaultStoreState,
-    defaultUseThunk: true
+const mounter = enzymeCreator({
+    component: UserProfile,
+    redux: {
+        state: defaultStoreState,
+        useThunk: true
+    }
 });
 
 const mockApi = new MockAdapter(API);
@@ -63,8 +66,8 @@ describe('UserProfile', () => {
         it('renders with admin role', async () => {
             mockApi.onGet('/api/auth/roles')
                 .reply(200, roles);
-            const { component, store } = doMount({
-                storeState: {
+            const { component, store } = mounter({
+                reduxState: {
                     ...defaultStoreState,
                     auth: {
                         ...defaultStoreState.auth,
@@ -89,7 +92,7 @@ describe('UserProfile', () => {
         it('renders without admin role', async () => {
             mockApi.onGet('/api/auth/roles')
                 .reply(200, roles);
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             await resolveComponent(component);
             testRendering(component);
             expect(store.getActions()).not.toEqual(expect.arrayContaining([
@@ -98,8 +101,8 @@ describe('UserProfile', () => {
         });
 
         it('renders with error loading roles', async () => {
-            const { component, store } = doMount({
-                storeState: {
+            const { component, store } = mounter({
+                reduxState: {
                     ...defaultStoreState,
                     auth: {
                         ...defaultStoreState.auth,
@@ -128,7 +131,7 @@ describe('UserProfile', () => {
 
     describe('actions and callbacks', () => {
         it('save', async () => {
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             await resolveComponent(component);
             const payload = { userId: 1 };
             component.find('UserDetailsPage').props().saveUser(payload);
