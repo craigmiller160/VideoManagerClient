@@ -12,7 +12,7 @@ const defaultProps = {
     className: 'className'
 };
 
-const doMount = enzymeCreator({
+const mounter = enzymeCreator({
     component: NavbarItem,
     props: defaultProps,
     router: {
@@ -62,12 +62,12 @@ describe('NavbarItem', () => {
 
     describe('rendering', () => {
         it('renders as link', () => {
-            const { component } = doMount();
+            const { component } = mounter();
             testRendering(component, { isLink: true });
         });
 
         it('renders when not link', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     isLink: false
@@ -77,7 +77,7 @@ describe('NavbarItem', () => {
         });
 
         it('renders when active', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 initialRouterEntries: ['/list']
             });
             testRendering(component, { isActive: true });
@@ -86,7 +86,7 @@ describe('NavbarItem', () => {
 
     describe('callbacks', () => {
         it('handles onClick', () => {
-            const { component } = doMount();
+            const { component } = mounter();
             const value = 'hello';
             component.find('NavLink#id_bootLink').props().onClick(value);
             expect(onClick).toHaveBeenCalledWith(value);

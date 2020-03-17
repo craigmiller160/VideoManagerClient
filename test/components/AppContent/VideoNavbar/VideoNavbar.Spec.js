@@ -1,7 +1,7 @@
 import React from 'react';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
 import useReactRouter from 'use-react-router';
-import mountTestComponent from '../../../exclude/testUtil/mountTestComponent'; // eslint-disable-line import/first
+import enzymeCreator from 'react-enzyme-utils';
 
 jest.mock('store/scanning/scanning.actions', () => ({
     startFileScan: () => ({ type: 'startFileScan' })
@@ -44,11 +44,16 @@ const defaultStoreState = {
     }
 };
 
-const doMount = mountTestComponent(VideoNavbar, {
-    defaultProps,
-    defaultStoreState,
-    defaultInitialRouterEntries: ['/'],
-    defaultUseThunk: true
+const mounter = enzymeCreator({
+    component: VideoNavbar,
+    props: defaultProps,
+    redux: {
+        state: defaultStoreState,
+        useThunk: true
+    },
+    router: {
+        initialRouterEntries: ['/']
+    }
 });
 
 const testRendering = (component, {
@@ -128,13 +133,14 @@ const testRendering = (component, {
 describe('VideoNavbar', () => {
     describe('rendering', () => {
         it('renders with all roles', () => {
-            const { component } = doMount();
+            const { component } = mounter();
             testRendering(component);
         });
 
         it('renders with disabled', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
+                    ...defaultProps,
                     disabled: true
                 }
             });
@@ -144,8 +150,9 @@ describe('VideoNavbar', () => {
         });
 
         it('renders without scanning role', () => {
-            const { component } = doMount({
-                storeState: {
+            const { component } = mounter({
+                reduxState: {
+                    ...defaultStoreState,
                     auth: {
                         userDetails: {
                             ...defaultStoreState.auth.userDetails,
@@ -165,8 +172,9 @@ describe('VideoNavbar', () => {
         });
 
         it('renders without edit role', () => {
-            const { component } = doMount({
-                storeState: {
+            const { component } = mounter({
+                reduxState: {
+                    ...defaultStoreState,
                     auth: {
                         userDetails: {
                             ...defaultStoreState.auth.userDetails,
@@ -186,8 +194,9 @@ describe('VideoNavbar', () => {
         });
 
         it('renders without admin role', () => {
-            const { component } = doMount({
-                storeState: {
+            const { component } = mounter({
+                reduxState: {
+                    ...defaultStoreState,
                     auth: {
                         userDetails: {
                             ...defaultStoreState.auth.userDetails,
@@ -213,7 +222,7 @@ describe('VideoNavbar', () => {
         });
 
         it('toggles the collapse open and closed', () => {
-            const { component } = doMount();
+            const { component } = mounter();
             const toggle = component.find('VideoNavbar NavbarToggler');
             expect(component.find('Collapse').props()).toEqual(expect.objectContaining({
                 isOpen: false
@@ -225,7 +234,7 @@ describe('VideoNavbar', () => {
         });
 
         it('clicks on scan directory link', async () => {
-            const { component, store }= doMount();
+            const { component, store } = mounter();
             await component.find('NavbarItem#scanDirectoryLink').props().onClick();
             expect(store.getActions()).toEqual([
                 { type: 'startFileScan' }
