@@ -1,8 +1,8 @@
 import API from 'services/API';
 import MockAdapter from 'axios-mock-adapter';
 import { act } from 'react-dom/test-utils';
+import enzymeCreator from 'react-enzyme-utils';
 import AddUser from 'components/AppContent/User/UserDetails/AddUser';
-import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent';
 import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
 import { ROLE_EDIT } from '../../../../../src/utils/securityConstants';
 
@@ -14,10 +14,13 @@ const defaultProps = {
 
 const defaultStoreState = {};
 
-const doMount = mountTestComponent(AddUser, {
-    defaultProps,
-    defaultStoreState,
-    defaultUseThunk: true
+const mounter = enzymeCreator({
+    component: AddUser,
+    props: defaultProps,
+    redux: {
+        state: defaultStoreState,
+        useThunk: true
+    }
 });
 
 const roles = [
@@ -58,7 +61,7 @@ describe('AddUser', () => {
         it('renders', async () => {
             mockApi.onGet('/auth/roles')
                 .reply(200, roles);
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             await resolveComponent(component);
             testRendering(component);
             expect(store.getActions()).not.toEqual(expect.arrayContaining([
@@ -67,7 +70,7 @@ describe('AddUser', () => {
         });
 
         it('renders with error', async () => {
-            const { component, store } = doMount();
+            const { component, store } = mounter();
             await resolveComponent(component);
             testRendering(component, {
                 hasError: true
@@ -88,7 +91,7 @@ describe('AddUser', () => {
                     .reply(200, roles);
                 mockApi.onPost('/auth/users')
                     .reply(200, userDetails);
-                const { component, store } = doMount();
+                const { component, store } = mounter();
                 await resolveComponent(component);
                 await act(async () => {
                     await component.find('UserDetailsPage').props()
@@ -106,7 +109,7 @@ describe('AddUser', () => {
             it('fails', async () => {
                 mockApi.onGet('/auth/roles')
                     .reply(200, roles);
-                const { component, store } = doMount();
+                const { component, store } = mounter();
                 await resolveComponent(component);
                 await act(async () => {
                     await component.find('UserDetailsPage').props()
