@@ -22,7 +22,7 @@ const mounter = enzymeCreator({
     component: UserListItem,
     props: defaultProps,
     router: {
-        initialRouterEntries: ['/']
+        initialEntries: ['/']
     }
 });
 

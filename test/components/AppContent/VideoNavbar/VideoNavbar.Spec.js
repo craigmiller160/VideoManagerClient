@@ -52,7 +52,7 @@ const mounter = enzymeCreator({
         useThunk: true
     },
     router: {
-        initialRouterEntries: ['/']
+        initialEntries: ['/']
     }
 });
 

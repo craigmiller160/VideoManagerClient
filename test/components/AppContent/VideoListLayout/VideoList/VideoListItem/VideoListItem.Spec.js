@@ -56,7 +56,7 @@ const mounter = enzymeCreator({
         state: defaultStoreState
     },
     router: {
-        initialRouterEntries: ['/']
+        initialEntries: ['/']
     }
 });
 

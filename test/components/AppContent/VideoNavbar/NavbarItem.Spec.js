@@ -16,7 +16,7 @@ const mounter = enzymeCreator({
     component: NavbarItem,
     props: defaultProps,
     router: {
-        initialRouterEntries: ['/']
+        initialEntries: ['/']
     }
 });
 
