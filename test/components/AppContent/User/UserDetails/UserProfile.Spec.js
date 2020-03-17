@@ -2,7 +2,6 @@ import API from 'services/API';
 import MockAdapter from 'axios-mock-adapter';
 import UserProfile from 'components/AppContent/User/UserDetails/UserProfile';
 import enzymeCreator from 'react-enzyme-utils';
-import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
 import { ROLE_ADMIN, ROLE_EDIT } from 'utils/securityConstants';
 
 jest.mock('store/auth/auth.actions', () => ({
@@ -66,7 +65,7 @@ describe('UserProfile', () => {
         it('renders with admin role', async () => {
             mockApi.onGet('/api/auth/roles')
                 .reply(200, roles);
-            const { component, store } = mounter({
+            const { component, store } = await mounter({
                 reduxState: {
                     ...defaultStoreState,
                     auth: {
@@ -79,8 +78,7 @@ describe('UserProfile', () => {
                         }
                     }
                 }
-            });
-            await resolveComponent(component);
+            }).resolve();
             testRendering(component, {
                 hasAdminRole: true
             });
@@ -92,8 +90,7 @@ describe('UserProfile', () => {
         it('renders without admin role', async () => {
             mockApi.onGet('/api/auth/roles')
                 .reply(200, roles);
-            const { component, store } = mounter();
-            await resolveComponent(component);
+            const { component, store } = await mounter().resolve();
             testRendering(component);
             expect(store.getActions()).not.toEqual(expect.arrayContaining([
                 { type: 'alert/showErrorAlert', payload: expect.any(String) }
@@ -101,7 +98,7 @@ describe('UserProfile', () => {
         });
 
         it('renders with error loading roles', async () => {
-            const { component, store } = mounter({
+            const { component, store } = await mounter({
                 reduxState: {
                     ...defaultStoreState,
                     auth: {
@@ -114,8 +111,7 @@ describe('UserProfile', () => {
                         }
                     }
                 }
-            });
-            await resolveComponent(component);
+            }).resolve();
             testRendering(component, {
                 hasAdminRole: true,
                 hasError: true
@@ -131,8 +127,7 @@ describe('UserProfile', () => {
 
     describe('actions and callbacks', () => {
         it('save', async () => {
-            const { component, store } = mounter();
-            await resolveComponent(component);
+            const { component, store } = await mounter().resolve();
             const payload = { userId: 1 };
             component.find('UserDetailsPage').props().saveUser(payload);
             expect(store.getActions()).toEqual(expect.arrayContaining([

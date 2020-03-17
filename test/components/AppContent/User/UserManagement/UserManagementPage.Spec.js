@@ -3,7 +3,6 @@ import MockAdapter from 'axios-mock-adapter';
 import { act } from 'react-dom/test-utils';
 import UserManagementPage from 'components/AppContent/User/Management/UserManagementPage';
 import enzymeCreator from 'react-enzyme-utils';
-import resolveComponent from '../../../../exclude/testUtil/resolveComponent';
 
 const defaultProps = {
     history: {
@@ -58,8 +57,7 @@ describe('UserManagementPage', () => {
 
     describe('rendering', () => {
         it('renders all users', async () => {
-            const { component } = mounter();
-            await resolveComponent(component);
+            const { component } = await mounter().resolve();
 
             expect(component.find('div.title > h3').text()).toEqual('User Management');
             expect(component.find('UserListItem')).toHaveLength(4);
@@ -82,19 +80,19 @@ describe('UserManagementPage', () => {
 
     describe('callbacks and actions', () => {
         it('calls history.push when clicking add button', async () => {
-            const { component } = mounter();
-            await resolveComponent(component);
+            const { component } = await mounter().resolve();
             component.find('Button#add-user-btn').simulate('click');
             expect(defaultProps.history.push).toHaveBeenCalledWith('/users/new');
         });
 
         it('updates state in changeExpanded', async () => {
-            const { component } = mounter();
-            await resolveComponent(component);
+            const mounted = await mounter().resolve();
+            let { component } = mounted;
 
             await act(async () => {
                 component.find('UserListItem').at(0).props().changeExpanded(1);
-                await resolveComponent(component);
+                await mounted.resolve();
+                ({ component } = mounted);
             });
 
             expect(component.find('UserListItem').at(0).props().user).toEqual({
@@ -108,8 +106,7 @@ describe('UserManagementPage', () => {
             mockApi.onGet('/api/auth/users')
                 .reply(500);
 
-            const { component, store } = mounter();
-            await resolveComponent(component);
+            const { component, store } = await mounter().resolve();
 
             const expectedActions = [
                 {
