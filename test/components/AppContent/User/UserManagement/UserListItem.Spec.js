@@ -1,5 +1,5 @@
 import UserListItem from 'components/AppContent/User/Management/UserListItem';
-import mountTestComponent from '../../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 import { ROLE_ADMIN, ROLE_EDIT } from '../../../../../src/utils/securityConstants';
 
 const changeExpanded = jest.fn();
@@ -18,9 +18,12 @@ const defaultProps = {
     changeExpanded
 };
 
-const doMount = mountTestComponent(UserListItem, {
-    defaultProps,
-    defaultInitialRouterEntries: ['/']
+const mounter = enzymeCreator({
+    component: UserListItem,
+    props: defaultProps,
+    router: {
+        initialRouterEntries: ['/']
+    }
 });
 
 const testRendering = (component, { isExpanded = false } = {}) => {
@@ -58,12 +61,12 @@ describe('UserListItem', () => {
     });
     describe('rendering', () => {
         it('renders without expanded', () => {
-            const { component } = doMount();
+            const { component } = mounter();
             testRendering(component);
         });
 
         it('renders with expanded', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     user: {
@@ -78,13 +81,13 @@ describe('UserListItem', () => {
 
     describe('callbacks', () => {
         it('calls changeExpanded when not expanded', () => {
-            const { component } = doMount();
+            const { component } = mounter();
             component.find('div[data-name="user-list-item-root"]').simulate('click');
             expect(changeExpanded).toHaveBeenCalledWith(defaultProps.user.userId);
         });
 
         it('does not call changeExpanded when expanded', () => {
-            const { component } = doMount({
+            const { component } = mounter({
                 props: {
                     ...defaultProps,
                     user: {
