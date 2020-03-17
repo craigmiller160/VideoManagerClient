@@ -1,5 +1,5 @@
 import VideoListItem from 'components/AppContent/VideoListLayout/VideoList/VideoListItem/VideoListItem';
-import mountTestComponent from '../../../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 import { ROLE_EDIT } from 'utils/securityConstants';
 
 jest.mock('store/videoList/videoList.actions', () => ({
@@ -49,10 +49,15 @@ const defaultStoreState = {
     }
 };
 
-const doMount = mountTestComponent(VideoListItem, {
-    defaultProps,
-    defaultStoreState,
-    defaultInitialRouterEntries: ['/']
+const doMount = enzymeCreator({
+    component: VideoListItem,
+    props: defaultProps,
+    redux: {
+        state: defaultStoreState
+    },
+    router: {
+        initialRouterEntries: ['/']
+    }
 });
 
 const testRendering = (component, { isExpanded = false, hasDisplayName = true, hasEditRole = true } = {}) => {
