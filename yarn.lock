@@ -10704,7 +10704,7 @@ react-dom@16.11.0:
     scheduler "^0.17.0"
 
 "react-enzyme-utils@file:.yalc/react-enzyme-utils":
-  version "1.0.0-7939dabe"
+  version "1.0.0-beta-ce7f1ed5"
 
 react-error-overlay@^5.1.4:
   version "5.1.6"
