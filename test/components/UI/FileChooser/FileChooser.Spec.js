@@ -4,7 +4,7 @@ import {
     getDirectoriesFromDirectory,
     getFilesFromDirectory
 } from 'services/LocalFileApiService';
-import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
+import enzymeCreator from 'react-enzyme-utils';
 import FileChooser from 'components/UI/FileChooser';
 import resolveComponent from '../../../exclude/testUtil/resolveComponent';
 import Spinner from 'components/UI/Spinner/Spinner';
@@ -36,10 +36,13 @@ const defaultProps = {
 
 const defaultStoreState = {};
 
-const doMount = mountTestComponent(FileChooser, {
-    defaultProps,
-    defaultStoreState,
-    defaultUseThunk: true
+const doMount = enzymeCreator({
+    component: FileChooser,
+    props: defaultProps,
+    redux: {
+        state: defaultStoreState,
+        useThunk: true
+    }
 });
 
 const getFilesData = { type: 'files' };
