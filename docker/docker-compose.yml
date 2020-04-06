@@ -11,7 +11,7 @@ services:
     ports:
       - 9000:443
     volumes:
-      - ~/video-manager/client-logs:/var/log/nginx
+      - /opt/docker/video-manager/client-logs:/var/log/nginx
 
 networks:
   videoManagerNetwork:
