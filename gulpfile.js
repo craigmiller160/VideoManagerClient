@@ -6,6 +6,7 @@ const zip = require('gulp-zip');
 const clean = require('gulp-clean');
 
 const packageJson = require('./package.json');
+const name = packageJson.name.replace('@craigmiller160', '');
 
 task('eslint', () => {
     return src(['./src/**/*.js', './test/**/*.js'])
@@ -38,7 +39,7 @@ task('build', () => {
 
 task('zip', () => {
     return src('./build/**/**')
-        .pipe(zip(`${packageJson.name}-${packageJson.version}.zip`))
+        .pipe(zip(`${name}-${packageJson.version}.zip`))
         .pipe(dest('./deploy/build'));
 });
 
