@@ -26,7 +26,7 @@ task('test', () => {
 });
 
 task('clean', () => {
-    return src(['./build', './dist'], { allowEmpty: true })
+    return src(['./build', './dist', './deploy/build'], { allowEmpty: true })
         .pipe(clean({ force: true }));
 });
 
@@ -39,7 +39,7 @@ task('build', () => {
 task('zip', () => {
     return src('./build/**/**')
         .pipe(zip(`${packageJson.name}-${packageJson.version}.zip`))
-        .pipe(dest('./dist'));
+        .pipe(dest('./deploy/build'));
 });
 
 task('dist', series('clean', 'validate', 'build', 'zip'));
