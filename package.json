@@ -1,5 +1,5 @@
 {
-  "name": "video-manager-client",
+  "name": "@craigmiller160/video-manager-client",
   "version": "1.10.0-beta",
   "private": true,
   "dependencies": {
