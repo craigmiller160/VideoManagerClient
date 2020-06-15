@@ -1,6 +1,6 @@
 #!/bin/bash
 
-name=$(cat package.json | grep name | sed 's/^\s*"name":\s\?"//g' | sed 's/",$//g' | sed 's/\@craigmiller160\///g')
+name=$(cat package.json | grep name | grep -v babel | sed 's/^\s*"name":\s\?"//g' | sed 's/",$//g' | sed 's/\@craigmiller160\///g')
 version=$(cat package.json | grep \"version\" | sed 's/^\s*"version":\s\?"//g' | sed 's/",$//g')
 registry=localhost:32000
 tag=$registry/$name:$version
