@@ -30,3 +30,4 @@ docker/*.zip
 
 .yalc
 yalc.lock
+deploy/build
