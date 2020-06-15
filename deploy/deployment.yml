@@ -16,11 +16,11 @@ spec:
         - name: video-manager-client
           image: localhost:32000/video-manager-client:1.10.0-beta
           ports:
-            - containerPort: 80
+            - containerPort: 443
           livenessProbe:
             httpGet:
               path: /healthcheck
-              port: 80
+              port: 443
               scheme: HTTPS
             initialDelaySeconds: 10
             periodSeconds: 300
@@ -34,7 +34,7 @@ spec:
   selector:
     app: video-manager-client
   ports:
-    - port: 80
-      targetPort: 80
+    - port: 443
+      targetPort: 443
       nodePort: 31001
       protocol: TCP
