@@ -69,7 +69,8 @@ const AppRoutes = (props) => {
         selected: selectedVideo,
         adminRole: hasAdminRole,
         editRole: hasEditRole,
-        auth: isAuth
+        auth: isAuth,
+        scanning: isScanning
     };
 
     return (
