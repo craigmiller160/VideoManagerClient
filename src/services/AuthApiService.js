@@ -19,9 +19,11 @@
 import API from './API';
 import { CSRF_TOKEN_KEY } from '../utils/securityConstants';
 
+// TODO refactor for oauth2
 export const login = (userName, password) =>
     API.post('/auth/login', { userName, password });
 
+// TODO refactor for oauth2
 export const checkAuth = () =>
     API.get('/auth/check', {
         headers: {
@@ -29,32 +31,41 @@ export const checkAuth = () =>
         }
     });
 
+// TODO refactor for oauth2
 export const logout = () =>
     API.get('/auth/logout');
 
 export const getVideoToken = (videoId) =>
     API.get(`/auth/videotoken/${videoId}`);
 
+// TODO delete this
 export const getRoles = () =>
     API.get('/auth/roles');
 
+// TODO delete this
 export const saveUserProfile = (userDetails) =>
     API.put('/auth/users/self', userDetails);
 
+// TODO delete this
 export const getAllUsers = () =>
     API.get('/auth/users');
 
+// TODO delete this
 export const getUser = (userId) =>
     API.get(`/auth/users/admin/${userId}`);
 
+// TODO delete this
 export const saveUserAdmin = (userId, userDetails) =>
     API.put(`/auth/users/admin/${userId}`, userDetails);
 
+// TODO delete this
 export const revokeAccess = (userId) =>
     API.post(`/auth/users/revoke/${userId}`);
 
+// TODO delete this
 export const createUser = (userDetails) =>
     API.post('/auth/users', userDetails);
 
+// TODO delete this
 export const deleteUser = (userId) =>
     API.delete(`/auth/users/${userId}`);
