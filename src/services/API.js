@@ -50,7 +50,7 @@ export const handle401Interceptor = async (error) => {
         error?.config?.url !== refreshUri &&
         !error?.config?.rerun) {
         try {
-            await instance.get('/auth/refresh');
+            await instance.get('/auth/refresh'); // TODO do not need refresh anymore
         } catch (ex) {
             error.suppressed = ex;
             store.dispatch(setIsAuth(false));
