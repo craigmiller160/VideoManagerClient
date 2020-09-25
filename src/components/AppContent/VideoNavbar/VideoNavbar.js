@@ -90,15 +90,6 @@ const VideoNavbar = (props) => {
                                 isLink
                             />
                         }
-                        {
-                            hasAdminRole &&
-                            <NavbarItem
-                                id="userManagementLink"
-                                to="/users"
-                                text="Users"
-                                isLink
-                            />
-                        }
                     </Nav>
                     <Nav className="ml-auto" navbar>
                         {
