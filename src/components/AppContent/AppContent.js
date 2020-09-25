@@ -68,7 +68,7 @@ const AppContent = () => {
     return (
         <div className={ classes.AppContent } onClick={ hideAlertOnClick }>
             <VideoNavbar
-                disabled={ isScanning || !isAuth }
+                disabled={ isScanning }
                 logout={ logout }
             />
             {

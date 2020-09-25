@@ -24,6 +24,8 @@ import classes from './NavbarDropdown.scss';
 import NavbarItem from './NavbarItem';
 import { logout } from '../../../store/auth/auth.actions';
 
+// TODO delete this, it's unnecessary
+
 const NavbarDropdown = () => {
     const dispatch = useDispatch();
     const { location } = useReactRouter();
