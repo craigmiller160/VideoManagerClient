@@ -45,9 +45,11 @@ const VideoNavbar = (props) => {
         history.push('/scanning');
     };
 
+    /* eslint-disable */ // TODO delete this
     const authLinkText = isAuth ? 'Logout' : 'Login';
     const doLogout = async () => {
         await logout();
+        console.log('Logged out'); // TODO delete this
         history.push('/');
     };
     const authLinkAction = isAuth ? doLogout : login;
