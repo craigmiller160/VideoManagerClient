@@ -88,7 +88,7 @@ module.exports = function(proxy, allowedHost) {
         logLevel: 'debug'
       },
       '/oauth2': {
-        target: 'https://localhost:8443',
+        target: 'https://localhost:7003',
         secure: false,
         pathRewrite: {
           '^/oauth2': ''
