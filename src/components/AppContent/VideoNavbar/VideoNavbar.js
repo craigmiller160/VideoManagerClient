@@ -29,6 +29,7 @@ import {
     hasEditRole as hasEditRoleSelector,
     hasScanRole as hasScanRoleSelector
 } from '../../../store/auth/auth.selectors';
+import { login, logout } from '../../../services/AuthApiService';
 
 const VideoNavbar = (props) => {
     const dispatch = useDispatch();
@@ -45,6 +46,11 @@ const VideoNavbar = (props) => {
     };
 
     const authLinkText = isAuth ? 'Logout' : 'Login';
+    const doLogout = async () => {
+        await logout();
+        history.push('/');
+    };
+    const authLinkAction = isAuth ? doLogout : login;
 
     return (
         <Navbar className={ classes.VideoNavbar } color="dark" dark expand="md">
@@ -115,6 +121,7 @@ const VideoNavbar = (props) => {
                         <NavbarItem
                             id="authLink"
                             text={ authLinkText }
+                            onClick={ authLinkAction }
                         />
                     </Nav>
                 </Collapse>
