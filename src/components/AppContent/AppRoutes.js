@@ -18,7 +18,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import Scanning from './Scanning/Scanning';
 import VideoFileEdit from './VideoFileEdit/VideoFileEdit';
 import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
@@ -210,6 +210,7 @@ const AppRoutes = (props) => {
                 component={ Home }
                 ruleProps={ ruleProps }
             />
+            <Redirect to="/" />
         </Switch>
     );
 };
