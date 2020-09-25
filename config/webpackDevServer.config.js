@@ -84,7 +84,6 @@ module.exports = function(proxy, allowedHost) {
       '/api': {
         target: 'https://localhost:8443',
         secure: false,
-        changeOrigin: true,
         logLevel: 'debug'
       },
       '/oauth2': {
