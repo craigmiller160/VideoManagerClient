@@ -209,9 +209,6 @@ const AppRoutes = (props) => {
                 exact
                 component={ Home }
                 ruleProps={ ruleProps }
-                rules={ [
-                    isAuthenticatedRule
-                ] }
             />
         </Switch>
     );
