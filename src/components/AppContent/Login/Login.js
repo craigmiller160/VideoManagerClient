@@ -27,6 +27,8 @@ import { login } from '../../../store/auth/auth.actions';
 import { loginFormHasErrors } from '../../../store/auth/auth.selectors';
 import Spinner from '../../UI/Spinner/Spinner';
 
+// TODO delete this
+
 export const LOGIN_FORM_NAME = 'LoginForm';
 
 const Login = () => {

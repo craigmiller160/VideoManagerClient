@@ -19,8 +19,16 @@
 import API from './API';
 import { CSRF_TOKEN_KEY } from '../utils/securityConstants';
 
+export const login = () =>
+    API.post('/oauth/authcode/login')
+        .then((res) => {
+            window.location.href = res.data.url;
+        });
+
+export const logout = () => API.get('/oauth/logout');
+
 // TODO refactor for oauth2
-export const login = (userName, password) =>
+export const loginOld = (userName, password) =>
     API.post('/auth/login', { userName, password });
 
 // TODO refactor for oauth2
@@ -32,7 +40,7 @@ export const checkAuth = () =>
     });
 
 // TODO refactor for oauth2
-export const logout = () =>
+export const logoutOld = () =>
     API.get('/auth/logout');
 
 export const getVideoToken = (videoId) =>
