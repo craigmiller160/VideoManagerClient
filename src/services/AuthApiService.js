@@ -17,7 +17,6 @@
  */
 
 import API from './API';
-import { CSRF_TOKEN_KEY } from '../utils/securityConstants';
 
 export const login = () =>
     API.post('/oauth/authcode/login')
@@ -28,3 +27,6 @@ export const login = () =>
 export const logout = () => API.get('/oauth/logout');
 
 export const getAuthUser = () => API.get('/oauth/user');
+
+export const getVideoToken = (videoId) =>
+    API.get(`/auth/videotoken/${videoId}`);
