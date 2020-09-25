@@ -27,6 +27,8 @@ export const login = () =>
 
 export const logout = () => API.get('/oauth/logout');
 
+export const getAuthUser = () => API.get('/oauth/user');
+
 // TODO refactor for oauth2
 export const loginOld = (userName, password) =>
     API.post('/auth/login', { userName, password });
