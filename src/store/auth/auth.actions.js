@@ -33,12 +33,10 @@ export const handleCsrfToken = (response) => (dispatch) => {
 export const checkAuth = () => async (dispatch) => {
     try {
         const response = await AuthService.getAuthUser();
-        dispatch(handleCsrfToken(response));
         dispatch(setIsAuth(true));
         dispatch(setUserDetails(response.data));
     }
     catch (ex) {
-        dispatch(handleCsrfToken(ex.response));
         dispatch(setIsAuth(false));
         dispatch(setUserDetails(null));
     }
