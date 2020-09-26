@@ -265,5 +265,15 @@ describe('VideoNavbar', () => {
             ]);
             expect(push).toHaveBeenCalledWith('/scanning');
         });
+
+        describe('authLink click', () => {
+            it('login', () => {
+                throw new Error();
+            });
+
+            it('logout', () => {
+                throw new Error();
+            });
+        });
     });
 });
