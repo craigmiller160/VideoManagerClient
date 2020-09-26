@@ -17,6 +17,7 @@
  */
 
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler } from 'reactstrap';
 import * as classes from './VideoNavbar.scss';
 import { NavLink } from 'react-router-dom';
@@ -33,6 +34,7 @@ import { login, logout } from '../../../services/AuthApiService';
 import { clearAuth } from '../../../store/auth/auth.actions';
 
 const VideoNavbar = (props) => {
+    const { disabled } = props;
     const dispatch = useDispatch();
     const { history } = useReactRouter();
     const [ isOpen, setOpen ] = useState(false);
@@ -69,58 +71,69 @@ const VideoNavbar = (props) => {
                         Video Manager
                     </NavLink>
                 </NavbarBrand>
-                <NavbarToggler onClick={ () => setOpen(!isOpen) } />
-                <Collapse isOpen={ isOpen } navbar>
-                    <Nav navbar>
-                        {
-                            isAuth &&
-                            <NavbarItem
-                                id="videoListLink"
-                                to="/videos"
-                                exact
-                                text="Videos"
-                                isLink
-                            />
-                        }
-                        {
-                            hasEditRole &&
-                            <NavbarItem
-                                id="manageFiltersLink"
-                                to="/filters"
-                                exact
-                                text="Filters"
-                                isLink
-                            />
-                        }
-                    </Nav>
-                    <Nav className="ml-auto" navbar>
-                        {
-                            hasScanRole &&
-                            <NavbarItem
-                                id="scanDirectoryLink"
-                                onClick={ onScanDirClick }
-                                text="Scan"
-                            />
-                        }
-                        {
-                            hasAdminRole &&
-                            <NavbarItem
-                                id="settingsLink"
-                                to="/settings"
-                                text="Settings"
-                                isLink
-                            />
-                        }
-                        <NavbarItem
-                            id="authLink"
-                            text={ authLinkText }
-                            onClick={ authLinkAction }
-                        />
-                    </Nav>
-                </Collapse>
+                {
+                    !disabled &&
+                        <>
+                            <NavbarToggler onClick={ () => setOpen(!isOpen) } />
+                            <Collapse isOpen={ isOpen } navbar>
+                                <Nav navbar>
+                                    {
+                                        isAuth &&
+                                        <NavbarItem
+                                            id="videoListLink"
+                                            to="/videos"
+                                            exact
+                                            text="Videos"
+                                            isLink
+                                        />
+                                    }
+                                    {
+                                        hasEditRole &&
+                                        <NavbarItem
+                                            id="manageFiltersLink"
+                                            to="/filters"
+                                            exact
+                                            text="Filters"
+                                            isLink
+                                        />
+                                    }
+                                </Nav>
+                                <Nav className="ml-auto" navbar>
+                                    {
+                                        hasScanRole &&
+                                        <NavbarItem
+                                            id="scanDirectoryLink"
+                                            onClick={ onScanDirClick }
+                                            text="Scan"
+                                        />
+                                    }
+                                    {
+                                        hasAdminRole &&
+                                        <NavbarItem
+                                            id="settingsLink"
+                                            to="/settings"
+                                            text="Settings"
+                                            isLink
+                                        />
+                                    }
+                                    <NavbarItem
+                                        id="authLink"
+                                        text={ authLinkText }
+                                        onClick={ authLinkAction }
+                                    />
+                                </Nav>
+                            </Collapse>
+                        </>
+                }
             </Container>
         </Navbar>
     );
+};
+VideoNavbar.propTypes = {
+    disabled: PropTypes.bool
+};
+VideoNavbar.defaultProps = {
+    disabled: false
 };
 
 export default VideoNavbar;

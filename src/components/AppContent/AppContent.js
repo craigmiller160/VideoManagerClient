@@ -68,7 +68,7 @@ const AppContent = () => {
     return (
         <div className={ classes.AppContent } onClick={ hideAlertOnClick }>
             <VideoNavbar
-                disabled={ isScanning }
+                disabled={ isScanning || !isStarted }
             />
             {
                 isStarted &&
