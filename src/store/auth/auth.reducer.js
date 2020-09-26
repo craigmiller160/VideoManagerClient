@@ -42,7 +42,12 @@ const handleSetCsrfToken = (state, action) => ({
 });
 
 const handleSetUserDetails = (state, action) => { // TODO definitely new tests here
-    if (!action.payload) return state;
+    if (!action.payload) {
+        return {
+            ...state,
+            userDetails: {}
+        }
+    }
 
     return {
         ...state,

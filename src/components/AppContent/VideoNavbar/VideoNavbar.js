@@ -20,7 +20,7 @@ import React, { useState } from 'react';
 import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler } from 'reactstrap';
 import * as classes from './VideoNavbar.scss';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useReactRouter from 'use-react-router';
 import { startFileScan } from '../../../store/scanning/scanning.actions';
 import NavbarItem from './NavbarItem';
@@ -36,9 +36,9 @@ const VideoNavbar = (props) => {
     const dispatch = useDispatch();
     const { history } = useReactRouter();
     const [ isOpen, setOpen ] = useState(false);
-    const hasEditRole = useSelector(hasEditRoleSelector);
-    const hasScanRole = useSelector(hasScanRoleSelector);
-    const hasAdminRole = useSelector(hasAdminRoleSelector);
+    const hasEditRole = useSelector(hasEditRoleSelector, shallowEqual);
+    const hasScanRole = useSelector(hasScanRoleSelector, shallowEqual);
+    const hasAdminRole = useSelector(hasAdminRoleSelector, shallowEqual);
     const isAuth = useSelector((state) => state.auth.isAuth);
 
     const onScanDirClick = async () => {

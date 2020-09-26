@@ -44,7 +44,7 @@ export const checkAuth = () => async (dispatch) => {
     }
 };
 
-export const clearAuth = () => async (dispatch) => {
+export const clearAuth = () => (dispatch) => {
     dispatch(setIsAuth(false));
     dispatch(setUserDetails(null));
 };
