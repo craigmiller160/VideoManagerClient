@@ -18,7 +18,7 @@
 
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
-import { getAuthUser, getVideoToken } from 'services/AuthApiService';
+import { getAuthUser, getVideoToken, login } from 'services/AuthApiService';
 import {
     mockCheckAuthSuccess,
     mockCreateUser,
@@ -27,7 +27,7 @@ import {
     mockGetAllUsers,
     mockGetRoles,
     mockGetUser,
-    mockGetVideoToken,
+    mockGetVideoToken, mockLogin,
     mockLoginSuccess,
     mockLogout,
     mockRevokeAccess,
@@ -43,17 +43,12 @@ describe('AuthApiService', () => {
     beforeEach(() => {
         mockApi.reset();
         mockCheckAuthSuccess(mockApi);
-        mockLoginSuccess(mockApi);
-        mockLogout(mockApi);
         mockGetVideoToken(mockApi);
-        mockGetRoles(mockApi);
-        mockSaveUserProfile(mockApi);
-        mockGetAllUsers(mockApi);
-        mockGetUser(mockApi);
-        mockSaveUserAdmin(mockApi);
-        mockRevokeAccess(mockApi);
-        mockCreateUser(mockApi);
-        mockDeleteUser(mockApi);
+        mockLogin(mockApi);
+    });
+
+    afterEach(() => {
+        window.location.href = 'http://localhost/';
     });
 
     it('getAuthUser', async () => {
@@ -66,8 +61,10 @@ describe('AuthApiService', () => {
         }));
     });
 
-    it('login', () => {
-        throw new Error();
+    it('login', async () => {
+        const res = await login();
+        expect(res.status).toEqual(200);
+        expect(window.location.href).toEqual('TheUrl');
     });
 
     it('logout', () => {
