@@ -39,6 +39,10 @@ export const mockLogin = (mockApi) =>
             url: 'TheUrl'
         });
 
+export const mockLogout = (mockApi) =>
+    mockApi.onGet('/oauth/logout')
+        .reply(200);
+
 export const mockCheckAuthSuccess = (mockApi) =>
     mockApi.onGet('/oauth/user')
         .reply((config) =>  [

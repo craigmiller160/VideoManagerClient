@@ -21,21 +21,14 @@ import API from 'services/API';
 import { getAuthUser, getVideoToken, login } from 'services/AuthApiService';
 import {
     mockCheckAuthSuccess,
-    mockCreateUser,
     mockCsrfToken,
-    mockDeleteUser,
-    mockGetAllUsers,
-    mockGetRoles,
-    mockGetUser,
-    mockGetVideoToken, mockLogin,
-    mockLoginSuccess,
+    mockGetVideoToken,
+    mockLogin,
     mockLogout,
-    mockRevokeAccess,
-    mockSaveUserAdmin,
-    mockSaveUserProfile,
     mockTokenResponse
 } from '../exclude/mock/mockApiConfig/authApi';
 import { CSRF_TOKEN_KEY } from '../../src/utils/securityConstants';
+import { logout } from '../../src/services/AuthApiService';
 
 const mockApi = new MockAdapter(API);
 
@@ -45,6 +38,7 @@ describe('AuthApiService', () => {
         mockCheckAuthSuccess(mockApi);
         mockGetVideoToken(mockApi);
         mockLogin(mockApi);
+        mockLogout(mockApi);
     });
 
     afterEach(() => {
@@ -67,8 +61,9 @@ describe('AuthApiService', () => {
         expect(window.location.href).toEqual('TheUrl');
     });
 
-    it('logout', () => {
-        throw new Error();
+    it('logout', async () => {
+        const res = await logout();
+        expect(res.status).toEqual(200);
     });
 
     it('getVideoToken', async () => {
