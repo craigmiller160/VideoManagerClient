@@ -19,7 +19,8 @@
 import React from 'react';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
 import useReactRouter from 'use-react-router';
-import mountTestComponent from '../../../exclude/testUtil/mountTestComponent'; // eslint-disable-line import/first
+import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
+import { login, logout } from '../../../../src/services/AuthApiService'; // eslint-disable-line import/first
 
 jest.mock('store/scanning/scanning.actions', () => ({
     startFileScan: () => ({ type: 'startFileScan' })
@@ -36,6 +37,10 @@ jest.mock('components/AppContent/VideoNavbar/NavbarDropdown', () => {
     return NavbarDropdown;
 });
 jest.mock('use-react-router', () => jest.fn());
+jest.mock('services/AuthApiService', () => ({
+    login: jest.fn(),
+    logout: jest.fn()
+}));
 
 const push = jest.fn();
 useReactRouter.mockImplementation(() => ({
@@ -145,6 +150,10 @@ const testRendering = (component, {
 };
 
 describe('VideoNavbar', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     describe('rendering', () => {
         it('renders with all roles', () => {
             const { component } = doMount();
@@ -180,6 +189,7 @@ describe('VideoNavbar', () => {
             const { component } = doMount({
                 storeState: {
                     auth: {
+                        isAuth: true,
                         userDetails: {
                             ...defaultStoreState.auth.userDetails,
                             roles: [
@@ -201,6 +211,7 @@ describe('VideoNavbar', () => {
             const { component } = doMount({
                 storeState: {
                     auth: {
+                        isAuth: true,
                         userDetails: {
                             ...defaultStoreState.auth.userDetails,
                             roles: [
@@ -222,6 +233,7 @@ describe('VideoNavbar', () => {
             const { component } = doMount({
                 storeState: {
                     auth: {
+                        isAuth: true,
                         userDetails: {
                             ...defaultStoreState.auth.userDetails,
                             roles: [
@@ -268,11 +280,28 @@ describe('VideoNavbar', () => {
 
         describe('authLink click', () => {
             it('login', () => {
-                throw new Error();
+                const { component } = doMount({
+                    storeState: {
+                        auth: {
+                            isAuth: false,
+                            userDetails: {}
+                        }
+                    }
+                });
+                const authLink = component.find('NavbarItem#authLink');
+                expect(authLink).toHaveLength(1);
+                authLink.props().onClick();
+                expect(login).toHaveBeenCalled();
+                expect(logout).not.toHaveBeenCalled();
             });
 
             it('logout', () => {
-                throw new Error();
+                const { component } = doMount();
+                const authLink = component.find('NavbarItem#authLink');
+                expect(authLink).toHaveLength(1);
+                authLink.props().onClick();
+                expect(login).not.toHaveBeenCalled();
+                expect(logout).toHaveBeenCalled();
             });
         });
     });
