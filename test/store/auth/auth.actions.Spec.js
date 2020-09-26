@@ -32,15 +32,9 @@ import {
     mockCheckAuthFail,
     mockCheckAuthSuccess,
     mockCsrfToken,
-    mockLoginFail,
-    mockLoginSuccess,
-    mockLogout,
-    mockPassword, mockSaveUserProfile,
-    mockUserDetails,
-    mockUserName
+    mockUserDetails
 } from '../../exclude/mock/mockApiConfig/authApi';
-import { showErrorAlert, showSuccessAlert } from 'store/alert/alert.actions';
-import { CSRF_TOKEN_KEY, ROLE_EDIT } from '../../../src/utils/securityConstants';
+import { CSRF_TOKEN_KEY } from '../../../src/utils/securityConstants';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);

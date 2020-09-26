@@ -34,9 +34,9 @@ export const mockRoles = [
 ];
 
 export const mockCheckAuthSuccess = (mockApi) =>
-    mockApi.onGet('/auth/check')
+    mockApi.onGet('/oauth/user')
         .reply((config) =>  [
-            204,
+            200,
             mockUserDetails,
             {
                 [CSRF_TOKEN_KEY]: mockCsrfToken,
@@ -45,7 +45,7 @@ export const mockCheckAuthSuccess = (mockApi) =>
         ]);
 
 export const mockCheckAuthFail = (mockApi) =>
-    mockApi.onGet('/auth/check')
+    mockApi.onGet('/oauth/user')
         .reply((config) => [
             401,
             null,
