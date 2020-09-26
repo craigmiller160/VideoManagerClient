@@ -30,6 +30,7 @@ import {
     hasScanRole as hasScanRoleSelector
 } from '../../../store/auth/auth.selectors';
 import { login, logout } from '../../../services/AuthApiService';
+import { clearAuth } from '../../../store/auth/auth.actions';
 
 const VideoNavbar = (props) => {
     const dispatch = useDispatch();
@@ -45,11 +46,10 @@ const VideoNavbar = (props) => {
         history.push('/scanning');
     };
 
-    /* eslint-disable */ // TODO delete this
     const authLinkText = isAuth ? 'Logout' : 'Login';
     const doLogout = async () => {
         await logout();
-        console.log('Logged out'); // TODO delete this
+        dispatch(clearAuth());
         history.push('/');
     };
     const authLinkAction = isAuth ? doLogout : login;
