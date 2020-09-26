@@ -96,7 +96,7 @@ describe('AppContent', () => {
 
         expect(component.find('VideoNavbar')).toHaveLength(1);
         expect(component.find('VideoNavbar').props()).toEqual(expect.objectContaining({
-            disabled: true
+            disabled: false
         }));
         expect(component.find('Alert')).toHaveLength(1);
         expect(component.find('AppRoutes')).toHaveLength(1);
