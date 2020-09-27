@@ -31,9 +31,6 @@ const instance = axios.create({
     xsrfHeaderName: 'X-CSRF-TOKEN'
 });
 
-const noAuthStatuses = [401, 403];
-const refreshUri = '/api/auth/refresh';
-
 export const addCsrfTokenInterceptor = (config) => {
     const { csrfToken } = store.getState().auth;
     if (csrfToken && config.method !== 'get') {
@@ -45,33 +42,6 @@ export const addCsrfTokenInterceptor = (config) => {
     return config;
 };
 
-export const handle401Interceptor = async (error) => {
-    if (noAuthStatuses.includes(error?.response?.status) &&
-        error?.config?.url !== refreshUri &&
-        !error?.config?.rerun) {
-        try {
-            await instance.get('/auth/refresh'); // TODO do not need refresh anymore
-        } catch (ex) {
-            error.suppressed = ex;
-            store.dispatch(setIsAuth(false));
-            throw error;
-        }
-
-        try {
-            return await instance.request({
-                ...error.config,
-                url: error.config.url.replace('/api', ''),
-                rerun: true
-            });
-        } catch (ex2) {
-            ex2.suppressed = error;
-            throw ex2;
-        }
-    }
-    throw error;
-};
-
 instance.interceptors.request.use(addCsrfTokenInterceptor);
-instance.interceptors.response.use((response) => response, handle401Interceptor);
 
 export default instance;
