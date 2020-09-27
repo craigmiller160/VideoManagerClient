@@ -28,7 +28,7 @@ import classes from './AppContent.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
 import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
-import { checkAuth, logout } from '../../store/auth/auth.actions';
+import { checkAuth } from '../../store/auth/auth.actions';
 import { hideAlert } from '../../store/alert/alert.actions';
 
 const AppContent = () => {
@@ -68,8 +68,7 @@ const AppContent = () => {
     return (
         <div className={ classes.AppContent } onClick={ hideAlertOnClick }>
             <VideoNavbar
-                disabled={ isScanning || !isAuth }
-                logout={ logout }
+                disabled={ isScanning || !isStarted }
             />
             {
                 isStarted &&

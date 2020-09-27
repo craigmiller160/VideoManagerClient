@@ -16,42 +16,14 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { LOGIN_FORM_NAME } from 'components/AppContent/Login/Login';
 import {
     hasAdminRole,
     hasEditRole,
-    hasScanRole,
-    loginFormHasErrors
+    hasScanRole
 } from 'store/auth/auth.selectors';
 import { ROLE_ADMIN, ROLE_EDIT, ROLE_SCAN } from '../../../src/utils/securityConstants';
 
 describe('auth.selectors', () => {
-    describe('loginFormHasErrors', () => {
-        it('has errors', () => {
-            const state = {
-                form: {
-                    [LOGIN_FORM_NAME]: {
-                        syncErrors: {
-                            username: 'Required'
-                        }
-                    }
-                }
-            };
-            const result = loginFormHasErrors(state);
-            expect(result).toEqual(true);
-        });
-
-        it('has no errors', () => {
-            const state = {
-                form: {
-                    [LOGIN_FORM_NAME]: {}
-                }
-            };
-            const result = loginFormHasErrors(state);
-            expect(result).toEqual(false);
-        });
-    });
-
     describe('hasEditRole', () => {
         it('has the role', () => {
             const state = {

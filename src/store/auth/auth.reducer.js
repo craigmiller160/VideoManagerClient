@@ -41,10 +41,27 @@ const handleSetCsrfToken = (state, action) => ({
     csrfToken: action.payload
 });
 
-const handleSetUserDetails = (state, action) => ({
-    ...state,
-    userDetails: action.payload ?? {}
-});
+const handleSetUserDetails = (state, action) => {
+    if (!action.payload) {
+        return {
+            ...state,
+            userDetails: {}
+        }
+    }
+
+    return {
+        ...state,
+        userDetails: {
+            firstName: action.payload.firstName,
+            lastName: action.payload.lastName,
+            userName: action.payload.username,
+            roles: action.payload.roles
+                .map((role) => ({
+                    name: role
+                }))
+        }
+    }
+};
 
 export default createReducer(initialState, {
     [setIsAuth]: handleSetIsAuth,

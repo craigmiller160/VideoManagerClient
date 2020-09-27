@@ -19,8 +19,6 @@
 import {
     checkAuth,
     handleCsrfToken,
-    login,
-    logout, saveUserProfile,
     setCsrfToken,
     setIsAuth,
     setLoginLoading,
@@ -34,15 +32,9 @@ import {
     mockCheckAuthFail,
     mockCheckAuthSuccess,
     mockCsrfToken,
-    mockLoginFail,
-    mockLoginSuccess,
-    mockLogout,
-    mockPassword, mockSaveUserProfile,
-    mockUserDetails,
-    mockUserName
+    mockUserDetails
 } from '../../exclude/mock/mockApiConfig/authApi';
-import { showErrorAlert, showSuccessAlert } from 'store/alert/alert.actions';
-import { CSRF_TOKEN_KEY, ROLE_EDIT } from '../../../src/utils/securityConstants';
+import { CSRF_TOKEN_KEY } from '../../../src/utils/securityConstants';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -114,7 +106,6 @@ describe('auth.actions', () => {
             it('checkAuth is authenticated', async () => {
                 mockCheckAuthSuccess(mockApi);
                 const expectedActions = [
-                    { type: setCsrfToken.toString(), payload: mockCsrfToken },
                     { type: setIsAuth.toString(), payload: true },
                     { type: setUserDetails.toString(), payload: mockUserDetails }
                 ];
@@ -125,70 +116,10 @@ describe('auth.actions', () => {
             it('checkAuth is not authenticated', async () => {
                 mockCheckAuthFail(mockApi);
                 const expectedActions = [
-                    { type: setCsrfToken.toString(), payload: mockCsrfToken },
                     { type: setIsAuth.toString(), payload: false },
                     { type: setUserDetails.toString(), payload: null }
                 ];
                 await store.dispatch(checkAuth());
-                expect(store.getActions()).toEqual(expectedActions);
-            });
-        });
-
-        describe('login', () => {
-            it('logs the user in', async () => {
-                mockLoginSuccess(mockApi);
-                mockCheckAuthSuccess(mockApi);
-                const expectedActions = [
-                    { type: setLoginLoading.toString(), payload: true },
-                    { type: setCsrfToken.toString(), payload: mockCsrfToken },
-                    { type: setIsAuth.toString(), payload: true },
-                    { type: setUserDetails.toString(), payload: mockUserDetails },
-                    { type: setLoginLoading.toString(), payload: false }
-                ];
-                await store.dispatch(login({ userName: mockUserName, password: mockPassword }));
-                expect(store.getActions()).toEqual(expectedActions);
-            });
-
-            it('handles invalid login', async () => {
-                mockLoginFail(mockApi);
-                const expectedActions = [
-                    { type: setLoginLoading.toString(), payload: true },
-                    { type: setIsAuth.toString(), payload: false },
-                    { type: showErrorAlert.toString(), payload: 'Invalid login' },
-                    { type: setLoginLoading.toString(), payload: false }
-                ];
-                await store.dispatch(login({ userName: mockUserName, password: mockPassword }));
-                expect(store.getActions()).toEqual(expectedActions);
-            });
-        });
-
-        describe('logout', () => {
-            it('logs out', async () => {
-                mockLogout(mockApi);
-                const expectedActions = [
-                    { type: setIsAuth.toString(), payload: false },
-                    { type: setUserDetails.toString(), payload: null }
-                ];
-                await store.dispatch(logout());
-                expect(store.getActions()).toEqual(expectedActions);
-            });
-        });
-
-        describe('saveUserProfile', () => {
-            it('saves user profile', async () => {
-                mockSaveUserProfile(mockApi);
-                mockCheckAuthSuccess(mockApi);
-                const values = {
-                    ...mockUserDetails,
-                    roles: [ { value: 1, label: ROLE_EDIT } ]
-                };
-                const expectedActions = [
-                    { type: setCsrfToken.toString(), payload: mockCsrfToken },
-                    { type: setIsAuth.toString(), payload: true },
-                    { type: setUserDetails.toString(), payload: mockUserDetails },
-                    { type: showSuccessAlert.toString(), payload: 'Successfully saved user profile' }
-                ];
-                await store.dispatch(saveUserProfile(values));
                 expect(store.getActions()).toEqual(expectedActions);
             });
         });

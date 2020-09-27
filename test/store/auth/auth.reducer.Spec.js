@@ -20,6 +20,13 @@ import authReducer, { initialState as authInitState } from 'store/auth/auth.redu
 import { setCsrfToken, setIsAuth, setLoginLoading, setUserDetails } from '../../../src/store/auth/auth.actions';
 import { mockCsrfToken, mockUserDetails } from '../../exclude/mock/mockApiConfig/authApi';
 
+const userDetailsPayload = {
+    username: mockUserDetails.userName,
+    firstName: mockUserDetails.firstName,
+    lastName: mockUserDetails.lastName,
+    roles: mockUserDetails.roles.map((role) => role.name)
+};
+
 describe('auth.reducer', () => {
     it('returns initial state', () => {
         expect(authReducer(undefined, {})).toEqual(authInitState);
@@ -53,10 +60,14 @@ describe('auth.reducer', () => {
     });
 
     it('handleSetUserDetails', () => {
-        const action = { type: setUserDetails.toString(), payload: mockUserDetails };
+        const action = { type: setUserDetails.toString(), payload: userDetailsPayload };
         const expectedState = {
             ...authInitState,
-            userDetails: mockUserDetails
+            userDetails: {
+                ...mockUserDetails,
+                roles: mockUserDetails.roles
+                    .map((role) => ({ name: role.name }))
+            }
         };
         expect(authReducer(authInitState, action)).toEqual(expectedState);
     });

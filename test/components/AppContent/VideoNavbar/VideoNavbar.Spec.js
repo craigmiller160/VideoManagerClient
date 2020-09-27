@@ -19,7 +19,8 @@
 import React from 'react';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
 import useReactRouter from 'use-react-router';
-import mountTestComponent from '../../../exclude/testUtil/mountTestComponent'; // eslint-disable-line import/first
+import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
+import { login, logout } from '../../../../src/services/AuthApiService'; // eslint-disable-line import/first
 
 jest.mock('store/scanning/scanning.actions', () => ({
     startFileScan: () => ({ type: 'startFileScan' })
@@ -31,11 +32,11 @@ jest.mock('components/AppContent/VideoNavbar/NavbarItem', () => {
     const NavbarItem = () => <div />;
     return NavbarItem;
 });
-jest.mock('components/AppContent/VideoNavbar/NavbarDropdown', () => {
-    const NavbarDropdown = () => <div />;
-    return NavbarDropdown;
-});
 jest.mock('use-react-router', () => jest.fn());
+jest.mock('services/AuthApiService', () => ({
+    login: jest.fn(),
+    logout: jest.fn()
+}));
 
 const push = jest.fn();
 useReactRouter.mockImplementation(() => ({
@@ -50,6 +51,7 @@ const defaultProps = {
 
 const defaultStoreState = {
     auth: {
+        isAuth: true,
         userDetails: {
             firstName: 'firstName',
             lastName: 'lastName',
@@ -71,6 +73,7 @@ const doMount = mountTestComponent(VideoNavbar, {
 
 const testRendering = (component, {
     disabled = false,
+    isAuth = true,
     roles = {}
 } = {}) => {
     const { hasEdit = true, hasAdmin = true, hasScan = true } = roles;
@@ -89,19 +92,20 @@ const testRendering = (component, {
         expect(component.find('NavbarToggler')).toHaveLength(0);
     } else {
         expect(component.find('NavbarToggler')).toHaveLength(1);
-        expect(component.find('NavbarDropdown')).toHaveLength(1);
 
         let itemIndex = 0;
 
-        testNavbarItem(itemIndex, {
-            id: 'videoListLink',
-            to: '/videos',
-            exact: true,
-            isLink: true,
-            text: 'Videos'
-        });
-        itemIndex++;
-        if (hasEdit) {
+        if (isAuth) {
+            testNavbarItem(itemIndex, {
+                id: 'videoListLink',
+                to: '/videos',
+                exact: true,
+                isLink: true,
+                text: 'Videos'
+            });
+            itemIndex++;
+        }
+        if (isAuth && hasEdit) {
             testNavbarItem(itemIndex, {
                 id: 'manageFiltersLink',
                 to: '/filters',
@@ -111,16 +115,7 @@ const testRendering = (component, {
             });
             itemIndex++;
         }
-        if (hasAdmin) {
-            testNavbarItem(itemIndex, {
-                id: 'userManagementLink',
-                to: '/users',
-                isLink: true,
-                text: 'Users'
-            });
-            itemIndex++;
-        }
-        if (hasScan) {
+        if (isAuth && hasScan) {
             testNavbarItem(itemIndex, {
                 id: 'scanDirectoryLink',
                 onClick: expect.any(Function),
@@ -128,7 +123,7 @@ const testRendering = (component, {
             });
             itemIndex++;
         }
-        if (hasAdmin) {
+        if (isAuth && hasAdmin) {
             testNavbarItem(itemIndex, {
                 id: 'settingsLink',
                 text: 'Settings',
@@ -138,12 +133,23 @@ const testRendering = (component, {
             itemIndex++;
         }
 
+        testNavbarItem(itemIndex, {
+            id: 'authLink',
+            text: isAuth ? 'Logout' : 'Login',
+            onClick: expect.any(Function)
+        });
+        itemIndex++;
+
         expect(component.find('NavbarItem')).toHaveLength(itemIndex);
     }
 
 };
 
 describe('VideoNavbar', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     describe('rendering', () => {
         it('renders with all roles', () => {
             const { component } = doMount();
@@ -161,10 +167,25 @@ describe('VideoNavbar', () => {
             });
         });
 
+        it('renders without auth', () => {
+            const { component } = doMount({
+                storeState: {
+                    auth: {
+                        isAuth: false,
+                        userDetails: {}
+                    }
+                }
+            });
+            testRendering(component, {
+                isAuth: false
+            });
+        });
+
         it('renders without scanning role', () => {
             const { component } = doMount({
                 storeState: {
                     auth: {
+                        isAuth: true,
                         userDetails: {
                             ...defaultStoreState.auth.userDetails,
                             roles: [
@@ -186,6 +207,7 @@ describe('VideoNavbar', () => {
             const { component } = doMount({
                 storeState: {
                     auth: {
+                        isAuth: true,
                         userDetails: {
                             ...defaultStoreState.auth.userDetails,
                             roles: [
@@ -207,6 +229,7 @@ describe('VideoNavbar', () => {
             const { component } = doMount({
                 storeState: {
                     auth: {
+                        isAuth: true,
                         userDetails: {
                             ...defaultStoreState.auth.userDetails,
                             roles: [
@@ -249,6 +272,33 @@ describe('VideoNavbar', () => {
                 { type: 'startFileScan' }
             ]);
             expect(push).toHaveBeenCalledWith('/scanning');
+        });
+
+        describe('authLink click', () => {
+            it('login', () => {
+                const { component } = doMount({
+                    storeState: {
+                        auth: {
+                            isAuth: false,
+                            userDetails: {}
+                        }
+                    }
+                });
+                const authLink = component.find('NavbarItem#authLink');
+                expect(authLink).toHaveLength(1);
+                authLink.props().onClick();
+                expect(login).toHaveBeenCalled();
+                expect(logout).not.toHaveBeenCalled();
+            });
+
+            it('logout', () => {
+                const { component } = doMount();
+                const authLink = component.find('NavbarItem#authLink');
+                expect(authLink).toHaveLength(1);
+                authLink.props().onClick();
+                expect(login).not.toHaveBeenCalled();
+                expect(logout).toHaveBeenCalled();
+            });
         });
     });
 });

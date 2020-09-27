@@ -18,13 +18,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import Scanning from './Scanning/Scanning';
 import VideoFileEdit from './VideoFileEdit/VideoFileEdit';
 import ManageVideoFilters from './ManageVideoFilters/ManageVideoFilters';
 import VideoPlayerPage from './VideoPlayer/VideoPlayerPage';
 import VideoListLayout from './VideoListLayout/VideoListLayout';
-import Login from './Login/Login';
 import ProtectedRoute from '@craigmiller160/react-protected-route';
 import Home from './Home/Home';
 import { useSelector } from 'react-redux';
@@ -32,10 +31,6 @@ import {
     hasAdminRole as hasAdminRoleSelector,
     hasEditRole as hasEditRoleSelector
 } from '../../store/auth/auth.selectors';
-import UserManagementPage from './User/Management/UserManagementPage';
-import UserProfile from './User/UserDetails/UserProfile';
-import EditUser from './User/UserDetails/EditUser';
-import AddUser from './User/UserDetails/AddUser';
 import Settings from './Settings';
 
 const AppRoutes = (props) => {
@@ -63,10 +58,10 @@ const AppRoutes = (props) => {
         redirect: '/login'
     };
 
-    const isNotAuthenticatedRule = {
-        allow: ({ auth }) => !auth,
-        redirect: '/'
-    };
+    // const isNotAuthenticatedRule = {
+    //     allow: ({ auth }) => !auth,
+    //     redirect: '/'
+    // };
 
     const isScanningRule = {
         allow: ({ scanning }) => scanning,
@@ -146,47 +141,6 @@ const AppRoutes = (props) => {
                 ] }
             />
             <ProtectedRoute
-                routeKey="/profile"
-                path="/profile"
-                component={ UserProfile }
-                ruleProps={ ruleProps }
-                rules={ [
-                    isAuthenticatedRule,
-                    isNotScanningRule
-                ] }
-            />
-            <ProtectedRoute
-                path="/users/new"
-                component={ AddUser }
-                ruleProps={ ruleProps }
-                rules={ [
-                    isAuthenticatedRule,
-                    hasAdminRoleRule,
-                    isNotScanningRule
-                ] }
-            />
-            <ProtectedRoute
-                routeKey="/users/userId"
-                path="/users/:userId"
-                component={ EditUser }
-                ruleProps={ ruleProps }
-                rules={ [
-                    isAuthenticatedRule,
-                    hasAdminRoleRule,
-                    isNotScanningRule
-                ] }
-            />
-            <ProtectedRoute
-                path="/users"
-                component={ UserManagementPage }
-                ruleProps={ ruleProps }
-                rules={ [
-                    isAuthenticatedRule,
-                    isNotScanningRule,
-                    hasAdminRoleRule
-                ] }
-            />
-            <ProtectedRoute
                 component={ Settings }
                 ruleProps={ ruleProps }
                 path="/settings"
@@ -196,23 +150,12 @@ const AppRoutes = (props) => {
                 ] }
             />
             <ProtectedRoute
-                path="/login"
-                exact
-                component={ Login }
-                ruleProps={ ruleProps }
-                rules={ [
-                    isNotAuthenticatedRule
-                ] }
-            />
-            <ProtectedRoute
                 path="/"
                 exact
                 component={ Home }
                 ruleProps={ ruleProps }
-                rules={ [
-                    isAuthenticatedRule
-                ] }
             />
+            <Redirect to="/" />
         </Switch>
     );
 };

@@ -18,77 +18,51 @@
 
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
+import { getAuthUser, getVideoToken, login } from 'services/AuthApiService';
 import {
-    checkAuth, createUser, deleteUser, getAllUsers,
-    getRoles, getUser,
-    getVideoToken,
-    login,
-    logout, revokeAccess, saveUserAdmin,
-    saveUserProfile
-} from 'services/AuthApiService';
-import {
-    CSRF_TOKEN_TEST,
     mockCheckAuthSuccess,
-    mockCreateUser,
     mockCsrfToken,
-    mockDeleteUser,
-    mockGetAllUsers,
-    mockGetRoles,
-    mockGetUser,
     mockGetVideoToken,
-    mockLoginSuccess,
+    mockLogin,
     mockLogout,
-    mockPassword,
-    mockRevokeAccess,
-    mockRoles,
-    mockSaveUserAdmin,
-    mockSaveUserProfile,
-    mockTokenResponse,
-    mockUserDetails,
-    mockUserName
+    mockTokenResponse
 } from '../exclude/mock/mockApiConfig/authApi';
 import { CSRF_TOKEN_KEY } from '../../src/utils/securityConstants';
+import { logout } from '../../src/services/AuthApiService';
 
 const mockApi = new MockAdapter(API);
 
 describe('AuthApiService', () => {
     beforeEach(() => {
+        jest.clearAllMocks();
         mockApi.reset();
         mockCheckAuthSuccess(mockApi);
-        mockLoginSuccess(mockApi);
-        mockLogout(mockApi);
         mockGetVideoToken(mockApi);
-        mockGetRoles(mockApi);
-        mockSaveUserProfile(mockApi);
-        mockGetAllUsers(mockApi);
-        mockGetUser(mockApi);
-        mockSaveUserAdmin(mockApi);
-        mockRevokeAccess(mockApi);
-        mockCreateUser(mockApi);
-        mockDeleteUser(mockApi);
+        mockLogin(mockApi);
+        mockLogout(mockApi);
+
+        window.location.assign = jest.fn();
     });
 
-    it('login', async () => {
-        const res = await login(mockUserName, mockPassword);
+    it('getAuthUser', async () => {
+        const res = await getAuthUser();
         expect(res).toEqual(expect.objectContaining({
-            status: 204
-        }));
-    });
-
-    it('checkAuth', async () => {
-        const res = await checkAuth();
-        expect(res).toEqual(expect.objectContaining({
-            status: 204,
+            status: 200,
             headers: expect.objectContaining({
-                [CSRF_TOKEN_KEY]: mockCsrfToken,
-                [CSRF_TOKEN_TEST]: true
+                [CSRF_TOKEN_KEY]: mockCsrfToken
             })
         }));
     });
 
+    it('login', async () => {
+        const res = await login();
+        expect(res.status).toEqual(200);
+        expect(window.location.assign).toHaveBeenCalledWith('TheUrl');
+    });
+
     it('logout', async () => {
         const res = await logout();
-        expect(res.status).toEqual(204);
+        expect(res.status).toEqual(200);
     });
 
     it('getVideoToken', async () => {
@@ -96,70 +70,6 @@ describe('AuthApiService', () => {
         expect(res).toEqual(expect.objectContaining({
             status: 200,
             data: mockTokenResponse
-        }));
-    });
-
-    it('getRoles', async () => {
-        const res = await getRoles();
-        expect(res).toEqual(expect.objectContaining({
-            status: 200,
-            data: mockRoles
-        }));
-    });
-
-    it('saveUserProfile', async () => {
-        const res = await saveUserProfile(mockUserDetails);
-        expect(res).toEqual(expect.objectContaining({
-            status: 200,
-            data: mockUserDetails
-        }));
-    });
-
-    it('getAllUsers', async () => {
-        const res = await getAllUsers();
-        expect(res).toEqual(expect.objectContaining({
-            status: 200,
-            data: [mockUserDetails]
-        }));
-    });
-
-    it('getUser', async () => {
-        const res = await getUser(1);
-        expect(res).toEqual(expect.objectContaining({
-            status: 200,
-            data: mockUserDetails
-        }));
-    });
-
-    it('saveUserAdmin', async () => {
-        const res = await saveUserAdmin(1, mockUserDetails);
-        expect(res).toEqual(expect.objectContaining({
-            status: 200,
-            data: mockUserDetails
-        }));
-    });
-
-    it('revokeAccess', async () => {
-        const res = await revokeAccess(1);
-        expect(res).toEqual(expect.objectContaining({
-            status: 200,
-            data: mockUserDetails
-        }));
-    });
-
-    it('createUser', async () => {
-        const res = await createUser(mockUserDetails);
-        expect(res).toEqual(expect.objectContaining({
-            status: 200,
-            data: mockUserDetails
-        }));
-    });
-
-    it('deleteUser', async () => {
-        const res = await deleteUser(1);
-        expect(res).toEqual(expect.objectContaining({
-            status: 200,
-            data: mockUserDetails
         }));
     });
 });

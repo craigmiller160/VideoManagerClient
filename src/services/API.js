@@ -19,7 +19,6 @@
 import axios from 'axios';
 import store from '../store/store';
 import { CSRF_TOKEN_KEY } from '../utils/securityConstants';
-import { setIsAuth } from '../store/auth/auth.actions';
 
 const instance = axios.create({
     baseURL: '/api',
@@ -30,9 +29,6 @@ const instance = axios.create({
     withCredentials: true,
     xsrfHeaderName: 'X-CSRF-TOKEN'
 });
-
-const noAuthStatuses = [401, 403];
-const refreshUri = '/api/auth/refresh';
 
 export const addCsrfTokenInterceptor = (config) => {
     const { csrfToken } = store.getState().auth;
@@ -45,33 +41,6 @@ export const addCsrfTokenInterceptor = (config) => {
     return config;
 };
 
-export const handle401Interceptor = async (error) => {
-    if (noAuthStatuses.includes(error?.response?.status) &&
-        error?.config?.url !== refreshUri &&
-        !error?.config?.rerun) {
-        try {
-            await instance.get('/auth/refresh');
-        } catch (ex) {
-            error.suppressed = ex;
-            store.dispatch(setIsAuth(false));
-            throw error;
-        }
-
-        try {
-            return await instance.request({
-                ...error.config,
-                url: error.config.url.replace('/api', ''),
-                rerun: true
-            });
-        } catch (ex2) {
-            ex2.suppressed = error;
-            throw ex2;
-        }
-    }
-    throw error;
-};
-
 instance.interceptors.request.use(addCsrfTokenInterceptor);
-instance.interceptors.response.use((response) => response, handle401Interceptor);
 
 export default instance;

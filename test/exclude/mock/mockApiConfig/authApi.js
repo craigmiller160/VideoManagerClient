@@ -33,10 +33,20 @@ export const mockRoles = [
     { roleId: 1, name: 'Role' }
 ];
 
+export const mockLogin = (mockApi) =>
+    mockApi.onPost('/oauth/authcode/login')
+        .reply(200, {
+            url: 'TheUrl'
+        });
+
+export const mockLogout = (mockApi) =>
+    mockApi.onGet('/oauth/logout')
+        .reply(200);
+
 export const mockCheckAuthSuccess = (mockApi) =>
-    mockApi.onGet('/auth/check')
+    mockApi.onGet('/oauth/user')
         .reply((config) =>  [
-            204,
+            200,
             mockUserDetails,
             {
                 [CSRF_TOKEN_KEY]: mockCsrfToken,
@@ -45,7 +55,7 @@ export const mockCheckAuthSuccess = (mockApi) =>
         ]);
 
 export const mockCheckAuthFail = (mockApi) =>
-    mockApi.onGet('/auth/check')
+    mockApi.onGet('/oauth/user')
         .reply((config) => [
             401,
             null,
@@ -55,50 +65,6 @@ export const mockCheckAuthFail = (mockApi) =>
             }
         ]);
 
-export const mockLoginSuccess = (mockApi) =>
-    mockApi.onPost('/auth/login', { userName: mockUserName, password: mockPassword })
-        .reply(204);
-
-export const mockLoginFail = (mockApi) =>
-    mockApi.onPost('/auth/login', { userName: mockUserName, password: mockPassword })
-        .reply(401);
-
-export const mockLogout = (mockApi) =>
-    mockApi.onGet('/auth/logout')
-        .reply(204);
-
 export const mockGetVideoToken = (mockApi) =>
     mockApi.onGet('/auth/videotoken/3')
         .reply(200, mockTokenResponse);
-
-export const mockGetRoles = (mockApi) =>
-    mockApi.onGet('/auth/roles')
-        .reply(200, mockRoles);
-
-export const mockSaveUserProfile = (mockApi) =>
-    mockApi.onPut('/auth/users/self', mockUserDetails)
-        .reply(200, mockUserDetails);
-
-export const mockGetAllUsers = (mockApi) =>
-    mockApi.onGet('/auth/users')
-        .reply(200, [mockUserDetails]);
-
-export const mockGetUser = (mockApi) =>
-    mockApi.onGet('/auth/users/admin/1')
-        .reply(200, mockUserDetails);
-
-export const mockSaveUserAdmin = (mockApi) =>
-    mockApi.onPut('/auth/users/admin/1', mockUserDetails)
-        .reply(200, mockUserDetails);
-
-export const mockRevokeAccess = (mockApi) =>
-    mockApi.onPost('/auth/users/revoke/1')
-        .reply(200, mockUserDetails);
-
-export const mockCreateUser = (mockApi) =>
-    mockApi.onPost('/auth/users', mockUserDetails)
-        .reply(200, mockUserDetails);
-
-export const mockDeleteUser = (mockApi) =>
-    mockApi.onDelete('/auth/users/1')
-        .reply(200, mockUserDetails);
