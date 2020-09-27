@@ -19,7 +19,6 @@
 import axios from 'axios';
 import store from '../store/store';
 import { CSRF_TOKEN_KEY } from '../utils/securityConstants';
-import { setIsAuth } from '../store/auth/auth.actions';
 
 const instance = axios.create({
     baseURL: '/api',
