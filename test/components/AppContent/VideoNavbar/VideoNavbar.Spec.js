@@ -32,10 +32,6 @@ jest.mock('components/AppContent/VideoNavbar/NavbarItem', () => {
     const NavbarItem = () => <div />;
     return NavbarItem;
 });
-jest.mock('components/AppContent/VideoNavbar/NavbarDropdown', () => {
-    const NavbarDropdown = () => <div />;
-    return NavbarDropdown;
-});
 jest.mock('use-react-router', () => jest.fn());
 jest.mock('services/AuthApiService', () => ({
     login: jest.fn(),
