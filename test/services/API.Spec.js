@@ -16,7 +16,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import API, { addCsrfTokenInterceptor, handle401Interceptor } from '../../src/services/API';
+import API, { addCsrfTokenInterceptor } from '../../src/services/API';
 import { CSRF_TOKEN_KEY } from 'utils/securityConstants';
 import MockAdapter from 'axios-mock-adapter';
 import { mockCsrfToken } from '../exclude/mock/mockApiConfig/authApi';
