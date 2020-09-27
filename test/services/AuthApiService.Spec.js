@@ -34,15 +34,14 @@ const mockApi = new MockAdapter(API);
 
 describe('AuthApiService', () => {
     beforeEach(() => {
+        jest.clearAllMocks();
         mockApi.reset();
         mockCheckAuthSuccess(mockApi);
         mockGetVideoToken(mockApi);
         mockLogin(mockApi);
         mockLogout(mockApi);
-    });
 
-    afterEach(() => {
-        window.location.href = 'http://localhost/';
+        window.location.assign = jest.fn();
     });
 
     it('getAuthUser', async () => {
@@ -58,7 +57,7 @@ describe('AuthApiService', () => {
     it('login', async () => {
         const res = await login();
         expect(res.status).toEqual(200);
-        expect(window.location.href).toEqual('TheUrl');
+        expect(window.location.assign).toHaveBeenCalledWith('TheUrl');
     });
 
     it('logout', async () => {

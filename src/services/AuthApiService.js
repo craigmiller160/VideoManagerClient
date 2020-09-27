@@ -21,7 +21,8 @@ import API from './API';
 export const login = () =>
     API.post('/oauth/authcode/login')
         .then((res) => {
-            window.location.href = res.data.url;
+            window.location.assign(res.data.url);
+            return res;
         });
 
 export const logout = () => API.get('/oauth/logout');
