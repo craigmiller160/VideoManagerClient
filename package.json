@@ -34,9 +34,10 @@
   "scripts": {
     "build": "web-config-scripts webpack",
     "prepDeploy": "web-config-scripts prepDeploy",
-    "start": "web-config-scripts devServer"
+    "start": "web-config-scripts devServer",
+    "test": "web-config-scripts test"
   },
   "devDependencies": {
-    "@craigmiller160/web-config": "^2.4.0"
+    "@craigmiller160/web-config": "file:.yalc/@craigmiller160/web-config"
   }
 }
