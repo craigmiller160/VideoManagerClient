@@ -18,7 +18,7 @@
 
 module.exports = {
     title: 'Video Manager',
-    devServerPort: 3000,
+    devServerPort: 3001,
     devServerHttps: true,
     devServerProxy: {
         '/api': {
