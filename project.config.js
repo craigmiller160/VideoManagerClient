@@ -28,7 +28,7 @@ module.exports = {
             target: 'https://localhost:8443',
             secure: false,
             pathRewrite: {
-                '^/video-manager': ''
+                '^/video-manager/api': ''
             },
             logLevel: 'debug'
         },
