@@ -31,6 +31,10 @@
     "styled-components": "^4.2.0",
     "use-react-router": "^1.0.7"
   },
+  "resolutions": {
+    "es-abstract": "^1.18.0-next.1",
+    "@babel/runtime": "^7.12.5"
+  },
   "scripts": {
     "build": "web-config-scripts webpack",
     "prepDeploy": "web-config-scripts prepDeploy",
