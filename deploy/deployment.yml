@@ -30,11 +30,10 @@ kind: Service
 metadata:
   name: video-manager-client-service
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: video-manager-client
   ports:
     - port: 443
       targetPort: 443
-      nodePort: 31001
       protocol: TCP
