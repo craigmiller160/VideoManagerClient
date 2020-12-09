@@ -20,7 +20,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavItem, NavLink as BootLink } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import classes from './NavbarItem.scss';
+import classes from './NavbarItem.module.scss';
 import useReactRouter from 'use-react-router';
 import newid from '../../../utils/newid';
 
