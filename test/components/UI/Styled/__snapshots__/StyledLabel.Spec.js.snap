@@ -1,3 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StyledLabel renders correctly 1`] = `ReactWrapper {}`;
+exports[`StyledLabel renders correctly 1`] = `
+<StyledLabel>
+  <StyledComponent
+    forwardedComponent={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": true,
+          "lastClassName": "clbXFz",
+          "rules": Array [
+            "
+    font-weight: bold;
+    margin: 0;
+",
+          ],
+        },
+        "displayName": "StyledLabel",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "label",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      }
+    }
+    forwardedRef={null}
+  >
+    <label
+      className="sc-bdVaJa clbXFz"
+    />
+  </StyledComponent>
+</StyledLabel>
+`;
