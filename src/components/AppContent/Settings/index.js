@@ -19,7 +19,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import classes from './Settings.scss';
+import classes from './Settings.module.scss';
 import FlexRow from '../../UI/Grid/FlexRow';
 import Spinner from '../../UI/Spinner/Spinner';
 import { loadSettings, saveSettings } from '../../../store/settings/settings.actions';

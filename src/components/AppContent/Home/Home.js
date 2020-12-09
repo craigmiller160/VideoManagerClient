@@ -17,7 +17,7 @@
  */
 
 import React from 'react';
-import classes from './Home.scss';
+import classes from './Home.module.scss';
 
 const Home = () => (
     <div className={ classes.Home }>

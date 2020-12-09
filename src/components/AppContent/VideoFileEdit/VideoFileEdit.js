@@ -19,7 +19,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'components/UI/form/Form/Form';
-import classes from './VideoFileEdit.scss';
+import classes from './VideoFileEdit.module.scss';
 import { Button, Col, Row } from 'reactstrap';
 import Input from 'components/UI/form/Input/Input';
 import Select from 'components/UI/form/Select/Select';

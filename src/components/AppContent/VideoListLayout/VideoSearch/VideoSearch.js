@@ -22,7 +22,7 @@ import { reset as resetForm } from 'redux-form';
 import { Row, Col, Button } from 'reactstrap';
 import Input from '../../../UI/form/Input/Input';
 import Select from '../../../UI/form/Select/Select';
-import classes from './VideoSearch.scss';
+import classes from './VideoSearch.module.scss';
 import Form from "../../../UI/form/Form/Form";
 import { searchForVideos, setCurrentPage } from 'store/videoList/videoList.actions';
 import { SORT_BY_OPTIONS, SORT_DIR_OPTIONS } from './VideoSearch.options';

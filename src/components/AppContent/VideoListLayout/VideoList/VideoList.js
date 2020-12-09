@@ -17,7 +17,7 @@
  */
 
 import React, { useEffect } from 'react';
-import classes from './VideoList.scss';
+import classes from './VideoList.module.scss';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
