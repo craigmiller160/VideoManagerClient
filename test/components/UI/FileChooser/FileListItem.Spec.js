@@ -53,7 +53,7 @@ const testRendering = (component, {
 
     expect(fileListItem.find('img')).toHaveLength(1);
     expect(fileListItem.find('img').props()).toEqual({
-        src: directory ? 'directory.png' : 'file.png',
+        src: directory ? 'file-mock' : 'file-mock',
         alt: directory ? 'Directory Icon' : 'File Icon'
     });
 
