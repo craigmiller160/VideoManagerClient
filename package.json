@@ -9,7 +9,7 @@
     "bootstrap": "^4.2.1",
     "identity-obj-proxy": "3.0.0",
     "keycode": "^2.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.1",
     "prop-types": "^15.6.2",
     "qs": "^6.9.1",
     "react": "^16.14.0",
