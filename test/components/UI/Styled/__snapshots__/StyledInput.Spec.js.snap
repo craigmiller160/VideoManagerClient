@@ -1,6 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StyledInput renders correctly 1`] = `
+.c0 {
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  padding: 2px 8px;
+  line-height: 1.5;
+  font-weight: 400;
+  height: calc(2.25rem + 2px);
+}
+
 <StyledInput
   hasError={false}
 >
@@ -15,7 +27,7 @@ exports[`StyledInput renders correctly 1`] = `
         "componentStyle": ComponentStyle {
           "componentId": "sc-bdVaJa",
           "isStatic": false,
-          "lastClassName": "IJMWF",
+          "lastClassName": "c0",
           "rules": Array [
             "
     border: 1px solid ",
@@ -49,7 +61,7 @@ exports[`StyledInput renders correctly 1`] = `
     hasError={false}
   >
     <input
-      className="sc-bdVaJa IJMWF"
+      className="c0"
     />
   </StyledComponent>
 </StyledInput>

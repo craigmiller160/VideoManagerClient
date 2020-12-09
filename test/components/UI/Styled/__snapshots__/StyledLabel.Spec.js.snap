@@ -1,6 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StyledLabel renders correctly 1`] = `
+.c0 {
+  font-weight: bold;
+  margin: 0;
+}
+
 <StyledLabel>
   <StyledComponent
     forwardedComponent={
@@ -10,7 +15,7 @@ exports[`StyledLabel renders correctly 1`] = `
         "componentStyle": ComponentStyle {
           "componentId": "sc-bdVaJa",
           "isStatic": true,
-          "lastClassName": "clbXFz",
+          "lastClassName": "c0",
           "rules": Array [
             "
     font-weight: bold;
@@ -31,7 +36,7 @@ exports[`StyledLabel renders correctly 1`] = `
     forwardedRef={null}
   >
     <label
-      className="sc-bdVaJa clbXFz"
+      className="c0"
     />
   </StyledComponent>
 </StyledLabel>
