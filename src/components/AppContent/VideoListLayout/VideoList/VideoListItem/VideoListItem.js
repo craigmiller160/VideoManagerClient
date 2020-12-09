@@ -18,7 +18,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import classes from './VideoListItem.scss';
+import classes from './VideoListItem.module.scss';
 import {
     ListGroupItem,
     ListGroupItemHeading,

@@ -18,7 +18,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import classes from './Alert.scss';
+import classes from './Alert.module.scss';
 import { useDispatch } from 'react-redux';
 import { hideAlert } from '../../../store/alert/alert.actions';
 

@@ -19,7 +19,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler } from 'reactstrap';
-import * as classes from './VideoNavbar.scss';
+import classes from './VideoNavbar.module.scss';
 import { NavLink } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useReactRouter from 'use-react-router';

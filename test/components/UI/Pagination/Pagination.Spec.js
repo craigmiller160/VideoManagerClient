@@ -24,7 +24,7 @@ import Pagination, {
     getAlignClassName,
     createPageButtons
 } from 'components/UI/Pagination/Pagination';
-import PaginationClasses from 'components/UI/Pagination/Pagination.scss';
+import PaginationClasses from 'components/UI/Pagination/Pagination.module.scss';
 import { mount } from 'enzyme';
 
 const getProps = (currentPage, totalPages = 5) => ({

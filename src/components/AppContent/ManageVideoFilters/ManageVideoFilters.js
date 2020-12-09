@@ -19,7 +19,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'reactstrap';
-import classes from './ManageVideoFilters.scss';
+import classes from './ManageVideoFilters.module.scss';
 import FilterInputModal from 'components/Modals/FilterInputModal/FilterInputModal';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

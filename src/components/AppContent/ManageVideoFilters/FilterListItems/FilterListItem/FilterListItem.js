@@ -18,7 +18,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import classes from './FilterListItem.scss';
+import classes from './FilterListItem.module.scss';
 
 const FilterListItem = (props) => {
     const {

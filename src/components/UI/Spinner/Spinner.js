@@ -17,7 +17,7 @@
  */
 
 import React from 'react';
-import classes from './Spinner.scss';
+import classes from './Spinner.module.scss';
 import { Spinner as ReactSpinner } from 'reactstrap';
 
 const Spinner = () => (

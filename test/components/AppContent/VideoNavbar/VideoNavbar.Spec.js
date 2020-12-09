@@ -26,7 +26,8 @@ jest.mock('store/scanning/scanning.actions', () => ({
     startFileScan: () => ({ type: 'startFileScan' })
 }));
 jest.mock('store/auth/auth.actions', () => ({
-    logout: () => ({ type: 'logout' })
+    logout: () => ({ type: 'logout' }),
+    clearAuth: () => ({ type: 'clearAuth' })
 }));
 jest.mock('components/AppContent/VideoNavbar/NavbarItem', () => {
     const NavbarItem = () => <div />;
@@ -291,13 +292,14 @@ describe('VideoNavbar', () => {
                 expect(logout).not.toHaveBeenCalled();
             });
 
-            it('logout', () => {
-                const { component } = doMount();
+            it('logout', async () => {
+                const { component, store } = doMount();
                 const authLink = component.find('NavbarItem#authLink');
                 expect(authLink).toHaveLength(1);
-                authLink.props().onClick();
-                expect(login).not.toHaveBeenCalled();
-                expect(logout).toHaveBeenCalled();
+                await authLink.props().onClick();
+                expect(store.getActions()).toEqual([
+                    { type: 'clearAuth' }
+                ]);
             });
         });
     });

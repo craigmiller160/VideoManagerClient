@@ -20,7 +20,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import classes from './VideoPlayerPage.scss';
+import classes from './VideoPlayerPage.module.scss';
 import Spinner from '../../UI/Spinner/Spinner';
 import { loadDataForPlayback } from 'store/videoPlayer/videoPlayer.actions';
 import { Helmet } from 'react-helmet';

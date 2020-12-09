@@ -16,8 +16,53 @@ exports[`StyledInput renders correctly 1`] = `
 <StyledInput
   hasError={false}
 >
-  <input
-    className="c0"
-  />
+  <StyledComponent
+    forwardedComponent={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "_foldedDefaultProps": Object {
+          "hasError": false,
+        },
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": false,
+          "lastClassName": "c0",
+          "rules": Array [
+            "
+    border: 1px solid ",
+            [Function],
+            ";
+    border-radius: 3px;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    padding: 2px 8px;
+    line-height: 1.5;
+    font-weight: 400;
+    height: calc(2.25rem + 2px);
+",
+          ],
+        },
+        "displayName": "StyledInput",
+        "foldedComponentIds": Array [],
+        "propTypes": Object {
+          "hasError": [Function],
+        },
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "input",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      }
+    }
+    forwardedRef={null}
+    hasError={false}
+  >
+    <input
+      className="c0"
+    />
+  </StyledComponent>
 </StyledInput>
 `;

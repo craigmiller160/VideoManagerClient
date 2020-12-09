@@ -1,4 +1,4 @@
-/*
+/*!
  *     VideoManagerClient
  *     Copyright (C) 2020 Craig Miller
  *
@@ -16,28 +16,15 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classes from './ToolTip.module.scss';
+@import './variables';
 
-const ToolTip = (props) => {
-    const {
-        children,
-        text
-    } = props;
-
-    return (
-        <div className={ classes.ToolTip }>
-            { children }
-            <span className={ classes.ToolTipText }>{ text }</span>
-        </div>
-    );
-};
-ToolTip.propTypes = {
-    text: PropTypes.string,
-    children: PropTypes.oneOfType([
-        PropTypes.node, PropTypes.element
-    ]).isRequired
-};
-
-export default ToolTip;
+:export {
+  success: $success;
+  successDark: $success-dark;
+  danger: $danger;
+  dangerDark: $danger-dark;
+  info: $info;
+  info-dark: $info-dark;
+  warning: $warning;
+  warning-dark: $warning-dark;
+}

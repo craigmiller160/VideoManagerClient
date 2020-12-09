@@ -16,28 +16,29 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classes from './ToolTip.module.scss';
+const path = require('path');
 
-const ToolTip = (props) => {
-    const {
-        children,
-        text
-    } = props;
-
-    return (
-        <div className={ classes.ToolTip }>
-            { children }
-            <span className={ classes.ToolTipText }>{ text }</span>
-        </div>
-    );
+module.exports = {
+    title: 'Video Manager',
+    devServerPort: 3001,
+    devServerHttps: true,
+    devServerProxy: {
+        '/api': {
+            target: 'https://localhost:8443',
+            secure: false,
+            logLevel: 'debug'
+        },
+        '/oauth2': {
+            target: 'https://localhost:7003',
+            secure: false,
+            pathRewrite: {
+                '^/oauth2': ''
+            },
+            changeOrigin: true,
+            logLevel: 'debug'
+        }
+    },
+    jestSetupFiles: [
+        path.resolve(process.cwd(), 'test/setupTests.js')
+    ]
 };
-ToolTip.propTypes = {
-    text: PropTypes.string,
-    children: PropTypes.oneOfType([
-        PropTypes.node, PropTypes.element
-    ]).isRequired
-};
-
-export default ToolTip;

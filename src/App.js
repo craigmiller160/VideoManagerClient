@@ -23,7 +23,7 @@ import { ThemeProvider } from 'styled-components';
 import { Helmet } from 'react-helmet';
 import store from './store/store';
 import './App.scss';
-import variables from './assets/styles/_variables.scss';
+import variables from './assets/styles/variables.module.scss';
 import AppContent from './components/AppContent/AppContent';
 
 const theme = {
