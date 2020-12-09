@@ -6,6 +6,8 @@ This is the client application for Video Manager.
 
 Make sure that the version number in the package.json and deployment.yml files are unique, or else the image won't be built properly.
 
-First, run `yarn dist` to build the artifact.
+First, run `yarn build` to build the code.
 
-Then, run `sh deploy.sh` to deploy the artifact to Kubernetes.
+Then, run `yarn prepDeploy` to prepare the artifact.
+
+Lastly, run `kube-deploy` (from k8s deployment app).
