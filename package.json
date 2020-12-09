@@ -38,6 +38,8 @@
     "test": "web-config-scripts test"
   },
   "devDependencies": {
-    "@craigmiller160/web-config": "file:.yalc/@craigmiller160/web-config"
+    "@craigmiller160/web-config": "file:.yalc/@craigmiller160/web-config",
+    "axios-mock-adapter": "^1.19.0",
+    "redux-mock-store": "^1.5.4"
   }
 }
