@@ -22,6 +22,7 @@ module.exports = {
     title: 'Video Manager',
     devServerPort: 3001,
     devServerHttps: true,
+    publicPath: '/video-manager',
     devServerProxy: {
         '/video-manager/api': {
             target: 'https://localhost:8443',
