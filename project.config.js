@@ -16,6 +16,8 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+const path = require('path');
+
 module.exports = {
     title: 'Video Manager',
     devServerPort: 3001,
@@ -35,5 +37,8 @@ module.exports = {
             changeOrigin: true,
             logLevel: 'debug'
         }
-    }
+    },
+    jestSetupFiles: [
+        path.resolve(process.cwd(), 'test/setupTests.js')
+    ]
 };
