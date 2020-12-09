@@ -24,7 +24,7 @@ const VideoPlayer = (props) => {
         fileId,
         videoToken
     } = props;
-    const videoUri = `/api/video-files/play/${fileId}?videoToken=${videoToken}`;
+    const videoUri = `/video-manager/api/video-files/play/${fileId}?videoToken=${videoToken}`;
     return (
         <video controls autoPlay="autoPlay">
             <source src={ videoUri } />

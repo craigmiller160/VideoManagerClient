@@ -21,7 +21,7 @@ import store from '../store/store';
 import { CSRF_TOKEN_KEY } from '../utils/securityConstants';
 
 const instance = axios.create({
-    baseURL: '/api',
+    baseURL: '/video-manager/api',
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'

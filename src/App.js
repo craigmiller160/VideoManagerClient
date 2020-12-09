@@ -38,7 +38,7 @@ const App = () => (
             <title>Video Manager</title>
         </Helmet>
         <Provider store={ store }>
-            <BrowserRouter>
+            <BrowserRouter basename="/video-manager">
                 <ThemeProvider theme={ theme }>
                     <AppContent />
                 </ThemeProvider>

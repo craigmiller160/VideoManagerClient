@@ -65,7 +65,7 @@ const VideoListItem = (props) => {
 
     const playVideoClick = async () => {
         await dispatch(videoPlayerReset());
-        window.open(`/play/${fileId}`, '_blank');
+        window.open(`/video-manager/play/${fileId}`, '_blank');
     };
 
     return (

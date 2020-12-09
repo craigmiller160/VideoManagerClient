@@ -22,17 +22,21 @@ module.exports = {
     title: 'Video Manager',
     devServerPort: 3001,
     devServerHttps: true,
+    publicPath: '/video-manager',
     devServerProxy: {
-        '/api': {
+        '/video-manager/api': {
             target: 'https://localhost:8443',
             secure: false,
+            pathRewrite: {
+                '^/video-manager/api': ''
+            },
             logLevel: 'debug'
         },
-        '/oauth2': {
+        '/video-manager/oauth2': {
             target: 'https://localhost:7003',
             secure: false,
             pathRewrite: {
-                '^/oauth2': ''
+                '^/video-manager/oauth2': ''
             },
             changeOrigin: true,
             logLevel: 'debug'
