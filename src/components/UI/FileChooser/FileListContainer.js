@@ -17,7 +17,7 @@
  */
 
 import React from 'react';
-import classes from './FileListContainer.scss';
+import classes from './FileListContainer.module.scss';
 import FileListItem from './FileListItem';
 import { fileListPropType } from './fileChooserPropTypes';
 

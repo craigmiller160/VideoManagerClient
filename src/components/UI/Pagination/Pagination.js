@@ -18,7 +18,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import classes from './Pagination.scss';
+import classes from './Pagination.module.scss';
 import { Pagination as ReactPagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 export const LEFT_ALIGN = 'left';

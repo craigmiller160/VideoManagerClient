@@ -24,7 +24,7 @@ import { checkIsScanning } from 'store/scanning/scanning.actions';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useReactRouter from 'use-react-router';
 import { getSelectedVideoWithFilters } from 'store/videoList/videoList.selectors';
-import classes from './AppContent.scss';
+import classes from './AppContent.module.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
 import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';

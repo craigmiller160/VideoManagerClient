@@ -18,7 +18,7 @@
 
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import classes from './FileListItem.scss';
+import classes from './FileListItem.module.scss';
 import directoryIcon from '../../../assets/images/directory.png';
 import fileIcon from '../../../assets/images/file.png';
 import { Button } from 'reactstrap';
