@@ -40,8 +40,6 @@ describe('AuthApiService', () => {
         mockGetVideoToken(mockApi);
         mockLogin(mockApi);
         mockLogout(mockApi);
-
-        window.location.assign = jest.fn();
     });
 
     it('getAuthUser', async () => {

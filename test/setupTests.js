@@ -16,4 +16,10 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+delete window.location
+
+window.location = {
+    assign: jest.fn()
+};
+
 jest.useFakeTimers();
