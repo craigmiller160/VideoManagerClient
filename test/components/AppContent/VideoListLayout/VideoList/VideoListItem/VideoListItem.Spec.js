@@ -208,7 +208,7 @@ describe('VideoListItem', () => {
             expect(store.getActions()).toEqual([
                 { type: 'RESET' }
             ]);
-            expect(open).toHaveBeenCalledWith(`/play/${defaultProps.videoFile.fileId}`, '_blank');
+            expect(open).toHaveBeenCalledWith(`/video-manager/play/${defaultProps.videoFile.fileId}`, '_blank');
         });
     });
 });
