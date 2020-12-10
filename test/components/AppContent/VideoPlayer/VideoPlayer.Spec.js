@@ -35,7 +35,7 @@ describe('VideoPlayer', () => {
             expect(component.find('video')).toHaveLength(1);
             expect(component.find('source')).toHaveLength(1);
             expect(component.find('source').props()).toEqual({
-                src: '/api/video-files/play/1?videoToken=token'
+                src: '/video-manager/api/video-files/play/1?videoToken=token'
             });
         });
     });
