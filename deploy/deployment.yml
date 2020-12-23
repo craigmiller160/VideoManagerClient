@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: video-manager-client
-          image: localhost:32000/video-manager-client:1.12.2.7
+          image: localhost:32000/video-manager-client:1.12.3
           ports:
             - containerPort: 443
           livenessProbe:
