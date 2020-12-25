@@ -16,9 +16,6 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-window.__webpack_nonce__ = window.NONCE_ID;
-console.log('Nonce', window.__webpack_nonce__); // TODO delete this
-
 import '@craigmiller160/react-web-config/polyfills';
 import React from 'react';
 import ReactDOM from 'react-dom';
