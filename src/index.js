@@ -16,12 +16,13 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import '@craigmiller160/react-web-config/polyfills';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import '!style-loader!css-loader!bootstrap/dist/css/bootstrap.min.css'; // eslint-disable-line import/no-webpack-loader-syntax
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

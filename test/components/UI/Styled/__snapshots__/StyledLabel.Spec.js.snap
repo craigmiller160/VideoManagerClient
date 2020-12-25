@@ -7,37 +7,8 @@ exports[`StyledLabel renders correctly 1`] = `
 }
 
 <StyledLabel>
-  <StyledComponent
-    forwardedComponent={
-      Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "attrs": Array [],
-        "componentStyle": ComponentStyle {
-          "componentId": "sc-bdVaJa",
-          "isStatic": true,
-          "lastClassName": "c0",
-          "rules": Array [
-            "
-    font-weight: bold;
-    margin: 0;
-",
-          ],
-        },
-        "displayName": "StyledLabel",
-        "foldedComponentIds": Array [],
-        "render": [Function],
-        "styledComponentId": "sc-bdVaJa",
-        "target": "label",
-        "toString": [Function],
-        "warnTooManyClasses": [Function],
-        "withComponent": [Function],
-      }
-    }
-    forwardedRef={null}
-  >
-    <label
-      className="c0"
-    />
-  </StyledComponent>
+  <label
+    className="c0"
+  />
 </StyledLabel>
 `;

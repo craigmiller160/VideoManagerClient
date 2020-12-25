@@ -31,7 +31,7 @@ describe('App', () => {
         expect(component.find('HelmetWrapper')).toHaveLength(1);
         expect(component.find('Provider')).toHaveLength(1);
         expect(component.find('BrowserRouter')).toHaveLength(1);
-        expect(component.find('ThemeProvider')).toHaveLength(1);
+        expect(component.find('#theme-provider')).toHaveLength(1);
         expect(component.find('AppContent')).toHaveLength(1);
     });
 });

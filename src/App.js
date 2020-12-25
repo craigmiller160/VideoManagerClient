@@ -39,7 +39,7 @@ const App = () => (
         </Helmet>
         <Provider store={ store }>
             <BrowserRouter basename="/video-manager">
-                <ThemeProvider theme={ theme }>
+                <ThemeProvider id="theme-provider" theme={ theme }>
                     <AppContent />
                 </ThemeProvider>
             </BrowserRouter>
