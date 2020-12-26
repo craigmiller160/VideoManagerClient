@@ -26,8 +26,7 @@ const instance = axios.create({
         'Content-Type': 'application/json',
         Accept: 'application/json'
     },
-    withCredentials: true,
-    xsrfHeaderName: 'X-CSRF-TOKEN'
+    withCredentials: true
 });
 
 export const addCsrfTokenInterceptor = (config) => {
