@@ -35,7 +35,6 @@ const handleCsrfToken = (response) => {
     store.dispatch(setCsrfToken(csrfToken));
 };
 
-// TODO update tests
 export const getAuthUser = () => API.get('/oauth/user', {
     headers: {
         [CSRF_TOKEN_KEY]: 'fetch'
