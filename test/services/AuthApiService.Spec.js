@@ -42,6 +42,7 @@ const mockApi = new MockAdapter(API);
 
 describe('AuthApiService', () => {
     beforeEach(() => {
+        store.clearActions();
         jest.clearAllMocks();
         mockApi.reset();
         mockCheckAuthSuccess(mockApi);
