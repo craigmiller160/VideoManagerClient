@@ -18,10 +18,15 @@
 
 import 'jest-styled-components';
 
-delete window.location
-
-window.location = {
-    assign: jest.fn()
-};
+beforeEach(() => {
+    delete window.location;
+    window.location = {
+        assign: jest.fn(),
+        pathname: '/',
+        search: '',
+        hash: '',
+        href: ''
+    };
+});
 
 jest.useFakeTimers();
