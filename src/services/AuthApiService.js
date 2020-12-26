@@ -17,6 +17,9 @@
  */
 
 import API from './API';
+import { CSRF_TOKEN_KEY } from '../utils/securityConstants';
+import store from '../store/store';
+import { setCsrfToken } from '../store/auth/auth.actions';
 
 export const login = () =>
     API.post('/oauth/authcode/login')
@@ -27,7 +30,26 @@ export const login = () =>
 
 export const logout = () => API.get('/oauth/logout');
 
-export const getAuthUser = () => API.get('/oauth/user');
+const handleCsrfToken = (response) => {
+    const csrfToken = response.headers[CSRF_TOKEN_KEY];
+    store.dispatch(setCsrfToken(csrfToken));
+};
+
+export const getAuthUser = () => API.get('/oauth/user', {
+    headers: {
+        [CSRF_TOKEN_KEY]: 'fetch'
+    }
+})
+    .then((res) => {
+        handleCsrfToken(res);
+        return res;
+    })
+    .catch((ex) => {
+        if (ex.response) {
+            handleCsrfToken(ex.response);
+        }
+        throw ex;
+    });
 
 export const getVideoToken = (videoId) =>
     API.get(`/auth/videotoken/${videoId}`);

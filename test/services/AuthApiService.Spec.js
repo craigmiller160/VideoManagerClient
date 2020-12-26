@@ -20,6 +20,7 @@ import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
 import { getAuthUser, getVideoToken, login } from 'services/AuthApiService';
 import {
+    mockCheckAuthFail,
     mockCheckAuthSuccess,
     mockCsrfToken,
     mockGetVideoToken,
@@ -29,6 +30,13 @@ import {
 } from '../exclude/mock/mockApiConfig/authApi';
 import { CSRF_TOKEN_KEY } from '../../src/utils/securityConstants';
 import { logout } from '../../src/services/AuthApiService';
+import store from '../../src/store/store';
+import { setCsrfToken } from '../../src/store/auth/auth.actions';
+
+jest.mock('../../src/store/store', () => {
+    const createMockStore = jest.requireActual('redux-mock-store').default;
+    return createMockStore([])({ auth: {} });
+});
 
 const mockApi = new MockAdapter(API);
 
@@ -50,6 +58,29 @@ describe('AuthApiService', () => {
                 [CSRF_TOKEN_KEY]: mockCsrfToken
             })
         }));
+        expect(store.getActions()).toEqual([
+            {
+                type: setCsrfToken.toString(),
+                payload: mockCsrfToken
+            }
+        ]);
+    });
+
+    it('getAuthUser still sets csrf on failure', async () => {
+        mockApi.reset();
+        mockCheckAuthFail(mockApi);
+        try {
+            await getAuthUser();
+        } catch (ex) {
+            expect(store.getActions()).toEqual([
+                {
+                    type: setCsrfToken.toString(),
+                    payload: mockCsrfToken
+                }
+            ]);
+            return;
+        }
+        throw new Error('Should have been error');
     });
 
     it('login', async () => {

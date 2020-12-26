@@ -54,6 +54,16 @@ export const mockCheckAuthSuccess = (mockApi) =>
             }
         ]);
 
+export const mockCheckAuthFailure = (mockApi) =>
+    mockApi.onGet('/oauth/user')
+        .reply((config) => [
+            401,
+            'Unauthorized',
+            {
+                [CSRF_TOKEN_KEY]: mockCsrfToken
+            }
+        ])
+
 export const mockCheckAuthFail = (mockApi) =>
     mockApi.onGet('/oauth/user')
         .reply((config) => [
