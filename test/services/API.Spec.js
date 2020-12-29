@@ -74,12 +74,36 @@ describe('API', () => {
             expect(res.data).toEqual('Success');
         });
 
-        it('adds CSRF token for PUT', () => {
-            throw new Error();
+        it('adds CSRF token for PUT', async () => {
+            mockOptions();
+            mockApi.onPut('/foo/bar', 'ABC')
+                .reply((config) => {
+                    expect(config.headers[CSRF_TOKEN_KEY]).toEqual(csrfToken);
+                    return [
+                        200,
+                        'Success'
+                    ];
+                });
+
+            const res = await API.put('/foo/bar', 'ABC');
+            expect(res.status).toEqual(200);
+            expect(res.data).toEqual('Success');
         });
 
-        it('adds CSRF token for DELETE', () => {
-            throw new Error();
+        it('adds CSRF token for DELETE', async () => {
+            mockOptions();
+            mockApi.onDelete('/foo/bar')
+                .reply((config) => {
+                    expect(config.headers[CSRF_TOKEN_KEY]).toEqual(csrfToken);
+                    return [
+                        200,
+                        'Success'
+                    ];
+                });
+
+            const res = await API.delete('/foo/bar');
+            expect(res.status).toEqual(200);
+            expect(res.data).toEqual('Success');
         });
 
         it('has error while getting CSRF token', async () => {
