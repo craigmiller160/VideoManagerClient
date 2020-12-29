@@ -26,6 +26,7 @@ import {
     mockGetAllSeries,
     mockUpdateSeries
 } from '../exclude/mock/mockApiConfig/seriesApi';
+import { mockCsrfOptions } from '../exclude/mock/mockApiConfig/authApi';
 
 const mockApi = new MockAdapter(API);
 
@@ -50,6 +51,7 @@ describe('SeriesApiService', () => {
     });
 
     it('Add Series', async () => {
+        mockCsrfOptions(mockApi, '/series');
         try {
             const result = await SeriesApiService.addSeries(NEW_SERIES);
             expect(result.status).toEqual(200);
@@ -61,6 +63,7 @@ describe('SeriesApiService', () => {
     });
 
     it('Update Series', async () => {
+        mockCsrfOptions(mockApi, '/series/3');
         try {
             const result = await SeriesApiService.updateSeries(3, NEW_SERIES);
             expect(result.status).toEqual(200);
@@ -72,6 +75,7 @@ describe('SeriesApiService', () => {
     });
 
     it('Delete Series', async () => {
+        mockCsrfOptions(mockApi, '/series/3');
         try {
             const result = await SeriesApiService.deleteSeries(3);
             expect(result.status).toEqual(200);

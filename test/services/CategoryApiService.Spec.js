@@ -26,6 +26,7 @@ import {
     mockGetAllCategories,
     mockUpdateCategory
 } from '../exclude/mock/mockApiConfig/categoryApi';
+import { mockCsrfOptions } from '../exclude/mock/mockApiConfig/authApi';
 
 const mockApi = new MockAdapter(API);
 
@@ -50,6 +51,7 @@ describe('CategoryApiService', () => {
     });
 
     it('Add Category', async () => {
+        mockCsrfOptions(mockApi, '/categories');
         try {
             const result = await CategoryApiService.addCategory(NEW_CATEGORY);
             expect(result.status).toEqual(200);
@@ -61,6 +63,7 @@ describe('CategoryApiService', () => {
     });
 
     it('Update Category', async () => {
+        mockCsrfOptions(mockApi, '/categories/3');
         try {
             const result = await CategoryApiService.updateCategory(3, NEW_CATEGORY);
             expect(result.status).toEqual(200);
@@ -72,6 +75,7 @@ describe('CategoryApiService', () => {
     });
 
     it('Delete Category', async () => {
+        mockCsrfOptions(mockApi, '/categories/3');
         try {
             const result = await CategoryApiService.deleteCategory(3);
             expect(result.status).toEqual(200);
