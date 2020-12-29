@@ -21,7 +21,7 @@ import API from 'services/API';
 import { getAuthUser, getVideoToken, login } from 'services/AuthApiService';
 import {
     mockCheckAuthFail,
-    mockCheckAuthSuccess,
+    mockCheckAuthSuccess, mockCsrfOptions,
     mockCsrfToken,
     mockGetVideoToken,
     mockLogin,
@@ -85,6 +85,7 @@ describe('AuthApiService', () => {
     });
 
     it('login', async () => {
+        mockCsrfOptions(mockApi, '/oauth/authcode/login');
         const res = await login();
         expect(res.status).toEqual(200);
         expect(window.location.assign).toHaveBeenCalledWith('TheUrl');

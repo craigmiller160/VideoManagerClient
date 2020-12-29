@@ -16,8 +16,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import axios from 'axios';
-import store from '../store/store';
+import axios, { Cancel } from 'axios';
 import { CSRF_TOKEN_KEY } from '../utils/securityConstants';
 
 const instance = axios.create({
@@ -29,17 +28,28 @@ const instance = axios.create({
     withCredentials: true
 });
 
-export const addCsrfTokenInterceptor = (config) => {
-    const { csrfToken } = store.getState().auth;
-    if (csrfToken && config.method !== 'get') {
-        config.headers = {
-            ...config.headers,
-            [CSRF_TOKEN_KEY]: csrfToken
-        };
+const CSRF_METHODS = ['post', 'put', 'delete'];
+
+export const addCsrfTokenInterceptor = async (config) => {
+    if (CSRF_METHODS.includes(config.method)) {
+        try {
+            const optionsRes = await instance.options(config.url, {
+                headers: {
+                    [CSRF_TOKEN_KEY]: 'fetch'
+                }
+            });
+            const token = optionsRes.headers[CSRF_TOKEN_KEY]
+            config.headers = {
+                ...config.headers,
+                [CSRF_TOKEN_KEY]: token
+            };
+        } catch (ex) {
+            throw new Cancel('Request failed preflight');
+        }
     }
     return config;
 };
 
-instance.interceptors.request.use(addCsrfTokenInterceptor);
+instance.interceptors.request.use(addCsrfTokenInterceptor, (error) => Promise.reject(error));
 
 export default instance;

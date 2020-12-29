@@ -19,92 +19,89 @@
 import API, { addCsrfTokenInterceptor } from '../../src/services/API';
 import { CSRF_TOKEN_KEY } from 'utils/securityConstants';
 import MockAdapter from 'axios-mock-adapter';
-import { mockCsrfToken } from '../exclude/mock/mockApiConfig/authApi';
-
-jest.mock('store/store', () => {
-    let csrfToken = '';
-    let actions = [];
-
-    return {
-        getState() {
-            return {
-                auth: {
-                    csrfToken
-                }
-            }
-        },
-        setCsrfToken(token) {
-            csrfToken = token
-        },
-        clearCsrfToken() {
-            csrfToken = '';
-        },
-        dispatch(action) {
-            actions.push(action);
-        },
-        getActions() {
-            return actions;
-        },
-        clearActions() {
-            actions = [];
-        }
-    }
-});
-
-import store from 'store/store'; // eslint-disable-line import/first
-
-const apiGetSpy = jest.spyOn(API, 'get');
-const apiRequestSpy = jest.spyOn(API, 'request');
-
-const contentType = 'Content-Type';
-const applicationJson = 'application/json';
+import { mockCsrfOptions, mockCsrfToken } from '../exclude/mock/mockApiConfig/authApi';
 
 const mockApi = new MockAdapter(API);
 
 describe('API', () => {
     beforeEach(() => {
-        store.clearCsrfToken();
-        store.clearActions();
         mockApi.reset();
-        apiRequestSpy.mockClear();
-        apiGetSpy.mockClear();
     });
 
     describe('addCsrfTokenInterceptor', () => {
-        const config = {
-            method: 'post',
-            headers: {
-                [contentType]: applicationJson
+        it('does nothing for GET', async () => {
+            mockApi.onGet('/foo/bar')
+                .reply((config) => {
+                    expect(config.headers[CSRF_TOKEN_KEY]).toBeUndefined();
+                    return [
+                        200,
+                        'Success'
+                    ];
+                });
+
+            const res = await API.get('/foo/bar');
+            expect(res.status).toEqual(200);
+            expect(res.data).toEqual('Success');
+        });
+
+        it('adds CSRF token for POST', async () => {
+            mockCsrfOptions(mockApi, '/foo/bar');
+            mockApi.onPost('/foo/bar', 'ABC')
+                .reply((config) => {
+                    expect(config.headers[CSRF_TOKEN_KEY]).toEqual(mockCsrfToken);
+                    return [
+                        200,
+                        'Success'
+                    ];
+                });
+
+            const res = await API.post('/foo/bar', 'ABC');
+            expect(res.status).toEqual(200);
+            expect(res.data).toEqual('Success');
+        });
+
+        it('adds CSRF token for PUT', async () => {
+            mockCsrfOptions(mockApi, '/foo/bar');
+            mockApi.onPut('/foo/bar', 'ABC')
+                .reply((config) => {
+                    expect(config.headers[CSRF_TOKEN_KEY]).toEqual(mockCsrfToken);
+                    return [
+                        200,
+                        'Success'
+                    ];
+                });
+
+            const res = await API.put('/foo/bar', 'ABC');
+            expect(res.status).toEqual(200);
+            expect(res.data).toEqual('Success');
+        });
+
+        it('adds CSRF token for DELETE', async () => {
+            mockCsrfOptions(mockApi, '/foo/bar');
+            mockApi.onDelete('/foo/bar')
+                .reply((config) => {
+                    expect(config.headers[CSRF_TOKEN_KEY]).toEqual(mockCsrfToken);
+                    return [
+                        200,
+                        'Success'
+                    ];
+                });
+
+            const res = await API.delete('/foo/bar');
+            expect(res.status).toEqual(200);
+            expect(res.data).toEqual('Success');
+        });
+
+        it('has error while getting CSRF token', async () => {
+            mockApi.onPost('/foo/bar')
+                .reply(200, 'Success');
+            try {
+                await API.post('/foo/bar');
+            } catch (ex) {
+                expect(ex.message).toEqual('Request failed preflight');
+                return;
             }
-        };
-
-        it('adds token if exists', () => {
-            store.setCsrfToken(mockCsrfToken);
-            const result = addCsrfTokenInterceptor(config);
-            expect(result).toEqual({
-                ...config,
-                headers: {
-                    ...config.headers,
-                    [CSRF_TOKEN_KEY]: mockCsrfToken
-                }
-            });
-        });
-
-        it('does not add token if not exists', () => {
-            const result = addCsrfTokenInterceptor(config);
-            expect(result).toEqual(config);
-        });
-
-        it('does not add token if method is get', () => {
-            store.setCsrfToken(mockCsrfToken);
-            const result = addCsrfTokenInterceptor({ ...config, method: 'get' });
-            expect(result).toEqual({
-                ...config,
-                method: 'get',
-                headers: {
-                    ...config.headers
-                }
-            });
+            throw new Error('Request should have been cancelled');
         });
     });
 });

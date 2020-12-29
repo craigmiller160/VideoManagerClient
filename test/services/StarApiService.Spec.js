@@ -21,6 +21,7 @@ import API from '../../src/services/API';
 import MockAdapter from 'axios-mock-adapter';
 import { BASE_STARS, NEW_STAR } from '../exclude/mock/mockData/starData';
 import { mockAddNewStar, mockDeleteStar, mockGetAllStars, mockUpdateStar } from '../exclude/mock/mockApiConfig/starApi';
+import { mockCsrfOptions } from '../exclude/mock/mockApiConfig/authApi';
 
 const mockApi = new MockAdapter(API);
 
@@ -45,6 +46,7 @@ describe('StarApiService', () => {
     });
 
     it('Add Star', async () => {
+        mockCsrfOptions(mockApi, '/stars');
         try {
             const result = await StarApiService.addStar(NEW_STAR);
             expect(result.status).toEqual(200);
@@ -56,6 +58,7 @@ describe('StarApiService', () => {
     });
 
     it('Update Star', async () => {
+        mockCsrfOptions(mockApi, '/stars/3');
         try {
             const result = await StarApiService.updateStar(3, NEW_STAR);
             expect(result.status).toEqual(200);
@@ -67,6 +70,7 @@ describe('StarApiService', () => {
     });
 
     it('Delete Star', async () => {
+        mockCsrfOptions(mockApi, '/stars/3');
         try {
             const result = await StarApiService.deleteStar(3);
             expect(result.status).toEqual(200);

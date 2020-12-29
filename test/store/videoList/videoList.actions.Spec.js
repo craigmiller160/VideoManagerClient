@@ -50,6 +50,7 @@ import {
     SORT_BY_NAME,
     SORT_BY_VIEWS, SORT_DESC
 } from 'components/AppContent/VideoListLayout/VideoSearch/VideoSearch.options';
+import { mockCsrfOptions } from '../../exclude/mock/mockApiConfig/authApi';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -135,6 +136,7 @@ describe('videoList.actions', () => {
 
         describe('searchForVideos action', () => {
             it('performs the search', async () => {
+                mockCsrfOptions(mockApi, '/video-files/search');
                 const store = mockStore(noConfigState);
 
                 const expectedActions = [
@@ -154,6 +156,7 @@ describe('videoList.actions', () => {
             });
 
             it('searchForVideos with config', async () => {
+                mockCsrfOptions(mockApi, '/video-files/search');
                 const store = mockStore(configState);
 
                 const expectedActions = [
@@ -175,6 +178,8 @@ describe('videoList.actions', () => {
 
         describe('saveVideoFile action', () => {
             it('saves the video file', async () => {
+                mockCsrfOptions(mockApi, '/video-files/3');
+                mockCsrfOptions(mockApi, '/video-files/search');
                 const store = mockStore(noConfigState);
 
                 const expectedActions = [
@@ -216,6 +221,8 @@ describe('videoList.actions', () => {
             });
 
             it('saves the video file edits', async () => {
+                mockCsrfOptions(mockApi, '/video-files/3');
+                mockCsrfOptions(mockApi, '/video-files/search');
                 const store = mockStore({
                     ...noConfigState,
                     form: {
