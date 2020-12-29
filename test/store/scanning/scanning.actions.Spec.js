@@ -23,6 +23,7 @@ import MockAdapter from 'axios-mock-adapter';
 import API from '../../../src/services/API';
 import { mockIsVideoScanRunning, mockStartVideoScan } from '../../exclude/mock/mockApiConfig/videoFileApi';
 import { initialState as scanningInitialState } from '../../../src/store/scanning/scanning.reducer';
+import { mockCsrfOptions } from '../../exclude/mock/mockApiConfig/authApi';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -81,6 +82,7 @@ describe('scanning.actions', () => {
 
         describe('startFileScan action', () => {
             it('starts the file scan', async () => {
+                mockCsrfOptions(mockApi, '/video-files/scanner');
                 const expectedActions = [
                     { type: setScanningError.toString(), payload: false },
                     { type: setIsScanning.toString(), payload: true },
