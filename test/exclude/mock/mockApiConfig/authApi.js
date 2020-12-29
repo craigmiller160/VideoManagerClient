@@ -78,3 +78,16 @@ export const mockCheckAuthFail = (mockApi) =>
 export const mockGetVideoToken = (mockApi) =>
     mockApi.onGet('/auth/videotoken/3')
         .reply(200, mockTokenResponse);
+
+export const mockCsrfOptions = (mockApi, url) =>
+    mockApi.onOptions(url)
+        .reply((config) => {
+            expect(config.headers[CSRF_TOKEN_KEY]).toEqual('fetch');
+            return [
+                200,
+                'Options Success',
+                {
+                    [CSRF_TOKEN_KEY]: mockCsrfToken
+                }
+            ]
+        });

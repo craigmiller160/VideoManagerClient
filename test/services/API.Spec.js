@@ -19,23 +19,9 @@
 import API, { addCsrfTokenInterceptor } from '../../src/services/API';
 import { CSRF_TOKEN_KEY } from 'utils/securityConstants';
 import MockAdapter from 'axios-mock-adapter';
+import { mockCsrfOptions, mockCsrfToken } from '../exclude/mock/mockApiConfig/authApi';
 
 const mockApi = new MockAdapter(API);
-
-const csrfToken = 'ABCDEFG';
-
-const mockOptions = () =>
-    mockApi.onOptions('/foo/bar')
-        .reply((config) => {
-            expect(config.headers[CSRF_TOKEN_KEY]).toEqual('fetch');
-            return [
-                200,
-                'Options Success',
-                {
-                    [CSRF_TOKEN_KEY]: csrfToken
-                }
-            ]
-        });
 
 describe('API', () => {
     beforeEach(() => {
@@ -59,10 +45,10 @@ describe('API', () => {
         });
 
         it('adds CSRF token for POST', async () => {
-            mockOptions();
+            mockCsrfOptions(mockApi, '/foo/bar');
             mockApi.onPost('/foo/bar', 'ABC')
                 .reply((config) => {
-                    expect(config.headers[CSRF_TOKEN_KEY]).toEqual(csrfToken);
+                    expect(config.headers[CSRF_TOKEN_KEY]).toEqual(mockCsrfToken);
                     return [
                         200,
                         'Success'
@@ -75,10 +61,10 @@ describe('API', () => {
         });
 
         it('adds CSRF token for PUT', async () => {
-            mockOptions();
+            mockCsrfOptions(mockApi, '/foo/bar');
             mockApi.onPut('/foo/bar', 'ABC')
                 .reply((config) => {
-                    expect(config.headers[CSRF_TOKEN_KEY]).toEqual(csrfToken);
+                    expect(config.headers[CSRF_TOKEN_KEY]).toEqual(mockCsrfToken);
                     return [
                         200,
                         'Success'
@@ -91,10 +77,10 @@ describe('API', () => {
         });
 
         it('adds CSRF token for DELETE', async () => {
-            mockOptions();
+            mockCsrfOptions(mockApi, '/foo/bar');
             mockApi.onDelete('/foo/bar')
                 .reply((config) => {
-                    expect(config.headers[CSRF_TOKEN_KEY]).toEqual(csrfToken);
+                    expect(config.headers[CSRF_TOKEN_KEY]).toEqual(mockCsrfToken);
                     return [
                         200,
                         'Success'
