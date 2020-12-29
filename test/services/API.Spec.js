@@ -22,6 +22,21 @@ import MockAdapter from 'axios-mock-adapter';
 
 const mockApi = new MockAdapter(API);
 
+const csrfToken = 'ABCDEFG';
+
+const mockOptions = () =>
+    mockApi.onOptions('/foo/bar')
+        .reply((config) => {
+            expect(config.headers[CSRF_TOKEN_KEY]).toEqual('fetch');
+            return [
+                200,
+                'Options Success',
+                {
+                    [CSRF_TOKEN_KEY]: csrfToken
+                }
+            ]
+        });
+
 describe('API', () => {
     beforeEach(() => {
         mockApi.reset();
@@ -30,13 +45,33 @@ describe('API', () => {
     describe('addCsrfTokenInterceptor', () => {
         it('does nothing for GET', async () => {
             mockApi.onGet('/foo/bar')
-                .reply(200, 'Success');
+                .reply((config) => {
+                    expect(config.headers[CSRF_TOKEN_KEY]).toBeUndefined();
+                    return [
+                        200,
+                        'Success'
+                    ];
+                });
 
             const res = await API.get('/foo/bar');
+            expect(res.status).toEqual(200);
+            expect(res.data).toEqual('Success');
         });
 
-        it('adds CSRF token for POST', () => {
-            throw new Error();
+        it('adds CSRF token for POST', async () => {
+            mockOptions();
+            mockApi.onPost('/foo/bar', 'ABC')
+                .reply((config) => {
+                    expect(config.headers[CSRF_TOKEN_KEY]).toEqual(csrfToken);
+                    return [
+                        200,
+                        'Success'
+                    ];
+                });
+
+            const res = await API.post('/foo/bar', 'ABC');
+            expect(res.status).toEqual(200);
+            expect(res.data).toEqual('Success');
         });
 
         it('adds CSRF token for PUT', () => {
