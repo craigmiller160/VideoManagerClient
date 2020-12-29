@@ -19,7 +19,6 @@
 import API, { addCsrfTokenInterceptor } from '../../src/services/API';
 import { CSRF_TOKEN_KEY } from 'utils/securityConstants';
 import MockAdapter from 'axios-mock-adapter';
-import { mockCsrfToken } from '../exclude/mock/mockApiConfig/authApi';
 
 const mockApi = new MockAdapter(API);
 
@@ -29,8 +28,11 @@ describe('API', () => {
     });
 
     describe('addCsrfTokenInterceptor', () => {
-        it('does nothing for GET', () => {
-            throw new Error();
+        it('does nothing for GET', async () => {
+            mockApi.onGet('/foo/bar')
+                .reply(200, 'Success');
+
+            const res = await API.get('/foo/bar');
         });
 
         it('adds CSRF token for POST', () => {
@@ -45,8 +47,16 @@ describe('API', () => {
             throw new Error();
         });
 
-        it('has error while getting CSRF token', () => {
-            throw new Error();
+        it('has error while getting CSRF token', async () => {
+            mockApi.onPost('/foo/bar')
+                .reply(200, 'Success');
+            try {
+                await API.post('/foo/bar');
+            } catch (ex) {
+                expect(ex.message).toEqual('Request failed preflight');
+                return;
+            }
+            throw new Error('Request should have been cancelled');
         });
     });
 });

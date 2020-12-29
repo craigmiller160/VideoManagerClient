@@ -16,7 +16,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import axios from 'axios';
+import axios, { Cancel } from 'axios';
 import { CSRF_TOKEN_KEY } from '../utils/securityConstants';
 
 const instance = axios.create({
@@ -44,7 +44,7 @@ export const addCsrfTokenInterceptor = async (config) => {
                 [CSRF_TOKEN_KEY]: token
             };
         } catch (ex) {
-            // TODO what to do in this case?
+            throw new Cancel('Request failed preflight');
         }
     }
     return config;
