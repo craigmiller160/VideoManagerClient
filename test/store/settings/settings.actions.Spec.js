@@ -25,6 +25,7 @@ import thunk from 'redux-thunk';
 import { mockGetSettings, mockUpdateSettings } from '../../exclude/mock/mockApiConfig/settingsApi';
 import { settingsData } from '../../exclude/mock/mockData/settingsData';
 import { showErrorAlert, showSuccessAlert } from '../../../src/store/alert/alert.actions';
+import { mockCsrfOptions } from '../../exclude/mock/mockApiConfig/authApi';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API);
@@ -79,6 +80,7 @@ describe('settings.actions', () => {
             };
 
             it('saves settings', async () => {
+                mockCsrfOptions(mockApi, '/settings');
                 mockUpdateSettings(mockApi);
                 let result;
                 await act(async () => {
