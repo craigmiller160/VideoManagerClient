@@ -19,31 +19,48 @@
 import API from './API';
 
 const addVideoFile = (videoFile) => {
-    return API.post('/video-files', videoFile);
+    return API.post({
+        uri: '/video-files',
+        body: videoFile
+    });
 };
 
 const updateVideoFile = (videoFileId, videoFile) => {
-    return API.put(`/video-files/${videoFileId}`, videoFile);
+    return API.put({
+        uri: `/video-files/${videoFileId}`,
+        body: videoFile
+    });
 };
 
 const startVideoScan = () => {
-    return API.post('/video-files/scanner');
+    return API.post({
+        uri: '/video-files/scanner'
+    });
 };
 
 const isVideoScanRunning = () => {
-    return API.get('/video-files/scanner');
+    return API.get({
+        uri: '/video-files/scanner'
+    });
 };
 
 const getVideoFile = (fileId) => {
-    return API.get(`/video-files/${fileId}`);
+    return API.get({
+        uri: `/video-files/${fileId}`
+    });
 };
 
 const recordNewVideoPlay = (fileId) => {
-    return API.get(`/video-files/record-play/${fileId}`);
+    return API.get({
+        uri: `/video-files/record-play/${fileId}`
+    });
 };
 
 const searchForVideos = (searchConfig) => {
-    return API.post('/video-files/search', searchConfig);
+    return API.post({
+        uri: '/video-files/search',
+        body: searchConfig
+    });
 };
 
 export default {

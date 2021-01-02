@@ -28,7 +28,7 @@ import {
 } from '../exclude/mock/mockApiConfig/categoryApi';
 import { mockCsrfOptions } from '../exclude/mock/mockApiConfig/authApi';
 
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 beforeEach(() => {
     mockApi.reset();

@@ -35,7 +35,7 @@ import {
 } from '../exclude/mock/mockApiConfig/videoFileApi';
 import { mockCsrfOptions } from '../exclude/mock/mockApiConfig/authApi';
 
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 describe('VideoApiService', () => {
     beforeEach(() => {

@@ -19,19 +19,29 @@
 import API from './API';
 
 const getAllCategories = () => {
-    return API.get('/categories');
+    return API.get({
+        uri: '/categories'
+    });
 };
 
 const addCategory = (category) => {
-    return API.post('/categories', category);
+    return API.post({
+        uri: '/categories',
+        body: category
+    });
 };
 
 const updateCategory = (categoryId, category) => {
-    return API.put(`/categories/${categoryId}`, category);
+    return API.put({
+        uri: `/categories/${categoryId}`,
+        body: category
+    });
 };
 
 const deleteCategory = (categoryId) => {
-    return API.delete(`/categories/${categoryId}`);
+    return API.delete({
+        uri: `/categories/${categoryId}`
+    });
 };
 
 export default {

@@ -23,7 +23,7 @@ import { BASE_STARS, NEW_STAR } from '../exclude/mock/mockData/starData';
 import { mockAddNewStar, mockDeleteStar, mockGetAllStars, mockUpdateStar } from '../exclude/mock/mockApiConfig/starApi';
 import { mockCsrfOptions } from '../exclude/mock/mockApiConfig/authApi';
 
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 beforeEach(() => {
     mockApi.reset();

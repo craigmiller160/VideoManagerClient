@@ -23,7 +23,7 @@ import { getSettings, updateSettings } from '../../src/services/SettingsApiServi
 import { settingsData } from '../exclude/mock/mockData/settingsData';
 import { mockCsrfOptions } from '../exclude/mock/mockApiConfig/authApi';
 
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 describe('SettingsApiService', () => {
     beforeEach(() => {

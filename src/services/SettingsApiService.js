@@ -18,6 +18,11 @@
 
 import API from './API';
 
-export const getSettings = () => API.get('/settings');
+export const getSettings = () => API.get({
+    uri: '/settings'
+});
 
-export const updateSettings = (settings) => API.put('/settings', settings);
+export const updateSettings = (settings) => API.put({
+    uri: '/settings',
+    body: settings
+});

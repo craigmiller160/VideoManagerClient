@@ -25,7 +25,7 @@ import {
 } from '../exclude/mock/mockApiConfig/localFileApi';
 import { BASE_FILES } from '../exclude/mock/mockData/localFileData';
 
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 describe('LocalFileApiService', () => {
     beforeEach(() => {
