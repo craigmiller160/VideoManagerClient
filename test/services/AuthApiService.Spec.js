@@ -32,6 +32,7 @@ import { CSRF_TOKEN_KEY } from '../../src/utils/securityConstants';
 import { logout } from '../../src/services/AuthApiService';
 import store from '../../src/store/store';
 import { setCsrfToken } from '../../src/store/auth/auth.actions';
+import { mockCsrfPreflight } from '@craigmiller160/ajax-api/lib/test-utils';
 
 jest.mock('../../src/store/store', () => {
     const createMockStore = jest.requireActual('redux-mock-store').default;
@@ -85,7 +86,7 @@ describe('AuthApiService', () => {
     });
 
     it('login', async () => {
-        mockCsrfOptions(mockApi, '/oauth/authcode/login');
+        mockCsrfPreflight(mockApi, '/oauth/authcode/login');
         const res = await login();
         expect(res.status).toEqual(200);
         expect(window.location.assign).toHaveBeenCalledWith('TheUrl');
