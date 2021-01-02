@@ -28,7 +28,7 @@ import { showErrorAlert, showSuccessAlert } from '../../../src/store/alert/alert
 import { mockCsrfOptions } from '../../exclude/mock/mockApiConfig/authApi';
 
 const mockStore = configureMockStore([thunk]);
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 describe('settings.actions', () => {
     it('setLoading', () => {

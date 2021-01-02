@@ -916,6 +916,13 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@craigmiller160/ajax-api@^1.0.0":
+  version "1.0.0"
+  resolved "http://craigpc:30000/@craigmiller160%2fajax-api/-/ajax-api-1.0.0.tgz#4bf2447a3d30c196d99a4bbb0fa3b173424b8dda"
+  integrity sha512-hFhtnFmCL4/pyfFrIsvOpMgqKM6SnhR8ys3cy8+Eyoy/gV00p02pcF/yPiMChQO1Hp6cMaF7fbobZjBS+gCLhA==
+  dependencies:
+    axios "^0.21.1"
+
 "@craigmiller160/react-protected-route@^1.1.1":
   version "1.2.0"
   resolved "http://craigpc:30000/@craigmiller160%2freact-protected-route/-/react-protected-route-1.2.0.tgz#54a1098091dfee02db6d85f00b164dcebbff41b3"
@@ -927,10 +934,10 @@
     react-router "^5.2.0"
     react-router-dom "^5.2.0"
 
-"@craigmiller160/react-web-config@^2.6.1":
-  version "2.6.2"
-  resolved "http://craigpc:30000/@craigmiller160%2freact-web-config/-/react-web-config-2.6.2.tgz#2bdb4e08a346587b7e558435e6105e5190f15be4"
-  integrity sha512-HH/wB6vYNtfXsP0MxqDaVyn17MvGtg71pwNSGuWzgyBBufyVWIRYqdOIx+abiYTNHIwX3LqlChY4Sezkw/dW0Q==
+"@craigmiller160/react-web-config@^2.6.3":
+  version "2.6.3"
+  resolved "http://craigpc:30000/@craigmiller160%2freact-web-config/-/react-web-config-2.6.3.tgz#77c00b6587bf8d17cc3041b5aba1ad2c188f8de4"
+  integrity sha512-ut14w2lJzO04zpCGcqgclr49Rx2+/zrMgQylqakol+HPEdiv/Zyt1JtrIx385tFpblKA+MKHr5XGXAzDB7Nalg==
   dependencies:
     "@babel/core" "^7.12.3"
     "@babel/plugin-proposal-class-properties" "^7.12.1"

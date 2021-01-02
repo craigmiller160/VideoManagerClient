@@ -60,7 +60,7 @@ import { showErrorAlert, showSuccessAlert } from 'store/alert/alert.actions';
 import { mockCsrfOptions } from '../../exclude/mock/mockApiConfig/authApi';
 
 const mockStore = configureMockStore([thunk]);
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 describe('filterInputModal.actions', () => {
     it('showAddCategoryModal action', () => {

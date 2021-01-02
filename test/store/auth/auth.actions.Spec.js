@@ -37,7 +37,7 @@ import {
 import { CSRF_TOKEN_KEY } from '../../../src/utils/securityConstants';
 
 const mockStore = configureMockStore([thunk]);
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 describe('auth.actions', () => {
     beforeEach(() => {

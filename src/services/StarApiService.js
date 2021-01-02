@@ -19,19 +19,29 @@
 import API from './API';
 
 const getAllStars = () => {
-    return API.get('/stars');
+    return API.get({
+        uri: '/stars'
+    });
 };
 
 const addStar = (star) => {
-    return API.post('/stars', star);
+    return API.post({
+        uri: '/stars',
+        body: star
+    });
 };
 
 const updateStar = (starId, star) => {
-    return API.put(`/stars/${starId}`, star);
+    return API.put({
+        uri: `/stars/${starId}`,
+        body: star
+    });
 };
 
 const deleteStar = (starId) => {
-    return API.delete(`/stars/${starId}`);
+    return API.delete({
+        uri: `/stars/${starId}`
+    });
 };
 
 export default {
