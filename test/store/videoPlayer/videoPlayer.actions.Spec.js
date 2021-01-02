@@ -32,7 +32,7 @@ import { mockGetVideoFile, mockRecordNewVideoPlay } from '../../exclude/mock/moc
 import { mockGetVideoToken, mockTokenResponse } from '../../exclude/mock/mockApiConfig/authApi';
 
 const mockStore = configureMockStore([thunk]);
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 describe('videoPlayer.actions', () => {
     it('creates setLoading action', () => {

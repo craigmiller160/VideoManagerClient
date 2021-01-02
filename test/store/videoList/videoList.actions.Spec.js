@@ -53,7 +53,7 @@ import {
 import { mockCsrfOptions } from '../../exclude/mock/mockApiConfig/authApi';
 
 const mockStore = configureMockStore([thunk]);
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 describe('videoList.actions', () => {
     describe('setVideoList action', () => {

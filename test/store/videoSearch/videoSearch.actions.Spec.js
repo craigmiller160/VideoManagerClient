@@ -37,7 +37,7 @@ import { mockGetAllStars } from '../../exclude/mock/mockApiConfig/starApi';
 import { initialState as videoSearchInitState } from '../../../src/store/videoSearch/videoSearch.reducer';
 
 const mockStore = configureMockStore([thunk]);
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 describe('videoSearch.actions', () => {
     describe('setCategories action', () => {

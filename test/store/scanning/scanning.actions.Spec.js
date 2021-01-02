@@ -26,7 +26,7 @@ import { initialState as scanningInitialState } from '../../../src/store/scannin
 import { mockCsrfOptions } from '../../exclude/mock/mockApiConfig/authApi';
 
 const mockStore = configureMockStore([thunk]);
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 describe('scanning.actions', () => {
     describe('setIsScanning action', () => {
