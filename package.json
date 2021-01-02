@@ -3,6 +3,7 @@
   "version": "1.15.0-beta",
   "noTsconfig": true,
   "dependencies": {
+    "@craigmiller160/ajax-api": "file:.yalc/@craigmiller160/ajax-api",
     "@craigmiller160/react-protected-route": "^1.1.1",
     "axios": "^0.21.1",
     "bfj": "6.1.1",
