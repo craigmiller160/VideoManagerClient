@@ -916,8 +916,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@craigmiller160/ajax-api@file:.yalc/@craigmiller160/ajax-api":
-  version "1.0.0-beta"
+"@craigmiller160/ajax-api@^1.0.0":
+  version "1.0.0"
+  resolved "http://craigpc:30000/@craigmiller160%2fajax-api/-/ajax-api-1.0.0.tgz#4bf2447a3d30c196d99a4bbb0fa3b173424b8dda"
+  integrity sha512-hFhtnFmCL4/pyfFrIsvOpMgqKM6SnhR8ys3cy8+Eyoy/gV00p02pcF/yPiMChQO1Hp6cMaF7fbobZjBS+gCLhA==
   dependencies:
     axios "^0.21.1"
 
