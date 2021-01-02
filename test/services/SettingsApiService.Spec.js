@@ -21,7 +21,7 @@ import API from 'services/API';
 import { mockGetSettings, mockUpdateSettings } from '../exclude/mock/mockApiConfig/settingsApi';
 import { getSettings, updateSettings } from '../../src/services/SettingsApiService';
 import { settingsData } from '../exclude/mock/mockData/settingsData';
-import { mockCsrfOptions } from '../exclude/mock/mockApiConfig/authApi';
+import { mockCsrfPreflight } from '@craigmiller160/ajax-api/lib/test-utils';
 
 const mockApi = new MockAdapter(API.instance);
 
@@ -41,7 +41,7 @@ describe('SettingsApiService', () => {
     });
 
     it('updateSettings', async () => {
-        mockCsrfOptions(mockApi, '/settings');
+        mockCsrfPreflight(mockApi, '/settings');
         const res = await updateSettings(settingsData);
         expect(res).toEqual(expect.objectContaining({
             status: 200,

@@ -21,7 +21,7 @@ import API from 'services/API';
 import { getAuthUser, getVideoToken, login } from 'services/AuthApiService';
 import {
     mockCheckAuthFail,
-    mockCheckAuthSuccess, mockCsrfOptions,
+    mockCheckAuthSuccess,
     mockCsrfToken,
     mockGetVideoToken,
     mockLogin,

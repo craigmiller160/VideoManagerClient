@@ -33,7 +33,7 @@ import {
     mockStartVideoScan,
     mockUpdateVideoFile
 } from '../exclude/mock/mockApiConfig/videoFileApi';
-import { mockCsrfOptions } from '../exclude/mock/mockApiConfig/authApi';
+import { mockCsrfPreflight } from '@craigmiller160/ajax-api/lib/test-utils';
 
 const mockApi = new MockAdapter(API.instance);
 
@@ -52,7 +52,7 @@ describe('VideoApiService', () => {
     });
 
     it('Add File', async () => {
-        mockCsrfOptions(mockApi, '/video-files');
+        mockCsrfPreflight(mockApi, '/video-files');
         try {
             const result = await VideoApiService.addVideoFile(NEW_VIDEO_FILE);
             expect(result.status).toEqual(200);
@@ -64,7 +64,7 @@ describe('VideoApiService', () => {
     });
 
     it('Update File', async () => {
-        mockCsrfOptions(mockApi, '/video-files/3');
+        mockCsrfPreflight(mockApi, '/video-files/3');
         try {
             const result = await VideoApiService.updateVideoFile(3, NEW_VIDEO_FILE);
             expect(result.status).toEqual(200);
@@ -76,7 +76,7 @@ describe('VideoApiService', () => {
     });
 
     it('Search for Files', async () => {
-        mockCsrfOptions(mockApi, '/video-files/search');
+        mockCsrfPreflight(mockApi, '/video-files/search');
         let result;
         try {
             result = await VideoApiService.searchForVideos({
@@ -98,7 +98,7 @@ describe('VideoApiService', () => {
     });
 
     it('Start Video Scan', async () => {
-        mockCsrfOptions(mockApi, '/video-files/scanner');
+        mockCsrfPreflight(mockApi, '/video-files/scanner');
         let result;
         try {
             result = await VideoApiService.startVideoScan();
