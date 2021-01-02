@@ -22,22 +22,29 @@ import store from '../store/store';
 import { setCsrfToken } from '../store/auth/auth.actions';
 
 export const login = () =>
-    API.post('/oauth/authcode/login')
+    API.post({
+        uri: '/oauth/authcode/login'
+    })
         .then((res) => {
             window.location.assign(res.data.url);
             return res;
         });
 
-export const logout = () => API.get('/oauth/logout');
+export const logout = () => API.get({
+    uri: '/oauth/logout'
+});
 
 const handleCsrfToken = (response) => {
     const csrfToken = response.headers[CSRF_TOKEN_KEY];
     store.dispatch(setCsrfToken(csrfToken));
 };
 
-export const getAuthUser = () => API.get('/oauth/user', {
-    headers: {
-        [CSRF_TOKEN_KEY]: 'fetch'
+export const getAuthUser = () => API.get({
+    uri: '/oauth/user',
+    config: {
+        headers: {
+            [CSRF_TOKEN_KEY]: 'fetch'
+        }
     }
 })
     .then((res) => {
@@ -52,4 +59,6 @@ export const getAuthUser = () => API.get('/oauth/user', {
     });
 
 export const getVideoToken = (videoId) =>
-    API.get(`/auth/videotoken/${videoId}`);
+    API.get({
+        uri: `/auth/videotoken/${videoId}`
+    });

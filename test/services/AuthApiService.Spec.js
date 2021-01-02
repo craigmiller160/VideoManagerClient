@@ -38,7 +38,7 @@ jest.mock('../../src/store/store', () => {
     return createMockStore([])({ auth: {} });
 });
 
-const mockApi = new MockAdapter(API);
+const mockApi = new MockAdapter(API.instance);
 
 describe('AuthApiService', () => {
     beforeEach(() => {
