@@ -16,40 +16,9 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import axios, { Cancel } from 'axios';
-import { CSRF_TOKEN_KEY } from '../utils/securityConstants';
+import { createApi } from '@craigmiller160/ajax-api';
 
-const instance = axios.create({
+export default createApi({
     baseURL: '/video-manager/api',
-    headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-    },
-    withCredentials: true
+    useCsrf: true
 });
-
-const CSRF_METHODS = ['post', 'put', 'delete'];
-
-export const addCsrfTokenInterceptor = async (config) => {
-    if (CSRF_METHODS.includes(config.method)) {
-        try {
-            const optionsRes = await instance.options(config.url, {
-                headers: {
-                    [CSRF_TOKEN_KEY]: 'fetch'
-                }
-            });
-            const token = optionsRes.headers[CSRF_TOKEN_KEY]
-            config.headers = {
-                ...config.headers,
-                [CSRF_TOKEN_KEY]: token
-            };
-        } catch (ex) {
-            throw new Cancel('Request failed preflight');
-        }
-    }
-    return config;
-};
-
-instance.interceptors.request.use(addCsrfTokenInterceptor, (error) => Promise.reject(error));
-
-export default instance;
