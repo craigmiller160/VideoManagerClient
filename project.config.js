@@ -44,5 +44,6 @@ module.exports = {
     },
     jestSetupFiles: [
         path.resolve(process.cwd(), 'test/setupTests.js')
-    ]
+    ],
+    enzymeReactVersion: 16
 };
