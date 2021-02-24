@@ -1,10 +1,10 @@
 FROM craigmiller160.ddns.net:30004/nginx-base:1.1.0
 
-RUN apt-get update && apt-get install unzip
-
-COPY ./build/video-manager-client-*.zip /var/www/video-manager-client.zip
-RUN unzip /var/www/video-manager-client.zip -d /var/www/
-RUN rm /var/www/video-manager-client.zip
+COPY ./build/video-manager-client-*.tgz /var/www/video-manager-client.tgz
+RUN tar xvf /var/www/video-manager-client.tgz -C /var/www/
+RUN rm /var/www/video-manager-client.tgz
+RUN cp -R /var/www/package/build/* /var/www/
+RUN rm -rf /var/www/package
 RUN cp /var/www/nginx.conf /etc/nginx/nginx.conf
 
 ENTRYPOINT ["nginx","-g","daemon off;"]
