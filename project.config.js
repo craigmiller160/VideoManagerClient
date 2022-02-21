@@ -20,7 +20,7 @@ const path = require('path');
 
 module.exports = {
     title: 'Video Manager',
-    devServerPort: 3001,
+    devServerPort: 3002,
     devServerHttps: true,
     publicPath: '/video-manager',
     devServerProxy: {
