@@ -1,6 +1,6 @@
 {
   "name": "@craigmiller160/video-manager-client",
-  "version": "1.15.0-beta",
+  "version": "1.14.3",
   "noTsconfig": true,
   "files": [
     "build"
