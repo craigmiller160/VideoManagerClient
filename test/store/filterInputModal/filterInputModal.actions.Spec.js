@@ -58,6 +58,7 @@ import { BASE_SERIES_FILTERS, NEW_SERIES_FILTER } from '../../exclude/mock/mockD
 import { BASE_STAR_FILTERS, NEW_STAR_FILTER } from '../../exclude/mock/mockData/starData';
 import { showErrorAlert, showSuccessAlert } from 'store/alert/alert.actions';
 import { mockCsrfPreflight } from '@craigmiller160/ajax-api/lib/test-utils';
+import { FORM_NAME } from '../../../src/components/AppContent/VideoFileEdit/VideoFileEdit';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API.instance);
@@ -118,7 +119,7 @@ describe('filterInputModal.actions', () => {
             }
         };
 
-        const createState = (action, type) => ({
+        const createState = (action, type, includeEditForm) => ({
             filterInputModal: {
                 ...filterInputInitState,
                 type,
@@ -130,7 +131,29 @@ describe('filterInputModal.actions', () => {
                         id: getStateFormValues(type).value,
                         name: getStateFormValues(type).label
                     }
-                }
+                },
+                [FORM_NAME]: includeEditForm ? {
+                    values: {
+                        series: [
+                            {
+                                value: 1,
+                                label: 'S1'
+                            }
+                        ],
+                        categories: [
+                            {
+                                value: 1,
+                                label: 'C1'
+                            }
+                        ],
+                        stars: [
+                            {
+                                value: 1,
+                                label: 'S1'
+                            }
+                        ]
+                    }
+                } : undefined
             }
         });
 
@@ -251,7 +274,32 @@ describe('filterInputModal.actions', () => {
             }));
         });
 
-        it('add new series with edit form', () => {
+        it('add new series with edit form', async () => {
+            mockCsrfPreflight(mockApi, '/series');
+            store = mockStore(createState(ADD_ACTION, SERIES_TYPE));
+            const expectedActions = [
+                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully saved Series filter' }
+            ];
+            try {
+                await store.dispatch(saveFilterChanges(NEW_SERIES_FILTER));
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+            expect(mockApi.history).toEqual(expect.objectContaining({
+                get: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/series$/)
+                    })
+                ],
+                post: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/series$/)
+                    })
+                ]
+            }));
             throw new Error();
         });
 
