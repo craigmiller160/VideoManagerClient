@@ -86,6 +86,7 @@ const handleHideFilterModal = (state) => ({
     open: false
 });
 
+// TODO write test
 const handleSetNewlyAddedId = (state, { payload }) => ({
     ...state,
     newlyAddedId: payload
