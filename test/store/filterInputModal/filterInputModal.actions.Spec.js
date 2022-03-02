@@ -58,6 +58,7 @@ import { BASE_SERIES_FILTERS, NEW_SERIES_FILTER } from '../../exclude/mock/mockD
 import { BASE_STAR_FILTERS, NEW_STAR_FILTER } from '../../exclude/mock/mockData/starData';
 import { showErrorAlert, showSuccessAlert } from 'store/alert/alert.actions';
 import { mockCsrfPreflight } from '@craigmiller160/ajax-api/lib/test-utils';
+import { FORM_NAME } from '../../../src/components/AppContent/VideoFileEdit/VideoFileEdit';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API.instance);
@@ -118,7 +119,7 @@ describe('filterInputModal.actions', () => {
             }
         };
 
-        const createState = (action, type) => ({
+        const createState = (action, type, includeEditForm) => ({
             filterInputModal: {
                 ...filterInputInitState,
                 type,
@@ -130,7 +131,29 @@ describe('filterInputModal.actions', () => {
                         id: getStateFormValues(type).value,
                         name: getStateFormValues(type).label
                     }
-                }
+                },
+                [FORM_NAME]: includeEditForm ? {
+                    values: {
+                        series: [
+                            {
+                                value: 1,
+                                label: 'S1'
+                            }
+                        ],
+                        categories: [
+                            {
+                                value: 1,
+                                label: 'C1'
+                            }
+                        ],
+                        stars: [
+                            {
+                                value: 1,
+                                label: 'S1'
+                            }
+                        ]
+                    }
+                } : undefined
             }
         });
 
@@ -167,6 +190,52 @@ describe('filterInputModal.actions', () => {
             store = mockStore(createState(ADD_ACTION, CATEGORY_TYPE));
             const expectedActions = [
                 { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully saved Category filter' }
+            ];
+
+            try {
+                await store.dispatch(saveFilterChanges(NEW_CATEGORY_FILTER));
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+            expect(mockApi.history).toEqual(expect.objectContaining({
+                get: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/categories$/)
+                    })
+                ],
+                post: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/categories$/)
+                    })
+                ]
+            }));
+        });
+
+        it('add new category with edit form', async () => {
+            mockCsrfPreflight(mockApi, '/categories');
+            store = mockStore(createState(ADD_ACTION, CATEGORY_TYPE, true));
+            const expectedActions = [
+                { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS },
+                expect.objectContaining({
+                    type: '@@redux-form/CHANGE',
+                    meta: {
+                        field: 'categories',
+                        form: FORM_NAME
+                    },
+                    payload: [
+                        {
+                            value: 1,
+                            label: 'C1'
+                        },
+                        {
+                            value: 3,
+                            label: 'ThirdCategory'
+                        }
+                    ]
+                }),
                 { type: showSuccessAlert.toString(), payload: 'Successfully saved Category filter' }
             ];
 
@@ -247,6 +316,51 @@ describe('filterInputModal.actions', () => {
             }));
         });
 
+        it('add new series with edit form', async () => {
+            mockCsrfPreflight(mockApi, '/series');
+            store = mockStore(createState(ADD_ACTION, SERIES_TYPE, true));
+            const expectedActions = [
+                { type: setSeries.toString(), payload: BASE_SERIES_FILTERS },
+                expect.objectContaining({
+                    type: '@@redux-form/CHANGE',
+                    meta: {
+                        field: 'series',
+                        form: FORM_NAME
+                    },
+                    payload: [
+                        {
+                            value: 1,
+                            label: 'S1'
+                        },
+                        {
+                            value: 3,
+                            label: 'ThirdSeries'
+                        }
+                    ]
+                }),
+                { type: showSuccessAlert.toString(), payload: 'Successfully saved Series filter' }
+            ];
+            try {
+                await store.dispatch(saveFilterChanges(NEW_SERIES_FILTER));
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+            expect(mockApi.history).toEqual(expect.objectContaining({
+                get: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/series$/)
+                    })
+                ],
+                post: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/series$/)
+                    })
+                ]
+            }));
+        });
+
         it('edit series', async () => {
             mockCsrfPreflight(mockApi, '/series/3');
             store = mockStore(createState(EDIT_ACTION, SERIES_TYPE));
@@ -280,6 +394,52 @@ describe('filterInputModal.actions', () => {
             store = mockStore(createState(ADD_ACTION, STAR_TYPE));
             const expectedActions = [
                 { type: setStars.toString(), payload: BASE_STAR_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully saved Star filter' }
+
+            ];
+            try {
+                await store.dispatch(saveFilterChanges(NEW_STAR_FILTER));
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+            expect(mockApi.history).toEqual(expect.objectContaining({
+                get: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/stars$/)
+                    })
+                ],
+                post: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/stars$/)
+                    })
+                ]
+            }));
+        });
+
+        it('add new star with edit form', async () => {
+            mockCsrfPreflight(mockApi, '/stars');
+            store = mockStore(createState(ADD_ACTION, STAR_TYPE, true));
+            const expectedActions = [
+                { type: setStars.toString(), payload: BASE_STAR_FILTERS },
+                expect.objectContaining({
+                    type: '@@redux-form/CHANGE',
+                    meta: {
+                        field: 'stars',
+                        form: FORM_NAME
+                    },
+                    payload: [
+                        {
+                            value: 1,
+                            label: 'S1'
+                        },
+                        {
+                            value: 3,
+                            label: 'ThirdStar'
+                        }
+                    ]
+                }),
                 { type: showSuccessAlert.toString(), payload: 'Successfully saved Star filter' }
 
             ];

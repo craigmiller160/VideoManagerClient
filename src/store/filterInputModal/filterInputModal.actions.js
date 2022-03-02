@@ -24,6 +24,8 @@ import { loadCategoryOptions, loadSeriesOptions, loadStarOptions } from '../vide
 import SeriesApiService from '../../services/SeriesApiService';
 import StarApiService from '../../services/StarApiService';
 import { getSelectedFilter } from './filterInputModal.selectors';
+import { FORM_NAME } from '../../components/AppContent/VideoFileEdit/VideoFileEdit';
+import { change } from 'redux-form';
 
 export const deleteFilter = () => async (dispatch, getState) => {
     const state = getState();
@@ -58,6 +60,51 @@ export const deleteFilter = () => async (dispatch, getState) => {
     catch (ex) {
         dispatch(handleApiError(ex));
     }
+};
+
+const addNewCategoryToEditForm = (newCategory) => (dispatch, getState) => {
+    const state = getState();
+    const form = state.form[FORM_NAME];
+    if (!form) {
+        return;
+    }
+
+    const categories = form.values.categories ?? [];
+    const newCategoryFormItem = {
+        value: newCategory.categoryId,
+        label: newCategory.categoryName
+    };
+    dispatch(change(FORM_NAME, 'categories', [...categories, newCategoryFormItem]));
+};
+
+const addNewStarToEditForm = (newStar) => (dispatch, getState) => {
+    const state = getState();
+    const form = state.form[FORM_NAME];
+    if (!form) {
+        return;
+    }
+
+    const stars = form.values.stars ?? [];
+    const newStarFormItem = {
+        value: newStar.starId,
+        label: newStar.starName
+    };
+    dispatch(change(FORM_NAME, 'stars', [...stars, newStarFormItem]));
+};
+
+const addNewSeriesToEditForm = (newSeries) => (dispatch, getState) => {
+    const state = getState();
+    const form = state.form[FORM_NAME];
+    if (!form) {
+        return;
+    }
+
+    const series = form.values.series ?? [];
+    const newSeriesFormItem = {
+        value: newSeries.seriesId,
+        label: newSeries.seriesName
+    };
+    dispatch(change(FORM_NAME, 'series', [...series, newSeriesFormItem]));
 };
 
 export const saveFilterChanges = () => async (dispatch, getState) => {
@@ -98,45 +145,58 @@ export const saveFilterChanges = () => async (dispatch, getState) => {
 };
 
 const saveCategoryChanges = async (filter, action, dispatch) => {
-    const category = {
+    let category = {
         categoryId: filter.value,
         categoryName: filter.label
     };
     if (ADD_ACTION === action) {
-        await CategoryApiService.addCategory(category);
+        const res = await CategoryApiService.addCategory(category);
+        category = res.data;
     }
     else {
         await CategoryApiService.updateCategory(category.categoryId, category);
     }
     await dispatch(loadCategoryOptions());
+    console.log('AddCategory', action, category);
+    if (ADD_ACTION === action) {
+        dispatch(addNewCategoryToEditForm(category));
+    }
 };
 
 const saveSeriesChanges = async (filter, action, dispatch) => {
-    const series = {
+    let series = {
         seriesId: filter.value,
         seriesName: filter.label
     };
     if (ADD_ACTION === action) {
-        await SeriesApiService.addSeries(series);
+        const res = await SeriesApiService.addSeries(series);
+        series = res.data;
     }
     else {
         await SeriesApiService.updateSeries(filter.value, series);
     }
     await dispatch(loadSeriesOptions());
+    if (ADD_ACTION === action) {
+        dispatch(addNewSeriesToEditForm(series));
+    }
 };
 
 const saveStarChanges = async (filter, action, dispatch) => {
-    const star = {
+    let star = {
         starId: filter.value,
         starName: filter.label
     };
     if (ADD_ACTION === action) {
-        await StarApiService.addStar(star);
+        const res = await StarApiService.addStar(star);
+        star = res.data;
     }
     else {
         await StarApiService.updateStar(filter.value, star);
     }
     await dispatch(loadStarOptions());
+    if (ADD_ACTION === action) {
+        dispatch(addNewStarToEditForm(star));
+    }
 };
 
 export const showAddCategoryModal = createAction('filterInputModal/showAddCategoryModal');
