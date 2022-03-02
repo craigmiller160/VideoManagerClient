@@ -89,7 +89,7 @@ const addNewStarToEditForm = (newStar) => (dispatch, getState) => {
         value: newStar.starId,
         label: newStar.starName
     };
-    dispatch(change(FORM_NAME, 'series', [...categories, newStarFormItem]));
+    dispatch(change(FORM_NAME, 'series', [...stars, newStarFormItem]));
 };
 
 const addNewSeriesToEditForm = (newSeries) => (dispatch, getState) => {

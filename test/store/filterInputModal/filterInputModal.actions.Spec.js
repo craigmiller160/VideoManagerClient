@@ -219,6 +219,19 @@ describe('filterInputModal.actions', () => {
             store = mockStore(createState(ADD_ACTION, CATEGORY_TYPE, true));
             const expectedActions = [
                 { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS },
+                expect.objectContaining({
+                    type: '@@redux-form/CHANGE',
+                    payload: [
+                        {
+                            value: 1,
+                            label: 'C1'
+                        },
+                        {
+                            value: 3,
+                            label: 'ThirdCategory'
+                        }
+                    ]
+                }),
                 { type: showSuccessAlert.toString(), payload: 'Successfully saved Category filter' }
             ];
 
@@ -402,6 +415,19 @@ describe('filterInputModal.actions', () => {
             store = mockStore(createState(ADD_ACTION, STAR_TYPE, true));
             const expectedActions = [
                 { type: setStars.toString(), payload: BASE_STAR_FILTERS },
+                expect.objectContaining({
+                    type: '@@redux-form/CHANGE',
+                    payload: [
+                        {
+                            value: 1,
+                            label: 'S1'
+                        },
+                        {
+                            value: 3,
+                            label: 'ThirdStar'
+                        }
+                    ]
+                }),
                 { type: showSuccessAlert.toString(), payload: 'Successfully saved Star filter' }
 
             ];
