@@ -214,8 +214,33 @@ describe('filterInputModal.actions', () => {
             }));
         });
 
-        it('add new category with edit form', () => {
-            throw new Error();
+        it('add new category with edit form', async () => {
+            mockCsrfPreflight(mockApi, '/categories');
+            store = mockStore(createState(ADD_ACTION, CATEGORY_TYPE, true));
+            const expectedActions = [
+                { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully saved Category filter' }
+            ];
+
+            try {
+                await store.dispatch(saveFilterChanges(NEW_CATEGORY_FILTER));
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+            expect(mockApi.history).toEqual(expect.objectContaining({
+                get: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/categories$/)
+                    })
+                ],
+                post: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/categories$/)
+                    })
+                ]
+            }));
         });
 
         it('edit category', async () => {
@@ -372,8 +397,33 @@ describe('filterInputModal.actions', () => {
             }));
         });
 
-        it('add new star with edit form', () => {
-            throw new Error();
+        it('add new star with edit form', async () => {
+            mockCsrfPreflight(mockApi, '/stars');
+            store = mockStore(createState(ADD_ACTION, STAR_TYPE, true));
+            const expectedActions = [
+                { type: setStars.toString(), payload: BASE_STAR_FILTERS },
+                { type: showSuccessAlert.toString(), payload: 'Successfully saved Star filter' }
+
+            ];
+            try {
+                await store.dispatch(saveFilterChanges(NEW_STAR_FILTER));
+            }
+            catch (ex) {
+                expect(ex).toBeUndefined();
+            }
+            expect(store.getActions()).toEqual(expectedActions);
+            expect(mockApi.history).toEqual(expect.objectContaining({
+                get: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/stars$/)
+                    })
+                ],
+                post: [
+                    expect.objectContaining({
+                        url: expect.stringMatching(/\/stars$/)
+                    })
+                ]
+            }));
         });
 
         it('edit star', async () => {
