@@ -221,6 +221,10 @@ describe('filterInputModal.actions', () => {
                 { type: setCategories.toString(), payload: BASE_CATEGORY_FILTERS },
                 expect.objectContaining({
                     type: '@@redux-form/CHANGE',
+                    meta: {
+                        field: 'categories',
+                        form: FORM_NAME
+                    },
                     payload: [
                         {
                             value: 1,
@@ -319,6 +323,10 @@ describe('filterInputModal.actions', () => {
                 { type: setSeries.toString(), payload: BASE_SERIES_FILTERS },
                 expect.objectContaining({
                     type: '@@redux-form/CHANGE',
+                    meta: {
+                        field: 'series',
+                        form: FORM_NAME
+                    },
                     payload: [
                         {
                             value: 1,
@@ -417,6 +425,10 @@ describe('filterInputModal.actions', () => {
                 { type: setStars.toString(), payload: BASE_STAR_FILTERS },
                 expect.objectContaining({
                     type: '@@redux-form/CHANGE',
+                    meta: {
+                        field: 'stars',
+                        form: FORM_NAME
+                    },
                     payload: [
                         {
                             value: 1,
