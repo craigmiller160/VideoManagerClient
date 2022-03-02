@@ -36,6 +36,7 @@ import FilterInputModal from '../../Modals/FilterInputModal/FilterInputModal';
 
 export const FORM_NAME = 'video-file-edit';
 
+// TODO write tests for changes
 export const VideoFileEdit = (props) => {
     const [ isSubmitted, setSubmitted ] = useState(false);
 
