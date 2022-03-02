@@ -126,6 +126,9 @@ const saveSeriesChanges = async (filter, action, dispatch) => {
         await SeriesApiService.updateSeries(filter.value, series);
     }
     await dispatch(loadSeriesOptions());
+    if (newlyAddedId >= 0) {
+        dispatch(setNewlyAddedId(newlyAddedId));
+    }
 };
 
 const saveStarChanges = async (filter, action, dispatch) => {
