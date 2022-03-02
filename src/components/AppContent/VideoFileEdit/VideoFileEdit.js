@@ -36,6 +36,18 @@ import FilterInputModal from '../../Modals/FilterInputModal/FilterInputModal';
 
 export const FORM_NAME = 'video-file-edit';
 
+/*
+ * TODO here is the flow I Need
+ *  1) Track when adding a filter in local component state. As in, which type of filter is being added.
+ *  2) Track the change to the newlyAddedId
+ * 3) Update the redux-form state
+ *
+ * OR
+ *
+ * 1) Add a callback to the modal showing logic that is used in the redux action
+ * 2) The callback will update redux-form with the newly added ID
+ */
+
 // TODO write tests for changes
 export const VideoFileEdit = (props) => {
     const [ isSubmitted, setSubmitted ] = useState(false);
