@@ -24,6 +24,8 @@ import { loadCategoryOptions, loadSeriesOptions, loadStarOptions } from '../vide
 import SeriesApiService from '../../services/SeriesApiService';
 import StarApiService from '../../services/StarApiService';
 import { getSelectedFilter } from './filterInputModal.selectors';
+import { FORM_NAME } from '../../components/AppContent/VideoFileEdit/VideoFileEdit';
+import { change } from 'redux-form';
 
 export const deleteFilter = () => async (dispatch, getState) => {
     const state = getState();
@@ -58,6 +60,18 @@ export const deleteFilter = () => async (dispatch, getState) => {
     catch (ex) {
         dispatch(handleApiError(ex));
     }
+};
+
+// TODO write test
+export const addNewSeriesToEditForm = (newSeries) => (dispatch, getState) => {
+    const state = getState();
+    const form = state.form[FORM_NAME];
+    if (!form) {
+        return;
+    }
+
+    const series = form.series ?? [];
+    dispatch(change(FORM_NAME, 'series', [...series, newSeries]));
 };
 
 export const saveFilterChanges = () => async (dispatch, getState) => {
@@ -123,6 +137,7 @@ const saveSeriesChanges = async (filter, action, dispatch) => {
         await SeriesApiService.updateSeries(filter.value, series);
     }
     await dispatch(loadSeriesOptions());
+    dispatch(addNewSeriesToEditForm(series))
 };
 
 const saveStarChanges = async (filter, action, dispatch) => {
