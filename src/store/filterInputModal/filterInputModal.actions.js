@@ -62,8 +62,7 @@ export const deleteFilter = () => async (dispatch, getState) => {
     }
 };
 
-// TODO write test
-export const addNewSeriesToEditForm = (newSeries) => (dispatch, getState) => {
+const addNewSeriesToEditForm = (newSeries) => (dispatch, getState) => {
     const state = getState();
     const form = state.form[FORM_NAME];
     if (!form) {

@@ -191,6 +191,10 @@ describe('filterInputModal.actions', () => {
             }));
         });
 
+        it('add new category with edit form', () => {
+            throw new Error();
+        });
+
         it('edit category', async () => {
             mockCsrfPreflight(mockApi, '/categories/3');
             store = mockStore(createState(EDIT_ACTION, CATEGORY_TYPE));
@@ -245,6 +249,10 @@ describe('filterInputModal.actions', () => {
                     })
                 ]
             }));
+        });
+
+        it('add new series with edit form', () => {
+            throw new Error();
         });
 
         it('edit series', async () => {
@@ -302,6 +310,10 @@ describe('filterInputModal.actions', () => {
                     })
                 ]
             }));
+        });
+
+        it('add new star with edit form', () => {
+            throw new Error();
         });
 
         it('edit star', async () => {
