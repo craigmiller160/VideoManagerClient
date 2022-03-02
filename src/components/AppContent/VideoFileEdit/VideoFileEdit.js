@@ -155,11 +155,13 @@ VideoFileEdit.propTypes = {
     saveFileChanges: PropTypes.func.isRequired,
     showAddCategoryModal: PropTypes.func,
     showAddSeriesModal: PropTypes.func,
-    showAddStarModal: PropTypes.func
+    showAddStarModal: PropTypes.func,
+    newlyAddedId: PropTypes.number
 };
 
 const mapStateToProps = (state) =>  ({
-    filters: state.videoSearch.filters
+    filters: state.videoSearch.filters,
+    newlyAddedId: state.filterInputModel.newlyAddedId
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
