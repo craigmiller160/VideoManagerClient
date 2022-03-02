@@ -276,9 +276,22 @@ describe('filterInputModal.actions', () => {
 
         it('add new series with edit form', async () => {
             mockCsrfPreflight(mockApi, '/series');
-            store = mockStore(createState(ADD_ACTION, SERIES_TYPE));
+            store = mockStore(createState(ADD_ACTION, SERIES_TYPE, true));
             const expectedActions = [
                 { type: setSeries.toString(), payload: BASE_SERIES_FILTERS },
+                expect.objectContaining({
+                    type: '@@redux-form/CHANGE',
+                    payload: [
+                        {
+                            value: 1,
+                            label: 'S1'
+                        },
+                        {
+                            value: 3,
+                            label: 'ThirdSeries'
+                        }
+                    ]
+                }),
                 { type: showSuccessAlert.toString(), payload: 'Successfully saved Series filter' }
             ];
             try {
@@ -300,7 +313,6 @@ describe('filterInputModal.actions', () => {
                     })
                 ]
             }));
-            throw new Error();
         });
 
         it('edit series', async () => {
