@@ -70,8 +70,12 @@ export const addNewSeriesToEditForm = (newSeries) => (dispatch, getState) => {
         return;
     }
 
-    const series = form.series ?? [];
-    dispatch(change(FORM_NAME, 'series', [...series, newSeries]));
+    const series = form.values.series ?? [];
+    const newSeriesFormItem = {
+        value: newSeries.seriesId,
+        label: newSeries.seriesName
+    };
+    dispatch(change(FORM_NAME, 'series', [...series, newSeriesFormItem]));
 };
 
 export const saveFilterChanges = () => async (dispatch, getState) => {
@@ -126,12 +130,13 @@ const saveCategoryChanges = async (filter, action, dispatch) => {
 };
 
 const saveSeriesChanges = async (filter, action, dispatch) => {
-    const series = {
+    let series = {
         seriesId: filter.value,
         seriesName: filter.label
     };
     if (ADD_ACTION === action) {
-        await SeriesApiService.addSeries(series);
+        const res = await SeriesApiService.addSeries(series);
+        series = res.data;
     }
     else {
         await SeriesApiService.updateSeries(filter.value, series);
