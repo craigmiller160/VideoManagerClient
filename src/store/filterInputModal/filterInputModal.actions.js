@@ -62,6 +62,36 @@ export const deleteFilter = () => async (dispatch, getState) => {
     }
 };
 
+const addNewCategoryToEditForm = (newCategory) => (dispatch, getState) => {
+    const state = getState();
+    const form = state.form[FORM_NAME];
+    if (!form) {
+        return;
+    }
+
+    const categories = form.values.categories ?? [];
+    const newCategoryFormItem = {
+        value: newCategory.categoryId,
+        label: newCategory.categoryName
+    };
+    dispatch(change(FORM_NAME, 'series', [...categories, newCategoryFormItem]));
+};
+
+const addNewStarToEditForm = (newStar) => (dispatch, getState) => {
+    const state = getState();
+    const form = state.form[FORM_NAME];
+    if (!form) {
+        return;
+    }
+
+    const stars = form.values.stars ?? [];
+    const newStarFormItem = {
+        value: newStar.starId,
+        label: newStar.starName
+    };
+    dispatch(change(FORM_NAME, 'series', [...categories, newStarFormItem]));
+};
+
 const addNewSeriesToEditForm = (newSeries) => (dispatch, getState) => {
     const state = getState();
     const form = state.form[FORM_NAME];
@@ -115,17 +145,21 @@ export const saveFilterChanges = () => async (dispatch, getState) => {
 };
 
 const saveCategoryChanges = async (filter, action, dispatch) => {
-    const category = {
+    let category = {
         categoryId: filter.value,
         categoryName: filter.label
     };
     if (ADD_ACTION === action) {
-        await CategoryApiService.addCategory(category);
+        const res = await CategoryApiService.addCategory(category);
+        category = res.data;
     }
     else {
         await CategoryApiService.updateCategory(category.categoryId, category);
     }
     await dispatch(loadCategoryOptions());
+    if (ADD_ACTION === action) {
+        dispatch(addNewCategoryToEditForm(category));
+    }
 };
 
 const saveSeriesChanges = async (filter, action, dispatch) => {
@@ -141,21 +175,27 @@ const saveSeriesChanges = async (filter, action, dispatch) => {
         await SeriesApiService.updateSeries(filter.value, series);
     }
     await dispatch(loadSeriesOptions());
-    dispatch(addNewSeriesToEditForm(series))
+    if (ADD_ACTION === action) {
+        dispatch(addNewSeriesToEditForm(series));
+    }
 };
 
 const saveStarChanges = async (filter, action, dispatch) => {
-    const star = {
+    let star = {
         starId: filter.value,
         starName: filter.label
     };
     if (ADD_ACTION === action) {
-        await StarApiService.addStar(star);
+        const res = await StarApiService.addStar(star);
+        star = res.data;
     }
     else {
         await StarApiService.updateStar(filter.value, star);
     }
     await dispatch(loadStarOptions());
+    if (ADD_ACTION === action) {
+        dispatch(addNewStarToEditForm(star));
+    }
 };
 
 export const showAddCategoryModal = createAction('filterInputModal/showAddCategoryModal');
