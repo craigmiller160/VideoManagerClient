@@ -18,7 +18,7 @@
 
 import { createReducer } from 'redux-starter-kit';
 import {
-    hideFilterModal,
+    hideFilterModal, setNewlyAddedId,
     showAddCategoryModal,
     showAddSeriesModal,
     showAddStarModal,
@@ -32,7 +32,8 @@ export const initialState = {
     open: false,
     type: '',
     action: '',
-    index: -1
+    index: -1,
+    newlyAddedId: -1
 };
 
 const handleShowAddCategoryModal = (state) => ({
@@ -85,6 +86,11 @@ const handleHideFilterModal = (state) => ({
     open: false
 });
 
+const handleSetNewlyAddedId = (state, { payload }) => ({
+    ...state,
+    newlyAddedId: payload
+});
+
 export default createReducer(initialState, {
     [showAddCategoryModal]: handleShowAddCategoryModal,
     [showAddSeriesModal]: handleShowAddSeriesModal,
@@ -92,5 +98,6 @@ export default createReducer(initialState, {
     [showEditCategoryModal]: handleShowEditCategoryModal,
     [showEditSeriesModal]: handleShowEditSeriesModal,
     [showEditStarModal]: handleShowEditStarModal,
-    [hideFilterModal]: handleHideFilterModal
+    [hideFilterModal]: handleHideFilterModal,
+    [setNewlyAddedId]: handleSetNewlyAddedId
 });

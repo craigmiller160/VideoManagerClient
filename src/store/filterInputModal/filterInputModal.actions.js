@@ -111,13 +111,16 @@ const saveCategoryChanges = async (filter, action, dispatch) => {
     await dispatch(loadCategoryOptions());
 };
 
+// TODO template for full change
 const saveSeriesChanges = async (filter, action, dispatch) => {
     const series = {
         seriesId: filter.value,
         seriesName: filter.label
     };
+    let newlyAddedId = -1;
     if (ADD_ACTION === action) {
-        await SeriesApiService.addSeries(series);
+        const res = await SeriesApiService.addSeries(series);
+        newlyAddedId = res.data.seriesId;
     }
     else {
         await SeriesApiService.updateSeries(filter.value, series);
@@ -146,3 +149,4 @@ export const showEditCategoryModal = createAction('filterInputModal/showEditCate
 export const showEditSeriesModal = createAction('filterInputModal/showEditSeriesModal');
 export const showEditStarModal = createAction('filterInputModal/showEditStarModal');
 export const hideFilterModal = createAction('filterInputModal/hideFilterModal');
+export const setNewlyAddedId = createAction('filterInputModel/setNewlyAddedId');
