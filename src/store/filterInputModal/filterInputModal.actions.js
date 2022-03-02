@@ -74,7 +74,7 @@ const addNewCategoryToEditForm = (newCategory) => (dispatch, getState) => {
         value: newCategory.categoryId,
         label: newCategory.categoryName
     };
-    dispatch(change(FORM_NAME, 'series', [...categories, newCategoryFormItem]));
+    dispatch(change(FORM_NAME, 'categories', [...categories, newCategoryFormItem]));
 };
 
 const addNewStarToEditForm = (newStar) => (dispatch, getState) => {
@@ -89,7 +89,7 @@ const addNewStarToEditForm = (newStar) => (dispatch, getState) => {
         value: newStar.starId,
         label: newStar.starName
     };
-    dispatch(change(FORM_NAME, 'series', [...stars, newStarFormItem]));
+    dispatch(change(FORM_NAME, 'stars', [...stars, newStarFormItem]));
 };
 
 const addNewSeriesToEditForm = (newSeries) => (dispatch, getState) => {
@@ -157,6 +157,7 @@ const saveCategoryChanges = async (filter, action, dispatch) => {
         await CategoryApiService.updateCategory(category.categoryId, category);
     }
     await dispatch(loadCategoryOptions());
+    console.log('AddCategory', action, category);
     if (ADD_ACTION === action) {
         dispatch(addNewCategoryToEditForm(category));
     }
