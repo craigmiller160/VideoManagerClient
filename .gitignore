@@ -31,3 +31,4 @@ docker/*.zip
 .yalc
 yalc.lock
 deploy/build
+deploy/chart/charts
