@@ -1,7 +1,7 @@
 app-deployment:
-  appName: auth-management-ui
+  appName: video-manager-client
   deployment:
-    image: nexus-docker-craigmiller160.ddns.net/auth-management-ui:latest
+    image: nexus-docker-craigmiller160.ddns.net/video-manager-client:latest
     ports:
       - 443
     livenessProbe:
