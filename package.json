@@ -51,6 +51,7 @@
     "test": "web-config-scripts test"
   },
   "devDependencies": {
+    "@babel/runtime-corejs3": "^7.20.1",
     "@craigmiller160/react-web-config": "^2.10.1",
     "axios-mock-adapter": "^1.19.0",
     "jest-styled-components": "^7.0.3",
