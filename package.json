@@ -41,7 +41,7 @@
   },
   "resolutions": {
     "es-abstract": "^1.18.0-next.1",
-    "@babel/runtime": "^7.12.5"
+    "@babel/runtime": "^7.20.1"
   },
   "scripts": {
     "build": "web-config-scripts test && web-config-scripts webpack",
@@ -51,7 +51,7 @@
     "test": "web-config-scripts test"
   },
   "devDependencies": {
-    "@craigmiller160/react-web-config": "^2.8.1",
+    "@craigmiller160/react-web-config": "^2.10.1",
     "axios-mock-adapter": "^1.19.0",
     "jest-styled-components": "^7.0.3",
     "redux-mock-store": "^1.5.4"
