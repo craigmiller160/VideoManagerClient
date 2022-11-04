@@ -1,4 +1,4 @@
-FROM craigmiller160.ddns.net:30004/nginx-base:1.1.0
+FROM nexus-docker-craigmiller160.ddns.net/nginx-base:1.1.1
 
 COPY ./build/video-manager-client-*.tgz /var/www/video-manager-client.tgz
 RUN tar xvf /var/www/video-manager-client.tgz -C /var/www/
