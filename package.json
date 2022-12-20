@@ -44,6 +44,7 @@
     "@babel/runtime": "^7.20.1"
   },
   "scripts": {
+    "lint": "craig-lint",
     "build": "web-config-scripts test && web-config-scripts webpack",
     "forceBuild": "web-config-scripts webpack",
     "prepDeploy": "web-config-scripts prepDeploy",
