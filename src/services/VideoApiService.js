@@ -32,6 +32,10 @@ const updateVideoFile = (videoFileId, videoFile) => {
     });
 };
 
+const deleteVideoFile = (videoFileId) => API.delete({
+    uri: `/video-files/${videoFileId}`
+});
+
 const startVideoScan = () => {
     return API.post({
         uri: '/video-files/scanner'
@@ -70,5 +74,6 @@ export default {
     isVideoScanRunning,
     searchForVideos,
     getVideoFile,
-    recordNewVideoPlay
+    recordNewVideoPlay,
+    deleteVideoFile
 }
