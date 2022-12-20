@@ -17,19 +17,26 @@
  */
 
 import { createSelector } from 'redux-starter-kit';
-import { ROLE_ADMIN, ROLE_EDIT, ROLE_SCAN } from '../../utils/securityConstants';
+import {
+	ROLE_ADMIN,
+	ROLE_EDIT,
+	ROLE_SCAN
+} from '../../utils/securityConstants';
 
 export const hasEditRole = createSelector(
-    ['auth.userDetails'],
-    (userDetails) => !!userDetails?.roles?.find((role) => role.name === ROLE_EDIT)
+	['auth.userDetails'],
+	(userDetails) =>
+		!!userDetails?.roles?.find((role) => role.name === ROLE_EDIT)
 );
 
 export const hasAdminRole = createSelector(
-    ['auth.userDetails'],
-    (userDetails) => !!userDetails?.roles?.find((role) => role.name === ROLE_ADMIN)
+	['auth.userDetails'],
+	(userDetails) =>
+		!!userDetails?.roles?.find((role) => role.name === ROLE_ADMIN)
 );
 
 export const hasScanRole = createSelector(
-    ['auth.userDetails'],
-    (userDetails) => !!userDetails?.roles?.find((role) => role.name === ROLE_SCAN)
+	['auth.userDetails'],
+	(userDetails) =>
+		!!userDetails?.roles?.find((role) => role.name === ROLE_SCAN)
 );

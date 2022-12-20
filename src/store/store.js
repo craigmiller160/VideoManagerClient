@@ -28,18 +28,18 @@ import authReducer from './auth/auth.reducer';
 import settingsReducer from './settings/settings.reducer';
 
 const reducer = {
-    videoList: videoListReducer,
-    videoSearch: videoSearchReducer,
-    form: formReducer,
-    alert: alertReducer,
-    scanning: scanningReducer,
-    filterInputModal: filterInputModalReducer,
-    videoPlayer: videoPlayerReducer,
-    auth: authReducer,
-    settings: settingsReducer
+	videoList: videoListReducer,
+	videoSearch: videoSearchReducer,
+	form: formReducer,
+	alert: alertReducer,
+	scanning: scanningReducer,
+	filterInputModal: filterInputModalReducer,
+	videoPlayer: videoPlayerReducer,
+	auth: authReducer,
+	settings: settingsReducer
 };
 
 export default configureStore({
-    reducer,
-    devTools: process.env.NODE_ENV !== 'production'
+	reducer,
+	devTools: process.env.NODE_ENV !== 'production'
 });

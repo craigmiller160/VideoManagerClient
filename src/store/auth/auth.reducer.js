@@ -17,55 +17,59 @@
  */
 
 import { createReducer } from 'redux-starter-kit';
-import { setCsrfToken, setIsAuth, setLoginLoading, setUserDetails } from './auth.actions';
+import {
+	setCsrfToken,
+	setIsAuth,
+	setLoginLoading,
+	setUserDetails
+} from './auth.actions';
 
 export const initialState = {
-    isAuth: false,
-    loginLoading: false,
-    csrfToken: null,
-    userDetails: {}
+	isAuth: false,
+	loginLoading: false,
+	csrfToken: null,
+	userDetails: {}
 };
 
 const handleSetIsAuth = (state, action) => ({
-    ...state,
-    isAuth: action.payload
+	...state,
+	isAuth: action.payload
 });
 
 const handleSetLoginLoading = (state, action) => ({
-    ...state,
-    loginLoading: action.payload
+	...state,
+	loginLoading: action.payload
 });
 
 const handleSetCsrfToken = (state, action) => ({
-    ...state,
-    csrfToken: action.payload
+	...state,
+	csrfToken: action.payload
 });
 
 const handleSetUserDetails = (state, action) => {
-    if (!action.payload) {
-        return {
-            ...state,
-            userDetails: {}
-        }
-    }
+	if (!action.payload) {
+		return {
+			...state,
+			userDetails: {}
+		};
+	}
 
-    return {
-        ...state,
-        userDetails: {
-            firstName: action.payload.firstName,
-            lastName: action.payload.lastName,
-            userName: action.payload.username,
-            roles: action.payload.roles
-                .map((role) => ({
-                    name: role
-                }))
-        }
-    }
+	return {
+		...state,
+		userDetails: {
+			firstName: action.payload.firstName,
+			lastName: action.payload.lastName,
+			userName: action.payload.username,
+			roles: action.payload.roles.map((role) => ({
+				name: role
+			}))
+		}
+	};
 };
 
 export default createReducer(initialState, {
-    [setIsAuth]: handleSetIsAuth,
-    [setLoginLoading]: handleSetLoginLoading,
-    [setCsrfToken]: handleSetCsrfToken,
-    [setUserDetails]: handleSetUserDetails
+	[setIsAuth]: handleSetIsAuth,
+	[setLoginLoading]: handleSetLoginLoading,
+	[setCsrfToken]: handleSetCsrfToken,
+	[setUserDetails]: handleSetUserDetails
 });

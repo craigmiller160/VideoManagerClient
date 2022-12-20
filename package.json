@@ -39,10 +39,6 @@
     "styled-components": "^5.2.1",
     "use-react-router": "^1.0.7"
   },
-  "resolutions": {
-    "es-abstract": "^1.18.0-next.1",
-    "@babel/runtime": "^7.20.1"
-  },
   "scripts": {
     "lint": "craig-lint",
     "build": "web-config-scripts test && web-config-scripts webpack",
@@ -53,6 +49,7 @@
   },
   "devDependencies": {
     "@babel/runtime-corejs3": "^7.20.1",
+    "@craigmiller160/babel-config": "^1.1.1",
     "@craigmiller160/eslint-config-jest": "^1.0.1",
     "@craigmiller160/eslint-config-js": "^1.0.1",
     "@craigmiller160/eslint-config-prettier": "^1.0.1",

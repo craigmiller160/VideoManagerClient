@@ -19,6 +19,6 @@
 import { createApi } from '@craigmiller160/ajax-api';
 
 export default createApi({
-    baseURL: '/video-manager/api',
-    useCsrf: false
+	baseURL: '/video-manager/api',
+	useCsrf: false
 });
