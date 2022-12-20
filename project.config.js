@@ -33,7 +33,7 @@ module.exports = {
             logLevel: 'debug'
         },
         '/video-manager/oauth2': {
-            target: 'https://localhost:7003',
+            target: 'https://apps-craigmiller160.ddns.net/oauth2',
             secure: false,
             pathRewrite: {
                 '^/video-manager/oauth2': ''
