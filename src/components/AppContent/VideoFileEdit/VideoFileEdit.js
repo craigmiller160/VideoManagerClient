@@ -61,10 +61,10 @@ export const VideoFileEdit = (props) => {
 
     return (
         <>
-            <Prompt
-                when={ !isSubmitted }
-                message="Are you sure you don't want to save your changes?"
-            />
+            {/*<Prompt*/}
+            {/*    when={ !isSubmitted }*/}
+            {/*    message="Are you sure you don't want to save your changes?"*/}
+            {/*/>*/}
             <Form
                 form={ FORM_NAME }
                 onSubmit={ (event) => event.preventDefault() }

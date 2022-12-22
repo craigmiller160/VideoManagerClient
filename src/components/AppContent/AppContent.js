@@ -26,7 +26,7 @@ import useReactRouter from 'use-react-router';
 import { getSelectedVideoWithFilters } from 'store/videoList/videoList.selectors';
 import classes from './AppContent.module.scss';
 import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
-import { saveVideoFileEdits } from 'store/videoList/videoList.actions';
+import { saveVideoFileEdits, deleteVideoFile } from 'store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
 import { checkAuth } from '../../store/auth/auth.actions';
 import { hideAlert } from '../../store/alert/alert.actions';
@@ -65,7 +65,7 @@ const AppContent = () => {
 
     const deleteFile = async (fileId) => {
         if (confirm('Are you sure you want to delete this file?')) {
-            await dispatch(deleteFile(fileId));
+            await dispatch(deleteVideoFile(fileId));
             history.push('/videos');
         }
     };
