@@ -139,7 +139,7 @@ export const VideoFileEdit = (props) => {
                             </Button>
                         </Col>
                         <Col className="text-center">
-                            <Button onClick={deleteFile} color="danger" type="button">
+                            <Button onClick={() => deleteFile(selectedVideo.fileId)} color="danger" type="button">
                                 Delete
                             </Button>
                         </Col>

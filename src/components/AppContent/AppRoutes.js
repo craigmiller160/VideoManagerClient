@@ -103,7 +103,7 @@ const AppRoutes = (props) => {
                 component={ VideoFileEdit }
                 componentProps={ {
                     selectedVideo,
-                    saveFileChanges
+                    saveFileChanges,
                     deleteFile
                 } }
                 ruleProps={ ruleProps }

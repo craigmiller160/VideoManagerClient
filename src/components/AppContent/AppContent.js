@@ -64,8 +64,10 @@ const AppContent = () => {
     };
 
     const deleteFile = async (fileId) => {
-        await dispatch(deleteFile(fileId));
-        history.push('/videos');
+        if (confirm('Are you sure you want to delete this file?')) {
+            await dispatch(deleteFile(fileId));
+            history.push('/videos');
+        }
     };
 
     const hideAlertOnClick = () => dispatch(hideAlert());
