@@ -137,6 +137,11 @@ export const VideoFileEdit = (props) => {
                                 Save
                             </Button>
                         </Col>
+                        <Col className="text-center">
+                            <Button color="danger" type="button">
+                                Delete
+                            </Button>
+                        </Col>
                     </Row>
                 </>
             </Form>
