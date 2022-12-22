@@ -63,6 +63,11 @@ const AppContent = () => {
         history.push('/videos');
     };
 
+    const deleteFile = async (fileId) => {
+        await dispatch(deleteFile(fileId));
+        history.push('/videos');
+    };
+
     const hideAlertOnClick = () => dispatch(hideAlert());
 
     return (
@@ -81,6 +86,7 @@ const AppContent = () => {
                         </Col>
                     </Row>
                     <AppRoutes
+                        deleteFile={deleteFile}
                         saveFileChanges={ saveFileChanges }
                         selectedVideo={ selectedVideo }
                         isScanning={ isScanning }

@@ -50,7 +50,8 @@ export const VideoFileEdit = (props) => {
         saveFileChanges,
         showAddCategoryModal,
         showAddSeriesModal,
-        showAddStarModal
+        showAddStarModal,
+        deleteFile
     } = props;
 
     const submit = () => {
@@ -138,7 +139,7 @@ export const VideoFileEdit = (props) => {
                             </Button>
                         </Col>
                         <Col className="text-center">
-                            <Button color="danger" type="button">
+                            <Button onClick={deleteFile} color="danger" type="button">
                                 Delete
                             </Button>
                         </Col>
@@ -176,7 +177,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 const VideoFileEditConnected = connect(mapStateToProps, mapDispatchToProps)(VideoFileEdit);
 VideoFileEditConnected.propTypes = {
     selectedVideo: PropTypes.object.isRequired,
-    saveFileChanges: PropTypes.func.isRequired
+    saveFileChanges: PropTypes.func.isRequired,
+    deleteFile: PropTypes.func.isRequired
 };
 
 export default VideoFileEditConnected;
