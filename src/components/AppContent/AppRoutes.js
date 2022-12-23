@@ -38,6 +38,7 @@ const AppRoutes = (props) => {
     const hasAdminRole = useSelector(hasAdminRoleSelector);
     const {
         selectedVideo,
+        deleteFile,
         saveFileChanges,
         isScanning,
         isAuth
@@ -102,7 +103,8 @@ const AppRoutes = (props) => {
                 component={ VideoFileEdit }
                 componentProps={ {
                     selectedVideo,
-                    saveFileChanges
+                    saveFileChanges,
+                    deleteFile
                 } }
                 ruleProps={ ruleProps }
                 rules={ [
@@ -160,6 +162,7 @@ const AppRoutes = (props) => {
     );
 };
 AppRoutes.propTypes = {
+    deleteFile: PropTypes.func,
     selectedVideo: PropTypes.object,
     saveFileChanges: PropTypes.func,
     isScanning: PropTypes.bool,

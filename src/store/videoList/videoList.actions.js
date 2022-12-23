@@ -111,6 +111,17 @@ export const saveVideoFile = (videoFile) => async (dispatch) => {
     }
 };
 
+export const deleteVideoFile = (fileId) => async (dispatch) => {
+    try {
+        await VideoApiService.deleteVideoFile(fileId);
+        dispatch(showSuccessAlert('Successfully deleted video file'));
+        await dispatch(searchForVideos());
+    }
+    catch (ex) {
+        dispatch(handleApiError(ex));
+    }
+};
+
 export const setVideoList = createAction('videoList/setVideoList');
 export const setPagination = createAction('videoList/setPagination');
 export const setCurrentPage = createAction('videoList/setCurrentPage');

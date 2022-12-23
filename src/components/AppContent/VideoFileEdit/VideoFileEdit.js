@@ -50,7 +50,8 @@ export const VideoFileEdit = (props) => {
         saveFileChanges,
         showAddCategoryModal,
         showAddSeriesModal,
-        showAddStarModal
+        showAddStarModal,
+        deleteFile
     } = props;
 
     const submit = () => {
@@ -60,10 +61,10 @@ export const VideoFileEdit = (props) => {
 
     return (
         <>
-            <Prompt
-                when={ !isSubmitted }
-                message="Are you sure you don't want to save your changes?"
-            />
+            {/*<Prompt*/}
+            {/*    when={ !isSubmitted }*/}
+            {/*    message="Are you sure you don't want to save your changes?"*/}
+            {/*/>*/}
             <Form
                 form={ FORM_NAME }
                 onSubmit={ (event) => event.preventDefault() }
@@ -137,6 +138,11 @@ export const VideoFileEdit = (props) => {
                                 Save
                             </Button>
                         </Col>
+                        <Col className="text-center">
+                            <Button onClick={() => deleteFile(selectedVideo.fileId)} color="danger" type="button">
+                                Delete
+                            </Button>
+                        </Col>
                     </Row>
                 </>
             </Form>
@@ -171,7 +177,8 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 const VideoFileEditConnected = connect(mapStateToProps, mapDispatchToProps)(VideoFileEdit);
 VideoFileEditConnected.propTypes = {
     selectedVideo: PropTypes.object.isRequired,
-    saveFileChanges: PropTypes.func.isRequired
+    saveFileChanges: PropTypes.func.isRequired,
+    deleteFile: PropTypes.func.isRequired
 };
 
 export default VideoFileEditConnected;
