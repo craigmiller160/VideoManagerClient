@@ -7,6 +7,7 @@ export default defineConfig({
 	root: path.join(process.cwd(), 'src'),
 	base: '/video-manager/',
 	publicDir: path.join(process.cwd(), 'public'),
+	envDir: path.join(process.cwd(), 'environment'),
 	server: {
 		port: 3000,
 		host: true,
