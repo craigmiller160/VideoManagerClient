@@ -1,4 +1,3 @@
-
 /*
  *     VideoManagerClient
  *     Copyright (C) 2020 Craig Miller
@@ -18,6 +17,6 @@
  */
 
 export const settingsData = {
-    settingsId: 1,
-    rootDir: '/home/user/videos'
+	settingsId: 1,
+	rootDir: '/home/user/videos'
 };

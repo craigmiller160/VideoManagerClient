@@ -17,14 +17,17 @@
  */
 
 export const BASE_SERIES = [
-    { seriesId: 1, seriesName: 'FirstSeries' },
-    { seriesId: 2, seriesName: 'SecondSeries' }
+	{ seriesId: 1, seriesName: 'FirstSeries' },
+	{ seriesId: 2, seriesName: 'SecondSeries' }
 ];
 
 export const BASE_SERIES_FILTERS = [
-    { value: 1, label: 'FirstSeries' },
-    { value: 2, label: 'SecondSeries' }
+	{ value: 1, label: 'FirstSeries' },
+	{ value: 2, label: 'SecondSeries' }
 ];
 
 export const NEW_SERIES = { seriesId: 3, seriesName: 'ThirdSeries' };
-export const NEW_SERIES_FILTER = { value: NEW_SERIES.seriesId, label: NEW_SERIES.seriesName };
+export const NEW_SERIES_FILTER = {
+	value: NEW_SERIES.seriesId,
+	label: NEW_SERIES.seriesName
+};

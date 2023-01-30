@@ -16,68 +16,85 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import authReducer, { initialState as authInitState } from 'store/auth/auth.reducer';
-import { setCsrfToken, setIsAuth, setLoginLoading, setUserDetails } from '../../../src/store/auth/auth.actions';
-import { mockCsrfToken, mockUserDetails } from '../../exclude/mock/mockApiConfig/authApi';
+import authReducer, {
+	initialState as authInitState
+} from 'store/auth/auth.reducer';
+import {
+	setCsrfToken,
+	setIsAuth,
+	setLoginLoading,
+	setUserDetails
+} from '../../../src/store/auth/auth.actions';
+import {
+	mockCsrfToken,
+	mockUserDetails
+} from '../../exclude/mock/mockApiConfig/authApi';
 
 const userDetailsPayload = {
-    username: mockUserDetails.userName,
-    firstName: mockUserDetails.firstName,
-    lastName: mockUserDetails.lastName,
-    roles: mockUserDetails.roles.map((role) => role.name)
+	username: mockUserDetails.userName,
+	firstName: mockUserDetails.firstName,
+	lastName: mockUserDetails.lastName,
+	roles: mockUserDetails.roles.map((role) => role.name)
 };
 
 describe('auth.reducer', () => {
-    it('returns initial state', () => {
-        expect(authReducer(undefined, {})).toEqual(authInitState);
-    });
+	it('returns initial state', () => {
+		expect(authReducer(undefined, {})).toEqual(authInitState);
+	});
 
-    it('handleSetIsAuth', () => {
-        const action = { type: setIsAuth.toString(), payload: true };
-        const expectedState = {
-            ...authInitState,
-            isAuth: true
-        };
-        expect(authReducer(authInitState, action)).toEqual(expectedState);
-    });
+	it('handleSetIsAuth', () => {
+		const action = { type: setIsAuth.toString(), payload: true };
+		const expectedState = {
+			...authInitState,
+			isAuth: true
+		};
+		expect(authReducer(authInitState, action)).toEqual(expectedState);
+	});
 
-    it('handleSetLoginLoading', () => {
-        const action = { type: setLoginLoading.toString(), payload: true };
-        const expectedState = {
-            ...authInitState,
-            loginLoading: true
-        };
-        expect(authReducer(authInitState, action)).toEqual(expectedState);
-    });
+	it('handleSetLoginLoading', () => {
+		const action = { type: setLoginLoading.toString(), payload: true };
+		const expectedState = {
+			...authInitState,
+			loginLoading: true
+		};
+		expect(authReducer(authInitState, action)).toEqual(expectedState);
+	});
 
-    it('handleSetCsrfToken', () => {
-        const action = { type: setCsrfToken.toString(), payload: mockCsrfToken };
-        const expectedState = {
-            ...authInitState,
-            csrfToken: mockCsrfToken
-        };
-        expect(authReducer(authInitState, action)).toEqual(expectedState);
-    });
+	it('handleSetCsrfToken', () => {
+		const action = {
+			type: setCsrfToken.toString(),
+			payload: mockCsrfToken
+		};
+		const expectedState = {
+			...authInitState,
+			csrfToken: mockCsrfToken
+		};
+		expect(authReducer(authInitState, action)).toEqual(expectedState);
+	});
 
-    it('handleSetUserDetails', () => {
-        const action = { type: setUserDetails.toString(), payload: userDetailsPayload };
-        const expectedState = {
-            ...authInitState,
-            userDetails: {
-                ...mockUserDetails,
-                roles: mockUserDetails.roles
-                    .map((role) => ({ name: role.name }))
-            }
-        };
-        expect(authReducer(authInitState, action)).toEqual(expectedState);
-    });
+	it('handleSetUserDetails', () => {
+		const action = {
+			type: setUserDetails.toString(),
+			payload: userDetailsPayload
+		};
+		const expectedState = {
+			...authInitState,
+			userDetails: {
+				...mockUserDetails,
+				roles: mockUserDetails.roles.map((role) => ({
+					name: role.name
+				}))
+			}
+		};
+		expect(authReducer(authInitState, action)).toEqual(expectedState);
+	});
 
-    it('handleSetUserDetails null value', () => {
-        const action = { type: setUserDetails.toString(), payload: null };
-        const expectedState = {
-            ...authInitState,
-            userDetails: {}
-        };
-        expect(authReducer(authInitState, action)).toEqual(expectedState);
-    });
+	it('handleSetUserDetails null value', () => {
+		const action = { type: setUserDetails.toString(), payload: null };
+		const expectedState = {
+			...authInitState,
+			userDetails: {}
+		};
+		expect(authReducer(authInitState, action)).toEqual(expectedState);
+	});
 });

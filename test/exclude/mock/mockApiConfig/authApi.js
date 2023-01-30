@@ -16,7 +16,10 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { CSRF_TOKEN_KEY, ROLE_EDIT } from '../../../../src/utils/securityConstants';
+import {
+	CSRF_TOKEN_KEY,
+	ROLE_EDIT
+} from '../../../../src/utils/securityConstants';
 
 export const mockTokenResponse = { token: 'ABCDEFG' };
 export const mockUserName = 'userName';
@@ -24,57 +27,49 @@ export const mockPassword = 'password';
 export const mockCsrfToken = 'HIJKLMONP';
 export const CSRF_TOKEN_TEST = 'csrf-token-test';
 export const mockUserDetails = {
-    userName: mockUserName,
-    firstName: 'firstName',
-    lastName: 'lastName',
-    roles: [ { roleId: 1, name: ROLE_EDIT } ]
+	userName: mockUserName,
+	firstName: 'firstName',
+	lastName: 'lastName',
+	roles: [{ roleId: 1, name: ROLE_EDIT }]
 };
-export const mockRoles = [
-    { roleId: 1, name: 'Role' }
-];
+export const mockRoles = [{ roleId: 1, name: 'Role' }];
 
 export const mockLogin = (mockApi) =>
-    mockApi.onPost('/oauth/authcode/login')
-        .reply(200, {
-            url: 'TheUrl'
-        });
+	mockApi.onPost('/oauth/authcode/login').reply(200, {
+		url: 'TheUrl'
+	});
 
 export const mockLogout = (mockApi) =>
-    mockApi.onGet('/oauth/logout')
-        .reply(200);
+	mockApi.onGet('/oauth/logout').reply(200);
 
 export const mockCheckAuthSuccess = (mockApi) =>
-    mockApi.onGet('/oauth/user')
-        .reply((config) =>  [
-            200,
-            mockUserDetails,
-            {
-                [CSRF_TOKEN_KEY]: mockCsrfToken,
-                [CSRF_TOKEN_TEST]: config.headers[CSRF_TOKEN_KEY] === 'fetch'
-            }
-        ]);
+	mockApi.onGet('/oauth/user').reply((config) => [
+		200,
+		mockUserDetails,
+		{
+			[CSRF_TOKEN_KEY]: mockCsrfToken,
+			[CSRF_TOKEN_TEST]: config.headers[CSRF_TOKEN_KEY] === 'fetch'
+		}
+	]);
 
 export const mockCheckAuthFailure = (mockApi) =>
-    mockApi.onGet('/oauth/user')
-        .reply((config) => [
-            401,
-            'Unauthorized',
-            {
-                [CSRF_TOKEN_KEY]: mockCsrfToken
-            }
-        ])
+	mockApi.onGet('/oauth/user').reply((config) => [
+		401,
+		'Unauthorized',
+		{
+			[CSRF_TOKEN_KEY]: mockCsrfToken
+		}
+	]);
 
 export const mockCheckAuthFail = (mockApi) =>
-    mockApi.onGet('/oauth/user')
-        .reply((config) => [
-            401,
-            null,
-            {
-                [CSRF_TOKEN_KEY]: mockCsrfToken,
-                [CSRF_TOKEN_TEST]: config.headers[CSRF_TOKEN_KEY] === 'fetch'
-            }
-        ]);
+	mockApi.onGet('/oauth/user').reply((config) => [
+		401,
+		null,
+		{
+			[CSRF_TOKEN_KEY]: mockCsrfToken,
+			[CSRF_TOKEN_TEST]: config.headers[CSRF_TOKEN_KEY] === 'fetch'
+		}
+	]);
 
 export const mockGetVideoToken = (mockApi) =>
-    mockApi.onGet('/auth/videotoken/3')
-        .reply(200, mockTokenResponse);
+	mockApi.onGet('/auth/videotoken/3').reply(200, mockTokenResponse);
