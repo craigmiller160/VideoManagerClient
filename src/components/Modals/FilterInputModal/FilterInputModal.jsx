@@ -20,14 +20,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Modal from 'components/UI/Modal/Modal';
-import Input from 'components/UI/form/Input/Input';
-import { EDIT_ACTION } from 'store/filterInputModal/filterInputModal.constants';
+import Modal from '../../../components/UI/Modal/Modal';
+import Input from '../../../components/UI/form/Input/Input';
+import { EDIT_ACTION } from '../../../store/filterInputModal/filterInputModal.constants';
 import {
 	deleteFilter,
 	hideFilterModal,
 	saveFilterChanges
-} from 'store/filterInputModal/filterInputModal.actions';
+} from '../../../store/filterInputModal/filterInputModal.actions';
 
 const FORM_NAME = 'filterInputForm';
 

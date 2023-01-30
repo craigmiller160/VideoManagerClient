@@ -28,10 +28,10 @@ import {
 	Collapse
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import VideoDate from 'model/VideoDate';
-import WordWrapCol from 'components/UI/WordWrapCol/WordWrapCol';
+import VideoDate from '../../../../../model/VideoDate';
+import WordWrapCol from '../../../../../components/UI/WordWrapCol/WordWrapCol';
 import { useDispatch, useSelector } from 'react-redux';
-import { reset as videoPlayerReset } from 'store/videoPlayer/videoPlayer.actions';
+import { reset as videoPlayerReset } from '../../../../../store/videoPlayer/videoPlayer.actions';
 import { expandVideoFile } from '../../../../../store/videoList/videoList.actions';
 import { hasEditRole as hasEditRoleSelector } from '../../../../../store/auth/auth.selectors';
 

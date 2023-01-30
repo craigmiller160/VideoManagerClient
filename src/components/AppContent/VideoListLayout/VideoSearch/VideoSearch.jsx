@@ -27,7 +27,7 @@ import Form from '../../../UI/form/Form/Form';
 import {
 	searchForVideos,
 	setCurrentPage
-} from 'store/videoList/videoList.actions';
+} from '../../../../store/videoList/videoList.actions';
 import { SORT_BY_OPTIONS, SORT_DIR_OPTIONS } from './VideoSearch.options';
 
 export const FORM_NAME = 'video-search';

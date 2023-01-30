@@ -21,8 +21,8 @@ import classes from './VideoList.module.scss';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import VideoListItem from './VideoListItem/VideoListItem';
 import { ListGroup } from 'reactstrap';
-import { searchForVideos } from 'store/videoList/videoList.actions';
-import Spinner from 'components/UI/Spinner/Spinner';
+import { searchForVideos } from '../../../../store/videoList/videoList.actions';
+import Spinner from '../../../../components/UI/Spinner/Spinner';
 import VideoListPagination from './VideoListPagination';
 
 const VideoList = () => {

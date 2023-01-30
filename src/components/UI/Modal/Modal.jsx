@@ -25,7 +25,7 @@ import {
 	ModalFooter,
 	Button
 } from 'reactstrap';
-import Form from 'components/UI/form/Form/Form';
+import Form from '../../../components/UI/form/Form/Form';
 
 const Modal = (props) => {
 	const { id, open, title, children, modalProps, modalBtns, close, form } =
