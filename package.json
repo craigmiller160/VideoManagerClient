@@ -64,6 +64,8 @@
     "@craigmiller160/eslint-config-tree-shaking-import-restrictions": "^1.0.1",
     "@craigmiller160/jest-config": "^1.0.4",
     "@craigmiller160/prettier-config": "^1.0.1",
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.11.18",
     "@vitejs/plugin-react": "^3.0.1",
     "axios-mock-adapter": "^1.19.0",
     "husky": "^8.0.3",
