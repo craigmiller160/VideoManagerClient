@@ -48,7 +48,6 @@ describe('Scanning', () => {
 	it('starts and stops calling the checkIsScanning function', () => {
 		const [component, store] = doMount();
 
-		jest.runAllImmediates();
 		jest.advanceTimersByTime(10000);
 
 		const actionsLength = store.getActions().length;
