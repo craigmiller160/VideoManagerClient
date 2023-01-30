@@ -48,7 +48,7 @@
     "forceBuild": "vite build",
     "start": "vite",
     "test": "craig-test",
-    "lint": "eslint --fix --max-warnings=0 **/**.{js,jsx}",
+    "lint": "eslint --fix --max-warnings=0 src/**/*.js && eslint --fix --max-warnings=0 test/**/*.js",
     "prepare": "husky install"
   },
   "lint-staged": {

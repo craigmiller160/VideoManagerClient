@@ -19,34 +19,34 @@
 import API from './API';
 
 const getAllSeries = () => {
-    return API.get({
-        uri: '/series'
-    });
+	return API.get({
+		uri: '/series'
+	});
 };
 
 const addSeries = (series) => {
-    return API.post({
-        uri: '/series',
-        body: series
-    });
+	return API.post({
+		uri: '/series',
+		body: series
+	});
 };
 
 const updateSeries = (seriesId, series) => {
-    return API.put({
-        uri: `/series/${seriesId}`,
-        body: series
-    });
+	return API.put({
+		uri: `/series/${seriesId}`,
+		body: series
+	});
 };
 
 const deleteSeries = (seriesId) => {
-    return API.delete({
-        uri: `/series/${seriesId}`
-    });
+	return API.delete({
+		uri: `/series/${seriesId}`
+	});
 };
 
 export default {
-    getAllSeries,
-    addSeries,
-    updateSeries,
-    deleteSeries
-}
+	getAllSeries,
+	addSeries,
+	updateSeries,
+	deleteSeries
+};

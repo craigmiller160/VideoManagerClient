@@ -19,61 +19,62 @@
 import API from './API';
 
 const addVideoFile = (videoFile) => {
-    return API.post({
-        uri: '/video-files',
-        body: videoFile
-    });
+	return API.post({
+		uri: '/video-files',
+		body: videoFile
+	});
 };
 
 const updateVideoFile = (videoFileId, videoFile) => {
-    return API.put({
-        uri: `/video-files/${videoFileId}`,
-        body: videoFile
-    });
+	return API.put({
+		uri: `/video-files/${videoFileId}`,
+		body: videoFile
+	});
 };
 
-const deleteVideoFile = (videoFileId) => API.delete({
-    uri: `/video-files/${videoFileId}`
-});
+const deleteVideoFile = (videoFileId) =>
+	API.delete({
+		uri: `/video-files/${videoFileId}`
+	});
 
 const startVideoScan = () => {
-    return API.post({
-        uri: '/video-files/scanner'
-    });
+	return API.post({
+		uri: '/video-files/scanner'
+	});
 };
 
 const isVideoScanRunning = () => {
-    return API.get({
-        uri: '/video-files/scanner'
-    });
+	return API.get({
+		uri: '/video-files/scanner'
+	});
 };
 
 const getVideoFile = (fileId) => {
-    return API.get({
-        uri: `/video-files/${fileId}`
-    });
+	return API.get({
+		uri: `/video-files/${fileId}`
+	});
 };
 
 const recordNewVideoPlay = (fileId) => {
-    return API.get({
-        uri: `/video-files/record-play/${fileId}`
-    });
+	return API.get({
+		uri: `/video-files/record-play/${fileId}`
+	});
 };
 
 const searchForVideos = (searchConfig) => {
-    return API.post({
-        uri: '/video-files/search',
-        body: searchConfig
-    });
+	return API.post({
+		uri: '/video-files/search',
+		body: searchConfig
+	});
 };
 
 export default {
-    addVideoFile,
-    updateVideoFile,
-    startVideoScan,
-    isVideoScanRunning,
-    searchForVideos,
-    getVideoFile,
-    recordNewVideoPlay,
-    deleteVideoFile
-}
+	addVideoFile,
+	updateVideoFile,
+	startVideoScan,
+	isVideoScanRunning,
+	searchForVideos,
+	getVideoFile,
+	recordNewVideoPlay,
+	deleteVideoFile
+};
