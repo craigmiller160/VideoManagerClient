@@ -54,6 +54,9 @@
   "lint-staged": {
     "*.{js,jsx}": "eslint --fix --max-warnings=0"
   },
+  "resolutions": {
+    "es-abstract": "^1.21.1"
+  },
   "devDependencies": {
     "@craigmiller160/babel-config": "^1.1.1",
     "@craigmiller160/config-merge": "^1.0.1",
