@@ -1105,6 +1105,13 @@
   dependencies:
     prettier "^2.5.1"
 
+"@craigmiller160/react-keycloak@^1.0.0-beta.4":
+  version "1.0.0-beta.4"
+  resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/@craigmiller160/react-keycloak/-/react-keycloak-1.0.0-beta.4.tgz#e960668509a2630e4f1c762f2ef9c9519889238b"
+  integrity sha512-t9zU2dCejxN4P4vv5IJBJbGgLqo6fACpAZXs8nHG5AtEklay/UhtO06c88V6mExnjBRPSJeuoSOLFwUHyu2b/g==
+  dependencies:
+    keycloak-js "^20.0.3"
+
 "@craigmiller160/react-protected-route@^1.2.4":
   version "1.2.5"
   resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/@craigmiller160/react-protected-route/-/react-protected-route-1.2.5.tgz#2f36599e26a5709c35f4766231fd8a56d1f4d659"
@@ -2318,6 +2325,11 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
+
+base64-js@^1.5.1:
+  version "1.5.1"
+  resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
+  integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
 base@^0.11.1:
   version "0.11.2"
@@ -5195,6 +5207,11 @@ js-sdsl@^4.1.4:
   resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/js-sdsl/-/js-sdsl-4.3.0.tgz#aeefe32a451f7af88425b11fdb5f58c90ae1d711"
   integrity sha512-mifzlm2+5nZ+lEcLJMoBK0/IH/bDg8XnJfd/Wq6IP+xoCjLZsTOnV2QpxlVbX9bMnkl5PdEjNtBJ9Cj1NjifhQ==
 
+js-sha256@^0.9.0:
+  version "0.9.0"
+  resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
+  integrity sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -5307,6 +5324,14 @@ jsonify@~0.0.0:
   dependencies:
     array-includes "^3.1.5"
     object.assign "^4.1.3"
+
+keycloak-js@^20.0.3:
+  version "20.0.3"
+  resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/keycloak-js/-/keycloak-js-20.0.3.tgz#1c1779e67b16bb2a1e7943e1d78557d3277bc705"
+  integrity sha512-XOOPip8M8K8BsHvk9hnyHuHQ49u9cDu42UXY187G6fM9wsFSvM2apYK3WQ0EUg90nlWt1oMykrWsCWJY10Ihkw==
+  dependencies:
+    base64-js "^1.5.1"
+    js-sha256 "^0.9.0"
 
 keycode@^2.2.0:
   version "2.2.0"
