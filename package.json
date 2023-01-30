@@ -40,8 +40,7 @@
     "use-react-router": "^1.0.7"
   },
   "resolutions": {
-    "es-abstract": "^1.18.0-next.1",
-    "@babel/runtime": "^7.20.1"
+    "es-abstract": "^1.21.1"
   },
   "scripts": {
     "build": "yarn lint && yarn test && yarn forceBuild",
@@ -54,11 +53,9 @@
   "lint-staged": {
     "*.{js,jsx}": "eslint --fix --max-warnings=0"
   },
-  "resolutions": {
-    "es-abstract": "^1.21.1"
-  },
   "devDependencies": {
     "@craigmiller160/babel-config": "^1.1.1",
+    "@craigmiller160/babel-config-react": "^1.0.1",
     "@craigmiller160/config-merge": "^1.0.1",
     "@craigmiller160/eslint-config-jest": "^1.0.1",
     "@craigmiller160/eslint-config-js": "^1.0.1",
