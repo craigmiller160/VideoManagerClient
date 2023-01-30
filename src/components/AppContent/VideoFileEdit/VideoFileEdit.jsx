@@ -18,11 +18,11 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Form from '../../../components/UI/form/Form/Form';
+import Form from '../../UI/form/Form/Form';
 import classes from './VideoFileEdit.module.scss';
 import { Button, Col, Row } from 'reactstrap';
-import Input from '../../../components/UI/form/Input/Input';
-import Select from '../../../components/UI/form/Select/Select';
+import Input from '../../UI/form/Input/Input';
+import Select from '../../UI/form/Select/Select';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AddButton from '../../UI/AddButton/AddButton';

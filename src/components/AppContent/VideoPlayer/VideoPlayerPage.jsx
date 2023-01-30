@@ -22,7 +22,7 @@ import { Row, Col } from 'reactstrap';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import classes from './VideoPlayerPage.module.scss';
 import Spinner from '../../UI/Spinner/Spinner';
-import { loadDataForPlayback } from 'store/videoPlayer/videoPlayer.actions';
+import { loadDataForPlayback } from '../../../store/videoPlayer/videoPlayer.actions';
 import { Helmet } from 'react-helmet';
 import VideoDate from '../../../model/VideoDate';
 import WordWrapCol from '../../UI/WordWrapCol/WordWrapCol';

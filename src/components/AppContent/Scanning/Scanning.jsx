@@ -19,7 +19,7 @@
 import React, { useEffect } from 'react';
 import { Col, Row } from 'reactstrap';
 import { useDispatch } from 'react-redux';
-import { checkIsScanning } from 'store/scanning/scanning.actions';
+import { checkIsScanning } from '../../../store/scanning/scanning.actions';
 import Spinner from '../../UI/Spinner/Spinner';
 import classes from './Scanning.module.scss';
 

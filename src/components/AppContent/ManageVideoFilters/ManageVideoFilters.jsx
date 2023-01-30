@@ -20,7 +20,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'reactstrap';
 import classes from './ManageVideoFilters.module.scss';
-import FilterInputModal from 'components/Modals/FilterInputModal/FilterInputModal';
+import FilterInputModal from '../../../components/Modals/FilterInputModal/FilterInputModal';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
@@ -30,8 +30,8 @@ import {
 	showEditCategoryModal,
 	showEditSeriesModal,
 	showEditStarModal
-} from 'store/filterInputModal/filterInputModal.actions';
-import { getSelectedFilter } from 'store/filterInputModal/filterInputModal.selectors';
+} from '../../../store/filterInputModal/filterInputModal.actions';
+import { getSelectedFilter } from '../../../store/filterInputModal/filterInputModal.selectors';
 import FilterListItems from './FilterListItems/FilterListItems';
 import AddButton from '../../UI/AddButton/AddButton';
 
