@@ -1019,12 +1019,12 @@
   resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@craigmiller160/ajax-api@^1.1.1":
-  version "1.1.4"
-  resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/@craigmiller160/ajax-api/-/ajax-api-1.1.4.tgz#b62c43f428d86cae4ea1d39bde1c482e6204c3ff"
-  integrity sha512-GjVatm5MCBkmEoPRtwBfYhEeJDFxPnb8+KOUKGCT1QReyEg2RE8FFfn1z9kT+7DEOEpa08kKOHyIAgDVKSBmZA==
+"@craigmiller160/ajax-api@^2.1.0":
+  version "2.1.0"
+  resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/@craigmiller160/ajax-api/-/ajax-api-2.1.0.tgz#7182f614027d338cda9203dd8c2fa2ad4f964326"
+  integrity sha512-H0VwrJGwOIf8dE316m06CH2VkZ/z6Kdu0P2LaG19gxeXLS8LlyWPDmpt8QgllqSlSpB89qBnwil+2fmIMFcieg==
   dependencies:
-    axios "^0.21.1"
+    axios "^0.26.0"
 
 "@craigmiller160/babel-config-react@^1.0.1":
   version "1.0.1"
@@ -1105,7 +1105,7 @@
   dependencies:
     prettier "^2.5.1"
 
-"@craigmiller160/react-keycloak@^1.0.0-beta.4":
+"@craigmiller160/react-keycloak@^1.0.0-beta":
   version "1.0.0-beta.4"
   resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/@craigmiller160/react-keycloak/-/react-keycloak-1.0.0-beta.4.tgz#e960668509a2630e4f1c762f2ef9c9519889238b"
   integrity sha512-t9zU2dCejxN4P4vv5IJBJbGgLqo6fACpAZXs8nHG5AtEklay/UhtO06c88V6mExnjBRPSJeuoSOLFwUHyu2b/g==
@@ -2180,6 +2180,13 @@ axios@^0.21.1:
   integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
   dependencies:
     follow-redirects "^1.10.0"
+
+axios@^0.26.0:
+  version "0.26.1"
+  resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/axios/-/axios-0.26.1.tgz#1ede41c51fcf51bbbd6fd43669caaa4f0495aaa9"
+  integrity sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==
+  dependencies:
+    follow-redirects "^1.14.8"
 
 axobject-query@^3.1.1:
   version "3.1.1"
@@ -3789,6 +3796,11 @@ follow-redirects@^1.10.0:
   version "1.13.2"
   resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/follow-redirects/-/follow-redirects-1.13.2.tgz#dd73c8effc12728ba5cf4259d760ea5fb83e3147"
   integrity sha512-6mPTgLxYm3r6Bkkg0vNM0HTjfGrOEtsfbhagQvbxDEsEkpNhw582upBaoRZylzen6krEmxXJgt9Ju6HiI4O7BA==
+
+follow-redirects@^1.14.8:
+  version "1.15.2"
+  resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
+  integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
 
 for-each@^0.3.3:
   version "0.3.3"

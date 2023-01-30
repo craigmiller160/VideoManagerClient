@@ -10,8 +10,8 @@
   },
   "author": "craigmiller160",
   "dependencies": {
-    "@craigmiller160/ajax-api": "^1.1.1",
-    "@craigmiller160/react-keycloak": "^1.0.0-beta.4",
+    "@craigmiller160/ajax-api": "^2.1.0",
+    "@craigmiller160/react-keycloak": "^1.0.0-beta",
     "@craigmiller160/react-protected-route": "^1.2.4",
     "axios": "^0.21.1",
     "bfj": "6.1.1",
