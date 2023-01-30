@@ -32,7 +32,7 @@ const Scanning = () => {
 		}, 1000);
 
 		return () => clearInterval(intervalId);
-	}, []);
+	}, [dispatch]);
 
 	const colSize = {
 		size: 8,

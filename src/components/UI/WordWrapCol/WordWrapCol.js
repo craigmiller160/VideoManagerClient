@@ -17,6 +17,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Col } from 'reactstrap';
 
 const style = {
@@ -28,5 +29,8 @@ const WordWrapCol = (props) => (
 		{props.children}
 	</Col>
 );
+WordWrapCol.propTypes = {
+	children: PropTypes.node
+};
 
 export default WordWrapCol;

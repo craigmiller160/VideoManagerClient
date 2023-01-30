@@ -48,7 +48,7 @@ const Settings = (props) => {
 
 	useEffect(() => {
 		dispatch(loadSettings());
-	}, []);
+	}, [dispatch]);
 
 	const editRootDir = () =>
 		setState((prevState) => ({

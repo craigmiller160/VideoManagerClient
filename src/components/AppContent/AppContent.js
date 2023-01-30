@@ -55,7 +55,7 @@ const AppContent = () => {
 			setStarted(true);
 		};
 		doCheckAuth();
-	}, []);
+	}, [dispatch]);
 
 	useEffect(() => {
 		const startup = async () => {
@@ -65,7 +65,7 @@ const AppContent = () => {
 			}
 		};
 		startup();
-	}, [isAuth]);
+	}, [isAuth, dispatch]);
 
 	const saveFileChanges = async () => {
 		await dispatch(saveVideoFileEdits());
@@ -82,6 +82,7 @@ const AppContent = () => {
 	const hideAlertOnClick = () => dispatch(hideAlert());
 
 	return (
+		// eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
 		<div className={classes.AppContent} onClick={hideAlertOnClick}>
 			<VideoNavbar disabled={isScanning || !isStarted} />
 			{isStarted && (

@@ -44,7 +44,7 @@ const VideoPlayerPage = (props) => {
 
 	useEffect(() => {
 		dispatch(loadDataForPlayback(params.fileId));
-	}, []);
+	}, [dispatch, params.fileId]);
 
 	const formattedLastViewed = videoFile.lastViewed
 		? new VideoDate(videoFile.lastViewed).formatDateTime()

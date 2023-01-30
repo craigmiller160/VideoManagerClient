@@ -23,6 +23,7 @@ import classes from './FilterListItem.module.scss';
 const FilterListItem = (props) => {
 	const { id, label, click } = props;
 	return (
+		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
 		<p id={id} onClick={click} className={classes.FilterListItem}>
 			{label}
 		</p>

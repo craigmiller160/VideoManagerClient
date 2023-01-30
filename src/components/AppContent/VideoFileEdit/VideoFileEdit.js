@@ -23,7 +23,6 @@ import classes from './VideoFileEdit.module.scss';
 import { Button, Col, Row } from 'reactstrap';
 import Input from 'components/UI/form/Input/Input';
 import Select from 'components/UI/form/Select/Select';
-import { Prompt } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AddButton from '../../UI/AddButton/AddButton';
@@ -37,7 +36,7 @@ import FilterInputModal from '../../Modals/FilterInputModal/FilterInputModal';
 export const FORM_NAME = 'video-file-edit';
 
 export const VideoFileEdit = (props) => {
-	const [isSubmitted, setSubmitted] = useState(false);
+	const [, setSubmitted] = useState(false);
 
 	if (!props.selectedVideo) {
 		return <div />;
@@ -162,7 +161,8 @@ VideoFileEdit.propTypes = {
 	saveFileChanges: PropTypes.func.isRequired,
 	showAddCategoryModal: PropTypes.func,
 	showAddSeriesModal: PropTypes.func,
-	showAddStarModal: PropTypes.func
+	showAddStarModal: PropTypes.func,
+	deleteFile: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({

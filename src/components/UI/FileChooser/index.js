@@ -62,7 +62,7 @@ const FileChooser = (props) => {
 		};
 
 		loadInitialFiles();
-	}, []);
+	}, [directoriesOnly, selectFile, initialDir, dispatch]);
 
 	const openDirectory = async (file) => {
 		try {

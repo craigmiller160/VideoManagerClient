@@ -25,6 +25,7 @@ import createField from '../createField';
 import StyledFormGroupDiv from '../../Styled/StyledFormGroupDiv';
 import StyledTextArea from '../../Styled/StyledTextArea';
 
+// eslint-disable-next-line react/display-name
 export const InnerComponent = forwardRef((props, ref) => {
 	// eslint-disable-line react/display-name
 	if (props.type === 'textarea') {
@@ -59,7 +60,7 @@ export const InputComponent = (props) => {
 		if (focusOnRender) {
 			inputRef.current?.focus();
 		}
-	}, []);
+	}, [focusOnRender]);
 
 	return (
 		<StyledFormGroupDiv

@@ -169,7 +169,6 @@ const saveCategoryChanges = async (filter, action, dispatch) => {
 		await CategoryApiService.updateCategory(category.categoryId, category);
 	}
 	await dispatch(loadCategoryOptions());
-	console.log('AddCategory', action, category);
 	if (ADD_ACTION === action) {
 		dispatch(addNewCategoryToEditForm(category));
 	}

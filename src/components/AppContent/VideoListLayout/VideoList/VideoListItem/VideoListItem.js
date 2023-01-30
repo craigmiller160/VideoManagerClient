@@ -73,6 +73,7 @@ const VideoListItem = (props) => {
 	};
 
 	return (
+		// eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
 		<div
 			data-name={`video-list-item-${fileId}`}
 			className={rootClasses.join(' ')}

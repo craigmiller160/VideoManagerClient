@@ -25,6 +25,7 @@ const Form = (props) => {
 	const { children, handleSubmit, className } = props;
 
 	return (
+		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 		<form
 			className={className}
 			onSubmit={(event) => {
@@ -48,7 +49,8 @@ const Form = (props) => {
 
 Form.propTypes = {
 	handleSubmit: PropTypes.func.isRequired,
-	className: PropTypes.string
+	className: PropTypes.string,
+	children: PropTypes.node
 };
 
 const ReduxFormForm = reduxForm({})(Form);

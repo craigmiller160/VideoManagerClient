@@ -23,6 +23,7 @@ const VideoPlayer = (props) => {
 	const { fileId, videoToken } = props;
 	const videoUri = `/video-manager/api/video-files/play/${fileId}?videoToken=${videoToken}`;
 	return (
+		// eslint-disable-next-line jsx-a11y/media-has-caption
 		<video controls autoPlay="autoPlay">
 			<source src={videoUri} />
 		</video>

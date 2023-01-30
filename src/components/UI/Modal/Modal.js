@@ -109,7 +109,8 @@ Modal.propTypes = {
 			onClick: PropTypes.func,
 			closeModal: PropTypes.bool
 		})
-	)
+	),
+	children: PropTypes.node
 };
 
 export default Modal;

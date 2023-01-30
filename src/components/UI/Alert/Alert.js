@@ -36,6 +36,7 @@ const Alert = (props) => {
 	const click = (event) => event.stopPropagation();
 
 	return (
+		// eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
 		<div id="alert-box" className={rootClasses.join(' ')} onClick={click}>
 			<button aria-label="close" onClick={() => dispatch(hideAlert())}>
 				<span aria-hidden="true">X</span>

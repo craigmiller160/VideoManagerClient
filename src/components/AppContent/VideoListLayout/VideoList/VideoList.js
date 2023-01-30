@@ -42,7 +42,7 @@ const VideoList = () => {
 
 	useEffect(() => {
 		dispatch(searchForVideos());
-	}, [currentPage]);
+	}, [currentPage, dispatch]);
 
 	const [pager1, pager2] = [...Array(2).keys()].map((index) => (
 		<VideoListPagination id={`video-pagination-${index}`} key={index} />

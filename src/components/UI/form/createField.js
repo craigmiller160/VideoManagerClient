@@ -21,9 +21,8 @@ import { Field } from 'redux-form';
 
 const createField =
 	(component) =>
-	(
-		props //eslint-disable-line react/display-name
-	) =>
+	//eslint-disable-next-line react/display-name
+	(props) =>
 		<Field {...props} component={component} />;
 
 export default createField;
