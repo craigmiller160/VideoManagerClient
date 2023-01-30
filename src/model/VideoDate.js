@@ -16,6 +16,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// eslint-disable-next-line no-restricted-imports
 import moment from 'moment';
 
 const SERVER_DATE_TIME_FORMAT = 'YYYY-MM-DDTHH:mm:ss';
