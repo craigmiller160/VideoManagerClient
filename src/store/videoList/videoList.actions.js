@@ -20,7 +20,7 @@ import { createAction } from 'redux-starter-kit';
 import VideoApiService from '../../services/VideoApiService';
 import { handleApiError, showSuccessAlert } from '../alert/alert.actions';
 import { setSearching } from '../videoSearch/videoSearch.actions';
-import { FORM_NAME } from 'components/AppContent/VideoFileEdit/VideoFileEdit';
+import { FORM_NAME } from '../../components/AppContent/VideoFileEdit/VideoFileEdit';
 import { convertFiltersToFile } from '../../utils/videoFileConverter';
 import {
 	SORT_ASC,

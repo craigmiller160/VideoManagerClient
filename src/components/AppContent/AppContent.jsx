@@ -17,19 +17,19 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
+import VideoNavbar from './VideoNavbar/VideoNavbar';
 import { Col, Container, Row } from 'reactstrap';
 import Alert from '../UI/Alert/Alert';
-import { checkIsScanning } from 'store/scanning/scanning.actions';
+import { checkIsScanning } from '../../store/scanning/scanning.actions';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useReactRouter from 'use-react-router';
-import { getSelectedVideoWithFilters } from 'store/videoList/videoList.selectors';
+import { getSelectedVideoWithFilters } from '../../store/videoList/videoList.selectors';
 import classes from './AppContent.module.scss';
-import { loadFilterOptions } from 'store/videoSearch/videoSearch.actions';
+import { loadFilterOptions } from '../../store/videoSearch/videoSearch.actions';
 import {
 	saveVideoFileEdits,
 	deleteVideoFile
-} from 'store/videoList/videoList.actions';
+} from '../../store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
 import { checkAuth } from '../../store/auth/auth.actions';
 import { hideAlert } from '../../store/alert/alert.actions';

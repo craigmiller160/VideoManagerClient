@@ -17,7 +17,7 @@
  */
 
 import { createAction } from 'redux-starter-kit';
-import * as AuthService from 'services/AuthApiService';
+import * as AuthService from '../../services/AuthApiService';
 import { CSRF_TOKEN_KEY } from '../../utils/securityConstants';
 
 export const setIsAuth = createAction('auth/setIsAuth');

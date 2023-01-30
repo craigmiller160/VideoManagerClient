@@ -18,11 +18,11 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Form from 'components/UI/form/Form/Form';
+import Form from '../../../components/UI/form/Form/Form';
 import classes from './VideoFileEdit.module.scss';
 import { Button, Col, Row } from 'reactstrap';
-import Input from 'components/UI/form/Input/Input';
-import Select from 'components/UI/form/Select/Select';
+import Input from '../../../components/UI/form/Input/Input';
+import Select from '../../../components/UI/form/Select/Select';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AddButton from '../../UI/AddButton/AddButton';
@@ -30,7 +30,7 @@ import {
 	showAddCategoryModal,
 	showAddSeriesModal,
 	showAddStarModal
-} from 'store/filterInputModal/filterInputModal.actions';
+} from '../../../store/filterInputModal/filterInputModal.actions';
 import FilterInputModal from '../../Modals/FilterInputModal/FilterInputModal';
 
 export const FORM_NAME = 'video-file-edit';
