@@ -47,11 +47,11 @@
     "forceBuild": "vite build",
     "start": "vite",
     "test": "craig-test",
-    "lint": "eslint --fix --max-warnings=0 'src/**/*.js' && eslint --fix --max-warnings=0 'test/**/*.js'",
+    "lint": "eslint --fix --max-warnings=0 'src/**/*.{js,jsx}' && eslint --fix --max-warnings=0 'test/**/*.{js,jsx}'",
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.js": "eslint --fix --max-warnings=0"
+    "*.{js,jsx}": "eslint --fix --max-warnings=0"
   },
   "devDependencies": {
     "@craigmiller160/babel-config": "^1.1.1",
