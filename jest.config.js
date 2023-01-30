@@ -1,6 +1,7 @@
+const merge = require('@craigmiller160/config-merge');
+const jestConfig = require('@craigmiller160/jest-config');
+const path = require("path");
 
-const jestConfig = require('@craigmiller160/react-web-config/jest');
-
-module.exports = {
-    ...jestConfig
-};
+module.exports = merge(jestConfig, {
+    setupFilesAfterEnv: [path.join(process.cwd(), 'test', 'setupTests.js')]
+})

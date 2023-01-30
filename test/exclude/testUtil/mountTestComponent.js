@@ -16,90 +16,113 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { mount } from 'enzyme';
 
 const createRouter = (initialRouterEntries) => {
-    const { MemoryRouter } = require('react-router');
-    const Router = (props) => (
-        <MemoryRouter initialEntries={ initialRouterEntries }>
-            { props.children }
-        </MemoryRouter>
-    );
+	const { MemoryRouter } = require('react-router');
+	const Router = (props) => (
+		<MemoryRouter initialEntries={initialRouterEntries}>
+			{props.children}
+		</MemoryRouter>
+	);
 
-    return Router;
+	return Router;
 };
 
 const createProvider = (storeState, useThunk) => {
-    const { Provider } = require('react-redux');
-    const configureMockStore = require('redux-mock-store').default;
+	const { Provider } = require('react-redux');
+	const configureMockStore = require('redux-mock-store').default;
 
-    let middleware = [];
-    if (useThunk) {
-        const thunk = require('redux-thunk').default;
-        middleware.push(thunk);
-    }
+	let middleware = [];
+	if (useThunk) {
+		const thunk = require('redux-thunk').default;
+		middleware.push(thunk);
+	}
 
-    const mockStore = configureMockStore(middleware);
-    const store = mockStore(storeState);
+	const mockStore = configureMockStore(middleware);
+	const store = mockStore(storeState);
 
-    const ReduxProvider = (props) => (
-        <Provider store={ store }>
-            { props.children }
-        </Provider>
-    );
+	const ReduxProvider = (props) => (
+		<Provider store={store}>{props.children}</Provider>
+	);
 
-    return [ReduxProvider, store];
+	return [ReduxProvider, store];
 };
 
 const createContext = (ContextType, contextValue) => {
-    const TestContext = (props) => (
-        <ContextType.Provider value={ contextValue }>
-            { props.children }
-        </ContextType.Provider>
-    );
+	const TestContext = (props) => (
+		<ContextType.Provider value={contextValue}>
+			{props.children}
+		</ContextType.Provider>
+	);
 
-    return TestContext;
+	return TestContext;
 };
 
 // defaultProps and defaultStoreState can have individual properties overridden, defaultInitialRouteEntries gets overridden in its entirety
-const creator = (Component, { defaultProps, defaultStoreState, ContextType, defaultContextValue, defaultInitialRouterEntries, defaultUseThunk } = {}) => {
-    return ({ props, storeState, initialRouterEntries, contextValue, useThunk } = {}) => {
-        const actualProps = { ...defaultProps, ...props };
+const creator = (
+	Component,
+	{
+		defaultProps,
+		defaultStoreState,
+		ContextType,
+		defaultContextValue,
+		defaultInitialRouterEntries,
+		defaultUseThunk
+	} = {}
+) => {
+	return ({
+		props,
+		storeState,
+		initialRouterEntries,
+		contextValue,
+		useThunk
+	} = {}) => {
+		const actualProps = { ...defaultProps, ...props };
 
-        let TestProviderWrapper = (props) => <div>{ props.children }</div>;
-        let store = {};
-        if (defaultStoreState || storeState) {
-            const providerAndStore = createProvider({ ...defaultStoreState, ...storeState }, useThunk || defaultUseThunk);
-            TestProviderWrapper = providerAndStore[0];
-            store = providerAndStore[1];
-        }
+		let TestProviderWrapper = (props) => <div>{props.children}</div>;
+		let store = {};
+		if (defaultStoreState || storeState) {
+			const providerAndStore = createProvider(
+				{ ...defaultStoreState, ...storeState },
+				useThunk || defaultUseThunk
+			);
+			TestProviderWrapper = providerAndStore[0];
+			store = providerAndStore[1];
+		}
 
-        let TestRouterWrapper = (props) => <div>{ props.children }</div>;
-        if (defaultInitialRouterEntries || initialRouterEntries) {
-            TestRouterWrapper = createRouter(initialRouterEntries || defaultInitialRouterEntries || []);
-        }
+		let TestRouterWrapper = (props) => <div>{props.children}</div>;
+		if (defaultInitialRouterEntries || initialRouterEntries) {
+			TestRouterWrapper = createRouter(
+				initialRouterEntries || defaultInitialRouterEntries || []
+			);
+		}
 
-        let TestContextWrapper = (props) => <div>{ props.children }</div>;
-        if (ContextType && (defaultContextValue || contextValue)) {
-            TestContextWrapper = createContext(ContextType, (contextValue || defaultContextValue));
-        }
+		let TestContextWrapper = (props) => <div>{props.children}</div>;
+		if (ContextType && (defaultContextValue || contextValue)) {
+			TestContextWrapper = createContext(
+				ContextType,
+				contextValue || defaultContextValue
+			);
+		}
 
-        const component = mount(
-            <TestProviderWrapper>
-                <TestRouterWrapper>
-                    <TestContextWrapper>
-                        <Component { ...actualProps } />
-                    </TestContextWrapper>
-                </TestRouterWrapper>
-            </TestProviderWrapper>
-        );
+		const component = mount(
+			<TestProviderWrapper>
+				<TestRouterWrapper>
+					<TestContextWrapper>
+						<Component {...actualProps} />
+					</TestContextWrapper>
+				</TestRouterWrapper>
+			</TestProviderWrapper>
+		);
 
-        return {
-            component,
-            store
-        };
-    };
+		return {
+			component,
+			store
+		};
+	};
 };
 
 export default creator;

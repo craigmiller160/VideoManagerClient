@@ -19,8 +19,8 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import {
-    getDirectoriesFromDirectory,
-    getFilesFromDirectory
+	getDirectoriesFromDirectory,
+	getFilesFromDirectory
 } from 'services/LocalFileApiService';
 import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
 import FileChooser from 'components/UI/FileChooser';
@@ -28,180 +28,190 @@ import resolveComponent from '../../../exclude/testUtil/resolveComponent';
 import Spinner from 'components/UI/Spinner/Spinner';
 
 jest.mock('services/LocalFileApiService', () => ({
-    getDirectoriesFromDirectory: jest.fn(),
-    getFilesFromDirectory: jest.fn()
+	getDirectoriesFromDirectory: jest.fn(),
+	getFilesFromDirectory: jest.fn()
 }));
 
 jest.mock('components/UI/FileChooser/FileListContainer', () => {
-    const FileChooserContext = require('components/UI/FileChooser/FileChooserContext').default;
-    const { useContext } = require('react');
-    const FileListContainer = () => {
-        const value = useContext(FileChooserContext);
-        return (
-            <div id="context-div" { ...value } />
-        );
-    };
-    return FileListContainer;
+	const FileChooserContext =
+		require('components/UI/FileChooser/FileChooserContext').default;
+	const { useContext } = require('react');
+	const FileListContainer = () => {
+		const value = useContext(FileChooserContext);
+		return <div id="context-div" {...value} />;
+	};
+	return FileListContainer;
 });
 
 const selectFile = jest.fn();
 const initialDir = '/home/user/videos';
 
 const defaultProps = {
-    directoriesOnly: false,
-    selectFile
+	directoriesOnly: false,
+	selectFile
 };
 
 const defaultStoreState = {};
 
 const doMount = mountTestComponent(FileChooser, {
-    defaultProps,
-    defaultStoreState,
-    defaultUseThunk: true
+	defaultProps,
+	defaultStoreState,
+	defaultUseThunk: true
 });
 
 const getFilesData = { type: 'files' };
 const getDirsData = { type: 'dirs' };
 
-const testRendering = (component, { loading = false, loadDirs = false, initialDir } = {}) => {
-    if (loading) {
-        expect(component.find(Spinner)).toHaveLength(1);
-        expect(component.find('FileListContainer')).toHaveLength(0);
-        return;
-    }
+const testRendering = (
+	component,
+	{ loading = false, loadDirs = false, initialDir } = {}
+) => {
+	if (loading) {
+		expect(component.find(Spinner)).toHaveLength(1);
+		expect(component.find('FileListContainer')).toHaveLength(0);
+		return;
+	}
 
-    const fileList = loadDirs ? getDirsData : getFilesData;
+	const fileList = loadDirs ? getDirsData : getFilesData;
 
-    expect(component.find('FileListContainer')).toHaveLength(1);
-    expect(component.find('FileListContainer').props()).toEqual({
-        fileList
-    });
+	expect(component.find('FileListContainer')).toHaveLength(1);
+	expect(component.find('FileListContainer').props()).toEqual({
+		fileList
+	});
 
-    if (loadDirs) {
-        expect(getDirectoriesFromDirectory).toHaveBeenLastCalledWith(initialDir);
-    } else {
-        expect(getFilesFromDirectory).toHaveBeenLastCalledWith(initialDir);
-    }
+	if (loadDirs) {
+		expect(getDirectoriesFromDirectory).toHaveBeenLastCalledWith(
+			initialDir
+		);
+	} else {
+		expect(getFilesFromDirectory).toHaveBeenLastCalledWith(initialDir);
+	}
 };
 
 describe('FileChooser', () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
+	beforeEach(() => {
+		jest.clearAllMocks();
+	});
 
-    describe('rendering', () => {
-        it('renders while loading', () => {
-            // Deliberately not using act() here because I want to see the state before
-            // the asynchronous updates are resolved
-            const { component } = doMount();
-            testRendering(component, {
-                loading: true
-            });
-        });
+	describe('rendering', () => {
+		it('renders while loading', () => {
+			// Deliberately not using act() here because I want to see the state before
+			// the asynchronous updates are resolved
+			const { component } = doMount();
+			testRendering(component, {
+				loading: true
+			});
+		});
 
-        it('renders after loading files and directories', async () => {
-            getFilesFromDirectory.mockResolvedValue({
-                data: getFilesData
-            });
+		it('renders after loading files and directories', async () => {
+			getFilesFromDirectory.mockResolvedValue({
+				data: getFilesData
+			});
 
-            const { component } = doMount();
-            await resolveComponent(component);
-            testRendering(component);
-        });
+			const { component } = doMount();
+			await resolveComponent(component);
+			testRendering(component);
+		});
 
-        it('renders after loading only directories', async () => {
-            getDirectoriesFromDirectory.mockResolvedValue({
-                data: getDirsData
-            });
+		it('renders after loading only directories', async () => {
+			getDirectoriesFromDirectory.mockResolvedValue({
+				data: getDirsData
+			});
 
-            const { component } = doMount({
-                props: {
-                    ...defaultProps,
-                    directoriesOnly: true
-                }
-            });
-            await resolveComponent(component);
-            testRendering(component, {
-                loadDirs: true
-            });
-        });
+			const { component } = doMount({
+				props: {
+					...defaultProps,
+					directoriesOnly: true
+				}
+			});
+			await resolveComponent(component);
+			testRendering(component, {
+				loadDirs: true
+			});
+		});
 
-        it('renders after loading files and directories, with initialDir', async () => {
-            getFilesFromDirectory.mockResolvedValue({
-                data: getFilesData
-            });
+		it('renders after loading files and directories, with initialDir', async () => {
+			getFilesFromDirectory.mockResolvedValue({
+				data: getFilesData
+			});
 
-            const { component } = doMount({
-                props: {
-                    ...defaultProps,
-                    initialDir
-                }
-            });
-            await resolveComponent(component);
-            testRendering(component, {
-                initialDir
-            });
-        });
+			const { component } = doMount({
+				props: {
+					...defaultProps,
+					initialDir
+				}
+			});
+			await resolveComponent(component);
+			testRendering(component, {
+				initialDir
+			});
+		});
 
-        it('renders after loading only directories, with initialDir', async () => {
-            getDirectoriesFromDirectory.mockResolvedValue({
-                data: getDirsData
-            });
+		it('renders after loading only directories, with initialDir', async () => {
+			getDirectoriesFromDirectory.mockResolvedValue({
+				data: getDirsData
+			});
 
-            const { component } = doMount({
-                props: {
-                    ...defaultProps,
-                    directoriesOnly: true,
-                    initialDir
-                }
-            });
-            await resolveComponent(component);
-            testRendering(component, {
-                loadDirs: true,
-                initialDir
-            });
-        });
-    });
+			const { component } = doMount({
+				props: {
+					...defaultProps,
+					directoriesOnly: true,
+					initialDir
+				}
+			});
+			await resolveComponent(component);
+			testRendering(component, {
+				loadDirs: true,
+				initialDir
+			});
+		});
+	});
 
-    describe('actions', () => {
-        it('openDirectory', async () => {
-            getFilesFromDirectory.mockResolvedValue({
-                data: getFilesData
-            });
+	describe('actions', () => {
+		it('openDirectory', async () => {
+			getFilesFromDirectory.mockResolvedValue({
+				data: getFilesData
+			});
 
-            const { component } = doMount();
-            await resolveComponent(component);
-            await act(async () => {
-                await component.find('div#context-div').props().openDirectory({ filePath: 'path' });
-            });
-            expect(getFilesFromDirectory).toHaveBeenNthCalledWith(2, 'path');
-        });
+			const { component } = doMount();
+			await resolveComponent(component);
+			await act(async () => {
+				await component
+					.find('div#context-div')
+					.props()
+					.openDirectory({ filePath: 'path' });
+			});
+			expect(getFilesFromDirectory).toHaveBeenNthCalledWith(2, 'path');
+		});
 
-        it('selectFile', async () => {
-            getFilesFromDirectory.mockResolvedValue({
-                data: getFilesData
-            });
+		it('selectFile', async () => {
+			getFilesFromDirectory.mockResolvedValue({
+				data: getFilesData
+			});
 
-            const { component } = doMount();
-            await resolveComponent(component);
-            component.find('div#context-div').props().selectFile({ fileName: 'file' });
-            expect(selectFile).toHaveBeenCalledWith({ fileName: 'file' });
-        });
+			const { component } = doMount();
+			await resolveComponent(component);
+			component
+				.find('div#context-div')
+				.props()
+				.selectFile({ fileName: 'file' });
+			expect(selectFile).toHaveBeenCalledWith({ fileName: 'file' });
+		});
 
-        it('handles loading error', async () => {
-            getFilesFromDirectory.mockRejectedValue({
-                message: 'It failed'
-            });
+		it('handles loading error', async () => {
+			getFilesFromDirectory.mockRejectedValue({
+				message: 'It failed'
+			});
 
-            const { component, store } = doMount();
-            await resolveComponent(component);
+			const { component, store } = doMount();
+			await resolveComponent(component);
 
-            expect(store.getActions()).toEqual([
-                {
-                    type: 'alert/showErrorAlert',
-                    payload: 'Error: Error loading files. Message: It failed'
-                }
-            ]);
-        });
-    });
+			expect(store.getActions()).toEqual([
+				{
+					type: 'alert/showErrorAlert',
+					payload: 'Error: Error loading files. Message: It failed'
+				}
+			]);
+		});
+	});
 });

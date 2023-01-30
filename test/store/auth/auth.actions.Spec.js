@@ -17,22 +17,22 @@
  */
 
 import {
-    checkAuth,
-    handleCsrfToken,
-    setCsrfToken,
-    setIsAuth,
-    setLoginLoading,
-    setUserDetails
+	checkAuth,
+	handleCsrfToken,
+	setCsrfToken,
+	setIsAuth,
+	setLoginLoading,
+	setUserDetails
 } from 'store/auth/auth.actions';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
 import {
-    mockCheckAuthFail,
-    mockCheckAuthSuccess,
-    mockCsrfToken,
-    mockUserDetails
+	mockCheckAuthFail,
+	mockCheckAuthSuccess,
+	mockCsrfToken,
+	mockUserDetails
 } from '../../exclude/mock/mockApiConfig/authApi';
 import { CSRF_TOKEN_KEY } from '../../../src/utils/securityConstants';
 
@@ -40,88 +40,91 @@ const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API.instance);
 
 describe('auth.actions', () => {
-    beforeEach(() => {
-        mockApi.reset();
-    });
+	beforeEach(() => {
+		mockApi.reset();
+	});
 
-    it('setIsAuth', () => {
-        const expectedAction = {
-            type: setIsAuth.toString(),
-            payload: true
-        };
-        const action = setIsAuth(true);
-        expect(action).toEqual(expectedAction);
-    });
+	it('setIsAuth', () => {
+		const expectedAction = {
+			type: setIsAuth.toString(),
+			payload: true
+		};
+		const action = setIsAuth(true);
+		expect(action).toEqual(expectedAction);
+	});
 
-    it('setLoginLoading', () => {
-        const expectedAction = {
-            type: setLoginLoading.toString(),
-            payload: true
-        };
-        const action = setLoginLoading(true);
-        expect(action).toEqual(expectedAction);
-    });
+	it('setLoginLoading', () => {
+		const expectedAction = {
+			type: setLoginLoading.toString(),
+			payload: true
+		};
+		const action = setLoginLoading(true);
+		expect(action).toEqual(expectedAction);
+	});
 
-    it('setCsrfToken', () => {
-        const csrfToken = 'csrfToken';
-        const expectedAction = {
-            type: setCsrfToken.toString(),
-            payload: csrfToken
-        };
-        const action = setCsrfToken(csrfToken);
-        expect(action).toEqual(expectedAction);
-    });
+	it('setCsrfToken', () => {
+		const csrfToken = 'csrfToken';
+		const expectedAction = {
+			type: setCsrfToken.toString(),
+			payload: csrfToken
+		};
+		const action = setCsrfToken(csrfToken);
+		expect(action).toEqual(expectedAction);
+	});
 
-    it('setUserDetails', () => {
-        const expectedAction = {
-            type: setUserDetails.toString(),
-            payload: mockUserDetails
-        };
-        const action = setUserDetails(mockUserDetails);
-        expect(action).toEqual(expectedAction);
-    });
+	it('setUserDetails', () => {
+		const expectedAction = {
+			type: setUserDetails.toString(),
+			payload: mockUserDetails
+		};
+		const action = setUserDetails(mockUserDetails);
+		expect(action).toEqual(expectedAction);
+	});
 
-    describe('thunk actions', () => {
-        let store;
-        beforeEach(() => {
-            store = mockStore({});
-        });
+	describe('thunk actions', () => {
+		let store;
+		beforeEach(() => {
+			store = mockStore({});
+		});
 
-        describe('handleCsrfToken', () => {
-            it('sets token', () => {
-                const expectedActions = [
-                    { type: setCsrfToken.toString(), payload: mockCsrfToken }
-                ];
-                const response = {
-                    headers: {
-                        [CSRF_TOKEN_KEY]: mockCsrfToken
-                    }
-                };
-                store.dispatch(handleCsrfToken(response));
-                expect(store.getActions()).toEqual(expectedActions);
-            });
-        });
+		describe('handleCsrfToken', () => {
+			it('sets token', () => {
+				const expectedActions = [
+					{ type: setCsrfToken.toString(), payload: mockCsrfToken }
+				];
+				const response = {
+					headers: {
+						[CSRF_TOKEN_KEY]: mockCsrfToken
+					}
+				};
+				store.dispatch(handleCsrfToken(response));
+				expect(store.getActions()).toEqual(expectedActions);
+			});
+		});
 
-        describe('checkAuth', () => {
-            it('checkAuth is authenticated', async () => {
-                mockCheckAuthSuccess(mockApi);
-                const expectedActions = [
-                    { type: setIsAuth.toString(), payload: true },
-                    { type: setUserDetails.toString(), payload: mockUserDetails }
-                ];
-                await store.dispatch(checkAuth());
-                expect(store.getActions()).toEqual(expectedActions);
-            });
+		describe('checkAuth', () => {
+			it('checkAuth is authenticated', async () => {
+				mockCheckAuthSuccess(mockApi);
+				const expectedActions = [
+					{ type: setIsAuth.toString(), payload: true },
+					{
+						type: setUserDetails.toString(),
+						payload: mockUserDetails
+					}
+				];
+				await store.dispatch(checkAuth());
+				expect(store.getActions()).toEqual(expectedActions);
+			});
 
-            it('checkAuth is not authenticated', async () => {
-                mockCheckAuthFail(mockApi);
-                const expectedActions = [
-                    { type: setIsAuth.toString(), payload: false },
-                    { type: setUserDetails.toString(), payload: null }
-                ];
-                await store.dispatch(checkAuth());
-                expect(store.getActions()).toEqual(expectedActions);
-            });
-        });
-    });
+			it('checkAuth is not authenticated', async () => {
+				mockCheckAuthFail(mockApi);
+				const expectedActions = [
+					{ type: setIsAuth.toString(), payload: false },
+					{ type: setUserDetails.toString(), payload: null }
+				];
+				await store.dispatch(checkAuth());
+				expect(store.getActions()).toEqual(expectedActions);
+			});
+		});
+	});
 });
