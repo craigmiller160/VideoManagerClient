@@ -16,6 +16,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { mount } from 'enzyme';
 

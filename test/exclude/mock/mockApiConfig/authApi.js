@@ -53,7 +53,7 @@ export const mockCheckAuthSuccess = (mockApi) =>
 	]);
 
 export const mockCheckAuthFailure = (mockApi) =>
-	mockApi.onGet('/oauth/user').reply((config) => [
+	mockApi.onGet('/oauth/user').reply(() => [
 		401,
 		'Unauthorized',
 		{

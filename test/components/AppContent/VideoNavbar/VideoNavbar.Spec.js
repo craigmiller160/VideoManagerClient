@@ -20,7 +20,7 @@ import React from 'react';
 import VideoNavbar from 'components/AppContent/VideoNavbar/VideoNavbar';
 import useReactRouter from 'use-react-router';
 import mountTestComponent from '../../../exclude/testUtil/mountTestComponent';
-import { login, logout } from '../../../../src/services/AuthApiService'; // eslint-disable-line import/first
+import { login, logout } from '../../../../src/services/AuthApiService';
 
 jest.mock('store/scanning/scanning.actions', () => ({
 	startFileScan: () => ({ type: 'startFileScan' })
