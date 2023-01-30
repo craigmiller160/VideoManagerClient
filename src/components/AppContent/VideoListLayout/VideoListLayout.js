@@ -22,18 +22,18 @@ import VideoSearch from './VideoSearch/VideoSearch';
 import VideoList from './VideoList/VideoList';
 
 const VideoListLayout = () => (
-    <>
-        <Row>
-            <Col xs="12">
-                <VideoSearch />
-            </Col>
-        </Row>
-        <Row>
-            <Col xs="12">
-                <VideoList />
-            </Col>
-        </Row>
-    </>
+	<>
+		<Row>
+			<Col xs="12">
+				<VideoSearch />
+			</Col>
+		</Row>
+		<Row>
+			<Col xs="12">
+				<VideoList />
+			</Col>
+		</Row>
+	</>
 );
 
 export default VideoListLayout;

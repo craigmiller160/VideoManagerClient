@@ -22,46 +22,45 @@ import keycode from 'keycode';
 import { reduxForm } from 'redux-form';
 
 const Form = (props) => {
-    const {
-        children,
-        handleSubmit,
-        className
-    } = props;
+	const { children, handleSubmit, className } = props;
 
-    return (
-        <form
-            className={ className }
-            onSubmit={ (event) => {
-                event.preventDefault();
-                handleSubmit(event);
-            } }
-            onKeyDown={ (event) => {
-                if (keycode(event.keyCode) && keycode(event.keyCode).toLowerCase() === 'enter') {
-                    event.preventDefault();
-                    handleSubmit(event);
-                }
-            } }
-        >
-            { children }
-        </form>
-    );
+	return (
+		<form
+			className={className}
+			onSubmit={(event) => {
+				event.preventDefault();
+				handleSubmit(event);
+			}}
+			onKeyDown={(event) => {
+				if (
+					keycode(event.keyCode) &&
+					keycode(event.keyCode).toLowerCase() === 'enter'
+				) {
+					event.preventDefault();
+					handleSubmit(event);
+				}
+			}}
+		>
+			{children}
+		</form>
+	);
 };
 
 Form.propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
-    className: PropTypes.string,
+	handleSubmit: PropTypes.func.isRequired,
+	className: PropTypes.string
 };
 
 const ReduxFormForm = reduxForm({})(Form);
 ReduxFormForm.propTypes = {
-    form: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func, // DEPRECATED
-    onSubmit: PropTypes.func.isRequired,
-    className: PropTypes.string,
-    initialValues: PropTypes.object,
-    children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
-    destroyOnUnmount: PropTypes.bool,
-    enableReinitialize: PropTypes.bool
+	form: PropTypes.string.isRequired,
+	handleSubmit: PropTypes.func, // DEPRECATED
+	onSubmit: PropTypes.func.isRequired,
+	className: PropTypes.string,
+	initialValues: PropTypes.object,
+	children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]),
+	destroyOnUnmount: PropTypes.bool,
+	enableReinitialize: PropTypes.bool
 };
 
 export default ReduxFormForm;

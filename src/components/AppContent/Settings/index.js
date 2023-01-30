@@ -22,7 +22,10 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import classes from './Settings.module.scss';
 import FlexRow from '../../UI/Grid/FlexRow';
 import Spinner from '../../UI/Spinner/Spinner';
-import { loadSettings, saveSettings } from '../../../store/settings/settings.actions';
+import {
+	loadSettings,
+	saveSettings
+} from '../../../store/settings/settings.actions';
 import Form from '../../UI/form/Form/Form';
 import Input from '../../UI/form/Input/Input';
 import { Button } from 'reactstrap';
@@ -34,136 +37,133 @@ import ToolTip from '../../UI/ToolTip';
 export const FORM_NAME = 'Settings_Form';
 
 const Settings = (props) => {
-    const {
-        rootDirEditing,
-        rootDirModified
-    } = props;
-    const dispatch = useDispatch();
-    const loading = useSelector((state) => state.settings.loading);
-    const form = useSelector((state) => state.form[FORM_NAME], shallowEqual);
-    const [state, setState] = useState({
-        rootDirEditing,
-        rootDirModified
-    });
+	const { rootDirEditing, rootDirModified } = props;
+	const dispatch = useDispatch();
+	const loading = useSelector((state) => state.settings.loading);
+	const form = useSelector((state) => state.form[FORM_NAME], shallowEqual);
+	const [state, setState] = useState({
+		rootDirEditing,
+		rootDirModified
+	});
 
-    useEffect(() => {
-        dispatch(loadSettings());
-    }, []);
+	useEffect(() => {
+		dispatch(loadSettings());
+	}, []);
 
-    const editRootDir = () => setState((prevState) => ({
-        ...prevState,
-        rootDirEditing: true
-    }));
+	const editRootDir = () =>
+		setState((prevState) => ({
+			...prevState,
+			rootDirEditing: true
+		}));
 
-    const selectDir = (selected) => {
-        setState((prevState) => ({
-            ...prevState,
-            rootDirEditing: false,
-            rootDirModified: true
-        }));
-        dispatch(change(FORM_NAME, 'rootDir', selected.filePath));
-    };
+	const selectDir = (selected) => {
+		setState((prevState) => ({
+			...prevState,
+			rootDirEditing: false,
+			rootDirModified: true
+		}));
+		dispatch(change(FORM_NAME, 'rootDir', selected.filePath));
+	};
 
-    const submit = async (values) => {
-        const successful = await dispatch(saveSettings(values));
-        if (successful) {
-            setState((prevState) => ({
-                ...prevState,
-                rootDirModified: false
-            }));
-        }
-    };
+	const submit = async (values) => {
+		const successful = await dispatch(saveSettings(values));
+		if (successful) {
+			setState((prevState) => ({
+				...prevState,
+				rootDirModified: false
+			}));
+		}
+	};
 
-    const showFileChooserClass = state.rootDirEditing ? classes.show : '';
-    const showSaveClass = state.rootDirEditing ? '' : classes.show;
+	const showFileChooserClass = state.rootDirEditing ? classes.show : '';
+	const showSaveClass = state.rootDirEditing ? '' : classes.show;
 
-    // Separate variable for this to make it easily extensible
-    const enableSaveBtn = state.rootDirModified;
-    const rootDirToolTipText = form?.values?.rootDir ?? '';
+	// Separate variable for this to make it easily extensible
+	const enableSaveBtn = state.rootDirModified;
+	const rootDirToolTipText = form?.values?.rootDir ?? '';
 
-    return (
-        <div className={ classes.Settings }>
-            <FlexRow>
-                <div className={ classes.title }>
-                    <h3>Settings</h3>
-                </div>
-            </FlexRow>
-            <Form
-                form={ FORM_NAME }
-                onSubmit={ submit }
-                destroyOnUnmount={ false }
-                className={ classes.form }
-            >
-                {
-                    loading &&
-                    <Spinner />
-                }
-                {
-                    !loading &&
-                    <div id="settings-form-content">
-                        <FlexRow
-                            id="root-dir-container"
-                            className={ classes.rootDirWrapper }
-                            justifyContent="center"
-                            alignItems="flex-end"
-                        >
-                            <ToolTip text={ rootDirToolTipText }>
-                                <Input
-                                    name="rootDir"
-                                    label="Directory to Scan"
-                                    divClassName={ classes.rootDir }
-                                    validate={ [
-                                        isRequired
-                                    ] }
-                                    disabled
-                                />
-                            </ToolTip>
-                            <Button
-                                id="set-root-dir-btn"
-                                color="info"
-                                onClick={ editRootDir }
-                            >
-                                Set
-                            </Button>
-                        </FlexRow>
-                        <FlexRow
-                            id="file-chooser-container"
-                            justifyContent="center"
-                            className={ [classes.fileChooser, showFileChooserClass].join(' ') }
-                        >
-                            <FileChooser
-                                directoriesOnly
-                                selectFile={ selectDir }
-                                initialDir={ form?.values?.rootDir }
-                            />
-                        </FlexRow>
-                        <FlexRow
-                            id="btn-container"
-                            justifyContent="center"
-                            className={ [classes.submit, showSaveClass].join(' ') }
-                        >
-                            <Button
-                                id="save-btn"
-                                type="submit"
-                                color="primary"
-                                disabled={ !enableSaveBtn }
-                            >
-                                Save
-                            </Button>
-                        </FlexRow>
-                    </div>
-                }
-            </Form>
-        </div>
-    );
+	return (
+		<div className={classes.Settings}>
+			<FlexRow>
+				<div className={classes.title}>
+					<h3>Settings</h3>
+				</div>
+			</FlexRow>
+			<Form
+				form={FORM_NAME}
+				onSubmit={submit}
+				destroyOnUnmount={false}
+				className={classes.form}
+			>
+				{loading && <Spinner />}
+				{!loading && (
+					<div id="settings-form-content">
+						<FlexRow
+							id="root-dir-container"
+							className={classes.rootDirWrapper}
+							justifyContent="center"
+							alignItems="flex-end"
+						>
+							<ToolTip text={rootDirToolTipText}>
+								<Input
+									name="rootDir"
+									label="Directory to Scan"
+									divClassName={classes.rootDir}
+									validate={[isRequired]}
+									disabled
+								/>
+							</ToolTip>
+							<Button
+								id="set-root-dir-btn"
+								color="info"
+								onClick={editRootDir}
+							>
+								Set
+							</Button>
+						</FlexRow>
+						<FlexRow
+							id="file-chooser-container"
+							justifyContent="center"
+							className={[
+								classes.fileChooser,
+								showFileChooserClass
+							].join(' ')}
+						>
+							<FileChooser
+								directoriesOnly
+								selectFile={selectDir}
+								initialDir={form?.values?.rootDir}
+							/>
+						</FlexRow>
+						<FlexRow
+							id="btn-container"
+							justifyContent="center"
+							className={[classes.submit, showSaveClass].join(
+								' '
+							)}
+						>
+							<Button
+								id="save-btn"
+								type="submit"
+								color="primary"
+								disabled={!enableSaveBtn}
+							>
+								Save
+							</Button>
+						</FlexRow>
+					</div>
+				)}
+			</Form>
+		</div>
+	);
 };
 Settings.propTypes = {
-    rootDirEditing: PropTypes.bool,
-    rootDirModified: PropTypes.bool
+	rootDirEditing: PropTypes.bool,
+	rootDirModified: PropTypes.bool
 };
 Settings.defaultProps = {
-    rootDirEditing: false,
-    rootDirModified: false
+	rootDirEditing: false,
+	rootDirModified: false
 };
 
 export default Settings;

@@ -27,24 +27,24 @@ import variables from './assets/styles/variables.module.scss';
 import AppContent from './components/AppContent/AppContent';
 
 const theme = {
-    colors: {
-        ...variables
-    }
+	colors: {
+		...variables
+	}
 };
 
 const App = () => (
-    <>
-        <Helmet>
-            <title>Video Manager</title>
-        </Helmet>
-        <Provider store={ store }>
-            <BrowserRouter basename="/video-manager">
-                <ThemeProvider id="theme-provider" theme={ theme }>
-                    <AppContent />
-                </ThemeProvider>
-            </BrowserRouter>
-        </Provider>
-    </>
+	<>
+		<Helmet>
+			<title>Video Manager</title>
+		</Helmet>
+		<Provider store={store}>
+			<BrowserRouter basename="/video-manager">
+				<ThemeProvider id="theme-provider" theme={theme}>
+					<AppContent />
+				</ThemeProvider>
+			</BrowserRouter>
+		</Provider>
+	</>
 );
 
 export default App;

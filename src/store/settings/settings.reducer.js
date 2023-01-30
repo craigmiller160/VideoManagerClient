@@ -20,14 +20,14 @@ import { createReducer } from 'redux-starter-kit';
 import { setLoading } from './settings.actions';
 
 export const initialState = {
-    loading: false
+	loading: false
 };
 
 const handleSetLoading = (state, action) => ({
-    ...state,
-    loading: action.payload
+	...state,
+	loading: action.payload
 });
 
 export default createReducer(initialState, {
-    [setLoading]: handleSetLoading
+	[setLoading]: handleSetLoading
 });

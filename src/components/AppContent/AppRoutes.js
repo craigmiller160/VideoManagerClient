@@ -28,145 +28,128 @@ import ProtectedRoute from '@craigmiller160/react-protected-route';
 import Home from './Home/Home';
 import { useSelector } from 'react-redux';
 import {
-    hasAdminRole as hasAdminRoleSelector,
-    hasEditRole as hasEditRoleSelector
+	hasAdminRole as hasAdminRoleSelector,
+	hasEditRole as hasEditRoleSelector
 } from '../../store/auth/auth.selectors';
 import Settings from './Settings';
 
 const AppRoutes = (props) => {
-    const hasEditRole = useSelector(hasEditRoleSelector);
-    const hasAdminRole = useSelector(hasAdminRoleSelector);
-    const {
-        selectedVideo,
-        deleteFile,
-        saveFileChanges,
-        isScanning,
-        isAuth
-    } = props;
+	const hasEditRole = useSelector(hasEditRoleSelector);
+	const hasAdminRole = useSelector(hasAdminRoleSelector);
+	const { selectedVideo, deleteFile, saveFileChanges, isScanning, isAuth } =
+		props;
 
-    const hasEditRoleRule = {
-        allow: ({ editRole }) => editRole,
-        redirect: '/'
-    };
+	const hasEditRoleRule = {
+		allow: ({ editRole }) => editRole,
+		redirect: '/'
+	};
 
-    const hasAdminRoleRule = {
-        allow: ({ adminRole }) => adminRole,
-        redirect: '/'
-    };
+	const hasAdminRoleRule = {
+		allow: ({ adminRole }) => adminRole,
+		redirect: '/'
+	};
 
-    const isAuthenticatedRule = {
-        allow: ({ auth }) => auth,
-        redirect: '/login'
-    };
+	const isAuthenticatedRule = {
+		allow: ({ auth }) => auth,
+		redirect: '/login'
+	};
 
-    // const isNotAuthenticatedRule = {
-    //     allow: ({ auth }) => !auth,
-    //     redirect: '/'
-    // };
+	// const isNotAuthenticatedRule = {
+	//     allow: ({ auth }) => !auth,
+	//     redirect: '/'
+	// };
 
-    const isScanningRule = {
-        allow: ({ scanning }) => scanning,
-        redirect: '/'
-    };
+	const isScanningRule = {
+		allow: ({ scanning }) => scanning,
+		redirect: '/'
+	};
 
-    const isNotScanningRule = {
-        allow: ({ scanning }) => !scanning,
-        redirect: '/scanning'
-    };
+	const isNotScanningRule = {
+		allow: ({ scanning }) => !scanning,
+		redirect: '/scanning'
+	};
 
-    const hasSelectedVideoRule = {
-        allow: ({ selected }) => !!selected?.fileName,
-        redirect: '/'
-    };
+	const hasSelectedVideoRule = {
+		allow: ({ selected }) => !!selected?.fileName,
+		redirect: '/'
+	};
 
-    const ruleProps = {
-        selected: selectedVideo,
-        adminRole: hasAdminRole,
-        editRole: hasEditRole,
-        auth: isAuth,
-        scanning: isScanning
-    };
+	const ruleProps = {
+		selected: selectedVideo,
+		adminRole: hasAdminRole,
+		editRole: hasEditRole,
+		auth: isAuth,
+		scanning: isScanning
+	};
 
-    return (
-        <Switch>
-            <ProtectedRoute
-                path="/scanning"
-                component={ Scanning }
-                ruleProps={ ruleProps }
-                rules={ [
-                    isAuthenticatedRule,
-                    isScanningRule
-                ] }
-            />
-            <ProtectedRoute
-                path="/edit"
-                component={ VideoFileEdit }
-                componentProps={ {
-                    selectedVideo,
-                    saveFileChanges,
-                    deleteFile
-                } }
-                ruleProps={ ruleProps }
-                rules={ [
-                    isAuthenticatedRule,
-                    isNotScanningRule,
-                    hasSelectedVideoRule,
-                    hasEditRoleRule
-                ] }
-            />
-            <ProtectedRoute
-                path="/filters"
-                component={ ManageVideoFilters }
-                ruleProps={ ruleProps }
-                rules={ [
-                    isAuthenticatedRule,
-                    isNotScanningRule,
-                    hasEditRoleRule
-                ] }
-            />
-            <ProtectedRoute
-                path="/play/:fileId"
-                component={ VideoPlayerPage }
-                ruleProps={ ruleProps }
-                rules={ [
-                    isAuthenticatedRule,
-                    isNotScanningRule
-                ] }
-            />
-            <ProtectedRoute
-                path="/videos"
-                component={ VideoListLayout }
-                ruleProps={ ruleProps }
-                rules={ [
-                    isAuthenticatedRule,
-                    isNotScanningRule
-                ] }
-            />
-            <ProtectedRoute
-                component={ Settings }
-                ruleProps={ ruleProps }
-                path="/settings"
-                rules={ [
-                    isAuthenticatedRule,
-                    hasAdminRoleRule
-                ] }
-            />
-            <ProtectedRoute
-                path="/"
-                exact
-                component={ Home }
-                ruleProps={ ruleProps }
-            />
-            <Redirect to="/" />
-        </Switch>
-    );
+	return (
+		<Switch>
+			<ProtectedRoute
+				path="/scanning"
+				component={Scanning}
+				ruleProps={ruleProps}
+				rules={[isAuthenticatedRule, isScanningRule]}
+			/>
+			<ProtectedRoute
+				path="/edit"
+				component={VideoFileEdit}
+				componentProps={{
+					selectedVideo,
+					saveFileChanges,
+					deleteFile
+				}}
+				ruleProps={ruleProps}
+				rules={[
+					isAuthenticatedRule,
+					isNotScanningRule,
+					hasSelectedVideoRule,
+					hasEditRoleRule
+				]}
+			/>
+			<ProtectedRoute
+				path="/filters"
+				component={ManageVideoFilters}
+				ruleProps={ruleProps}
+				rules={[
+					isAuthenticatedRule,
+					isNotScanningRule,
+					hasEditRoleRule
+				]}
+			/>
+			<ProtectedRoute
+				path="/play/:fileId"
+				component={VideoPlayerPage}
+				ruleProps={ruleProps}
+				rules={[isAuthenticatedRule, isNotScanningRule]}
+			/>
+			<ProtectedRoute
+				path="/videos"
+				component={VideoListLayout}
+				ruleProps={ruleProps}
+				rules={[isAuthenticatedRule, isNotScanningRule]}
+			/>
+			<ProtectedRoute
+				component={Settings}
+				ruleProps={ruleProps}
+				path="/settings"
+				rules={[isAuthenticatedRule, hasAdminRoleRule]}
+			/>
+			<ProtectedRoute
+				path="/"
+				exact
+				component={Home}
+				ruleProps={ruleProps}
+			/>
+			<Redirect to="/" />
+		</Switch>
+	);
 };
 AppRoutes.propTypes = {
-    deleteFile: PropTypes.func,
-    selectedVideo: PropTypes.object,
-    saveFileChanges: PropTypes.func,
-    isScanning: PropTypes.bool,
-    isAuth: PropTypes.bool
+	deleteFile: PropTypes.func,
+	selectedVideo: PropTypes.object,
+	saveFileChanges: PropTypes.func,
+	isScanning: PropTypes.bool,
+	isAuth: PropTypes.bool
 };
 
 export default AppRoutes;

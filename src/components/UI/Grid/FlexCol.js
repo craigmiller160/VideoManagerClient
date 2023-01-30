@@ -20,20 +20,20 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const FlexCol = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: ${(props) => props.justifyContent};
-    align-items: ${(props) => props.alignItems};
-    height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: ${(props) => props.justifyContent};
+	align-items: ${(props) => props.alignItems};
+	height: 100%;
 `;
 FlexCol.displayName = 'FlexCol';
 FlexCol.propTypes = {
-    justifyContent: PropTypes.string,
-    alignItems: PropTypes.string
+	justifyContent: PropTypes.string,
+	alignItems: PropTypes.string
 };
 FlexCol.defaultProps = {
-    justifyContent: 'flex-start',
-    alignItems: 'stretch'
+	justifyContent: 'flex-start',
+	alignItems: 'stretch'
 };
 
 export default FlexCol;

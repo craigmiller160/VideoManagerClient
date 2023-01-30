@@ -19,88 +19,87 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { getDirectoriesFromDirectory, getFilesFromDirectory } from '../../../services/LocalFileApiService';
+import {
+	getDirectoriesFromDirectory,
+	getFilesFromDirectory
+} from '../../../services/LocalFileApiService';
 import FileListContainer from './FileListContainer';
 import FileChooserContext from './FileChooserContext';
 import Spinner from '../Spinner/Spinner';
 import { handleApiError } from '../../../store/alert/alert.actions';
 
 const loadFiles = (path, directoriesOnly) => {
-    if (directoriesOnly) {
-        return getDirectoriesFromDirectory(path);
-    }
+	if (directoriesOnly) {
+		return getDirectoriesFromDirectory(path);
+	}
 
-    return getFilesFromDirectory(path);
+	return getFilesFromDirectory(path);
 };
 
 const FileChooser = (props) => {
-    const dispatch = useDispatch();
-    const {
-        directoriesOnly,
-        selectFile,
-        initialDir
-    } = props;
+	const dispatch = useDispatch();
+	const { directoriesOnly, selectFile, initialDir } = props;
 
-    const [state, setState] = useState({
-        fileList: { rootPath: '', parentPath: '', files: [] },
-        selectedFile: null,
-        loading: true
-    });
+	const [state, setState] = useState({
+		fileList: { rootPath: '', parentPath: '', files: [] },
+		selectedFile: null,
+		loading: true
+	});
 
-    useEffect(() => {
-        const loadInitialFiles = async () => {
-            try {
-                const res = await loadFiles(initialDir, directoriesOnly);
+	useEffect(() => {
+		const loadInitialFiles = async () => {
+			try {
+				const res = await loadFiles(initialDir, directoriesOnly);
 
-                setState((prevState) => ({
-                    ...prevState,
-                    fileList: res.data,
-                    loading: false
-                }));
-            } catch (ex) {
-                dispatch(handleApiError(ex, 'Error loading files.'));
-            }
-        };
+				setState((prevState) => ({
+					...prevState,
+					fileList: res.data,
+					loading: false
+				}));
+			} catch (ex) {
+				dispatch(handleApiError(ex, 'Error loading files.'));
+			}
+		};
 
-        loadInitialFiles();
-    }, []);
+		loadInitialFiles();
+	}, []);
 
-    const openDirectory = async (file) => {
-        try {
-            const res = await loadFiles(file.filePath, directoriesOnly);
-            setState((prevState) => ({
-                ...prevState,
-                fileList: res.data
-            }));
-        } catch (ex) {
-            dispatch(handleApiError(ex, 'Error loading files'));
-        }
-    };
+	const openDirectory = async (file) => {
+		try {
+			const res = await loadFiles(file.filePath, directoriesOnly);
+			setState((prevState) => ({
+				...prevState,
+				fileList: res.data
+			}));
+		} catch (ex) {
+			dispatch(handleApiError(ex, 'Error loading files'));
+		}
+	};
 
-    if (state.loading) {
-        return <Spinner />
-    }
+	if (state.loading) {
+		return <Spinner />;
+	}
 
-    const context = {
-        directoriesOnly,
-        selectFile,
-        openDirectory
-    };
+	const context = {
+		directoriesOnly,
+		selectFile,
+		openDirectory
+	};
 
-    return (
-        <FileChooserContext.Provider value={ context }>
-            <FileListContainer fileList={ state.fileList } />
-        </FileChooserContext.Provider>
-    );
+	return (
+		<FileChooserContext.Provider value={context}>
+			<FileListContainer fileList={state.fileList} />
+		</FileChooserContext.Provider>
+	);
 };
 FileChooser.propTypes = {
-    directoriesOnly: PropTypes.bool,
-    selectFile: PropTypes.func,
-    initialDir: PropTypes.string
+	directoriesOnly: PropTypes.bool,
+	selectFile: PropTypes.func,
+	initialDir: PropTypes.string
 };
 FileChooser.defaultProps = {
-    directoriesOnly: false,
-    selectFile: () => {}
+	directoriesOnly: false,
+	selectFile: () => {}
 };
 
 export default FileChooser;

@@ -21,23 +21,19 @@ import PropTypes from 'prop-types';
 import classes from './ToolTip.module.scss';
 
 const ToolTip = (props) => {
-    const {
-        children,
-        text
-    } = props;
+	const { children, text } = props;
 
-    return (
-        <div className={ classes.ToolTip }>
-            { children }
-            <span className={ classes.ToolTipText }>{ text }</span>
-        </div>
-    );
+	return (
+		<div className={classes.ToolTip}>
+			{children}
+			<span className={classes.ToolTipText}>{text}</span>
+		</div>
+	);
 };
 ToolTip.propTypes = {
-    text: PropTypes.string,
-    children: PropTypes.oneOfType([
-        PropTypes.node, PropTypes.element
-    ]).isRequired
+	text: PropTypes.string,
+	children: PropTypes.oneOfType([PropTypes.node, PropTypes.element])
+		.isRequired
 };
 
 export default ToolTip;
