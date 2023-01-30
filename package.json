@@ -44,11 +44,11 @@
     "@babel/runtime": "^7.20.1"
   },
   "scripts": {
-    "build": "web-config-scripts test && web-config-scripts webpack",
-    "forceBuild": "web-config-scripts webpack",
-    "prepDeploy": "web-config-scripts prepDeploy",
-    "start": "web-config-scripts devServer",
-    "test": "web-config-scripts test"
+    "build": "yarn lint && yarn test && yarn forceBuild",
+    "forceBuild": "vite build",
+    "start": "vite",
+    "test": "craig-test",
+    "lint": "eslint --fix --max-warnings=0 **/**.{js,jsx}"
   },
   "devDependencies": {
     "@craigmiller160/babel-config": "^1.1.1",
@@ -62,7 +62,9 @@
     "@craigmiller160/prettier-config": "^1.0.1",
     "@vitejs/plugin-react": "^3.0.1",
     "axios-mock-adapter": "^1.19.0",
+    "husky": "^8.0.3",
     "jest-styled-components": "^7.0.3",
+    "lint-staged": "^13.1.0",
     "redux-mock-store": "^1.5.4",
     "vite": "^4.0.4"
   }
