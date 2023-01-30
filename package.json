@@ -51,11 +51,13 @@
     "test": "web-config-scripts test"
   },
   "devDependencies": {
+    "@craigmiller160/config-merge": "^1.0.1",
     "@craigmiller160/eslint-config-jest": "^1.0.1",
     "@craigmiller160/eslint-config-js": "^1.0.1",
     "@craigmiller160/eslint-config-prettier": "^1.0.1",
     "@craigmiller160/eslint-config-react": "^1.0.2",
     "@craigmiller160/eslint-config-tree-shaking-import-restrictions": "^1.0.1",
+    "@craigmiller160/jest-config": "^1.0.4",
     "@craigmiller160/prettier-config": "^1.0.1",
     "axios-mock-adapter": "^1.19.0",
     "jest-styled-components": "^7.0.3",
