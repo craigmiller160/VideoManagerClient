@@ -31,7 +31,7 @@ import Input from '../../UI/form/Input/Input';
 import { Button } from 'reactstrap';
 import { isRequired } from '../../../utils/validations';
 import FileChooser from '../../UI/FileChooser';
-import { change } from 'redux-form';
+import { change } from 'redux-form/dist/redux-form';
 import ToolTip from '../../UI/ToolTip';
 
 export const FORM_NAME = 'Settings_Form';

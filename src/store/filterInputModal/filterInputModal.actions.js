@@ -38,7 +38,7 @@ import SeriesApiService from '../../services/SeriesApiService';
 import StarApiService from '../../services/StarApiService';
 import { getSelectedFilter } from './filterInputModal.selectors';
 import { FORM_NAME } from '../../components/AppContent/VideoFileEdit/VideoFileEdit';
-import { change } from 'redux-form';
+import { change } from 'redux-form/dist/redux-form';
 
 export const deleteFilter = () => async (dispatch, getState) => {
 	const state = getState();

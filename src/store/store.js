@@ -22,7 +22,7 @@ import videoSearchReducer from './videoSearch/videoSearch.reducer';
 import scanningReducer from './scanning/scanning.reducer';
 import filterInputModalReducer from './filterInputModal/filterInputModal.reducer';
 import videoPlayerReducer from './videoPlayer/videoPlayer.reducer';
-import { reducer as formReducer } from 'redux-form';
+import { reducer as formReducer } from 'redux-form/dist/redux-form';
 import alertReducer from './alert/alert.reducer';
 import authReducer from './auth/auth.reducer';
 import settingsReducer from './settings/settings.reducer';

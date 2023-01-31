@@ -20,7 +20,7 @@ import { createAction } from 'redux-starter-kit';
 import { getSettings, updateSettings } from '../../services/SettingsApiService';
 import { handleApiError, showSuccessAlert } from '../alert/alert.actions';
 import { FORM_NAME } from '../../components/AppContent/Settings';
-import { initialize } from 'redux-form';
+import { initialize } from 'redux-form/dist/redux-form';
 
 export const setLoading = createAction('settings/setLoading');
 

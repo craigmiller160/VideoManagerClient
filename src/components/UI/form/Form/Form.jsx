@@ -19,7 +19,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
-import { reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form/dist/redux-form';
 
 const Form = (props) => {
 	const { children, handleSubmit, className } = props;

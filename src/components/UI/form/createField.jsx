@@ -17,7 +17,7 @@
  */
 
 import React from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'redux-form/dist/redux-form';
 
 const createField =
 	(component) =>
