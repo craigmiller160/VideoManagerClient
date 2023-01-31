@@ -24,13 +24,13 @@ resource "keycloak_openid_client" "video_manager_client_dev" {
   access_type = local.client_common.access_type
   standard_flow_enabled = local.client_common.standard_flow_enabled
   valid_redirect_uris = [
-    "https://localhost:3002/video-manager/*"
+    "https://localhost:3000/video-manager/*"
   ]
   valid_post_logout_redirect_uris = [
-    "https://localhost:3002/video-manager/*"
+    "https://localhost:3000/video-manager/*"
   ]
   web_origins = [
-    "https://localhost:3002"
+    "https://localhost:3000"
   ]
 }
 

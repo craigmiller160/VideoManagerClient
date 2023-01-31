@@ -25,6 +25,7 @@ import store from './store/store';
 import './App.scss';
 import variables from './assets/styles/variables.module.scss';
 import AppContent from './components/AppContent/AppContent';
+import { VideoManagerKeycloakProvider } from './components/VideoManagerKeycloakProvider';
 
 const theme = {
 	colors: {
@@ -38,11 +39,13 @@ const App = () => (
 			<title>Video Manager</title>
 		</Helmet>
 		<Provider store={store}>
-			<BrowserRouter basename="/video-manager">
-				<ThemeProvider id="theme-provider" theme={theme}>
-					<AppContent />
-				</ThemeProvider>
-			</BrowserRouter>
+			<VideoManagerKeycloakProvider>
+				<BrowserRouter basename="/video-manager">
+					<ThemeProvider id="theme-provider" theme={theme}>
+						<AppContent />
+					</ThemeProvider>
+				</BrowserRouter>
+			</VideoManagerKeycloakProvider>
 		</Provider>
 	</>
 );
