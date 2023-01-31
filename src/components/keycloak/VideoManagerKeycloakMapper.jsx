@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
-import {useContext, useEffect} from "react";
-import {KeycloakAuthContext} from "@craigmiller160/react-keycloak";
-import {useDispatch} from "react-redux";
-import {setIsAuth, setUserDetails} from "../../store/auth/auth.actions";
+import { useContext, useEffect } from 'react';
+import { KeycloakAuthContext } from '@craigmiller160/react-keycloak';
+import { useDispatch } from 'react-redux';
+import { setIsAuth, setUserDetails } from '../../store/auth/auth.actions';
 
 const mapUserDetails = (token) => ({
-	firstName: '',
-	lastName: '',
-	username: '',
-	roles: []
+	firstName: token.given_name,
+	lastName: token.family_name,
+	username: token.preferred_username,
+	roles: token.resource_access['video-manager-server']?.roles ?? []
 });
 
 export const VideoManagerKeycloakMapper = (props) => {
