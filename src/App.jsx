@@ -25,7 +25,7 @@ import store from './store/store';
 import './App.scss';
 import variables from './assets/styles/variables.module.scss';
 import AppContent from './components/AppContent/AppContent';
-import { VideoManagerKeycloakProvider } from './components/VideoManagerKeycloakProvider';
+import { VideoManagerKeycloakProvider } from './components/keycloak/VideoManagerKeycloakProvider';
 
 const theme = {
 	colors: {

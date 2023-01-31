@@ -1,6 +1,7 @@
 import { KeycloakAuthProvider } from '@craigmiller160/react-keycloak';
 import { BEARER_TOKEN_KEY } from '@craigmiller160/ajax-api';
 import PropTypes from 'prop-types';
+import { VideoManagerKeycloakMapper } from './VideoManagerKeycloakMapper';
 
 const ACCESS_TOKEN_EXP_SECS = 300;
 
@@ -19,7 +20,9 @@ export const VideoManagerKeycloakProvider = (props) => (
 		clientId="video-manager-client"
 		bearerTokenLocalStorageKey={BEARER_TOKEN_KEY}
 	>
-		{props.children}
+		<VideoManagerKeycloakMapper>
+			{props.children}
+		</VideoManagerKeycloakMapper>
 	</KeycloakAuthProvider>
 );
 VideoManagerKeycloakProvider.propTypes = {
