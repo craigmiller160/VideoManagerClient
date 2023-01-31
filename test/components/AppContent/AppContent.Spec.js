@@ -25,6 +25,7 @@ import { mount } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
+import { KeycloakAuthContext } from '@craigmiller160/react-keycloak';
 
 jest.mock('components/UI/Alert/Alert', () => {
 	const Alert = (props) => <div>{props.children}</div>;
@@ -64,12 +65,14 @@ const defaultState = {
 	}
 };
 
-const doMount = (state = defaultState) => {
+const doMount = (state = defaultState, authStatus = 'pre-auth') => {
 	const store = mockStore(state);
 	const component = mount(
 		<Provider store={store}>
 			<MemoryRouter initialEntries={['/']}>
-				<AppContent />
+				<KeycloakAuthContext.Provider value={{ authStatus }}>
+					<AppContent />
+				</KeycloakAuthContext.Provider>
 			</MemoryRouter>
 		</Provider>
 	);
@@ -109,13 +112,16 @@ describe('AppContent', () => {
 	});
 
 	it('runs initial loading when authorized', async () => {
-		const [component, store] = doMount({
-			...defaultState,
-			auth: {
-				...defaultState.auth,
-				isAuth: true
-			}
-		});
+		const [component, store] = doMount(
+			{
+				...defaultState,
+				auth: {
+					...defaultState.auth,
+					isAuth: true
+				}
+			},
+			'post-auth'
+		);
 		await act(async () => {
 			jest.advanceTimersByTime(10000);
 		});
@@ -130,7 +136,6 @@ describe('AppContent', () => {
 		expect(component.find('Alert')).toHaveLength(1);
 		expect(component.find('AppRoutes')).toHaveLength(1);
 		expect(store.getActions()).toEqual([
-			{ type: 'checkAuth' },
 			{ type: 'loadFilterOptions' },
 			{ type: 'checkIsScanning' }
 		]);
