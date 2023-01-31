@@ -16,7 +16,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import VideoNavbar from './VideoNavbar/VideoNavbar';
 import { Col, Container, Row } from 'reactstrap';
 import Alert from '../UI/Alert/Alert';
@@ -31,10 +31,11 @@ import {
 	deleteVideoFile
 } from '../../store/videoList/videoList.actions';
 import AppRoutes from './AppRoutes';
-import { checkAuth } from '../../store/auth/auth.actions';
 import { hideAlert } from '../../store/alert/alert.actions';
+import { KeycloakAuthContext } from '@craigmiller160/react-keycloak';
 
 const AppContent = () => {
+	const { authStatus } = useContext(KeycloakAuthContext);
 	const [isStarted, setStarted] = useState(false);
 	const { history } = useReactRouter();
 	const dispatch = useDispatch();
@@ -50,13 +51,8 @@ const AppContent = () => {
 	const isAuth = useSelector((state) => state.auth.isAuth, shallowEqual);
 
 	useEffect(() => {
-		const doCheckAuth = async () => {
-			// TODO need to update this to integrate keycloak
-			await dispatch(checkAuth());
-			setStarted(true);
-		};
-		doCheckAuth();
-	}, [dispatch]);
+		setStarted(authStatus === 'post-auth');
+	}, [authStatus]);
 
 	useEffect(() => {
 		const startup = async () => {
