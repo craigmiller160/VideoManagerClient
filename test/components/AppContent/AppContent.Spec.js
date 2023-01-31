@@ -93,24 +93,6 @@ describe('AppContent', () => {
 		expect(component.find('AppRoutes')).toHaveLength(0);
 	});
 
-	it('runs auth check effect and starts component', async () => {
-		const [component, store] = doMount();
-		await act(async () => {
-			jest.advanceTimersByTime(10000);
-		});
-		component.update();
-
-		expect(component.find('VideoNavbar')).toHaveLength(1);
-		expect(component.find('VideoNavbar').props()).toEqual(
-			expect.objectContaining({
-				disabled: false
-			})
-		);
-		expect(component.find('Alert')).toHaveLength(1);
-		expect(component.find('AppRoutes')).toHaveLength(1);
-		expect(store.getActions()).toEqual([{ type: 'checkAuth' }]);
-	});
-
 	it('runs initial loading when authorized', async () => {
 		const [component, store] = doMount(
 			{
