@@ -4,11 +4,13 @@ import { KeycloakAuthContext } from '@craigmiller160/react-keycloak';
 import { useDispatch } from 'react-redux';
 import { setIsAuth, setUserDetails } from '../../store/auth/auth.actions';
 
+const mapRoles = (roles) => roles.map((role) => `ROLE_${role}`);
+
 const mapUserDetails = (token) => ({
 	firstName: token.given_name,
 	lastName: token.family_name,
 	username: token.preferred_username,
-	roles: token.resource_access['video-manager-server']?.roles ?? []
+	roles: mapRoles(token.resource_access['video-manager-server']?.roles ?? [])
 });
 
 export const VideoManagerKeycloakMapper = (props) => {
