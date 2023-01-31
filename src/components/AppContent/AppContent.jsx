@@ -51,6 +51,7 @@ const AppContent = () => {
 
 	useEffect(() => {
 		const doCheckAuth = async () => {
+			// TODO need to update this to integrate keycloak
 			await dispatch(checkAuth());
 			setStarted(true);
 		};
