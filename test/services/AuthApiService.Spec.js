@@ -20,13 +20,13 @@ import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
 import { getAuthUser, getVideoToken, login } from 'services/AuthApiService';
 import {
-    mockCheckAuthFail,
-    mockCheckAuthSuccess,
-    mockCsrfToken,
-    mockGetVideoToken,
-    mockLogin,
-    mockLogout,
-    mockTokenResponse
+	mockCheckAuthFail,
+	mockCheckAuthSuccess,
+	mockCsrfToken,
+	mockGetVideoToken,
+	mockLogin,
+	mockLogout,
+	mockTokenResponse
 } from '../exclude/mock/mockApiConfig/authApi';
 import { CSRF_TOKEN_KEY } from '../../src/utils/securityConstants';
 import { logout } from '../../src/services/AuthApiService';
@@ -35,73 +35,77 @@ import { setCsrfToken } from '../../src/store/auth/auth.actions';
 import { mockCsrfPreflight } from '@craigmiller160/ajax-api/lib/test-utils';
 
 jest.mock('../../src/store/store', () => {
-    const createMockStore = jest.requireActual('redux-mock-store').default;
-    return createMockStore([])({ auth: {} });
+	const createMockStore = jest.requireActual('redux-mock-store').default;
+	return createMockStore([])({ auth: {} });
 });
 
 const mockApi = new MockAdapter(API.instance);
 
 describe('AuthApiService', () => {
-    beforeEach(() => {
-        store.clearActions();
-        jest.clearAllMocks();
-        mockApi.reset();
-        mockCheckAuthSuccess(mockApi);
-        mockGetVideoToken(mockApi);
-        mockLogin(mockApi);
-        mockLogout(mockApi);
-    });
+	beforeEach(() => {
+		store.clearActions();
+		jest.clearAllMocks();
+		mockApi.reset();
+		mockCheckAuthSuccess(mockApi);
+		mockGetVideoToken(mockApi);
+		mockLogin(mockApi);
+		mockLogout(mockApi);
+	});
 
-    it('getAuthUser', async () => {
-        const res = await getAuthUser();
-        expect(res).toEqual(expect.objectContaining({
-            status: 200,
-            headers: expect.objectContaining({
-                [CSRF_TOKEN_KEY]: mockCsrfToken
-            })
-        }));
-        expect(store.getActions()).toEqual([
-            {
-                type: setCsrfToken.toString(),
-                payload: mockCsrfToken
-            }
-        ]);
-    });
+	it('getAuthUser', async () => {
+		const res = await getAuthUser();
+		expect(res).toEqual(
+			expect.objectContaining({
+				status: 200,
+				headers: expect.objectContaining({
+					[CSRF_TOKEN_KEY]: mockCsrfToken
+				})
+			})
+		);
+		expect(store.getActions()).toEqual([
+			{
+				type: setCsrfToken.toString(),
+				payload: mockCsrfToken
+			}
+		]);
+	});
 
-    it('getAuthUser still sets csrf on failure', async () => {
-        mockApi.reset();
-        mockCheckAuthFail(mockApi);
-        try {
-            await getAuthUser();
-        } catch (ex) {
-            expect(store.getActions()).toEqual([
-                {
-                    type: setCsrfToken.toString(),
-                    payload: mockCsrfToken
-                }
-            ]);
-            return;
-        }
-        throw new Error('Should have been error');
-    });
+	it('getAuthUser still sets csrf on failure', async () => {
+		mockApi.reset();
+		mockCheckAuthFail(mockApi);
+		try {
+			await getAuthUser();
+		} catch (ex) {
+			expect(store.getActions()).toEqual([
+				{
+					type: setCsrfToken.toString(),
+					payload: mockCsrfToken
+				}
+			]);
+			return;
+		}
+		throw new Error('Should have been error');
+	});
 
-    it('login', async () => {
-        mockCsrfPreflight(mockApi, '/oauth/authcode/login');
-        const res = await login();
-        expect(res.status).toEqual(200);
-        expect(window.location.assign).toHaveBeenCalledWith('TheUrl');
-    });
+	it('login', async () => {
+		mockCsrfPreflight(mockApi, '/oauth/authcode/login');
+		const res = await login();
+		expect(res.status).toEqual(200);
+		expect(window.location.assign).toHaveBeenCalledWith('TheUrl');
+	});
 
-    it('logout', async () => {
-        const res = await logout();
-        expect(res.status).toEqual(200);
-    });
+	it('logout', async () => {
+		const res = await logout();
+		expect(res.status).toEqual(200);
+	});
 
-    it('getVideoToken', async () => {
-        const res = await getVideoToken(3);
-        expect(res).toEqual(expect.objectContaining({
-            status: 200,
-            data: mockTokenResponse
-        }));
-    });
+	it('getVideoToken', async () => {
+		const res = await getVideoToken(3);
+		expect(res).toEqual(
+			expect.objectContaining({
+				status: 200,
+				data: mockTokenResponse
+			})
+		);
+	});
 });

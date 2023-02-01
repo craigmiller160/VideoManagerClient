@@ -16,26 +16,26 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// eslint-disable-next-line no-restricted-imports
 import moment from 'moment';
 
 const SERVER_DATE_TIME_FORMAT = 'YYYY-MM-DDTHH:mm:ss';
 const DATE_TIME_FORMAT = 'YYYY-MM-DD hh:mm a';
 
 class VideoDate {
+	#date;
 
-    #date;
+	constructor(date) {
+		this.#date = moment(date, SERVER_DATE_TIME_FORMAT);
+	}
 
-    constructor(date) {
-        this.#date = moment(date, SERVER_DATE_TIME_FORMAT);
-    }
+	formatDateTime() {
+		return this.#date.format(DATE_TIME_FORMAT);
+	}
 
-    formatDateTime() {
-        return this.#date.format(DATE_TIME_FORMAT);
-    }
-
-    getDate() {
-        return this.#date;
-    }
+	getDate() {
+		return this.#date;
+	}
 }
 
 export default VideoDate;

@@ -17,102 +17,119 @@
  */
 
 import { act } from 'react-dom/test-utils';
-import { loadSettings, saveSettings, setLoading } from 'store/settings/settings.actions';
+import {
+	loadSettings,
+	saveSettings,
+	setLoading
+} from 'store/settings/settings.actions';
 import MockAdapter from 'axios-mock-adapter';
 import API from 'services/API';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { mockGetSettings, mockUpdateSettings } from '../../exclude/mock/mockApiConfig/settingsApi';
+import {
+	mockGetSettings,
+	mockUpdateSettings
+} from '../../exclude/mock/mockApiConfig/settingsApi';
 import { settingsData } from '../../exclude/mock/mockData/settingsData';
-import { showErrorAlert, showSuccessAlert } from '../../../src/store/alert/alert.actions';
+import {
+	showErrorAlert,
+	showSuccessAlert
+} from '../../../src/store/alert/alert.actions';
 import { mockCsrfPreflight } from '@craigmiller160/ajax-api/lib/test-utils';
 
 const mockStore = configureMockStore([thunk]);
 const mockApi = new MockAdapter(API.instance);
 
 describe('settings.actions', () => {
-    it('setLoading', () => {
-        const expectedAction = {
-            type: setLoading.toString(),
-            payload: true
-        };
-        expect(setLoading(true)).toEqual(expectedAction);
-    });
+	it('setLoading', () => {
+		const expectedAction = {
+			type: setLoading.toString(),
+			payload: true
+		};
+		expect(setLoading(true)).toEqual(expectedAction);
+	});
 
-    describe('thunk actions', () => {
-        let store;
-        beforeEach(() => {
-            mockApi.reset();
-            store = mockStore({});
-        });
+	describe('thunk actions', () => {
+		let store;
+		beforeEach(() => {
+			mockApi.reset();
+			store = mockStore({});
+		});
 
-        describe('loadSettings', () => {
-            it('loads settings', async () => {
-                mockGetSettings(mockApi);
-                await store.dispatch(loadSettings());
-                expect(store.getActions()).toEqual([
-                    { type: setLoading.toString(), payload: true },
-                    expect.objectContaining({
-                        type: '@@redux-form/INITIALIZE',
-                        payload: settingsData
-                    }),
-                    { type: setLoading.toString(), payload: false }
-                ]);
-            });
+		describe('loadSettings', () => {
+			it('loads settings', async () => {
+				mockGetSettings(mockApi);
+				await store.dispatch(loadSettings());
+				expect(store.getActions()).toEqual([
+					{ type: setLoading.toString(), payload: true },
+					expect.objectContaining({
+						type: '@@redux-form/INITIALIZE',
+						payload: settingsData
+					}),
+					{ type: setLoading.toString(), payload: false }
+				]);
+			});
 
-            it('has error', async () => {
-                await store.dispatch(loadSettings());
-                expect(store.getActions()).toEqual([
-                    { type: setLoading.toString(), payload: true },
-                    {
-                        type: showErrorAlert.toString(),
-                        payload: expect.stringContaining('Error loading settings')
-                    },
-                    { type: setLoading.toString(), payload: false }
-                ]);
-            });
-        });
+			it('has error', async () => {
+				await store.dispatch(loadSettings());
+				expect(store.getActions()).toEqual([
+					{ type: setLoading.toString(), payload: true },
+					{
+						type: showErrorAlert.toString(),
+						payload: expect.stringContaining(
+							'Error loading settings'
+						)
+					},
+					{ type: setLoading.toString(), payload: false }
+				]);
+			});
+		});
 
-        describe('saveSettings', () => {
-            const values = {
-                settingsId: 1,
-                rootDir: '/home/user/videos'
-            };
+		describe('saveSettings', () => {
+			const values = {
+				settingsId: 1,
+				rootDir: '/home/user/videos'
+			};
 
-            it('saves settings', async () => {
-                mockCsrfPreflight(mockApi, '/settings');
-                mockUpdateSettings(mockApi);
-                let result;
-                await act(async () => {
-                    result = await store.dispatch(saveSettings(values));
-                });
-                expect(result).toEqual(true);
-                expect(store.getActions()).toEqual([
-                    { type: setLoading.toString(), payload: true },
-                    expect.objectContaining({
-                        type: '@@redux-form/INITIALIZE',
-                        payload: settingsData
-                    }),
-                    { type: showSuccessAlert.toString(), payload: 'Settings saved successfully' },
-                    { type: setLoading.toString(), payload: false }
-                ]);
-            });
+			it('saves settings', async () => {
+				mockCsrfPreflight(mockApi, '/settings');
+				mockUpdateSettings(mockApi);
+				let result;
+				await act(async () => {
+					result = await store.dispatch(saveSettings(values));
+				});
+				expect(result).toEqual(true);
+				expect(store.getActions()).toEqual([
+					{ type: setLoading.toString(), payload: true },
+					expect.objectContaining({
+						type: '@@redux-form/INITIALIZE',
+						payload: settingsData
+					}),
+					{
+						type: showSuccessAlert.toString(),
+						payload: 'Settings saved successfully'
+					},
+					{ type: setLoading.toString(), payload: false }
+				]);
+			});
 
-            it('has error', async () => {
-                let result;
-                await act(async () => {
-                    result = await store.dispatch(saveSettings(values));
-                });
-                expect(result).toEqual(false);
-                expect(store.getActions()).toEqual([
-                    { type: setLoading.toString(), payload: true },
-                    {
-                        type: showErrorAlert.toString(),
-                        payload: expect.stringContaining('Error saving settings')
-                    },
-                    { type: setLoading.toString(), payload: false }
-                ]);
-            });
-        });
-    });
+			it('has error', async () => {
+				let result;
+				await act(async () => {
+					result = await store.dispatch(saveSettings(values));
+				});
+				expect(result).toEqual(false);
+				expect(store.getActions()).toEqual([
+					{ type: setLoading.toString(), payload: true },
+					{
+						type: showErrorAlert.toString(),
+						payload: expect.stringContaining(
+							'Error saving settings'
+						)
+					},
+					{ type: setLoading.toString(), payload: false }
+				]);
+			});
+		});
+	});
 });

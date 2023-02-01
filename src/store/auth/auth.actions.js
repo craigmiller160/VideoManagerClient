@@ -17,7 +17,7 @@
  */
 
 import { createAction } from 'redux-starter-kit';
-import * as AuthService from 'services/AuthApiService';
+import * as AuthService from '../../services/AuthApiService';
 import { CSRF_TOKEN_KEY } from '../../utils/securityConstants';
 
 export const setIsAuth = createAction('auth/setIsAuth');
@@ -26,23 +26,22 @@ export const setCsrfToken = createAction('auth/setCsrfToken');
 export const setUserDetails = createAction('auth/setUserDetails');
 
 export const handleCsrfToken = (response) => (dispatch) => {
-    const csrfToken = response?.headers?.[CSRF_TOKEN_KEY];
-    dispatch(setCsrfToken(csrfToken));
+	const csrfToken = response?.headers?.[CSRF_TOKEN_KEY];
+	dispatch(setCsrfToken(csrfToken));
 };
 
 export const checkAuth = () => async (dispatch) => {
-    try {
-        const response = await AuthService.getAuthUser();
-        dispatch(setIsAuth(true));
-        dispatch(setUserDetails(response.data));
-    }
-    catch (ex) {
-        dispatch(setIsAuth(false));
-        dispatch(setUserDetails(null));
-    }
+	try {
+		const response = await AuthService.getAuthUser();
+		dispatch(setIsAuth(true));
+		dispatch(setUserDetails(response.data));
+	} catch (ex) {
+		dispatch(setIsAuth(false));
+		dispatch(setUserDetails(null));
+	}
 };
 
 export const clearAuth = () => (dispatch) => {
-    dispatch(setIsAuth(false));
-    dispatch(setUserDetails(null));
+	dispatch(setIsAuth(false));
+	dispatch(setUserDetails(null));
 };

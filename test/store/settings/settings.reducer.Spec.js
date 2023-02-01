@@ -16,22 +16,24 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import settingsReducer, { initialState as settingsInitState } from 'store/settings/settings.reducer';
+import settingsReducer, {
+	initialState as settingsInitState
+} from 'store/settings/settings.reducer';
 import { setLoading } from 'store/settings/settings.actions';
 
 describe('settings.reducer', () => {
-    it('should return initial state', () => {
-        expect(settingsReducer(undefined, {})).toEqual(settingsInitState);
-    });
+	it('should return initial state', () => {
+		expect(settingsReducer(undefined, {})).toEqual(settingsInitState);
+	});
 
-    it('should handle setLoading', () => {
-        const action = {
-            type: setLoading.toString(),
-            payload: true
-        };
-        expect(settingsReducer(settingsInitState, action)).toEqual({
-            ...settingsInitState,
-            loading: true
-        });
-    });
+	it('should handle setLoading', () => {
+		const action = {
+			type: setLoading.toString(),
+			payload: true
+		};
+		expect(settingsReducer(settingsInitState, action)).toEqual({
+			...settingsInitState,
+			loading: true
+		});
+	});
 });

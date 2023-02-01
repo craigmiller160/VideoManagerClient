@@ -32,3 +32,4 @@ docker/*.zip
 yalc.lock
 deploy/build
 deploy/chart/charts
+.terraform
