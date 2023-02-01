@@ -33,3 +33,4 @@ yalc.lock
 deploy/build
 deploy/chart/charts
 .terraform
+*.tgz

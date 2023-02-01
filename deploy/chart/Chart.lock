@@ -1,9 +1,6 @@
 dependencies:
-- name: app-deployment
+- name: app_deployment
   repository: https://nexus-craigmiller160.ddns.net/repository/helm-private
-  version: 1.1.0
-- name: secure_ingress
-  repository: https://nexus-craigmiller160.ddns.net/repository/helm-private
-  version: 1.0.0
-digest: sha256:239ce5f1d39b84ddac0d8e2715f905dfab78668c602da3a2c84055d19687c63b
-generated: "2022-12-25T21:10:30.283023-05:00"
+  version: 2.4.0
+digest: sha256:4a5b58b3f19eb21becaf470000d5cb63f5e97c9b3f6d6e45c7a02274706c62dd
+generated: "2023-02-01T08:41:56.586609-05:00"
