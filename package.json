@@ -1,6 +1,6 @@
 {
   "name": "@craigmiller160/video-manager-client",
-  "version": "1.17.0-beta",
+  "version": "1.17.0",
   "noTsconfig": true,
   "files": [
     "build"
@@ -11,7 +11,7 @@
   "author": "craigmiller160",
   "dependencies": {
     "@craigmiller160/ajax-api": "^2.1.0",
-    "@craigmiller160/react-keycloak": "^1.0.0-beta",
+    "@craigmiller160/react-keycloak": "1.0.0",
     "@craigmiller160/react-protected-route": "^1.2.4",
     "axios": "^0.21.1",
     "bfj": "6.1.1",
