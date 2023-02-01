@@ -20,7 +20,7 @@
     "keycode": "^2.2.0",
     "moment": "^2.29.1",
     "prop-types": "^15.6.2",
-    "qs": "^6.9.1",
+    "qs": "^6.9.7",
     "react": "^17.0.2",
     "react-animate-height": "^2.0.16",
     "react-app-polyfill": "^0.2.0",
