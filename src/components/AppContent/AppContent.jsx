@@ -35,7 +35,7 @@ import { hideAlert } from '../../store/alert/alert.actions';
 import { KeycloakAuthContext } from '@craigmiller160/react-keycloak';
 
 const AppContent = () => {
-	const { authStatus } = useContext(KeycloakAuthContext);
+	const { isPostAuthorization } = useContext(KeycloakAuthContext);
 	const [isStarted, setStarted] = useState(false);
 	const { history } = useReactRouter();
 	const dispatch = useDispatch();
@@ -51,8 +51,8 @@ const AppContent = () => {
 	const isAuth = useSelector((state) => state.auth.isAuth, shallowEqual);
 
 	useEffect(() => {
-		setStarted(authStatus === 'post-auth');
-	}, [authStatus]);
+		setStarted(isPostAuthorization);
+	}, [isPostAuthorization]);
 
 	useEffect(() => {
 		const startup = async () => {
