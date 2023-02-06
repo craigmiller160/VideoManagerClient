@@ -1105,10 +1105,10 @@
   dependencies:
     prettier "^2.5.1"
 
-"@craigmiller160/react-keycloak@1.0.0":
-  version "1.0.0"
-  resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/@craigmiller160/react-keycloak/-/react-keycloak-1.0.0.tgz#2f7ee2f13b700a35b9a306caa0292cefceedd59a"
-  integrity sha512-VvwS8GxiyW2Oeqcx8q6+3a33hNor3wnBOtlZCGZflo3qlO1WW3/LZyMyKXiuzzZzrQGcwNGJarZ19ap+9KSLYg==
+"@craigmiller160/react-keycloak@1.1.0":
+  version "1.1.0"
+  resolved "https://nexus-craigmiller160.ddns.net/repository/npm-group/@craigmiller160/react-keycloak/-/react-keycloak-1.1.0.tgz#79014169b817e64dd7386299b4cc7e64c331ccf9"
+  integrity sha512-SE9UKHKxApJf5ieeBLTAO5NUof8bX03zHmwQtMuXn4HadfOJI4XbMQMERnifnXR8wI81OB4Jp2eglquKAluWUA==
   dependencies:
     keycloak-js "^20.0.3"
 
