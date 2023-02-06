@@ -17,8 +17,9 @@ export const VideoManagerKeycloakMapper = (props) => {
 	const keycloakAuth = useContext(KeycloakAuthContext);
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(setIsAuth(keycloakAuth.isAuthorized));
-		if (keycloakAuth.isAuthorized) {
+		const isAuthorized = keycloakAuth.status === 'authorized';
+		dispatch(setIsAuth(isAuthorized));
+		if (isAuthorized) {
 			dispatch(setUserDetails(mapUserDetails(keycloakAuth.token)));
 		}
 	}, [dispatch, keycloakAuth]);
