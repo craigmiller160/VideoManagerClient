@@ -65,12 +65,12 @@ const defaultState = {
 	}
 };
 
-const doMount = (state = defaultState, authStatus = 'pre-auth') => {
+const doMount = (state = defaultState, isPostAuthorization = false) => {
 	const store = mockStore(state);
 	const component = mount(
 		<Provider store={store}>
 			<MemoryRouter initialEntries={['/']}>
-				<KeycloakAuthContext.Provider value={{ authStatus }}>
+				<KeycloakAuthContext.Provider value={{ isPostAuthorization }}>
 					<AppContent />
 				</KeycloakAuthContext.Provider>
 			</MemoryRouter>
@@ -102,7 +102,7 @@ describe('AppContent', () => {
 					isAuth: true
 				}
 			},
-			'post-auth'
+			true
 		);
 		await act(async () => {
 			jest.advanceTimersByTime(10000);
