@@ -13,7 +13,7 @@
     "@craigmiller160/ajax-api": "^2.1.0",
     "@craigmiller160/react-keycloak": "1.1.4",
     "@craigmiller160/react-protected-route": "^1.2.4",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bfj": "6.1.1",
     "bootstrap": "^4.2.1",
     "identity-obj-proxy": "3.0.0",
