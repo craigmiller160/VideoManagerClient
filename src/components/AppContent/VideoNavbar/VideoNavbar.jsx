@@ -16,7 +16,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
 	Collapse,
@@ -37,8 +37,9 @@ import {
 	hasEditRole as hasEditRoleSelector,
 	hasScanRole as hasScanRoleSelector
 } from '../../../store/auth/auth.selectors';
-import { login, logout } from '../../../services/AuthApiService';
+import { login } from '../../../services/AuthApiService';
 import { clearAuth } from '../../../store/auth/auth.actions';
+import { KeycloakAuthContext } from '@craigmiller160/react-keycloak';
 
 const VideoNavbar = (props) => {
 	const { disabled } = props;
@@ -49,6 +50,7 @@ const VideoNavbar = (props) => {
 	const hasScanRole = useSelector(hasScanRoleSelector, shallowEqual);
 	const hasAdminRole = useSelector(hasAdminRoleSelector, shallowEqual);
 	const isAuth = useSelector((state) => state.auth.isAuth);
+	const { logout } = useContext(KeycloakAuthContext);
 
 	const onScanDirClick = async () => {
 		await dispatch(startFileScan());
@@ -57,7 +59,7 @@ const VideoNavbar = (props) => {
 
 	const authLinkText = isAuth ? 'Logout' : 'Login';
 	const doLogout = async () => {
-		await logout();
+		logout();
 		dispatch(clearAuth());
 		history.push('/');
 	};
